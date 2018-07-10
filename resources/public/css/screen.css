@@ -1,0 +1,55 @@
+.tube-indicator {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 3px;
+}
+
+.tube-indicator.true {
+  border-color: green;
+}
+
+.tube-indicator.false {
+  border-color: gray;
+}
+
+.chat {
+  max-height: 100px;
+}
+
+.chat .messages {
+  display: flex;
+  flex-direction: column;
+  min-height: 0px;
+  overflow-y: scroll;
+}
+
+.chat .messages .message {
+  padding: 5px 10px;
+}
+
+.race-game .race-text {
+  display: flex;
+  flex-direction: row;
+}
+
+.race-game .race-text .char {
+  display: block;
+  min-width: 5px;
+}
+
+.race-game .race-text .char.done {
+  color: gray;
+}
+
+.race-game .race-text .char.right-typed {
+  border-bottom: 2px solid blue;
+}
+
+.race-game .race-text .char.wrong-typed {
+  border-bottom: 2px solid red;
+}
