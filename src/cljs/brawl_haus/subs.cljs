@@ -16,3 +16,8 @@
  ::re-pressed-example
  (fn [db _]
    (:re-pressed-example db)))
+
+(re-frame/reg-sub
+ :user
+ (fn [db _]
+   (:user db)))

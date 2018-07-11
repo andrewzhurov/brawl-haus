@@ -7,7 +7,9 @@
    [brawl-haus.routes :as routes]
    [brawl-haus.views :as views]
    [brawl-haus.config :as config]
+   [brawl-haus.tube]
    [brawl-haus.ws]
+   [brawl-haus.utils]
    ))
 
 
@@ -23,8 +25,9 @@
 
 (defn ^:export init []
   (routes/app-routes)
-  (re-frame/dispatch-sync [::events/initialize-db])
+  (re-frame/dispatch-sync [:initialize-db])
   (re-frame/dispatch-sync [::rp/add-keyboard-event-listener "keydown"])
-  (re-frame/dispatch-sync [:connect-tube])
+  (re-frame/dispatch-sync [:tube/connect])
+  (re-frame/dispatch-sync [:tube/send [:init]])
   (dev-setup)
   (mount-root))

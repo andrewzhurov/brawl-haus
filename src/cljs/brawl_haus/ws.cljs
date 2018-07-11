@@ -1,48 +1,50 @@
 (ns brawl-haus.ws
   (:require [re-frame.core :as rf :refer [reg-event-db reg-sub dispatch after]]
-            [pneumatic-tubes.core :as tubes]))
+            [brawl-haus.tube :as tube]))
 
-(defn on-receive [event-v]
-  ;; handler of incoming events from server
-  (.log js/console "received from server:" (str event-v))
-  (rf/dispatch event-v))
+(defn l [desc expr] (js/console.log desc expr) expr)
 
-
-;; definition of event 'tube' over WebSocket
-(def send-to-server (after (fn [db evt]
-                             (rf/dispatch [:tube-send evt]))))
-(rf/reg-fx
- :tube-send
- (fn [db [_ evt]]
-   (when-let [tube (:tube db)]
-     (tubes/dispatch tube evt))))
-;; middleware to send event to server
-
+; Race
 (reg-event-db ;; normal re-frame handler
- :add-message
- send-to-server ;; forwards this event also to server
- (fn [db [_ msg]]
-   (.log js/console (str "Trying to add msg: " msg))
+ :new-race
+ tube/send-to-server ;; forwards this event also to server
+ (fn [db _]
+   (.log js/console (str "Initiating a new race"))
    db))
 
-(reg-event-db ;; will be called by server
- :added-message
- (fn [db [_ msg]]
-   (update db :messages conj msg)))
+(reg-event-db
+ :race-initiated
+ (fn [db [_ race]]
+   (.log js/console (str "Race initiated:" race))
+   (rf/dispatch [:current-route :race (:id race)])
+   db))
 
-(reg-sub
- :db/get-in
- (fn [db [_ path]]
-   (get-in db path)))
+(rf/reg-event-fx
+ :enter-race
+ (fn [{:keys [db]} [_ race-id]]
+   {:dispatch-n [[:tube/send [:enter-race race-id]]
+                 [:current-route :race race-id]]}))
 
 (reg-event-db
- :db/set-in
- (fn [db [_ path val]]
-   (assoc-in db path val)))
+ :current-public-state
+ (fn [db [_ public-state]]
+   (l "DB:" db)
+   (assoc db :public-state public-state)))
 
 (reg-event-db
- :connect-tube
+ :init
+ (fn [db [_ init-opts]]
+   (assoc db :init-opts init-opts)))
+
+#_(reg-event-db
+ :open-races
+ (fn [db [_ open-races]]
+   (.log js/console (str "Open races:" open-races))
+   (assoc db :open-races open-races)))
+
+#_(reg-event-db ;; normal re-frame handler
+ :connect-to-race
+ tube/send-to-server ;; forwards this event also to server
  (fn [db _]
-   (let [tube (tubes/tube (str "ws://localhost:9090/ws") on-receive)]
-     (tubes/create! tube)
-     (assoc db :tube tube))))
+   (.log js/console (str "Initiating a new race"))
+   db))
