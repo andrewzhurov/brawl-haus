@@ -80,8 +80,6 @@
                    :height "100vh"
                    :width "100vw"}
     [:form {:max-width "300px"
-            :max-height "700px"}
-     [:.title {:font-}]]
-    [:.onward {
-               :width "100%"
-               }]]])
+            :max-height "700px"}]
+    [:.onward {:width "100%"
+               :height "42px"}]]])

@@ -20,10 +20,8 @@
                :placeholder "Passs they shall not pass"
                :value (:pass @form)
                :on-change #(swap! form assoc :pass (.-value (.-target %)))}]
-      [:button.btn {:type "submit"
-                    :disabled (when (or (empty? (:nick @form))
-                                        (empty? (:pass @form))) "true")
-                    :style {:width "100%"
-                            :height "42px"}}
+      [:button.onward.btn {:type "submit"
+                           :disabled (when (or (empty? (:nick @form))
+                                               (empty? (:pass @form))) "true")}
        "Onward!"
        [:i.material-icons  "accessibility_new"]]]]))
