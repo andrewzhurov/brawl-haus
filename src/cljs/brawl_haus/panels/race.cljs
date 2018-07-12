@@ -5,7 +5,8 @@
             [brawl-haus.utils :refer [l <sub]]
             [cljs-time.core :as t]
             [cljs-time.coerce :as c]
-            [cljs-time.format :as f]))
+            [cljs-time.format :as f]
+            [re-com.misc :as rcmisc]))
 
 (defn current-race [db]
   (let [race-id (get-in db [:current-panel :route-params :race-id])]
@@ -64,6 +65,18 @@
                (map (fn [x] {:char x :statuses #{"yet"}}) after-wrong)))
     ))
 
+(defn race-progress [race]
+  [:div.race-progress
+   (for [[nick left-chars] (:participants race)]
+     [:div.participant
+      [:div.nick nick]
+      [rcmisc/progress-bar
+       :model (- 100
+                 (-> left-chars
+                     (/ (count (:race-text race)))
+                     (* 100)))
+       ]])])
+
 (defn text-race [race]
   (r/with-let [input-state (r/atom {:current-text ""
                                     :left-text (:race-text race)})
@@ -74,7 +87,7 @@
                               left-text :left-text :as old-state}]
                           (let [current-text (.-value (.-target e))]
                             (if-let [new-left-text (bite left-text current-text)]
-                              (do (rf/dispatch [:tube/send [:left-text new-left-text]])
+                              (do (rf/dispatch [:tube/send [:left-text (:id race) new-left-text]])
                                   {:current-text ""
                                    :left-text new-left-text})
                               (assoc old-state :current-text current-text))))))]
@@ -102,4 +115,5 @@
      [panels/navbar]
      [:div.content.race-panel
       [countdown race]
-      [text-race race]]]))
+      [text-race race]
+      [race-progress race]]]))

@@ -58,7 +58,8 @@
     ]
    [:.race-panel
     [:.race-text {:display "flex"
-                  :flex-direction "row"}
+                  :flex-direction "row"
+                  :flex-wrap "wrap"}
      [:.char {:display "block"
               :min-width "unset"
               :min-height "unset"}

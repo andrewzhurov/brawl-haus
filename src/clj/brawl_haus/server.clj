@@ -84,6 +84,20 @@
           tube->user
           user-publics))
 
+;; {race-id : {nick: left%}}
+(defn race [race-id]
+  (get-in @public-state [:open-races race-id]))
+
+#_(def race-status (atom {}))
+#_(add-watch race-status :sync-race-status
+           (fn [key atom old-state new-state]
+             (let [altered-races (l "Diff:" (clojure.set/difference (l "New users:" (set new-state)) (l "Old users:" (set old-state))))
+                   users @users]
+               (doseq [[race-id statuses] altered-races
+                       [nick _] statuses]
+                 (let [tube (l "A tube of altered race:"(get-in users [nick :tube]))]
+                   (dispatch-to tube [:db/set-in [:race-status race-id] statuses]))))))
+
 (def rx                         ;; collection of handlers for processing incoming messages
   (receiver
    {:login
@@ -114,33 +128,44 @@
 
     :new-race
     (fn [tube _]
-      (l "TUBE1111:" tube)
-      (let [new-race {:id (uuid)
-                      :initiated-at (now)
-                      :initiator tube
-                      :participants #{tube}
-                      :status :not-started}]
-        (swap! public-state update :open-races assoc (:id new-race) new-race)
-        (java.lang.Thread/sleep 3000)
-        (dispatch-to tube [:race-initiated new-race])
-        )
+      (when-let [user (tube->user tube)]
+        (l "Tube on new race:" tube)
+        (l "User on new race:" user)
+        (let [new-race {:id (uuid)
+                        :initiated-at (now)
+                        :initiator tube
+                        :participants {(:nick user) nil}
+                        :status :not-started}]
+          (swap! public-state update :open-races assoc (:id new-race) new-race)
+          (java.lang.Thread/sleep 3000)
+          (dispatch-to tube [:race-initiated new-race])
+          ))
       tube)
 
     :enter-race
     (fn [tube [_ race-id]]
       (l "Tube on enter:" tube)
-      (swap! public-state
-             #(update-in % [:open-races race-id]
-                         (fn [race]
-                           (if (= :not-started (:status race))
-                             (-> race
-                                 (update :participants conj tube)
-                                 (assoc :status :countdown)
-                                 (assoc :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date)))
-                                 (assoc :race-text (rand-nth texts/longs)))
-                             race)))
-             )
+      (when-let [user (tube->user tube)]
+        (l "User on enter:" user)
+        (swap! public-state
+               #(update-in % [:open-races race-id]
+                           (fn [race]
+                             (if (= :not-started (:status race))
+                               (-> race
+                                   (update :participants assoc (:nick user) nil)
+                                   (assoc :status :countdown)
+                                   (assoc :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date)))
+                                   (assoc :race-text (rand-nth texts/longs)))
+                               race)))
+               ))
       tube)
+
+    :left-text
+    (fn [tube [_ race-id left-text]]
+      (when-let [{:keys [nick]} (?user tube)]
+        (swap! public-state assoc-in [:open-races race-id :participants nick] (count left-text)))
+      tube)
+
     }))
 
 (defroutes routes
