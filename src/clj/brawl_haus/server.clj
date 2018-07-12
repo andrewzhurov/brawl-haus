@@ -10,6 +10,7 @@
             [compojure.route :refer [resources]]
             [ring.util.response :refer [resource-response]]
             [ring.adapter.jetty :refer [run-jetty]]
+            [ring.middleware.reload :refer [wrap-reload]]
 
             [clj-time.core :as t]
             [clj-time.coerce :as c])
@@ -114,6 +115,8 @@
   (GET "/tube" [] (websocket-handler rx))
   (resources "/"))
 
+(def dev-handler (-> #'routes wrap-reload))
+
 #_(def handler (fn [req] (clojure.pprint/pprint req) ((websocket-handler rx) req)))
     ;; kttp-kit based WebSocket request handler
     ;; it also works with Compojure routes
@@ -123,7 +126,7 @@
 (defn restart-server []
   (when @server
     (@server))
-  (reset! server (l "SERVER:" (run-server routes {:port 9090}))))
+  (reset! server (l "SERVER:" (run-server dev-handler {:port 9090}))))
 
 (defn -main [& args]
   (println "IN MAIN")
