@@ -2,7 +2,8 @@
   (:require [garden.def :refer [defstyles]]))
 
 (defstyles screen
-  [[:.tube-indicator {:position "absolute"
+  [[:body {:overflow-y "hidden"}]
+   [:.tube-indicator {:position "absolute"
                       :height "15px" :width "15px"
                       :top "10px"
                       :right "10px"

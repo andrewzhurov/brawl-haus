@@ -18,6 +18,11 @@
    (:re-pressed-example db)))
 
 (re-frame/reg-sub
+ :user
+ (fn [db _]
+   (get-in db [:private-state :user])))
+
+(re-frame/reg-sub
  :nick
  (fn [db _]
    (get-in db [:private-state :user :nick])))
