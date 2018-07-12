@@ -98,6 +98,12 @@
                  (let [tube (l "A tube of altered race:"(get-in users [nick :tube]))]
                    (dispatch-to tube [:db/set-in [:race-status race-id] statuses]))))))
 
+(defn start-race [race]
+  (-> race
+      (assoc :status :countdown)
+      (assoc :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date)))
+      (assoc :race-text (rand-nth texts/longs))))
+
 (def rx                         ;; collection of handlers for processing incoming messages
   (receiver
    {:login
@@ -137,7 +143,6 @@
                         :participants {(:nick user) nil}
                         :status :not-started}]
           (swap! public-state update :open-races assoc (:id new-race) new-race)
-          (java.lang.Thread/sleep 3000)
           (dispatch-to tube [:race-initiated new-race])
           ))
       tube)
@@ -150,12 +155,11 @@
         (swap! public-state
                #(update-in % [:open-races race-id]
                            (fn [race]
-                             (if (= :not-started (:status race))
+                             (if (and (= :not-started (:status race))
+                                      (not (contains? (:participants race) (:nick user))))
                                (-> race
                                    (update :participants assoc (:nick user) nil)
-                                   (assoc :status :countdown)
-                                   (assoc :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date)))
-                                   (assoc :race-text (rand-nth texts/longs)))
+                                   start-race)
                                race)))
                ))
       tube)
@@ -163,7 +167,12 @@
     :left-text
     (fn [tube [_ race-id left-text]]
       (when-let [{:keys [nick]} (?user tube)]
-        (swap! public-state assoc-in [:open-races race-id :participants nick] (count left-text)))
+        (swap! public-state update-in [:open-races race-id ]
+               (fn [race]
+                 (-> race
+                     (assoc :status :ongoing)
+                     (assoc-in [:participants nick] (count left-text))
+                     (assoc-in [:finished nick] (when (zero? (count left-text)) (now)))))))
       tube)
 
     }))

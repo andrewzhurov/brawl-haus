@@ -46,28 +46,47 @@
      [:input {:max-width "90%"
               :flex 1}]
      [:div.btn {:transition "0.2s"}]]]
-   [:.open-races {:display "flex"
+   [:.collection.open-races {:display "flex"
                   :flex-direction "column"}
     [:.race {;:padding "5px 10px"
              ;:margin "3px 0px"
              :cursor "pointer"
              ;:background-color "lightgray"
-             }]]
+             :display "flex"
+             :flex-direction "row"
+             :align-items "center"
+             }]
+    [:.countdown {:width "30px"}]
+    ]
    [:.races-panel
     [:.new-race-btn {:margin "5px 5px"}]
     ]
-   [:.race-panel
-    [:.race-text {:display "flex"
-                  :flex-direction "row"
-                  :flex-wrap "wrap"}
-     [:.char {:display "block"
-              :min-width "unset"
-              :min-height "unset"}
-      [:&.whitespace {:min-width "5px"}]
-      [:&.done {
-                :color "gray"}]
-      [:&.right-typed {:border-bottom "2px solid blue"}]
-      [:&.wrong-typed {:border-bottom "2px solid red"}]]]]
+   [:.race-panel {:padding "5px 10px"}
+    [:.countdown {:text-align "center"
+                  :font-size "20px"
+                  :text-decoration "underline"
+                  :margin "5px"}]
+    [:.waiting {:vertical-align "center"}]
+    [:.text-race 
+     [:.race-text {:display "flex"
+                   :flex-direction "row"
+                   :flex-wrap "wrap"}
+      [:.char {:display "block"
+               :min-width "unset"
+               :min-height "unset"}
+       [:&.whitespace {:min-width "5px"}]
+       [:&.done {
+                 :color "gray"}]
+       [:&.right-typed {:border-bottom "2px solid blue"}]
+       [:&.wrong-typed {:border-bottom "2px solid red"}]]]
+     [:input {:width "90%"
+              :margin "auto"
+              :display "block"}]]
+    [:.race-progress {:margin "5px 0px"}
+     [:.nick {:display "inline-block"}]
+     [:.average-speed {:display "inline-block"
+                       :float "right"
+                       :margin-right "10px"}]]]
    [:.app {:display "grid"
            :grid-template-columns "auto 1fr"}
     [:.navbar {:display "flex"

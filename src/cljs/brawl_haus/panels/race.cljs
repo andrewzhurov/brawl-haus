@@ -38,17 +38,11 @@
     (cond (= text chunk) ""
           (contains? breaks (last chunk)) (subs text (count chunk)))))
 
-(rf/reg-event-fx
- :current-text
- (fn [{:keys [db]} [_ current-text]]
-   (let [left-text (or (:left-text db) (:race-text (current-race db)))]
-     )))
-
-
 (defn how-matches [str substr]
   (count (take-while true? (map = (l 11 str) (l 22 substr)))))
 
 (defn meta-text [{:keys [race-text] :as race} current-text left-text]
+  (js/console.log race-text current-text left-text)
   (when race-text
     (let [[done after-done] (split-at (- (count race-text) (count left-text))
                                       race-text)
@@ -65,48 +59,79 @@
                (map (fn [x] {:char x :statuses #{"yet"}}) after-wrong)))
     ))
 
+(defn calc-speed [text start finish]
+  (let [minutes (/ (t/in-seconds (t/interval (c/from-date start)
+                                             (c/from-date finish)))
+                   60)
+        chars  (count text)]
+    (/ chars minutes)))
+
 (defn race-progress [race]
   [:div.race-progress
    (for [[nick left-chars] (:participants race)]
-     [:div.participant
+     [:div.participant {:key nick}
       [:div.nick nick]
+      (when-let [finish-at (get-in race [:finished nick])]
+        [:div.average-speed (str (int (calc-speed (:race-text race)
+                                                  (:starts-at race)
+                                                  finish-at)) " char/minute")])
       [rcmisc/progress-bar
-       :model (- 100
-                 (-> left-chars
-                     (/ (count (:race-text race)))
-                     (* 100)))
-       ]])])
+       :striped? (not (zero? left-chars))
+       :model (if left-chars
+                (- 100
+                   (-> left-chars
+                       (/ (count (:race-text race)))
+                       (* 100)))
+                0)]
+      ])])
+
+(defn waiting []
+  (r/with-let [dots (r/atom 4)
+               _ (js/setInterval #(swap! dots inc) 800)]
+    (l "DOTS:" @dots)
+    [:div.card.waiting
+     [:div.card-content "Waiting a company"
+      (case (rem @dots 4)
+            0 ""
+            1 "."
+            2 ".."
+            3 "...")]]))
 
 (defn text-race [race]
-  (r/with-let [input-state (r/atom {:current-text ""
-                                    :left-text (:race-text race)})
-               on-type
-               (fn [e]
-                 (swap! input-state
-                        (fn [{old-current-text :current-text
-                              left-text :left-text :as old-state}]
-                          (let [current-text (.-value (.-target e))]
-                            (if-let [new-left-text (bite left-text current-text)]
-                              (do (rf/dispatch [:tube/send [:left-text (:id race) new-left-text]])
-                                  {:current-text ""
-                                   :left-text new-left-text})
-                              (assoc old-state :current-text current-text))))))]
-    (let [{:keys [current-text left-text]} @input-state]
-      [:div.text-race
-       [:div.race-text
-        (doall
-         (map-indexed
-          (fn [idx {:keys [char statuses]}]
-            ^{:key idx}
-            [:div.char {:class (str (apply str statuses)
-                                    (when (= " " char) " whitespace"))}
-             (when (contains? statuses "wrong-typed")
-               (.play (js/Audio. "audio/bump.mp3")) nil)
-             char])
-          (meta-text race current-text left-text)))]
-       [:input {:on-change on-type
-                :value current-text}
-        ]])))
+  [:div.text-race-wrap;.card.blue-gray.darken-1
+   (if (:race-text race)
+     (r/with-let [input-state (r/atom {:current-text ""
+                                       :left-text (:race-text race)})
+                  on-type
+                  (fn [e]
+                    (swap! input-state
+                           (fn [{old-current-text :current-text
+                                 left-text :left-text :as old-state}]
+                             (let [current-text (.-value (.-target e))]
+                               (if-let [new-left-text (bite left-text current-text)]
+                                 (do (rf/dispatch [:tube/send [:left-text (:id race) new-left-text]])
+                                     {:current-text ""
+                                      :left-text new-left-text})
+                                 (assoc old-state :current-text current-text))))))]
+       (let [{:keys [current-text left-text]} @input-state]
+         [:div.text-race.card
+          [:div.race-text.card-content
+           (doall
+            (map-indexed
+             (fn [idx {:keys [char statuses]}]
+               ^{:key idx}
+               [:div.char {:class (str (apply str statuses)
+                                       (when (= " " char) " whitespace"))}
+                (when (contains? statuses "wrong-typed")
+                  (.play (js/Audio. "audio/bump.mp3")) nil)
+                char])
+             (meta-text race current-text left-text)))]
+          [:input {:on-change on-type
+                   :value current-text
+                   :ref #(when % (.focus %))}
+           ]]))
+     [waiting]
+     )])
 
 (defmethod panels/panel :race-panel
   [_ route-params]

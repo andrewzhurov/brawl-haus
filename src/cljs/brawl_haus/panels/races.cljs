@@ -2,15 +2,18 @@
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
             [brawl-haus.panels :as panels]
-            [brawl-haus.utils :refer [l <sub]]))
+            [brawl-haus.utils :refer [l <sub]]
+            [brawl-haus.panels.race :as race]))
 
 (defn open-races []
   [:div.collection.open-races
-   (for [[_ {:keys [id initiator participants] :as race}] (<sub [:db/get-in [:public-state :open-races]])]
+   (for [[_ {:keys [id initiator participants status] :as race}] (<sub [:db/get-in [:public-state :open-races]])
+         :when (not= :ongoing status)]
      [:a.collection-item.race {:key id
                                :on-click #(do (rf/dispatch [:enter-race id])
                                               (rf/dispatch [:current-route :race id]))}
-      (str "(" (count participants) ") " id)])])
+      [race/countdown race]
+      (clojure.string/join ", " (keys participants))])])
 
 
 
