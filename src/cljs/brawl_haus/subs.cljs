@@ -18,6 +18,6 @@
    (:re-pressed-example db)))
 
 (re-frame/reg-sub
- :user
+ :nick
  (fn [db _]
-   (:user db)))
+   (get-in db [:private-state :user :nick])))

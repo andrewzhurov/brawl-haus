@@ -2,7 +2,11 @@
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
             [brawl-haus.panels :as panels]
-            [brawl-haus.utils :refer [l <sub]]))
+            [brawl-haus.utils :refer [l <sub]]
+            [cljs-time.core :as t]
+            [cljs-time.format :as f]
+            [cljs-time.coerce :as c]
+            ))
 
 (defn send-box []
   (r/with-let [input-msg (r/atom "")
@@ -36,9 +40,11 @@
     [:div.messages
      [:ul
       (doall
-       (for [{:keys [id text from receivedAt]} (<sub [:messages])]
+       (for [{:keys [id text from received-at]} (<sub [:messages])]
          [:li.collection-item {:key id
-                               :class (when (= from (<sub [:tube])) "my")}
-          (do (l "FROM:" from) (l "TUBE:" (<sub [:tube])) nil)
-          text]))]]
+                               :class (when (= (:nick from) (<sub [:nick])) "my")}
+          #_(do (l "FROM:" from) (l "TUBE:" (<sub [:tube])) nil)
+          [:div.from (:nick from)]
+          [:div.received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))]
+          [:div.text text]]))]]
     ]])

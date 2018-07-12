@@ -18,15 +18,23 @@
     [:.messages {:flex 1
                  :min-height "0px"
                  :overflow-y "scroll"
-                 :width "100%"}
+                 :width "90%"}
      [:ul {:display "flex"
            :flex-direction "column"}
       [:li {:margin-bottom "3px"
             :padding "10px 10px"
             :width "fit-content"
             :background-color "lightgray"
-            :border-radius "8px"}
-       [:&.my {:background-color "lightblue"}]]]
+            :border-radius "8px"
+            :margin-left "10px"
+            :max-width "80%"}
+       [:&.my {:background-color "lightblue"
+               :align-self "flex-end"
+               :margin-left "0px"
+               :margin-right "10px"}]
+       [:.from {:display "inline-block"
+                :margin-right "10px"}]
+       [:.received-at {:display "inline-block"}]]]
      [:.message {
                  }]]
     [:.send-box {:width "90%"
