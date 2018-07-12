@@ -18,8 +18,10 @@
             :align-items "center"}
     [:.messages {:flex 1
                  :min-height "0px"
-                 :overflow-y "scroll"
-                 :width "90%"}
+                 :overflow-y "auto"
+                 :width "100%"
+                 :padding-left "5%"
+                 :padding-right "5%"}
      [:ul {:display "flex"
            :flex-direction "column"}
       [:li {:margin-bottom "3px"
@@ -53,10 +55,14 @@
              }]]
    [:.races-panel
     [:.new-race-btn {:margin "5px 5px"}]
+    ]
+   [:.race-panel
     [:.race-text {:display "flex"
                   :flex-direction "row"}
      [:.char {:display "block"
-              :min-width "5px"}
+              :min-width "unset"
+              :min-height "unset"}
+      [:&.whitespace {:min-width "5px"}]
       [:&.done {
                 :color "gray"}]
       [:&.right-typed {:border-bottom "2px solid blue"}]

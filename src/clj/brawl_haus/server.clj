@@ -13,7 +13,9 @@
             [ring.middleware.reload :refer [wrap-reload]]
 
             [clj-time.core :as t]
-            [clj-time.coerce :as c])
+            [clj-time.coerce :as c]
+
+            [brawl-haus.texts :as texts])
   (:gen-class))
 
 (defn l [desc expr] (println desc expr) expr)
@@ -134,7 +136,8 @@
                              (-> race
                                  (update :participants conj tube)
                                  (assoc :status :countdown)
-                                 (assoc :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date))))
+                                 (assoc :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date)))
+                                 (assoc :race-text (rand-nth texts/longs)))
                              race)))
              )
       tube)

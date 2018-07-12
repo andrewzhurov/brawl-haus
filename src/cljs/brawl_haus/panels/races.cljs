@@ -10,18 +10,15 @@
      [:a.collection-item.race {:key id
                                :on-click #(do (rf/dispatch [:enter-race id])
                                               (rf/dispatch [:current-route :race id]))}
-      (js/console.log "RACE:" race)
       (str "(" (count participants) ") " id)])])
 
 
 
 (defmethod panels/panel :races-panel
   [_ route-params]
-  (l "Route params:" route-params)
-  (let [race (<sub [:race (l "Race id:" (:race-id route-params))])]
-    [:div.app
-     [panels/navbar]
-     [:div.content.races-panel
-      [:div.new-race-btn.btn {:on-click #(rf/dispatch [:tube/send [:new-race]])}
-       "New race!"]
-      [open-races]]]))
+  [:div.app
+   [panels/navbar]
+   [:div.content.races-panel
+    [:div.new-race-btn.btn {:on-click #(rf/dispatch [:tube/send [:new-race]])}
+     "New race!"]
+    [open-races]]])

@@ -33,18 +33,20 @@
   [_ route-params]
   [:div.app
    [panels/navbar]
-   [:div.tube-indicator {:class (boolean @(rf/subscribe [:db/get-in [:tube]]))}]
+   #_[:div.tube-indicator {:class (boolean @(rf/subscribe [:db/get-in [:tube]]))}]
    #_[:button {:on-click #(rf/dispatch [:tube/send [:sync-public-state]])} "Sync public state"]
    [:div.content.chat
     [send-box]
     [:div.messages
-     [:ul
-      (doall
-       (for [{:keys [id text from received-at]} (<sub [:messages])]
-         [:li.collection-item {:key id
-                               :class (when (= (:nick from) (<sub [:nick])) "my")}
-          #_(do (l "FROM:" from) (l "TUBE:" (<sub [:tube])) nil)
-          [:div.from (:nick from)]
-          [:div.received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))]
-          [:div.text text]]))]]
+     (if-let [messages (not-empty (<sub [:messages]))]
+       [:ul
+        (doall
+         (for [{:keys [id text from received-at]} (<sub [:messages])]
+           [:li.collection-item {:key id
+                                 :class (when (= (:nick from) (<sub [:nick])) "my")}
+            #_(do (l "FROM:" from) (l "TUBE:" (<sub [:tube])) nil)
+            [:div.from (:nick from)]
+            [:div.received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))]
+            [:div.text text]]))]
+       [:div "No talking yet, be the first!"])]
     ]])
