@@ -15,7 +15,7 @@
 (reg-event-db
  :tube/connect
  (fn [db _]
-   (let [tube (tubes/tube (str "ws://localhost:9090/ws") on-receive)]
+   (let [tube (tubes/tube (str "ws://localhost:9090/tube") on-receive)]
      (tubes/create! tube)
      (assoc db :tube tube))))
 

@@ -2,13 +2,19 @@
   (:use org.httpkit.server)
   (:require [pneumatic-tubes.core :refer [receiver transmitter dispatch]]
             [pneumatic-tubes.httpkit :refer [websocket-handler]]
-            #_[brawl-haus.handler :refer [handler]]
+            [brawl-haus.handler :as handler]
 
             [config.core :refer [env]]
+
+            [compojure.core :refer [GET defroutes]]
+            [compojure.route :refer [resources]]
+            [ring.util.response :refer [resource-response]]
             [ring.adapter.jetty :refer [run-jetty]]
+
             [clj-time.core :as t]
             [clj-time.coerce :as c])
   (:gen-class))
+
 (defn l [desc expr] (println desc expr) expr)
 
 (def tx (transmitter))          ;; responsible for transmitting messages to one or more clients
@@ -23,7 +29,6 @@
 (add-watch public-state :clients-sync
            (fn [key atom old-state new-state]
              (dispatch-to (fn [x] true) [:current-public-state new-state])))
-
 
 (def users (atom {}))
 
@@ -104,17 +109,21 @@
                 ))
     }))
 
-(def handler (fn [req] (clojure.pprint/pprint req) ((websocket-handler rx) req)))   ;; kttp-kit based WebSocket request handler
-                                       ;; it also works with Compojure routes
+(defroutes routes
+  (GET "/" [] (resource-response "index.html" {:root "public"}))
+  (GET "/tube" [] (websocket-handler rx))
+  (resources "/"))
+
+#_(def handler (fn [req] (clojure.pprint/pprint req) ((websocket-handler rx) req)))
+    ;; kttp-kit based WebSocket request handler
+    ;; it also works with Compojure routes
 
 (defonce server (atom nil))
-
-(defn l [desc expr] (println desc expr) expr)
 
 (defn restart-server []
   (when @server
     (@server))
-  (reset! server (l "SERVER:" (run-server handler {:port 9090}))))
+  (reset! server (l "SERVER:" (run-server routes {:port 9090}))))
 
 (defn -main [& args]
   (println "IN MAIN")
