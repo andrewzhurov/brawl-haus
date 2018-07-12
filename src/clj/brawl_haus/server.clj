@@ -126,7 +126,7 @@
 (defn restart-server []
   (when @server
     (@server))
-  (reset! server (l "SERVER:" (run-server dev-handler {:port 9090}))))
+  (reset! server (l "SERVER:" (run-server #'dev-handler {:port 9090}))))
 
 (defn -main [& args]
   (println "IN MAIN")
