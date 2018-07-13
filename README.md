@@ -1,6 +1,8 @@
 # brawl-haus
 
-A [re-frame](https://github.com/Day8/re-frame) application designed to ... well, that part is up to you.
+Welcome to the Brawl Haus repo, where the pub is being built!
+
+Brawl Haus is a cooperative competition service, planned to have blind-typing oriented challenges as it's core.
 
 ## Development Mode
 
