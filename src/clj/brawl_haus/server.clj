@@ -15,7 +15,8 @@
             [clj-time.core :as t]
             [clj-time.coerce :as c]
 
-            [brawl-haus.texts :as texts])
+            [brawl-haus.texts :as texts]
+            [brawl-haus.my-tubes :as my-tubes])
   (:gen-class))
 
 (defn l [desc expr] (println desc expr) expr)
@@ -33,14 +34,19 @@
            (fn [key atom old-state new-state]
              (dispatch-to (fn [x] true) [:current-public-state new-state])))
 
+(defn user-publics [user] (select-keys user [:nick :user-since :tube]))
 (def users (atom {}))
 (add-watch users :user-data-client-sync
            (fn [key atom old-state new-state]
-             (let [altered-users (l "Diff:" (clojure.set/difference (l "New users:" (set new-state)) (l "Old users:" (set old-state))))]
+             (l "Old users state:" old-state)
+             (l "New users state:" new-state)
+             (swap! public-state assoc :users (map user-publics (vals new-state)))
+             (let [altered-users (clojure.set/difference (set new-state) (set old-state))]
                (doall
                 (map
                  (fn [[_ {:keys [tube] :as user}]]
-                   (dispatch-to (l "To tube:" tube) (l "Evt:" [:current-private-state {:user user}])))
+                   (when tube
+                     (dispatch-to  tube [:current-private-state {:user user}])))
                  altered-users)))))
 
 (defn create-user [users nick pass]
@@ -76,8 +82,7 @@
 (defn tube->user [tube]
   (l "User:" (first (filter (fn [user] (= (l "A TUBE:"(:tube user)) (l "The tube:" tube))) (vals @users)))))
 
-(defn user-publics [user]
-  (l "Publics:" (select-keys user [:id :nick :user-since])))
+
 
 (defn ?user [tube]
   (some-> tube
@@ -179,7 +184,10 @@
 
 (defroutes routes
   (GET "/" [] (resource-response "index.html" {:root "public"}))
-  (GET "/tube" [] (websocket-handler rx))
+  (GET "/tube" [] (my-tubes/websocket-handler rx {:on-tube-close (fn [tube]
+                                                                   (l "On close of tube:" tube)
+                                                                   (swap! users assoc-in
+                                                                          [(:nick (l "Of user:" (tube->user tube))) :tube] nil))}))
   (resources "/"))
 
 (def dev-handler (-> #'routes wrap-reload))

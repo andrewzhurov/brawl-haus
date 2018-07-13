@@ -1,6 +1,14 @@
 (ns brawl-haus.css
   (:require [garden.def :refer [defstyles]]))
 
+(defn grid [& strs]
+  (let [rows (butlast strs)
+        columns (last strs)
+        escaped-rows (for [row rows]
+                       (let [[areas size] (clojure.string/split row #" (?=[\w\d]+$)")]
+                         (format "\"%s\" %s" areas size)))]
+    (str (clojure.string/join "\n"  (conj (vec escaped-rows)  (str "/ " columns))))))
+
 (defstyles screen
   [[:body {:overflow-y "hidden"}]
    [:.tube-indicator {:position "absolute"
@@ -12,11 +20,14 @@
                       :border-width "3px"}
     [:&.true {:border-color "green"}]
     [:&.false {:border-color "gray"}]]
-   [:.chat {:display "flex"
-            :flex-direction "column"
+   [:.chat {:display "grid"
+            :grid-template
+            (grid "send-box participants 50px"
+                  "messages participants 1fr"
+                  "2fr 1fr")
             :height "100vh"
-            :align-items "center"}
-    [:.messages {:flex 1
+            }
+    [:.messages {:grid-area "messages"
                  :min-height "0px"
                  :overflow-y "auto"
                  :width "100%"
@@ -40,12 +51,17 @@
        [:.received-at {:display "inline-block"}]]]
      [:.message {
                  }]]
-    [:.send-box {:width "90%"
+    [:.send-box {:grid-area "send-box"
+                 :padding-left "5%"
+                 :padding-right "5%"
                  :display "flex"
                  :align-items "center"}
      [:input {:max-width "90%"
               :flex 1}]
-     [:div.btn {:transition "0.2s"}]]]
+     [:div.btn {:transition "0.2s"}]]
+    [:.participants {:grid-area "participants"}
+     [:.activity-indicator
+      ]]]
    [:.collection.open-races {:display "flex"
                   :flex-direction "column"}
     [:.race {;:padding "5px 10px"
@@ -56,7 +72,7 @@
              :flex-direction "row"
              :align-items "center"
              }]
-    [:.countdown {:width "30px"}]
+    [:.countdown {:width "40px"}]
     ]
    [:.races-panel
     [:.new-race-btn {:margin "5px 5px"}]

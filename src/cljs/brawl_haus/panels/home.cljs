@@ -15,12 +15,23 @@
                          (reset! input-msg ""))]
     [:div.send-box
      [:input {:value @input-msg
+              :ref #(when % (.focus %))
               :on-change #(reset! input-msg (.-value (.-target %)))
               :on-key-down #(when (= (.-keyCode %) 13)
-                              (send-fn @input-msg))}
-      ]
-     [:div.btn.btn-flat {:class (when (empty? @input-msg) "disabled"):on-click #(send-fn @input-msg)}
+                              (send-fn @input-msg))}]
+     [:div.btn.btn-flat {:class (when (empty? @input-msg) "disabled")
+                         :on-click #(send-fn @input-msg)}
       [:i.material-icons "send"]]]))
+
+(defn participants []
+  (let [users (<sub [:db/get-in [:public-state :users]])]
+    [:div.participants.z-depth-2
+     (for [{:keys [nick tube]} users]
+       [:div.user {:key nick}
+        [:span.activity-indicator.badge.white-text {:class (when tube "teal")}
+         (if tube "on" "off")]
+        [:div.nick nick]])
+     ]))
 
 
 (rf/reg-sub
@@ -33,8 +44,6 @@
   [_ route-params]
   [:div.app
    [panels/navbar]
-   #_[:div.tube-indicator {:class (boolean @(rf/subscribe [:db/get-in [:tube]]))}]
-   #_[:button {:on-click #(rf/dispatch [:tube/send [:sync-public-state]])} "Sync public state"]
    [:div.content.chat
     [send-box]
     [:div.messages
@@ -44,9 +53,9 @@
          (for [{:keys [id text from received-at]} (<sub [:messages])]
            [:li.collection-item {:key id
                                  :class (when (= (:nick from) (<sub [:nick])) "my")}
-            #_(do (l "FROM:" from) (l "TUBE:" (<sub [:tube])) nil)
             [:div.from (:nick from)]
             [:div.received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))]
             [:div.text text]]))]
-       [:div "No talking yet, be the first!"])]
+       [:div.empty "No talking yet, be the first!"])]
+    [participants]
     ]])

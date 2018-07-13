@@ -104,15 +104,16 @@
                                        :left-text (:race-text race)})
                   on-type
                   (fn [e]
-                    (swap! input-state
-                           (fn [{old-current-text :current-text
-                                 left-text :left-text :as old-state}]
-                             (let [current-text (.-value (.-target e))]
-                               (if-let [new-left-text (bite left-text current-text)]
-                                 (do (rf/dispatch [:tube/send [:left-text (:id race) new-left-text]])
-                                     {:current-text ""
-                                      :left-text new-left-text})
-                                 (assoc old-state :current-text current-text))))))]
+                    (when (t/after? (t/now) (c/from-date (:starts-at race)))
+                      (swap! input-state
+                             (fn [{old-current-text :current-text
+                                   left-text :left-text :as old-state}]
+                               (let [current-text (.-value (.-target e))]
+                                 (if-let [new-left-text (bite left-text current-text)]
+                                   (do (rf/dispatch [:tube/send [:left-text (:id race) new-left-text]])
+                                       {:current-text ""
+                                        :left-text new-left-text})
+                                   (assoc old-state :current-text current-text)))))))]
        (let [{:keys [current-text left-text]} @input-state]
          [:div.text-race.card
           [:div.race-text.card-content
