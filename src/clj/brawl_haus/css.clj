@@ -59,7 +59,14 @@
      [:input {:max-width "90%"
               :flex 1}]
      [:div.btn {:transition "0.2s"}]]
-    [:.participants {:grid-area "participants"}
+    [:ul.participants {:grid-area "participants"
+                       :overflow-y "auto"
+                       :margin "0px"
+                       :height "100%"}
+     [:li]
+     [:a {:cursor "pointer"}]
+     [:.collection-header {:position "sticky"
+                           :top "0px"}]
      [:.activity-indicator
       ]]]
    [:.collection.open-races {:display "flex"
@@ -76,7 +83,8 @@
     ]
    [:.races-panel
     [:.new-race-btn {:margin "5px 5px"}]
-    ]
+    [:.highscores {:width "220px"}
+     [:a]]]
    [:.race-panel {:padding "5px 10px"}
     [:.countdown {:text-align "center"
                   :font-size "20px"

@@ -23,15 +23,30 @@
                          :on-click #(send-fn @input-msg)}
       [:i.material-icons "send"]]]))
 
+(rf/reg-sub
+ :users
+ (fn [db _]
+   (get-in db [:public-state :users])))
+
 (defn participants []
-  (let [users (<sub [:db/get-in [:public-state :users]])]
-    [:div.participants.z-depth-2
-     (for [{:keys [nick tube]} users]
-       [:div.user {:key nick}
-        [:span.activity-indicator.badge.white-text {:class (when tube "teal")}
-         (if tube "on" "off")]
+  (let [users (sort-by :nick (<sub [:users]))
+        {active true
+         inactive false} (group-by (comp boolean :tube) users)]
+    [:ul.collection.with-header.participants.z-depth-1
+     [:li.collection-header.z-depth-1
+      [:h6 "Active users (" (count active) ")"]]
+     (for [{:keys [nick tube]} active]
+       [:li.collection-item {:key nick
+                             :style {:color "#26a69a"}}
+        [:span.activity-indicator.badge.white-text.teal "on"]
         [:div.nick nick]])
-     ]))
+     [:li.collection-header.z-depth-1
+      [:h6 "Inactive users (" (count inactive) ")"]]
+     (for [{:keys [nick tube]} inactive]
+       [:li.collection-item {:key nick}
+        [:span.activity-indicator.badge.white-text "off"]
+        [:div.nick nick]])]
+     ))
 
 
 (rf/reg-sub

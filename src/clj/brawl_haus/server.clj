@@ -34,8 +34,10 @@
            (fn [key atom old-state new-state]
              (dispatch-to (fn [x] true) [:current-public-state new-state])))
 
-(defn user-publics [user] (select-keys user [:nick :user-since :tube]))
-(def users (atom {}))
+(defn user-publics [user] (select-keys user [:nick :user-since :tube :highscore]))
+(def users (atom {"test-nick" {:nick "test-nick"
+                               :pass "test-pass"
+                               :highscore 233}}))
 (add-watch users :user-data-client-sync
            (fn [key atom old-state new-state]
              (l "Old users state:" old-state)
@@ -109,6 +111,13 @@
       (assoc :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date)))
       (assoc :race-text (rand-nth texts/longs))))
 
+(defn calc-speed [text start finish]
+  (let [minutes (/ (l "In sec: " (t/in-seconds (t/interval (c/from-date start)
+                                                           (c/from-date finish))))
+                   60)
+        chars  (l "chars" (count text))]
+    (int (/ chars (l "Mins"minutes)))))
+
 (def rx                         ;; collection of handlers for processing incoming messages
   (receiver
    {:login
@@ -171,13 +180,26 @@
 
     :left-text
     (fn [tube [_ race-id left-text]]
-      (when-let [{:keys [nick]} (?user tube)]
-        (swap! public-state update-in [:open-races race-id ]
-               (fn [race]
-                 (-> race
-                     (assoc :status :ongoing)
-                     (assoc-in [:participants nick] (count left-text))
-                     (assoc-in [:finished nick] (when (zero? (count left-text)) (now)))))))
+      (when-let [{:keys [nick] :as user} (?user tube)]
+        (let [current-highscore (or (:highscore user) 0)
+              ?finish-time (and (zero? (count left-text))
+                                (now))
+              score (when ?finish-time
+                      (let [{:keys [race-text starts-at]} (get-in @public-state [:open-races race-id])]
+                        (calc-speed (l 11 race-text) (l 22 starts-at) (l 33 ?finish-time))))
+              is-new-highscore (when score (> score current-highscore))]
+          (l "Score:" score)
+          (l "Is high:" is-new-highscore)
+          (when (and score
+                     is-new-highscore)
+            (l "New user with high:" (swap! users assoc-in [nick :highscore] score)))
+          (swap! public-state update-in [:open-races race-id ]
+                 (fn [race]
+                   (-> race
+                       (assoc :status :ongoing)
+                       (assoc-in [:participants nick] (count left-text))
+                       (assoc-in [:scores nick] score))))
+          ))
       tube)
 
     }))
@@ -186,8 +208,9 @@
   (GET "/" [] (resource-response "index.html" {:root "public"}))
   (GET "/tube" [] (my-tubes/websocket-handler rx {:on-tube-close (fn [tube]
                                                                    (l "On close of tube:" tube)
-                                                                   (swap! users assoc-in
-                                                                          [(:nick (l "Of user:" (tube->user tube))) :tube] nil))}))
+                                                                   (when-let [user (l "Closing for user:" (not-empty (tube->user tube)))]
+                                                                     (swap! users assoc-in
+                                                                            [(:nick user) :tube] nil)))}))
   (resources "/"))
 
 (def dev-handler (-> #'routes wrap-reload))
