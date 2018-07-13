@@ -59,22 +59,15 @@
                (map (fn [x] {:char x :statuses #{"yet"}}) after-wrong)))
     ))
 
-(defn calc-speed [text start finish]
-  (let [minutes (/ (t/in-seconds (t/interval (c/from-date start)
-                                             (c/from-date finish)))
-                   60)
-        chars  (count text)]
-    (/ chars minutes)))
-
 (defn race-progress [race]
   [:div.race-progress
    (for [[nick left-chars] (:participants race)]
      [:div.participant {:key nick}
       [:div.nick nick]
-      (when-let [finish-at (get-in race [:finished nick])]
-        [:div.average-speed (str (int (calc-speed (:race-text race)
-                                                  (:starts-at race)
-                                                  finish-at)) " char/minute")])
+      (when-let [score (get-in (l "RACE:"race) [:scores nick])]
+        (let [{:keys [highscore]} (l "PUB:"(<sub [:public-user nick]))]
+          [:span.average-speed.badge.white-text {:class (when (= score highscore) "new")}
+           (str score)]))
       [rcmisc/progress-bar
        :striped? (not (zero? left-chars))
        :model (if left-chars

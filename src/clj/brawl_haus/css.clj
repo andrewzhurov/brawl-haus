@@ -10,7 +10,10 @@
     (str (clojure.string/join "\n"  (conj (vec escaped-rows)  (str "/ " columns))))))
 
 (defstyles screen
-  [[:body {:overflow-y "hidden"}]
+  [[:.badge {:border-radius "4px"}]
+   [:span.badge.new {:font-size "1.1rem"
+                     :font-weight "500"}]
+   [:body {:overflow-y "hidden"}]
    [:.tube-indicator {:position "absolute"
                       :height "15px" :width "15px"
                       :top "10px"
@@ -69,8 +72,10 @@
                            :top "0px"}]
      [:.activity-indicator
       ]]]
-   [:.collection.open-races {:display "flex"
-                  :flex-direction "column"}
+   [:.collection.open-races
+    {:display "flex"
+     :grid-area "open-races"
+     :flex-direction "column"}
     [:.race {;:padding "5px 10px"
              ;:margin "3px 0px"
              :cursor "pointer"
@@ -82,9 +87,25 @@
     [:.countdown {:width "40px"}]
     ]
    [:.races-panel
+    {:display "grid"
+     :grid-template (grid "controls highscores 50px"
+                          "open-races highscores 1fr"
+                          "2fr 1fr")}
     [:.new-race-btn {:margin "5px 5px"}]
-    [:.highscores {:width "220px"}
-     [:a]]]
+    [:ul.highscores {:grid-area "highscores"
+                     :overflow-y "auto"
+                     :margin "0px"
+                     :height "100%"}
+     [:li]
+     [:a {:cursor "pointer"}]
+     [:.collection-header {:position "sticky"
+                           :top "0px"}]
+     [:.activity-indicator
+      ]]
+    #_[:.highscores {:grid-area "highscores"
+                   :overflow-y "auto"
+                   :margin "0px"
+                   :height "100%"}]]
    [:.race-panel {:padding "5px 10px"}
     [:.countdown {:text-align "center"
                   :font-size "20px"
@@ -107,10 +128,12 @@
               :margin "auto"
               :display "block"}]]
     [:.race-progress {:margin "5px 0px"}
-     [:.nick {:display "inline-block"}]
-     [:.average-speed {:display "inline-block"
-                       :float "right"
-                       :margin-right "10px"}]]]
+     [:.participant {:position "relative"}
+      [:.nick {:display "inline-block"}]
+      [:.average-speed {:display "inline-block"
+                        :position "absolute"
+                        :top 0 :right 0
+                        :margin-right "10px"}]]]]
    [:.app {:display "grid"
            :grid-template-columns "auto 1fr"}
     [:.navbar {:display "flex"

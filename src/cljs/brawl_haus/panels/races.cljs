@@ -18,7 +18,16 @@
         (l 3))))
 
 (defn highscores []
-  [:div.highscores.collection.z-depth-1
+  [:ul.highscores.collection.with-header.z-depth-1
+   [:li.collection-header.z-depth-1
+    [:h5 "Highscores"]]
+   (for [{:keys [nick highscore]} (<sub [:highscored-users])]
+     [:li.collection-item {:key nick} nick
+      [:span.badge.white-text highscore]])
+   ]
+  #_[:div.highscores.collection.with-header.z-depth-1
+   [:div.collection-header.z-depth-1
+    [:h5 "Highscores"]]
    (for [{:keys [nick highscore]} (<sub [:highscored-users])]
      [:a.collection-item {:key nick} nick
       [:span.badge.white-text highscore]])])
