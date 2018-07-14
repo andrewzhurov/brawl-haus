@@ -18,7 +18,7 @@
 (defn main-panel []
   (let [{:keys [handler route-params]} (<sub [:db/get-in [:current-panel]])
         user (<sub [:user])]
-    (when (nil? user) (rf/dispatch [:unauthorized]))
+    #_(when (nil? user) (rf/dispatch [:unauthorized]))
     [:div
      [panels/notifications]
      [panels/panel handler route-params]]))

@@ -9,7 +9,7 @@
    [bidi.bidi :as bidi]))
 (defn l [desc expr] (js/console.log desc expr) expr)
 (def route-map
-  ["/" {"" :home-panel
+  ["/" {"" :race-panel #_:home-panel
         "race" :races-panel
         ["race/" :race-id] :race-panel
         "login" :login-panel}])

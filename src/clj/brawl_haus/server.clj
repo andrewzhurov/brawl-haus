@@ -118,6 +118,11 @@
         chars  (l "chars" (count text))]
     (int (/ chars (l "Mins"minutes)))))
 
+(defn race-to-be [races]
+  (->> races
+       (filter (fn [[_ {:keys [status]}]] (= :to-be status)))
+       first))
+
 (def rx                         ;; collection of handlers for processing incoming messages
   (receiver
    {:login
@@ -125,6 +130,12 @@
       (l "Tube on login:" tube)
       (swap! users auth nick pass tube)
       tube)
+
+    :login/anonymous
+    (fn [tube _]
+      (let [anonymous-nick (uuid)]
+        (swap! users assoc anonymous-nick {:nick anonymous-nick
+                                           :tube tube})))
 
     :sync-public-state
     (fn [tube _]
@@ -148,17 +159,14 @@
 
     :new-race
     (fn [tube _]
-      (when-let [user (tube->user tube)]
-        (l "Tube on new race:" tube)
-        (l "User on new race:" user)
-        (let [new-race {:id (uuid)
-                        :initiated-at (now)
-                        :initiator tube
-                        :participants {(:nick user) nil}
-                        :status :not-started}]
-          (swap! public-state update :open-races assoc (:id new-race) new-race)
-          (dispatch-to tube [:race-initiated new-race])
-          ))
+      (let [new-race {:id (uuid)
+                      :participants {}
+                      :status :to-be}]
+        (swap! public-state
+               (fn [current-state]
+                 (if-not (race-to-be (:open-races current-state))
+                   (update current-state :open-races assoc (:id new-race) new-race)
+                   current-state))))
       tube)
 
     :enter-race

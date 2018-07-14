@@ -106,7 +106,11 @@
                    :overflow-y "auto"
                    :margin "0px"
                    :height "100%"}]]
-   [:.race-panel {:padding "5px 10px"}
+
+   ;; Race panel
+   [:.race-panel {:padding "5px 10px"
+                  :width "90%"
+                  :height "90%"}
     [:.countdown {:text-align "center"
                   :font-size "20px"
                   :text-decoration "underline"
@@ -134,7 +138,7 @@
                         :position "absolute"
                         :top 0 :right 0
                         :margin-right "10px"}]]]]
-   [:.app {:display "grid"
+   #_[:.app {:display "grid"
            :grid-template-columns "auto 1fr"}
     [:.navbar {:display "flex"
                  :flex-direction "column"

@@ -127,12 +127,27 @@
      [waiting]
      )])
 
+(rf/reg-sub
+ :race-to-be
+ (fn [db _]
+   (->> (get-in db [:public-state :open-races])
+        (filter (fn [[_ {:keys [status]}]] (= :to-be status)))
+        first)))
+
 (defmethod panels/panel :race-panel
   [_ route-params]
   (let [race (<sub [:current-race])]
-    [:div.app
-     [panels/navbar]
-     [:div.content.race-panel
-      [countdown race]
-      [text-race race]
-      [race-progress race]]]))
+    (cond (nil? (<sub [:user]))
+          (do (rf/dispatch [:tube/send [:login/anonymous]])
+              [:div "Waiting to be logged in..."])
+
+          (nil? (<sub [:race-to-be]))
+          (do (rf/dispatch [:tube/send [:new-race]])
+              [:div "Waiting for a race to init..."])
+
+          :all-set
+          [:div.app
+           [:div.content.race-panel
+            [countdown race]
+            [text-race race]
+            [race-progress race]]])))
