@@ -91,7 +91,7 @@
             3 "...")]]))
 
 (defn text-race [race]
-  [:div.text-race-wrap;.card.blue-gray.darken-1
+  [:div.text-race-wrap
    (if (:race-text race)
      (r/with-let [input-state (r/atom {:current-text ""
                                        :left-text (:race-text race)})
@@ -127,27 +127,29 @@
      [waiting]
      )])
 
+
+(defn to-next []
+  [:div {:on-click #(rf/dispatch [:tube/send [:navigate {:location-id :stand-by-panel}]])} "To next"])
+
+
 (rf/reg-sub
  :race-to-be
  (fn [db _]
    (->> (get-in db [:public-state :open-races])
         (filter (fn [[_ {:keys [status]}]] (= :to-be status)))
         first)))
+(rf/reg-sub
+ :race
+ (fn [db [_ race-id]]
+   (get-in db [:public-state :open-races race-id])))
 
 (defmethod panels/panel :race-panel
-  [_ route-params]
-  (let [race (<sub [:current-race])]
-    (cond (nil? (<sub [:user]))
-          (do (rf/dispatch [:tube/send [:login/anonymous]])
-              [:div "Waiting to be logged in..."])
-
-          (nil? (<sub [:race-to-be]))
-          (do (rf/dispatch [:tube/send [:new-race]])
-              [:div "Waiting for a race to init..."])
-
-          :all-set
-          [:div.app
-           [:div.content.race-panel
-            [countdown race]
-            [text-race race]
-            [race-progress race]]])))
+  [{:keys [params]}]
+  (l "PARAMS:" params)
+  (let [race (l 1111 (<sub [:race (l "RACE ID:"(:race-id params))])) #_(<sub [:race-to-be])]
+    [:div.app
+     [:div.content.race-panel
+      [countdown race]
+      [text-race race]
+      [race-progress race]
+      [to-next]]]))

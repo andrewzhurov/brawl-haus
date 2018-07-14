@@ -1,10 +1,10 @@
 (ns brawl-haus.panels
   (:require [brawl-haus.utils :refer [<sub l]]))
 
-(defmulti panel (fn [panel-id _] panel-id))
+(defmulti panel :location-id)
 
-(defmethod panel :default []
-  [:div "Eh, what 'a you doing here?"])
+(defmethod panel :default [location]
+  [:div "None panels registered for: " (pr-str location)])
 
 (defn home-btn []
   [:a.home-btn.btn {:href "/#/"

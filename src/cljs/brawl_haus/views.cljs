@@ -8,6 +8,7 @@
    [brawl-haus.utils :refer [l <sub]]
    [brawl-haus.panels :as panels]
    [brawl-haus.panels :as panels]
+   [brawl-haus.panels.stand-by]
    [brawl-haus.panels.home]
    [brawl-haus.panels.races]
    [brawl-haus.panels.race]
@@ -16,9 +17,13 @@
 
 
 (defn main-panel []
-  (let [{:keys [handler route-params]} (<sub [:db/get-in [:current-panel]])
-        user (<sub [:user])]
-    #_(when (nil? user) (rf/dispatch [:unauthorized]))
-    [:div
-     [panels/notifications]
-     [panels/panel handler route-params]]))
+  (let [user (l "User:" (<sub [:user]))
+        location (l "Location:" (<sub [:db/get-in [:public-state :user-locations (:nick user)]]))]
+    (cond (nil? user)
+          (do (rf/dispatch [:tube/send [:login/anonymous]])
+              [:div "Waiting to be logged in..."])
+
+          :logged-in
+          [:div
+           [panels/notifications]
+           [panels/panel location]])))

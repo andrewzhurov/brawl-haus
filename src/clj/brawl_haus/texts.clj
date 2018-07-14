@@ -1,7 +1,7 @@
 (ns brawl-haus.texts)
 
-#_(def longs ["blah blah meh meh"])
-(def longs ["In computer science, ACID (Atomicity, Consistency, Isolation, Durability) is a set of properties of database transactions intended to guarantee validity even in the event of errors, power failures, etc. In the context of databases, a sequence of database operations that satisfies the ACID properties, and thus can be perceived as a single logical operation on the data, is called a transaction"
+(def longs ["A fast text to type"])
+#_(def longs ["In computer science, ACID (Atomicity, Consistency, Isolation, Durability) is a set of properties of database transactions intended to guarantee validity even in the event of errors, power failures, etc. In the context of databases, a sequence of database operations that satisfies the ACID properties, and thus can be perceived as a single logical operation on the data, is called a transaction"
             "For example, a transfer of funds from one bank account to another, even involving multiple changes such as debiting one account and crediting another, is a single transaction."
             "In 1983, Andreas Reuter and Theo Harder coined the acronym ACID as shorthand for Atomicity, Consistency, Isolation, and Durability, building on earlier work by Jim Gray who enumerated Atomicity, Consistency, and Durability but left out Isolation when characterizing the transaction concept."
             "These four properties describe the major guarantees of the transaction paradigm, which has influenced many aspects of development in database systems."

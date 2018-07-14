@@ -23,9 +23,9 @@
    (get-in db [:private-state :user])))
 
 (re-frame/reg-sub
- :public-user
- (fn [db [_ nick]]
-   (first (filter #(= nick (:nick %)) (get-in db [:public-state :users])))))
+  :public-user
+  (fn [db [_ nick]]
+    (first (filter #(= nick (:nick %)) (get-in db [:public-state :users])))))
 
 (re-frame/reg-sub
  :nick

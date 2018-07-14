@@ -8,13 +8,13 @@
    [brawl-haus.events :as events]
    [bidi.bidi :as bidi]))
 (defn l [desc expr] (js/console.log desc expr) expr)
-(def route-map
+#_(def route-map
   ["/" {"" :race-panel #_:home-panel
         "race" :races-panel
         ["race/" :race-id] :race-panel
         "login" :login-panel}])
 
-(rf/reg-event-db
+#_(rf/reg-event-db
  :current-route
  (fn [db [_ & route-parts]]
    (set! (.-location js/window)
@@ -26,7 +26,7 @@
                                             route-parts))))
    db))
 
-(defn hook-browser-navigation! []
+#_(defn hook-browser-navigation! []
   (doto (History.)
     (gevents/listen
      EventType/NAVIGATE
@@ -36,4 +36,4 @@
     (.setEnabled true)))
 
 (defn app-routes []
-  (hook-browser-navigation!))
+  #_(hook-browser-navigation!))

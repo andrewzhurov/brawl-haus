@@ -37,7 +37,8 @@
 (defn user-publics [user] (select-keys user [:nick :user-since :tube :highscore]))
 (def users (atom {"test-nick" {:nick "test-nick"
                                :pass "test-pass"
-                               :highscore 233}}))
+                               :highscore 233
+                               :tube nil}}))
 (add-watch users :user-data-client-sync
            (fn [key atom old-state new-state]
              (l "Old users state:" old-state)
@@ -107,7 +108,7 @@
 
 (defn start-race [race]
   (-> race
-      (assoc :status :countdown)
+      ;(assoc :status :countdown)
       (assoc :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date)))
       (assoc :race-text (rand-nth texts/longs))))
 
@@ -135,7 +136,10 @@
     (fn [tube _]
       (let [anonymous-nick (uuid)]
         (swap! users assoc anonymous-nick {:nick anonymous-nick
-                                           :tube tube})))
+                                           :tube tube})
+        (swap! public-state assoc-in [:user-locations anonymous-nick] {:location-id :stand-by-panel
+                                                                       :params nil}))
+      tube)
 
     :sync-public-state
     (fn [tube _]
@@ -159,9 +163,10 @@
 
     :new-race
     (fn [tube _]
-      (let [new-race {:id (uuid)
-                      :participants {}
-                      :status :to-be}]
+      (let [new-race (-> {:id (uuid)
+                          :participants {}
+                          :status :to-be}
+                         start-race)]
         (swap! public-state
                (fn [current-state]
                  (if-not (race-to-be (:open-races current-state))
@@ -170,20 +175,22 @@
       tube)
 
     :enter-race
-    (fn [tube [_ race-id]]
+    (fn [tube _]
       (l "Tube on enter:" tube)
-      (when-let [user (tube->user tube)]
-        (l "User on enter:" user)
-        (swap! public-state
-               #(update-in % [:open-races race-id]
-                           (fn [race]
-                             (if (and (= :not-started (:status race))
-                                      (not (contains? (:participants race) (:nick user))))
-                               (-> race
-                                   (update :participants assoc (:nick user) nil)
-                                   start-race)
-                               race)))
-               ))
+      (when-let [{:keys [nick]} (l "User on enter:" (tube->user tube))]
+        (let [new-state (swap! public-state
+                               (fn [current-state]
+                                 (when-let [[_ {:keys [id status]}] (l "Race to be:" (race-to-be (:open-races current-state)))]
+                                   (if (= status :to-be)
+                                     (l "New state: "
+                                        (-> current-state
+                                            (assoc-in [:open-races id :participants nick]
+                                                      {:progress nil})
+                                            (assoc-in [:user-locations nick] {:location-id :race-panel
+                                                                              :params {:race-id id}})))
+                                     current-state)))
+                               )]
+          ))
       tube)
 
     :left-text
@@ -210,6 +217,12 @@
           ))
       tube)
 
+    :navigate
+    (fn [tube [_ location]]
+      (let [{:keys [nick]} (tube->user tube)]
+        (swap! public-state
+               assoc-in [:user-locations nick] location))
+      tube)
     }))
 
 (defroutes routes
