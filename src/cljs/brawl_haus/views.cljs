@@ -7,23 +7,12 @@
    [brawl-haus.subs :as subs]
    [brawl-haus.utils :refer [l <sub]]
    [brawl-haus.panels :as panels]
-   [brawl-haus.panels :as panels]
-   [brawl-haus.panels.stand-by]
-   [brawl-haus.panels.home]
-   [brawl-haus.panels.races]
-   [brawl-haus.panels.race]
-   [brawl-haus.panels.login]))
-
-
+   [brawl-haus.panels.race]))
 
 (defn main-panel []
-  (let [user (l "User:" (<sub [:user]))
-        location (l "Location:" (<sub [:db/get-in [:public-state :user-locations (:nick user)]]))]
-    (cond (nil? user)
-          (do (rf/dispatch [:tube/send [:login/anonymous]])
-              [:div "Waiting to be logged in..."])
-
-          :logged-in
-          [:div
-           [panels/notifications]
-           [panels/panel location]])))
+  (let [tube (<sub [:tube])
+        location (<sub [:db/get-in [:public-state :user-locations (:tube/id tube)]])]
+    [:div {:key (str location)}
+     (pr-str location)
+     #_[panels/notifications]
+     [panels/panel location]]))

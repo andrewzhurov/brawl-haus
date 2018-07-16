@@ -39,7 +39,7 @@
           (contains? breaks (last chunk)) (subs text (count chunk)))))
 
 (defn how-matches [str substr]
-  (count (take-while true? (map = (l 11 str) (l 22 substr)))))
+  (count (take-while true? (map = str substr))))
 
 (defn meta-text [{:keys [race-text] :as race} current-text left-text]
   (js/console.log race-text current-text left-text)
@@ -61,27 +61,26 @@
 
 (defn race-progress [race]
   [:div.race-progress
-   (for [[nick left-chars] (:participants race)]
-     [:div.participant {:key nick}
-      [:div.nick nick]
-      (when-let [score (get-in (l "RACE:"race) [:scores nick])]
-        (let [{:keys [highscore]} (l "PUB:"(<sub [:public-user nick]))]
-          [:span.average-speed.badge.white-text {:class (when (= score highscore) "new")}
-           (str score)]))
-      [rcmisc/progress-bar
-       :striped? (not (zero? left-chars))
-       :model (if left-chars
-                (- 100
-                   (-> left-chars
-                       (/ (count (:race-text race)))
-                       (* 100)))
-                0)]
-      ])])
+   (doall
+    (for [[id {:keys [speed left-chars]}] (:participants race)]
+      (let [{:keys [nick]} (<sub [:user id])]
+        [:div.participant {:key id}
+         [:div.nick nick]
+         (when speed
+           [:span.average-speed.badge.white-text (str speed)])
+         [rcmisc/progress-bar
+          :striped? (not (zero? left-chars))
+          :model (if left-chars
+                   (- 100
+                      (-> left-chars
+                          (/ (count (:race-text race)))
+                          (* 100)))
+                   0)]
+         ])))])
 
 (defn waiting []
   (r/with-let [dots (r/atom 4)
                _ (js/setInterval #(swap! dots inc) 800)]
-    (l "DOTS:" @dots)
     [:div.card.waiting
      [:div.card-content "Waiting a company"
       (case (rem @dots 4)
@@ -129,15 +128,8 @@
 
 
 (defn to-next []
-  [:div {:on-click #(rf/dispatch [:tube/send [:navigate {:location-id :stand-by-panel}]])} "To next"])
+  [:div.btn.btn-flat {:on-click #(rf/dispatch [:tube/send [:race/attend]])} "To next"])
 
-
-(rf/reg-sub
- :race-to-be
- (fn [db _]
-   (->> (get-in db [:public-state :open-races])
-        (filter (fn [[_ {:keys [status]}]] (= :to-be status)))
-        first)))
 (rf/reg-sub
  :race
  (fn [db [_ race-id]]
@@ -145,8 +137,7 @@
 
 (defmethod panels/panel :race-panel
   [{:keys [params]}]
-  (l "PARAMS:" params)
-  (let [race (l 1111 (<sub [:race (l "RACE ID:"(:race-id params))])) #_(<sub [:race-to-be])]
+  (let [race (<sub [:race (:race-id params)])]
     [:div.app
      [:div.content.race-panel
       [countdown race]

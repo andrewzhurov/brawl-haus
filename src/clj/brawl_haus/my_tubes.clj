@@ -29,7 +29,7 @@
 
 (defn websocket-handler
   "Creates WebSocket request handler, use it in your compojure routes"
-  [receiver {:keys [on-tube-close]}]
+  [receiver {:keys [on-tube-open on-tube-close]}]
   (fn [request]
     (with-channel
       request ch

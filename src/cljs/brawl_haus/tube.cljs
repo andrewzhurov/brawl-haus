@@ -5,28 +5,39 @@
 
 (defn on-receive [event-v]
   ;; handler of incoming events from server
-  (.log js/console "<=evt:" (str event-v))
-  (rf/dispatch event-v))
+  (rf/dispatch (l "<=evt" event-v)))
 
-(def send-to-server (after (fn [db evt]
-                             (when-let [tube (:tube db)]
-                               (tubes/dispatch tube evt)))))
+(defn tube [db]
+  (:tube db))
+
+(rf/reg-sub
+ :tube
+ (fn [db _]
+   (tube db)))
+
+(rf/reg-sub
+ :id
+ :<- [:tube]
+ (fn [[tube] _]
+   (:tube/id tube)))
+
 
 (reg-event-db
- :tube/connect
+ :tube/create
  (fn [db _]
    (let [tube (tubes/tube (str "ws://localhost:9090/tube") on-receive)]
      (tubes/create! tube)
      (assoc db :tube tube))))
 
-(rf/reg-sub
- :tube
- (fn [db _]
-   (get-in db [:init-opts :tube/id])))
+;<=
+(reg-event-db
+ :tube/did-create
+ (fn [db [_ tube-id]]
+   (assoc-in db [:tube :tube/id] tube-id)))
 
 (rf/reg-event-db
  :tube/send
  (fn [db [_ evt]]
-   (when-let [tube (:tube db)]
-     (tubes/dispatch tube (l "=>evt:" evt)))
+   (when-let [tube (tube db)]
+     (tubes/dispatch tube (l "=>evt" evt)))
    db))

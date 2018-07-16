@@ -1,11 +1,7 @@
 (ns brawl-haus.subs
   (:require
-   [re-frame.core :as re-frame]))
-
-(re-frame/reg-sub
- ::name
- (fn [db]
-   (:name db)))
+   [re-frame.core :as re-frame]
+   [brawl-haus.utils :refer [l <sub]]))
 
 (re-frame/reg-sub
  ::active-panel
@@ -13,21 +9,13 @@
    (:active-panel db)))
 
 (re-frame/reg-sub
- ::re-pressed-example
+ :users
  (fn [db _]
-   (:re-pressed-example db)))
+   (get-in db [:public-state :users])))
 
 (re-frame/reg-sub
  :user
- (fn [db _]
-   (get-in db [:private-state :user])))
-
-(re-frame/reg-sub
-  :public-user
-  (fn [db [_ nick]]
-    (first (filter #(= nick (:nick %)) (get-in db [:public-state :users])))))
-
-(re-frame/reg-sub
- :nick
- (fn [db _]
-   (get-in db [:private-state :user :nick])))
+ :<- [:tube]
+ :<- [:users]
+ (fn [[tube users] [_ tube-id]]
+   (get users (or tube-id (:tube/id tube)))))
