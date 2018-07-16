@@ -10,7 +10,6 @@
                  [garden "1.3.5"]
                  [ns-tracker "0.3.1"]
                  [compojure "1.5.0"]
-                 [yogthos/config "0.8"]
                  [ring "1.4.0"]
                  [re-pressed "0.2.2"]
                  [http-kit "2.2.0"]
@@ -49,7 +48,8 @@
 
   :profiles
   {:dev
-   {:dependencies [[binaryage/devtools "0.9.10"]
+   {:source-paths ["dev"]
+    :dependencies [[binaryage/devtools "0.9.10"]
                    [day8.re-frame/re-frame-10x "0.3.3"]
                    [day8.re-frame/tracing "0.5.1"]
                    [figwheel-sidecar "0.5.16"]
@@ -57,7 +57,9 @@
 
     :plugins      [[lein-figwheel "0.5.16"]
                    [lein-pdo "0.1.1"]]}
-   :prod { :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]}}
+   :prod
+   {:source-paths ["prod"]
+    :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]}}
 
   :cljsbuild
   {:builds

@@ -1,7 +1,8 @@
 (ns brawl-haus.tube
   (:require [re-frame.core :as rf :refer [reg-event-db reg-sub dispatch after]]
             [pneumatic-tubes.core :as tubes]
-            [brawl-haus.utils :refer [<sub l]]))
+            [brawl-haus.utils :refer [<sub l]]
+            [config.core :refer [env]]))
 
 (defn on-receive [event-v]
   ;; handler of incoming events from server
@@ -25,7 +26,7 @@
 (reg-event-db
  :tube/create
  (fn [db _]
-   (let [tube (tubes/tube (str "ws://localhost:9090/tube") on-receive)]
+   (let [tube (tubes/tube (str "ws://" (:server-url env) "/tube") on-receive)]
      (tubes/create! tube)
      (assoc db :tube tube))))
 
