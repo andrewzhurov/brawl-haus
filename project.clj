@@ -17,7 +17,6 @@
                  [clj-time "0.14.4"]
                  [com.andrewmcveigh/cljs-time "0.5.2"]]
 
-  :repl-options {:timeout 120000}
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-garden "0.2.8"]]
 
@@ -37,7 +36,8 @@
                      :compiler     {:output-to     "resources/public/css/screen.css"
                                     :pretty-print? true}}]}
 
-  :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
+  :repl-options {:timeout 120000
+                 :nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
 
   :aliases {"dev" ["do" "clean"
                         ["pdo" ["figwheel" "dev"]
