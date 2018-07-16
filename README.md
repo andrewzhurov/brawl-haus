@@ -42,7 +42,7 @@ Having all state of the world at disposal and being event-driven it looks much l
 
 It drives crazy out of me. :shivers:
 
-And now you too.
+And now so you.;)
 
 ## Developer mode
 
