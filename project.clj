@@ -36,7 +36,7 @@
                      :compiler     {:output-to     "resources/public/css/screen.css"
                                     :pretty-print? true}}]}
 
-  :repl-options {:timeout 120000
+  :repl-options {:timeout 600000
                  :nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
 
   :aliases {"dev" ["do" "clean"
