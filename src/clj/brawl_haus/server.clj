@@ -4,19 +4,15 @@
             [pneumatic-tubes.httpkit :refer [websocket-handler]]
             [brawl-haus.handler :as handler]
 
-            [config.core :refer [env]]
-
             [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [resources]]
             [ring.util.response :refer [resource-response]]
-            [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware.reload :refer [wrap-reload]]
 
             [clj-time.core :as t]
             [clj-time.coerce :as c]
 
-            [brawl-haus.data :as data]
-            [brawl-haus.my-tubes :as my-tubes])
+            [brawl-haus.data :as data])
   (:gen-class))
 
 (defn l [desc expr] (println desc expr) expr)

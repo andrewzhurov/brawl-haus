@@ -122,7 +122,9 @@
                    :flex-wrap "wrap"}
       [:.char {:display "block"
                :min-width "unset"
-               :min-height "unset"}
+               :min-height "unset"
+               :font-family "\"Courier New\", Courier, monospace"}
+
        [:&.whitespace {:min-width "5px"}]
        [:&.done {
                  :color "gray"}]
