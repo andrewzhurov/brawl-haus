@@ -9,6 +9,7 @@
    [brawl-haus.receiver]
    [brawl-haus.tube]
    [brawl-haus.utils]
+   [brawl-haus.shortcuts :as shortcuts]
    ))
 
 
@@ -24,6 +25,11 @@
 
 (defn ^:export init []
   (re-frame/dispatch-sync [:initialize-db])
+  (re-frame/dispatch-sync [::rp/add-keyboard-event-listener "keydown"])
+  (re-frame/dispatch-sync [::rp/add-keyboard-event-listener "keyup"])
+
+  (re-frame/dispatch-sync shortcuts/keydown-rules)
+  (re-frame/dispatch-sync shortcuts/keyup-rules)
   #_(re-frame/dispatch-sync [::rp/add-keyboard-event-listener "keydown"])
   (re-frame/dispatch-sync [:tube/create])
   (dev-setup)

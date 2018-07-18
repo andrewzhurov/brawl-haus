@@ -23,13 +23,38 @@
                       :border-width "3px"}
     [:&.true {:border-color "green"}]
     [:&.false {:border-color "gray"}]]
-   [:.chat {:display "grid"
+   [:.help-btn {:position "fixed"
+                :right "15px"
+                :top "10px"
+                :z-index 1}]
+   [:.help {:position "fixed"
+            :min-width "300px"
+            :width "25vw"
+            :right "-50vw"
+            :transition "0.4s"
+            :top "0px"
+            :overflow "visible"
+            :z-index 2}
+    [:&.open {:right "0px"}]
+    [:.collection-header
+     [:.header {:display "inline-block"}]
+     [:.description {:display "inline-block"
+                     :margin-left "10px"
+                     :color "gray"}]]
+    [:.collection-item {:cursor "pointer"}]
+    ]
+   [:.chat {:position "fixed"
+            :bottom "-55vh"
+            :margin "0px"
+            :display "grid"
             :grid-template
             (grid "send-box participants 50px"
                   "messages participants 1fr"
                   "2fr 1fr")
-            :height "100vh"
-            }
+            :height "50vh"
+            :width "100vw"
+            :transition "0.5s"}
+    [:&.open {:bottom "0px"}]
     [:.messages {:grid-area "messages"
                  :min-height "0px"
                  :overflow-y "auto"
@@ -116,7 +141,7 @@
                   :text-decoration "underline"
                   :margin "5px"}]
     [:.waiting {:vertical-align "center"}]
-    [:.text-race 
+    [:.text-race
      [:.race-text {:display "flex"
                    :flex-direction "row"
                    :flex-wrap "wrap"}
@@ -135,11 +160,18 @@
               :display "block"}]]
     [:.race-progress {:margin "5px 0px"}
      [:.participant {:position "relative"}
-      [:.nick {:display "inline-block"}]
+      [:.nick {:display "inline-block"}
+       ]
       [:.average-speed {:display "inline-block"
                         :position "absolute"
                         :top 0 :right 0
-                        :margin-right "10px"}]]]]
+                        :margin-right "10px"}]
+      [:&.quit
+       [:.nick {:color "lightgray"}]
+       [:.rc-progress-bar {:background-color "lightgray"}]]]]
+    [:.to-next-row
+     {:display "flex"
+      :justify-content "flex-end"}]]
    #_[:.app {:display "grid"
            :grid-template-columns "auto 1fr"}
     [:.navbar {:display "flex"

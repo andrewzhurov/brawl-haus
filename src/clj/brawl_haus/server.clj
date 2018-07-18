@@ -65,7 +65,7 @@
       state)))
 
 (defn navigate [state tube-id location]
-  (assoc-in state [:user-locations tube-id] location))
+  (assoc-in state [:users tube-id :location] location))
 
 (defn enter-race [state tube-id]
   (let [race (race-to-be state)]
@@ -89,17 +89,16 @@
     :tube/on-destroy
     (fn [tube _]
       (swap! public-state
-             update :users
-             dissoc (id tube)))
+             navigate (id tube) {:location-id :quit}))
 
-    ;:add-message
-    ;(fn [tube [_ text]]
-    ;  (when-let [user (?user tube)]
-    ;    (swap! public-state update :messages conj {:text text
-    ;                                               :from user
-    ;                                               :id (uuid)
-    ;                                               :received-at (now)}))
-    ;  tube)
+    :add-message
+    (fn [tube [_ text]]
+      (when-let [user (l "USER?: "(tube->user (id tube)))]
+        (swap! public-state update :messages conj {:text text
+                                                   :from user
+                                                   :id (uuid)
+                                                   :received-at (now)}))
+      tube)
 
     :race/attend
     (fn [tube _]
@@ -146,3 +145,19 @@
 
 (defn -main [& args]
   (reload))
+
+(def text "These four properties describe the major guarantees of the transaction paradigm, which has influenced many aspects of development in database systems.")
+
+(defn text->words [text]
+  (clojure.string/split text #"\s"))
+
+(defn my-split-at [coll pred]
+  (reduce (fn [acc el]
+            (if (pred el)
+              (conj acc [])
+              (conj (vec (butlast acc)) (conj (last acc) el))))
+          [[]] coll))
+
+(-> text
+    text->words) 
+ 

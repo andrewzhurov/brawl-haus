@@ -6,16 +6,8 @@
             [cljs-time.core :as t]
             [cljs-time.coerce :as c]
             [cljs-time.format :as f]
-            [re-com.misc :as rcmisc]))
-
-(defn current-race [db]
-  (let [race-id (get-in db [:current-panel :route-params :race-id])]
-    (get-in db [:public-state :open-races race-id])))
-
-(rf/reg-sub
- :current-race
- (fn [db _]
-   (current-race db)))
+            [re-com.misc :as rcmisc]
+            [brawl-haus.components :as comps]))
 
 (defn countdown [race]
   (r/with-let [now (r/atom (t/now))
@@ -36,10 +28,17 @@
              (not-empty chunk)
              (clojure.string/starts-with? text chunk))
     (cond (= text chunk) ""
-          (contains? breaks (last chunk)) (subs text (count chunk)))))
+          (re-matches #"\S*\s" chunk) (subs text (count chunk)))))
 
 (defn how-matches [str substr]
   (count (take-while true? (map = str substr))))
+
+#_(defn my-split-at [coll pred]
+  (reduce (fn [acc el]
+            (if (pred el)
+              (conj acc [])
+              (conj (vec (butlast acc)) (conj (last acc) el))))
+          [[]] coll))
 
 (defn meta-text [{:keys [race-text] :as race} current-text left-text]
   (js/console.log race-text current-text left-text)
@@ -59,12 +58,14 @@
                (map (fn [x] {:char x :statuses #{"yet"}}) after-wrong)))
     ))
 
+
 (defn race-progress [race]
   [:div.race-progress
    (doall
     (for [[id {:keys [speed left-chars]}] (:participants race)]
-      (let [{:keys [nick]} (<sub [:user id])]
-        [:div.participant {:key id}
+      (let [{:keys [nick location]} (<sub [:user id])]
+        [:div.participant {:key id
+                           :class (when (= (:location-id location) :quit) "quit")}
          [:div.nick nick]
          (when speed
            [:span.average-speed.badge.white-text (str speed)])
@@ -125,12 +126,15 @@
 
 
 (defn to-next []
-  [:button.btn.btn-flat {:on-click #(rf/dispatch [:tube/send [:race/attend]])} "Next race"])
+  [:div.to-next-row
+   [:button.btn.btn-flat {:on-click #(rf/dispatch [:tube/send [:race/attend]])} "Next race"]])
 
 (rf/reg-sub
  :race
  (fn [db [_ race-id]]
    (get-in db [:public-state :open-races race-id])))
+
+
 
 (defmethod panels/panel :race-panel
   [{:keys [params]}]
@@ -139,5 +143,5 @@
      [:div.content.race-panel
       [countdown race]
       [text-race race]
-      [race-progress race]
-      [to-next]]]))
+      [to-next]
+      [race-progress race]]]))
