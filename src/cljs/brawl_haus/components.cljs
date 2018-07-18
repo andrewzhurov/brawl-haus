@@ -55,7 +55,8 @@
        (doall
         (for [{:keys [id text from received-at]} (<sub [:messages])]
           [:li.collection-item {:key id
-                                :class (when (= (:id from) (:id (<sub [:user]))) "my")}
+                                :class (when (= (:tube from)
+                                                (:tube (<sub [:user]))) "my")}
            [:div.from (:nick from)]
            [:div.received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))]
            [:div.text text]]))]
