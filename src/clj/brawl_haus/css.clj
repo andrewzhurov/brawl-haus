@@ -10,7 +10,9 @@
     (str (clojure.string/join "\n"  (conj (vec escaped-rows)  (str "/ " columns))))))
 
 (defstyles screen
-  [[:.badge {:border-radius "4px"}]
+  [[:.progress-bar
+    {:transition "1s"}]
+   [:.badge {:border-radius "4px"}]
    [:span.badge.new {:font-size "1.1rem"
                      :font-weight "500"}]
    [:body {:overflow-y "hidden"}]
@@ -148,11 +150,12 @@
       [:.char {:display "block"
                :min-width "unset"
                :min-height "unset"
-               :font-family "\"Courier New\", Courier, monospace"}
-
-       [:&.whitespace {:min-width "5px"}]
-       [:&.done {
-                 :color "gray"}]
+               :font-family "\"Courier New\", Courier, monospace"
+               :white-space "pre"
+               :border-bottom "2px solid rgba(255,255,255,0)"
+               :transition "border 0.4s"
+               }
+       [:&.done {:color "gray"}]
        [:&.right-typed {:border-bottom "2px solid blue"}]
        [:&.wrong-typed {:border-bottom "2px solid red"}]]]
      [:input {:width "90%"
