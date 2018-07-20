@@ -9,12 +9,15 @@
    [brawl-haus.panels :as panels]
    [brawl-haus.panels.race]
    [brawl-haus.components :as comps]
-   [brawl-haus.shortcuts :as shortcuts]))
+   [brawl-haus.shortcuts :as shortcuts]
+   [brawl-haus.focus :as focus]))
 
 (rf/reg-event-db
  :toggle-chat
  (fn [db _]
-   (l "GOT IT" 11)
+   (if (:is-chat-open db)
+     (focus/focus-previous)
+     (.. js/document (getElementById "chat-input") focus))
    (-> db
        (update :is-chat-open not)
        (assoc :is-help-open false))))

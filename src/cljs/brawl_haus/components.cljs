@@ -3,10 +3,10 @@
             [re-frame.core :as rf]
             [brawl-haus.panels :as panels]
             [brawl-haus.utils :refer [l <sub]]
+            [brawl-haus.focus :as focus]
             [cljs-time.core :as t]
             [cljs-time.format :as f]
-            [cljs-time.coerce :as c]
-            ))
+            [cljs-time.coerce :as c]))
 
 (rf/reg-sub
  :users
@@ -37,14 +37,15 @@
                          (rf/dispatch [:tube/send [:add-message text]])
                          (reset! input-msg ""))]
     [:div.send-box
-     [:input {:value @input-msg
-              :ref #(when % (.focus %))
+     [:input {:id :chat-input
+              :value @input-msg
               :on-change #(reset! input-msg (.-value (.-target %)))
               :on-key-down #(when (= (.-keyCode %) 13)
                               (send-fn @input-msg))}]
      [:div.btn.btn-flat {:class (when (empty? @input-msg) "disabled")
                          :on-click #(send-fn @input-msg)}
       [:i.material-icons "send"]]]))
+
 
 (defn chat []
   [:div.chat.card.z-depth-1 {:class (when (<sub [:db/get-in [:is-chat-open]]) "open")}

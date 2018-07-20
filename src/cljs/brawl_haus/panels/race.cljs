@@ -118,10 +118,10 @@
                (.play (js/Audio. "audio/bump.mp3")) nil)
              char])
           (meta-text race current-text left-text)))]
-       [:input {:on-change on-type
+       [:input {:id :race-input
+                :on-change on-type
                 :disabled (zero? (count left-text))
-                :value current-text
-                :ref #(when % (.focus %))}]
+                :value current-text}]
        ])))
 
 
