@@ -19,10 +19,18 @@ jobs:
     working_directory: ~/repo
 
     environment:
+      PROJECT_NAME: circle-ctl-test
+      PROJECT_ID: circle-ctl-test
+      CLUSTER_NAME: docker-hello-google-cluster
+      CLOUDSDK_COMPUTE_ZONE: us-central1-f
       LEIN_ROOT: "true"
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
     
+    pre:
+      - docker build -t us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 .
+      - docker tag us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 us.gcr.io/${PROJECT_NAME}/hello:latest
+
     steps:
       - checkout
 
