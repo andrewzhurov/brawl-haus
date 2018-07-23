@@ -44,21 +44,13 @@ jobs:
       - run: lein test
 
       # build image
-      - run: docker build -t brawl-haus-master:latest .
+      - run: sudo docker build -t brawl-haus-master:latest .
 
       # login
-      - run: docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
+      - run: sudo docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
 
       # publish
-      - run: docker push andrewzhurov/brawl-haus-master:latest
-  deploy:
-      machine:
-        enabled: true
-      steps:
-        - run:
-            name: Deploy Over SSH
-            command: |
-              ssh $SSH_USER@$SSH_HOST "cd brawl-haus && git pull && lein stage"
+      - run: sudo docker push andrewzhurov/brawl-haus-master:latest
 
 workflows:
   version: 2
