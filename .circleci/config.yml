@@ -19,25 +19,9 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      PROJECT_NAME: brawl-haus
-      PROJECT_ID: dev
-      REGISTRY: eu.gcr.io
-      #CLUSTER_NAME: docker-hello-google-cluster
-      #CLOUDSDK_COMPUTE_ZONE: us-central1-f
       LEIN_ROOT: "true"
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
-    
-    pre:
-      #- docker tag us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 us.gcr.io/${PROJECT_NAME}/hello:latest
-    #- sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0
-    #- sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0 kubectl
-    #- echo $ACCT_AUTH | base64 --decode > ${HOME}//gcloud-service-key.json
-    #- sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-    #- sudo /opt/google-cloud-sdk/bin/gcloud config set project $PROJECT_ID
-    #- sudo /opt/google-cloud-sdk/bin/gcloud --quiet config set container/cluster $CLUSTER_NAME
-    #- sudo /opt/google-cloud-sdk/bin/gcloud config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}
-    #- sudo /opt/google-cloud-sdk/bin/gcloud --quiet container clusters get-credentials $CLUSTER_NAME
 
     steps:
       - checkout
@@ -63,15 +47,9 @@ jobs:
 
       # build and push 
       - run: |
-          docker build -t $DOCKERHUB_USER/${PROJECT_NAME} .
-          docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-          docker push $DOCKERHUB_USER/${PROJECT_NAME}
-
-      # deploy image
-      #- run: sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
-
-      # publish
-      #- run: sudo docker push andrewzhurov/brawl-haus-master:latest
+          docker build -t "$DOCKERHUB_USER/$PROJECT_NAME" .
+          docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASSWORD"
+          docker push "$DOCKERHUB_USER/$PROJECT_NAME"
 
 workflows:
   version: 2
