@@ -21,6 +21,7 @@ jobs:
     environment:
       PROJECT_NAME: brawl-haus
       PROJECT_ID: dev
+      REGISTRY: eu.gcr.io
       #CLUSTER_NAME: docker-hello-google-cluster
       #CLOUDSDK_COMPUTE_ZONE: us-central1-f
       LEIN_ROOT: "true"
@@ -62,9 +63,9 @@ jobs:
 
       # build and push
       - run: |
-          docker build -t ${PROJECT_NAME}/${PROJECT_ID}:latest .
+          docker build -t ${REGISTRY}/${PROJECT_NAME}/${PROJECT_ID}:latest .
           docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
-          docker push ${PROJECT_NAME}/${PROJECT_ID}:latest
+          docker push ${REGISTRY}/${PROJECT_NAME}/${PROJECT_ID}:latest
 
       # deploy image
       #- run: sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
