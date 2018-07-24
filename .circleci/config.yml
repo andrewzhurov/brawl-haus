@@ -58,7 +58,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST "docker pull andrewzhurov/brawl-haus; docker stop brawl-haus; docker rm brawl-haus; docker run -d -p 9090:9090 --name brawl-haus andrewzhurov/brawl-haus")
+            ssh $SSH_USER@$SSH_HOST "docker pull andrewzhurov/brawl-haus; docker stop brawl-haus; docker rm brawl-haus; docker run -d -p 9090:9090 --name brawl-haus andrewzhurov/brawl-haus"
 
 
 workflows:
