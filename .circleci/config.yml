@@ -61,10 +61,10 @@ jobs:
       #- run: lein test
 
       # build
-      - docker build -t us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 .
+      - run: docker build -t us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 .
 
       # login
-      - run: sudo docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
+      - run: docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
 
       # deploy image
       - run: sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
