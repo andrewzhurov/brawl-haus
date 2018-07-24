@@ -49,7 +49,8 @@
             "stage" ["with-profile" "stage" "do"
                      ["clean"]
                      ["cljsbuild" "once" "min"]
-                     ["garden" "once"]]}
+                     ["garden" "once"]
+                     ]}
 
   :profiles
   {:dev
@@ -112,5 +113,5 @@
 
   :uberjar-name "brawl-haus.jar"
 
-  :prep-tasks [["cljsbuild" "once" "min"]["garden" "once"] "compile"]
+  ;:prep-tasks [["cljsbuild" "once" "min"]["garden" "once"] "compile"]
   )

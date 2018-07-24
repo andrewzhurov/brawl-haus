@@ -45,6 +45,9 @@ jobs:
       # run tests!
       #- run: lein test
 
+      # compile for stage
+      - run: "lein stage"
+
       # build and push 
       - run: |
           docker build -t "andrewzhurov/brawl-haus" .

@@ -1,3 +1,3 @@
 (ns config.core)
 
-(def env {:server-url "178.128.36.92:9090"})
+(def env {:server-url "206.81.30.206:9090"})
