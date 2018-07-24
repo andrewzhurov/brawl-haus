@@ -19,10 +19,10 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      PROJECT_NAME: circle-ctl-test
-      PROJECT_ID: circle-ctl-test
-      CLUSTER_NAME: docker-hello-google-cluster
-      CLOUDSDK_COMPUTE_ZONE: us-central1-f
+      PROJECT_NAME: brawl-haus
+      PROJECT_ID: dev
+      #CLUSTER_NAME: docker-hello-google-cluster
+      #CLOUDSDK_COMPUTE_ZONE: us-central1-f
       LEIN_ROOT: "true"
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
@@ -60,14 +60,14 @@ jobs:
       # run tests!
       #- run: lein test
 
-      # build
-      - run: docker build -t us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 .
-
-      # login
-      - run: docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
+      # build and push
+      - run: |
+          docker build -t ${PROJECT_NAME}/${PROJECT_ID}:latest .
+          docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
+          docker push ${PROJECT_NAME}/${PROJECT_ID}:latest
 
       # deploy image
-      - run: sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
+      #- run: sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
 
       # publish
       #- run: sudo docker push andrewzhurov/brawl-haus-master:latest
