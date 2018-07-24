@@ -61,7 +61,7 @@ jobs:
       # run tests!
       #- run: lein test
 
-      # build and push
+      # build and push 
       - run: |
           docker build -t ${REGISTRY}/${PROJECT_NAME}/${PROJECT_ID}:latest .
           docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
