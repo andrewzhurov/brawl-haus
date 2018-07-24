@@ -35,7 +35,7 @@ jobs:
 
       - setup_remote_docker
 
-      - run: lein deps
+      #- run: lein deps
 
       - save_cache:
           paths:
@@ -47,9 +47,19 @@ jobs:
 
       # build and push 
       - run: |
-          docker build -t "$DOCKERHUB_USER/$PROJECT_NAME" .
-          docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASSWORD"
-          docker push "$DOCKERHUB_USER/$PROJECT_NAME"
+          docker build -t "andrewzhurov/brawl-haus" .
+          docker login -u "andrewzhurov" -p "$DOCKERHUB_PASSWORD"
+          docker push "andrewzhurov/brawl-haus"
+
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "docker pull andrewzhurov/brawl-haus; docker stop brawl-haus; docker rm brawl-haus; docker run -d -p 9090:9090 --name brawl-haus andrewzhurov/brawl-haus")
+
 
 workflows:
   version: 2
