@@ -28,8 +28,15 @@ jobs:
       JVM_OPTS: -Xmx3200m
     
     pre:
-      - docker build -t us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 .
-      - docker tag us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 us.gcr.io/${PROJECT_NAME}/hello:latest
+      #- docker tag us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 us.gcr.io/${PROJECT_NAME}/hello:latest
+    #- sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0
+    #- sudo /opt/google-cloud-sdk/bin/gcloud --quiet components update --version 120.0.0 kubectl
+    #- echo $ACCT_AUTH | base64 --decode > ${HOME}//gcloud-service-key.json
+    #- sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+    #- sudo /opt/google-cloud-sdk/bin/gcloud config set project $PROJECT_ID
+    #- sudo /opt/google-cloud-sdk/bin/gcloud --quiet config set container/cluster $CLUSTER_NAME
+    #- sudo /opt/google-cloud-sdk/bin/gcloud config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}
+    #- sudo /opt/google-cloud-sdk/bin/gcloud --quiet container clusters get-credentials $CLUSTER_NAME
 
     steps:
       - checkout
@@ -41,6 +48,8 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      - setup_remote_docker
+
       - run: lein deps
 
       - save_cache:
@@ -49,19 +58,19 @@ jobs:
           key: v1-dependencies-{{ checksum "project.clj" }}
         
       # run tests!
-      - run: lein test
+      #- run: lein test
 
-      # ready docker
-      - run: sudo service docker stop && sudo nohup docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock &
-
-      # build image
-      - run: sudo docker build -t brawl-haus-master:latest .
+      # build
+      - docker build -t us.gcr.io/${PROJECT_NAME}/hello:$CIRCLE_SHA1 .
 
       # login
       - run: sudo docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
 
+      # deploy image
+      - run: sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
+
       # publish
-      - run: sudo docker push andrewzhurov/brawl-haus-master:latest
+      #- run: sudo docker push andrewzhurov/brawl-haus-master:latest
 
 workflows:
   version: 2
