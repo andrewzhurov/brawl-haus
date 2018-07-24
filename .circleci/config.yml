@@ -63,9 +63,9 @@ jobs:
 
       # build and push 
       - run: |
-          docker build -t ${REGISTRY}/${PROJECT_NAME}/${PROJECT_ID}:latest .
-          docker login -u "_json_key" -p "$GCI_JSON_TOKEN" https://eu.gcr.io
-          docker push ${REGISTRY}/${PROJECT_NAME}/${PROJECT_ID}:latest
+          docker build -t $DOCKERHUB_USER/${PROJECT_NAME} .
+          docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+          docker push $DOCKERHUB_USER/${PROJECT_NAME}
 
       # deploy image
       #- run: sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
