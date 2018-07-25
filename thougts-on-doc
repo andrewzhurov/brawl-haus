@@ -1,0 +1,28 @@
+# Poking around good ways to express ideas
+
+In a good modern SPA we've got our state in *one place*, at top of our _client_, *propagating* it down to UI end-nodes on every mutation, and here is the next step for that idea of reactive propagation, put to it's absolute - we've got all the state at the truly top of our app - _server_, reactively propagating it to our clients and down to end-nodes.
+Achieving simplicity of web2.0 (simple data representation of current world's state), coupled with reactive data flow and all the goodies of thick and fancy SPAs.
+
+
+It did not solved one more: the real application state is out there, usually we've got a copy of it or some chunk from some point in time (got it on init app load or route visit). The problem is: it gets old and does it fast.
+Here an extra step for state management was taken - put the state of our application to the *truly top* - _server_ and propagate it down to clients down to end-nodes reactively, as it mutates, being driven by events, received from clients.
+
+### State on a client
+In a good modern SPA we've got the 'waterflow' architecture - having our state in *one place*, at the very top of our client, and *propagating* it to the end-nodes as it mutates over time, causing such a pure render and solving the problem of node's _growing wild inter-connection complexity_ (see flux architecture)
+
+Example tools: Redux, re-frame, Vue.js
+
+It's a very good techniq on it's own, solving state management problem on client's side
+
+Hovewer clients are merely UI parts of our apps.
+
+### Real state is out there
+### State of the real world
+Any complex behaviour (different result for the same actions over time) can be seen as a FSM.
+You've got a chunk of state and events, driving it.
+
+Usually our clients ask of current state of the world to present for user, and after some time user, based on what he could do in that state, produce an event, meant to drive state. Here is the thing: received state *gets old*, and often fast.
+This means user could spend great time preparing an event he then gets notified could not even happen - real world had changed, can't do!
+
+Moreover sometimes we leave our control logic solemly on clients' side (sad-sad kitty picture)
+
