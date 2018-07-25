@@ -74,7 +74,6 @@
         (navigate tube-id {:location-id :race-panel
                            :params {:race-id (:id race)}}))))
 
-
 (def rx ;; collection of handlers for processing incoming messages
   (receiver
    {:tube/on-create
@@ -131,11 +130,11 @@
 
 (def dev-handler (-> #'routes wrap-reload))
 
-
 (defonce server (atom nil))
 (defn restart-server []
   (when @server
     (@server))
+  (println "Running server on port 9090")
   (reset! server (run-server #'dev-handler {:port 9090})))
 
 (defn reload []
@@ -145,19 +144,3 @@
 
 (defn -main [& args]
   (reload))
-
-(def text "These four properties describe the major guarantees of the transaction paradigm, which has influenced many aspects of development in database systems.")
-
-(defn text->words [text]
-  (clojure.string/split text #"\s"))
-
-(defn my-split-at [coll pred]
-  (reduce (fn [acc el]
-            (if (pred el)
-              (conj acc [])
-              (conj (vec (butlast acc)) (conj (last acc) el))))
-          [[]] coll))
-
-(-> text
-    text->words) 
- 

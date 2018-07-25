@@ -50,7 +50,7 @@
                      ["clean"]
                      ["cljsbuild" "once" "min"]
                      ["garden" "once"]
-                     ]}
+                     ["compile"]]}
 
   :profiles
   {:dev
