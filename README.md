@@ -12,7 +12,7 @@ Touch: http://dev.brawl.haus
 ## Mindset
 
 ### State is what we care
-Over years we've been struggling with accidential complexity of inter-connected mutable objects, populating front-end of our application, brought tools thought to be fancy in those times.
+Over years we've been struggling with accidential complexity of inter-connected mutable objects, populating front-end of our application, brought by tools thought to be fancy in those times.
 
 We've had the same problem just before that - having mutable objects of data+operations in run-time at our back-end. We've been smart enough to find a solution - decouple state out of operations and store it in non-volatile memory.
 
@@ -40,7 +40,7 @@ So, what do we need? You guessed it! Keep clients in sync with the world.
 Welcome websockets! Those little channels allow bidirectional/async client-server communication. Just the tool we need to tell our clients "now the world is such and such, please inform the user"
 
 ### How it's done, in a shortie
-We've good an ol' good SPA as our client, state in one place, propagating down, however the idea of "putting state to the top" was put to extreme - we keep __all the state__ our client may care at the __truly top__ of our application - **server**!
+We have an ol' good SPA as our client, state in one place, propagating down, however the idea of "putting state to the top" was put to extreme - we keep __all the state__ our client may care at the __truly top__ of our application - **server**!
 It propagates down to clients and then down to end-nodes, all in sync, clients driven!
 
 Just the simplicity of web2.0(view being simple data representation), but with a reactive data flow and all the goodies we can do with thick and tasty SPAs at client side.
