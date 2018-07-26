@@ -40,11 +40,11 @@
               (conj (vec (butlast acc)) (conj (last acc) el))))
           [[]] coll))
 
-(defn meta-text [{:keys [race-text] :as race} current-text left-text]
-  (js/console.log race-text current-text left-text)
-  (when race-text
-    (let [[done after-done] (split-at (- (count race-text) (count left-text))
-                                      race-text)
+(defn meta-text [whole-text current-text left-text]
+  (js/console.log "Meta text args. Whole:" whole-text ";Current:" current-text ";Left:" left-text)
+  (when whole-text
+    (let [[done after-done] (split-at (- (count whole-text) (count left-text))
+                                      whole-text)
           [typed after-typed] (split-at (count current-text) left-text)
 
           [right-typed _] (split-at (how-matches after-done current-text) after-done)
@@ -90,39 +90,43 @@
             2 ".."
             3 "...")]]))
 
-(defn text-race [race]
-  (r/with-let [input-state (r/atom {:current-text ""
-                                    :left-text (:race-text race)})
-               on-type
-               (fn [e]
-                 (when (t/after? (t/now) (c/from-date (:starts-at race)))
-                   (swap! input-state
-                          (fn [{old-current-text :current-text
-                                left-text :left-text :as old-state}]
-                            (let [current-text (.-value (.-target e))]
-                              (if-let [new-left-text (bite left-text current-text)]
-                                (do (rf/dispatch [:tube/send [:left-text (:id race) new-left-text]])
-                                    {:current-text ""
-                                     :left-text new-left-text})
-                                (assoc old-state :current-text current-text)))))))]
-    (let [{:keys [current-text left-text]} @input-state]
-      [:div.text-race.card
-       [:div.race-text.card-content
-        (doall
-         (map-indexed
-          (fn [idx {:keys [char statuses]}]
-            ^{:key idx}
-            [:div.char {:class (str (apply str statuses)
-                                    (when (= " " char) " whitespace"))}
-             (when (contains? statuses "wrong-typed")
-               (.play (js/Audio. "audio/bump.mp3")) nil)
-             char])
-          (meta-text race current-text left-text)))]
-       [:input {:id :race-input
-                :on-change on-type
-                :disabled (zero? (count left-text))
-                :value current-text}]
-       ])))
+(defn text-race [{:keys [race-text starts-at id]}]
+  (if (empty? race-text)
+    [:div.text-race.card
+     [:div.race-text.card-content
+      "Race is soon to begin - warm up your fingers, get comfy."]]
+    (r/with-let [input-state (r/atom {:current-text ""
+                                      :left-text race-text})
+                 on-type
+                 (fn [e]
+                   (when (t/after? (t/now) (c/from-date starts-at))
+                     (swap! input-state
+                            (fn [{old-current-text :current-text
+                                  left-text :left-text :as old-state}]
+                              (let [current-text (.-value (.-target e))]
+                                (if-let [new-left-text (bite left-text current-text)]
+                                  (do (rf/dispatch [:tube/send [:left-text id new-left-text]])
+                                      {:current-text ""
+                                       :left-text new-left-text})
+                                  (assoc old-state :current-text current-text)))))))]
+      (let [{:keys [current-text left-text]} @input-state]
+        [:div.text-race.card
+         [:div.race-text.card-content
+          (doall
+           (map-indexed
+            (fn [idx {:keys [char statuses]}]
+              ^{:key idx}
+              [:div.char {:class (str (apply str statuses)
+                                      (when (= " " char) " whitespace"))}
+               (when (contains? statuses "wrong-typed")
+                 (.play (js/Audio. "audio/bump.mp3")) nil)
+               char])
+            (meta-text race-text current-text left-text)))]
+         [:input {:id :race-input
+                  :on-change on-type
+                  :disabled (zero? (count left-text))
+                  :value current-text}]
+         ]))))
 
 
 (defn to-next []

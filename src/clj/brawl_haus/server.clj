@@ -37,10 +37,18 @@
 (defn race [race-id]
   (get-in @public-state [:open-races race-id]))
 
-(defn start-race [race]
-  (-> race
-      (assoc :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date)))
-      (assoc :race-text (rand-nth data/long-texts))))
+
+;; Hardcoded to start in 10 sec
+(defn schedule-race [race]
+  (assoc race :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date))))
+
+(defn ready-set-go [{:keys [id] :as race}]
+  (future (Thread/sleep 7000)
+          (swap! public-state update-in [:open-races id]
+                 merge {:status :began
+                        :race-text (rand-nth data/long-texts)}))
+  race)
+
 
 (defn calc-speed [text start finish]
   (let [minutes (/ (t/in-seconds (t/interval (c/from-date start)
@@ -54,15 +62,16 @@
                            (get state :open-races))]
     race))
 
-(defn ensure-race [state]
-  (let [new-race (-> {:id (uuid)
-                      :participants {}
-                      :status :to-be}
-                     start-race)]
-    (if-not (race-to-be state)
 
-      (update state :open-races assoc (:id new-race) new-race)
-      state)))
+(defn ensure-race [state]
+  (if-not (race-to-be state)
+    (let [new-race (-> {:id (uuid)
+                        :participants {}
+                        :status :to-be}
+                       schedule-race
+                       ready-set-go)]
+      (assoc-in state [:open-races (:id new-race)] new-race))
+    state))
 
 (defn navigate [state tube-id location]
   (assoc-in state [:users tube-id :location] location))
@@ -74,7 +83,7 @@
         (navigate tube-id {:location-id :race-panel
                            :params {:race-id (:id race)}}))))
 
-(def rx ;; collection of handlers for processing incoming messages
+(def rx ;; collection of handlers for processing incoming events
   (receiver
    {:tube/on-create
     (fn [tube _]
@@ -82,8 +91,7 @@
                             :tube (id tube)}]
         (swap! public-state
                assoc-in [:users (id tube)] anonymous-user))
-      (dispatch-to tube [:tube/did-create (id tube)])
-      (dispatch-to tube [:current-public-state @public-state]))
+      (dispatch-to tube [:tube/did-create (id tube)]))
 
     :tube/on-destroy
     (fn [tube _]
