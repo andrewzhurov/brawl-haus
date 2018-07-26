@@ -121,12 +121,10 @@
               speed (when is-finished
                       (let [{:keys [race-text starts-at]} (get-in @public-state [:open-races race-id])]
                         (calc-speed race-text starts-at (now))))]
-          (swap! public-state update-in [:open-races race-id]
-                 (fn [race]
-                   (-> race
-                       (assoc :status :ongoing)
-                       (assoc-in [:participants (id tube)] {:left-chars (count left-text)
-                                                            :speed speed}))))))
+          (swap! public-state assoc-in
+                 [:open-races race-id :participants (id tube)]
+                 {:left-chars (count left-text)
+                  :speed speed})))
       tube)
     }))
 
