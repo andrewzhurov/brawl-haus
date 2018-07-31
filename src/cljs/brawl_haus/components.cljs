@@ -19,12 +19,22 @@
    (reverse
     (sort-by :received-at (get-in db [:public-state :messages])))))
 
+(defn set-nick []
+  (r/with-let [new-nick (r/atom "")]
+    [:div.set-nick
+     [:input.collection-header {:value @new-nick
+                                :on-change #(reset! new-nick (l "VAL:" (.-value (.-target %))))
+                                :placeholder (:nick (<sub [:user]))}]
+     [:button.btn.btn-flat {:on-click #(do (rf/dispatch [:tube/send [:chat/set-nick @new-nick]])
+                                           (reset! new-nick ""))} "Set nick"]]))
+
 (defn participants []
   (let [users (->> (<sub [:users])
                    (sort-by :nick )
                    vals
                    (remove #(= :quit (get-in % [:location :location-id]))))]
-    [:ul.collection.participants.z-depth-1
+    [:ul.collection.with-header.participants.z-depth-1
+     [set-nick]
      (for [{:keys [id nick tube]} users]
        [:li.collection-item {:key nick
                              :style {:color "#26a69a"}}

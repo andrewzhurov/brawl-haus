@@ -2,7 +2,6 @@
   (:use org.httpkit.server)
   (:require [pneumatic-tubes.core :refer [receiver transmitter dispatch]]
             [pneumatic-tubes.httpkit :refer [websocket-handler]]
-            [brawl-haus.handler :as handler]
 
             [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [resources]]
@@ -126,6 +125,14 @@
                  {:left-chars (count left-text)
                   :speed speed})))
       tube)
+
+    :chat/set-nick
+    (fn [tube [_ nick]]
+      (when (tube->user (id tube))
+        (swap! public-state assoc-in
+               [:users (id tube) :nick] nick))
+      tube)
+
     }))
 
 

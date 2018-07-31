@@ -10,7 +10,12 @@
     (str (clojure.string/join "\n"  (conj (vec escaped-rows)  (str "/ " columns))))))
 
 (defstyles screen
-  [[:.progress-bar {:transition "1s !important"}]
+  [[:.set-nick {:display "flex"
+                :flex-direction "row"
+                :justify-content "center"
+                :align-items "center"}
+    ]
+   [:.progress-bar {:transition "1s !important"}]
    [:.badge {:border-radius "4px"}]
    [:span.badge.new {:font-size "1.1rem"
                      :font-weight "500"}]
