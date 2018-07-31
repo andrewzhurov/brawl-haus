@@ -64,13 +64,14 @@
     (if-let [messages (not-empty (<sub [:messages]))]
       [:ul
        (doall
-        (for [{:keys [id text from received-at]} (<sub [:messages])]
-          [:li.collection-item {:key id
-                                :class (when (= (:tube from)
-                                                (:tube (<sub [:user]))) "my")}
-           [:div.from (:nick from)]
-           [:div.received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))]
-           [:div.text text]]))]
+        (for [{:keys [id sender text received-at]} (<sub [:messages])]
+          (let [{:keys [nick]} (<sub [:user sender])]
+            [:li.collection-item {:key id
+                                  :class (when (= sender
+                                                  (:tube (<sub [:user]))) "my")}
+             [:div.from nick]
+             [:div.received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))]
+             [:div.text text]])))]
       [:div.empty "No talking yet, be the first!"])]
    [participants]
    ])

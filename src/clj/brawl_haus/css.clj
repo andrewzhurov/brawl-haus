@@ -14,7 +14,7 @@
                 :flex-direction "row"
                 :justify-content "center"
                 :align-items "center"}
-    ]
+    [:button {:min-width "100px"}]]
    [:.progress-bar {:transition "1s !important"}]
    [:.badge {:border-radius "4px"}]
    [:span.badge.new {:font-size "1.1rem"

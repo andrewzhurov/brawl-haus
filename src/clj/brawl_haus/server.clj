@@ -101,8 +101,8 @@
     (fn [tube [_ text]]
       (when-let [user (l "USER?: "(tube->user (id tube)))]
         (swap! public-state update :messages conj {:text text
-                                                   :from user
                                                    :id (uuid)
+                                                   :sender (id tube)
                                                    :received-at (now)}))
       tube)
 
