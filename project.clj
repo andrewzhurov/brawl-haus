@@ -18,7 +18,8 @@
                  [com.andrewmcveigh/cljs-time "0.5.2"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
-            [lein-garden "0.2.8"]]
+            [lein-garden "0.2.8"]
+            [lein-cljfmt "0.6.0"]]
 
   :min-lein-version "2.5.3"
 
