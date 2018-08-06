@@ -47,8 +47,7 @@
      [:.description {:display "inline-block"
                      :margin-left "10px"
                      :color "gray"}]]
-    [:.collection-item {:cursor "pointer"}]
-    ]
+    [:.collection-item {:cursor "pointer"}]]
    [:.chat {:position "fixed"
             :bottom "-55vh"
             :margin "0px"
@@ -83,8 +82,7 @@
        [:.from {:display "inline-block"
                 :margin-right "10px"}]
        [:.received-at {:display "inline-block"}]]]
-     [:.message {
-                 }]]
+     [:.message {}]]
     [:.send-box {:grid-area "send-box"
                  :padding-left "5%"
                  :padding-right "5%"
@@ -101,8 +99,7 @@
      [:a {:cursor "pointer"}]
      [:.collection-header {:position "sticky"
                            :top "0px"}]
-     [:.activity-indicator
-      ]]]
+     [:.activity-indicator]]]
    [:.collection.open-races
     {:display "flex"
      :grid-area "open-races"
@@ -113,10 +110,8 @@
              ;:background-color "lightgray"
              :display "flex"
              :flex-direction "row"
-             :align-items "center"
-             }]
-    [:.countdown {:width "40px"}]
-    ]
+             :align-items "center"}]
+    [:.countdown {:width "40px"}]]
    [:.races-panel
     {:display "grid"
      :grid-template (grid "controls highscores 50px"
@@ -131,12 +126,11 @@
      [:a {:cursor "pointer"}]
      [:.collection-header {:position "sticky"
                            :top "0px"}]
-     [:.activity-indicator
-      ]]
+     [:.activity-indicator]]
     #_[:.highscores {:grid-area "highscores"
-                   :overflow-y "auto"
-                   :margin "0px"
-                   :height "100%"}]]
+                     :overflow-y "auto"
+                     :margin "0px"
+                     :height "100%"}]]
 
    ;; Race panel
    [:.race-panel {:padding "5px 10px"
@@ -157,8 +151,7 @@
                :font-family "\"Courier New\", Courier, monospace"
                :white-space "pre"
                :border-bottom "2px solid rgba(255,255,255,0)"
-               :transition "border 0.4s"
-               }
+               :transition "border 0.4s"}
        [:&.done {:color "gray"}]
        [:&.right-typed {:border-bottom "2px solid blue"}]
        [:&.wrong-typed {:border-bottom "2px solid red"}]]]
@@ -167,8 +160,7 @@
               :display "block"}]]
     [:.race-progress {:margin "5px 0px"}
      [:.participant {:position "relative"}
-      [:.nick {:display "inline-block"}
-       ]
+      [:.nick {:display "inline-block"}]
       [:.average-speed {:display "inline-block"
                         :position "absolute"
                         :top 0 :right 0
@@ -180,20 +172,19 @@
      {:display "flex"
       :justify-content "flex-end"}]]
    #_[:.app {:display "grid"
-           :grid-template-columns "auto 1fr"}
-    [:.navbar {:display "flex"
+             :grid-template-columns "auto 1fr"}
+      [:.navbar {:display "flex"
                  :flex-direction "column"
                  :height "100vh"
                  :width "60px"
                  :border-right "1px solid lightgray"
                  :align-items "center"}
-     [:.tab {:padding "0px 10px"
-             :margin "3px 0px"
-             :cursor "pointer"}
-      [:i {:font-size "30px"}]
-      ]]
-    [:.content {:margin-left "10px"
-                :box-shadow "0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)"}]]
+       [:.tab {:padding "0px 10px"
+               :margin "3px 0px"
+               :cursor "pointer"}
+        [:i {:font-size "30px"}]]]
+      [:.content {:margin-left "10px"
+                  :box-shadow "0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)"}]]
    [:.content {:margin-left "10px"}]
 
    [:.notifications {:position "absolute"

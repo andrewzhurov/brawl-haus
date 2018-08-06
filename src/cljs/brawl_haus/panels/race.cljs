@@ -34,11 +34,11 @@
   (count (take-while true? (map = str substr))))
 
 #_(defn my-split-at [coll pred]
-  (reduce (fn [acc el]
-            (if (pred el)
-              (conj acc [])
-              (conj (vec (butlast acc)) (conj (last acc) el))))
-          [[]] coll))
+    (reduce (fn [acc el]
+              (if (pred el)
+                (conj acc [])
+                (conj (vec (butlast acc)) (conj (last acc) el))))
+            [[]] coll))
 
 (defn meta-text [whole-text current-text left-text]
   (js/console.log "Meta text args. Whole:" whole-text ";Current:" current-text ";Left:" left-text)
@@ -50,14 +50,11 @@
           [right-typed _] (split-at (how-matches after-done current-text) after-done)
           [wrong-typed after-wrong] (->> after-done
                                          (drop (count right-typed))
-                                         (split-at (- (count current-text) (count right-typed))))
-          ]
+                                         (split-at (- (count current-text) (count right-typed))))]
       (concat  (map (fn [x] {:char x :statuses #{"done"}}) done)
                (map (fn [x] {:char x :statuses #{"right-typed"}}) right-typed)
                (map (fn [x] {:char x :statuses #{"wrong-typed"}}) wrong-typed)
-               (map (fn [x] {:char x :statuses #{"yet"}}) after-wrong)))
-    ))
-
+               (map (fn [x] {:char x :statuses #{"yet"}}) after-wrong)))))
 
 (defn race-progress [race]
   [:div.race-progress
@@ -76,8 +73,7 @@
                       (-> left-chars
                           (/ (count (:race-text race)))
                           (* 100)))
-                   0)]
-         ])))])
+                   0)]])))])
 
 (defn waiting []
   (r/with-let [dots (r/atom 4)
@@ -85,10 +81,10 @@
     [:div.card.waiting
      [:div.card-content "Waiting a company"
       (case (rem @dots 4)
-            0 ""
-            1 "."
-            2 ".."
-            3 "...")]]))
+        0 ""
+        1 "."
+        2 ".."
+        3 "...")]]))
 
 (defn text-race [{:keys [race-text starts-at id]}]
   (if (empty? race-text)
@@ -125,9 +121,7 @@
          [:input {:id :race-input
                   :on-change on-type
                   :disabled (zero? (count left-text))
-                  :value current-text}]
-         ]))))
-
+                  :value current-text}]]))))
 
 (defn to-next []
   [:div.to-next-row
@@ -137,8 +131,6 @@
  :race
  (fn [db [_ race-id]]
    (get-in db [:public-state :open-races race-id])))
-
-
 
 (defmethod panels/panel :race-panel
   [{:keys [params]}]

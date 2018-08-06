@@ -8,23 +8,19 @@
   [{:name "Hide help"
     :human-combo "Ctrl + space"
     :evt [:help/fire]
-    :key-seq { ;; ?
+    :key-seq {;; ?
               :which 32
-              :ctrlKey true}
-    }
+              :ctrlKey true}}
    {:name "Toggle chat"
     :human-combo "Ctrl + c"
     :evt [:help/fire [:toggle-chat]]
     :key-seq {:which 67 ;; c
-              :ctrlKey true}
-    }
+              :ctrlKey true}}
    {:name "Next race"
     :human-combo "Ctrl + ->"
     :evt [:help/fire [:tube/send [:race/attend]]]
     :key-seq {:which 39 ;; ->
-              :ctrlKey true}
-    }
-   ])
+              :ctrlKey true}}])
 
 (rf/reg-event-fx
  :help/fire
@@ -56,8 +52,7 @@
     :always-listen-keys
     [{:ctrlKey true}]
     :prevent-default
-    [{:ctrlKey true}]
-    }])
+    [{:ctrlKey true}]}])
 
 (def keyup-rules
   [::rp/set-keyup-rules
@@ -66,9 +61,7 @@
                          [key-seq]])
                       shortcuts)
     :always-listen-keys
-    (mapv :key-seq shortcuts)
-    }])
-
+    (mapv :key-seq shortcuts)}])
 
 (defn help-btn []
   [:div.btn.help-btn {:on-click #(rf/dispatch [:help/toggle])}

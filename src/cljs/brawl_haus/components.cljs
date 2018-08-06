@@ -30,7 +30,7 @@
 
 (defn participants []
   (let [users (->> (<sub [:users])
-                   (sort-by :nick )
+                   (sort-by :nick)
                    vals
                    (remove #(= :quit (get-in % [:location :location-id]))))]
     [:ul.collection.with-header.participants.z-depth-1
@@ -56,7 +56,6 @@
                          :on-click #(send-fn @input-msg)}
       [:i.material-icons "send"]]]))
 
-
 (defn chat []
   [:div.chat.card.z-depth-1 {:class (when (<sub [:db/get-in [:is-chat-open]]) "open")}
    [send-box]
@@ -73,7 +72,6 @@
              [:div.received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))]
              [:div.text text]])))]
       [:div.empty "No talking yet, be the first!"])]
-   [participants]
-   ])
+   [participants]])
 
 

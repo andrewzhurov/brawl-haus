@@ -38,6 +38,8 @@
 
 
 ;; Hardcoded to start in 10 sec
+
+
 (defn schedule-race [race]
   (assoc race :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date))))
 
@@ -47,7 +49,6 @@
                  merge {:status :began
                         :race-text (rand-nth data/long-texts)}))
   race)
-
 
 (defn calc-speed [text start finish]
   (let [minutes (/ (t/in-seconds (t/interval (c/from-date start)
@@ -60,7 +61,6 @@
   (let [[[_ race]] (filter (fn [[_ {:keys [status]}]] (= :to-be status))
                            (get state :open-races))]
     race))
-
 
 (defn ensure-race [state]
   (if-not (race-to-be state)
@@ -99,7 +99,7 @@
 
     :add-message
     (fn [tube [_ text]]
-      (when-let [user (l "USER?: "(tube->user (id tube)))]
+      (when-let [user (l "USER?: " (tube->user (id tube)))]
         (swap! public-state update :messages conj {:text text
                                                    :id (uuid)
                                                    :sender (id tube)
@@ -131,10 +131,7 @@
       (when (tube->user (id tube))
         (swap! public-state assoc-in
                [:users (id tube) :nick] nick))
-      tube)
-
-    }))
-
+      tube)}))
 
 (defroutes routes
   (GET "/" [] (resource-response "index.html" {:root "public"}))
