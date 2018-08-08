@@ -10,9 +10,7 @@
    [brawl-haus.receiver]
    [brawl-haus.tube]
    [brawl-haus.utils]
-   [brawl-haus.shortcuts :as shortcuts]
-   ))
-
+   [brawl-haus.shortcuts :as shortcuts]))
 
 (defn dev-setup []
   (when config/debug?

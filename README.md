@@ -2,7 +2,7 @@
 
 Welcome to the Brawl Haus repo, where the pub is being built!
 
-<img src="/images/pub.jpg" alt="drawing" width="500px" href="http://dev.brawl.haus"/>
+<img src="/doc/pub.jpg" alt="drawing" width="500px" href="http://dev.brawl.haus"/>
 
 Brawl Haus is a cooperative competition service, planned to have blind-typing oriented challenges as it's core.
 

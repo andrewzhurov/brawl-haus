@@ -22,7 +22,6 @@
  (fn [[tube] _]
    (:tube/id tube)))
 
-
 (reg-event-db
  :tube/create
  (fn [db _]
