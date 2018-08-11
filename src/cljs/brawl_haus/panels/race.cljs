@@ -59,7 +59,7 @@
 (defn race-progress [race]
   [:div.race-progress
    (doall
-    (for [[id {:keys [speed left-chars]}] (:participants race)]
+    (for [[id {:keys [speed progress]}] (:participants race)]
       (let [{:keys [nick location]} (<sub [:user id])]
         [:div.participant {:key id
                            :class (when (= (:location-id location) :quit) "quit")}
@@ -68,12 +68,8 @@
            [:span.average-speed.badge.white-text (str speed)])
          [rcmisc/progress-bar
           :striped? (not (zero? left-chars))
-          :model (if left-chars
-                   (- 100
-                      (-> left-chars
-                          (/ (count (:race-text race)))
-                          (* 100)))
-                   0)]])))])
+          :model progress]
+         ])))])
 
 (defn waiting []
   (r/with-let [dots (r/atom 4)
@@ -101,7 +97,7 @@
                                   left-text :left-text :as old-state}]
                               (let [current-text (.-value (.-target e))]
                                 (if-let [new-left-text (bite left-text current-text)]
-                                  (do (rf/dispatch [:tube/send [:left-text id new-left-text]])
+                                  (do (rf/dispatch [:conn/send [:race/left-text id new-left-text]])
                                       {:current-text ""
                                        :left-text new-left-text})
                                   (assoc old-state :current-text current-text)))))))]
@@ -125,7 +121,7 @@
 
 (defn to-next []
   [:div.to-next-row
-   [:button.btn.btn-flat {:on-click #(rf/dispatch [:tube/send [:race/attend]])} "Next race"]])
+   [:button.btn.btn-flat {:on-click #(rf/dispatch [:conn/send [:race/attend]])} "Next race"]])
 
 (rf/reg-sub
  :race

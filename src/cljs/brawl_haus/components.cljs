@@ -25,7 +25,7 @@
      [:input.collection-header {:value @new-nick
                                 :on-change #(reset! new-nick (l "VAL:" (.-value (.-target %))))
                                 :placeholder (:nick (<sub [:user]))}]
-     [:button.btn.btn-flat {:on-click #(do (rf/dispatch [:tube/send [:chat/set-nick @new-nick]])
+     [:button.btn.btn-flat {:on-click #(do (rf/dispatch [:conn/send [:chat/set-nick @new-nick]])
                                            (reset! new-nick ""))} "Set nick"]]))
 
 (defn participants []

@@ -5,8 +5,7 @@
 (defmulti panel :location-id)
 
 (defmethod panel :default [location]
-  (rf/dispatch [:tube/send [:race/attend]]) ;; Shift to server side
-  [:div "Attending a race"])
+  [:div "Not there yet ~_~"])
 
 (defn notifications []
   [:ul.notifications

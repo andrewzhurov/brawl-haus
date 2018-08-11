@@ -8,6 +8,7 @@
    [brawl-haus.config :as config]
    [brawl-haus.focus :as focus]
    [brawl-haus.receiver]
+   [brawl-haus.ws]
    [brawl-haus.tube]
    [brawl-haus.utils]
    [brawl-haus.shortcuts :as shortcuts]))
@@ -30,7 +31,8 @@
   (re-frame/dispatch-sync shortcuts/keydown-rules)
   (re-frame/dispatch-sync shortcuts/keyup-rules)
   #_(re-frame/dispatch-sync [::rp/add-keyboard-event-listener "keydown"])
-  (re-frame/dispatch-sync [:tube/create])
+  (re-frame/dispatch-sync [:conn/create])
+  #_(re-frame/dispatch-sync [:tube/create])
   (focus/reg-focus-listener)
   (dev-setup)
   (mount-root))

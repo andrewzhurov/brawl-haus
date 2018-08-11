@@ -1,21 +1,26 @@
 (ns brawl-haus.subs
   (:require
-   [re-frame.core :as re-frame]
+   [re-frame.core :as rf]
    [brawl-haus.utils :refer [l <sub]]))
 
-(re-frame/reg-sub
+(rf/reg-sub
  ::active-panel
  (fn [db _]
    (:active-panel db)))
 
-(re-frame/reg-sub
+(rf/reg-sub
  :users
  (fn [db _]
    (get-in db [:public-state :users])))
 
-(re-frame/reg-sub
+(rf/reg-sub
+ :conn-id
+ (fn [db _]
+   (:conn-id db)))
+
+(rf/reg-sub
  :user
- :<- [:tube]
+ :<- [:conn-id]
  :<- [:users]
- (fn [[tube users] [_ tube-id]]
-   (get users (or tube-id (:tube/id tube)))))
+ (fn [[my-conn-id users] [_ conn-id]]
+   (get users (or my-conn-id conn-id))))

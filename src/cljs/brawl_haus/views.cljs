@@ -23,8 +23,8 @@
        (assoc :is-help-open false))))
 
 (defn main-panel []
-  (let [tube (<sub [:tube])
-        location (<sub [:db/get-in [:public-state :users (:tube/id tube) :location]])]
+  (let [conn-id (<sub [:db/get-in [:conn-id]])
+        location (<sub [:db/get-in [:public-state :users conn-id :location]])]
     [:div {:key (str location)}
      #_[panels/notifications]
      [panels/panel location]
