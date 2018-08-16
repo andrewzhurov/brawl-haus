@@ -1,6 +1,7 @@
 (defproject brawl-haus "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.9.0"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
                  [org.clojure/clojurescript "1.10.339"]
+                 [org.clojure/core.async "0.4.474"]
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
                  [com.andrewmcveigh/cljs-time "0.5.2"]
@@ -25,8 +26,8 @@
 
   :min-lein-version "2.5.3"
 
-  :source-paths ["src/clj" "src/cljs" "src/cljc" "test/cljc"]
-  :test-paths ["test" "test/cljc"]
+  :source-paths ["src/clj" "src/cljs"]
+  :test-paths ["test" "test/clj"]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"
                                     "resources/public/css"]

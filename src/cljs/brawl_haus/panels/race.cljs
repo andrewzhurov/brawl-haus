@@ -2,25 +2,27 @@
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
             [brawl-haus.panels :as panels]
-            [brawl-haus.utils :refer [l <sub]]
+            [brawl-haus.utils :refer [l <sub defview view]]
             [cljs-time.core :as t]
             [cljs-time.coerce :as c]
             [cljs-time.format :as f]
             [re-com.misc :as rcmisc]
-            [brawl-haus.components :as comps]))
+            [brawl-haus.components :as comps]
+            #_[brawl-haus.events :as events]))
 
-(defn countdown [race]
-  (r/with-let [now (r/atom (t/now))
-               looper (js/setInterval #(reset! now (t/now)) 20)]
-    (let [starts (c/from-date (:starts-at race))
-          remains (t/in-millis
-                   (cond
-                     (nil? starts) (t/seconds 10)
-                     (t/after? @now starts) (do (js/clearInterval looper)
-                                                (t/seconds 0))
-                     :counting (t/interval @now starts)))]
-      [:div.countdown
-       (str (int (/ remains 1000)) ":" (rem remains 1000))])))
+(defview :countdown
+  (fn [{:keys [starts-at]}]
+    (r/with-let [now (r/atom (t/now))
+                 looper (js/setInterval #(reset! now (t/now)) 20)]
+      (let [starts (c/from-date starts-at)
+            remains (t/in-millis
+                     (cond
+                       (nil? starts) (t/seconds 10)
+                       (t/after? @now starts) (do (js/clearInterval looper)
+                                                  (t/seconds 0))
+                       :counting (t/interval @now starts)))]
+        [:div.countdown
+         (str (int (/ remains 1000)) ":" (rem remains 1000))]))))
 
 (def breaks #{\, \space \.})
 (defn bite [text chunk]
@@ -56,20 +58,38 @@
                (map (fn [x] {:char x :statuses #{"wrong-typed"}}) wrong-typed)
                (map (fn [x] {:char x :statuses #{"yet"}}) after-wrong)))))
 
-(defn race-progress [race]
-  [:div.race-progress
-   (doall
-    (for [[id {:keys [speed progress]}] (:participants race)]
-      (let [{:keys [nick location]} (<sub [:user id])]
-        [:div.participant {:key id
-                           :class (when (= (:location-id location) :quit) "quit")}
+#_(defmacro defview [my-symbol binding body]
+  (let [view-id (keyword (namespace ::dull) (str my-symbol))]
+    (do `(println "SYM:" ~my-symbol ~binding ~body)
+        [:div]#_`(def ~my-symbol
+           (do
+             ~(rf/dispatch [:conn/send [:view-data/subscribe view-id]])
+             (`(fn ~binding
+                 ~body)
+              ~(<sub [:view-data view-id])))))))
+
+#_(defn defview [my-symbol render-fn]
+  (let [view-id (keyword (namespace ::dull) (str my-symbol))]
+    (def (l "SYMBOL:"my-symbol)
+      (fn []
+        (render-fn (<sub [:view-data view-id]))))))
+
+#_(defview 'a-view (fn [view-data-here] [:div view-data-here]))
+
+(defview :race-progress
+  (fn [participants]
+    [:div.race-progress
+     (doall
+      (for [{:keys [nick speed progress did-finish did-quit]} participants]
+        [:div.participant {:key nick
+                           :class (when did-quit "quit")}
          [:div.nick nick]
          (when speed
            [:span.average-speed.badge.white-text (str speed)])
          [rcmisc/progress-bar
-          :striped? (not (zero? left-chars))
+          :striped? (not did-finish)
           :model progress]
-         ])))])
+         ]))]))
 
 (defn waiting []
   (r/with-let [dots (r/atom 4)
@@ -82,8 +102,9 @@
         2 ".."
         3 "...")]]))
 
-(defn text-race [{:keys [race-text starts-at id]}]
-  (if (empty? race-text)
+(defview :text-race
+  (fn [{:keys [has-began race-text starts-at]}]
+    (if has-began
     [:div.text-race.card
      [:div.race-text.card-content
       "Race is soon to begin - warm up your fingers, get comfy."]]
@@ -97,7 +118,7 @@
                                   left-text :left-text :as old-state}]
                               (let [current-text (.-value (.-target e))]
                                 (if-let [new-left-text (bite left-text current-text)]
-                                  (do (rf/dispatch [:conn/send [:race/left-text id new-left-text]])
+                                  (do (rf/dispatch [:conn/send [:race/left-text new-left-text]])
                                       {:current-text ""
                                        :left-text new-left-text})
                                   (assoc old-state :current-text current-text)))))))]
@@ -116,24 +137,18 @@
             (meta-text race-text current-text left-text)))]
          [:input {:id :race-input
                   :on-change on-type
-                  :disabled (zero? (count left-text))
-                  :value current-text}]]))))
+                  :disabled (= 0 (count left-text))
+                  :value current-text}]])))))
 
 (defn to-next []
   [:div.to-next-row
    [:button.btn.btn-flat {:on-click #(rf/dispatch [:conn/send [:race/attend]])} "Next race"]])
 
-(rf/reg-sub
- :race
- (fn [db [_ race-id]]
-   (get-in db [:public-state :open-races race-id])))
-
 (defmethod panels/panel :race-panel
   [{:keys [params]}]
-  (let [race (<sub [:race (:race-id params)])]
-    [:div.app
-     [:div.content.race-panel
-      [countdown race]
-      [text-race race]
-      [to-next]
-      [race-progress race]]]))
+  [:div.app
+   [:div.content.race-panel
+    [view :countdown]
+    [view :text-race]
+    [to-next]
+    [view :race-progress]]])
