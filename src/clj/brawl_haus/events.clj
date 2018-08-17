@@ -57,34 +57,32 @@
 
 (def event-handlers
   {:conn/on-create
-   (fn [state [_ conn-id]]
+   (fn [state conn-id _]
      (let [anonymous-user {:nick (rand-nth data/names)}]
        (-> state
            (assoc-in [:users conn-id] anonymous-user)
-           (drive [:race/attend] conn-id))))
+           (drive conn-id [:race/attend]))))
    
    ;:tube/on-destroy
    ;(fn [tube _]
    ;  (swap! public-state
    ;         navigate (id tube) {:location-id :quit}))
    
-   ;:add-message
-   ;(fn [tube [_ text]]
-   ;  (when-let [user (l "USER?: "(tube->user (id tube)))]
-   ;    (swap! public-state update :messages conj {:text text
-   ;                                               :id (uuid)
-   ;                                               :sender (id tube)
-   ;                                               :received-at (now)}))
-   ;  tube)
+   :chat/add-message
+   (fn [state conn-id [_ text]]
+     (update state :messages conj {:text text
+                                   :id (uuid)
+                                   :sender conn-id
+                                   :received-at (now)}))
    
    :race/attend
-   (fn [state _ conn-id]
+   (fn [state conn-id _]
      (-> state
          ensure-race
          (enter-race conn-id)))
    
    :race/left-text
-   (fn [state [_ left-text] conn-id]
+   (fn [state conn-id [_ left-text]]
      (let [is-finished (zero? (count left-text))
            race-id (-> (view-data/location state conn-id) :params :race-id)
            {:keys [race-text starts-at]} (get-in state [:open-races race-id])]
@@ -94,26 +92,24 @@
                   :speed (calc-speed race-text starts-at (now))})))
    
    :chat/set-nick
-   (fn [state [_ nick] conn-id]
+   (fn [state conn-id [_ nick]]
      (assoc-in state [:users conn-id :nick] nick))
 
 
    :view-data/subscribe
-   (fn [state [_ view-id] conn-id]
+   (fn [state conn-id [_ view-id]]
      (if (contains? view-data/view-data-fns view-id)
        (assoc-in state [:users conn-id :view-data-subs view-id] {})
        (do (throw (Exception. (str "No view-data-fn registered for: " view-id)))
            state)))
 
    :view-data/unsubscribe
-   (fn [state [_ view-id] conn-id]
-     (update-in state [:users conn-id :view-data-subs] dissoc conn-id))
-   })
-
-
+   (fn [state conn-id [_ view-id]]
+     (update-in state [:users conn-id :view-data-subs] dissoc conn-id))})
+   
 
 (defn drive
-  [state & [[evt-id] :as params]]
+  [state conn-id [evt-id :as evt]]
   (let [event-handler (get event-handlers evt-id)]
-    (when (nil? event-handler) (throw (Exception. (str "Unable to find event handler for: " (pr-str params)))))
-    (apply event-handler state params)))
+    (when (nil? event-handler) (throw (Exception. (str "Unable to find event handler for: " evt))))
+    (event-handler state conn-id evt)))

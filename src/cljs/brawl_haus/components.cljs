@@ -3,11 +3,7 @@
             [re-frame.core :as rf]
             [brawl-haus.panels :as panels]
             [brawl-haus.utils :refer [l <sub defview view]]
-            [brawl-haus.focus :as focus]
-            [cljs-time.core :as t]
-            [cljs-time.format :as f]
-            [cljs-time.coerce :as c]
-            ))
+            [brawl-haus.focus :as focus]))
 
 (rf/reg-sub
  :users
@@ -43,7 +39,7 @@
 (defn send-box []
   (r/with-let [input-msg (r/atom "")
                send-fn (fn [text]
-                         (rf/dispatch [:tube/send [:add-message text]])
+                         (rf/dispatch [:conn/send [:chat/add-message text]])
                          (reset! input-msg ""))]
     [:div.send-box
      [:input {:id :chat-input
@@ -55,21 +51,24 @@
                          :on-click #(send-fn @input-msg)}
       [:i.material-icons "send"]]]))
 
+(defview :messages
+  (fn [{:keys [is-empty messages]}]
+    [:div.messages
+     (if is-empty
+       [:div.empty "No talking yet, be the first!"]
+       [:ul
+        (doall
+         (for [{:keys [id nick is-my text received-at]} messages]
+           [:li.collection-item {:key id
+                                 :class (when is-my "my")}
+            [:div.from nick]
+            [:div.received-at received-at]
+            [:div.text text]]))]
+       )]))
+
 (defn chat []
   [:div.chat.card.z-depth-1 {:class (when (<sub [:db/get-in [:is-chat-open]]) "open")}
    [send-box]
-   [:div.messages
-    #_(if-let [messages (not-empty (<sub [:messages]))]
-      [:ul
-       (doall
-        (for [{:keys [id sender text received-at]} (<sub [:messages])]
-          (let [{:keys [nick]} (<sub [:user sender])]
-            [:li.collection-item {:key id
-                                  :class (when (= sender
-                                                  (:tube (<sub [:user]))) "my")}
-             [:div.from nick]
-             [:div.received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))]
-             [:div.text text]])))]
-      [:div.empty "No talking yet, be the first!"])]
+   [view :messages]
    [view :participants]
    ])

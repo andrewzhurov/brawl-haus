@@ -1,4 +1,8 @@
-(ns brawl-haus.view-data)
+(ns brawl-haus.view-data
+  (:require
+   [clj-time.core :as t]
+   [clj-time.format :as f]
+   [clj-time.coerce :as c]))
 
 (defn l [desc expr] (println desc expr) expr)
 
@@ -59,6 +63,18 @@
 (defn set-nick [state conn-id]
   {:current-nick (get-in state [:users conn-id :nick])})
 
+(defn messages [state conn-id]
+  {:is-empty false
+   :messages (->> (:messages state)
+                  (sort-by :received-at)
+                  (reverse)
+                  (map (fn [{:keys [id sender text received-at]}]
+                         {:id id
+                          :nick (:nick (user state sender))
+                          :is-my (= (:nick (user state sender)) (:nick (user state conn-id)))
+                          :text text
+                          :received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))})))})
+
 (def view-data-fns
   {:countdown countdown
    :text-race text-race
@@ -66,4 +82,5 @@
    :location location
 
    :participants participants
-   :set-nick set-nick})
+   :set-nick set-nick
+   :messages messages})

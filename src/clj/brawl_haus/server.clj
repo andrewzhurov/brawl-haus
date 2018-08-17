@@ -12,6 +12,7 @@
             [brawl-haus.state :as state]
             [brawl-haus.data :as data]
             [brawl-haus.events :as events]
+            [clojure.pprint]
             )
   (:gen-class))
 
@@ -23,12 +24,15 @@
        (with-channel req channel              ; get the channel
          ;; communicate with client using method defined above
          (let [conn-id (conn/new-connection channel)]
-           (swap! state/public-state events/drive [:conn/on-create conn-id])
+           (swap! state/public-state (fn [state]
+                                       (events/drive state conn-id [:conn/on-create])))
 
            (on-close channel (fn [status]
                                (println "channel closed")))
            (on-receive channel (fn [data]
-                                 (swap! state/public-state events/drive (read-string data) conn-id))))))
+                                 (swap! state/public-state
+                                        (fn [state]
+                                          (events/drive state conn-id (read-string data)))))))))
   (resources "/"))
 
 (def dev-handler (-> #'routes wrap-reload))
@@ -42,8 +46,14 @@
 
 (defn reload []
   (use 'brawl-haus.server :reload)
+  (require 'brawl-haus.events :reload)
   (reset! state/public-state state/init-public-state)
   (restart-server))
+
+(defn inspect-public-state []
+  (clojure.pprint/pprint @state/public-state))
+(defn inspect-connections []
+  (clojure.pprint/pprint @conn/connections))
 
 (defn -main [& args]
   (reload))
