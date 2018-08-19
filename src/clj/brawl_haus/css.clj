@@ -34,6 +34,37 @@
                 :right "15px"
                 :top "10px"
                 :z-index 1}]
+   [:.hiccup-touch {:position "fixed"
+                    :right "15px"
+                    :top "50px"
+                    :z-index 1}]
+   [:.hiccup-touch-panel {:display "grid"
+                          :height "100vh"
+                          :width "100vw"
+                          :grid-template
+                          (grid "hiccup-editor result 1fr"
+                                "garden-editor result 1fr"
+                                "1fr 1fr")}
+    [:.switch-line {:position "absolute"
+                    :bottom "0px"
+                    :left "0px"
+                    :right "0px"
+                    :display "flex"
+                    :justify-content "center"}
+     [:.switch {:padding "5px 8px"
+                :margin-bottom "0px"
+                :border-radius "5px 5px 0px 0px"
+                :background-color "rgba(0,0,0,0.7)"}
+      ]]
+    [:.hiccup-editor {:grid-area "hiccup-editor"}
+     [:.content {:height "100%"}
+      [:.paren-soup {:height "100%"}]]]
+    [:.garden-editor {:grid-area "garden-editor"}
+     [:.content {:height "100%"}
+      [:.paren-soup {:height "100%"}]]]
+    [:.render-result {:grid-area "result"}]
+    [:.compile-result {:grid-area "result"}
+     [:div {:height "50%"}]]]
    [:.help {:position "fixed"
             :min-width "300px"
             :width "25vw"

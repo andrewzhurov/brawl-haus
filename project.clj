@@ -17,12 +17,18 @@
                  [pneumatic-tubes "0.3.0"]
                  [clj-time "0.14.4"]
                  [com.andrewmcveigh/cljs-time "0.5.2"]
-                 [matcho "0.1.0-RC6"]]
+                 [matcho "0.1.0-RC6"]
+                 [paren-soup "2.13.2"]
+                 [hiccups "0.3.0"]
+                 [garden "1.3.5"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
-            [lein-garden "0.2.8"]
+            [lein-garden "0.3.0"]
             [lein-cljfmt "0.6.0"]
             [lein-ancient "0.6.15"]]
+
+  ;:repositories [["nexus-public" {:url "https://clojars.org/repo/"}]]
+
 
   :min-lein-version "2.5.3"
 

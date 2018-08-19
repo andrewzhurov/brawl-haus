@@ -43,8 +43,8 @@
       (assoc-in state [:open-races (:id new-race)] new-race))
     state))
 
-(defn navigate [state tube-id location]
-  (assoc-in state [:users tube-id :location] location))
+(defn navigate [state conn-id location]
+  (assoc-in state [:users conn-id :location] location))
 
 (defn enter-race [state conn-id]
   (let [race (race-to-be state)]
@@ -75,6 +75,10 @@
                                    :sender conn-id
                                    :received-at (now)}))
    
+   :hiccup-touch/attend
+   (fn [state conn-id _]
+     (navigate state conn-id {:location-id :hiccup-touch}))
+
    :race/attend
    (fn [state conn-id _]
      (-> state

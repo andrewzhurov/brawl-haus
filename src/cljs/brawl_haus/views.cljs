@@ -7,6 +7,7 @@
    [brawl-haus.utils :refer [l <sub]]
    [brawl-haus.panels :as panels]
    [brawl-haus.panels.race]
+   [brawl-haus.panels.hiccup-touch]
    [brawl-haus.components :as comps]
    [brawl-haus.shortcuts :as shortcuts]
    [brawl-haus.focus :as focus]))
@@ -31,4 +32,5 @@
        [panels/panel location]
        [comps/chat]
        [shortcuts/help-btn]
+       [:div.btn.hiccup-touch {:on-click #(rf/dispatch [:conn/send [:hiccup-touch/attend]])} "Hiccup practice"]
        [shortcuts/help]])))

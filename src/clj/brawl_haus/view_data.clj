@@ -64,7 +64,7 @@
   {:current-nick (get-in state [:users conn-id :nick])})
 
 (defn messages [state conn-id]
-  {:is-empty false
+  {:is-empty (= 0 (count (:messages state)))
    :messages (->> (:messages state)
                   (sort-by :received-at)
                   (reverse)
