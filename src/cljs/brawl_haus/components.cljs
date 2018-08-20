@@ -66,6 +66,35 @@
             [:div.text text]]))]
        )]))
 
+(rf/reg-event-fx
+ :chat/display
+ (fn [{:keys [db]} [_ evt]]
+   (l "EVT:" evt)
+   (case (l "OP:L"(:is-chat-open db))
+     true (case evt
+            :hide {:dispatch [:chat/hide]}
+            :open {}
+            :toggle {:dispatch [:chat/hide]})
+     false (case evt
+             :hide {}
+             :open {:dispatch [:chat/show]}
+             :toggle {:dispatch [:chat/show]}))))
+
+(rf/reg-event-db
+ :chat/show
+ (fn [db _]
+   (.. js/document (getElementById "chat-input") focus)
+   (-> db
+       (assoc :is-chat-open true)
+       (assoc :is-help-open false))))
+(rf/reg-event-db
+ :chat/hide
+ (fn [db _]
+   (focus/focus-previous)
+   (-> db
+       (assoc :is-chat-open false)
+       (assoc :is-help-open false))))
+
 (defn chat []
   [:div.chat.card.z-depth-1 {:class (when (<sub [:db/get-in [:is-chat-open]]) "open")}
    [send-box]

@@ -11,7 +11,62 @@
     (str (clojure.string/join "\n"  (conj (vec escaped-rows)  (str "/ " columns))))))
 
 (defstyles screen
-  [[:.set-nick {:display "flex"
+  [[:.main-layout {:display "grid"
+                   :height "100vh"
+                   :grid-template
+                   (grid "nav-section auto"
+                         "content-section 1fr"
+                         "1fr")}
+    [:.nav-section {:grid-area "nav-section"}
+     [:.brand-logo {:padding "0px 20px"
+                    :cursor "pointer"}]
+     [:li.controls {:width "50px"}]]
+    [:.content-section {:grid-area "content-section"}]]
+
+   [:.default-panel
+    {:padding-top "10%"
+     :display "flex"
+     :height "100%"
+     :flex-direction "column"
+     :align-items "center"}
+    [:.thoughts {:margin-bottom "-10px"
+                 :display "flex"
+                 :align-items "center"}
+     [:.dot {:border-radius "50%"
+             :border "2px solid gray"
+             :height "fit-content"
+             :margin "2px"
+             :transition "0.8s"}
+      [:&.active {:border "8px solid gray"}]]]
+    [:.face {:margin-top "0px"}]]
+
+
+   [:.home-panel
+    [:.top-section {:grid-area "top-section"
+                    :border-bottom "1px solid gray"
+                    :display "flex"
+                    :align-items "center"}]
+    [:.content-section {:grid-area "content-section"
+                        :margin "15px 10px 0px 10px"}]
+    [:.logo {:font-size "24px"
+             :margin "4px"
+             :cursor "pointer"}]
+    [:ul.shelf {:display "flex"}
+     [:li {:max-width "272px"
+           :margin-right "20px"}
+      [:img {:max-height "200px"
+             :object-fit "cover"}]
+      [:.card-title {:text-shadow "1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000"}]
+      [:a {:cursor "pointer"}]]]]
+
+
+   [:.ccc-panel {:margin "20px 30px"
+                 :display "flex"
+                 :flex-direction "column"}
+    ]
+
+
+   [:.set-nick {:display "flex"
                 :flex-direction "row"
                 :justify-content "center"
                 :align-items "center"}
@@ -21,23 +76,7 @@
    [:span.badge.new {:font-size "1.1rem"
                      :font-weight "500"}]
    [:body {:overflow-y "hidden"}]
-   [:.tube-indicator {:position "absolute"
-                      :height "15px" :width "15px"
-                      :top "10px"
-                      :right "10px"
-                      :border-radius "50%"
-                      :border-style "solid"
-                      :border-width "3px"}
-    [:&.true {:border-color "green"}]
-    [:&.false {:border-color "gray"}]]
-   [:.help-btn {:position "fixed"
-                :right "15px"
-                :top "10px"
-                :z-index 1}]
-   [:.hiccup-touch {:position "fixed"
-                    :right "15px"
-                    :top "50px"
-                    :z-index 1}]
+
    [:.hiccup-touch-panel {:display "grid"
                           :height "100vh"
                           :width "100vw"
@@ -132,7 +171,8 @@
      [:.collection-header {:position "sticky"
                            :top "0px"}]
      [:.activity-indicator]]]
-   [:.collection.open-races
+
+   #_[:.collection.open-races
     {:display "flex"
      :grid-area "open-races"
      :flex-direction "column"}
@@ -144,7 +184,8 @@
              :flex-direction "row"
              :align-items "center"}]
     [:.countdown {:width "40px"}]]
-   [:.races-panel
+
+   #_[:.races-panel
     {:display "grid"
      :grid-template (grid "controls highscores 50px"
                           "open-races highscores 1fr"
@@ -159,7 +200,7 @@
      [:.collection-header {:position "sticky"
                            :top "0px"}]
      [:.activity-indicator]]
-    #_[:.highscores {:grid-area "highscores"
+    [:.highscores {:grid-area "highscores"
                      :overflow-y "auto"
                      :margin "0px"
                      :height "100%"}]]
@@ -203,33 +244,11 @@
     [:.to-next-row
      {:display "flex"
       :justify-content "flex-end"}]]
-   #_[:.app {:display "grid"
-             :grid-template-columns "auto 1fr"}
-      [:.navbar {:display "flex"
-                 :flex-direction "column"
-                 :height "100vh"
-                 :width "60px"
-                 :border-right "1px solid lightgray"
-                 :align-items "center"}
-       [:.tab {:padding "0px 10px"
-               :margin "3px 0px"
-               :cursor "pointer"}
-        [:i {:font-size "30px"}]]]
-      [:.content {:margin-left "10px"
-                  :box-shadow "0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2)"}]]
+
    [:.content {:margin-left "10px"}]
 
    [:.notifications {:position "absolute"
                      :top "10px"
                      :right "10px"}]
 
-   [:.login-panel {:display "flex"
-                   :flex-direction "column"
-                   :align-items "center"
-                   :justify-content "center"
-                   :height "100vh"
-                   :width "100vw"}
-    [:form {:max-width "300px"
-            :max-height "700px"}]
-    [:.onward {:width "100%"
-               :height "42px"}]]])
+   ])

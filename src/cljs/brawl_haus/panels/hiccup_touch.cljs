@@ -86,11 +86,11 @@
   [{:keys [params]}]
   (let [h (rf/subscribe [:db/get-in [::h]])
         g (rf/subscribe [:db/get-in [::g]])
-        h-looper (js/setInterval #(do (println "RERUN H")
+        h-looper (js/setInterval #(do #_(println "RERUN H")
                                       (my-eval (cljs.reader/read-string (get-h))
                                                (fn [h] (rf/dispatch [:db/set-in [::h] h]))))
                                  500)
-        g-looper (js/setInterval #(do (println "RERUN G")
+        g-looper (js/setInterval #(do #_(println "RERUN G")
                                       (my-eval (cljs.reader/read-string (get-g))
                                                (fn [g] (rf/dispatch [:db/set-in [::g] g]))))
                                  500)

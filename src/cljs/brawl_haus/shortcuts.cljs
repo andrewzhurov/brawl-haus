@@ -5,7 +5,7 @@
             [brawl-haus.utils :refer [l <sub]]))
 
 (def shortcuts
-  [{:name "Hide help"
+  [{:name "Hide controls"
     :human-combo "Ctrl + space"
     :evt [:help/fire]
     :key-seq {;; ?
@@ -13,13 +13,28 @@
               :ctrlKey true}}
    {:name "Toggle chat"
     :human-combo "Ctrl + c"
-    :evt [:help/fire [:toggle-chat]]
+    :evt [:help/fire [:chat/display :toggle]]
     :key-seq {:which 67 ;; c
+              :ctrlKey true}}
+   #_{:name "Show chat"
+    :human-combo "Ctrl + <arrow-up>"
+    :evt [:help/fire [:chat/display :show]]
+    :key-seq {:which 38 ;; c
+              :ctrlKey true}}
+   #_{:name "Hide chat"
+    :human-combo "Ctrl + <arrow-down>"
+    :evt [:help/fire [:chat/display :hide]]
+    :key-seq {:which 40 ;; c
               :ctrlKey true}}
    {:name "Next race"
     :human-combo "Ctrl + ->"
-    :evt [:help/fire [:tube/send [:race/attend]]]
+    :evt [:help/fire [:conn/send [:race/attend]]]
     :key-seq {:which 39 ;; ->
+              :ctrlKey true}}
+   {:name "Go home"
+    :human-combo "Ctrl + <-"
+    :evt [:help/fire [:conn/send [:home/attend]]]
+    :key-seq {:which 37 ;; ->
               :ctrlKey true}}])
 
 (rf/reg-event-fx
@@ -62,10 +77,6 @@
                       shortcuts)
     :always-listen-keys
     (mapv :key-seq shortcuts)}])
-
-(defn help-btn []
-  [:div.btn.help-btn {:on-click #(rf/dispatch [:help/toggle])}
-   [:i.material-icons "help_outline"]])
 
 (defn help []
   [:div.help.collection.with-header.card.z-depth-2

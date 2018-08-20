@@ -61,30 +61,43 @@
      (let [anonymous-user {:nick (rand-nth data/names)}]
        (-> state
            (assoc-in [:users conn-id] anonymous-user)
-           (drive conn-id [:race/attend]))))
-   
+           (drive conn-id [:home/attend]))))
+
    ;:tube/on-destroy
    ;(fn [tube _]
    ;  (swap! public-state
    ;         navigate (id tube) {:location-id :quit}))
-   
+
    :chat/add-message
    (fn [state conn-id [_ text]]
      (update state :messages conj {:text text
                                    :id (uuid)
                                    :sender conn-id
                                    :received-at (now)}))
-   
+
+   :chat/set-nick
+   (fn [state conn-id [_ nick]]
+     (assoc-in state [:users conn-id :nick] nick))
+
+
    :hiccup-touch/attend
    (fn [state conn-id _]
      (navigate state conn-id {:location-id :hiccup-touch}))
+
+   :home/attend
+   (fn [state conn-id _]
+     (navigate state conn-id {:location-id :home-panel}))
+
+   :ccc/attend
+   (fn [state conn-id _]
+     (navigate state conn-id {:location-id :ccc-panel}))
 
    :race/attend
    (fn [state conn-id _]
      (-> state
          ensure-race
          (enter-race conn-id)))
-   
+
    :race/left-text
    (fn [state conn-id [_ left-text]]
      (let [is-finished (zero? (count left-text))
@@ -94,10 +107,6 @@
                  [:open-races race-id :participants conn-id]
                  {:left-chars (count left-text)
                   :speed (calc-speed race-text starts-at (now))})))
-   
-   :chat/set-nick
-   (fn [state conn-id [_ nick]]
-     (assoc-in state [:users conn-id :nick] nick))
 
 
    :view-data/subscribe
@@ -110,7 +119,7 @@
    :view-data/unsubscribe
    (fn [state conn-id [_ view-id]]
      (update-in state [:users conn-id :view-data-subs] dissoc conn-id))})
-   
+
 
 (defn drive
   [state conn-id [evt-id :as evt]]

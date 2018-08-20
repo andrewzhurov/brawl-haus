@@ -1,4 +1,5 @@
 (ns brawl-haus.db)
 
 (def default-db
-  {:notifications #{}})
+  {:notifications #{}
+   :is-chat-open false})

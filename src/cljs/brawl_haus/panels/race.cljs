@@ -137,6 +137,7 @@
             (meta-text race-text current-text left-text)))]
          [:input {:id :race-input
                   :on-change on-type
+                  :ref #(when % (.focus %))
                   :disabled (= 0 (count left-text))
                   :value current-text}]])))))
 
