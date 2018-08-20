@@ -14,7 +14,7 @@
             #_[brawl-haus.events :as events]))
 
 (defn my-eval [form cb]
-  (cljs.js/eval (cljs.js/empty-state) form {:eval cljs.js/js-eval} #(cb (:value %))))
+  (js/cljs.js.eval (js/cljs.js.empty-state) form {:eval js/cljs.js.js-eval} #(cb (:value %))))
 
 (defn get-h []
   (.-textContent (js/document.getElementById "hiccup-content")))
@@ -87,11 +87,11 @@
   (let [h (rf/subscribe [:db/get-in [::h]])
         g (rf/subscribe [:db/get-in [::g]])
         h-looper (js/setInterval #(do #_(println "RERUN H")
-                                      (my-eval (cljs.reader/read-string (get-h))
+                                      (my-eval (js/cljs.reader.read-string (get-h))
                                                (fn [h] (rf/dispatch [:db/set-in [::h] h]))))
                                  500)
         g-looper (js/setInterval #(do #_(println "RERUN G")
-                                      (my-eval (cljs.reader/read-string (get-g))
+                                      (my-eval (js/cljs.reader.read-string (get-g))
                                                (fn [g] (rf/dispatch [:db/set-in [::g] g]))))
                                  500)
         render-mode (r/atom true)]
