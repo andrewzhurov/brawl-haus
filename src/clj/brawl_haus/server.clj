@@ -28,6 +28,8 @@
                                        (events/drive state conn-id [:conn/on-create])))
 
            (on-close channel (fn [status]
+                               (swap! state/public-state (fn [state]
+                                                           (events/drive state conn-id [:conn/on-close])))
                                (println "channel closed")))
            (on-receive channel (fn [data]
                                  (swap! state/public-state

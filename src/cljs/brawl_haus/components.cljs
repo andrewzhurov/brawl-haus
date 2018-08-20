@@ -19,12 +19,15 @@
 (defview :set-nick
   (fn [{:keys [current-nick]}]
     (r/with-let [new-nick (r/atom "")]
-      [:div.set-nick
-       [:input.collection-header {:value @new-nick
-                                  :on-change #(reset! new-nick (l "VAL:" (.-value (.-target %))))
-                                  :placeholder current-nick}]
-       [:button.btn.btn-flat {:on-click #(do (rf/dispatch [:conn/send [:chat/set-nick @new-nick]])
-                                             (reset! new-nick ""))} "Set nick"]])))
+      (let [send-fn #(do (rf/dispatch [:conn/send [:chat/set-nick @new-nick]])
+                         (reset! new-nick ""))]
+        [:div.set-nick
+         [:input.collection-header {:value @new-nick
+                                    :on-change #(reset! new-nick (l "VAL:" (.-value (.-target %))))
+                                    :on-key-down #(when (= (.-keyCode %) 13)
+                                                    (send-fn))
+                                    :placeholder current-nick}]
+         [:button.btn.btn-flat {:on-click send-fn} "Set nick"]]))))
 
 (defview :participants
   (fn [nicks]

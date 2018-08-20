@@ -63,10 +63,9 @@
            (assoc-in [:users conn-id] anonymous-user)
            (drive conn-id [:home/attend]))))
 
-   ;:tube/on-destroy
-   ;(fn [tube _]
-   ;  (swap! public-state
-   ;         navigate (id tube) {:location-id :quit}))
+   :conn/on-close
+   (fn [state conn-id _]
+     (navigate state conn-id {:location-id :quit}))
 
    :chat/add-message
    (fn [state conn-id [_ text]]

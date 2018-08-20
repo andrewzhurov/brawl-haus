@@ -23,7 +23,7 @@
        [:nav.nav-section
         [:div.nav-wrapper
          [:a.brand-logo {:on-click #(rf/dispatch [:conn/send [:home/attend]])} "BrawlHaus"]
-         [:ul#nav-mobile.right.hide-on-med-and-down
+         [:ul#nav-mobile.right
           [:li.controls [:a {:on-click #(rf/dispatch [:help/toggle])}
                          [:i.material-icons "all_out"]]]]]]
 

@@ -105,9 +105,8 @@
     [:.compile-result {:grid-area "result"}
      [:div {:height "50%"}]]]
    [:.help {:position "fixed"
-            :min-width "300px"
-            :width "25vw"
-            :right "-50vw"
+            :width "300px"
+            :right "-300px"
             :transition "0.4s"
             :top "0px"
             :overflow "visible"
