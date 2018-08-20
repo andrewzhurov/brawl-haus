@@ -78,8 +78,7 @@
    [:body {:overflow-y "hidden"}]
 
    [:.hiccup-touch-panel {:display "grid"
-                          :height "100vh"
-                          :width "100vw"
+                          :height "100%"
                           :grid-template
                           (grid "hiccup-editor result 1fr"
                                 "garden-editor result 1fr"
