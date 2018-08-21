@@ -3,7 +3,6 @@
    [re-frame.core :as rf]
    [reagent.core :as r]
    [re-com.core :as re-com]
-   [re-pressed.core :as rp]
    [brawl-haus.utils :refer [l <sub >evt =>evt defview view]]
    [brawl-haus.panels :as panels]
    [brawl-haus.panels.race]
@@ -21,7 +20,7 @@
       [:div.nav-wrapper
        [:a.brand-logo {:on-click #(=>evt [:home/attend])} "BrawlHaus"]
        [:ul#nav-mobile.right
-        [:li.controls [:a {:on-click #(>evt [:help/toggle])}
+        [:li.controls [:a {:on-click #(>evt [:help/show])}
                        [:i.material-icons "all_out"]]]]]]
 
      [:div.content-section

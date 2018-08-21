@@ -44,8 +44,9 @@
   [:div.help.collection.with-header.card.z-depth-2
    {:class (when (<sub [:help]) "open")}
    [:div.collection-header [:h5.header "Controls"] [:h7.description "(click to fire)"]]
-   (for [{:keys [name human-combo evt]} shortcuts]
+   (for [{:keys [name id human-combo evt]} shortcuts]
      [:a.collection-item.waves-effect {:key name
+                                       :id id
                                        :on-click #(rf/dispatch evt)}
       [:div name [:div.secondary-content human-combo]]])])
 

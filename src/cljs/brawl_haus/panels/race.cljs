@@ -2,13 +2,13 @@
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
             [brawl-haus.panels :as panels]
-            [brawl-haus.utils :refer [l <sub defview view]]
+            [brawl-haus.utils :refer [l <sub >evt defview view]]
             [cljs-time.core :as t]
             [cljs-time.coerce :as c]
             [cljs-time.format :as f]
             [re-com.misc :as rcmisc]
             [brawl-haus.components :as comps]
-            #_[brawl-haus.events :as events]))
+            ))
 
 (defview :countdown
   (fn [{:keys [starts-at]}]
@@ -58,23 +58,6 @@
                (map (fn [x] {:char x :statuses #{"wrong-typed"}}) wrong-typed)
                (map (fn [x] {:char x :statuses #{"yet"}}) after-wrong)))))
 
-#_(defmacro defview [my-symbol binding body]
-  (let [view-id (keyword (namespace ::dull) (str my-symbol))]
-    (do `(println "SYM:" ~my-symbol ~binding ~body)
-        [:div]#_`(def ~my-symbol
-           (do
-             ~(rf/dispatch [:conn/send [:view-data/subscribe view-id]])
-             (`(fn ~binding
-                 ~body)
-              ~(<sub [:view-data view-id])))))))
-
-#_(defn defview [my-symbol render-fn]
-  (let [view-id (keyword (namespace ::dull) (str my-symbol))]
-    (def (l "SYMBOL:"my-symbol)
-      (fn []
-        (render-fn (<sub [:view-data view-id]))))))
-
-#_(defview 'a-view (fn [view-data-here] [:div view-data-here]))
 
 (defview :race-progress
   (fn [participants]
@@ -136,8 +119,8 @@
                char])
             (meta-text race-text current-text left-text)))]
          [:input {:id :race-input
+                  :ref #(when % (>evt [:focus "race-input"]))
                   :on-change on-type
-                  :ref #(when % (.focus %))
                   :disabled (= 0 (count left-text))
                   :value current-text}]])))))
 

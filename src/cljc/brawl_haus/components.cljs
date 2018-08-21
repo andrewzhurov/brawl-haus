@@ -2,7 +2,7 @@
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
             [brawl-haus.panels :as panels]
-            [brawl-haus.utils :refer [l <sub defview view]]
+            [brawl-haus.utils :refer [l <sub >evt defview view]]
             [brawl-haus.focus :as focus]))
 
 (rf/reg-sub
@@ -72,8 +72,7 @@
 (rf/reg-event-fx
  :chat/display
  (fn [{:keys [db]} [_ evt]]
-   (l "EVT:" evt)
-   (case (l "OP:L"(:is-chat-open db))
+   (case (:is-chat-open db)
      true (case evt
             :hide {:dispatch [:chat/hide]}
             :open {}
@@ -83,20 +82,20 @@
              :open {:dispatch [:chat/show]}
              :toggle {:dispatch [:chat/show]}))))
 
-(rf/reg-event-db
+(rf/reg-event-fx
  :chat/show
- (fn [db _]
-   (.. js/document (getElementById "chat-input") focus)
-   (-> db
-       (assoc :is-chat-open true)
-       (assoc :is-help-open false))))
-(rf/reg-event-db
+ (fn [{:keys [db]} _]
+   {:db (-> db
+            (assoc :is-chat-open true)
+            (assoc :is-help-open false))
+    :dispatch [:focus "chat-input"]}))
+(rf/reg-event-fx
  :chat/hide
- (fn [db _]
-   (focus/focus-previous)
-   (-> db
-       (assoc :is-chat-open false)
-       (assoc :is-help-open false))))
+ (fn [{:keys [db]} _]
+   {:db (-> db
+            (assoc :is-chat-open false)
+            (assoc :is-help-open false))
+    :dispatch [:focus/previous]}))
 
 (defn chat []
   [:div.chat.card.z-depth-1 {:class (when (<sub [:db/get-in [:is-chat-open]]) "open")}

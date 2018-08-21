@@ -3,9 +3,7 @@
    [reagent.core :as reagent]
    [day8.re-frame.tracing :refer-macros [fn-traced defn-traced]]
    [re-frame.core :as rf]
-   [re-pressed.core :as rp]
-   [brawl-haus.config :as config]
-   [brawl-haus.focus :as focus]
+   [config.core :as config]
    [brawl-haus.receiver]
    [brawl-haus.db :as db]
    [brawl-haus.ws]
@@ -14,7 +12,7 @@
    [brawl-haus.shortcuts :as shortcuts]))
 
 (defn dev-setup []
-  (when config/debug?
+  (when (:debug? config/env)
     (enable-console-print!)
     (println "dev mode")))
 
@@ -31,7 +29,6 @@
 (defn ^:export init []
   (rf/dispatch-sync [:initialize-db])
   (rf/dispatch-sync [:conn/create])
-  (focus/reg-focus-listener)
   (dev-setup)
   (shortcuts/reg-press-handlers)
   (mount-root))

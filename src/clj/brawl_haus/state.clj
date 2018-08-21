@@ -9,7 +9,7 @@
 (def public-state (atom init-public-state))
 (add-watch public-state :propagate-view-data
            (fn [key atom old-state new-state]
-             (doseq [conn-id (l "KEYS:" (keys (:users (l "New state:" new-state))))
-                     [sub-id _] (l "SUBS:" (get-in new-state [:users conn-id :view-data-subs]))]
+             (doseq [conn-id (keys (:users new-state))
+                     [sub-id _] (get-in new-state [:users conn-id :view-data-subs])]
                (let [view-data ((get view-data/view-data-fns sub-id) new-state conn-id)]
                  (conn/dispatch conn-id [:view-data sub-id view-data])))))
