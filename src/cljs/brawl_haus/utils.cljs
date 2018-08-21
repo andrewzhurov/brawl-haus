@@ -17,6 +17,9 @@
    (assoc-in db path val)))
 
 (defn <sub [evt] (deref (rf/subscribe evt)))
+(defn >evt [evt] (rf/dispatch evt))
+
+(defn =>evt [evt] (rf/dispatch [:conn/send evt]))
 
 (defn l [desc expr] (js/console.log desc expr) expr)
 

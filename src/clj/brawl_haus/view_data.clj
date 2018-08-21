@@ -75,8 +75,13 @@
                           :text text
                           :received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))})))})
 
+(defn entry-point [state conn-id]
+  {:location (location state conn-id)})
+
 (def view-data-fns
-  {:countdown countdown
+  {:entry-point entry-point
+
+   :countdown countdown
    :text-race text-race
    :race-progress race-progress
    :location location

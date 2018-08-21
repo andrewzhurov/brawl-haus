@@ -5,7 +5,8 @@
 (defn uuid [] (str (java.util.UUID/randomUUID)))
 (defn now [] (java.util.Date.))
 
-(def connections (atom {}))
+(def init-connections {})
+(def connections (atom init-connections))
 (add-watch connections :connections-sync
            (fn [key atom old-state new-state]
              (doseq [[conn-id {:keys [ch last-sent-personalized personalized]}] new-state]

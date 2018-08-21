@@ -18,6 +18,7 @@
     [:a {:on-click action-fn} action]]])
 
 (defn shelf-item2 [{:keys [img-src name desc action-fn action]}]
+  ^{:key name}
   [:li.col.s12.m7
    [:div.card
     [:div.card-image

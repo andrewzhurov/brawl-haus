@@ -14,7 +14,6 @@
                  [ring "1.4.0"]
                  [re-pressed "0.2.2"]
                  [http-kit "2.2.0"]
-                 [pneumatic-tubes "0.3.0"]
                  [clj-time "0.14.4"]
                  [com.andrewmcveigh/cljs-time "0.5.2"]
                  [matcho "0.1.0-RC6"]
@@ -94,7 +93,7 @@
   :cljsbuild
   {:builds
    [{:id           "dev"
-     :source-paths ["src/cljs"]
+     :source-paths ["src/cljs" "src/cljc"]
      :figwheel     {:on-jsload "brawl-haus.core/mount-root"}
      :compiler     {:main                 brawl-haus.core
                     :output-to            "resources/public/js/compiled/app.js"
@@ -109,7 +108,7 @@
                     }}
 
     {:id           "min"
-     :source-paths ["src/cljs"]
+     :source-paths ["src/cljs" "src/cljc"]
      :jar true
      :compiler     {:main            brawl-haus.core
                     :output-to       "resources/public/js/compiled/app.js"

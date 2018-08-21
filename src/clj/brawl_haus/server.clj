@@ -47,9 +47,9 @@
   (reset! server (run-server #'dev-handler {:port 9090})))
 
 (defn reload []
-  (use 'brawl-haus.server :reload)
-  (require 'brawl-haus.events :reload)
+  (use 'brawl-haus.server :reload-all)
   (reset! state/public-state state/init-public-state)
+  (reset! conn/connections conn/init-connections)
   (restart-server))
 
 (defn inspect-public-state []
