@@ -1,4 +1,4 @@
-(ns brawl-haus.data)
+(ns brawl-haus.shared.data)
 
 #_(def long-texts ["A fast text to type"])
 (def long-texts ["In computer science, ACID (Atomicity, Consistency, Isolation, Durability) is a set of properties of database transactions intended to guarantee validity even in the event of errors, power failures, etc. In the context of databases, a sequence of database operations that satisfies the ACID properties, and thus can be perceived as a single logical operation on the data, is called a transaction"

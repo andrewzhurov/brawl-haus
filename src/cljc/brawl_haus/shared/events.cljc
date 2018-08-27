@@ -1,20 +1,25 @@
-(ns brawl-haus.events
-  (:require [clj-time.core :as t]
-            [clj-time.coerce :as c]
-            [brawl-haus.conn :as conn]
-            [brawl-haus.state :as state]
-            [brawl-haus.data :as data]
-            [brawl-haus.view-data :as view-data]))
+(ns brawl-haus.shared.events
+  (:require #?@(:clj [[clj-time.core :as t]
+                      [clj-time.coerce :as c]]
+                :cljs [[cljs-time.core :as t]
+                       [cljs-time.coerce :as c]])
+            [brawl-haus.shared.data :as data]
+            [re-frame.core :as rf]
+            ))
 
 (defn l [desc expr] (println desc expr) expr)
-(defn uuid [] (str (java.util.UUID/randomUUID)))
+(defn location [state conn-id]
+  (get-in state [:users conn-id :location]))
+(defn gen-uuid [] #?(:clj (str (java.util.UUID/randomUUID))
+                     :cljs (str (rand-int 9999999))))
 (defn now [] (java.util.Date.))
+
 
 ; hardcoded to start in 10 sec
 (defn schedule-race [race]
   (assoc race :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date))))
 
-(defn ready-set-go [{:keys [id] :as race}]
+#_(defn ready-set-go [{:keys [id] :as race}]
   (future (Thread/sleep 7000)
           (swap! state/public-state update-in [:open-races id]
                  merge {:status :began
@@ -35,11 +40,11 @@
 
 (defn ensure-race [state]
   (if-not (race-to-be state)
-    (let [new-race (-> {:id (uuid)
+    (let [new-race (-> {:id (gen-uuid)
                         :participants {}
                         :status :to-be}
                        schedule-race
-                       ready-set-go)]
+                       #_ready-set-go)]
       (assoc-in state [:open-races (:id new-race)] new-race))
     state))
 
@@ -55,30 +60,21 @@
 
 (declare drive)
 
+(rf/reg-event-db
+ :chat/add-message
+ (fn [db [_ {:keys [conn-id]} text]]
+   (update db :messages conj {:text text
+                              :id (gen-uuid)
+                              :sender conn-id
+                              :received-at (now)})))
+
+(rf/reg-event-db
+ :chat/set-nick
+ (fn [db [_ {:keys [conn-id]} nick]]
+   (assoc-in db [:users conn-id :nick] nick)))
+
 (def event-handlers
-  {:conn/on-create
-   (fn [state conn-id _]
-     (let [anonymous-user {:nick (rand-nth data/names)}]
-       (-> state
-           (assoc-in [:users conn-id] anonymous-user)
-           (drive conn-id [:home/attend]))))
-
-   :conn/on-close
-   (fn [state conn-id _]
-     (navigate state conn-id {:location-id :quit}))
-
-   :chat/add-message
-   (fn [state conn-id [_ text]]
-     (update state :messages conj {:text text
-                                   :id (uuid)
-                                   :sender conn-id
-                                   :received-at (now)}))
-
-   :chat/set-nick
-   (fn [state conn-id [_ nick]]
-     (assoc-in state [:users conn-id :nick] nick))
-
-
+  {
    :hiccup-touch/attend
    (fn [state conn-id _]
      (navigate state conn-id {:location-id :hiccup-touch}))
@@ -100,28 +96,28 @@
    :race/left-text
    (fn [state conn-id [_ left-text]]
      (let [is-finished (zero? (count left-text))
-           race-id (-> (view-data/location state conn-id) :params :race-id)
+           race-id (-> (location state conn-id) :params :race-id)
            {:keys [race-text starts-at]} (get-in state [:open-races race-id])]
        (assoc-in state
                  [:open-races race-id :participants conn-id]
                  {:left-chars (count left-text)
                   :speed (calc-speed race-text starts-at (now))})))
+   })
 
 
-   :view-data/subscribe
-   (fn [state conn-id [_ view-id]]
-     (if (contains? view-data/view-data-fns view-id)
-       (assoc-in state [:users conn-id :view-data-subs view-id] {})
-       (do (throw (Exception. (str "No view-data-fn registered for: " view-id)))
-           state)))
+(rf/reg-event-db
+ :conn/on-close
+ (fn [db [_ {:keys [conn-id]}]]
+   (-> db
+       (navigate conn-id {:location-id :quit})
+       (update-in [:users conn-id] dissoc :conn))))
 
-   :view-data/unsubscribe
-   (fn [state conn-id [_ view-id]]
-     (update-in state [:users conn-id :view-data-subs] dissoc conn-id))})
-
-
-(defn drive
-  [state conn-id [evt-id :as evt]]
-  (let [event-handler (get event-handlers evt-id)]
-    (when (nil? event-handler) (throw (Exception. (str "Unable to find event handler for: " evt))))
-    (event-handler state conn-id evt)))
+(rf/reg-event-db
+ :conn/on-create
+ (fn [db [_ {:keys [conn conn-id]}]]
+   (let [anonymous-user {:nick (rand-nth data/names)
+                         :conn-id conn-id
+                         :conn conn}]
+     (-> db
+         (assoc-in [:users conn-id] anonymous-user)
+         (navigate conn-id {:location-id :home-panel})))))

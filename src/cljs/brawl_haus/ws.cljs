@@ -7,9 +7,10 @@
 
 (defn- start-send-loop! [socket out-queue]
   (go-loop
-      [evt (l "EVT out:" (<! out-queue))]
+      [evt (<! out-queue)]
     (when (and evt (= (.-readyState socket) 1))
       (.send socket (pr-str evt))
+      (l "=>evt" evt)
       (recur (<! out-queue)))))
 
 (reg-event-db
@@ -35,7 +36,7 @@
  (fn [{:keys [db]} [_ evt]]
    (let [ch (:out-queue db)]
      (if ch
-       (put! ch (l "=>evt" evt))
+       (put! ch evt)
        (throw (js/Error. "Out queue does not exist"))))
    {}))
 

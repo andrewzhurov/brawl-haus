@@ -1,5 +1,8 @@
 (ns brawl-haus.utils
-  (:require [re-frame.core :as rf]))
+  (:require [reagent.ratom]
+            [re-frame.core :as rf]))
+
+(defn l [desc expr] (js/console.log desc expr) expr)
 
 (rf/reg-event-fx
  :dirt
@@ -20,24 +23,28 @@
 (defn >evt [evt] (rf/dispatch evt))
 
 (defn =>evt [evt] (rf/dispatch [:conn/send evt]))
+(defn <=sub [sub]
+  (=>evt [:subscribe sub])
+  (reagent.ratom/make-reaction
+   (fn [] (<sub [:derived-data sub])
+     :on-dispose (=>evt [:unsubscribe sub]))))
 
-(defn l [desc expr] (js/console.log desc expr) expr)
 
 (def views (atom {}))
 (defn defview [view-id render-fn]
   (swap! views assoc view-id render-fn))
 
 (defn view [view-id]
-  (rf/dispatch [:conn/send [:view-data/subscribe view-id]])
+  (rf/dispatch [:conn/send [:subscribe [view-id]]])
   (fn []
-    ((get @views view-id) (<sub [:view-data view-id]))))
+    ((get @views view-id) (<sub [:derived-data [view-id]]))))
 
 (rf/reg-event-db
- :view-data
- (fn [db [_ view-id view-data]]
-   (assoc-in db [:view-data/subs view-id] view-data)))
+ :derived-data
+ (fn [db [_ sub data]]
+   (assoc-in db [:derived-data sub] data)))
 
 (rf/reg-sub
- :view-data
- (fn [db [_ view-id]]
-   (get-in db [:view-data/subs view-id])))
+ :derived-data
+ (fn [db [_ sub]]
+   (get-in db [:derived-data sub])))

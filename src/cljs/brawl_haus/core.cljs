@@ -7,7 +7,7 @@
    [brawl-haus.receiver]
    [brawl-haus.db :as db]
    [brawl-haus.ws]
-   [brawl-haus.utils :refer [view]]
+   [brawl-haus.utils :refer [view <=sub]]
    [brawl-haus.panels.entry-point]
    [brawl-haus.shortcuts :as shortcuts]))
 
@@ -18,6 +18,7 @@
 
 (defn mount-root []
   (rf/clear-subscription-cache!)
+  (<=sub [:self])
   (reagent/render [view :entry-point]
                   (.getElementById js/document "app")))
 

@@ -2,13 +2,13 @@
   :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
                  [org.clojure/clojurescript "1.10.339"]
                  [org.clojure/core.async "0.4.474"]
+
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
-                 [com.andrewmcveigh/cljs-time "0.5.2"]
-                 [org.clojure/core.async "0.2.391"]
+                 [day8.re-frame/test "0.1.5"]
+                 [healthsamurai/matcho "0.3.1"]
+
                  [re-com "2.1.0"]
-                 [bidi "2.1.3"]
-                 [garden "1.3.5"]
                  [ns-tracker "0.3.1"]
                  [compojure "1.5.0"]
                  [ring "1.4.0"]
@@ -16,7 +16,7 @@
                  [http-kit "2.2.0"]
                  [clj-time "0.14.4"]
                  [com.andrewmcveigh/cljs-time "0.5.2"]
-                 [matcho "0.1.0-RC6"]
+
                  [paren-soup "2.13.2"]
                  [hiccups "0.3.0"]
                  [garden "1.3.5"]]
@@ -26,12 +26,9 @@
             [lein-cljfmt "0.6.0"]
             [lein-ancient "0.6.15"]]
 
-  ;:repositories [["nexus-public" {:url "https://clojars.org/repo/"}]]
-
-
   :min-lein-version "2.5.3"
 
-  :source-paths ["src/clj" "src/cljs"]
+  :source-paths ["src/clj" "src/cljs" "src/cljc"]
   :test-paths ["test" "test/clj"]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"
@@ -41,7 +38,7 @@
              :ring-handler brawl-haus.handler/dev-handler}
 
   :garden {:builds [{:id           "screen"
-                     :source-paths ["src/clj"]
+                     :source-paths ["src/clj" "src/cljc"]
                      :stylesheet   brawl-haus.css/screen
                      :compiler     {:output-to     "resources/public/css/screen.css"
                                     :pretty-print? true}}]}
