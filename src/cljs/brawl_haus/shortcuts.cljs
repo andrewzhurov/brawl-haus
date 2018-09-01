@@ -55,7 +55,7 @@
    :ctrlKey (.-ctrlKey e)})
 
 (defn handle-keydown [e]
-  (let [data (l "keydown:" (e->data e))
+  (let [data #_(l "keydown:") (e->data e)
         {:keys [evt key-seq]} {:evt [:help/show]
                                :key-seq {:which 17
                                          :ctrlKey true}}]
@@ -63,7 +63,7 @@
       (>evt evt))))
 
 (defn handle-keyup [e]
-  (let [data (l "keyup:" (e->data e))]
+  (let [data #_(l "keyup:") (e->data e)]
     (doseq [{:keys [evt key-seq]} shortcuts]
       (when (= key-seq data)
         (>evt evt)))))

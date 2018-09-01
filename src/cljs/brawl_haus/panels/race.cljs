@@ -86,25 +86,25 @@
         3 "...")]]))
 
 (defview :text-race
-  (fn [{:keys [has-began race-text starts-at]}]
-    (if has-began
-    [:div.text-race.card
-     [:div.race-text.card-content
-      "Race is soon to begin - warm up your fingers, get comfy."]]
-    (r/with-let [input-state (r/atom {:current-text ""
-                                      :left-text race-text})
-                 on-type
-                 (fn [e]
-                   (when (t/after? (t/now) (c/from-date starts-at))
-                     (swap! input-state
-                            (fn [{old-current-text :current-text
-                                  left-text :left-text :as old-state}]
-                              (let [current-text (.-value (.-target e))]
-                                (if-let [new-left-text (bite left-text current-text)]
-                                  (do (rf/dispatch [:conn/send [:race/left-text new-left-text]])
-                                      {:current-text ""
-                                       :left-text new-left-text})
-                                  (assoc old-state :current-text current-text)))))))]
+  (fn [{:keys [has-not-began race-text starts-at]}]
+    (if has-not-began
+      [:div.text-race.card
+       [:div.race-text.card-content
+        "Race is soon to begin - warm up your fingers, get comfy."]]
+      (r/with-let [input-state (r/atom {:current-text ""
+                                        :left-text race-text})
+                   on-type
+                   (fn [e]
+                     (when (t/after? (t/now) (c/from-date starts-at))
+                       (swap! input-state
+                              (fn [{old-current-text :current-text
+                                    left-text :left-text :as old-state}]
+                                (let [current-text (.-value (.-target e))]
+                                  (if-let [new-left-text (bite left-text current-text)]
+                                    (do (rf/dispatch [:conn/send [:race/left-text new-left-text]])
+                                        {:current-text ""
+                                         :left-text new-left-text})
+                                    (assoc old-state :current-text current-text)))))))]
       (let [{:keys [current-text left-text]} @input-state]
         [:div.text-race.card
          [:div.race-text.card-content

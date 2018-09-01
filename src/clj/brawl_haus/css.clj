@@ -1,6 +1,8 @@
 (ns brawl-haus.css
   (:require [garden.def :refer [defstyles]]))
 
+(def active-color "rgb(125, 139, 198)" #_"#7D8BC6")
+(def focused-active-color "rgb(134, 151, 221)")
 
 (defn grid [& strs]
   (let [rows (butlast strs)
@@ -249,4 +251,115 @@
                      :top "10px"
                      :right "10px"}]
 
+   [:.space-versus {:transition "0.4s"}
+    {:display "flex"
+     :height "100%"}
+    [:.player {:background "darkgray"
+               :margin "5px"}
+     [:&.me {:width "65%"}]
+     [:&.enemy {:width "35%"}]]
+    [:.bottom-hud {:position "absolute"
+                   :bottom "10px" :left "10px"
+                   :display "flex"
+                   :align-items "flex-end"}]
+    [:.energy-bar {:display "flex"
+                   :flex-direction "column-reverse"
+                   :width "35px"
+                   :margin-right "15px"}
+     [:.cell {:height "10px"
+              :margin-top "4px"}
+      [:&.with-power {:background-color active-color}]
+      [:&.without-power {:background-opacity "1"
+                         :border "1px solid lightgray"}]]]
+
+    [:.module {:display "flex"
+               :flex-direction "column-reverse"
+               :align-items "center"
+               :margin-right "10px"}
+     [:.icon {:height "30px" :width "30px"
+              :border-radius "50%"
+              :margin-top "5px"
+              :background-position "center"
+              :border "2px solid white"
+              :cursor "pointer"
+              :transition "0.3s"}
+      [:&.with-power {:background-color active-color}]
+      [:&:hover {:background-color focused-active-color}]
+      [:&.without-power {:border "1px solid lightgray"}]
+      [:&.shields {:background-image "url(/image/ShieldsSymbol.png)"}]
+      [:&.engines {:background-image "url(/image/EnginesSymbol.png)"}]
+      [:&.weapons {:background-image "url(/image/WeaponControlSymbol.png)"}]
+      ]
+     [:.cell {:width "20px"
+              :height "8px"
+              :margin-top "2px"}
+      [:&.with-power {:background-color active-color}]
+      [:&.without-power {:border "1px solid lightgray"}]]]
+
+    [:.weapons-panel {:border "2px solid white"
+                      :display "flex"}
+     [:.weapon {:position "relative"
+                :margin "5px 5px"
+                :display "flex"
+                :align-items "flex-end"
+                :color "white"
+                :cursor "pointer"}
+      [:&.with-power
+       [:.box {:background-color "gainsboro"}]
+       [:.cell {:background-color "white"}]]
+      [:.box:hover
+       {:background-color "gainsboro"}]
+
+      [:.readiness {:position "relative"
+                    :border "2px solid white"
+                    :border-radius "7px 0px 0px 0px"
+                    :display "inline-block"
+                    :height "60%"
+                    :width "10px"}
+       [:.bar {:position "absolute"
+               :bottom "0px"
+               :background-color "white"
+               :margin "1px"
+               :width "4px"
+               :border-radius "7px 0px 0px 0px"}]]
+      [:.box {:display "flex"
+              :align-items "flex-end"
+              :min-height "60px"
+              :border "2px solid white"
+              :transition "0.3s"}
+       [:.power-require {:display "flex"
+                         :flex-direction "column"
+                         :width "24px"
+                         :padding "2px"}
+        [:.cell {:border "2px solid white"}]
+        [:.cell {:weight "14px"
+                 :height "8px"
+                 :margin-top "2px"}
+         ]]]
+      [:.name {:margin "3px"}]]
+     [:.weapon:before
+      {:content "oaeu"
+       :position "absolute"
+       :z-index "-1"
+       :top "0px" :right "0px" :bottom "0px" :left "0px"
+       :background "black"}]]
+
+    [:.me {:position "relative"}
+     [:.ship-mock {:width "100%"}]]
+    [:.systems {:position "absolute"
+                :top "10px"
+                :left "0px"
+                :right "0px"
+                :display "flex"
+                :justify-content "center"}
+     [:.system {:height "60px"
+                :width "60px"
+                :background-color "lightgray"
+                :border "2px solid gray"
+                :margin-right "20px"
+                :transition "0.3s"
+                :cursor "pointer"}
+      [:&:hover {:background-color "gainsboro"}]]]
+    [:.enemy
+     [:.ship-mock {:width "100%"}]]]
    ])

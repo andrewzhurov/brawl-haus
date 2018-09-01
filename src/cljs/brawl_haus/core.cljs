@@ -7,8 +7,17 @@
    [brawl-haus.receiver]
    [brawl-haus.db :as db]
    [brawl-haus.ws]
-   [brawl-haus.utils :refer [view <=sub]]
-   [brawl-haus.panels.entry-point]
+   [brawl-haus.utils :refer [l <sub >evt <=sub =>evt defview view]]
+
+   [brawl-haus.panels :as panels]
+   [brawl-haus.panels.race]
+   [brawl-haus.panels.hiccup-touch]
+   [brawl-haus.panels.home]
+   [brawl-haus.panels.ccc]
+   [brawl-haus.panels.space-versus]
+
+   [brawl-haus.components :as comps]
+   [brawl-haus.focus :as focus]
    [brawl-haus.shortcuts :as shortcuts]))
 
 (defn dev-setup []
@@ -16,10 +25,23 @@
     (enable-console-print!)
     (println "dev mode")))
 
+(defn entry-point []
+  [:div.main-layout
+   [:nav.nav-section
+    [:div.nav-wrapper
+     [:a.brand-logo {:on-click #(=>evt [:home/attend])} "BrawlHaus"]
+     [:ul#nav-mobile.right
+      [:li.controls [:a {:on-click #(>evt [:help/show])}
+                     [:i.material-icons "all_out"]]]]]]
+   [:div.content-section
+    [panels/panel (<=sub [:location])]]
+   [comps/chat]
+   [shortcuts/help]])
+
 (defn mount-root []
   (rf/clear-subscription-cache!)
   (<=sub [:self])
-  (reagent/render [view :entry-point]
+  (reagent/render [entry-point]
                   (.getElementById js/document "app")))
 
 (rf/reg-event-db

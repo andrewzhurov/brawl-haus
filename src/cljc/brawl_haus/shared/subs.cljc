@@ -37,35 +37,36 @@
                      :race-id)]
     (get-in state [:open-races race-id])))
 
-(defn countdown [state conn-id]
-  (select-keys (current-race state conn-id) [:starts-at]))
+(rf/reg-sub
+ :countdown
+ (fn [db [_ conn-id]]
+   (select-keys (l "CURR:"(current-race db conn-id)) [:starts-at])))
 
-(defn text-race [state conn-id]
-  (let [race (current-race state conn-id)]
-    {:has-began (empty? (:race-text race))
-     :race-text (:race-text race)
-     :starts-at (:starts-at race)}))
+(rf/reg-sub
+ :text-race
+ (fn [db [_ conn-id]]
+   (let [race (current-race db conn-id)]
+     {:has-not-began (empty? (:race-text race))
+      :race-text (:race-text race)
+      :starts-at (:starts-at race)})))
 
-(defn race-progress [state conn-id]
-  (->> (location state conn-id)
-       :params
-       :race-id
-       (race-progress* state)))
-
-
+(rf/reg-sub
+ :race-progress
+ (fn [db [_ conn-id]]
+   (->> (location db conn-id)
+        :params
+        :race-id
+        (race-progress* db))))
 
 (rf/reg-sub
  :set-nick
- (fn [db [_ {:keys [conn-id]}]]
+ (fn [db [_ conn-id]]
    {:current-nick (get-in db [:users conn-id :nick])}))
 
-
-
-
 (rf/reg-sub
- :entry-point
- (fn [db [_ {:keys [conn-id]}]]
-   {:location (location db conn-id)}))
+ :location
+ (fn [db [_ conn-id]]
+   (location db conn-id)))
 
 (rf/reg-sub
  :user
@@ -74,7 +75,7 @@
 
 (rf/reg-sub
  :self
- (fn [db [_ {:keys [conn-id]}]]
+ (fn [db [_ conn-id]]
    (select-keys (get-in db [:users conn-id]) [:conn-id :nick])))
 
 (rf/reg-sub
@@ -88,7 +89,7 @@
 
 (rf/reg-sub
  :messages
- (fn [db [_ {:keys [conn-id]}]]
+ (fn [db [_ conn-id]]
    {:is-empty (= 0 (count (:messages db)))
     :messages (->> (:messages db)
                    (sort-by :received-at)
@@ -99,3 +100,61 @@
                            :is-my (= (:nick (user db sender)) (:nick (user db conn-id)))
                            :text text
                            :received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))})))}))
+
+
+;; Space versus
+(rf/reg-sub
+ :sv
+ (fn [db _]
+   (get-in db [:games :sv])))
+
+(rf/reg-sub
+ :sv/power-hub
+ (fn [db [_ conn-id]]
+   (l "POWER HUB:" (get-in db [:games :sv :ship conn-id :power-hub]))))
+
+(rf/reg-sub
+ :sv/systems
+ (fn [db [_ conn-id]]
+   (get-in db [:games :sv :ship conn-id :systems])))
+
+(rf/reg-sub
+ :sv/weapon
+ (fn [[_ conn-id]]
+   [(rf/subscribe [:sv/systems conn-id])])
+ (fn [[systems] [_ _ {:keys [stuff-id]}]]
+   (get-in systems [:weapons :stuff stuff-id])))
+
+(rf/reg-sub
+ :sv/left-power
+ (fn [[_ conn-id]]
+   [(rf/subscribe [:sv/power-hub conn-id])
+    (rf/subscribe [:sv/systems conn-id])])
+ (fn [[{:keys [generating]} systems] [_ conn-id]]
+   (let [power-in-use (reduce (fn [acc [_ system]] (+ acc (:in-use system))) 0 systems)]
+     (l 11 generating)
+     (l 22 power-in-use)
+     (- generating power-in-use))))
+
+(rf/reg-sub
+ :sv.weapon/readiness
+ (fn [[_ conn-id {:keys [stuff-id]}]]
+   (rf/subscribe [:sv/weapon conn-id {:stuff-id stuff-id}]))
+ (fn [{:keys [charge-time charging-since]} _]
+   (let [percentage (when charging-since
+                      (-> (t/interval charging-since (t/now))
+                          (t/in-millis)
+                          (* 100)
+                          (double)))]
+     (cond
+       (not charging-since) {:is-on false
+                             :percentage 0
+                             :is-ready false}
+       (< percentage 100) {:is-on true
+                           :percentage percentage
+                           :is-ready false}
+       :ready {:is-on true
+               :percentage 100
+               :is-ready true}))))
+
+

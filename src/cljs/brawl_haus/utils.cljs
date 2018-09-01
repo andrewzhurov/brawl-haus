@@ -25,9 +25,10 @@
 (defn =>evt [evt] (rf/dispatch [:conn/send evt]))
 (defn <=sub [sub]
   (=>evt [:subscribe sub])
-  (reagent.ratom/make-reaction
-   (fn [] (<sub [:derived-data sub])
-     :on-dispose (=>evt [:unsubscribe sub]))))
+  (deref (reagent.ratom/make-reaction
+          (fn [] (<sub [:derived-data sub]))
+          ;:on-dispose #(=>evt [:unsubscribe sub])
+          )))
 
 
 (def views (atom {}))
