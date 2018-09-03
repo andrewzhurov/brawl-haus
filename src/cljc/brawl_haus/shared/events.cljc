@@ -145,7 +145,7 @@
 ;; Space versus
 
 (defn create-ship [conn-id]
-  {:power-hub {:max 5
+  {:power-hub {:max 7
                :generating 5}
    :systems {:shields {:max 4
                        :in-use 0
@@ -156,14 +156,18 @@
              :weapons {:max 3
                        :damaged 0
                        :in-use 0
-                       :stuff {:burst-laser-2 {:required-power 2
+                       :stuff {:burst-laser-2 {:name "Burst Laser II"
+                                               :required-power 2
                                                :damage 2
                                                :charge-time 200
-                                               :charging-since nil}
-                               :basic-laser {:required-power 1
+                                               :charging-since nil
+                                               :is-selected false}
+                               :basic-laser {:name "Basic Laser"
+                                             :required-power 1
                                              :damage 1
-                                             :charge-time 500
-                                             :charging-since nil}}}}})
+                                             :charge-time 100
+                                             :charging-since nil
+                                             :is-selected false}}}}})
 
 (defn sv [db]
   (get-in db [:games :sv]))
@@ -174,14 +178,6 @@
    (-> db
        (assoc-in [:games :sv :ship conn-id] (create-ship conn-id))
        (navigate conn-id {:location-id :space-versus}))))
-
-(defn save-deplete-power [player]
-  (reduce (fn [acc [system-id {:keys [max powered damaged]}]]
-            (let [power-overuse (- (+ powered damaged) max)]
-              (if (pos? power-overuse)
-                (update-in [:systems system-id :powered dec power-overuse])
-                acc)))
-          player (:systems player)))
 
 (rf/reg-event-db
  :sv.system/power-up
@@ -210,6 +206,17 @@
                     (assoc-in ship [:systems :weapons :stuff stuff-id :charging-since] (t/now))
                     ship))))))
 
+(rf/reg-event-db
+ :sv.weapon/power-down
+ (fn [db [_ conn-id {:keys [stuff-id]}]]
+   (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :charging-since] nil)))
+
+(rf/reg-event-db
+ :sv.system/power-down
+ (fn [db [_ conn-id {:keys [system-id]}]]
+   (let [current-in-use (get-in db [:games :sv :ship conn-id :systems system-id :in-use])]
+     (assoc-in db [:games :sv :ship conn-id :systems system-id :in-use] (max (dec current-in-use) 0)))))
+
 (defn deplete-power [system]
   (let [rational-in-use (max (min (- (:max system) (:damaged system)) (:in-use system)) 0)]
     (assoc system :in-use rational-in-use)))
@@ -221,6 +228,17 @@
             system
             (:stuff system))
     system))
+
+
+
+(rf/reg-event-db
+ :sv.weapon.select/toggle
+ (fn [db [_ conn-id {:keys [stuff-id]}]]
+   (update-in db [:games :sv :ships conn-id :systems :weapons :stuff stuff-id :is-selected] not)))
+
+(rf/reg-event-db
+ :sv.weapons/fire
+ (fn [db ]))
 
 (rf/reg-event-db
  :sv.weapon/hit

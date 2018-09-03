@@ -54,7 +54,7 @@
     :img-src "https://i.kinja-img.com/gawker-media/image/upload/t_original/tm7dh3qlzvvnfefftvks.jpg"
     :desc "It's a versus... in the space! Machete kills."
     :action "Embark on a spaceship"
-    :action-fn #(rf/dispatch [:conn/send [:space-versus/attend]])}])
+    :action-fn #(rf/dispatch [:conn/send [:sv/attend]])}])
 
 (defmethod panels/panel :home-panel
   [_]

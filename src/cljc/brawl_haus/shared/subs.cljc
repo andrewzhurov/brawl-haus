@@ -119,6 +119,34 @@
    (get-in db [:games :sv :ship conn-id :systems])))
 
 (rf/reg-sub
+ :view.sv/systems
+ (fn [[_ conn-id]]
+   (rf/subscribe [:sv/systems conn-id]))
+ (fn [systems _]
+   (map (fn [[system-id {:keys [max in-use]}]]
+          {:system-id system-id
+           :max max
+           :in-use in-use})
+        (l "SYSS:" systems))))
+
+(rf/reg-sub
+ :sv.weapons/stuff
+ (fn [[_ conn-id]]
+   [(rf/subscribe [:sv/systems conn-id])])
+ (fn [[systems] [_ _ {:keys [stuff-id]}]]
+   (get-in systems [:weapons :stuff])))
+
+(rf/reg-sub
+ :sv.weapons.stuff/view
+ (fn [[_ conn-id]]
+   (rf/subscribe [:sv.weapons/stuff conn-id]))
+ (fn [stuff _]
+   (map (fn [[stuff-id a-stuff]]
+          (assoc (select-keys a-stuff [:name :required-power])
+                 :stuff-id stuff-id))
+        stuff)))
+
+(rf/reg-sub
  :sv/weapon
  (fn [[_ conn-id]]
    [(rf/subscribe [:sv/systems conn-id])])
@@ -137,24 +165,47 @@
      (- generating power-in-use))))
 
 (rf/reg-sub
+ :sv/used-power
+ (fn [[_ conn-id]]
+   [(rf/subscribe [:sv/power-hub conn-id])
+    (rf/subscribe [:sv/left-power conn-id])])
+ (fn [[{:keys [max]} left-power] [_ conn-id]]
+   (- max left-power)))
+
+(rf/reg-sub
+ :sv.power/info
+ (fn [[_ conn-id]]
+   [(rf/subscribe [:sv/used-power conn-id])
+    (rf/subscribe [:sv/left-power conn-id])
+    (rf/subscribe [:sv/power-hub conn-id])])
+ (fn [[used left power-hub]_]
+   {:used used
+    :left left
+    :max (:max power-hub)}))
+
+(defn calc-readiness [charge-time charging-since]
+  (let [percentage (when charging-since
+                     (-> (t/interval charging-since (t/now))
+                         (t/in-millis)
+                         (/ charge-time)
+                         (* 100)
+                         (double)))]
+    (cond
+      (not charging-since) {:is-on false
+                            :percentage 0
+                            :is-ready false}
+      (< percentage 100) {:is-on true
+                          :percentage percentage
+                          :is-ready false}
+      :ready {:is-on true
+              :percentage 100
+              :is-ready true})))
+
+(rf/reg-sub
  :sv.weapon/readiness
  (fn [[_ conn-id {:keys [stuff-id]}]]
    (rf/subscribe [:sv/weapon conn-id {:stuff-id stuff-id}]))
  (fn [{:keys [charge-time charging-since]} _]
-   (let [percentage (when charging-since
-                      (-> (t/interval charging-since (t/now))
-                          (t/in-millis)
-                          (* 100)
-                          (double)))]
-     (cond
-       (not charging-since) {:is-on false
-                             :percentage 0
-                             :is-ready false}
-       (< percentage 100) {:is-on true
-                           :percentage percentage
-                           :is-ready false}
-       :ready {:is-on true
-               :percentage 100
-               :is-ready true}))))
+   (calc-readiness charge-time charging-since)))
 
 

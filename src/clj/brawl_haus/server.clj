@@ -20,6 +20,7 @@
 
 (def <sub (comp deref rf/subscribe))
 (defn >evt [evt & [conn-id]]
+  (println "EVT FIRE" evt conn-id)
   (when (not (vector? evt))
     (throw (Exception. (str "Expect event be a vector, but got: " (pr-str evt) " :/"))))
   (if-not conn-id
@@ -49,6 +50,7 @@
 
 (add-watch re-frame.db/app-db :propagate-derived-data
            (fn [key atom old-state new-state]
+             (l "RAN" 11)
              (doseq [[sub-id conn-id & params :as sub] (:subs new-state)]
                (try
                  (let [derived-data (<sub sub)]

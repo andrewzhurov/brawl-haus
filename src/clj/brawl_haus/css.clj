@@ -267,7 +267,8 @@
                    :width "35px"
                    :margin-right "15px"}
      [:.cell {:height "10px"
-              :margin-top "4px"}
+              :margin-top "4px"
+              :transition "0.5s"}
       [:&.with-power {:background-color active-color}]
       [:&.without-power {:background-opacity "1"
                          :border "1px solid lightgray"}]]]
@@ -292,7 +293,8 @@
       ]
      [:.cell {:width "20px"
               :height "8px"
-              :margin-top "2px"}
+              :margin-top "2px"
+              :transition "0.5s"}
       [:&.with-power {:background-color active-color}]
       [:&.without-power {:border "1px solid lightgray"}]]]
 
@@ -307,6 +309,8 @@
       [:&.with-power
        [:.box {:background-color "gainsboro"}]
        [:.cell {:background-color "white"}]]
+      [:&.is-ready
+       [:.bar {:background-color (str active-color " !important")}]]
       [:.box:hover
        {:background-color "gainsboro"}]
 
@@ -331,8 +335,8 @@
                          :flex-direction "column"
                          :width "24px"
                          :padding "2px"}
-        [:.cell {:border "2px solid white"}]
-        [:.cell {:weight "14px"
+        [:.cell {:border "2px solid white"
+                 :weight "14px"
                  :height "8px"
                  :margin-top "2px"}
          ]]]
