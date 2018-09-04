@@ -1,40 +1,38 @@
-(ns brawl-haus.shared.events
-  (:require #?@(:clj [[clj-time.core :as t]
-                      [clj-time.coerce :as c]]
-                :cljs [[cljs-time.core :as t]
-                       [cljs-time.coerce :as c]])
+(ns brawl-haus.events
+  (:require [clj-time.core :as t]
+            [clj-time.coerce :as c]
             [re-frame.events]
             [re-frame.cofx]
             [re-frame.fx]
             [re-frame.std-interceptors]
-            [brawl-haus.shared.data :as data]
+            [brawl-haus.data :as data]
             [re-frame.core :as rf]
+            [brawl-haus.subs :as subs]
             ))
 
 (defn l [desc expr] (println desc expr) expr)
-(def <sub (comp deref rf/subscribe))
-(rf/reg-event-db
- :inspect-db
- (fn [db _]
-   (println "DB:" db)
-   db))
 
 (defn location [state conn-id]
   (get-in state [:users conn-id :location]))
 (defn navigate [state conn-id location]
   (assoc-in state [:users conn-id :location] location))
 
-(defn gen-uuid [] #?(:clj (str (java.util.UUID/randomUUID))
-                     :cljs (str (rand-int 9999999))))
+(defn gen-uuid [] (str (java.util.UUID/randomUUID)))
 (defn now [] (java.util.Date.))
+
+(def init-db {:open-races {}
+              :messages #{}
+              :subs #{}
+              :games {:sv {}}})
+
+(def db (atom init-db))
 
 (rf/reg-event-db
  :race/ready-set-go
  (fn [db [_ _ race-id]]
-   (l "RAN"
-      (update-in db [:open-races race-id]
-                 merge {:status :began
-                        :race-text (rand-nth data/long-texts)}))))
+   (update-in db [:open-races race-id]
+              merge {:status :began
+                     :race-text (rand-nth data/long-texts)})))
 
 (defn calc-speed [text start finish]
   (let [minutes (/ (t/in-seconds (t/interval (c/from-date start)
@@ -75,9 +73,8 @@
  :later-evt
  (fn [{:keys [ms evt] :as in}]
    (l "later evt: " in)
-   #?(:clj (do (Thread/sleep ms)
-               (rf/dispatch evt))
-      :cljs nil)))
+   (Thread/sleep ms)
+   (rf/dispatch evt)))
 
 (rf/reg-event-db
  :race/left-text
@@ -101,10 +98,7 @@
                               :sender conn-id
                               :received-at (now)})))
 
-(rf/reg-event-db
- :chat/set-nick
- (fn [db [_ conn-id nick]]
-   (assoc-in db [:users conn-id :nick] nick)))
+
 
 
 (rf/reg-event-db
@@ -112,10 +106,7 @@
  (fn [db [_ conn-id]]
    (navigate db conn-id {:location-id :hiccup-touch})))
 
-(rf/reg-event-db
- :home/attend
- (fn [db [_ conn-id]]
-   (navigate db conn-id {:location-id :home-panel})))
+
 
 (rf/reg-event-db
  :ccc/attend
@@ -124,28 +115,16 @@
 
 
 
-(rf/reg-event-db
- :conn/on-close
- (fn [db [_ conn-id]]
-   (-> db
-       (navigate conn-id {:location-id :quit})
-       (update-in [:users conn-id] dissoc :conn))))
 
-(rf/reg-event-db
- :conn/on-create
- (fn [db [_ _ {:keys [conn-id conn]}]]
-   (let [anonymous-user {:nick (rand-nth data/names)
-                         :conn-id conn-id
-                         :conn conn}]
-     (-> db
-         (assoc-in [:users conn-id] anonymous-user)
-         (navigate conn-id {:location-id :home-panel})))))
+
+
 
 
 ;; Space versus
 
 (defn create-ship [conn-id]
-  {:power-hub {:max 7
+  {:integrity 9
+   :power-hub {:max 7
                :generating 5}
    :systems {:shields {:max 4
                        :in-use 0
@@ -172,51 +151,6 @@
 (defn sv [db]
   (get-in db [:games :sv]))
 
-(rf/reg-event-db
- :sv/attend
- (fn [db [_ conn-id]]
-   (-> db
-       (assoc-in [:games :sv :ship conn-id] (create-ship conn-id))
-       (navigate conn-id {:location-id :space-versus}))))
-
-(rf/reg-event-db
- :sv.system/power-up
- (fn [db [_ conn-id {:keys [system-id]}]]
-   (let [left-power (l "LEFT POWER:" (<sub [:sv/left-power conn-id]))
-         {:keys [max in-use]} (l "SYSTEMS:" (get (<sub [:sv/systems conn-id]) system-id))]
-     (if (and (> left-power 0)
-              (> (l "LEFT TILL MAX:" (- max in-use)) 0))
-       (update-in db [:games :sv :ship conn-id :systems system-id :in-use] inc)
-       db))))
-
-(rf/reg-event-db
- :sv.weapon/power-up
- (fn [db [_ conn-id {:keys [stuff-id]}]]
-   (update-in db [:games :sv :ship conn-id]
-              (fn [ship]
-                (let [weapons-system (get-in ship [:systems :weapons])
-                      consuming-power (->> weapons-system
-                                           :stuff
-                                           vals
-                                           (filter :charging-since)
-                                           (reduce (fn [acc {:keys [required-power]}] (+ acc required-power)) 0))]
-                  (if (>= (- (:in-use (l "WS:"weapons-system))
-                             (l "IN USE" consuming-power))
-                          (l "REQ: "(get-in weapons-system [:stuff stuff-id :required-power])))
-                    (assoc-in ship [:systems :weapons :stuff stuff-id :charging-since] (t/now))
-                    ship))))))
-
-(rf/reg-event-db
- :sv.weapon/power-down
- (fn [db [_ conn-id {:keys [stuff-id]}]]
-   (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :charging-since] nil)))
-
-(rf/reg-event-db
- :sv.system/power-down
- (fn [db [_ conn-id {:keys [system-id]}]]
-   (let [current-in-use (get-in db [:games :sv :ship conn-id :systems system-id :in-use])]
-     (assoc-in db [:games :sv :ship conn-id :systems system-id :in-use] (max (dec current-in-use) 0)))))
-
 (defn deplete-power [system]
   (let [rational-in-use (max (min (- (:max system) (:damaged system)) (:in-use system)) 0)]
     (assoc system :in-use rational-in-use)))
@@ -229,27 +163,94 @@
             (:stuff system))
     system))
 
+(def events
+  {
+   :chat/set-nick
+   (fn [db [_ nick] conn-id]
+     (assoc-in db [:users conn-id :nick] nick))
 
+   :subscribe
+   (fn [db [_ sub] conn-id]
+     (update db :subs (fn [old] (conj (set old) [sub conn-id]))))
 
-(rf/reg-event-db
- :sv.weapon.select/toggle
- (fn [db [_ conn-id {:keys [stuff-id]}]]
-   (update-in db [:games :sv :ships conn-id :systems :weapons :stuff stuff-id :is-selected] not)))
+   :unsubscribe
+   (fn [db [_ sub] conn-id]
+     (update db :subs disj [sub conn-id]))
 
-(rf/reg-event-db
- :sv.weapons/fire
- (fn [db ]))
+   :conn/on-create
+   (fn [db [_ {:keys [conn-id conn]}]]
+     (let [anonymous-user {:nick (rand-nth data/names)
+                           :conn-id conn-id
+                           :conn conn}]
+       (-> db
+           (assoc-in [:users conn-id] anonymous-user)
+           (navigate conn-id {:location-id :home-panel}))))
 
-(rf/reg-event-db
- :sv.weapon/hit
- (fn [db [_ conn-id {:keys [ship-id system-id stuff-id]}]]
-   (let [{:keys [damage]} (l "W:" (<sub [:sv/weapon conn-id {:stuff-id stuff-id}]))
-         {:keys [is-ready]} (l "READINESS:" (<sub [:sv.weapon/readiness conn-id {:stuff-id stuff-id}]))]
-     (if is-ready
-       (update-in db [:games :sv :ship ship-id :systems system-id]
-                  (fn [system]
-                    (-> system
-                        (update :damaged + damage)
-                        (deplete-power)
-                        (turn-off-weapons))))
-       db))))
+   :conn/on-close
+   (fn [db _ conn-id]
+     (-> db
+         (navigate conn-id {:location-id :quit})
+         (update-in [:users conn-id] dissoc :conn)))
+
+   :home/attend
+   (fn [db _ conn-id]
+     (navigate db conn-id {:location-id :home-panel}))
+
+   :sv/attend
+   (fn [db _ conn-id]
+     (-> db
+         (assoc-in [:games :sv :ship conn-id] (create-ship conn-id))
+         (navigate conn-id {:location-id :space-versus})))
+
+   :sv.system/power-up
+   (fn [db [_ system-id] conn-id]
+     (let [left-power (subs/left-power db conn-id)
+           {:keys [max in-use]} (subs/system db conn-id system-id)]
+       (if (and (> left-power 0)
+                (> (- max in-use) 0))
+         (update-in db [:games :sv :ship conn-id :systems system-id :in-use] inc)
+         db)))
+
+   :sv.system/power-down
+   (fn [db [_ system-id] conn-id]
+     (let [db (assoc-in db [:games :sv :ship conn-id :systems system-id :in-use]
+                        (max (dec (:in-use (subs/system db conn-id system-id)))
+                             0))]
+       (update-in db [:games :sv :ship conn-id :systems system-id] turn-off-weapons)))
+
+   :sv.weapon/power-up
+   (fn [db [_ stuff-id] conn-id]
+     (let [weapons-system (subs/system db conn-id :weapons)
+           consuming-power (->> weapons-system
+                                :stuff
+                                vals
+                                (filter :charging-since)
+                                (reduce (fn [acc {:keys [required-power]}] (+ acc required-power)) 0))]
+       (if (>= (- (:in-use weapons-system)
+                  consuming-power)
+               (get-in weapons-system [:stuff stuff-id :required-power]))
+         (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :charging-since] (t/now))
+         db)))
+
+   :sv.weapon/power-down
+   (fn [db [_ stuff-id] conn-id]
+     (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :charging-since] nil))
+
+   :sv.weapon/hit
+   (fn [db [_ target-ship-id target-system-id firing-stuff-id] conn-id]
+     (let [{:keys [damage]} (subs/weapon db conn-id firing-stuff-id)
+           {:keys [is-ready]} (subs/weapon-readiness db conn-id firing-stuff-id)]
+       (if is-ready
+         (update-in db [:games :sv :ship target-ship-id :systems target-system-id]
+                    (fn [system]
+                      (-> system
+                          (update :damaged + damage)
+                          (deplete-power)
+                          (turn-off-weapons))))
+         db)))})
+
+(defn drive [db [evt-id :as evt] & params]
+  (if-let [evt-fn (get events evt-id)]
+    (do (println "drive: " (pr-str evt) " " (pr-str params))
+        (apply evt-fn db evt params))
+    (throw (Exception. (str "!!No evt found: " (pr-str evt))))))

@@ -17,13 +17,13 @@
   [:div.weapons-panel
    (doall
     (for [{:keys [stuff-id name required-power]} (l 111 (<=sub [:sv.weapons.stuff/view]))]
-      (let [{:keys [is-on percentage is-ready]} (l 33333 (<=sub [:sv.weapon/readiness {:stuff-id stuff-id}]))]
+      (let [{:keys [is-on percentage is-ready]} (l 33333 (<=sub [:sv.weapon/readiness stuff-id]))]
         ^{:key stuff-id}
         [:div.weapon {:class (str (if is-on "with-power" "without-power")
                                   (when is-ready " is-ready"))
-                      :on-click #(=>evt [:sv.weapon/power-up {:stuff-id stuff-id}])
+                      :on-click #(=>evt [:sv.weapon/power-up stuff-id])
                       :on-context-menu #(do (.preventDefault %)
-                                            (=>evt [:sv.weapon/power-down {:stuff-id stuff-id}]))
+                                            (=>evt [:sv.weapon/power-down stuff-id]))
                       }
          [:div.readiness
           [:div.bar {:style {:height (str percentage "%")}}]]
@@ -32,16 +32,20 @@
            (repeat required-power [:div.cell])]
           [:div.name name]]])))])
 
+(defn ship-ui []
+  [:div.ship
+   [:div.systems
+    [:div.system.shields]
+    [:div.system.engines]
+    [:div.system.weapons]]])
+
 (defmethod panels/panel :space-versus
   [{{:keys [space-versus-id]} :params :as all}]
   (l 111 all)
   [:div.space-versus
    [:div.player.me
     [:img.ship-mock {:src "./image/my-ship.jpg"}]
-    [:div.systems
-     [:div.system.shields]
-     [:div.system.engines]
-     [:div.system.weapons]]
+    [ship-ui]
     [:div.bottom-hud
      [:div.energy-bar
       (let [{:keys [left max]} (<=sub [:sv.power/info])]
@@ -50,15 +54,15 @@
                        [:div.cell {:class (if (< idx left) "with-power" "without-power")}])
                      (repeat max {})))]
 
-     (for [{:keys [system-id with-power max in-use]} (<=sub [:view.sv/systems])]
+     (for [{:keys [system-id with-power max in-use]} (l 111111 (<=sub [:view.sv/systems]))]
        ^{:key system-id}
        [:div.module
         [:div.icon {:class (str (name system-id) " " (if (not= 0 in-use)
                                                        "with-power"
                                                        "without-power"))
-                    :on-click #(=>evt [:sv.system/power-up {:system-id system-id}])
+                    :on-click #(=>evt [:sv.system/power-up system-id])
                     :on-context-menu #(do (.preventDefault %)
-                                          (=>evt [:sv.system/power-down {:system-id system-id}]))}]
+                                          (=>evt [:sv.system/power-down system-id]))}]
         (map-indexed (fn [idx el]
                        ^{:key idx}
                        [:div.cell {:class (if (< idx in-use) "with-power" "without-power")}])

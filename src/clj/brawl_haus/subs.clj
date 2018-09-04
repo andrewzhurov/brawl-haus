@@ -1,11 +1,9 @@
-(ns brawl-haus.shared.subs
+(ns brawl-haus.subs
   (:require [re-frame.core :as rf]
-            #?@(:clj [[clj-time.core :as t]
-                      [clj-time.format :as f]
-                      [clj-time.coerce :as c]]
-                :cljs [[cljs-time.core :as t]
-                       [cljs-time.format :as f]
-                       [cljs-time.coerce :as c]])))
+            [clj-time.core :as t]
+            [clj-time.format :as f]
+            [clj-time.coerce :as c]
+            ))
 
 (defn l [desc expr] (println desc expr) expr)
 
@@ -64,11 +62,6 @@
    {:current-nick (get-in db [:users conn-id :nick])}))
 
 (rf/reg-sub
- :location
- (fn [db [_ conn-id]]
-   (location db conn-id)))
-
-(rf/reg-sub
  :user
  (fn [db [_ _ conn-id]]
    (get-in db [:users conn-id])))
@@ -104,47 +97,15 @@
 
 ;; Space versus
 (rf/reg-sub
- :sv
- (fn [db _]
-   (get-in db [:games :sv])))
-
-(rf/reg-sub
  :sv/power-hub
  (fn [db [_ conn-id]]
    (l "POWER HUB:" (get-in db [:games :sv :ship conn-id :power-hub]))))
 
-(rf/reg-sub
- :sv/systems
- (fn [db [_ conn-id]]
-   (get-in db [:games :sv :ship conn-id :systems])))
 
-(rf/reg-sub
- :view.sv/systems
- (fn [[_ conn-id]]
-   (rf/subscribe [:sv/systems conn-id]))
- (fn [systems _]
-   (map (fn [[system-id {:keys [max in-use]}]]
-          {:system-id system-id
-           :max max
-           :in-use in-use})
-        (l "SYSS:" systems))))
 
-(rf/reg-sub
- :sv.weapons/stuff
- (fn [[_ conn-id]]
-   [(rf/subscribe [:sv/systems conn-id])])
- (fn [[systems] [_ _ {:keys [stuff-id]}]]
-   (get-in systems [:weapons :stuff])))
 
-(rf/reg-sub
- :sv.weapons.stuff/view
- (fn [[_ conn-id]]
-   (rf/subscribe [:sv.weapons/stuff conn-id]))
- (fn [stuff _]
-   (map (fn [[stuff-id a-stuff]]
-          (assoc (select-keys a-stuff [:name :required-power])
-                 :stuff-id stuff-id))
-        stuff)))
+
+
 
 (rf/reg-sub
  :sv/weapon
@@ -152,36 +113,6 @@
    [(rf/subscribe [:sv/systems conn-id])])
  (fn [[systems] [_ _ {:keys [stuff-id]}]]
    (get-in systems [:weapons :stuff stuff-id])))
-
-(rf/reg-sub
- :sv/left-power
- (fn [[_ conn-id]]
-   [(rf/subscribe [:sv/power-hub conn-id])
-    (rf/subscribe [:sv/systems conn-id])])
- (fn [[{:keys [generating]} systems] [_ conn-id]]
-   (let [power-in-use (reduce (fn [acc [_ system]] (+ acc (:in-use system))) 0 systems)]
-     (l 11 generating)
-     (l 22 power-in-use)
-     (- generating power-in-use))))
-
-(rf/reg-sub
- :sv/used-power
- (fn [[_ conn-id]]
-   [(rf/subscribe [:sv/power-hub conn-id])
-    (rf/subscribe [:sv/left-power conn-id])])
- (fn [[{:keys [max]} left-power] [_ conn-id]]
-   (- max left-power)))
-
-(rf/reg-sub
- :sv.power/info
- (fn [[_ conn-id]]
-   [(rf/subscribe [:sv/used-power conn-id])
-    (rf/subscribe [:sv/left-power conn-id])
-    (rf/subscribe [:sv/power-hub conn-id])])
- (fn [[used left power-hub]_]
-   {:used used
-    :left left
-    :max (:max power-hub)}))
 
 (defn calc-readiness [charge-time charging-since]
   (let [percentage (when charging-since
@@ -201,11 +132,72 @@
               :percentage 100
               :is-ready true})))
 
-(rf/reg-sub
- :sv.weapon/readiness
- (fn [[_ conn-id {:keys [stuff-id]}]]
-   (rf/subscribe [:sv/weapon conn-id {:stuff-id stuff-id}]))
- (fn [{:keys [charge-time charging-since]} _]
-   (calc-readiness charge-time charging-since)))
+(defn ship [db ship-id]
+  (get-in db [:games :sv :ship ship-id]))
 
+(defn power-hub [db ship-id]
+  (:power-hub (ship db ship-id)))
+(defn systems [db ship-id]
+  (:systems (ship db ship-id)))
+(defn system [db ship-id system-id]
+  (get (systems db ship-id) system-id))
 
+(defn power-in-use [db ship-id]
+  (let [systems (systems db ship-id)]
+    (reduce (fn [acc [_ system]] (+ acc (:in-use system))) 0 systems)))
+
+(defn left-power [db ship-id]
+  (- (:generating (power-hub db ship-id)) (power-in-use db ship-id)))
+
+(defn weapon [db ship-id stuff-id]
+  (get-in (systems db ship-id) [:weapons :stuff stuff-id]))
+(defn weapon-readiness [db ship-id stuff-id]
+  (let [{:keys [charge-time charging-since]} (weapon db ship-id stuff-id)]
+    (calc-readiness charge-time charging-since)))
+
+(def subs
+  {:sv
+   (fn [db _]
+     (get-in db [:games :sv]))
+
+   :location
+   (fn [db _ conn-id]
+     (location db conn-id))
+
+   :sv/systems
+   (fn [db _ conn-id]
+     (get-in db [:games :sv :ship conn-id :systems]))
+
+   :sv.ship/integrity
+   (fn [db _ conn-id]
+     {:integrity (:integrity (ship db conn-id))})
+
+   :sv.weapon/readiness
+   (fn [db [_ stuff-id] conn-id]
+     (weapon-readiness db conn-id stuff-id))
+
+   :sv.power/info
+   (fn [db _ conn-id]
+     {:left (left-power db conn-id)
+      :max (:max (power-hub db conn-id))})
+
+   :view.sv/systems
+   (fn [db _ conn-id]
+     (map (fn [[system-id {:keys [max in-use]}]]
+            {:system-id system-id
+             :max max
+             :in-use in-use})
+          (systems db conn-id)))
+
+   :sv.weapons.stuff/view
+   (fn [db _ conn-id]
+     (map (fn [[stuff-id a-stuff]]
+            (assoc (select-keys a-stuff [:name :required-power])
+                   :stuff-id stuff-id))
+          (:stuff (system db conn-id :weapons))))
+   })
+
+(defn derive [db [sub-id :as sub] & params]
+  (if-let [sub-fn (get subs sub-id)]
+    (apply sub-fn db sub params)
+    (throw (Exception. (str "!!No sub found: " (pr-str sub))))))

@@ -359,11 +359,20 @@
      [:.system {:height "60px"
                 :width "60px"
                 :background-color "lightgray"
+                :background-position "center"
+                :background-repeat "no-repeat"
+                :background-size "contain"
                 :border "2px solid gray"
                 :margin-right "20px"
                 :transition "0.3s"
                 :cursor "pointer"}
-      [:&:hover {:background-color "gainsboro"}]]]
+      [:&:hover {:background-color "gainsboro"}]
+      [:&.with-power {:background-color active-color}]
+      [:&:hover {:background-color focused-active-color}]
+      [:&.without-power {:border "1px solid lightgray"}]
+      [:&.shields {:background-image "url(/image/ShieldsSymbol.png)"}]
+      [:&.engines {:background-image "url(/image/EnginesSymbol.png)"}]
+      [:&.weapons {:background-image "url(/image/WeaponControlSymbol.png)"}]]]
     [:.enemy
      [:.ship-mock {:width "100%"}]]]
    ])
