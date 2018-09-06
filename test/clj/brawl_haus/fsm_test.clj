@@ -44,13 +44,13 @@
         <=sub1 (init-<=sub conn-id1)
         <=sub2 (init-<=sub conn-id2)]
     (-> {}
-        (=>evt1 [:sv/attend])
+        (=>evt1 [:sv/attend {:with-test-equipment? true}])
         (expect {:location-id :space-versus}
                 (<=sub1 [:location]))
 
         (expect {:integrity number?}
                 (<=sub1 [:sv.ship/integrity]))
-        (=>evt2 [:sv/attend])
+        (=>evt2 [:sv/attend {:with-test-equipment? true}])
         (expect {:shields {:in-use 0}
                  :engines {:in-use 0}
                  :weapons {:in-use 0}}
@@ -96,8 +96,8 @@
                  :is-ready false}
                 (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
 
-        ;;; Not ready and did not fire
-        (=>evt1 [:sv.weapon/hit conn-id2 :weapons :burst-laser-2])
+        ;;; Not ready, not selected and did not fire
+        (=>evt1 [:sv.weapon/hit conn-id2 :weapons])
         (expect {:weapons {:damaged 0}}
                 (<=sub2 [:sv/systems]))
 
@@ -107,6 +107,14 @@
                  :percentage 100
                  :is-ready true}
                 (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
+
+        ;;; Not selected and did not fire
+        (=>evt1 [:sv.weapon/hit conn-id2 :weapons])
+        (expect {:weapons {:damaged 0}}
+                (<=sub2 [:sv/systems]))
+
+        ;;; Select
+        (=>evt1 [:sv.weapon/select :burst-laser-2])
 
         ;; On weapon power off discharge continually
         ;(=>evt1 [:sv.weapon/power-down :burst-laser-2])
@@ -124,20 +132,44 @@
         ;         :is-ready false}
         ;        (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
 
-        ;;; Enemy powers weapon
+        ;;; Enemy powers, selects weapon
         (=>evt2 [:sv.system/power-up :weapons])
         (=>evt2 [:sv.system/power-up :weapons])
         (=>evt2 [:sv.weapon/power-up :burst-laser-2])
-        (expect {:is-on true}
+        (=>evt2 [:sv.weapon/select :burst-laser-2])
+        (expect {:is-on true
+                 :is-selected true}
                 (<=sub2 [:sv.weapon/readiness :burst-laser-2]))
 
-        ;;; System gets damaged and weapon turns off
-        (=>evt1 [:sv.weapon/hit conn-id2 :weapons :burst-laser-2])
+        ;;; System gets damaged
+        (=>evt1 [:sv.weapon/hit conn-id2 :weapons])
         (expect {:weapons {:damaged 2
                            :in-use 1}}
                 (<=sub2 [:sv/systems]))
-        (expect {:is-on false}
-                (<=sub2 [:sv.weapon/readiness]))
+        ;;; Doesn't power up damaged cells
+        (=>evt2 [:sv.system/power-up :weapons])
+        (expect {:weapons {:damaged 2
+                           :in-use 1}}
+                (<=sub2 [:sv/systems]))
+        ;;; Weapons turns off, selection drops
+        (expect {:is-on false
+                 :is-selected false}
+                (<=sub2 [:sv.weapon/readiness :burst-laser-2]))
+        ;;; My selection drops, charges again
+        (expect {:is-on true
+                 :is-selected false
+                 :percentage #(< % 30)}
+                (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
+
+        ;;; Damage does not go over max system integrity
+        ((fn [db] (Thread/sleep 200) db))
+        (=>evt1 [:sv.weapon/select :burst-laser-2])
+        (=>evt1 [:sv.weapon/hit conn-id2 :weapons])
+        (expect {:weapons {:max 3
+                           :damaged 3
+                           :in-use 0}}
+                (<=sub2 [:sv/systems]))
+
 
         ;;; Power down weapon system depletes power from weapons (not smartly)
         (=>evt1 [:sv.system/power-down :weapons])

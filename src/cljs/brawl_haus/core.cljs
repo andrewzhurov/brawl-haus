@@ -31,6 +31,8 @@
     [:div.nav-wrapper
      [:a.brand-logo {:on-click #(=>evt [:home/attend])} "BrawlHaus"]
      [:ul#nav-mobile.right
+      [:li [:a {:on-click #(do (rf/dispatch-sync [:initialize-db])
+                               (rf/dispatch-sync [:conn/create]))} "RESET"]]
       [:li.controls [:a {:on-click #(>evt [:help/show])}
                      [:i.material-icons "all_out"]]]]]]
    [:div.content-section

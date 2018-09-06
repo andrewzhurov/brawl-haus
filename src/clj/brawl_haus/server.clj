@@ -28,16 +28,20 @@
 
 (add-watch events/db :propagate-derived-data
            (fn [key atom old-state new-state]
-             (doseq [[sub conn-id] (:subs new-state)]
-               (try
-                 (let [derived-data (subs/derive new-state sub conn-id)]
-                   (swap! last-derived
-                          update sub
-                          (fn [last-derived]
-                            (when (not= derived-data last-derived)
-                              (send! (conn new-state conn-id) (l "<=evt " (pr-str [:derived-data sub derived-data]))))
-                            derived-data)))
-                 (catch Exception e (println "!sub derive fail: " sub ". Message: " (.getMessage e) ". " e))))))
+             (when (not= old-state new-state)
+               (doseq [[sub conn-id] (:subs new-state)]
+                 (try
+                   (let [derived-data (subs/derive new-state sub conn-id)]
+                     (swap! last-derived
+                            update [sub conn-id]
+                            (fn [last-derived]
+                              (when (not= derived-data last-derived)
+                                (when-let [conn (conn new-state conn-id)]
+                                  (send! conn (l "<=evt " (pr-str [:derived-data sub derived-data])))))
+                              derived-data)))
+                   (catch Exception e (println "!sub derive fail: " sub ". Message: " (.getMessage e) ". " e)))))))
+
+
 
 
 
@@ -68,7 +72,14 @@
   (println "Running server on port 9090")
   (reset! server (run-server #'dev-handler {:port 9090})))
 
+(def looper nil)
 (defn reload []
+  (when (future? looper) (future-cancel looper))
+  (def looper (future
+                (loop [now (t/now)]
+                  (swap! events/db assoc :now (t/now))
+                  (Thread/sleep 300)
+                  (recur (t/now)))))
   (use 'brawl-haus.server :reload-all)
   (rf/dispatch-sync [:init-db])
   (restart-server))

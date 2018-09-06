@@ -88,19 +88,6 @@
                 :speed (calc-speed race-text starts-at (now))}))))
 
 
-
-
-(rf/reg-event-db
- :chat/add-message
- (fn [db [_ conn-id text]]
-   (update db :messages conj {:text text
-                              :id (gen-uuid)
-                              :sender conn-id
-                              :received-at (now)})))
-
-
-
-
 (rf/reg-event-db
  :hiccup-touch/attend
  (fn [db [_ conn-id]]
@@ -117,12 +104,9 @@
 
 
 
-
-
-
 ;; Space versus
 
-(defn create-ship [conn-id]
+(def standard-ship
   {:integrity 9
    :power-hub {:max 7
                :generating 5}
@@ -135,18 +119,26 @@
              :weapons {:max 3
                        :damaged 0
                        :in-use 0
-                       :stuff {:burst-laser-2 {:name "Burst Laser II"
+                       :stuff {:burst-laser-2 {:id :burst-laser-2
+                                               :slot 1
+                                               :name "Burst Laser II"
                                                :required-power 2
                                                :damage 2
-                                               :charge-time 200
+                                               :charge-time 2000
+                                               :fire-time 500
                                                :charging-since nil
                                                :is-selected false}
-                               :basic-laser {:name "Basic Laser"
+                               :basic-laser {:id :basic-laser
+                                             :slot 2
+                                             :name "Basic Laser"
                                              :required-power 1
                                              :damage 1
                                              :charge-time 100
                                              :charging-since nil
                                              :is-selected false}}}}})
+(def test-ship
+  (assoc-in standard-ship [:systems :weapons :stuff :burst-laser-2 :charge-time] 200))
+
 
 (defn sv [db]
   (get-in db [:games :sv]))
@@ -158,13 +150,22 @@
 (defn turn-off-weapons [system]
   (if (:stuff system)
     (reduce (fn [acc [stuff-id stuff]]
-              (assoc-in acc [:stuff stuff-id] (assoc stuff :charging-since nil)))
+              (assoc-in acc [:stuff stuff-id] (-> stuff
+                                                  (assoc :charging-since nil)
+                                                  (assoc :is-selected false))))
             system
             (:stuff system))
     system))
 
 (def events
   {
+   :chat/add-message
+   (fn [db [_ text] conn-id]
+     (update db :messages conj {:text text
+                                :id (gen-uuid)
+                                :sender conn-id
+                                :received-at (now)}))
+
    :chat/set-nick
    (fn [db [_ nick] conn-id]
      (assoc-in db [:users conn-id :nick] nick))
@@ -187,7 +188,7 @@
            (navigate conn-id {:location-id :home-panel}))))
 
    :conn/on-close
-   (fn [db _ conn-id]
+   (fn [db [_ conn-id]]
      (-> db
          (navigate conn-id {:location-id :quit})
          (update-in [:users conn-id] dissoc :conn)))
@@ -197,17 +198,17 @@
      (navigate db conn-id {:location-id :home-panel}))
 
    :sv/attend
-   (fn [db _ conn-id]
+   (fn [db [_ with-test-equipment?] conn-id]
      (-> db
-         (assoc-in [:games :sv :ship conn-id] (create-ship conn-id))
+         (assoc-in [:games :sv :ship conn-id] (if with-test-equipment? test-ship standard-ship))
          (navigate conn-id {:location-id :space-versus})))
 
    :sv.system/power-up
    (fn [db [_ system-id] conn-id]
      (let [left-power (subs/left-power db conn-id)
-           {:keys [max in-use]} (subs/system db conn-id system-id)]
+           {:keys [max damaged in-use]} (subs/system db conn-id system-id)]
        (if (and (> left-power 0)
-                (> (- max in-use) 0))
+                (> (- (- max damaged) in-use) 0))
          (update-in db [:games :sv :ship conn-id :systems system-id :in-use] inc)
          db)))
 
@@ -237,17 +238,31 @@
      (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :charging-since] nil))
 
    :sv.weapon/hit
-   (fn [db [_ target-ship-id target-system-id firing-stuff-id] conn-id]
-     (let [{:keys [damage]} (subs/weapon db conn-id firing-stuff-id)
-           {:keys [is-ready]} (subs/weapon-readiness db conn-id firing-stuff-id)]
-       (if is-ready
-         (update-in db [:games :sv :ship target-ship-id :systems target-system-id]
-                    (fn [system]
-                      (-> system
-                          (update :damaged + damage)
-                          (deplete-power)
-                          (turn-off-weapons))))
-         db)))})
+   (fn [db [_ target-ship-id target-system-id] conn-id]
+     (reduce (fn [acc-db {:keys [id is-ready is-selected damage]}]
+               (if (and is-ready is-selected)
+                 (-> acc-db
+                     (assoc-in [:games :sv :ship conn-id :systems :weapons :stuff id :charging-since] (t/now))
+                     (update-in [:games :sv :ship target-ship-id :systems target-system-id]
+                                (fn [system]
+                                  (-> system
+                                      (update :damaged (fn [current-damage] (min (:max system) (+ current-damage damage))))
+                                      (deplete-power)
+                                      (turn-off-weapons))))
+                     (assoc-in [:games :sv :ship conn-id :systems :weapons :stuff id :is-selected] false)
+                     )
+                 acc-db))
+             db
+             (subs/weapons-readiness db conn-id)))
+
+   :sv.weapon/select
+   (fn [db [_ stuff-id] conn-id]
+     (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :is-selected] true))
+
+   :sv.weapon/unselect
+   (fn [db [_ stuff-id] conn-id]
+     (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :is-selected] false))
+   })
 
 (defn drive [db [evt-id :as evt] & params]
   (if-let [evt-fn (get events evt-id)]
