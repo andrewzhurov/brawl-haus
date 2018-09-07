@@ -243,9 +243,9 @@
        {:ship-id ship-id
         :systems (map (fn [[system-id {:keys [max damaged in-use]}]]
                         {:id system-id
-                         :status (cond (= 0 damaged) "full"
-                                       (not= max damaged) "damaged"
-                                       :else "crit")})
+                         :status (cond (= 0 damaged) "integrity-full"
+                                       (not= max damaged) "integrity-damaged"
+                                       :else "integrity-wrecked")})
                       (systems db ship-id))
         :weapons (weapons-readiness db ship-id)}))
 

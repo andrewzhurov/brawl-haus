@@ -50,8 +50,8 @@
   [:div.ship
    [:img.ship-backdrop {:src "https://vignette.wikia.nocookie.net/ftl/images/a/aa/Kestrel_ship.png/revision/latest?cb=20160308183246"}]
    [:div.ship-schema
-    (for [{:keys [id]} systems]
-      [:div.system {:class (name id)
+    (for [{:keys [id status]} systems]
+      [:div.system {:class (str (name id) " " status)
                     :on-click #(=>evt [:sv.weapon/hit ship-id id])}])
     (for [{:keys [slot is-on is-ready]} weapons]
       [:img.hardware-weapon {:class (str (when is-on " is-on")

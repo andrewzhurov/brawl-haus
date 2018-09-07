@@ -408,7 +408,10 @@
        [:&.engines {:grid-area "e"
                     :background-image "url(/image/EnginesSymbol.png)"}]
        [:&.weapons {:grid-area "w"
-                    :background-image "url(/image/WeaponControlSymbol.png)"}]]
+                    :background-image "url(/image/WeaponControlSymbol.png)"}]
+       [:&.integrity-full {:border-color "green"}]
+       [:&.integrity-damaged {:border-color "yellow"}]
+       [:&.integrity-wrecked {:border-color "red"}]]
       ]]
     [:.locations {:width "100%"
                   :max-height "20%"
