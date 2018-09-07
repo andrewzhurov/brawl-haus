@@ -104,9 +104,24 @@
            :damage damage
            :id id)))
 
+
 (defn weapons-readiness [db ship-id]
   (map #(weapon-readiness db ship-id %) (keys (:stuff (system db ship-id :weapons)))))
 
+(defn locations [db]
+  (->> (:users db)
+       vals
+       (map :location)
+       (filter #(= :space-versus (:location-id %)))
+       (map #(get-in % [:params :ship-location-id]))
+       set))
+
+(defn ships-at [db location-id]
+  (->> (:users db)
+       (filter (fn [[id user]] (and (= :space-versus (get-in user [:location :location-id]))
+                                    (= location-id (get-in user [:location :params :ship-location-id])))))
+       (map key)
+       set))
 
 (def subs
   {
@@ -140,6 +155,9 @@
                              :text text
                              :received-at (f/unparse (f/formatter "HH:mm:ss") (c/from-date received-at))})))})
 
+   :personal-info
+   (fn [db _ conn-id]
+     (dissoc (get-in db [:users conn-id]) :conn))
 
    :location
    (fn [db _ conn-id]
@@ -158,8 +176,8 @@
      (weapon-readiness db conn-id stuff-id))
 
    :sv.weapons/readiness
-   (fn [db _ conn-id]
-     (weapons-readiness db conn-id))
+   (fn [db [_ ship-id] conn-id]
+     (weapons-readiness db (or ship-id conn-id)))
 
    :sv.power/info
    (fn [db _ conn-id]
@@ -187,14 +205,61 @@
    (fn [db _ conn-id]
      (keys (dissoc (get-in db [:games :sv :ship]) conn-id)))
 
-   :inspect
-   (fn [db & _]
-     (clojure.pprint/pprint db)
-     db)
-   })
+   :sv/locations
+   (fn [db [_ location-id] _]
+     (->> (:users db)
+          vals
+          (map :location)
+          (filter #(= :space-versus (:location-id %)))
+          (map #(get-in % [:params :ship-location-id]))
+          set))
+
+   :sv.location/ships
+   (fn [db [_ location-id] _]
+     (ships-at location-id))
+
+   :view.sv/locations
+   (fn [db _ _]
+     (for [location-id (locations db)]
+       {:location-id location-id
+        :location-name (apply str (take 5 (name location-id)))
+        :ship-captains (map (fn [ship-id] (get-in db [:users ship-id :nick]))
+                            (ships-at db location-id))}))
+
+   :view.sv/ship
+   (fn [db [_ ship-id] _]
+     {:ship-id ship-id
+      :systems (map (fn [[system-id {:keys [max damaged in-use]}]]
+                      {:id system-id
+                       :status (cond (= 0 damaged) "full"
+                                     (not= max damaged) "damaged"
+                                     :else "crit")})
+                    (systems db ship-id))
+      :weapons (weapons-readiness db ship-id)})
+
+   :view.sv/ships
+   (fn [db [_ location-id] _]
+     (for [ship-id (ships-at db location-id)]
+       {:ship-id ship-id
+        :systems (map (fn [[system-id {:keys [max damaged in-use]}]]
+                        {:id system-id
+                         :status (cond (= 0 damaged) "full"
+                                       (not= max damaged) "damaged"
+                                       :else "crit")})
+                      (systems db ship-id))
+        :weapons (weapons-readiness db ship-id)}))
+
+   :sv.ship/nick
+   (fn [db [_ ship-id] _]
+     {:nick (get-in db [:users ship-id :nick])})
+
+   :sv.shield/readiness
+   (fn [db _ conn-id]
+     (let [{:keys [charge-time powered-since]} (system db conn-id :shields)]
+       (calc-readiness charge-time (first powered-since))))})
 
 (defn derive [db [sub-id :as sub] & params]
   (if-let [sub-fn (get subs sub-id)]
     (do #_(println "derive: " (pr-str sub) " " (pr-str params))
         (apply sub-fn db sub params))
-    (throw (Exception. (str "!!No sub found: " (pr-str sub))))))
+    (println "!!No sub found:" (pr-str sub))))

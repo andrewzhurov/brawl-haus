@@ -36,7 +36,7 @@
       [:li.controls [:a {:on-click #(>evt [:help/show])}
                      [:i.material-icons "all_out"]]]]]]
    [:div.content-section
-    [panels/panel (<=sub [:location])]]
+    [panels/panel (<=sub [:personal-info])]]
    [comps/chat]
    [shortcuts/help]])
 

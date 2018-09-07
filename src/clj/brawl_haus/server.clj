@@ -26,20 +26,21 @@
 (defn conn [db conn-id]
   (l "FOUND CONN:" (get-in db [:users conn-id :conn])))
 
-(add-watch events/db :propagate-derived-data
-           (fn [key atom old-state new-state]
-             (when (not= old-state new-state)
-               (doseq [[sub conn-id] (:subs new-state)]
-                 (try
-                   (let [derived-data (subs/derive new-state sub conn-id)]
-                     (swap! last-derived
-                            update [sub conn-id]
-                            (fn [last-derived]
-                              (when (not= derived-data last-derived)
-                                (when-let [conn (conn new-state conn-id)]
-                                  (send! conn (l "<=evt " (pr-str [:derived-data sub derived-data])))))
-                              derived-data)))
-                   (catch Exception e (println "!sub derive fail: " sub ". Message: " (.getMessage e) ". " e)))))))
+(defn propagate-derived-data []
+  (add-watch events/db :propagate-derived-data
+             (fn [key atom old-state new-state]
+               (when (not= old-state new-state)
+                 (doseq [[sub conn-id] (:subs new-state)]
+                   (try
+                     (let [derived-data (subs/derive new-state sub conn-id)]
+                       (swap! last-derived
+                              update [sub conn-id]
+                              (fn [last-derived]
+                                (when (not= derived-data last-derived)
+                                  (when-let [conn (conn new-state conn-id)]
+                                    (send! conn (l "<=evt " (pr-str [:derived-data sub derived-data])))))
+                                derived-data)))
+                     (catch Exception e (println "!sub derive fail: " sub ". Message: " (.getMessage e) ". " e))))))))
 
 
 
@@ -74,6 +75,7 @@
 
 (def looper nil)
 (defn reload []
+  (remove-watch events/db :propagate-derived-data)
   (when (future? looper) (future-cancel looper))
   (def looper (future
                 (loop [now (t/now)]
@@ -81,8 +83,9 @@
                   (Thread/sleep 300)
                   (recur (t/now)))))
   (use 'brawl-haus.server :reload-all)
-  (rf/dispatch-sync [:init-db])
-  (restart-server))
+  (reset! events/db events/init-db)
+  (restart-server)
+  (propagate-derived-data))
 
 (defn inspect-db []
   (clojure.pprint/pprint @events/db))

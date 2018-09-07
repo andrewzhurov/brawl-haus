@@ -111,14 +111,18 @@
    :power-hub {:max 7
                :generating 5}
    :systems {:shields {:max 4
+                       :damaged 0
                        :in-use 0
-                       :damaged 0}
+                       :charge-time 3000
+                       :powered-since []}
              :engines {:max 3
+                       :damaged 0
                        :in-use 0
-                       :damaged 0}
+                       :powered-since []}
              :weapons {:max 3
                        :damaged 0
                        :in-use 0
+                       :powered-since []
                        :stuff {:burst-laser-2 {:id :burst-laser-2
                                                :slot 1
                                                :name "Burst Laser II"
@@ -133,11 +137,14 @@
                                              :name "Basic Laser"
                                              :required-power 1
                                              :damage 1
-                                             :charge-time 100
+                                             :charge-time 666
                                              :charging-since nil
                                              :is-selected false}}}}})
 (def test-ship
-  (assoc-in standard-ship [:systems :weapons :stuff :burst-laser-2 :charge-time] 200))
+  (-> standard-ship
+      (assoc-in [:systems :weapons :stuff :burst-laser-2 :charge-time] 200)
+      (assoc-in [:systems :weapons :stuff :basic-laser :charge-time] 66)
+      (assoc-in [:systems :shields :charge-time] 300)))
 
 
 (defn sv [db]
@@ -145,7 +152,9 @@
 
 (defn deplete-power [system]
   (let [rational-in-use (max (min (- (:max system) (:damaged system)) (:in-use system)) 0)]
-    (assoc system :in-use rational-in-use)))
+    (-> system
+        (assoc :in-use rational-in-use)
+        (assoc :charging-since (vec (take rational-in-use (:charging-since system)))))))
 
 (defn turn-off-weapons [system]
   (if (:stuff system)
@@ -156,6 +165,9 @@
             system
             (:stuff system))
     system))
+
+(defn ensure [struct path val]
+  (update-in struct path #(if (nil? %) val %)))
 
 (def events
   {
@@ -198,10 +210,11 @@
      (navigate db conn-id {:location-id :home-panel}))
 
    :sv/attend
-   (fn [db [_ with-test-equipment?] conn-id]
+   (fn [db [_ {:keys [with-test-equipment? location]}] conn-id]
      (-> db
-         (assoc-in [:games :sv :ship conn-id] (if with-test-equipment? test-ship standard-ship))
-         (navigate conn-id {:location-id :space-versus})))
+         (navigate conn-id {:location-id :space-versus
+                            :params {:ship-location-id (or location (gen-uuid))}})
+         (ensure [:games :sv :ship conn-id] (if with-test-equipment? test-ship standard-ship))))
 
    :sv.system/power-up
    (fn [db [_ system-id] conn-id]
@@ -209,14 +222,20 @@
            {:keys [max damaged in-use]} (subs/system db conn-id system-id)]
        (if (and (> left-power 0)
                 (> (- (- max damaged) in-use) 0))
-         (update-in db [:games :sv :ship conn-id :systems system-id :in-use] inc)
+         (-> db
+             (update-in [:games :sv :ship conn-id :systems system-id :in-use] inc)
+             (update-in [:games :sv :ship conn-id :systems system-id :powered-since] conj (t/now)))
          db)))
 
    :sv.system/power-down
    (fn [db [_ system-id] conn-id]
-     (let [db (assoc-in db [:games :sv :ship conn-id :systems system-id :in-use]
-                        (max (dec (:in-use (subs/system db conn-id system-id)))
-                             0))]
+     (let [db (update-in db [:games :sv :ship conn-id :systems system-id]
+                         (fn [{:keys [in-use] :as system}]
+                           (if (> in-use 0)
+                             (-> system
+                                 (assoc :in-use (dec in-use))
+                                 (update :powered-since (comp vec butlast)))
+                             system)))]
        (update-in db [:games :sv :ship conn-id :systems system-id] turn-off-weapons)))
 
    :sv.weapon/power-up
@@ -268,4 +287,4 @@
   (if-let [evt-fn (get events evt-id)]
     (do (println "drive: " (pr-str evt) " " (pr-str params))
         (apply evt-fn db evt params))
-    (throw (Exception. (str "!!No evt found: " (pr-str evt))))))
+    (println "!!No evt found:" (pr-str evt))))

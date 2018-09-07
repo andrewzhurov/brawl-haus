@@ -260,10 +260,12 @@
    [:.space-versus {:transition "0.4s"}
     {:display "flex"
      :height "100%"}
-    [:.player {:background "darkgray"
-               :margin "5px"}
-     [:&.me {:width "65%"}]
-     [:&.enemy {:width "35%"}]]
+    [:.me {:background "darkgray"
+            :margin "5px"
+            :width "65%"}]
+    [:.outside {:background "darkgray"
+                 :margin "5px"
+                 :width "35%"}]
     [:.bottom-hud {:position "absolute"
                    :bottom "10px" :left "10px"
                    :display "flex"
@@ -357,49 +359,60 @@
        :top "0px" :right "0px" :bottom "0px" :left "0px"
        :background "black"}]]
 
-    [:.me {:position "relative"}
-     [:.ship {:position "relative"}
-      [:.ship-backdrop {:height "180px"}]
-      [:.ship-schema
-       {:position "absolute"
-        :top "0px"
-        :display "grid"
-        :grid (grid
-               ". . . . . . . . . . . . 30px"
-               ". . . . . . . w1 w1 . . . 30px"
-               ". e e s s . . w w . . . 30px"
-               ". e e s s . . w w . . . 30px"
-               ". . . . . . . w2 w2 . . . 30px"
-               ". . . . . . . . . . . . 30px"
-               "30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px")
-        }
-       [:.hardware-weapon {:max-height "30px"
-                           :max-width "60px"}
-        [:&.w1 {:grid-area "w1"
-                :align-self "end"}]
-        [:&.w2 {:grid-area "w2"
-                :transform "scaleY(-1)"}]]
+    [:.me {:position "relative"}]
+    [:.ship {:position "relative"}
+     [:.ship-backdrop {:height "210px"}]
+     [:.ship-schema
+      {:position "absolute"
+       :top "15px"
+       :display "grid"
+       :grid (grid
+              ". . . . . . . . . . . . 30px"
+              ". . . . . . . w1 w1 . . . 30px"
+              ". e e s s . . w w . . . 30px"
+              ". e e s s . . w w . . . 30px"
+              ". . . . . . . w2 w2 . . . 30px"
+              ". . . . . . . . . . . . 30px"
+              "30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px")
+       :z-index 2
+       }
+      [:.hardware-weapon {:max-height "30px"
+                          :max-width "60px"
+                          :z-index 1
+                          :transition "1.25s"}
+       [:&.w1 {:grid-area "w1"
+               :align-self "end"
+               :margin-bottom "-15px"}
+        [:&.is-on {:margin-bottom "-5px"}]]
+       [:&.w2 {:grid-area "w2"
+               :transform "scaleY(-1)"
+               :margin-top "-15px"}
+        [:&.is-on {:margin-top "-5px"}]]
+       [:&.firing
+        {:animation [[single-fire "0.6s"]]}]]
 
-       [:.system {:background-color "lightgray"
-                  :background-position "center"
-                  :background-repeat "no-repeat"
+      [:.system {:background-color "lightgray"
+                 :background-position "center"
+                 :background-repeat "no-repeat"
                                         ;:background-size "contain"
-                  :border "1px solid gray"
-                  :transition "0.3s"
-                  :cursor "pointer"}
-        [:&:hover {:background-color "gainsboro"}]
-        [:&.with-power {:background-color active-color}]
-        [:&:hover {:background-color focused-active-color}]
-        [:&.without-power {:border "1px solid lightgray"}]
-        [:&.shields {:grid-area "s"
-                     :background-image "url(/image/ShieldsSymbol.png)"}]
-        [:&.engines {:grid-area "e"
-                     :background-image "url(/image/EnginesSymbol.png)"}]
-        [:&.weapons {:grid-area "w"
-                     :background-image "url(/image/WeaponControlSymbol.png)"}]]
-       ]]
-     [:.ship-mock {:width "100%"}]]
-    
-    [:.enemy
-     [:.ship-mock {:width "100%"}]]]
+                 :border "1px solid gray"
+                 :transition "0.3s"
+                 :cursor "pointer"
+                 :z-index 2}
+       [:&:hover {:background-color "gainsboro"}]
+       [:&.with-power {:background-color active-color}]
+       [:&:hover {:background-color focused-active-color}]
+       [:&.without-power {:border "1px solid lightgray"}]
+       [:&.shields {:grid-area "s"
+                    :background-image "url(/image/ShieldsSymbol.png)"}]
+       [:&.engines {:grid-area "e"
+                    :background-image "url(/image/EnginesSymbol.png)"}]
+       [:&.weapons {:grid-area "w"
+                    :background-image "url(/image/WeaponControlSymbol.png)"}]]
+      ]]
+    [:.locations {:width "100%"
+                  :max-height "20%"
+                  :overflow-y "scroll"}]
+
+    ]
    ])

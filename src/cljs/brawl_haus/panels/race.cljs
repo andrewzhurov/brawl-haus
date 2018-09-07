@@ -129,7 +129,7 @@
    [:button.btn.btn-flat {:on-click #(rf/dispatch [:conn/send [:race/attend]])} "Next race"]])
 
 (defmethod panels/panel :race-panel
-  [{:keys [params]}]
+  [_]
   [:div.app
    [:div.content.race-panel
     [view :countdown]

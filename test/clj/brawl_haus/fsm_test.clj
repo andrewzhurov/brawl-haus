@@ -17,6 +17,13 @@
       {:conn-id conn-id
        :sub sub})))
 
+(defn wait [db ms]
+  (Thread/sleep ms)
+  db)
+(defn inspect [db]
+  (clojure.pprint/pprint db)
+  db)
+
 (defn failed-test-line-number []
   (let [trace (->> (.. Thread currentThread getStackTrace)
                    (map (fn [el] (str (.getFileName el) ":" (.getLineNumber el))))
@@ -101,7 +108,8 @@
         (expect {:weapons {:damaged 0}}
                 (<=sub2 [:sv/systems]))
 
-        ((fn [db] (Thread/sleep 200) db))
+        (wait 200)
+
         ;;; Ready
         (expect {:is-on true
                  :percentage 100
@@ -162,7 +170,8 @@
                 (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
 
         ;;; Damage does not go over max system integrity
-        ((fn [db] (Thread/sleep 200) db))
+        (wait 200)
+
         (=>evt1 [:sv.weapon/select :burst-laser-2])
         (=>evt1 [:sv.weapon/hit conn-id2 :weapons])
         (expect {:weapons {:max 3
@@ -176,4 +185,83 @@
         (=>evt1 [:sv.system/power-down :weapons])
         (expect {:is-on false}
                 (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
-        )))
+        )
+
+    ;;; Preserve ship state
+    (testing "Preserve ship state"
+      (-> {}
+          (=>evt1 [:sv/attend {:with-test-equipment? true}])
+          (=>evt2 [:sv/attend {:with-test-equipment? true}])
+          (=>evt1 [:sv.system/power-up :weapons])
+          (=>evt1 [:sv.system/power-up :weapons])
+          (=>evt1 [:sv.weapon/power-up :burst-laser-2])
+          (=>evt1 [:sv.weapon/select :burst-laser-2])
+          (wait 200)
+          (=>evt1 [:sv.weapon/hit conn-id2 :weapons])
+          (expect {:weapons {:damaged 2}}
+                  (<=sub2 [:sv/systems]))
+
+          ;;; Player2 re-attends
+          (=>evt2 [:sv/attend])
+          (expect {:weapons {:damaged 2}}
+                  (<=sub2 [:sv/systems]))
+          ))
+
+
+    (testing "Same location visit"
+      (-> {}
+          (=>evt1 [:sv/attend {:with-test-equipment? true}])
+          (=>evt2 [:sv/attend {:with-test-equipment? true
+                               :location :test-location}])
+          (expect #(= 2 (count %))
+                  (<=sub1 [:sv/locations]))
+
+          ;;; Hey!
+          (=>evt1 [:sv/attend {:location :test-location}])
+          (expect #(= 1 (count %))
+                  (<=sub1 [:sv/locations]))
+          (expect #{conn-id1 conn-id2}
+                  (<=sub1 [:sv.location/ships :test-location]))
+
+          ;;; Wanna trade?;) (powers weapons)
+          (=>evt1 [:sv.system/power-up :weapons])
+          (=>evt1 [:sv.system/power-up :weapons])
+          (=>evt1 [:sv.weapon/power-up :burst-laser-2])
+
+          ;;; Fleeing, fast!
+          (=>evt2 [:sv.system/power-up :shields])
+          (=>evt2 [:sv.system/power-up :shields])
+
+
+          (wait 400)
+          ;;; Weapon is ready
+          (expect {:is-on true
+                   :percentage 100
+                   :is-ready true}
+                  (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
+          ;;; Shield is ready
+          (expect {:is-ready true}
+                  (<=sub2 [:sv.shield/readiness]))
+
+          ;;; Flee!
+          (=>evt2 [:sv/attend {:location :flee-location}])
+          (expect #(= 2 (count %))
+                  (<=sub1 [:sv/locations]))
+
+          ;;; Systems' power is preserved
+          (expect {:shields {:in-use 2}}
+                  (<=sub2 [:sv/systems]))
+          ;;; Shield readiness is preserved
+          (expect {:is-ready true}
+                  (<=sub2 [:sv.shield/readiness]))
+
+          ;;; In pursuit!
+          (=>evt1 [:sv/attend {:location :flee-location}])
+          (expect #(= 1 (count %))
+                  (<=sub1 [:sv/locations]))
+
+          ;;; Weapons' readiness dropped
+          (expect {:is-on false}
+                  (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
+          ))))
+
