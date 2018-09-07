@@ -85,7 +85,7 @@
    [:div.g-compiled (pr-str (garden/css [:#hr g]))]])
 
 (defmethod panels/panel :hiccup-touch
-  [{:keys [params]}]
+  [_]
   (let [h (rf/subscribe [:db/get-in [::h]])
         g (rf/subscribe [:db/get-in [::g]])
         h-looper (js/setInterval #(do #_(println "RERUN H")

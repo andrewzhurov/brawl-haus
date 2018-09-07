@@ -28,7 +28,7 @@
 
   :min-lein-version "2.5.3"
 
-  :source-paths ["src/clj" "src/cljs" "src/cljc"]
+  :source-paths ["src/clj" "src/cljs"]
   :test-paths ["test" "test/clj"]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"
@@ -38,7 +38,7 @@
              :ring-handler brawl-haus.handler/dev-handler}
 
   :garden {:builds [{:id           "screen"
-                     :source-paths ["src/clj" "src/cljc"]
+                     :source-paths ["src/clj"]
                      :stylesheet   brawl-haus.css/screen
                      :compiler     {:output-to     "resources/public/css/screen.css"
                                     :pretty-print? true}}]}
@@ -90,7 +90,7 @@
   :cljsbuild
   {:builds
    [{:id           "dev"
-     :source-paths ["src/cljs" "src/cljc"]
+     :source-paths ["src/cljs"]
      :figwheel     {:on-jsload "brawl-haus.core/mount-root"}
      :compiler     {:main                 brawl-haus.core
                     :output-to            "resources/public/js/compiled/app.js"
@@ -105,7 +105,7 @@
                     }}
 
     {:id           "min"
-     :source-paths ["src/cljs" "src/cljc"]
+     :source-paths ["src/cljs"]
      :jar true
      :compiler     {:main            brawl-haus.core
                     :output-to       "resources/public/js/compiled/app.js"

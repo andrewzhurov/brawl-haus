@@ -3,7 +3,7 @@
             [reagent.core :as r]
             [brawl-haus.utils :refer [<sub l]]))
 
-(defmulti panel :location-id)
+(defmulti panel (comp :location-id :location))
 
 (defn thoughts []
   (let [active-dot (r/atom 5)]
