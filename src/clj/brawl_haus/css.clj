@@ -315,13 +315,16 @@
                 :align-items "flex-end"
                 :color "white"
                 :cursor "pointer"}
-      [:&.with-power
-       [:.box {:background-color "gainsboro"}]
-       [:.cell {:background-color "white"}]]
-      [:&.is-selected
-       [:.box {:border-color "gold"}]]
-      [:&.is-ready
+      [:.cell {:background-color "white"}]
+      [:.box {:background-color "gainsboro"}]
+      [:&.idle
+       [:.cell {:background-color "transparent"}]
+       [:.box {:background-color "transparent"}]]
+      [:&.ready
        [:.bar {:background-color (str active-color " !important")}]]
+      [:&.selected
+       [:.bar {:background-color (str active-color " !important")}]
+       [:.box {:border-color "gold"}]]
       [:.box:hover
        {:background-color "gainsboro"}]
 
@@ -352,19 +355,31 @@
                  :margin-top "2px"}
          ]]]
       [:.name {:margin "3px"}]]
-     [:.weapon:before
-      {:content "oaeu"
-       :position "absolute"
-       :z-index "-1"
-       :top "0px" :right "0px" :bottom "0px" :left "0px"
-       :background "black"}]]
+     ]
 
     [:.me {:position "relative"}]
-    [:.ship {:position "relative"}
+    [:.ship {:position "relative"
+             :width "min-content"
+             :padding "10px"
+             :margin "5px"}
+     [:.name {:position "absolute"
+              :top "148px"
+              :left "106px"
+              :color "rgb(208, 143, 113)"
+              :font-weight "800"
+              :text-shadow "1px 0 0 white, 0 -1px 0 white, 0 1px 0 white, -1px 0 0 white"
+              }]
+     [:.shield {:position "absolute"
+                :top "0px" :right "0px" :bottom "0px" :left "0px"
+                :border-radius "70%"
+                :background-color "rgba(75, 156, 196, 0.20)"
+                :transition "0.3s"}
+      [:&.ready {:background-color "rgba(75, 156, 196, 0.40)"}]]
+
      [:.ship-backdrop {:height "210px"}]
      [:.ship-schema
       {:position "absolute"
-       :top "15px"
+       :top "26px"
        :display "grid"
        :grid (grid
               ". . . . . . . . . . . . 30px"
@@ -382,12 +397,12 @@
                           :transition "1.25s"}
        [:&.w1 {:grid-area "w1"
                :align-self "end"
-               :margin-bottom "-15px"}
-        [:&.is-on {:margin-bottom "-5px"}]]
+               :margin-bottom "-5px" }
+        [:&.idle {:margin-bottom "-15px"}]]
        [:&.w2 {:grid-area "w2"
                :transform "scaleY(-1)"
-               :margin-top "-15px"}
-        [:&.is-on {:margin-top "-5px"}]]
+               :margin-top "-5px"}
+        [:&.idle {:margin-top "-15px"}]]
        [:&.firing
         {:animation [[single-fire "0.6s"]]}]]
 
@@ -399,6 +414,7 @@
                  :transition "0.3s"
                  :cursor "pointer"
                  :z-index 2}
+       [:&.integrity-0 {:animation [hit "0.3s"]}]
        [:&:hover {:background-color "gainsboro"}]
        [:&.with-power {:background-color active-color}]
        [:&:hover {:background-color focused-active-color}]
@@ -409,13 +425,14 @@
                     :background-image "url(/image/EnginesSymbol.png)"}]
        [:&.weapons {:grid-area "w"
                     :background-image "url(/image/WeaponControlSymbol.png)"}]
-       [:&.integrity-full {:border-color "green"}]
-       [:&.integrity-damaged {:border-color "yellow"}]
-       [:&.integrity-wrecked {:border-color "red"}]]
+       [:&.integrity-full {:border-color "gray"}]
+       [:&.integrity-damaged {:border-color "yellow"
+                              :animation [hit "0.4s"]}]
+       [:&.integrity-wrecked {:border-color "red"}]
+       ]
       ]]
     [:.locations {:width "100%"
                   :max-height "20%"
                   :overflow-y "scroll"}]
 
-    ]
-   ])
+    ]])

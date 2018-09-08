@@ -1,11 +1,18 @@
 (ns brawl-haus.fsm-test
   (:require  [clojure.test :refer [deftest testing is]]
-             [brawl-haus.events :refer [drive]]
+             [brawl-haus.events :refer [standard-ship drive]]
              [brawl-haus.subs :refer [derive]]
              [matcho.core :refer [assert match]]
              ))
 
+
+
 (defn l [desc expr] (println desc expr) expr)
+
+(defn deep-merge [& vals]
+  (if (every? map? vals)
+    (apply merge-with deep-merge vals)
+    (last vals)))
 
 (def init-=>evt
   (fn [conn-id]
@@ -43,6 +50,19 @@
 
 #_(println (macroexpand '(expect {} {:one 1} {:conn-id :ID :sub [:a-sub]})))
 
+(def ship-fast-weapons
+  {:systems {:weapons {:stuff {:burst-laser-2 {:charge-time 200
+                                               :fire-time 50}
+                               :basic-laser {:charge-time 66
+                                             :fire-time 33}}}}})
+(def ship-fast-shields
+  {:systems {:shields {:charge-time 300}}})
+(def ship-no-shields
+  {:systems {:shields {:charge-time 99999999}}})
+
+(defn make-ship [& with]
+  (apply deep-merge brawl-haus.events/standard-ship with))
+
 (deftest fsm-test
   (let [conn-id1 "test-conn-id1"
         conn-id2 "test-conn-id2"
@@ -51,13 +71,16 @@
         <=sub1 (init-<=sub conn-id1)
         <=sub2 (init-<=sub conn-id2)]
     (-> {}
-        (=>evt1 [:sv/attend {:with-test-equipment? true}])
+        (=>evt1 [:sv/attend {:with-ship (make-ship
+                                         ship-fast-weapons)}])
         (expect {:location-id :space-versus}
                 (<=sub1 [:location]))
 
         (expect {:integrity number?}
                 (<=sub1 [:sv.ship/integrity]))
-        (=>evt2 [:sv/attend {:with-test-equipment? true}])
+        (=>evt2 [:sv/attend {:with-ship (make-ship
+                                         ship-fast-weapons
+                                         ship-no-shields)}])
         (expect {:shields {:in-use 0}
                  :engines {:in-use 0}
                  :weapons {:in-use 0}}
@@ -92,15 +115,14 @@
         ;; Power up weapon, not enough power
         (=>evt1 [:sv.system/power-up :weapons])
         (=>evt1 [:sv.weapon/power-up :burst-laser-2])
-        (expect {:is-on false}
+        (expect {:status :idle}
                 (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
 
         ;;; Enough power
         (=>evt1 [:sv.system/power-up :weapons])
         (=>evt1 [:sv.weapon/power-up :burst-laser-2])
-        (expect {:is-on true
-                 :percentage number?
-                 :is-ready false}
+        (expect {:status :charging
+                 :percentage number?}
                 (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
 
         ;;; Not ready, not selected and did not fire
@@ -111,9 +133,7 @@
         (wait 200)
 
         ;;; Ready
-        (expect {:is-on true
-                 :percentage 100
-                 :is-ready true}
+        (expect {:status :ready}
                 (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
 
         ;;; Not selected and did not fire
@@ -144,13 +164,24 @@
         (=>evt2 [:sv.system/power-up :weapons])
         (=>evt2 [:sv.system/power-up :weapons])
         (=>evt2 [:sv.weapon/power-up :burst-laser-2])
+        (wait 200)
         (=>evt2 [:sv.weapon/select :burst-laser-2])
-        (expect {:is-on true
-                 :is-selected true}
+        (expect {:status :selected}
                 (<=sub2 [:sv.weapon/readiness :burst-laser-2]))
 
-        ;;; System gets damaged
+        ;;; FIRE!
         (=>evt1 [:sv.weapon/hit conn-id2 :weapons])
+
+        ;;; It's firing for some time
+        (expect {:status :firing}
+                (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
+        (wait 50)
+        ;;; Charges again
+        (expect {:status :charging
+                 :percentage #(and % (< % 80))}
+                (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
+
+        ;;; System gets damaged
         (expect {:weapons {:damaged 2
                            :in-use 1}}
                 (<=sub2 [:sv/systems]))
@@ -159,15 +190,11 @@
         (expect {:weapons {:damaged 2
                            :in-use 1}}
                 (<=sub2 [:sv/systems]))
+
         ;;; Weapons turns off, selection drops
-        (expect {:is-on false
-                 :is-selected false}
+        (expect {:status :idle}
                 (<=sub2 [:sv.weapon/readiness :burst-laser-2]))
-        ;;; My selection drops, charges again
-        (expect {:is-on true
-                 :is-selected false
-                 :percentage #(< % 30)}
-                (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
+
 
         ;;; Damage does not go over max system integrity
         (wait 200)
@@ -183,20 +210,21 @@
         ;;; Power down weapon system depletes power from weapons (not smartly)
         (=>evt1 [:sv.system/power-down :weapons])
         (=>evt1 [:sv.system/power-down :weapons])
-        (expect {:is-on false}
+        (expect {:status :idle}
                 (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
         )
 
     ;;; Preserve ship state
     (testing "Preserve ship state"
       (-> {}
-          (=>evt1 [:sv/attend {:with-test-equipment? true}])
-          (=>evt2 [:sv/attend {:with-test-equipment? true}])
+          (=>evt1 [:sv/attend {:with-ship (make-ship
+                                           ship-fast-weapons)}])
+          (=>evt2 [:sv/attend])
           (=>evt1 [:sv.system/power-up :weapons])
           (=>evt1 [:sv.system/power-up :weapons])
           (=>evt1 [:sv.weapon/power-up :burst-laser-2])
-          (=>evt1 [:sv.weapon/select :burst-laser-2])
           (wait 200)
+          (=>evt1 [:sv.weapon/select :burst-laser-2])
           (=>evt1 [:sv.weapon/hit conn-id2 :weapons])
           (expect {:weapons {:damaged 2}}
                   (<=sub2 [:sv/systems]))
@@ -210,9 +238,11 @@
 
     (testing "Same location visit"
       (-> {}
-          (=>evt1 [:sv/attend {:with-test-equipment? true}])
-          (=>evt2 [:sv/attend {:with-test-equipment? true
-                               :location :test-location}])
+          (=>evt1 [:sv/attend {:with-ship (make-ship
+                                           ship-fast-weapons)}])
+          (=>evt2 [:sv/attend {:location :test-location
+                               :with-ship (make-ship
+                                           ship-fast-shields)}])
           (expect #(= 2 (count %))
                   (<=sub1 [:sv/locations]))
 
@@ -235,12 +265,10 @@
 
           (wait 400)
           ;;; Weapon is ready
-          (expect {:is-on true
-                   :percentage 100
-                   :is-ready true}
+          (expect {:status :ready}
                   (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
           ;;; Shield is ready
-          (expect {:is-ready true}
+          (expect {:status :ready}
                   (<=sub2 [:sv.shield/readiness]))
 
           ;;; Flee!
@@ -252,7 +280,7 @@
           (expect {:shields {:in-use 2}}
                   (<=sub2 [:sv/systems]))
           ;;; Shield readiness is preserved
-          (expect {:is-ready true}
+          (expect {:status :ready}
                   (<=sub2 [:sv.shield/readiness]))
 
           ;;; In pursuit!
@@ -261,7 +289,29 @@
                   (<=sub1 [:sv/locations]))
 
           ;;; Weapons' readiness dropped
-          (expect {:is-on false}
+          (expect {:status :idle}
                   (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
-          ))))
+
+
+          ;;; Shield absorbs
+          (=>evt1 [:sv.weapon/power-up :burst-laser-2])
+          (wait 200)
+          (=>evt1 [:sv.weapon/select :burst-laser-2])
+          (=>evt1 [:sv.weapon/hit conn-id2 :engines])
+          (expect {:status :firing}
+                  (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
+          (expect {:status :charging}
+                  (<=sub2 [:sv.shield/readiness]))
+          (expect {:engines {:damaged 0}}
+                  (<=sub2 [:sv/systems]))
+
+          ;; Weapon does not charge again until it finished firing
+          (wait 20)
+          (expect {:status :firing}
+                  (<=sub1 [:sv.weapon/readiness :burst-laser-2]))
+
+          (wait 30)
+          (expect {:status :charging
+                   :percentage (comp not zero?)}
+                  (<=sub1 [:sv.weapon/readiness :burst-laser-2]))))))
 

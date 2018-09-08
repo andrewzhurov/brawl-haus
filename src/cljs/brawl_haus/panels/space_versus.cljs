@@ -14,25 +14,20 @@
             #_[brawl-haus.events :as events]))
 
 
-(fn [number-of-li]
-  [:div
-   [:ul
-    [:li]
-    [:li]]])
-
 (defn weapons []
   [:div.weapons-panel
    (doall
-    (for [{:keys [stuff-id name required-power]} (<=sub [:sv.weapons.stuff/view])]
-      (let [{:keys [is-on is-selected percentage is-ready]} (<=sub [:sv.weapon/readiness stuff-id])]
+    (for [{:keys [stuff-id required-power] weapon-name :name} (<=sub [:sv.weapons.stuff/view])]
+      (let [{:keys [status percentage]} (<=sub [:sv.weapon/readiness stuff-id])]
         ^{:key stuff-id}
-        [:div.weapon {:class (str (if is-on "with-power" "without-power")
+        [:div.weapon {:class (and status (name status))
+                      #_(str (if is-on "with-power" "without-power")
                                   (when is-selected " is-selected")
                                   (when is-ready " is-ready"))
-                      :on-click (if-not is-on
+                      :on-click (if (= :idle status)
                                   #(=>evt [:sv.weapon/power-up stuff-id])
                                   #(=>evt [:sv.weapon/select stuff-id]))
-                      :on-context-menu (if is-selected
+                      :on-context-menu (if (:selected status)
                                          #(do (.preventDefault %)
                                               (=>evt [:sv.weapon/unselect stuff-id]))
                                          #(do (.preventDefault %)
@@ -43,22 +38,24 @@
          [:div.box
           [:div.power-require
            (repeat required-power [:div.cell])]
-          [:div.name name]]])))])
+          [:div.name weapon-name]]])))])
 
 
-(defn ship-obscured [{:keys [ship-id systems weapons]}]
+(defn ship-obscured [{:keys [ship-id nick systems weapons]}]
   [:div.ship
+   [:div.name nick]
+   (let [{:keys [status percentage]} (<=sub [:sv.shield/readiness ship-id])]
+     [:div.shield {:class status
+                   :style {:opacity (/ percentage  100)}}])
    [:img.ship-backdrop {:src "https://vignette.wikia.nocookie.net/ftl/images/a/aa/Kestrel_ship.png/revision/latest?cb=20160308183246"}]
    [:div.ship-schema
-    (for [{:keys [id status]} systems]
-      [:div.system {:class (str (name id) " " status)
+    (for [{:keys [id status integrity]} systems]
+      [:div.system {:class (str (name id)
+                                " " status
+                                " integrity-" integrity)
                     :on-click #(=>evt [:sv.weapon/hit ship-id id])}])
-    (for [{:keys [slot is-on is-ready]} weapons]
-      [:img.hardware-weapon {:class (str (when is-on " is-on")
-                                         (when is-ready " is-ready")
-                                         #_(when is-ready " firing")
-                                         " w" slot
-                                         )
+    (for [{:keys [slot status]} weapons]
+      [:img.hardware-weapon {:class (str (and status (name status)) " w" slot)
 
                              :src "https://vignette.wikia.nocookie.net/ftl/images/9/99/Basic_Laser.png/revision/latest?cb=20141122223317"}])]])
 

@@ -73,15 +73,17 @@
   (println "Running server on port 9090")
   (reset! server (run-server #'dev-handler {:port 9090})))
 
-(def looper nil)
 (defn reload []
   (remove-watch events/db :propagate-derived-data)
+  (declare looper)
   (when (future? looper) (future-cancel looper))
   (def looper (future
                 (loop [now (t/now)]
                   (swap! events/db assoc :now (t/now))
                   (Thread/sleep 300)
                   (recur (t/now)))))
+
+
   (use 'brawl-haus.server :reload-all)
   (reset! events/db events/init-db)
   (restart-server)

@@ -35,10 +35,11 @@
                      :race-id)]
     (get-in state [:open-races race-id])))
 
+
 (rf/reg-sub
  :countdown
  (fn [db [_ conn-id]]
-   (select-keys (l "CURR:"(current-race db conn-id)) [:starts-at])))
+   (select-keys (current-race db conn-id) [:starts-at])))
 
 (rf/reg-sub
  :text-race
@@ -58,23 +59,29 @@
 
 
 ;; Space versus
-(defn calc-readiness [charge-time charging-since]
-  (let [percentage (when charging-since
-                     (-> (t/interval charging-since (t/now))
+(defn calc-readiness [{:keys [charge-time charging-since fire-time firing-since is-selected]}]
+  (let [now (t/now)
+        is-firing (when firing-since
+                    (-> (t/interval firing-since now)
+                        (t/in-millis)
+                        (< fire-time)))
+        percentage (when (and (not is-firing) charging-since)
+                     (-> (t/interval (or firing-since charging-since) now)
                          (t/in-millis)
                          (/ charge-time)
                          (* 100)
                          (double)))]
     (cond
-      (not charging-since) {:is-on false
-                            :percentage 0
-                            :is-ready false}
-      (< percentage 100) {:is-on true
-                          :percentage percentage
-                          :is-ready false}
-      :ready {:is-on true
-              :percentage 100
-              :is-ready true})))
+      is-selected {:status :selected
+                   :percentage 100}
+      (not charging-since) {:status :idle
+                            :percentage 0}
+      is-firing {:status :firing
+                 :percentage 0}
+      (< percentage 100) {:status :charging
+                          :percentage percentage}
+      :ready {:status :ready
+              :percentage 100})))
 
 (defn ship [db ship-id]
   (get-in db [:games :sv :ship ship-id]))
@@ -97,12 +104,16 @@
   (get-in (systems db ship-id) [:weapons :stuff stuff-id]))
 
 (defn weapon-readiness [db ship-id stuff-id]
-  (let [{:keys [slot charge-time charging-since is-selected damage id]} (weapon db ship-id stuff-id)]
-    (assoc (calc-readiness charge-time charging-since)
-           :slot slot
-           :is-selected is-selected
-           :damage damage
-           :id id)))
+  (let [a-weapon (weapon db ship-id stuff-id)]
+    (merge (select-keys a-weapon [:id :slot :damage])
+           (calc-readiness a-weapon))))
+
+(defn shield-readiness [db ship-id]
+  (let [{:keys [charge-time powered-since last-absorption]} (system db ship-id :shields)]
+    (calc-readiness {:charge-time charge-time
+                     :charging-since (if last-absorption
+                                       (t/max-date last-absorption (first powered-since))
+                                       (first powered-since))})))
 
 
 (defn weapons-readiness [db ship-id]
@@ -123,8 +134,14 @@
        (map key)
        set))
 
+(declare derive)
 (def subs
-  {
+  {:my-subs
+   (fn [db _ conn-id]
+     (->> (:subs db)
+          (filter (fn [[_ subber]] (= subber conn-id)))
+          (map first)))
+
    :set-nick
    (fn [db _ conn-id]
      {:current-nick (get-in db [:users conn-id :nick])})
@@ -179,6 +196,10 @@
    (fn [db [_ ship-id] conn-id]
      (weapons-readiness db (or ship-id conn-id)))
 
+   :sv.shield/readiness
+   (fn [db [_ ship-id] conn-id]
+     (shield-readiness db (or ship-id conn-id)))
+
    :sv.power/info
    (fn [db _ conn-id]
      {:max (:max (power-hub db conn-id))
@@ -216,7 +237,7 @@
 
    :sv.location/ships
    (fn [db [_ location-id] _]
-     (ships-at location-id))
+     (ships-at db location-id))
 
    :view.sv/locations
    (fn [db _ _]
@@ -229,34 +250,22 @@
    :view.sv/ship
    (fn [db [_ ship-id] _]
      {:ship-id ship-id
+      :nick (get-in db [:users ship-id :nick])
       :systems (map (fn [[system-id {:keys [max damaged in-use]}]]
                       {:id system-id
-                       :status (cond (= 0 damaged) "full"
-                                     (not= max damaged) "damaged"
-                                     :else "crit")})
+                       :status (cond (= 0 damaged) "integrity-full"
+                                     (not= max damaged) "integrity-damaged"
+                                     :else "integrity-wrecked")
+                       :integrity (- max damaged)})
                     (systems db ship-id))
       :weapons (weapons-readiness db ship-id)})
 
    :view.sv/ships
    (fn [db [_ location-id] _]
      (for [ship-id (ships-at db location-id)]
-       {:ship-id ship-id
-        :systems (map (fn [[system-id {:keys [max damaged in-use]}]]
-                        {:id system-id
-                         :status (cond (= 0 damaged) "integrity-full"
-                                       (not= max damaged) "integrity-damaged"
-                                       :else "integrity-wrecked")})
-                      (systems db ship-id))
-        :weapons (weapons-readiness db ship-id)}))
+       (derive db [:view.sv/ship ship-id] nil)))
 
-   :sv.ship/nick
-   (fn [db [_ ship-id] _]
-     {:nick (get-in db [:users ship-id :nick])})
-
-   :sv.shield/readiness
-   (fn [db _ conn-id]
-     (let [{:keys [charge-time powered-since]} (system db conn-id :shields)]
-       (calc-readiness charge-time (first powered-since))))})
+   })
 
 (defn derive [db [sub-id :as sub] & params]
   (if-let [sub-fn (get subs sub-id)]

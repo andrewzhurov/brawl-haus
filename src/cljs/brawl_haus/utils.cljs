@@ -24,7 +24,8 @@
 
 (defn =>evt [evt] (rf/dispatch [:conn/send evt]))
 (defn <=sub [sub]
-  (=>evt [:subscribe sub])
+  (when (not (<sub [:subscribed? sub]))
+    (=>evt [:subscribe sub]))
   (deref (reagent.ratom/make-reaction
           (fn [] (<sub [:derived-data sub]))
           ;:on-dispose #(=>evt [:unsubscribe sub])
@@ -39,6 +40,11 @@
   (rf/dispatch [:conn/send [:subscribe [view-id]]])
   (fn []
     ((get @views view-id) (<sub [:derived-data [view-id]]))))
+
+(rf/reg-sub
+ :subscribed?
+ (fn [db [_ sub]]
+   (contains? (set (get-in db [:derived-data [:my-subs]])) sub)))
 
 (rf/reg-event-db
  :derived-data

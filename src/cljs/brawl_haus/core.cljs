@@ -26,6 +26,8 @@
     (println "dev mode")))
 
 (defn entry-point []
+  (<=sub [:self])
+  (<=sub [:my-subs])
   [:div.main-layout
    [:nav.nav-section
     [:div.nav-wrapper
@@ -42,7 +44,7 @@
 
 (defn mount-root []
   (rf/clear-subscription-cache!)
-  (<=sub [:self])
+  
   (reagent/render [entry-point]
                   (.getElementById js/document "app")))
 
