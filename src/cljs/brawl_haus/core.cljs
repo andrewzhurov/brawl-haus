@@ -26,15 +26,15 @@
     (println "dev mode")))
 
 (defn entry-point []
-  (<=sub [:self])
-  (<=sub [:my-subs])
   [:div.main-layout
    [:nav.nav-section
     [:div.nav-wrapper
      [:a.brand-logo {:on-click #(=>evt [:home/attend])} "BrawlHaus"]
      [:ul#nav-mobile.right
       [:li [:a {:on-click #(do (rf/dispatch-sync [:initialize-db])
-                               (rf/dispatch-sync [:conn/create]))} "RESET"]]
+                               (rf/dispatch-sync [:conn/create])
+                               (<=sub [:self])
+                               (<=sub [:my-subs]))} "RESET"]]
       [:li.controls [:a {:on-click #(>evt [:help/show])}
                      [:i.material-icons "all_out"]]]]]]
    [:div.content-section
@@ -44,7 +44,8 @@
 
 (defn mount-root []
   (rf/clear-subscription-cache!)
-  
+  (<=sub [:self])
+  (<=sub [:my-subs])
   (reagent/render [entry-point]
                   (.getElementById js/document "app")))
 

@@ -414,7 +414,6 @@
                  :transition "0.3s"
                  :cursor "pointer"
                  :z-index 2}
-       [:&.integrity-0 {:animation [hit "0.3s"]}]
        [:&:hover {:background-color "gainsboro"}]
        [:&.with-power {:background-color active-color}]
        [:&:hover {:background-color focused-active-color}]
@@ -426,8 +425,7 @@
        [:&.weapons {:grid-area "w"
                     :background-image "url(/image/WeaponControlSymbol.png)"}]
        [:&.integrity-full {:border-color "gray"}]
-       [:&.integrity-damaged {:border-color "yellow"
-                              :animation [hit "0.4s"]}]
+       [:&.integrity-damaged {:border-color "yellow"}]
        [:&.integrity-wrecked {:border-color "red"}]
        ]
       ]]

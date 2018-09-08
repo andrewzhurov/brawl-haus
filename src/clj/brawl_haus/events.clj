@@ -169,7 +169,10 @@
   (update-in struct path #(if (nil? %) val %)))
 
 (def events
-  {
+  {:drop-my-subs
+   (fn [db _ conn-id]
+     (update db :subs #(set (remove (fn [_ subber] (= subber conn-id)) %))))
+
    :chat/add-message
    (fn [db [_ text] conn-id]
      (update db :messages conj {:text text
