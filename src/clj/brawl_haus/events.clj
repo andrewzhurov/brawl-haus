@@ -23,7 +23,7 @@
 (def init-db {:open-races {}
               :messages #{}
               :subs #{}
-              :games {:sv {}}})
+              :games {:sv {:locations {:station-location {:station {}}}}}})
 
 (def db (atom init-db))
 
@@ -102,28 +102,38 @@
 
 
 
-
-
 ;; Space versus
 
-(def standard-ship
-  {:integrity 9
-   :power-hub {:max 7
-               :generating 5}
-   :systems {:shields {:max 4
+(defn deep-merge [& vals]
+  (if (every? map? vals)
+    (apply merge-with deep-merge vals)
+    (last vals)))
+
+(def ship-basic-power-hub
+  {:power-hub {:max 7
+               :generating 5}})
+
+(def ship-basic-shields
+  {:systems {:shields {:max 4
                        :damaged 0
                        :in-use 0
                        :charge-time 3000
-                       :powered-since []}
-             :engines {:max 3
+                       :powered-since []}}})
+
+(def ship-basic-engines
+  {:systems {:engines {:max 3
                        :damaged 0
                        :in-use 0
-                       :powered-since []}
-             :weapons {:max 3
+                       :powered-since []}}})
+
+(def ship-basic-weapons
+  {:systems {:weapons {:max 3
                        :damaged 0
                        :in-use 0
-                       :powered-since []
-                       :stuff {:burst-laser-2 {:id :burst-laser-2
+                       :powered-since []}}})
+
+(def ship-burst-laser-2
+  {:systems {:weapons {:stuff {:burst-laser-2 {:id :burst-laser-2
                                                :slot 1
                                                :name "Burst Laser II"
                                                :required-power 2
@@ -132,17 +142,31 @@
                                                :fire-time 500
                                                :charging-since nil
                                                :firing-since nil
-                                               :is-selected false}
-                               :basic-laser {:id :basic-laser
-                                             :slot 2
-                                             :name "Basic Laser"
-                                             :required-power 1
-                                             :damage 1
-                                             :charge-time 666
-                                             :fire-time 333
-                                             :charging-since nil
-                                             :firing-since nil
-                                             :is-selected false}}}}})
+                                               :is-selected false}}}}})
+
+(def weapon-basic-laser
+  {:id :basic-laser
+   :slot 2
+   :name "Basic Laser"
+   :required-power 1
+   :damage 1
+   :charge-time 3333
+   :fire-time 333
+   :charging-since nil
+   :firing-since nil
+   :is-selected false})
+
+(def ship-basic-laser
+  {:systems {:weapons {:stuff {:basic-laser weapon-basic-laser}}}})
+
+(def basic-ship
+  (deep-merge
+   ship-basic-power-hub
+   ship-basic-shields
+   ship-basic-engines
+   ship-basic-weapons
+   ship-basic-laser
+   ))
 
 
 
@@ -156,150 +180,182 @@
         (assoc :powered-since (vec (take rational-in-use (:powered-since system)))))))
 
 (defn turn-off-weapons [db ship-id]
-  (update-in db [:games :sv :ship ship-id :systems :weapons :stuff]
-             (fn [stuff]
-               (into {} (map (fn [[id a-stuff]]
-                               [id (merge a-stuff
-                                          {:charging-since nil
-                                           :firing-since nil
-                                           :is-selected false})]))
-                     stuff))))
+  (if (get-in db [:games :sv :ship ship-id :systems :weapons])
+    (update-in db [:games :sv :ship ship-id :systems :weapons :stuff]
+               (fn [stuff]
+                 (into {} (map (fn [[id a-stuff]]
+                                 [id (merge a-stuff
+                                            {:charging-since nil
+                                             :firing-since nil
+                                             :is-selected false})]))
+                       stuff)))
+    db))
 
 (defn ensure [struct path val]
   (update-in struct path #(if (nil? %) val %)))
 
+(declare drive)
 (def events
-  {:drop-my-subs
-   (fn [db _ conn-id]
-     (update db :subs #(set (remove (fn [_ subber] (= subber conn-id)) %))))
+  (atom
+   {:drop-my-subs
+    (fn [db _ conn-id]
+      (update db :subs #(set (remove (fn [_ subber] (= subber conn-id)) %))))
 
-   :chat/add-message
-   (fn [db [_ text] conn-id]
-     (update db :messages conj {:text text
-                                :id (gen-uuid)
-                                :sender conn-id
-                                :received-at (now)}))
+    :chat/add-message
+    (fn [db [_ text] conn-id]
+      (update db :messages conj {:text text
+                                 :id (gen-uuid)
+                                 :sender conn-id
+                                 :received-at (now)}))
 
-   :chat/set-nick
-   (fn [db [_ nick] conn-id]
-     (assoc-in db [:users conn-id :nick] nick))
+    :chat/set-nick
+    (fn [db [_ nick] conn-id]
+      (assoc-in db [:users conn-id :nick] nick))
 
-   :subscribe
-   (fn [db [_ sub] conn-id]
-     (update db :subs (fn [old] (conj (set old) [sub conn-id]))))
+    :subscribe
+    (fn [db [_ sub] conn-id]
+      (update db :subs (fn [old] (conj (set old) [sub conn-id]))))
 
-   :unsubscribe
-   (fn [db [_ sub] conn-id]
-     (update db :subs disj [sub conn-id]))
+    :unsubscribe
+    (fn [db [_ sub] conn-id]
+      (update db :subs disj [sub conn-id]))
 
-   :conn/on-create
-   (fn [db [_ {:keys [conn-id conn]}]]
-     (let [anonymous-user {:nick (rand-nth data/names)
-                           :conn-id conn-id
-                           :conn conn}]
-       (-> db
-           (assoc-in [:users conn-id] anonymous-user)
-           (navigate conn-id {:location-id :home-panel}))))
+    :conn/on-create
+    (fn [db [_ {:keys [conn-id conn]}]]
+      (let [anonymous-user {:nick (rand-nth data/names)
+                            :conn-id conn-id
+                            :conn conn}]
+        (-> db
+            (assoc-in [:users conn-id] anonymous-user)
+            (navigate conn-id {:location-id :home-panel}))))
 
-   :conn/on-close
-   (fn [db [_ conn-id]]
-     (-> db
-         (navigate conn-id {:location-id :quit})
-         (update-in [:users conn-id] dissoc :conn)))
+    :conn/on-close
+    (fn [db [_ conn-id]]
+      (-> db
+          (navigate conn-id {:location-id :quit})
+          (update-in [:users conn-id] dissoc :conn)))
 
-   :home/attend
-   (fn [db _ conn-id]
-     (navigate db conn-id {:location-id :home-panel}))
+    :home/attend
+    (fn [db _ conn-id]
+      (navigate db conn-id {:location-id :home-panel}))
 
-   :sv/attend
-   (fn [db [_ {:keys [with-ship location]}] conn-id]
-     (-> db
-         (navigate conn-id {:location-id :space-versus
-                            :params {:ship-location-id (or location (gen-uuid))}})
-         (ensure [:games :sv :ship conn-id] (or with-ship standard-ship))
-         (turn-off-weapons conn-id)))
+    :sv/attend
+    (fn [db [_ {:keys [with-ship]}] conn-id]
+      (-> db
+          (navigate conn-id {:location-id :space-versus})
+          (ensure [:games :sv :ship conn-id] (merge (or with-ship basic-ship)
+                                                    {:ship-id conn-id}))
+          (drive [:sv/jump (str (gen-uuid))] conn-id)))
 
-   :sv.system/power-up
-   (fn [db [_ system-id] conn-id]
-     (let [left-power (subs/left-power db conn-id)
-           {:keys [max damaged in-use]} (subs/system db conn-id system-id)]
-       (if (and (> left-power 0)
-                (> (- (- max damaged) in-use) 0))
-         (-> db
-             (update-in [:games :sv :ship conn-id :systems system-id :in-use] inc)
-             (update-in [:games :sv :ship conn-id :systems system-id :powered-since] conj (t/now)))
-         db)))
+    :sv.system/power-up
+    (fn [db [_ system-id] conn-id]
+      (let [left-power (subs/left-power db conn-id)
+            {:keys [max damaged in-use]} (subs/system db conn-id system-id)]
+        (if (and (> left-power 0)
+                 (> (- (- max damaged) in-use) 0))
+          (-> db
+              (update-in [:games :sv :ship conn-id :systems system-id :in-use] inc)
+              (update-in [:games :sv :ship conn-id :systems system-id :powered-since] conj (t/now)))
+          db)))
 
-   :sv.system/power-down
-   (fn [db [_ system-id] conn-id]
-     (let [db (update-in db [:games :sv :ship conn-id :systems system-id]
-                         (fn [{:keys [in-use] :as system}]
-                           (if (> in-use 0)
-                             (-> system
-                                 (assoc :in-use (dec in-use))
-                                 (update :powered-since (comp vec butlast)))
-                             system)))]
-       (if (= :weapons system-id)
-         (turn-off-weapons db conn-id)
-         db)))
+    :sv.system/power-down
+    (fn [db [_ system-id] conn-id]
+      (let [db (update-in db [:games :sv :ship conn-id :systems system-id]
+                          (fn [{:keys [in-use] :as system}]
+                            (if (> in-use 0)
+                              (-> system
+                                  (assoc :in-use (dec in-use))
+                                  (update :powered-since (comp vec butlast)))
+                              system)))]
+        (if (= :weapons system-id)
+          (turn-off-weapons db conn-id)
+          db)))
 
-   :sv.weapon/power-up
-   (fn [db [_ stuff-id] conn-id]
-     (let [weapons-system (subs/system db conn-id :weapons)
-           consuming-power (->> weapons-system
-                                :stuff
-                                vals
-                                (filter :charging-since)
-                                (reduce (fn [acc {:keys [required-power]}] (+ acc required-power)) 0))]
-       (if (>= (- (:in-use weapons-system)
-                  consuming-power)
-               (get-in weapons-system [:stuff stuff-id :required-power]))
-         (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :charging-since] (t/now))
-         db)))
+    :sv.weapon/power-up
+    (fn [db [_ stuff-id] conn-id]
+      (let [weapons-system (subs/system db conn-id :weapons)
+            consuming-power (->> weapons-system
+                                 :stuff
+                                 vals
+                                 (filter :charging-since)
+                                 (map :required-power)
+                                 (reduce +))]
+        (if (>= (- (:in-use weapons-system)
+                   consuming-power)
+                (get-in weapons-system [:stuff stuff-id :required-power]))
+          (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :charging-since] (t/now))
+          db)))
 
-   :sv.weapon/power-down
-   (fn [db [_ stuff-id] conn-id]
-     (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :charging-since] nil))
+    :sv.weapon/power-down
+    (fn [db [_ stuff-id] conn-id]
+      (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :charging-since] nil))
 
-   :sv.weapon/hit
-   (fn [db [_ target-ship-id target-system-id] conn-id]
-     (reduce (fn [acc-db {:keys [id status damage]}]
-               (let [shields-ready? (= :ready (:status (subs/shield-readiness acc-db target-ship-id)))]
-                 (cond-> acc-db
-                   (= :selected status) (cond->
-                                            shields-ready?
-                                          (assoc-in [:games :sv :ship target-ship-id :systems :shields :last-absorption] (t/now))
+    :sv.weapon/hit
+    (fn [db [_ target-ship-id target-system-id] conn-id]
+      (reduce (fn [acc-db {:keys [id status damage]}]
+                (let [shields-ready? (= :ready (:status (subs/shield-readiness acc-db target-ship-id)))]
+                  (if (= :selected status)
+                    (cond-> acc-db
+                      :fire
+                      (assoc-in [:games :sv :ship conn-id :systems :weapons :stuff id :firing-since] (t/now))
+                      :drop-selection
+                      (assoc-in [:games :sv :ship conn-id :systems :weapons :stuff id :is-selected] false)
 
-                                          (not shields-ready?)
-                                          (update-in [:games :sv :ship target-ship-id :systems target-system-id]
-                                                     (fn [system]
-                                                       (-> system
-                                                           (update :damaged (fn [current-damage] (min (:max system) (+ current-damage damage))))
-                                                           (deplete-power))))
-                                          :deplete-weapon
-                                          (->
-                                           (assoc-in [:games :sv :ship conn-id :systems :weapons :stuff id :firing-since] (t/now))
-                                           (turn-off-weapons target-ship-id)
-                                           (assoc-in [:games :sv :ship conn-id :systems :weapons :stuff id :is-selected] false)))
+                      shields-ready?
+                      (assoc-in [:games :sv :ship target-ship-id :systems :shields :last-absorption] (t/now))
 
-                   (= :weapons target-system-id) (turn-off-weapons target-ship-id)
-                   )))
-             db
-             (subs/weapons-readiness db conn-id)))
+                      (not shields-ready?)
+                      (update-in [:games :sv :ship target-ship-id :systems target-system-id]
+                                 (fn [system]
+                                   (-> system
+                                       (update :damaged (fn [current-damage] (min (:max system) (+ current-damage damage))))
+                                       (assoc :last-hit-at (t/now))
+                                       (deplete-power))))
 
-   :sv.weapon/select
-   (fn [db [_ stuff-id] conn-id]
-     (if (= :ready (:status (subs/weapon-readiness db conn-id stuff-id)))
-       (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :is-selected] true)
-       db))
+                      (and (not shields-ready?)
+                           (= :weapons target-system-id))
+                      (turn-off-weapons target-ship-id))
+                    acc-db)))
+              db
+              (subs/weapons-readiness db conn-id)))
 
-   :sv.weapon/unselect
-   (fn [db [_ stuff-id] conn-id]
-     (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :is-selected] false))
-   })
+    :sv.weapon/select
+    (fn [db [_ stuff-id] conn-id]
+      (if (= :ready (:status (subs/weapon-readiness db conn-id stuff-id)))
+        (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :is-selected] true)
+        db))
+
+    :sv.weapon/unselect
+    (fn [db [_ stuff-id] conn-id]
+      (assoc-in db [:games :sv :ship conn-id :systems :weapons :stuff stuff-id :is-selected] false))
+
+    :sv/jump
+    (fn [db [_ location-id] conn-id]
+      (-> db
+          (assoc-in [:games :sv :ship conn-id :location-id] (or location-id (gen-uuid)))
+          (turn-off-weapons conn-id)))
+
+    :sv.ship/loot
+    (fn [db [_ ship-id] conn-id]
+      (let [amount (get-in db [:games :sv :ship ship-id :cargo :scrap])]
+        (-> db
+            (assoc-in [:games :sv :ship ship-id :cargo :scrap] 0)
+            (assoc-in [:games :sv :ship conn-id :cargo :scrap] amount))))
+
+    :sv.store/purchase
+    (fn [db _ conn-id]
+      (if (>= 30 (subs/derive db [:sv.cargo/scrap] conn-id))
+        (-> db
+            (assoc-in [:games :sv :ship conn-id :systems :weapons :stuff :basic-laser2] (merge weapon-basic-laser
+                                                                                               {:id :basic-laser2}))
+            (update-in [:games :sv :ship conn-id :cargo :scrap] - 30))
+        db))}))
 
 (defn drive [db [evt-id :as evt] & params]
-  (if-let [evt-fn (get events evt-id)]
+  (if-let [evt-fn (get @events evt-id)]
     (do (println "drive: " (pr-str evt) " " (pr-str params))
         (apply evt-fn db evt params))
     (println "!!No evt found:" (pr-str evt))))
+
+(defn add-evt [id handler]
+  (swap! events assoc id handler))

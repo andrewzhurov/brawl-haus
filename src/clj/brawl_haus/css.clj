@@ -17,8 +17,19 @@
   ["33%" {:margin-left "-10px"}]
   ["100%" {:margin-left "0px"}])
 
+(defkeyframes charge-out
+  ["0%" {:opacity 0}]
+  ["5%" {:opacity 1}]
+  ["100%" {:margin-right "-300px"}])
+
+(defkeyframes flash
+  ["33%" {:opacity 0.1}]
+  ["50%" {:opacity 0.6}])
+
 (defstyles screen
   [single-fire
+   flash
+   charge-out
    [:.main-layout {:display "grid"
                    :height "100vh"
                    :grid-template
@@ -257,9 +268,12 @@
                      :top "10px"
                      :right "10px"}]
 
-   [:.space-versus {:transition "0.4s"}
-    {:display "flex"
-     :height "100%"}
+   [:.space-versus {:position "relative"
+                    :display "grid"
+                    :grid-template
+                    (grid "ship locations environment 1fr"
+                          "3fr 2fr 4fr")
+                    :height "100%"}
     [:.me {:background "darkgray"
             :margin "5px"
             :width "65%"}]
@@ -356,12 +370,13 @@
          ]]]
       [:.name {:margin "3px"}]]
      ]
-
-    [:.me {:position "relative"}]
     [:.ship {:position "relative"
+             :grid-area "ship"
              :width "min-content"
              :padding "10px"
              :margin "5px"}
+     [:&.wrecked
+      {:animation [[flash "0.6s"]]}]
      [:.name {:position "absolute"
               :top "148px"
               :left "106px"
@@ -391,20 +406,49 @@
               "30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px")
        :z-index 2
        }
-      [:.hardware-weapon {:max-height "30px"
+      [:.hardware-weapon {:position "relative"
+                          :max-height "30px"
                           :max-width "60px"
                           :z-index 1
                           :transition "1.25s"}
+       [:img {:width "100%"}]
        [:&.w1 {:grid-area "w1"
                :align-self "end"
                :margin-bottom "-5px" }
         [:&.idle {:margin-bottom "-15px"}]]
        [:&.w2 {:grid-area "w2"
+               :align-self "start"
                :transform "scaleY(-1)"
                :margin-top "-5px"}
         [:&.idle {:margin-top "-15px"}]]
+       [:.ready-indicator
+        {:position "absolute"
+         :top "21%"
+         :right "21px"
+         :height "6px"
+         :width "12px"
+         :border-radius "4px"
+         :z-index 4
+         :background-color "darkred"}]
+       [:&.ready
+        [:.ready-indicator {:background-color "green"}]]
+       [:&.selected
+        [:.ready-indicator {:background-color "green"}]]
+       [:.charge
+        {:position "absolute"
+         :top "10%"
+         :right "-8px"
+         :height "10px"
+         :width "18px"
+         :border-radius "30%"
+         :background-color "orange"
+         :z-index 4
+         :opacity 0}]
        [:&.firing
-        {:animation [[single-fire "0.6s"]]}]]
+        {:animation [[single-fire "0.6s"]]}
+        [:.charge
+         {:animation [[charge-out "0.4s"]]}]
+        ]]
 
       [:.system {:background-color "lightgray"
                  :background-position "center"
@@ -413,7 +457,8 @@
                  :border "1px solid gray"
                  :transition "0.3s"
                  :cursor "pointer"
-                 :z-index 2}
+                 :z-index 2
+                 :animation [[flash "0.4s"]]}
        [:&:hover {:background-color "gainsboro"}]
        [:&.with-power {:background-color active-color}]
        [:&:hover {:background-color focused-active-color}]
@@ -429,8 +474,35 @@
        [:&.integrity-wrecked {:border-color "red"}]
        ]
       ]]
-    [:.locations {:width "100%"
-                  :max-height "20%"
-                  :overflow-y "scroll"}]
+    [:.locations {:grid-area "locations"
+                  :width "100%"
+                  :overflow-y "auto"}]
+    [:.environment {:grid-area "environment"}]
+    [:.station
+     {:color "white"
+      :font-size "18px"
+      :font-weight "600"
+      :background-color "gray"
+      :padding "5px"}]
+    [:.store
+     [:.weapon
+      {:position "relative"
+       :width "110px"
+       :height "110px"
+       :display "grid"
+       :font-size "initial"
+       :background-image "url(/ftl-assets/img/storeUI/store_buy_weapons_on.png)"
+       :cursor "pointer"}
+      [:&:hover {:background-image "url(/ftl-assets/img/storeUI/store_buy_weapons_select2.png)"}]
+      [:.name {:position "absolute"
+               :top "30px"
+               :left "20px"
+               :font-weight "600"
+               :color "white"}]
+      [:.price {:position "absolute"
+                :top "82px"
+                :left "40px"
+                :font-weight "600"
+                :color "white"}]]]
 
     ]])

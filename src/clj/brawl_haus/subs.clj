@@ -3,6 +3,7 @@
             [clj-time.core :as t]
             [clj-time.format :as f]
             [clj-time.coerce :as c]
+            [clojure.set]
             ))
 
 (defn l [desc expr] (println desc expr) expr)
@@ -83,22 +84,35 @@
       :ready {:status :ready
               :percentage 100})))
 
+(defn ships [db]
+  (get-in db [:games :sv :ship]))
 (defn ship [db ship-id]
-  (get-in db [:games :sv :ship ship-id]))
+  (get (ships db) ship-id))
+
+(defn ship-wrecked? [db ship-id]
+  (every? (fn [[_ {:keys [max damaged]}]] (= max damaged)) (:systems (ship db ship-id))))
 
 (defn power-hub [db ship-id]
   (:power-hub (ship db ship-id)))
 (defn systems [db ship-id]
   (:systems (ship db ship-id)))
+
 (defn system [db ship-id system-id]
-  (get (systems db ship-id) system-id))
+  (-> (ship db ship-id)
+      :systems
+      (get system-id)))
 
 (defn power-in-use [db ship-id]
-  (let [systems (systems db ship-id)]
-    (reduce (fn [acc [_ system]] (+ acc (:in-use system))) 0 systems)))
+  (->> (systems db ship-id)
+       vals
+       (filter :in-use)
+       (map :in-use)
+       (reduce +)))
 
 (defn left-power [db ship-id]
-  (- (:generating (power-hub db ship-id)) (power-in-use db ship-id)))
+  (if-let [generating (:generating (power-hub db ship-id))]
+    (- generating (power-in-use db ship-id))
+    0))
 
 (defn weapon [db ship-id stuff-id]
   (get-in (systems db ship-id) [:weapons :stuff stuff-id]))
@@ -106,7 +120,7 @@
 (defn weapon-readiness [db ship-id stuff-id]
   (let [a-weapon (weapon db ship-id stuff-id)]
     (merge (select-keys a-weapon [:id :slot :damage])
-           (calc-readiness a-weapon))))
+           (calc-readiness  a-weapon))))
 
 (defn shield-readiness [db ship-id]
   (let [{:keys [charge-time powered-since last-absorption]} (system db ship-id :shields)]
@@ -127,12 +141,6 @@
        (map #(get-in % [:params :ship-location-id]))
        set))
 
-(defn ships-at [db location-id]
-  (->> (:users db)
-       (filter (fn [[id user]] (and (= :space-versus (get-in user [:location :location-id]))
-                                    (= location-id (get-in user [:location :params :ship-location-id])))))
-       (map key)
-       set))
 
 (declare derive)
 (def subs
@@ -180,17 +188,34 @@
    (fn [db _ conn-id]
      (location db conn-id))
 
+   :sv.ship/name
+   (fn [db [_ ship-id] _]
+     (get-in db [:users ship-id :nick]))
+
    :sv/systems
    (fn [db _ conn-id]
      (get-in db [:games :sv :ship conn-id :systems]))
 
-   :sv.ship/integrity
-   (fn [db _ conn-id]
-     {:integrity (:integrity (ship db conn-id))})
+   :sv.ship/systems
+   (fn [db [_ ship-id] _]
+     (keys (get-in (l "SHIP:" (ship db ship-id)) [:systems])))
+
+   :sv.ship/weapons
+   (fn [db [_ ship-id] _]
+     (keys (get-in (l "SHIP:" (ship db ship-id)) [:systems :weapons :stuff])))
+
+   :sv.weapon/view
+   (fn [db [_ ship-id weapon-id] _]
+     (-> (get-in (system db ship-id :weapons) [:stuff weapon-id])
+         (select-keys [:id :name :required-power])))
 
    :sv.weapon/readiness
    (fn [db [_ stuff-id] conn-id]
      (weapon-readiness db conn-id stuff-id))
+
+   :sv.weapon/obscured-readiness
+   (fn [db [_ ship-id weapon-id] _]
+     (select-keys (weapon-readiness db ship-id weapon-id) [:slot :status]))
 
    :sv.weapons/readiness
    (fn [db [_ ship-id] conn-id]
@@ -222,50 +247,55 @@
                    :stuff-id stuff-id))
           (:stuff (system db conn-id :weapons))))
 
-   :sv/enemies
-   (fn [db _ conn-id]
-     (keys (dissoc (get-in db [:games :sv :ship]) conn-id)))
 
    :sv/locations
-   (fn [db [_ location-id] _]
-     (->> (:users db)
-          vals
-          (map :location)
-          (filter #(= :space-versus (:location-id %)))
-          (map #(get-in % [:params :ship-location-id]))
-          set))
-
-   :sv.location/ships
-   (fn [db [_ location-id] _]
-     (ships-at db location-id))
-
-   :view.sv/locations
    (fn [db _ _]
-     (for [location-id (locations db)]
-       {:location-id location-id
-        :location-name (apply str (take 5 (name location-id)))
-        :ship-captains (map (fn [ship-id] (get-in db [:users ship-id :nick]))
-                            (ships-at db location-id))}))
+     (let [static-locations (->> (get-in db [:games :sv :locations])
+                                 keys
+                                 set)
+           dynamic-locations (->> (ships db)
+                                  (map (comp :location-id val))
+                                  (remove nil?)
+                                  set)]
+       (clojure.set/union static-locations
+                          dynamic-locations)))
 
-   :view.sv/ship
-   (fn [db [_ ship-id] _]
-     {:ship-id ship-id
-      :nick (get-in db [:users ship-id :nick])
-      :systems (map (fn [[system-id {:keys [max damaged in-use]}]]
-                      {:id system-id
-                       :status (cond (= 0 damaged) "integrity-full"
-                                     (not= max damaged) "integrity-damaged"
-                                     :else "integrity-wrecked")
-                       :integrity (- max damaged)})
-                    (systems db ship-id))
-      :weapons (weapons-readiness db ship-id)})
-
-   :view.sv/ships
+   :sv.location/details
    (fn [db [_ location-id] _]
-     (for [ship-id (ships-at db location-id)]
-       (derive db [:view.sv/ship ship-id] nil)))
+     (reduce (fn [location [ship-id ship]]
+               (cond-> (merge location
+                              {:location-id location-id
+                               :location-name (apply str (take 5 (name (or location-id "VOID"))))})
+                 (= location-id (:location-id ship))
+                 (update :ships (comp set conj) ship-id)))
+             (get-in db [:games :sv :locations location-id])
+             (ships db)))
 
-   })
+   :sv.current-location/details
+   (fn [db _ conn-id]
+     (let [current-location-id (:location-id (ship db conn-id))]
+       (update (derive db [:sv.location/details current-location-id] nil)
+               :ships disj conn-id)))
+
+   :sv.system/status
+   (fn [db [_ ship-id system-id] _]
+     (let [{:keys [max damaged last-hit-at]} (get-in (ship db ship-id) [:systems system-id])]
+       {:status (cond
+                  (zero? damaged) "integrity-full"
+                  (not= damaged max) "integrity-damaged"
+                  :else "integrity-wrecked")
+        :last-hit-at_FOR_UPDATE_SEND (str last-hit-at)}))
+
+   :sv.cargo/scrap
+   (fn [db _ conn-id]
+     (get-in db [:games :sv :ship conn-id :cargo :scrap]))
+
+   :sv.ship/wrecked?
+   (fn [db [_ ship-id] _]
+     (every?
+      (fn [[_ {:keys [max damaged]}]]
+        (= max damaged))
+      (:systems (ship db ship-id))))})
 
 (defn derive [db [sub-id :as sub] & params]
   (if-let [sub-fn (get subs sub-id)]

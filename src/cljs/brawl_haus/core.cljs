@@ -25,16 +25,16 @@
     (enable-console-print!)
     (println "dev mode")))
 
+(declare init)
 (defn entry-point []
   [:div.main-layout
    [:nav.nav-section
     [:div.nav-wrapper
      [:a.brand-logo {:on-click #(=>evt [:home/attend])} "BrawlHaus"]
      [:ul#nav-mobile.right
-      [:li [:a {:on-click #(do (rf/dispatch-sync [:initialize-db])
-                               (rf/dispatch-sync [:conn/create])
-                               (<=sub [:self])
-                               (<=sub [:my-subs]))} "RESET"]]
+      [:li [:a {:on-click #(do (rf/dispatch-sync [:conn/send [:reset]])
+                               (js/setTimeout init 1000)
+                               )} "RESET"]]
       [:li.controls [:a {:on-click #(>evt [:help/show])}
                      [:i.material-icons "all_out"]]]]]]
    [:div.content-section
@@ -43,9 +43,6 @@
    [shortcuts/help]])
 
 (defn mount-root []
-  (rf/clear-subscription-cache!)
-  (<=sub [:self])
-  (<=sub [:my-subs])
   (reagent/render [entry-point]
                   (.getElementById js/document "app")))
 
@@ -59,4 +56,7 @@
   (rf/dispatch-sync [:conn/create])
   (dev-setup)
   (shortcuts/reg-press-handlers)
+  (rf/clear-subscription-cache!)
+  (<=sub [:self])
+  (<=sub [:my-subs])
   (mount-root))
