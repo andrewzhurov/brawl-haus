@@ -27,13 +27,6 @@
 
 (def db (atom init-db))
 
-(rf/reg-event-db
- :race/ready-set-go
- (fn [db [_ _ race-id]]
-   (update-in db [:open-races race-id]
-              merge {:status :began
-                     :race-text (rand-nth data/long-texts)})))
-
 (defn calc-speed [text start finish]
   (let [minutes (/ (t/in-seconds (t/interval (c/from-date start)
                                              (c/from-date finish)))
@@ -61,13 +54,7 @@
       (assoc-in db [:open-races (:id new-race)] new-race))
     db))
 
-(rf/reg-event-fx
- :race/attend
- (fn [{:keys [db]} [_ conn-id]]
-   (let [db-with-race (ensure-race db conn-id)]
-     {:db (enter-race db-with-race (:id (race-to-be db-with-race)) conn-id)
-      :later-evt {:ms 7000 :evt [:race/ready-set-go nil (:id (race-to-be db-with-race))]}
-      })))
+
 
 (rf/reg-fx
  :later-evt
@@ -76,29 +63,7 @@
    (Thread/sleep ms)
    (rf/dispatch evt)))
 
-(rf/reg-event-db
- :race/left-text
- (fn [db [_ conn-id left-text]]
-   (let [is-finished (zero? (count left-text))
-         race-id (-> (location db conn-id) :params :race-id)
-         {:keys [race-text starts-at]} (get-in db [:open-races race-id])]
-     (assoc-in db
-               [:open-races race-id :participants conn-id]
-               {:left-chars (count left-text)
-                :speed (calc-speed race-text starts-at (now))}))))
 
-
-(rf/reg-event-db
- :hiccup-touch/attend
- (fn [db [_ conn-id]]
-   (navigate db conn-id {:location-id :hiccup-touch})))
-
-
-
-(rf/reg-event-db
- :ccc/attend
- (fn [db [_ conn-id]]
-   (navigate db conn-id {:location-id :ccc-panel})))
 
 
 
@@ -200,6 +165,39 @@
    {:drop-my-subs
     (fn [db _ conn-id]
       (update db :subs #(set (remove (fn [_ subber] (= subber conn-id)) %))))
+
+    :race/left-text
+    (fn [db [_ left-text] conn-id]
+      (let [is-finished (zero? (count left-text))
+            race-id (-> (location db conn-id) :params :race-id)
+            {:keys [race-text starts-at]} (get-in db [:open-races race-id])]
+        (assoc-in db
+                  [:open-races race-id :participants conn-id]
+                  {:left-chars (count left-text)
+                   :speed (calc-speed race-text starts-at (now))})))
+
+    :hiccup-touch/attend
+    (fn [db _ conn-id]
+      (navigate db conn-id {:location-id :hiccup-touch}))
+
+    :ccc/attend
+    (fn [db _ conn-id]
+      (navigate db conn-id {:location-id :ccc-panel}))
+
+    :race/ready-set-go
+    (fn [db [_ race-id] _]
+      (update-in db [:open-races race-id]
+                 merge {:status :began
+                        :race-text (rand-nth data/long-texts)}))
+
+    :race/attend
+    (fn [current-db _ conn-id]
+      (let [db-with-race (ensure-race current-db conn-id)]
+        (l "DB:" db-with-race)
+        (future (Thread/sleep 7000)
+                (l 11 2222)
+                (swap! db drive [:race/ready-set-go (:id (race-to-be db-with-race))] nil))
+        (enter-race db-with-race (:id (race-to-be db-with-race)) conn-id)))
 
     :chat/add-message
     (fn [db [_ text] conn-id]

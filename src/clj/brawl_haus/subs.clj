@@ -37,26 +37,7 @@
     (get-in state [:open-races race-id])))
 
 
-(rf/reg-sub
- :countdown
- (fn [db [_ conn-id]]
-   (select-keys (current-race db conn-id) [:starts-at])))
 
-(rf/reg-sub
- :text-race
- (fn [db [_ conn-id]]
-   (let [race (current-race db conn-id)]
-     {:has-not-began (empty? (:race-text race))
-      :race-text (:race-text race)
-      :starts-at (:starts-at race)})))
-
-(rf/reg-sub
- :race-progress
- (fn [db [_ conn-id]]
-   (->> (location db conn-id)
-        :params
-        :race-id
-        (race-progress* db))))
 
 
 ;; Space versus
@@ -150,6 +131,26 @@
           (filter (fn [[_ subber]] (= subber conn-id)))
           (map first)))
 
+   ;; Race
+   :countdown
+   (fn [db _ conn-id]
+     (select-keys (current-race db conn-id) [:starts-at]))
+
+   :text-race
+   (fn [db _ conn-id]
+     (let [race (current-race db conn-id)]
+       {:has-not-began (empty? (:race-text race))
+        :race-text (:race-text race)
+        :starts-at (:starts-at race)}))
+
+   :race-progress
+   (fn [db _ conn-id]
+     (->> (location db conn-id)
+          :params
+          :race-id
+          (race-progress* db)))
+
+
    :set-nick
    (fn [db _ conn-id]
      {:current-nick (get-in db [:users conn-id :nick])})
@@ -188,6 +189,7 @@
    (fn [db _ conn-id]
      (location db conn-id))
 
+   ;; Space Versus
    :sv.ship/name
    (fn [db [_ ship-id] _]
      (get-in db [:users ship-id :nick]))
