@@ -1,0 +1,2018 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- fire stuff -->
+<animSheet name="fire_large" w="256" h="32" fw="32" fh="32">effects/fire_L1_strip8.png</animSheet>
+<animSheet name="fire_small" w="256" h="32" fw="32" fh="32">effects/fire_S1_strip8.png</animSheet>
+
+<anim name="fire_large">
+	<sheet>fire_large</sheet>
+	<desc length="8" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="fire_small">
+	<sheet>fire_small</sheet>
+	<desc length="8" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<!-- breach stuff -->
+<animSheet name="breach" w="154" h="19" fw="22" fh="19">effects/breach.png</animSheet>
+
+<anim name="breach">
+	<sheet>breach</sheet>
+	<desc length="7" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<!-- Crystal Lockdown -->
+
+<animSheet name="crystal_1" w="108" h="19" fw="18" fh="19">people/crystal_1.png</animSheet>
+<animSheet name="crystal_2" w="90" h="19" fw="18" fh="19">people/crystal_2.png</animSheet>
+
+<anim name="crystal_1">
+	<sheet>crystal_1</sheet>
+	<desc length="6" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<anim name="crystal_2">
+	<sheet>crystal_2</sheet>
+	<desc length="5" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+
+<!-- Customize screen stuff-->
+<animSheet name="custom_repair" w="315" h="35" fw="35" fh="35">customizeUI/custom_repair_strip9.png</animSheet>
+<animSheet name="custom_rock" w="140" h="35" fw="35" fh="35">customizeUI/custom_rockman_strip4.png</animSheet>
+<animSheet name="custom_type" w="96" h="24" fw="24" fh="24">customizeUI/custom_type_strip4.png</animSheet>
+
+<anim name="custom_repair">
+	<sheet>custom_repair</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="custom_rock">
+	<sheet>custom_rock</sheet>
+	<desc length="4" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="custom_type">
+	<sheet>custom_type</sheet>
+	<desc length="4" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+
+
+<!-- weapon stuff -->
+<animSheet name="laser1" w="192" h="60" fw="16" fh="60">weapons/laser1_strip12.png</animSheet>
+<animSheet name="laser_burst_1" w="192" h="60" fw="16" fh="60">weapons/laser1_strip12.png</animSheet>
+<animSheet name="laser_burst_2" w="192" h="60" fw="16" fh="60">weapons/laser2_strip12.png</animSheet>
+<animSheet name="laser_burst_3" w="276" h="64" fw="23" fh="64">weapons/laser3_strip12.png</animSheet>
+<animSheet name="laser_burst_5" w="300" h="64" fw="25" fh="64">weapons/laser5_strip12.png</animSheet>
+<animSheet name="laser_heavy_1" w="208" h="62" fw="26" fh="62">weapons/heavy_1_strip8.png</animSheet>
+<animSheet name="laser_heavy_2" w="224" h="71" fw="28" fh="71">weapons/heavy_2_strip8.png</animSheet>
+<animSheet name="beam_1" w="192" h="33" fw="24" fh="33">weapons/beam_1_strip8.png</animSheet>
+<animSheet name="beam_2" w="300" h="41" fw="30" fh="41">weapons/beam_2_strip10.png</animSheet>
+<animSheet name="beam_3" w="330" h="75" fw="33" fh="75">weapons/beam_3_strip10.png</animSheet>
+<animSheet name="beam_fire" w="280" h="52" fw="28" fh="52">weapons/beam_fire_strip10.png</animSheet>
+<animSheet name="beam_long" w="260" h="71" fw="26" fh="71">weapons/beam_long_strip10.png</animSheet>
+<animSheet name="beam_bio" w="240" h="46" fw="30" fh="46">weapons/beam_bio_strip8.png</animSheet>
+<animSheet name="missiles_1" w="75" h="43" fw="25" fh="43">weapons/missiles_1_strip3.png</animSheet>
+<animSheet name="missiles_2" w="78" h="55" fw="26" fh="55">weapons/missiles_2_strip3.png</animSheet>
+<animSheet name="ion_1" w="240" h="50" fw="30" fh="50">weapons/ion_1_strip8.png</animSheet>
+<animSheet name="ion_2" w="216" h="52" fw="27" fh="52">weapons/ion_2_strip8.png</animSheet>
+<animSheet name="ion_4" w="216" h="54" fw="27" fh="54">weapons/ion_4_strip8.png</animSheet>
+<animSheet name="bomb_1" w="595" h="52" fw="35" fh="52">weapons/bomblauncher_1_strip17.png</animSheet>
+<animSheet name="bomb_fire" w="595" h="52" fw="35" fh="52">weapons/bomblauncher_fire_strip17.png</animSheet>
+<animSheet name="bomb_heal" w="595" h="52" fw="35" fh="52">weapons/bomblauncher_heal_strip17.png</animSheet>
+<animSheet name="bomb_ion" w="595" h="52" fw="35" fh="52">weapons/bomblauncher_ion_strip17.png</animSheet>
+<animSheet name="bomb_lockdown" w="595" h="52" fw="35" fh="52">weapons/bomblauncher_lockdown_strip17.png</animSheet>
+<animSheet name="bomb_breach" w="595" h="52" fw="35" fh="52">weapons/bomblauncher_breach_strip17.png</animSheet>
+<animSheet name="laser_hull" w="176" h="67" fw="22" fh="67">weapons/laser_hull_strip8.png</animSheet>
+<animSheet name="beam_hull" w="182" h="62" fw="26" fh="62">weapons/beam_hull_strip7.png</animSheet>
+
+<animSheet name="crystal_burst_1" w="288" h="52" fw="24" fh="52">weapons/crystal_burst_1_strip12.png</animSheet>
+<animSheet name="crystal_burst_2" w="420" h="61" fw="35" fh="61">weapons/crystal_burst_2_strip12.png</animSheet>
+<animSheet name="crystal_heavy_1" w="444" h="63" fw="37" fh="63">weapons/crystal_heavy_1_strip12.png</animSheet>
+<animSheet name="crystal_heavy_2" w="564" h="69" fw="47" fh="69">weapons/crystal_heavy_2_strip12.png</animSheet>
+
+
+<animSheet name="artillery_fed" w="400" h="100" fw="40" fh="100">weapons/blank.png</animSheet>
+
+
+<weaponAnim name="artillery_fed">
+	<sheet>artillery_fed</sheet>
+	<desc length="10" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="0" y="50"/>
+	<mountPoint x="0" y="50"/>
+	<chargeImage>weapons/blank.png</chargeImage>
+</weaponAnim>
+
+
+<animSheet name="boss_1" w="396" h="65" fw="33" fh="65">weapons/boss_1_strip12.png</animSheet>
+<animSheet name="boss_2" w="99" h="65" fw="33" fh="65">weapons/boss_2_strip3.png</animSheet>
+<animSheet name="boss_3" w="264" h="65" fw="33" fh="65">weapons/boss_3_strip8.png</animSheet>
+<animSheet name="boss_4" w="264" h="65" fw="33" fh="65">weapons/boss_4_strip8.png</animSheet>
+<weaponAnim name="boss_1">
+	<sheet>boss_1</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="16" y="20"/>
+	<mountPoint x="0" y="0"/>
+</weaponAnim>
+<weaponAnim name="boss_2">
+	<sheet>boss_2</sheet>
+	<desc length="3" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="16" y="20"/>
+	<mountPoint x="0" y="0"/>
+	<chargeImage>weapons/boss_2_glow.png</chargeImage>
+</weaponAnim>
+<weaponAnim name="boss_3">
+	<sheet>boss_3</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="16" y="25"/>
+	<mountPoint x="0" y="0"/>
+	<chargeImage>weapons/boss_3_glow.png</chargeImage>
+</weaponAnim>
+<weaponAnim name="boss_4">
+	<sheet>boss_4</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="16" y="20"/>
+	<mountPoint x="0" y="0"/>
+	<chargeImage>weapons/boss_4_glow.png</chargeImage>
+</weaponAnim>
+
+<!-- LEAVE THIS -->
+<weaponAnim name="default">
+	<sheet>laser1</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="10" y="16"/>
+	<mountPoint x="4" y="44"/>
+</weaponAnim>
+
+
+<weaponAnim name="laser_burst_1">
+	<sheet>laser_burst_1</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="10" y="16"/>
+	<mountPoint x="2" y="44"/>
+</weaponAnim>
+
+<weaponAnim name="laser_burst_2">
+	<sheet>laser_burst_2</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="10" y="16"/>
+	<mountPoint x="4" y="44"/>
+</weaponAnim>
+
+<weaponAnim name="laser_burst_3">
+	<sheet>laser_burst_3</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="12" y="10"/>
+	<mountPoint x="3" y="44"/>
+</weaponAnim>
+
+<weaponAnim name="laser_burst_5">
+	<sheet>laser_burst_5</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="14" y="10"/>
+	<mountPoint x="6" y="45"/>
+</weaponAnim>
+
+<weaponAnim name="laser_heavy_1">
+	<sheet>laser_heavy_1</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="17" y="10"/>
+	<mountPoint x="3" y="41"/>
+	<chargeImage>weapons/heavy_1_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="laser_heavy_2">
+	<sheet>laser_heavy_2</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="18" y="10"/>
+	<mountPoint x="6" y="45"/>
+	<chargeImage>weapons/heavy_2_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="beam_1">
+	<sheet>beam_1</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="16" y="9"/>
+	<mountPoint x="5" y="24"/>
+	<chargeImage>weapons/beam_1_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="beam_2">
+	<sheet>beam_2</sheet>
+	<desc length="10" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="16" y="13"/>
+	<mountPoint x="3" y="30"/>
+	<chargeImage>weapons/beam_2_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="beam_3">
+	<sheet>beam_3</sheet>
+	<desc length="10" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="19" y="40"/>
+	<mountPoint x="4" y="62"/>
+	<chargeImage>weapons/beam_3_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="beam_fire">
+	<sheet>beam_fire</sheet>
+	<desc length="10" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="16" y="21"/>
+	<mountPoint x="6" y="38"/>
+	<chargeImage>weapons/beam_fire_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="beam_long">
+	<sheet>beam_long</sheet>
+	<desc length="10" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="16" y="44"/>
+	<mountPoint x="5" y="56"/>
+	<chargeImage>weapons/beam_long_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="beam_bio">
+	<sheet>beam_bio</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="18" y="19"/>
+	<mountPoint x="3" y="37"/>
+	<chargeImage>weapons/beam_bio_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="missiles_1">
+	<sheet>missiles_1</sheet>
+	<desc length="3" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="15" y="20"/>
+	<mountPoint x="7" y="30"/>
+	<chargeImage>weapons/missiles_1_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="missiles_2">
+	<sheet>missiles_2</sheet>
+	<desc length="3" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="16" y="15"/>
+	<mountPoint x="3" y="40"/>
+	<chargeImage>weapons/missiles_2_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="ion_1">
+	<sheet>ion_1</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="17" y="7"/>
+	<mountPoint x="9" y="35"/>
+	<chargeImage>weapons/ion_1_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="ion_2">
+	<sheet>ion_2</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="15" y="6"/>
+	<mountPoint x="3" y="36"/>
+	<chargeImage>weapons/ion_2_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="ion_4">
+	<sheet>ion_4</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="16" y="12"/>
+	<mountPoint x="5" y="38"/>
+	<chargeImage>weapons/ion_4_glow.png</chargeImage>
+</weaponAnim>
+
+
+<weaponAnim name="bomb_1">
+	<sheet>bomb_1</sheet>
+	<desc length="17" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>16</fireFrame>
+	<firePoint x="20" y="8" />
+	<mountPoint x="5" y="34" />
+	<delayChargeAnim>0.98</delayChargeAnim>
+	<chargeImage>weapons/bomblauncher_1_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="bomb_fire">
+	<sheet>bomb_fire</sheet>
+	<desc length="17" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>16</fireFrame>
+	<firePoint x="20" y="8" />
+	<mountPoint x="5" y="34" />
+	<delayChargeAnim>0.98</delayChargeAnim>
+	<chargeImage>weapons/bomblauncher_1_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="bomb_heal">
+	<sheet>bomb_heal</sheet>
+	<desc length="17" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>16</fireFrame>
+	<firePoint x="20" y="8" />
+	<mountPoint x="5" y="34" />
+	<delayChargeAnim>0.98</delayChargeAnim>
+	<chargeImage>weapons/bomblauncher_1_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="bomb_ion">
+	<sheet>bomb_ion</sheet>
+	<desc length="17" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>16</fireFrame>
+	<firePoint x="20" y="8" />
+	<mountPoint x="5" y="34" />
+	<delayChargeAnim>0.98</delayChargeAnim>
+	<chargeImage>weapons/bomblauncher_1_glow.png</chargeImage>
+</weaponAnim>
+
+
+<weaponAnim name="bomb_lockdown">
+	<sheet>bomb_lockdown</sheet>
+	<desc length="17" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>16</fireFrame>
+	<firePoint x="20" y="8" />
+	<mountPoint x="5" y="34" />
+	<delayChargeAnim>0.98</delayChargeAnim>
+	<chargeImage>weapons/bomblauncher_1_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="bomb_breach">
+	<sheet>bomb_breach</sheet>
+	<desc length="17" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>16</fireFrame>
+	<firePoint x="20" y="8" />
+	<mountPoint x="5" y="34" />
+	<delayChargeAnim>0.98</delayChargeAnim>
+	<chargeImage>weapons/bomblauncher_1_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="laser_hull">
+	<sheet>laser_hull</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="16" y="7"/>
+	<mountPoint x="5" y="47"/>
+	<chargeImage>weapons/laser_hull_glow.png</chargeImage>
+</weaponAnim>
+
+<weaponAnim name="beam_hull">
+	<sheet>beam_hull</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="18" y="10"/>
+	<mountPoint x="5" y="50"/>
+	<chargeImage>weapons/beam_hull_glow.png</chargeImage>
+</weaponAnim>
+
+
+
+
+<weaponAnim name="crystal_burst_1">
+	<sheet>crystal_burst_1</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="15" y="15"/>
+	<mountPoint x="6" y="36"/>
+</weaponAnim>
+
+<weaponAnim name="crystal_burst_2">
+	<sheet>crystal_burst_2</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="19" y="14"/>
+	<mountPoint x="6" y="41"/>
+</weaponAnim>
+
+<weaponAnim name="crystal_heavy_1">
+	<sheet>crystal_heavy_1</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="20" y="16"/>
+	<mountPoint x="8" y="45"/>
+</weaponAnim>
+
+<weaponAnim name="crystal_heavy_2">
+	<sheet>crystal_heavy_2</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>8</fireFrame>
+	<firePoint  x="21" y="22"/>
+	<mountPoint x="9" y="47"/>
+</weaponAnim>
+
+
+<!-- ACTUAL PROJECTILES -->
+<animSheet name="laser_heavy1" w="200" h="20" fw="50" fh="20">weapons/laser_heavy_strip4.png</animSheet>
+
+<anim name="laser_heavy1">
+	<sheet>laser_heavy1</sheet>
+	<desc length="4" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<animSheet name="ion_1_shot" w="192" h="24" fw="24" fh="24">weapons/ion_1_shot_strip8.png</animSheet>
+
+<anim name="ion_1_shot">
+	<sheet>ion_1_shot</sheet>
+	<desc length="8" x="0" y="0"/>
+	<time>0.3</time>
+</anim>
+
+<animSheet name="ion_2_shot" w="192" h="24" fw="24" fh="24">weapons/ion_2_shot_strip8.png</animSheet>
+
+<anim name="ion_2_shot">
+	<sheet>ion_2_shot</sheet>
+	<desc length="8" x="0" y="0"/>
+	<time>0.3</time>
+</anim>
+
+
+
+<animSheet name="ion_4_shot" w="256" h="32" fw="32" fh="32">weapons/ion_4_shot_strip8.png</animSheet>
+<anim name="ion_4_shot">
+	<sheet>ion_4_shot</sheet>
+	<desc length="8" x="0" y="0"/>
+	<time>0.3</time>
+</anim>
+
+
+<animSheet name="laser_light1" w="200" h="20" fw="50" fh="20">weapons/laser_light_strip4.png</animSheet>
+
+<anim name="laser_light1">
+	<sheet>laser_light1</sheet>
+	<desc length="4" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<animSheet name="laser_light2" w="200" h="20" fw="50" fh="20">weapons/laser_light2_strip4.png</animSheet>
+
+<anim name="laser_light2">
+	<sheet>laser_light2</sheet>
+	<desc length="4" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<animSheet name="laser_light2" w="200" h="20" fw="50" fh="20">weapons/laser_light2_strip4.png</animSheet>
+
+<anim name="laser_light2">
+	<sheet>laser_light2</sheet>
+	<desc length="4" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<animSheet name="laser_drone" w="200" h="20" fw="50" fh="20">weapons/laser_drone_strip4.png</animSheet>
+
+<anim name="laser_drone">
+	<sheet>laser_drone</sheet>
+	<desc length="4" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<animSheet name="crystal_shard" w="32" h="80" fw="32" fh="80">weapons/crystal_shot1.png</animSheet>
+<anim name="crystal_shard">
+	<sheet>crystal_shard</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<animSheet name="crystal_shard2" w="32" h="80" fw="32" fh="80">weapons/crystal_shot2.png</animSheet>
+<anim name="crystal_shard2">
+	<sheet>crystal_shard2</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+<animSheet name="crystal_shard3" w="32" h="80" fw="32" fh="80">weapons/crystal_shot3.png</animSheet>
+<anim name="crystal_shard3">
+	<sheet>crystal_shard3</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<animSheet name="missile_1" w="32" h="80" fw="32" fh="80">weapons/missile_1.png</animSheet>
+<anim name="missile_1">
+	<sheet>missile_1</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<animSheet name="missile_burst" w="43" h="32" fw="43" fh="32">weapons/missile_burst.png</animSheet>
+<anim name="missile_burst">
+	<sheet>missile_burst</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<animSheet name="missile_2" w="32" h="80" fw="32" fh="80">weapons/missile_2.png</animSheet>
+<anim name="missile_2">
+	<sheet>missile_2</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<animSheet name="missile_3" w="32" h="80" fw="32" fh="80">weapons/missile_3.png</animSheet>
+<anim name="missile_3">
+	<sheet>missile_3</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<animSheet name="missile_breach" w="32" h="80" fw="32" fh="80">weapons/missile_breach.png</animSheet>
+<anim name="missile_breach">
+	<sheet>missile_breach</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<animSheet name="missile_hull" w="32" h="80" fw="32" fh="80">weapons/missile_hull.png</animSheet>
+<anim name="missile_hull">
+	<sheet>missile_hull</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+<animSheet name="beam_contact" w="240" h="48" fw="48" fh="48">weapons/laser_contact.png</animSheet>
+<anim name="beam_contact">
+	<sheet>beam_contact</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>0.75</time>
+</anim>
+
+<animSheet name="bomb1" w="315" h="35" fw="35" fh="35">weapons/bomb_1_strip9.png</animSheet>
+<anim name="bomb1">
+	<sheet>bomb1</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.35</time>
+</anim>
+
+<animSheet name="bomb_ion" w="315" h="35" fw="35" fh="35">weapons/bomb_ion_strip9.png</animSheet>
+<anim name="bomb_ion">
+	<sheet>bomb_ion</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.35</time>
+</anim>
+
+<animSheet name="bomb_lockdown" w="315" h="35" fw="35" fh="35">weapons/bomb_lockdown_strip9.png</animSheet>
+<anim name="bomb_lockdown">
+	<sheet>bomb_lockdown</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.35</time>
+</anim>
+
+<animSheet name="bomb_fire" w="315" h="35" fw="35" fh="35">weapons/bomb_fire_strip9.png</animSheet>
+<anim name="bomb_fire">
+	<sheet>bomb_fire</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.35</time>
+</anim>
+
+<animSheet name="bomb_heal" w="315" h="35" fw="35" fh="35">weapons/bomb_heal_strip9.png</animSheet>
+<anim name="bomb_heal">
+	<sheet>bomb_heal</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.35</time>
+</anim>
+
+<animSheet name="bomb_breach" w="315" h="35" fw="35" fh="35">weapons/bomb_breach_strip9.png</animSheet>
+<anim name="bomb_breach">
+	<sheet>bomb_breach</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.35</time>
+</anim>
+
+<animSheet name="explosion_big1" w="768" h="64" fw="64" fh="64">effects/explosion_big2.png</animSheet>
+<anim name="explosion_big1">
+	<sheet>explosion_big1</sheet>
+	<desc length="12" x="0" y="0"/>
+	<time>0.75</time>
+</anim>
+<!--  JUSTIN
+<animSheet name="explosion_big1" w="640" h="64" fw="64" fh="64">effects/explosion_big1_strip10.png</animSheet>
+<anim name="explosion_big1">
+	<sheet>explosion_big1</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>0.75</time>
+</anim> -->
+
+
+<animSheet name="explosion_crystal" w="512" h="64" fw="64" fh="64">effects/explosion_crystal.png</animSheet>
+<anim name="explosion_crystal">
+	<sheet>explosion_crystal</sheet>
+	<desc length="8" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<animSheet name="explosion_crystal_2" w="336" h="48" fw="48" fh="48">effects/explosion_crystal_2.png</animSheet>
+<anim name="explosion_crystal_2">
+	<sheet>explosion_crystal_2</sheet>
+	<desc length="7" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+
+<animSheet name="explosion_missile1" w="289" h="32" fw="32" fh="32">effects/explosion_missile1_strip9.png</animSheet>
+<anim name="explosion_missile1">
+	<sheet>explosion_missile1</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.6</time>
+</anim>
+
+<animSheet name="explosion_big1_green" w="640" h="64" fw="64" fh="64">effects/explosion_big1_strip10_green.png</animSheet>
+<anim name="explosion_big1_green">
+	<sheet>explosion_big1_green</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>0.75</time>
+</anim>
+
+<animSheet name="explosion_big1_ion" w="640" h="64" fw="64" fh="64">effects/explosion_big1_strip10_ion.png</animSheet>
+<anim name="explosion_big1_ion">
+	<sheet>explosion_big1_ion</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<animSheet name="explosion_small_ion" w="144" h="16" fw="16" fh="16">effects/explosion_ion2.png</animSheet>
+<anim name="explosion_small_ion">
+	<sheet>explosion_small_ion</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<animSheet name="explosion_big1_heal" w="640" h="64" fw="64" fh="64">effects/explosion_big1_strip10_heal.png</animSheet>
+<anim name="explosion_big1_heal">
+	<sheet>explosion_big1_heal</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>0.75</time>
+</anim>
+
+<animSheet name="explosion_lockdown" w="640" h="64" fw="64" fh="64">effects/explosion_lockdown.png</animSheet>
+<anim name="explosion_lockdown">
+	<sheet>explosion_lockdown</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>0.4</time>
+</anim>
+
+<animSheet name="explosion1" w="320" h="32" fw="32" fh="32">effects/explosion1_strip10.png</animSheet>
+<anim name="explosion1">
+	<sheet>explosion1</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>0.75</time>
+</anim>
+
+
+<!-- THESE EXPLOSIONS are called randomly when you use "explosion_random" as an explosion name -->
+<animSheet name="explosion_big2" w="576" h="64" fw="64" fh="64">effects/explosion_big2.png</animSheet>
+<anim name="explosion_big2">
+	<sheet>explosion_big2</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.75</time>
+</anim>
+
+
+<animSheet name="explosion_big3" w="704" h="64" fw="64" fh="64">effects/explosion_big3.png</animSheet>
+<anim name="explosion_big3">
+	<sheet>explosion_big3</sheet>
+	<desc length="11" x="0" y="0"/>
+	<time>0.75</time>
+</anim>
+
+
+<animSheet name="explosion_big4" w="640" h="64" fw="64" fh="64">effects/explosion_big4.png</animSheet>
+<anim name="explosion_big4">
+	<sheet>explosion_big4</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>0.75</time>
+</anim>
+<!-- end of random explosions -->
+
+
+<!-- CREW ANIMATIONS. ALL REBEL/PLAYER CAN USE THESE -->
+<animSheet name="human" w="315" h="455" fw="35" fh="35">people/human_base.png</animSheet>
+
+
+<anim name="human_clone">
+	<sheet>human</sheet>
+	<desc length="6" x="0" y="2"/>
+	<time>0.75</time>
+</anim>
+
+
+<anim name="human_death_right">
+	<sheet>human</sheet>
+	<desc length="5" x="3" y="0"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="human_death_left">
+	<sheet>human</sheet>
+	<desc length="5" x="0" y="2"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="human_walk_down">
+	<sheet>human</sheet>
+	<desc length="4" x="0" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_walk_right">
+	<sheet>human</sheet>
+	<desc length="4" x="4" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_walk_up">
+	<sheet>human</sheet>
+	<desc length="4" x="0" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_walk_left">
+	<sheet>human</sheet>
+	<desc length="4" x="4" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_shoot_down">
+	<sheet>human</sheet>
+	<desc length="3" x="0" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_shoot_right">
+	<sheet>human</sheet>
+	<desc length="3" x="3" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_shoot_up">
+	<sheet>human</sheet>
+	<desc length="3" x="6" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_shoot_left">
+	<sheet>human</sheet>
+	<desc length="3" x="0" y="1"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_fire_down">
+	<sheet>human</sheet>
+	<desc length="4" x="0" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_fire_right">
+	<sheet>human</sheet>
+	<desc length="4" x="4" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_fire_up">
+	<sheet>human</sheet>
+	<desc length="4" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_fire_left">
+	<sheet>human</sheet>
+	<desc length="4" x="4" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_repair">
+	<sheet>human</sheet>
+	<desc length="9" x="0" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_punch_up">
+	<sheet>human</sheet>
+	<desc length="6" x="3" y="1"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_punch_down">
+	<sheet>human</sheet>
+	<desc length="6" x="0" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="human_teleport">
+	<sheet>human</sheet>
+	<desc length="9" x="0" y="3"/>
+	<time>0.5</time>
+</anim>
+
+<anim name="human_type_right">
+	<sheet>human</sheet>
+	<desc length="4" x="0" y="5"/>
+	<time>0.75</time>
+</anim>
+<anim name="human_type_left">
+	<sheet>human</sheet>
+	<desc length="4" x="4" y="5"/>
+	<time>0.75</time>
+</anim>
+<anim name="human_type_up">
+	<sheet>human</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>0.75</time>
+</anim>
+<anim name="human_type_down">
+	<sheet>human</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>0.75</time>
+</anim>
+
+<!-- every crewmember uses this -->
+<anim name="crewLaser">
+	<sheet>human</sheet>
+	<desc length="1" x="1" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<anim name="human_portrait">
+	<sheet>human</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<!-- same as crew teleport -->
+<anim name="ghost_death">
+	<sheet>human</sheet>
+	<desc length="9" x="0" y="4"/>
+	<time>0.5</time>
+</anim>
+
+
+<anim name="ghost_portrait">
+	<sheet>human</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+
+
+<!--
+*******************
+	REPAIR MAN  ANIMATIONS 
+********************
+-->
+<animSheet name="repair" w="280" h="280" fw="35" fh="35">people/repair_base.png</animSheet>
+<animSheet name="repair_death" w="320" h="32" fh="32" fw="32">effects/explosion1_strip10.png</animSheet>
+
+<anim name="repair_death_right">
+	<sheet>repair_death</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_death_left">
+	<sheet>repair_death</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_walk_down">
+	<sheet>repair</sheet>
+	<desc length="4" x="0" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_walk_right">
+	<sheet>repair</sheet>
+	<desc length="4" x="4" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_walk_up">
+	<sheet>repair</sheet>
+	<desc length="4" x="0" y="5"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_walk_left">
+	<sheet>repair</sheet>
+	<desc length="4" x="4" y="5"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_fire_down">
+	<sheet>repair</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_fire_right">
+	<sheet>repair</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_fire_up">
+	<sheet>repair</sheet>
+	<desc length="4" x="0" y="3"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_fire_left">
+	<sheet>repair</sheet>
+	<desc length="4" x="4" y="3"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_repair">
+	<sheet>repair</sheet>
+	<desc length="8" x="0" y="2"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_power_down">
+	<sheet>repair</sheet>
+	<desc length="7" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_power_up">
+	<sheet>repair</sheet>
+	<desc length="7" x="1" y="1"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_portrait">
+	<sheet>repair</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+
+<anim name="repair_shoot_down">
+	<sheet>repair</sheet>
+	<desc length="2" x="0" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_shoot_right">
+	<sheet>repair</sheet>
+	<desc length="2" x="2" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_shoot_up">
+	<sheet>repair</sheet>
+	<desc length="2" x="4" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="repair_shoot_left">
+	<sheet>repair</sheet>
+	<desc length="2" x="6" y="7"/>
+	<time>1.0</time>
+</anim>
+
+
+<!--
+*******************
+	BATTLE DRONE ANIMATIONS 
+********************
+-->
+<animSheet name="battle" w="280" h="210" fw="35" fh="35">people/battle_base.png</animSheet>
+<animSheet name="battle_death" w="320" h="32" fh="32" fw="32">effects/explosion1_strip10.png</animSheet>
+
+<anim name="battle_death_right">
+	<sheet>battle_death</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_death_left">
+	<sheet>battle_death</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_walk_down">
+	<sheet>battle</sheet>
+	<desc length="4" x="0" y="5"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_walk_right">
+	<sheet>battle</sheet>
+	<desc length="4" x="4" y="5"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_walk_up">
+	<sheet>battle</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_walk_left">
+	<sheet>battle</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_shoot_down">
+	<sheet>battle</sheet>
+	<desc length="3" x="0" y="3"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_shoot_right">
+	<sheet>battle</sheet>
+	<desc length="3" x="3" y="3"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_shoot_up">
+	<sheet>battle</sheet>
+	<desc length="3" x="2" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_shoot_left">
+	<sheet>battle</sheet>
+	<desc length="3" x="5" y="0"/>
+	<time>1.0</time>
+</anim>
+
+
+<anim name="battle_power_down">
+	<sheet>battle</sheet>
+	<desc length="7" x="0" y="2"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="battle_power_up">
+	<sheet>battle</sheet>
+	<desc length="7" x="0" y="1"/>
+	<time>1.0</time>
+</anim>
+
+
+<anim name="battle_portrait">
+	<sheet>battle</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<!--
+*******************
+ENGINEER ANIMATIONS 
+********************
+-->
+<animSheet name="engi" w="315" h="455" fw="35" fh="35">people/engi_base.png</animSheet>
+
+<anim name="engi_clone">
+	<sheet>engi</sheet>
+	<desc length="6" x="0" y="1"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_death_right">
+	<sheet>engi</sheet>
+	<desc length="8" x="0" y="2"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_death_left">
+	<sheet>engi</sheet>
+	<desc length="8" x="0" y="2"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_walk_down">
+	<sheet>engi</sheet>
+	<desc length="4" x="0" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_walk_right">
+	<sheet>engi</sheet>
+	<desc length="4" x="4" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_walk_up">
+	<sheet>engi</sheet>
+	<desc length="4" x="0" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_walk_left">
+	<sheet>engi</sheet>
+	<desc length="4" x="4" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_shoot_down">
+	<sheet>engi</sheet>
+	<desc length="3" x="0" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_shoot_right">
+	<sheet>engi</sheet>
+	<desc length="3" x="3" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_shoot_up">
+	<sheet>engi</sheet>
+	<desc length="3" x="6" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_shoot_left">
+	<sheet>engi</sheet>
+	<desc length="3" x="6" y="1"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_fire_down">
+	<sheet>engi</sheet>
+	<desc length="4" x="0" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_fire_right">
+	<sheet>engi</sheet>
+	<desc length="4" x="4" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_fire_up">
+	<sheet>engi</sheet>
+	<desc length="4" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_fire_left">
+	<sheet>engi</sheet>
+	<desc length="4" x="4" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_repair">
+	<sheet>engi</sheet>
+	<desc length="9" x="0" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_punch_up">
+	<sheet>engi</sheet>
+	<desc length="6" x="2" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_punch_down">
+	<sheet>engi</sheet>
+	<desc length="6" x="0" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="engi_teleport">
+	<sheet>engi</sheet>
+	<desc length="9" x="0" y="3"/>
+	<time>0.5</time>
+</anim>
+
+
+<anim name="engi_type_right">
+	<sheet>engi</sheet>
+	<desc length="4" x="0" y="5"/>
+	<time>1</time>
+</anim>
+<anim name="engi_type_left">
+	<sheet>engi</sheet>
+	<desc length="4" x="4" y="5"/>
+	<time>1</time>
+</anim>
+<anim name="engi_type_up">
+	<sheet>engi</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>1</time>
+</anim>
+<anim name="engi_type_down">
+	<sheet>engi</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>1</time>
+</anim>
+
+<anim name="engi_portrait">
+	<sheet>engi</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+
+<!--
+*******************
+	ENERGY MAN  ANIMATIONS 
+********************
+-->
+<animSheet name="energy" w="280" h="455" fw="35" fh="35">people/energy_base.png</animSheet>
+
+<anim name="energy_clone">
+	<sheet>energy</sheet>
+	<desc length="6" x="0" y="1"/>
+	<time>0.5</time>
+</anim>
+
+
+<animSheet name="explosion_energy_death" w="640" h="64" fw="64" fh="64">effects/explosion_big1_strip10_green.png</animSheet>
+<anim name="energy_death_right">
+	<sheet>explosion_energy_death</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<anim name="energy_death_left">
+	<sheet>explosion_energy_death</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<anim name="energy_walk_down">
+	<sheet>energy</sheet>
+	<desc length="4" x="0" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_walk_right">
+	<sheet>energy</sheet>
+	<desc length="4" x="4" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_walk_up">
+	<sheet>energy</sheet>
+	<desc length="4" x="0" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_walk_left">
+	<sheet>energy</sheet>
+	<desc length="4" x="4" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_shoot_down">
+	<sheet>energy</sheet>
+	<desc length="3" x="0" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_shoot_right">
+	<sheet>energy</sheet>
+	<desc length="3" x="3" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_shoot_up">
+	<sheet>energy</sheet>
+	<desc length="3" x="2" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_shoot_left">
+	<sheet>energy</sheet>
+	<desc length="3" x="5" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_fire_down">
+	<sheet>energy</sheet>
+	<desc length="4" x="0" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_fire_right">
+	<sheet>energy</sheet>
+	<desc length="4" x="4" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_fire_up">
+	<sheet>energy</sheet>
+	<desc length="4" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_fire_left">
+	<sheet>energy</sheet>
+	<desc length="4" x="4" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_repair">
+	<sheet>energy</sheet>
+	<desc length="8" x="0" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_punch_up">
+	<sheet>energy</sheet>
+	<desc length="6" x="0" y="5"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_punch_down">
+	<sheet>energy</sheet>
+	<desc length="6" x="0" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="energy_teleport">
+	<sheet>energy</sheet>
+	<desc length="8" x="0" y="2"/>
+	<time>0.5</time>
+</anim>
+
+<anim name="energy_type_right">
+	<sheet>energy</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>1</time>
+</anim>
+<anim name="energy_type_left">
+	<sheet>energy</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>1</time>
+</anim>
+<anim name="energy_type_up">
+	<sheet>energy</sheet>
+	<desc length="4" x="0" y="3"/>
+	<time>1</time>
+</anim>
+<anim name="energy_type_down">
+	<sheet>energy</sheet>
+	<desc length="4" x="4" y="3"/>
+	<time>1</time>
+</anim>
+
+<anim name="energy_portrait">
+	<sheet>energy</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<!--
+*******************
+	ROCK MAN  ANIMATIONS 
+********************
+-->
+<animSheet name="rock" w="350" h="455" fw="35" fh="35">people/rock_base.png</animSheet>
+
+<anim name="rock_clone">
+	<sheet>rock</sheet>
+	<desc length="6" x="0" y="2"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_death_right">
+	<sheet>rock</sheet>
+	<desc length="7" x="3" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_death_left">
+	<sheet>rock</sheet>
+	<desc length="7" x="3" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_walk_down">
+	<sheet>rock</sheet>
+	<desc length="4" x="0" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_walk_right">
+	<sheet>rock</sheet>
+	<desc length="4" x="4" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_walk_up">
+	<sheet>rock</sheet>
+	<desc length="4" x="0" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_walk_left">
+	<sheet>rock</sheet>
+	<desc length="4" x="4" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_shoot_down">
+	<sheet>rock</sheet>
+	<desc length="4" x="0" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_shoot_right">
+	<sheet>rock</sheet>
+	<desc length="4" x="4" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_shoot_up">
+	<sheet>rock</sheet>
+	<desc length="4" x="0" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_shoot_left">
+	<sheet>rock</sheet>
+	<desc length="4" x="4" y="9"/>
+	<time>1.0</time>
+</anim>
+
+
+<anim name="rock_fire_down">
+	<sheet>rock</sheet>
+	<desc length="10" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_fire_right">
+	<sheet>rock</sheet>
+	<desc length="10" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_fire_up">
+	<sheet>rock</sheet>
+	<desc length="10" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_fire_left">
+	<sheet>rock</sheet>
+	<desc length="10" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_repair">
+	<sheet>rock</sheet>
+	<desc length="8" x="0" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_punch_up">
+	<sheet>rock</sheet>
+	<desc length="6" x="3" y="1"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_punch_down">
+	<sheet>rock</sheet>
+	<desc length="6" x="0" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="rock_teleport">
+	<sheet>rock</sheet>
+	<desc length="9" x="0" y="3"/>
+	<time>0.5</time>
+</anim>
+
+
+<anim name="rock_type_right">
+	<sheet>rock</sheet>
+	<desc length="4" x="0" y="5"/>
+	<time>1</time>
+</anim>
+<anim name="rock_type_left">
+	<sheet>rock</sheet>
+	<desc length="4" x="4" y="5"/>
+	<time>1</time>
+</anim>
+<anim name="rock_type_up">
+	<sheet>rock</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>1</time>
+</anim>
+<anim name="rock_type_down">
+	<sheet>rock</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>1</time>
+</anim>
+
+<anim name="rock_portrait">
+	<sheet>rock</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<!--
+*******************
+	CRYSTAL MAN  ANIMATIONS 
+********************
+-->
+<animSheet name="crystal" w="350" h="455" fw="35" fh="35">people/crystal_base.png</animSheet>
+
+<anim name="crystal_clone">
+	<sheet>crystal</sheet>
+	<desc length="6" x="0" y="2"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_death_right">
+	<sheet>crystal</sheet>
+	<desc length="6" x="3" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_death_left">
+	<sheet>crystal</sheet>
+	<desc length="6" x="0" y="2"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_walk_down">
+	<sheet>crystal</sheet>
+	<desc length="4" x="0" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_walk_right">
+	<sheet>crystal</sheet>
+	<desc length="4" x="4" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_walk_up">
+	<sheet>crystal</sheet>
+	<desc length="4" x="0" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_walk_left">
+	<sheet>crystal</sheet>
+	<desc length="4" x="4" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_shoot_down">
+	<sheet>crystal</sheet>
+	<desc length="4" x="0" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_shoot_right">
+	<sheet>crystal</sheet>
+	<desc length="4" x="4" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_shoot_up">
+	<sheet>crystal</sheet>
+	<desc length="4" x="0" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_shoot_left">
+	<sheet>crystal</sheet>
+	<desc length="4" x="4" y="9"/>
+	<time>1.0</time>
+</anim>
+
+
+<anim name="crystal_fire_down">
+	<sheet>crystal</sheet>
+	<desc length="10" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_fire_right">
+	<sheet>crystal</sheet>
+	<desc length="10" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_fire_up">
+	<sheet>crystal</sheet>
+	<desc length="10" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_fire_left">
+	<sheet>crystal</sheet>
+	<desc length="10" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_repair">
+	<sheet>crystal</sheet>
+	<desc length="8" x="0" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_punch_up">
+	<sheet>crystal</sheet>
+	<desc length="6" x="3" y="1"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_punch_down">
+	<sheet>crystal</sheet>
+	<desc length="6" x="0" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="crystal_teleport">
+	<sheet>crystal</sheet>
+	<desc length="9" x="0" y="3"/>
+	<time>0.5</time>
+</anim>
+
+
+<anim name="crystal_type_right">
+	<sheet>crystal</sheet>
+	<desc length="4" x="0" y="5"/>
+	<time>1</time>
+</anim>
+<anim name="crystal_type_left">
+	<sheet>crystal</sheet>
+	<desc length="4" x="4" y="5"/>
+	<time>1</time>
+</anim>
+<anim name="crystal_type_up">
+	<sheet>crystal</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>1</time>
+</anim>
+<anim name="crystal_type_down">
+	<sheet>crystal</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>1</time>
+</anim>
+
+
+<anim name="crystal_portrait">
+	<sheet>crystal</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<!--
+*******************
+	MANTIS  ANIMATIONS 
+********************
+-->
+<animSheet name="mantis" w="350" h="490" fw="35" fh="35">people/mantis_base.png</animSheet>
+
+
+<anim name="mantis_clone">
+	<sheet>mantis</sheet>
+	<desc length="6" x="0" y="2"/>
+	<time>0.7</time>
+</anim>
+
+<anim name="mantis_death_left">
+	<sheet>mantis</sheet>
+	<desc length="7" x="0" y="1"/>
+	<time>0.7</time>
+</anim>
+<anim name="mantis_death_right">
+	<sheet>mantis</sheet>
+	<desc length="7" x="0" y="1"/>
+	<time>0.7</time>
+</anim>
+
+<anim name="mantis_walk_down">
+	<sheet>mantis</sheet>
+	<desc length="5" x="0" y="13"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_walk_right">
+	<sheet>mantis</sheet>
+	<desc length="5" x="5" y="13"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_walk_up">
+	<sheet>mantis</sheet>
+	<desc length="5" x="0" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_walk_left">
+	<sheet>mantis</sheet>
+	<desc length="5" x="5" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_shoot_down">
+	<sheet>mantis</sheet>
+	<desc length="4" x="0" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_shoot_right">
+	<sheet>mantis</sheet>
+	<desc length="4" x="4" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_shoot_up">
+	<sheet>mantis</sheet>
+	<desc length="4" x="2" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_shoot_left">
+	<sheet>mantis</sheet>
+	<desc length="4" x="6" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_fire_down">
+	<sheet>mantis</sheet>
+	<desc length="4" x="0" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_fire_right">
+	<sheet>mantis</sheet>
+	<desc length="4" x="4" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_fire_up">
+	<sheet>mantis</sheet>
+	<desc length="4" x="0" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_fire_left">
+	<sheet>mantis</sheet>
+	<desc length="4" x="4" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_repair">
+	<sheet>mantis</sheet>
+	<desc length="9" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_punch_up">
+	<sheet>mantis</sheet>
+	<desc length="10" x="0" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_punch_down">
+	<sheet>mantis</sheet>
+	<desc length="10" x="0" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="mantis_teleport">
+	<sheet>mantis</sheet>
+	<desc length="9" x="0" y="3"/>
+	<time>0.5</time>
+</anim>
+
+
+<anim name="mantis_type_right">
+	<sheet>mantis</sheet>
+	<desc length="4" x="0" y="5"/>
+	<time>1</time>
+</anim>
+<anim name="mantis_type_left">
+	<sheet>mantis</sheet>
+	<desc length="4" x="4" y="5"/>
+	<time>1</time>
+</anim>
+<anim name="mantis_type_up">
+	<sheet>mantis</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>1</time>
+</anim>
+<anim name="mantis_type_down">
+	<sheet>mantis</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>1</time>
+</anim>
+
+
+<anim name="mantis_portrait">
+	<sheet>mantis</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+
+<!--
+*******
+	Slug animations! 
+********
+-->
+<animSheet name="slug" w="315" h="455" fw="35" fh="35">people/slug_base.png</animSheet>
+
+<anim name="slug_clone">
+	<sheet>slug</sheet>
+	<desc length="6" x="0" y="1"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="slug_death_right">
+	<sheet>slug</sheet>
+	<desc length="7" x="2" y="0"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="slug_walk_down">
+	<sheet>slug</sheet>
+	<desc length="4" x="0" y="12"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="slug_walk_right">
+	<sheet>slug</sheet>
+	<desc length="4" x="4" y="12"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="slug_walk_up">
+	<sheet>slug</sheet>
+	<desc length="4" x="0" y="11"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="slug_walk_left">
+	<sheet>slug</sheet>
+	<desc length="4" x="4" y="11"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="slug_shoot_down">
+	<sheet>slug</sheet>
+	<desc length="3" x="0" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_shoot_right">
+	<sheet>slug</sheet>
+	<desc length="3" x="3" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_shoot_up">
+	<sheet>slug</sheet>
+	<desc length="3" x="6" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_shoot_left">
+	<sheet>slug</sheet>
+	<desc length="3" x="6" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_fire_down">
+	<sheet>slug</sheet>
+	<desc length="4" x="0" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_fire_right">
+	<sheet>slug</sheet>
+	<desc length="4" x="4" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_fire_up">
+	<sheet>slug</sheet>
+	<desc length="4" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_fire_left">
+	<sheet>slug</sheet>
+	<desc length="4" x="4" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_repair">
+	<sheet>slug</sheet>
+	<desc length="9" x="0" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_punch_up">
+	<sheet>slug</sheet>
+	<desc length="6" x="0" y="5"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_punch_down">
+	<sheet>slug</sheet>
+	<desc length="6" x="0" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="slug_teleport">
+	<sheet>slug</sheet>
+	<desc length="9" x="0" y="2"/>
+	<time>0.5</time>
+</anim>
+
+<anim name="slug_type_right">
+	<sheet>slug</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>0.75</time>
+</anim>
+<anim name="slug_type_left">
+	<sheet>slug</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>0.75</time>
+</anim>
+<anim name="slug_type_up">
+	<sheet>slug</sheet>
+	<desc length="4" x="0" y="3"/>
+	<time>0.75</time>
+</anim>
+<anim name="slug_type_down">
+	<sheet>slug</sheet>
+	<desc length="4" x="4" y="3"/>
+	<time>0.75</time>
+</anim>
+
+
+<anim name="slug_portrait">
+	<sheet>slug</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+</FTL>

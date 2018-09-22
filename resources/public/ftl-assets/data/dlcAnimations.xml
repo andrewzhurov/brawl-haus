@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<animSheet name="stun_floor" w="700" h="70" fw="70" fh="70">effects/stun_floor.png</animSheet>
+
+<anim name="stun_spark_big">
+	<sheet>stun_floor</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<animSheet name="hacked_console" w="245" h="35" fw="35" fh="35">effects/stun_computer.png</animSheet>
+
+<anim name="hacked_console">
+	<sheet>hacked_console</sheet>
+	<desc length="7" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<animSheet name="room_touch2x2" w="420" h="70" fw="70" fh="70">ipad/tap_2x2.png</animSheet>
+
+<anim name="room_touch2x2">
+	<sheet>room_touch2x2</sheet>
+	<desc length="6" x="0" y="0"/>
+	<time>0.3</time>
+</anim>
+
+<animSheet name="room_touch2x1" w="420" h="35" fw="70" fh="35">ipad/tap_2x1.png</animSheet>
+
+<anim name="room_touch2x1">
+	<sheet>room_touch2x1</sheet>
+	<desc length="6" x="0" y="0"/>
+	<time>0.3</time>
+</anim>
+
+<animSheet name="mindcontrol" w="112" h="14" fw="14" fh="14">people/mindcontrol_strip8.png</animSheet>
+
+<anim name="mindcontrol">
+	<sheet>mindcontrol</sheet>
+	<desc length="8" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+
+<animSheet name="pds" w="43" h="25" fw="43" fh="25">weapons/pds.png</animSheet>
+
+<anim name="pds">
+	<sheet>pds</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+
+<animSheet name="asteroid0" w="24" h="24" fw="24" fh="24">asteroids/asteroid0.png</animSheet>
+<animSheet name="asteroid1" w="24" h="24" fw="24" fh="24">asteroids/asteroid1.png</animSheet>
+<animSheet name="asteroid2" w="24" h="24" fw="24" fh="24">asteroids/asteroid2.png</animSheet>
+<animSheet name="asteroid3" w="24" h="24" fw="24" fh="24">asteroids/asteroid3.png</animSheet>
+<animSheet name="asteroid4" w="24" h="24" fw="24" fh="24">asteroids/asteroid4.png</animSheet>
+<animSheet name="asteroid5" w="24" h="24" fw="24" fh="24">asteroids/asteroid5.png</animSheet>
+<animSheet name="asteroid6" w="24" h="24" fw="24" fh="24">asteroids/asteroid6.png</animSheet>
+<animSheet name="asteroid7" w="24" h="24" fw="24" fh="24">asteroids/asteroid7.png</animSheet>
+<animSheet name="asteroid8" w="24" h="24" fw="24" fh="24">asteroids/asteroid8.png</animSheet>
+<animSheet name="asteroid9" w="24" h="24" fw="24" fh="24">asteroids/asteroid9.png</animSheet>
+
+
+<anim name="asteroid0">
+	<sheet>asteroid0</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="asteroid1">
+	<sheet>asteroid1</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="asteroid2">
+	<sheet>asteroid2</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="asteroid3">
+	<sheet>asteroid3</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="asteroid4">
+	<sheet>asteroid4</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="asteroid5">
+	<sheet>asteroid5</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="asteroid6">
+	<sheet>asteroid6</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="asteroid7">
+	<sheet>asteroid7</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="asteroid8">
+	<sheet>asteroid8</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="asteroid9">
+	<sheet>asteroid9</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+
+
+<animSheet name="drone_hack_land" w="155" h="49" fw="31" fh="49">ship/drones/drone_hack_land.png</animSheet>
+<anim name="drone_hack_fly">
+	<sheet>drone_hack_land</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="drone_hack_land">
+	<sheet>drone_hack_land</sheet>
+	<desc length="5" x="0" y="0"/>
+	<time>0.3</time>
+</anim>
+
+<animSheet name="drone_hack_extend" w="155" h="49" fw="31" fh="49">ship/drones/drone_hack_extend.png</animSheet>
+<anim name="drone_hack_extend">
+	<sheet>drone_hack_extend</sheet>
+	<desc length="5" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+
+<!-- WEAPON ANIMATIONS -->
+
+<animSheet name="shotgun" w="296" h="51" fw="37" fh="51">weapons/shotgun_strip8.png</animSheet>
+<weaponAnim name="shotgun">
+	<sheet>shotgun</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>3</fireFrame>
+	<firePoint  x="12" y="22"/>
+	<mountPoint x="3" y="33"/>
+	<chargeImage>weapons/shotgun_glow.png</chargeImage>
+</weaponAnim>
+
+<animSheet name="shotgun_2" w="296" h="53" fw="37" fh="53">weapons/shotgun_2_strip8.png</animSheet>
+<weaponAnim name="shotgun_2">
+	<sheet>shotgun_2</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>3</fireFrame>
+	<firePoint  x="14" y="22"/>
+	<mountPoint x="3" y="33"/>
+	<chargeImage>weapons/shotgun_2_glow.png</chargeImage>
+</weaponAnim>
+
+<animSheet name="chainlaser_1_charge" w="75" h="49" fw="25" fh="49">weapons/chainlaser_1_chargeglow_strip3.png</animSheet>
+<anim name="chainlaser_1_charge">
+	<sheet>chainlaser_1_charge</sheet>
+	<desc length="3" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<animSheet name="chainlaser" w="275" h="49" fw="25" fh="49">weapons/chainlaser_1_strip11.png</animSheet>
+<weaponAnim name="chainlaser">
+	<sheet>chainlaser</sheet>
+	<desc length="11" x="0" y="0"/>
+	<chargedFrame>4</chargedFrame>
+	<fireFrame>6</fireFrame>
+	<firePoint  x="16" y="16"/>
+	<mountPoint x="4" y="37"/>
+	<boost>chainlaser_1_charge</boost>
+</weaponAnim>
+
+<animSheet name="chainlaser_2_charge" w="160" h="67" fw="32" fh="67">weapons/chainlaser_2_chargeglow_strip5.png</animSheet>
+<anim name="chainlaser_2_charge">
+	<sheet>chainlaser_2_charge</sheet>
+	<desc length="5" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<animSheet name="chainlaser_2" w="320" h="67" fw="32" fh="67">weapons/chainlaser_2_strip10.png</animSheet>
+<weaponAnim name="chainlaser_2">
+	<sheet>chainlaser_2</sheet>
+	<desc length="10" x="0" y="0"/>
+	<chargedFrame>4</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="18" y="23"/>
+	<mountPoint x="4" y="49"/>
+	<boost>chainlaser_2_charge</boost>
+</weaponAnim>
+
+
+
+<animSheet name="ion_chaingun_charge" w="105" h="58" fw="35" fh="58">weapons/ion_chain_chargeglow.png</animSheet>
+<anim name="ion_chaingun_charge">
+	<sheet>ion_chaingun_charge</sheet>
+	<desc length="3" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+
+<animSheet name="ion_chaingun" w="280" h="58" fw="35" fh="58">weapons/ion_chain.png</animSheet>
+<weaponAnim name="ion_chaingun">
+	<sheet>ion_chaingun</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="17" y="17"/>
+	<mountPoint x="5" y="45"/>
+	<chargeImage>weapons/ion_chain_glow.png</chargeImage>
+	<boost>ion_chaingun_charge</boost>
+</weaponAnim>
+
+
+
+<animSheet name="chargelaser_charge" w="54" h="49" fw="27" fh="49">weapons/laser_charger_charges.png</animSheet>
+
+<anim name="chargelaser_charge">
+	<sheet>chargelaser_charge</sheet>
+	<desc length="2" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<animSheet name="chargelaser" w="324" h="49" fw="27" fh="49">weapons/laser_charger_base.png</animSheet>
+<weaponAnim name="chargelaser">
+	<sheet>chargelaser</sheet>
+	<desc length="12" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>6</fireFrame>
+	<firePoint  x="20" y="18" charge="5"/>
+	<mountPoint x="5" y="35"/>
+	<boost>chargelaser_charge</boost>
+</weaponAnim>
+
+
+
+<animSheet name="chargelaser2_charge" w="152" h="48" fw="38" fh="48">weapons/laser_charger2_charges.png</animSheet>
+<anim name="chargelaser2_charge">
+	<sheet>chargelaser2_charge</sheet>
+	<desc length="4" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<animSheet name="chargelaser2" w="684" h="48" fw="38" fh="48">weapons/laser_charger2_base.png</animSheet>
+<weaponAnim name="chargelaser2">
+	<sheet>chargelaser2</sheet>
+	<desc length="18" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>6</fireFrame>
+	<firePoint  x="33" y="16" charge="6"/>
+	<mountPoint x="8" y="37"/>
+	<boost>chargelaser2_charge</boost>
+</weaponAnim>
+
+
+<animSheet name="chargemissile_charge" w="90" h="46" fw="30" fh="46">weapons/missile_charger_charges.png</animSheet>
+
+<anim name="chargemissile_charge">
+	<sheet>chargemissile_charge</sheet>
+	<desc length="3" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<animSheet name="chargemissile" w="240" h="46" fw="30" fh="46">weapons/missile_charger_base.png</animSheet>
+<weaponAnim name="chargemissile">
+	<sheet>chargemissile</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>4</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="18" y="20" charge="0"/>
+	<mountPoint x="7" y="35"/>
+	<boost>chargemissile_charge</boost>
+</weaponAnim>
+
+
+<animSheet name="chargeion_charge" w="105" h="40" fw="35" fh="40">weapons/ion_charger_charges.png</animSheet>
+<anim name="chargeion_charge">
+	<sheet>chargeion_charge</sheet>
+	<desc length="4" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<animSheet name="chargeion" w="385" h="40" fw="35" fh="40">weapons/ion_charger_base.png</animSheet>
+<weaponAnim name="chargeion">
+	<sheet>chargeion</sheet>
+	<desc length="11" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>2</fireFrame>
+	<firePoint  x="24" y="10" charge="6"/>
+	<mountPoint x="8" y="34"/>
+	<boost>chargeion_charge</boost>
+ <chargeImage>weapons/ion_charger_glow.png</chargeImage>
+</weaponAnim>
+
+<animSheet name="ion_stun" w="240" h="45" fw="30" fh="45">weapons/ion_stun_strip8.png</animSheet>
+<weaponAnim name="ion_stun">
+	<sheet>ion_stun</sheet>
+	<desc length="8" x="0" y="0"/>
+	<chargedFrame>1</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint  x="15" y="12"/>
+	<mountPoint x="5" y="35"/>
+	<chargeImage>weapons/ion_stun_glow.png</chargeImage>
+</weaponAnim>
+
+
+<animSheet name="ion_stun_shot" w="192" h="24" fw="24" fh="24">weapons/ion_stun_shot_strip8.png</animSheet>
+<anim name="ion_stun_shot">
+	<sheet>ion_stun_shot</sheet>
+	<desc length="8" x="0" y="0"/>
+	<time>0.3</time>
+</anim>
+
+<animSheet name="explosion_stun_ion" w="144" h="16" fw="16" fh="16">effects/explosion_ion_stun.png</animSheet>
+<anim name="explosion_stun_ion">
+	<sheet>explosion_stun_ion</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.5</time>
+</anim>
+
+<animSheet name="bomb_stun" w="595" h="52" fw="35" fh="52">weapons/bomblauncher_stun_strip17.png</animSheet>
+<weaponAnim name="bomb_stun">
+	<sheet>bomb_stun</sheet>
+	<desc length="17" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>16</fireFrame>
+	<firePoint x="20" y="8" />
+	<mountPoint x="5" y="34" />
+	<delayChargeAnim>0.98</delayChargeAnim>
+	<chargeImage>weapons/bomblauncher_1_glow.png</chargeImage>
+</weaponAnim>
+
+<animSheet name="bomb_stun_anim" w="315" h="35" fw="35" fh="35">weapons/bomb_stun_strip9.png</animSheet>
+<anim name="bomb_stun_anim">
+	<sheet>bomb_stun_anim</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.35</time>
+</anim>
+
+
+<animSheet name="bomb_repair" w="595" h="52" fw="35" fh="52">weapons/bomblauncher_repair_strip17.png</animSheet>
+<weaponAnim name="bomb_repair">
+	<sheet>bomb_repair</sheet>
+	<desc length="17" x="0" y="0"/>
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>16</fireFrame>
+	<firePoint x="20" y="8" />
+	<mountPoint x="5" y="34" />
+	<delayChargeAnim>0.98</delayChargeAnim>
+	<chargeImage>weapons/bomblauncher_1_glow.png</chargeImage>
+</weaponAnim>
+<animSheet name="bomb_repair_anim" w="315" h="35" fw="35" fh="35">weapons/bomb_repair_strip9.png</animSheet>
+<anim name="bomb_repair_anim">
+	<sheet>bomb_repair_anim</sheet>
+	<desc length="9" x="0" y="0"/>
+	<time>0.35</time>
+</anim>
+<animSheet name="explosion_repair" w="448" h="64" fw="64" fh="64">effects/explosion_big1_repair2.png</animSheet>
+<anim name="explosion_repair">
+	<sheet>explosion_repair</sheet>
+	<desc length="7" x="0" y="0"/>
+	<time>0.7</time>
+</anim>
+
+
+<animSheet name="debris_large_strip3" w="96" h="32" fw="32" fh="32">weapons/debris_large_strip3.png</animSheet>
+<animSheet name="debris_med_strip5" w="120" h="24" fw="24" fh="24">weapons/debris_med_strip5.png</animSheet>
+<animSheet name="debris_small_strip6" w="96" h="16" fw="16" fh="16">weapons/debris_small_strip6.png</animSheet>
+
+<anim name="debris_large">
+	<sheet>debris_large_strip3</sheet>
+	<desc length="3" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="debris_med">
+	<sheet>debris_med_strip5</sheet>
+	<desc length="5" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+<anim name="debris_small">
+	<sheet>debris_small_strip6</sheet>
+	<desc length="6" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+
+
+<!-- NEW ALIEN RACE -->
+<animSheet name="anaerobic" w="280" h="490" fw="35" fh="35">people/anaerobic_base.png</animSheet>
+
+<anim name="anaerobic_clone">
+	<sheet>anaerobic</sheet>
+	<desc length="6" x="0" y="1"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="anaerobic_death_right">
+	<sheet>anaerobic</sheet>
+	<desc length="8" x="0" y="2"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="anaerobic_death_left">
+	<sheet>anaerobic</sheet>
+	<desc length="8" x="0" y="2"/>
+	<time>0.75</time>
+</anim>
+
+<anim name="anaerobic_walk_down">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="0" y="13"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_walk_right">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="4" y="13"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_walk_up">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="0" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_walk_left">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="4" y="12"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_shoot_down">
+	<sheet>anaerobic</sheet>
+	<desc length="3" x="0" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_shoot_right">
+	<sheet>anaerobic</sheet>
+	<desc length="3" x="3" y="11"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_shoot_up">
+	<sheet>anaerobic</sheet>
+	<desc length="3" x="0" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_shoot_left">
+	<sheet>anaerobic</sheet>
+	<desc length="3" x="3" y="10"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_fire_down">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="0" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_fire_right">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="4" y="9"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_fire_up">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="0" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_fire_left">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="4" y="8"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_repair">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="3" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_punch_up">
+	<sheet>anaerobic</sheet>
+	<desc length="6" x="0" y="7"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_punch_down">
+	<sheet>anaerobic</sheet>
+	<desc length="6" x="0" y="6"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="anaerobic_teleport">
+	<sheet>anaerobic</sheet>
+	<desc length="9" x="0" y="3"/>
+	<time>0.5</time>
+</anim>
+
+<anim name="anaerobic_type_right">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="0" y="5"/>
+	<time>0.75</time>
+</anim>
+<anim name="anaerobic_type_left">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="4" y="5"/>
+	<time>0.75</time>
+</anim>
+<anim name="anaerobic_type_up">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="0" y="4"/>
+	<time>0.75</time>
+</anim>
+<anim name="anaerobic_type_down">
+	<sheet>anaerobic</sheet>
+	<desc length="4" x="4" y="4"/>
+	<time>0.75</time>
+</anim>
+
+<!-- every crewmember uses this -->
+<anim name="crewLaser">
+	<sheet>anaerobic</sheet>
+	<desc length="1" x="1" y="0"/>
+	<time>0.5</time>
+</anim>
+
+
+<anim name="anaerobic_portrait">
+	<sheet>anaerobic</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+
+
+
+
+<!--
+*******************
+	ION BOARDER DRONE ANIMATIONS 
+*********************
+-->
+<animSheet name="boarder_ion" w="210" h="245" fw="35" fh="35">people/boarder_ion_base.png</animSheet>
+<animSheet name="boarder_ion_death" w="320" h="32" fh="32" fw="32">effects/explosion1_strip10.png</animSheet>
+
+
+<anim name="boarder_ion_attack">
+	<sheet>boarder_ion</sheet>
+	<desc length="4" x="0" y="2"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="boarder_ion_shoot_down">
+	<sheet>boarder_ion</sheet>
+	<desc length="2" x="0" y="6"/>
+	<time>1.5</time>
+</anim>
+
+<anim name="boarder_ion_shoot_right">
+	<sheet>boarder_ion</sheet>
+	<desc length="2" x="2" y="6"/>
+	<time>1.5</time>
+</anim>
+
+<anim name="boarder_ion_shoot_up">
+	<sheet>boarder_ion</sheet>
+	<desc length="2" x="0" y="5"/>
+	<time>1.5</time>
+</anim>
+
+<anim name="boarder_ion_shoot_left">
+	<sheet>boarder_ion</sheet>
+	<desc length="2" x="0" y="5"/>
+	<time>1.5</time>
+</anim>
+
+<anim name="boarder_ion_death_right">
+	<sheet>boarder_ion_death</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="boarder_ion_death_right">
+	<sheet>boarder_ion_death</sheet>
+	<desc length="10" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="boarder_ion_walk_down">
+	<sheet>boarder_ion</sheet>
+	<desc length="4" x="0" y="2"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="boarder_ion_walk_right">
+	<sheet>boarder_ion</sheet>
+	<desc length="2" x="4" y="2"/>
+	<time>0.5</time>
+</anim>
+
+<anim name="boarder_ion_walk_up">
+	<sheet>boarder_ion</sheet>
+	<desc length="4" x="0" y="1"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="boarder_ion_walk_left">
+	<sheet>boarder_ion</sheet>
+	<desc length="2" x="4" y="1"/>
+	<time>0.5</time>
+</anim>
+
+
+<anim name="boarder_ion_power_up">
+	<sheet>boarder_ion</sheet>
+	<desc length="5" x="0" y="4"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="boarder_ion_power_down">
+	<sheet>boarder_ion</sheet>
+	<desc length="5" x="0" y="0"/>
+	<time>1.0</time>
+</anim>
+
+<anim name="boarder_ion_portrait">
+	<sheet>boarder_ion</sheet>
+	<desc length="1" x="0" y="0"/>
+	<time>1</time>
+</anim>
+
+<anim name="boarder_ion_ion">
+	<sheet>boarder_ion</sheet>
+	<desc length="5" x="0" y="3"/>
+	<time>1</time>
+</anim>
+
+<anim name="boarder_ion_glow">
+	<sheet>boarder_ion</sheet>
+	<desc length="1" x="5" y="3"/>
+	<time>1</time>
+</anim>
+
+
+
+</FTL>

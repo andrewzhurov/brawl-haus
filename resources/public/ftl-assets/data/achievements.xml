@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--***** IMPLEMENTED *********-->
+<achievement id="ACH_SECTOR_5">
+	<name id="ACH_SECTOR_5_name"/>
+	<desc id="ACH_SECTOR_5_desc"/>
+	<img>achievements/0.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_SECTOR_8">
+	<name id="ACH_SECTOR_8_name"/>
+	<desc id="ACH_SECTOR_8_desc"/>
+	<img>achievements/1.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_WIN_EASY">
+	<name id="ACH_WIN_EASY_name"/>
+	<desc id="ACH_WIN_EASY_desc"/>
+	<img>achievements/2.png</img>
+</achievement>
+
+<achievement id="ACH_WIN_NORMAL">
+	<name id="ACH_WIN_NORMAL_name"/>
+	<desc id="ACH_WIN_NORMAL_desc"/>
+	<img>achievements/3.png</img>
+</achievement>
+
+<achievement id="ACH_UNLOCK_ALL">
+	<name id="ACH_UNLOCK_ALL_name"/>
+	<desc id="ACH_UNLOCK_ALL_desc"/>
+	<img>achievements/4.png</img>
+</achievement>
+
+<achievement id="ACH_SCRAP">
+	<name id="ACH_SCRAP_name"/>
+	<desc id="ACH_SCRAP_desc"/>
+	<img>achievements/5.png</img>
+</achievement>
+
+<achievement id="ACH_SHIPS">
+	<name id="ACH_SHIPS_name"/>
+	<desc id="ACH_SHIPS_desc"/>
+	<img>achievements/6.png</img>
+</achievement>
+
+
+<achievement id="ACH_NO_UPGRADES">
+	<name id="ACH_NO_UPGRADES_name"/>
+	<desc id="ACH_NO_UPGRADES_desc"/>
+	<img>achievements/7.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_PACIFIST">
+	<name id="ACH_PACIFIST_name"/>
+	<desc id="ACH_PACIFIST_desc"/>
+	<img>achievements/8.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_NO_REPAIR">
+	<name id="ACH_NO_REPAIR_name"/>
+	<desc id="ACH_NO_REPAIR_desc"/>
+	<img>achievements/9.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_NO_MISSILES">
+	<name id="ACH_NO_MISSILES_name"/>
+	<desc id="ACH_NO_MISSILES_desc"/>
+	<img>achievements/10.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_NO_DRONES">
+	<name id="ACH_NO_DRONES_name"/>
+	<desc id="ACH_NO_DRONES_desc"/>
+	<img>achievements/11.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_NO_BUYING">
+	<name id="ACH_NO_BUYING_name"/>
+	<desc id="ACH_NO_BUYING_desc"/>
+	<img>achievements/12.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_NO_DEATH">
+	<name id="ACH_NO_DEATH_name"/>
+	<desc id="ACH_NO_DEATH_desc"/>
+	<img>achievements/13.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_BURNING">
+	<name id="ACH_BURNING_name"/>
+	<shortname id="ACH_BURNING_shortname"/>
+	<desc id="ACH_BURNING_desc"/>
+	<img>achievements/16.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_BAD_DODGING">
+	<name id="ACH_BAD_DODGING_name"/>
+	<desc id="ACH_BAD_DODGING_desc"/>
+	<img>achievements/18.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_ONE_VOLLEY">
+	<name id="ACH_ONE_VOLLEY_name"/>
+	<desc id="ACH_ONE_VOLLEY_desc"/>
+	<img>achievements/14.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_BOARDING_DRONE">
+	<name id="ACH_BOARDING_DRONE_name"/>
+	<desc id="ACH_BOARDING_DRONE_desc"/>
+	<img>achievements/15.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_INVADE_SHIP">
+	<name id="ACH_INVADE_SHIP_name"/>
+	<desc id="ACH_INVADE_SHIP_desc"/>
+	<img>achievements/19.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_SLICE_DICE">
+	<name id="ACH_SLICE_DICE_name"/>
+	<desc id="ACH_SLICE_DICE_desc"/>
+	<img>achievements/20.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_SUFFOCATE">
+	<name id="ACH_SUFFOCATE_name"/>
+	<desc id="ACH_SUFFOCATE_desc"/>
+	<img>achievements/17.png</img>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+
+<!-- KESTREL ACHIEVEMENTS -->
+
+<achievement id="ACH_UNITED_FEDERATION">
+	<name id="ACH_UNITED_FEDERATION_name"/>
+	<desc id="ACH_UNITED_FEDERATION_desc"/>
+	<img>achievements/kestral_1.png</img>
+	<ship>PLAYER_SHIP_HARD</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_FULL_ARSENAL">
+	<name id="ACH_FULL_ARSENAL_name"/>
+	<desc id="ACH_FULL_ARSENAL_desc"/>
+	<img>achievements/kestral_2.png</img>
+	<multiDifficulty>1</multiDifficulty>
+	<ship>PLAYER_SHIP_HARD</ship>
+</achievement>
+
+<achievement id="ACH_TOUGH_SHIP">
+	<name id="ACH_TOUGH_SHIP_name"/>
+	<desc id="ACH_TOUGH_SHIP_desc"/>
+	<img>achievements/kestral_3.png</img>
+	<multiDifficulty>1</multiDifficulty>
+	<ship>PLAYER_SHIP_HARD</ship>
+</achievement>
+
+<!-- ENERGY ACHIEVEMENTS -->
+
+<achievement id="ACH_ENERGY_SHIELDS">
+	<name id="ACH_ENERGY_SHIELDS_name"/>
+	<desc id="ACH_ENERGY_SHIELDS_desc"/>
+	<img>achievements/energy_cruiser_1.png</img>
+	<multiDifficulty>1</multiDifficulty>
+	<ship>PLAYER_SHIP_ENERGY</ship>
+</achievement>
+
+<achievement id="ACH_ENERGY_POWER">
+	<name id="ACH_ENERGY_POWER_name"/>
+	<desc id="ACH_ENERGY_POWER_desc"/>
+	<img>achievements/energy_cruiser_2.png</img>
+	<multiDifficulty>1</multiDifficulty>
+	<ship>PLAYER_SHIP_ENERGY</ship>
+</achievement>
+
+<achievement id="ACH_ENERGY_MANPOWER">
+	<name id="ACH_ENERGY_MANPOWER_name"/>
+	<desc id="ACH_ENERGY_MANPOWER_desc"/>
+	<img>achievements/energy_cruiser_3.png</img>
+	<multiDifficulty>1</multiDifficulty>
+	<ship>PLAYER_SHIP_ENERGY</ship>
+</achievement>
+
+
+<!-- STEALTH ACHIEVEMENTS -->
+
+<achievement id="ACH_STEALTH_DESTROY">
+	<name id="ACH_STEALTH_DESTROY_name"/>
+	<desc id="ACH_STEALTH_DESTROY_desc"/>
+	<img>achievements/stealth_1.png</img>
+	<ship>PLAYER_SHIP_STEALTH</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_STEALTH_AVOID">
+	<name id="ACH_STEALTH_AVOID_name"/>
+	<desc id="ACH_STEALTH_AVOID_desc"/>
+	<img>achievements/stealth_2.png</img>
+	<ship>PLAYER_SHIP_STEALTH</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_STEALTH_TACTICAL">
+	<name id="ACH_STEALTH_TACTICAL_name"/>
+	<desc id="ACH_STEALTH_TACTICAL_desc"/>
+	<img>achievements/stealth_3.png</img>
+	<multiDifficulty>1</multiDifficulty>
+	<ship>PLAYER_SHIP_STEALTH</ship>
+</achievement>
+
+<!-- ENGI ACHIEVEMENTS -->
+
+<achievement id="ACH_ROBOTIC">
+	<name id="ACH_ROBOTIC_name"/>
+	<desc id="ACH_ROBOTIC_desc"/>
+	<img>achievements/circle_cruiser_1.png</img>
+	<multiDifficulty>1</multiDifficulty>
+	<ship>PLAYER_SHIP_CIRCLE</ship>
+</achievement>
+
+<achievement id="ACH_ONLY_DRONES">
+	<name id="ACH_ONLY_DRONES_name"/>
+	<desc id="ACH_ONLY_DRONES_desc"/>
+	<img>achievements/circle_cruiser_2.png</img>
+	<ship>PLAYER_SHIP_CIRCLE</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_IONED">
+	<name id="ACH_IONED_name"/>
+	<desc id="ACH_IONED_desc"/>
+	<img>achievements/circle_cruiser_3.png</img>
+	<ship>PLAYER_SHIP_CIRCLE</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<!-- ROCK ACHIEVEMENTS -->
+
+<achievement id="ACH_ROCK_FIRE">
+	<name id="ACH_ROCK_FIRE_name"/>
+	<desc id="ACH_ROCK_FIRE_desc"/>
+	<img>achievements/rock_cruiser_1.png</img>
+	<ship>PLAYER_SHIP_ROCK</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_ROCK_MISSILES">
+	<name id="ACH_ROCK_MISSILES_name"/>
+	<shortname id="ACH_ROCK_MISSILES_shortname"/>
+	<desc id="ACH_ROCK_MISSILES_desc"/>
+	<img>achievements/rock_cruiser_2.png</img>
+	<ship>PLAYER_SHIP_ROCK</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_ROCK_CRYSTAL">
+	<name id="ACH_ROCK_CRYSTAL_name"/>
+	<desc id="ACH_ROCK_CRYSTAL_desc"/>
+	<img>achievements/rock_cruiser_3.png</img>
+	<ship>PLAYER_SHIP_ROCK</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<!-- MANTIS ACHIEVEMENTS -->
+
+<achievement id="ACH_MANTIS_CREW_DEAD">
+	<name id="ACH_MANTIS_CREW_DEAD_name"/>
+	<desc id="ACH_MANTIS_CREW_DEAD_desc"/>
+	<img>achievements/mantis_cruiser_1.png</img>
+	<ship>PLAYER_SHIP_MANTIS</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_MANTIS_SLAUGHTER">
+	<name id="ACH_MANTIS_SLAUGHTER_name"/>
+	<desc id="ACH_MANTIS_SLAUGHTER_desc"/>
+	<img>achievements/mantis_cruiser_2.png</img>
+	<ship>PLAYER_SHIP_MANTIS</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_MANTIS_SURVIVOR">
+	<name id="ACH_MANTIS_SURVIVOR_name"/>
+	<desc id="ACH_MANTIS_SURVIVOR_desc"/>
+	<img>achievements/mantis_cruiser_3.png</img>
+	<ship>PLAYER_SHIP_MANTIS</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+
+
+
+<!-- SLUG ACHIEVEMENTS -->
+
+<achievement id="ACH_SLUG_VISION">
+	<name id="ACH_SLUG_VISION_name"/>
+	<desc id="ACH_SLUG_VISION_desc"/>
+	<img>achievements/jelly_cruiser_1.png</img>
+	<ship>PLAYER_SHIP_JELLY</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_SLUG_NEBULA">
+	<name id="ACH_SLUG_NEBULA_name"/>
+	<desc id="ACH_SLUG_NEBULA_desc"/>
+	<img>achievements/jelly_cruiser_2.png</img>
+	<ship>PLAYER_SHIP_JELLY</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_SLUG_BIO">
+	<name id="ACH_SLUG_BIO_name"/>
+	<desc id="ACH_SLUG_BIO_desc"/>
+	<img>achievements/jelly_cruiser_3.png</img>
+	<ship>PLAYER_SHIP_JELLY</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<!-- FEDERATION CRUISER ACHIEVEMENTS -->
+
+<achievement id="ACH_FED_PATIENCE">
+	<name id="ACH_FED_PATIENCE_name"/>
+	<desc id="ACH_FED_PATIENCE_desc"/>
+	<img>achievements/fed_cruiser_1.png</img>
+	<ship>PLAYER_SHIP_FED</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_FED_DIPLOMACY">
+	<name id="ACH_FED_DIPLOMACY_name"/>
+	<desc id="ACH_FED_DIPLOMACY_desc"/>
+	<img>achievements/fed_cruiser_2.png</img>
+	<ship>PLAYER_SHIP_FED</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_FED_UPGRADE">
+	<name id="ACH_FED_UPGRADE_name"/>
+	<desc id="ACH_FED_UPGRADE_desc"/>
+	<img>achievements/fed_cruiser_3.png</img>
+	<ship>PLAYER_SHIP_FED</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+
+<!-- CRYSTAL CRUISER ACHIEVEMENTS -->
+
+<achievement id="ACH_CRYSTAL_SHARD">
+	<name id="ACH_CRYSTAL_SHARD_name"/>
+	<desc id="ACH_CRYSTAL_SHARD_desc"/>
+	<img>achievements/crystal_cruiser_1.png</img>
+	<ship>PLAYER_SHIP_CRYSTAL</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_CRYSTAL_LOCKDOWN">
+	<name id="ACH_CRYSTAL_LOCKDOWN_name"/>
+	<desc id="ACH_CRYSTAL_LOCKDOWN_desc"/>
+	<img>achievements/crystal_cruiser_2.png</img>
+	<ship>PLAYER_SHIP_CRYSTAL</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_CRYSTAL_CLASH">
+	<name id="ACH_CRYSTAL_CLASH_name"/>
+	<desc id="ACH_CRYSTAL_CLASH_desc"/>
+	<img>achievements/crystal_cruiser_3.png</img>
+	<ship>PLAYER_SHIP_CRYSTAL</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<!-- LANIUS SHIP ACHIEVEMENTS -->
+
+<achievement id="ACH_LANIUS_ADVANCED">
+	<name id="ACH_LANIUS_ADVANCED_name"/>
+	<desc id="ACH_LANIUS_ADVANCED_desc"/>
+	<img>achievements/anaerobic_cruiser_1.png</img>
+	<ship>PLAYER_SHIP_ANAEROBIC</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_LANIUS_SCRAP">
+	<name id="ACH_LANIUS_SCRAP_name"/>
+	<desc id="ACH_LANIUS_SCRAP_desc"/>
+	<img>achievements/anaerobic_cruiser_2.png</img>
+	<ship>PLAYER_SHIP_ANAEROBIC</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<achievement id="ACH_LANIUS_OXYGEN">
+	<name id="ACH_LANIUS_OXYGEN_name"/>
+	<desc id="ACH_LANIUS_OXYGEN_desc"/>
+	<img>achievements/anaerobic_cruiser_3.png</img>
+	<ship>PLAYER_SHIP_ANAEROBIC</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>
+
+<!--<achievement id="ACH_LANIUS_SUFFOCATION">
+	<name>They Should Really Have Spacesuits</name>
+	<desc>Have 10 enemy crew die while suffocating by sector 5.</desc>
+	<img>achievements/anaerobic_cruiser_3.png</img>
+	<ship>PLAYER_SHIP_ANAEROBIC</ship>
+	<multiDifficulty>1</multiDifficulty>
+</achievement>-->
+
+
+
+
+
+
+</FTL>

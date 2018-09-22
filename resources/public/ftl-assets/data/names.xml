@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+
+<nameList race="human" sex="male">
+	<name>Kirby</name>
+	<name>Ma Fan</name>
+	<name>Jon</name>
+	<name>Bjorn</name>
+	<name>Justin</name>
+	<name>Matt</name>
+	<name>Oni</name>
+	<name>Jack</name>
+	<name>Markus</name>
+	<name>Adnan</name>
+	<name>Hector</name>
+	<name>Liu Jun</name>
+	<name>Jose</name>
+	<name>Liam</name>
+	<name>Eoin</name>
+	<name>Markel</name>
+	<name>Nathan</name>
+	<name>Tomas</name>
+	<name>Filip</name>
+	<name>Nikola</name>
+	<name>Maxim</name>
+	<name>Artyom</name>
+	<name>Mikhail</name>
+	<name>Tai Yi</name>
+	<name>Junpeng</name>
+	<name>Steven</name>
+	<name>Ferry</name>
+	<name>Sem</name>
+	<name>Tee Lek</name>
+	<name>Matthieu</name>
+	<name>King</name>
+	<name>Graffin</name>
+	<name>Hutz</name>
+	<name>Atreyu</name>
+	<name>Bryan</name>
+	<name>Zas</name>
+	<name>Bigby</name>
+</nameList>
+
+<nameList race="human" sex="female">
+	<name>T'ten</name>
+	<name>Layla</name>
+	<name>Jill</name>
+	<name>Alison</name>
+	<name>Lexie</name>
+	<name>Aki</name>
+	<name>Maria</name>
+	<name>Lauren</name>
+	<name>Elizabeth</name>
+	<name>Nazia</name>
+	<name>Emily</name>
+	<name>Willow</name>
+	<name>Xin Xin</name>
+	<name>Felicity</name>
+	<name>Ariel</name>
+	<name>Aisha</name>
+	<name>Manon</name>
+	<name>Emma</name>
+	<name>Sophia</name>
+	<name>Rebekah</name>
+	<name>Lisandra</name>
+	<name>Pipaluk</name>
+	<name>Lana</name>
+	<name>Noemi</name>
+	<name>Valeriya</name>
+	<name>Gracie</name>
+</nameList>
+
+<!-- Kickstarter name list start -->
+<!-- Missing:
+	$100
+	Chase Cagle
+
+	$500
+	Steve Swink
+
+-->
+
+<nameList race="human" sex="female">
+	<name>Beth</name>
+	<name>Debbie</name>
+	<name>Kara</name>
+</nameList>
+
+
+<nameList race="human" sex="male">
+	<name>Alex Rigopulos</name>
+	<name short="Mort">Mortraven</name>
+	<name>Notch</name>
+	<name>Steven</name>
+	<name short="WaiShing">Wai-Shing</name>
+	<name>Kadreal</name>
+	<name>Starger</name>
+	<name>Andrew Fenn</name>
+	<name>Mr Buga</name>
+	<name>Borman</name>
+	<name>Scott Kletzkin</name>
+	<name>Fleischy</name>
+	<name>Joel</name>
+	<name>Shelton</name>
+	<name>Tach</name>
+	<name>Logan Johnson</name>
+	<name>Enzo Martin</name>
+	<name>Jax</name>
+	<name>Jeff Baars</name>
+	<name>Ohm</name>
+	<name>Ihlay Caris</name>
+	<name>Gumpo</name>
+	<name>Zerimar</name>
+	<name>Bomfy M</name>
+	<name>Nekose</name>
+	<name>Scoops</name>
+	<name>Remo</name>
+	<name>Berko</name>
+	<name>Jorlack</name>
+	<name>Hassifa</name>
+	<name short="Magmar">Magmaros</name>
+	<name>Butters</name> <!-- not sure -->
+	<name>Josh Cubbin</name>
+	<name>Vitas Varnas</name>
+	<name>Monsvik</name>
+	<name>Grozoly</name>
+	<name>Sean O'Regan</name>
+	<name>Tom Banks</name>
+	<name>Nikmi</name>
+	<name>Mullett</name>
+	<name>Vivimord</name>
+	<name>Craig Dolan</name>
+	<name>Dre Kozar</name>
+	<name>Nick Lanng</name>
+	<name>Giles</name>
+	<name>CY Heng</name>
+	<name short="Narth">Narthollis</name>
+	<name short="Schultze">Norwyn Schultze</name>
+	<name short="Chriz">Christoph Z</name>
+	<name>Bruce Geryk</name>
+	<name>Chris Phillips</name>
+	<name>Mikael Olofsson</name>
+	<name>James Pomeroy</name>
+	<name>Mike Weston</name>
+	<name>Jason Bovee</name>
+	<name>Xemu</name>
+	<name>Nick Breckon</name>
+	<name>Kapalka</name>
+	<name>Stick</name>
+	<name>Roper</name>
+	<name short="Frederic">Frederick</name>
+	<name>Henrik Aasted</name>
+	<name>Firedihm</name>
+	<name>Triko</name>
+	<name short="Mara">Maradine</name>
+  	<name short="Swamps">Swampson</name> <!--Shortens to Swamps. Messaged -->
+	<name>Arries</name>
+	<name>Elnubnub</name>
+	<name>Ken</name>
+	<name>Randy Walker</name>
+	<name>Declan</name>
+	<name>Luaan Ti</name>
+	<name>Kirkner</name>
+	<name>Lombard</name>
+	<name>Feras</name>
+	<name>Yeoz</name>
+	<name>Ryan Maniscalco</name>
+	<name>GM Faux</name>
+	<name>O. Williams</name>
+	<name>Yevon Si</name>
+	<name>Johnny Maloney</name>
+	<name>Will</name>
+	<name>Maxwell</name>
+	<name>Thomas Bloch</name>
+	<name>Rynhart</name>
+	<name>Cremity</name>
+	<name>AJ Hager</name>
+	<name>Stephen Eckman</name>
+	<name>Jan Magne</name>
+	<name>Jack Shirai</name>
+	<name>Julian Rafn</name>
+	<name>Markand</name>
+	<name>Steven Dengler</name>
+	<name>Nelis</name>
+	<name>Chris Malott</name>
+	<name>Davion</name>
+	<name>Jon Caldwell</name>
+	<name>Kusy</name>
+	<name>Lagardi</name>
+	<name>Vincent</name>
+	<name>Kevin Fish</name>
+	<name>Turing</name>
+	<name>Stelly</name>
+	<name>Teldarin</name>
+</nameList>
+</FTL>

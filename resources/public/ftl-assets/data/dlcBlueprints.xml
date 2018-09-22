@@ -1,0 +1,1514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- DLC ITEMS LIST - These items are turned off if the DLC is turned off.
+		Includes any weapons, drones, augments, or aliens 					-->
+
+<blueprintList name="DLC_ITEMS">
+	<name>BOMB_HEAL_SYSTEM</name>
+	<name>SHOTGUN_PLAYER</name>
+	<name>SHOTGUN</name>
+	<name>SHOTGUN_2</name>
+	<name>MISSILE_CHARGEGUN</name>
+	<name>LASER_CHAINGUN</name>
+	<name>LASER_CHAINGUN_2</name>
+	<name>LASER_CHARGEGUN</name>
+	<name>LASER_CHARGEGUN_2</name>
+	<name>ION_CHAINGUN</name>
+	<name>ION_STUN</name>
+	<name>ION_CHARGEGUN</name>
+	<name>BOMB_STUN</name>
+
+	<name>PDS_SHOT</name>
+
+	<name>DRONE_HACKING</name>
+	<name>BOARDER_ION</name>
+	<name>DRONE_SHIELD</name>
+	<name>DRONE_SHIELD_PLAYER</name>
+	<name>ANTI_DRONE</name>
+	<name>COMBAT_BEAM_2</name>
+	<name>COMBAT_FIRE</name>
+
+	<name>anaerobic</name>
+
+
+	<name>O2_MASKS</name>
+	<name>EXPLOSIVE_REPLICATOR</name>
+	<name>FIRE_EXTINGUISHERS</name>
+	<name>FLEET_DISTRACTION</name>
+	<name>TELEPORT_HEAL</name>
+	<name>BATTERY_BOOSTER</name>
+	<name>DEFENSE_SCRAMBLER</name>
+	<name>BACKUP_DNA</name>
+	<name>LIFE_SCANNER</name>
+	<name>ZOLTAN_BYPASS</name>
+	<name>HACKING_STUN</name>
+</blueprintList>
+
+<blueprintList name="DLC_WEAPONS">
+	<name>BOMB_HEAL_SYSTEM</name>
+	<name>SHOTGUN</name>
+	<name>SHOTGUN_2</name>
+	<name>MISSILE_CHARGEGUN</name>
+	<name>LASER_CHAINGUN</name>
+	<name>LASER_CHAINGUN_2</name>
+	<name>ION_CHAINGUN</name>
+	<name>LASER_CHARGEGUN</name>
+	<name>LASER_CHARGEGUN_2</name>
+	<name>ION_CHARGEGUN</name>
+	<name>ION_STUN</name>
+	<name>BOMB_STUN</name>
+
+
+</blueprintList>
+
+<blueprintList name="DLC_DRONES">
+	<!--<name>DRONE_HACKING</name>-->
+	<name>BOARDER_ION</name>
+	<name>DRONE_SHIELD</name>
+	<name>ANTI_DRONE</name>
+	<name>COMBAT_BEAM_2</name>
+	<name>COMBAT_FIRE</name>
+</blueprintList>
+
+
+
+<blueprintList name="DLC_AUGMENTS">
+	<name>O2_MASKS</name>
+	<name>EXPLOSIVE_REPLICATOR</name>
+	<name>FIRE_EXTINGUISHERS</name>
+	<name>FLEET_DISTRACTION</name>
+	<name>TELEPORT_HEAL</name>
+	<name>BATTERY_BOOSTER</name>
+	<name>DEFENSE_SCRAMBLER</name>
+	<name>BACKUP_DNA</name>
+	<name>LIFE_SCANNER</name>
+	<name>ZOLTAN_BYPASS</name>
+	<name>HACKING_STUN</name>
+</blueprintList>
+
+
+
+<!--
+***************************
+	NEW AUGMENTS
+*****************************
+-->
+
+<augBlueprint name="O2_MASKS">
+	<title id="aug_O2_MASKS_title"/>
+	<desc id="aug_O2_MASKS_desc"/>
+	<cost>50</cost>
+	<bp>8</bp>
+	<rarity>2</rarity>
+	<stackable>false</stackable>
+	<value>0.5</value>
+</augBlueprint>
+
+<augBlueprint name="EXPLOSIVE_REPLICATOR">
+	<title id="aug_EXPLOSIVE_REPLICATOR_title"/>
+	<desc id="aug_EXPLOSIVE_REPLICATOR_desc"/>
+	<cost>60</cost>
+	<bp>8</bp>
+	<rarity>3</rarity>
+	<stackable>false</stackable>
+	<value>0.5</value>
+</augBlueprint>
+
+<augBlueprint name="FIRE_EXTINGUISHERS">
+	<title id="aug_FIRE_EXTINGUISHERS_title"/>
+	<desc id="aug_FIRE_EXTINGUISHERS_desc"/>
+	<cost>65</cost>
+	<bp>8</bp>
+	<rarity>3</rarity>
+	<stackable>false</stackable>
+	<value>1.f</value>
+</augBlueprint>
+
+<augBlueprint name="FLEET_DISTRACTION">
+	<title id="aug_FLEET_DISTRACTION_title"/>
+	<desc id="aug_FLEET_DISTRACTION_desc"/>
+	<cost>55</cost>
+	<bp>8</bp>
+	<rarity>3</rarity>
+	<stackable>false</stackable>
+	<value>1.f</value>
+</augBlueprint>
+
+<augBlueprint name="TELEPORT_HEAL">
+	<title id="aug_TELEPORT_HEAL_title"/>
+	<desc id="aug_TELEPORT_HEAL_desc"/>
+	<cost>70</cost>
+	<bp>8</bp>
+	<rarity>3</rarity>
+	<stackable>false</stackable>
+	<value>1.f</value>
+</augBlueprint>
+
+<augBlueprint name="BATTERY_BOOSTER">
+	<title id="aug_BATTERY_BOOSTER_title"/>
+	<desc id="aug_BATTERY_BOOSTER_desc"/>
+	<cost>40</cost>
+	<bp>8</bp>
+	<rarity>2</rarity>
+	<stackable>false</stackable>
+	<value>0.5</value>
+</augBlueprint>
+
+<augBlueprint name="DEFENSE_SCRAMBLER">
+	<title id="aug_DEFENSE_SCRAMBLER_title"/>
+	<desc id="aug_DEFENSE_SCRAMBLER_desc"/>
+	<cost>80</cost>
+	<bp>8</bp>
+	<rarity>4</rarity>
+	<stackable>false</stackable>
+	<value>0.0</value>
+</augBlueprint>
+
+<augBlueprint name="BACKUP_DNA">
+	<title id="aug_BACKUP_DNA_title"/>
+	<desc id="aug_BACKUP_DNA_desc"/>
+	<cost>40</cost> <!-- Was 35-->
+	<bp>8</bp>
+	<rarity>2</rarity>
+	<stackable>false</stackable>
+	<value>0.0</value>
+</augBlueprint>
+
+<augBlueprint name="HACKING_STUN">
+	<title id="aug_HACKING_STUN_title"/>
+	<desc id="aug_HACKING_STUN_desc"/>
+	<cost>60</cost>
+	<rarity>3</rarity>
+	<stackable>false</stackable>
+	<value>0.0</value>
+</augBlueprint>
+
+<augBlueprint name="LIFE_SCANNER">
+	<title id="aug_LIFE_SCANNER_title"/>
+	<desc id="aug_LIFE_SCANNER_desc"/>
+	<cost>40</cost>
+	<bp>8</bp>
+	<rarity>3</rarity>
+	<stackable>false</stackable>
+	<value>0.0</value>
+</augBlueprint>
+
+<augBlueprint name="ZOLTAN_BYPASS">
+	<title id="aug_ZOLTAN_BYPASS_title"/>
+	<desc id="aug_ZOLTAN_BYPASS_desc"/>
+	<cost>55</cost>
+	<bp>8</bp>
+	<rarity>3</rarity>
+	<stackable>false</stackable>
+	<value>0.0</value>
+</augBlueprint>
+
+<!--**************************************-->
+
+<crewBlueprint name="anaerobic">
+	<desc id="crew_anaerobic_desc"/>
+	<title id="crew_anaerobic_title"/>
+	<short id="crew_anaerobic_short"/>
+	<cost>50</cost>
+	<bp>2</bp>
+	<rarity>0</rarity>
+	<powerList>
+		<power id="crew_anaerobic_power_1"/>
+		<power id="crew_anaerobic_power_2"/>
+	</powerList>
+	<colorList>
+		<layer><!-- Layer 1 - color -->
+			<color r="196" g="117" b="232" a="0.3"/>
+			<color r="1" g="1" b="1" a="0"/>
+			<color r="1" g="1" b="1" a="0.2"/>
+			<color r="232" g="220" b="117" a="0.5"/>
+		</layer>
+	</colorList>
+</crewBlueprint>
+
+<!--**************************************-->
+
+
+
+<systemBlueprint name="clonebay">
+	<type>clonebay</type>
+	<title id="system_clonebay_title"/>
+	<desc id="system_clonebay_desc"/>
+	<startPower>1</startPower>
+	<maxPower>3</maxPower>
+	<rarity>1</rarity>
+	<upgradeCost>
+		<level>35</level> <!-- level 2 -->
+		<level>45</level> <!-- level 3 -->
+	</upgradeCost>
+	<cost>50</cost>
+</systemBlueprint>
+
+<systemBlueprint name="hacking">
+	<type>hacking</type>
+	<title id="system_hacking_title"/>
+	<desc id="system_hacking_desc"/>
+	<startPower>1</startPower>
+	<maxPower>3</maxPower>
+	<rarity>1</rarity>
+	<upgradeCost>
+		<level>35</level> <!-- level 2 -->
+		<level>60</level> <!-- level 3 -->
+	</upgradeCost>
+	<cost>80</cost>
+</systemBlueprint>
+
+<systemBlueprint name="battery">
+	<type>battery</type>
+	<title id="system_battery_title"/>
+	<desc id="system_battery_desc"/>
+	<startPower>1</startPower>
+	<maxPower>2</maxPower>
+	<rarity>1</rarity>
+	<upgradeCost>
+		<level>50</level> <!-- level 2 -->
+	</upgradeCost>
+	<cost>35</cost>
+</systemBlueprint>
+
+<systemBlueprint name="mind">
+	<type>mind</type>
+	<title id="system_mind_title"/>
+	<desc id="system_mind_desc"/>
+	<startPower>1</startPower>
+	<maxPower>3</maxPower>
+	<rarity>1</rarity>
+	<upgradeCost>
+		<level>30</level> <!-- level 2 -->
+		<level>60</level> <!-- level 3 -->
+	</upgradeCost>
+	<cost>75</cost>
+	<locked>1</locked>
+</systemBlueprint>
+
+<!--**************************************-->
+
+<droneBlueprint name="BOARDER_ION">
+	<type>BOARDER</type>
+	<tip>tip_boarding</tip>
+	<locked>1</locked>
+	<title id="drone_BOARDER_ION_title"/>
+	<short id="drone_BOARDER_ION_short"/>
+	<desc id="drone_BOARDER_ION_desc"/>
+	<power>3</power>
+	<speed>18</speed>
+	<cost>65</cost>
+	<rarity>4</rarity>
+	<iconImage>ionD</iconImage>
+</droneBlueprint>
+
+<droneBlueprint name="DRONE_HACKING" NOLOC="1">
+	<type>HACKING</type>
+	<locked>1</locked>
+	<title>Hacking Drone</title>
+	<short>Hacking</short>
+	<desc>Should never see this.</desc>
+	<power>1</power>
+	<speed>28</speed>
+	<cost>70</cost>
+	<rarity>0</rarity>
+	<droneImage>drone_hack</droneImage>
+</droneBlueprint>
+
+<droneBlueprint name="ANTI_DRONE">
+	<type>DEFENSE</type>
+	<tip>tip_defense</tip>
+	<target>DRONES</target>
+	<level>1</level>
+	<title id="drone_ANTI_DRONE_title"/>
+	<short id="drone_ANTI_DRONE_short"/>
+	<desc id="drone_ANTI_DRONE_desc"/>
+	<power>1</power>
+	<cooldown>7000</cooldown> <!-- Shooting cooldown for shooting at asteroids/missiles, in ms -->
+	<dodge>0</dodge>
+	<speed>5</speed> <!-- Superficial change.. just makes it fly faster -->
+	<cost>35</cost>
+	<bp>2</bp>
+	<droneImage>drone_anti</droneImage>
+	<!-- WEAPON INFO -->
+	<weaponBlueprint>ANTI_DRONE_ION</weaponBlueprint>
+	<!-- -->
+	<rarity>1</rarity>
+	<iconImage>antiD</iconImage>
+</droneBlueprint>
+
+<weaponBlueprint name="ANTI_DRONE_ION" NOLOC="1">
+	<type>LASER</type>
+	<title>Drone Laser</title>
+	<damage>0</damage>
+	<shots>1</shots>
+	<ion>1</ion>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<rarity>0</rarity>
+	<speed>90</speed>
+	<image>ion_1_shot</image>
+	<explosion>explosion_small_ion</explosion>
+	<launchSounds>
+		<sound>ionShoot1</sound>
+		<sound>ionShoot2</sound>
+		<sound>ionShoot3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>ionHit1</sound>
+		<sound>ionHit2</sound>
+		<sound>ionHit3</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>ionShields1</sound>
+		<sound>ionShields2</sound>
+		<sound>ionShields3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>ion_1</weaponArt>
+	<iconImage>ion</iconImage>
+</weaponBlueprint>
+
+
+<weaponBlueprint name="DRONE_BEAM2" NOLOC="1">
+	<type>BEAM</type>
+	<title>Mini Beam</title>
+	<short>Mini Beam</short>
+	<desc>'Baby's first beam'; Extremely cheap and weak beam weapon.</desc>
+	<damage>1</damage>
+	<sp>0</sp>
+	<fireChance>1</fireChance>
+	<breachChance>0</breachChance>
+	<speed>8</speed>
+	<rarity>0</rarity>
+	<image>beam_contact</image>
+	<length>40</length>
+	<launchSounds>
+		<sound>beam1</sound>
+		<sound>beam1_2</sound>
+	</launchSounds>
+	<weaponArt>beam_1</weaponArt>
+</weaponBlueprint>
+<droneBlueprint name="COMBAT_BEAM_2">
+	<type>COMBAT</type>
+	<title id="drone_COMBAT_BEAM_2_title"/>
+	<tip>tip_combat</tip>
+	<short id="drone_COMBAT_BEAM_2_short"/>
+	<desc id="drone_COMBAT_BEAM_2_desc"/>
+	<power>3</power>
+	<cooldown>1000</cooldown> <!-- Doesn't affect combat drone -->
+	<dodge>0</dodge>
+	<speed>11</speed> <!-- Change this to increase/decrease firing speed -->
+	<cost>60</cost>
+	<bp>3</bp>
+	<droneImage>drone_beam_2</droneImage>
+	<weaponBlueprint>DRONE_BEAM2</weaponBlueprint>
+	<rarity>5</rarity>
+	<iconImage>beam2</iconImage>
+</droneBlueprint>
+
+<weaponBlueprint name="DRONE_FIREBEAM" NOLOC="1">
+	<type>BEAM</type>
+	<title>Fire Beam</title>
+	<short>Fire Beam</short>
+	<desc>Fire beam.</desc>
+	<damage>0</damage>
+	<sp>0</sp>
+	<fireChance>9</fireChance>
+	<breachChance>0</breachChance>
+	<speed>2</speed>
+	<rarity>0</rarity>
+	<image>beam_contact</image>
+	<length>10</length>
+	<launchSounds>
+		<sound>beam1</sound>
+		<sound>beam1_2</sound>
+	</launchSounds>
+	<weaponArt>beam_1</weaponArt>
+</weaponBlueprint>
+<droneBlueprint name="COMBAT_FIRE">
+	<type>COMBAT</type>
+	<tip>tip_combat</tip>
+	<title id="drone_COMBAT_FIRE_title"/>
+	<short id="drone_COMBAT_FIRE_short"/>
+	<desc id="drone_COMBAT_FIRE_desc"/>
+	<power>3</power>
+	<cooldown>1000</cooldown> <!-- Doesn't affect combat drone -->
+	<dodge>0</dodge>
+	<speed>12</speed> <!-- Change this to increase/decrease firing speed -->
+	<cost>50</cost>
+	<bp>3</bp>
+	<droneImage>drone_fire</droneImage>
+	<weaponBlueprint>DRONE_FIREBEAM</weaponBlueprint>
+	<rarity>4</rarity>
+	<iconImage>fire</iconImage>
+</droneBlueprint>
+
+
+
+<droneBlueprint name="DRONE_SHIELD">
+	<type>SHIELD</type>
+	<level>1</level>
+	<tip>tip_defense</tip>
+	<title id="drone_DRONE_SHIELD_title"/>
+	<short id="drone_DRONE_SHIELD_short"/>
+	<desc id="drone_DRONE_SHIELD_desc"/>
+	<power>3</power>
+	<cooldown>15000</cooldown> <!-- cooldown for recharge, in ms -->
+	<dodge>0</dodge>
+	<speed>5</speed> <!-- Superficial change.. just makes it fly faster -->
+	<cost>60</cost>
+	<bp>2</bp>
+	<droneImage>drone_shield</droneImage>
+	<rarity>4</rarity>
+	<iconImage>shield</iconImage>
+</droneBlueprint>
+
+
+<droneBlueprint name="DRONE_SHIELD_PLAYER">
+	<type>SHIELD</type>
+	<level>1</level>
+	<tip>tip_defense</tip>
+	<title id="drone_DRONE_SHIELD_PLAYER_title"/>
+	<short id="drone_DRONE_SHIELD_PLAYER_short"/>
+	<desc id="drone_DRONE_SHIELD_PLAYER_desc"/>
+	<power>2</power>
+	<cooldown>15000</cooldown> <!-- cooldown for recharge, in ms -->
+	<dodge>0</dodge>
+	<speed>5</speed> <!-- Superficial change.. just makes it fly faster -->
+	<cost>60</cost>
+	<bp>2</bp>
+	<droneImage>drone_shield</droneImage>
+	<rarity>0</rarity>
+	<iconImage>shield</iconImage>
+</droneBlueprint>
+
+<weaponBlueprint name="BOMB_HEAL_SYSTEM">
+	<type>BOMB</type>
+	<tip>tip_repair_bomb</tip>
+	<title id="weapon_BOMB_HEAL_SYSTEM_title"/>
+	<short id="weapon_BOMB_HEAL_SYSTEM_short"/>
+	<locked>1</locked>
+	<desc id="weapon_BOMB_HEAL_SYSTEM_desc"/>
+	<tooltip id="weapon_BOMB_HEAL_SYSTEM_tooltip"/>
+	<damage>0</damage>
+	<sysDamage>-8</sysDamage>
+	<persDamage>0</persDamage>
+	<missiles>1</missiles>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>14</cooldown> <!-- was 18-->
+	<power>1</power>
+	<cost>40</cost>
+	<bp>4</bp>
+	<rarity>3</rarity>
+	<image>bomb_repair_anim</image>
+	<explosion>explosion_repair</explosion>
+	<launchSounds>
+		<sound>bombTeleport</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>healBomb</sound>
+	</hitShipSounds>
+	<weaponArt>bomb_repair</weaponArt>
+	<iconImage>bomb_heal</iconImage>
+</weaponBlueprint>
+
+
+<weaponBlueprint name="SHOTGUN_PLAYER">
+	<type>BURST</type>
+	<drone_targetable>1</drone_targetable>
+	<flavorType id="weapon_SHOTGUN_PLAYER_flavorType"/>
+	<title id="weapon_SHOTGUN_PLAYER_title"/>
+	<short id="weapon_SHOTGUN_PLAYER_short"/>
+	<tip>tip_flak</tip>
+	<desc id="weapon_SHOTGUN_PLAYER_desc"/>
+	<tooltip id="weapon_SHOTGUN_PLAYER_tooltip"/>
+	<radius>40</radius>
+	<damage>1</damage>
+	<shots>1</shots>
+	<sp>0</sp>
+	<spin>720</spin>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>8</cooldown>
+	<power>1</power>
+	<cost>60</cost>
+	<bp>10</bp>
+	<speed>26</speed>
+	<rarity>0</rarity>
+	<projectiles>
+		<projectile count="1" fake="false">debris_large</projectile>
+		<projectile count="2" fake="false">debris_med</projectile>
+		<projectile count="3" fake="true">debris_small</projectile>
+	</projectiles>
+	<launchSounds>
+		<sound>flak</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>flakImpact1</sound>
+		<sound>flakImpact2</sound>
+		<sound>flakImpact3</sound>
+		<sound>flakImpact4</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>shotgun</weaponArt>
+	<iconImage>flak</iconImage>
+</weaponBlueprint>
+
+<weaponBlueprint name="SHOTGUN">
+	<type>BURST</type>
+	<flavorType id="weapon_SHOTGUN_flavorType"/>
+	<drone_targetable>1</drone_targetable>
+	<title id="weapon_SHOTGUN_title"/>
+	<tip>tip_flak</tip>
+	<short id="weapon_SHOTGUN_short"/>
+	<desc id="weapon_SHOTGUN_desc"/>
+	<tooltip id="weapon_SHOTGUN_tooltip"/>
+	<radius>42</radius>
+	<damage>1</damage>
+	<shots>1</shots>
+	<sp>0</sp>
+	<spin>720</spin>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>10</cooldown>
+	<power>2</power>
+	<cost>65</cost>
+	<bp>10</bp>
+	<speed>26</speed>
+	<rarity>1</rarity>
+	<projectiles>
+		<projectile count="1" fake="false">debris_large</projectile>
+		<projectile count="2" fake="false">debris_med</projectile>
+		<projectile count="3" fake="true">debris_small</projectile>
+	</projectiles>
+	<launchSounds>
+		<sound>flak</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>flakImpact1</sound>
+		<sound>flakImpact2</sound>
+		<sound>flakImpact3</sound>
+		<sound>flakImpact4</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>shotgun</weaponArt>
+	<iconImage>flak</iconImage>
+</weaponBlueprint>
+
+<weaponBlueprint name="ARTILLERY_FED_C">
+	<type>BURST</type>
+	<flavorType id="weapon_ARTILLERY_FED_C_flavorType"/>
+	<drone_targetable>1</drone_targetable>
+	<title id="weapon_ARTILLERY_FED_C_title"/>
+	<short id="weapon_ARTILLERY_FED_C_short"/>
+	<desc id="weapon_ARTILLERY_FED_C_desc"/>
+	<tooltip id="weapon_ARTILLERY_FED_C_tooltip"/>
+	<radius>35</radius>
+	<damage>1</damage>
+	<spin>720</spin>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>40</cooldown>
+	<power>3</power>
+	<cost>75</cost>
+	<bp>10</bp>
+	<speed>26</speed>
+	<rarity>0</rarity>
+	<projectiles>
+		<projectile count="3" fake="false">debris_large</projectile>
+		<projectile count="4" fake="false">debris_med</projectile>
+		<projectile count="7" fake="true">debris_small</projectile>
+	</projectiles>
+	<launchSounds>
+		<sound>flak</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>flakImpact1</sound>
+		<sound>flakImpact2</sound>
+		<sound>flakImpact3</sound>
+		<sound>flakImpact4</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<iconImage>flak</iconImage>
+	<weaponArt>artillery_fed</weaponArt>
+</weaponBlueprint>
+
+<weaponBlueprint name="SHOTGUN_2">
+	<type>BURST</type>
+	<flavorType id="weapon_SHOTGUN_2_flavorType"/>
+	<drone_targetable>1</drone_targetable>
+	<title id="weapon_SHOTGUN_2_title"/>
+	<short id="weapon_SHOTGUN_2_short"/>
+	<tip>tip_flak</tip>
+	<desc id="weapon_SHOTGUN_2_desc"/>
+	<tooltip id="weapon_SHOTGUN_2_tooltip"/>
+	<radius>55</radius>
+	<damage>1</damage>
+	<spin>720</spin>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>21</cooldown>
+	<power>3</power>
+	<cost>80</cost>
+	<bp>10</bp>
+	<speed>26</speed>
+	<rarity>4</rarity>
+	<projectiles>
+		<projectile count="3" fake="false">debris_large</projectile>
+		<projectile count="4" fake="false">debris_med</projectile>
+		<projectile count="6" fake="true">debris_small</projectile>
+	</projectiles>
+	<launchSounds>
+		<sound>flak</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>flakImpact1</sound>
+		<sound>flakImpact2</sound>
+		<sound>flakImpact3</sound>
+		<sound>flakImpact4</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>shotgun_2</weaponArt>
+	<iconImage>flak</iconImage>
+</weaponBlueprint>
+
+<weaponBlueprint name="MISSILE_CHARGEGUN">
+	<type>BURST</type>
+	<flavorType id="weapon_MISSILE_CHARGEGUN_flavorType"/>
+	<drone_targetable>1</drone_targetable>
+	<title id="weapon_MISSILE_CHARGEGUN_title"/>
+	<tip>tip_charge</tip>
+	<short id="weapon_MISSILE_CHARGEGUN_short"/>
+	<desc id="weapon_MISSILE_CHARGEGUN_desc"/>
+	<tooltip id="weapon_MISSILE_CHARGEGUN_tooltip"/>
+	<radius>31</radius>  <!-- was 34-->
+	<missiles>1</missiles>
+	<damage>1</damage>
+	<shots>1</shots>
+	<sp>5</sp>
+	<fireChance>1</fireChance>
+	<breachChance>1</breachChance>
+	<drone_targetable>1</drone_targetable>
+	<cooldown>7</cooldown>
+	<power>2</power>
+	<chargeLevels>3</chargeLevels>
+	<cost>65</cost>
+	<bp>10</bp>
+	<speed>45</speed>
+	<rarity>4</rarity>
+	<explosion>explosion_random</explosion>
+	<projectiles>
+		<projectile count="1" fake="false">missile_burst</projectile>
+	</projectiles>
+	<launchSounds>
+		<sound>smallMissile1</sound>
+		<sound>smallMissile2</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>smallExplosion</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>chargemissile</weaponArt>
+	<iconImage>missile_charge</iconImage>
+</weaponBlueprint>
+
+<weaponBlueprint name="LASER_CHAINGUN">  <!-- 1 shot 1power-->
+	<type>LASER</type>
+	<title id="weapon_LASER_CHAINGUN_title"/>
+	<short id="weapon_LASER_CHAINGUN_short"/>
+	<tip>tip_chain_laser</tip>
+	<desc id="weapon_LASER_CHAINGUN_desc"/>
+	<tooltip id="weapon_LASER_CHAINGUN_tooltip"/>
+	<damage>1</damage>
+	<shots>2</shots>
+	<sp>0</sp>
+	<fireChance>1</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>16</cooldown>
+	<power>2</power>
+	<cost>65</cost>
+	<bp>2</bp>
+	<rarity>3</rarity>
+	<image>laser_light1</image>
+	<boost>
+		<type>cooldown</type>
+		<amount>3</amount>
+		<count>3</count>
+	</boost>
+	<launchSounds>
+		<sound>lightLaser1</sound>
+		<sound>lightLaser2</sound>
+		<sound>lightLaser3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>hitHull2</sound>
+		<sound>hitHull3</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>chainlaser</weaponArt>
+	<iconImage>laser_chain</iconImage>
+</weaponBlueprint>
+
+
+<weaponBlueprint name="LASER_CHAINGUN_2">  <!-- 1 shot 1power-->
+	<type>LASER</type>
+	<title id="weapon_LASER_CHAINGUN_2_title"/>
+	<short id="weapon_LASER_CHAINGUN_2_short"/>
+	<tip>tip_chain_laser</tip>
+	<desc id="weapon_LASER_CHAINGUN_2_desc"/>
+	<tooltip id="weapon_LASER_CHAINGUN_2_tooltip"/>
+	<damage>1</damage>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>1</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>11.1</cooldown>
+	<power>4</power>
+	<cost>95</cost>
+	<bp>2</bp>
+	<rarity>5</rarity>
+	<image>laser_light1</image>
+	<boost>
+		<type>cooldown</type>
+		<amount>2</amount>
+		<count>5</count>
+	</boost>
+	<launchSounds>
+		<sound>lightLaser1</sound>
+		<sound>lightLaser2</sound>
+		<sound>lightLaser3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>hitHull2</sound>
+		<sound>hitHull3</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>chainlaser_2</weaponArt>
+	<iconImage>laser_chain</iconImage>
+</weaponBlueprint>
+
+
+
+<weaponBlueprint name="ION_CHAINGUN">
+	<type>LASER</type>
+	<title id="weapon_ION_CHAINGUN_title"/>
+	<short id="weapon_ION_CHAINGUN_short"/>
+	<locked>1</locked>
+	<tip>tip_chain_ion</tip>
+	<desc id="weapon_ION_CHAINGUN_desc"/>
+	<tooltip id="weapon_ION_CHAINGUN_tooltip"/>
+	<damage>0</damage>
+	<ion>1</ion>
+	<speed>30</speed>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>14</cooldown> <!--13-->
+	<power>3</power>
+	<cost>55</cost>
+	<bp>3</bp>
+	<rarity>4</rarity>
+	<image>ion_2_shot</image>
+	<boost>
+		<type>damage</type>
+		<amount>1</amount>
+		<count>3</count>
+	</boost>
+	<explosion>explosion_small_ion</explosion>
+	<launchSounds>
+		<sound>ionShoot1</sound>
+		<sound>ionShoot2</sound>
+		<sound>ionShoot3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>ionHit1</sound>
+		<sound>ionHit2</sound>
+		<sound>ionHit3</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>ionShields1</sound>
+		<sound>ionShields2</sound>
+		<sound>ionShields3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>ion_chaingun</weaponArt>
+	<iconImage>ion_chain</iconImage>
+</weaponBlueprint>
+
+
+
+<weaponBlueprint name="LASER_CHARGEGUN_PLAYER">
+	<type>LASER</type>
+	<title id="weapon_LASER_CHARGEGUN_PLAYER_title"/>
+	<short id="weapon_LASER_CHARGEGUN_PLAYER_short"/>
+	<tip>tip_charge</tip>
+	<desc id="weapon_LASER_CHARGEGUN_PLAYER_desc"/>
+	<tooltip id="weapon_LASER_CHARGEGUN_PLAYER_tooltip"/>
+	<damage>1</damage>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>5.5</cooldown> <!-- was 4.2-->
+	<power>1</power>
+	<cost>30</cost>
+	<bp>2</bp>
+	<rarity>0</rarity>
+	<image>laser_light1</image>
+	<chargeLevels>2</chargeLevels>
+	<launchSounds>
+		<sound>lightLaser1</sound>
+		<sound>lightLaser2</sound>
+		<sound>lightLaser3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>hitHull2</sound>
+		<sound>hitHull3</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>chargelaser</weaponArt>
+	<iconImage>laser_charge2</iconImage>
+</weaponBlueprint>
+
+<weaponBlueprint name="LASER_CHARGEGUN">
+	<type>LASER</type>
+	<title id="weapon_LASER_CHARGEGUN_title"/>
+	<short id="weapon_LASER_CHARGEGUN_short"/>
+	<tip>tip_charge</tip>
+	<desc id="weapon_LASER_CHARGEGUN_desc"/>
+	<tooltip id="weapon_LASER_CHARGEGUN_tooltip"/>
+	<damage>1</damage>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>6</cooldown> <!-- was 4.2-->
+	<power>2</power>
+	<cost>55</cost> <!-- was 45-->
+	<bp>2</bp>
+	<rarity>3</rarity>
+	<image>laser_light1</image>
+	<chargeLevels>2</chargeLevels>
+	<launchSounds>
+		<sound>lightLaser1</sound>
+		<sound>lightLaser2</sound>
+		<sound>lightLaser3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>hitHull2</sound>
+		<sound>hitHull3</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>chargelaser</weaponArt>
+	<iconImage>laser_charge2</iconImage>
+</weaponBlueprint>
+
+
+<weaponBlueprint name="LASER_CHARGEGUN_2">
+	<type>LASER</type>
+	<title id="weapon_LASER_CHARGEGUN_2_title"/>
+	<short id="weapon_LASER_CHARGEGUN_2_short"/>
+	<tip>tip_charge</tip>
+	<desc id="weapon_LASER_CHARGEGUN_2_desc"/>
+	<tooltip id="weapon_LASER_CHARGEGUN_2_tooltip"/>
+	<damage>1</damage>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>1</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>5</cooldown>
+	<power>3</power>
+	<cost>70</cost>
+	<bp>2</bp>
+	<rarity>3</rarity>
+	<image>laser_light1</image>
+	<chargeLevels>4</chargeLevels>
+	<launchSounds>
+		<sound>lightLaser1</sound>
+		<sound>lightLaser2</sound>
+		<sound>lightLaser3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>hitHull2</sound>
+		<sound>hitHull3</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>chargelaser2</weaponArt>
+	<iconImage>laser_charge4</iconImage>
+</weaponBlueprint>
+
+
+<weaponBlueprint name="ION_CHARGEGUN">
+	<type>LASER</type>
+	<title id="weapon_ION_CHARGEGUN_title"/>
+	<short id="weapon_ION_CHARGEGUN_short"/>
+	<tip>tip_charge</tip>
+	<desc id="weapon_ION_CHARGEGUN_desc"/>
+	<tooltip id="weapon_ION_CHARGEGUN_tooltip"/>
+	<damage>0</damage>
+	<ion>1</ion>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>0</fireChance>
+	<speed>30</speed>
+	<breachChance>0</breachChance>
+	<cooldown>6</cooldown>
+	<power>2</power>
+	<cost>50</cost>
+	<bp>2</bp>
+	<rarity>3</rarity>
+	<image>ion_1_shot</image>
+	<chargeLevels>3</chargeLevels>
+	<explosion>explosion_small_ion</explosion>
+	<launchSounds>
+		<sound>ionShoot1</sound>
+		<sound>ionShoot2</sound>
+		<sound>ionShoot3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>ionHit1</sound>
+		<sound>ionHit2</sound>
+		<sound>ionHit3</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>ionShields1</sound>
+		<sound>ionShields2</sound>
+		<sound>ionShields3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>chargeion</weaponArt>
+	<iconImage>ion_charge</iconImage>
+</weaponBlueprint>
+
+
+<weaponBlueprint name="ION_STUN">
+	<type>LASER</type>
+	<tip>tip_ion</tip>
+	<title id="weapon_ION_STUN_title"/>
+	<short id="weapon_ION_STUN_short"/>
+	<locked>1</locked>
+	<desc id="weapon_ION_STUN_desc"/>
+	<tooltip id="weapon_ION_STUN_tooltip"/>
+	<stun>5</stun>
+	<damage>0</damage>
+	<ion>1</ion>
+	<speed>30</speed>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>10</cooldown>
+	<power>1</power>
+	<cost>35</cost>
+	<bp>3</bp>
+	<rarity>4</rarity>
+	<image>ion_stun_shot</image>
+	<explosion>explosion_stun_ion</explosion>
+	<launchSounds>
+		<sound>ionShoot1</sound>
+		<sound>ionShoot2</sound>
+		<sound>ionShoot3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>ionHit1</sound>
+		<sound>ionHit2</sound>
+		<sound>ionHit3</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>ionShields1</sound>
+		<sound>ionShields2</sound>
+		<sound>ionShields3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>ion_stun</weaponArt>
+	<iconImage>ion</iconImage>
+</weaponBlueprint>
+
+<weaponBlueprint name="BOMB_STUN">
+	<type>BOMB</type>
+	<tip>tip_bombs</tip>
+	<title id="weapon_BOMB_STUN_title"/>
+	<short id="weapon_BOMB_STUN_short"/>
+	<locked>1</locked>
+	<desc id="weapon_BOMB_STUN_desc"/>
+	<tooltip id="weapon_BOMB_STUN_tooltip"/>
+	<damage>0</damage>
+	<stun>15</stun>
+	<sysDamage>0</sysDamage>
+	<persDamage>0</persDamage>
+	<ion>1</ion>
+	<missiles>1</missiles>
+	<shots>1</shots>
+	<sp>0</sp>
+	<fireChance>0</fireChance>
+	<breachChance>0</breachChance>
+	<cooldown>17</cooldown>
+	<power>1</power>
+	<cost>45</cost>
+	<bp>4</bp>
+	<rarity>2</rarity>
+	<image>bomb_stun_anim</image>
+	<explosion>explosion_big1_ion</explosion>
+	<launchSounds>
+		<sound>bombTeleport</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>smallExplosion</sound>
+	</hitShipSounds>
+	<weaponArt>bomb_stun</weaponArt>
+	<iconImage>bomb</iconImage>
+</weaponBlueprint>
+
+
+
+<weaponBlueprint name="PDS_SHOT">
+	<type>LASER</type>
+	<title>PDS SHOT</title>
+	<short>PDS SHOT</short>
+	<desc>YOU SHOULD NEVER SEE THIS</desc>
+	<tooltip>YOU SHOULD NEVER SEE THIS.</tooltip>
+	<damage>3</damage>
+	<shots>1</shots>
+	<sp>5</sp>
+	<fireChance>0</fireChance>
+	<breachChance>10</breachChance>
+	<cooldown>9</cooldown>
+	<power>1</power>
+	<speed>20</speed>
+	<cost>55</cost>
+	<bp>6</bp>
+	<rarity>0</rarity>
+	<image>pds</image>
+	<explosion>explosion_random</explosion>
+	<launchSounds>
+		<sound>heavyLaser1</sound>
+		<sound>heavyLaser2</sound>
+		<sound>heavyLaser3</sound>
+	</launchSounds>
+	<hitShipSounds>
+		<sound>hitHull1</sound>
+	</hitShipSounds>
+	<hitShieldSounds>
+		<sound>hitShield1</sound>
+		<sound>hitShield2</sound>
+		<sound>hitShield3</sound>
+	</hitShieldSounds>
+	<missSounds>
+		<sound>miss</sound>
+	</missSounds>
+	<weaponArt>laser_heavy_1</weaponArt>
+</weaponBlueprint>
+
+
+
+
+
+<!--
+   ***********************
+	Anaerobic SHIP
+   ***********************
+ -->
+<!-- SHIP ID = ??? -->
+<shipBlueprint name="PLAYER_SHIP_ANAEROBIC" layout="anaerobic_cruiser" img="anaerobic_cruiser">
+	<class id="ship_PLAYER_SHIP_ANAEROBIC_class"/>
+	<name id="ship_PLAYER_SHIP_ANAEROBIC_name"/>
+	<unlock id="ship_PLAYER_SHIP_ANAEROBIC_unlock"/>
+	<desc id="ship_PLAYER_SHIP_ANAEROBIC_desc"/>
+	<systemList>
+		<pilot power="1" room="8" start="true" img="room_pilot_4">
+			<slot>
+				<direction>right</direction>
+				<number>0</number>
+			</slot>
+		</pilot>
+		<doors power="1" room="15" start="true" img="room_doors_2">
+			<slot>
+				<direction>down</direction>
+				<number>0</number>
+			</slot>
+		</doors>
+		<sensors power="1" room="14" start="true" img="room_sensors">
+			<slot>
+				<direction>down</direction>
+				<number>1</number>
+			</slot>
+		</sensors>
+		<oxygen power="1" room="2" start="true" img="room_oxygen_2"/>
+		<engines power="1" room="7" start="true" img="room_engines_7">
+			<slot>
+				<direction>right</direction>
+				<number>3</number>
+			</slot>
+		</engines>
+		<shields power="2" room="5" start="true" img="room_shields_10">
+			<slot>
+				<direction>down</direction>
+				<number>3</number>
+			</slot>
+		</shields>
+		<weapons power="3" room="9" start="true" img="room_weapons_9">
+			<slot>
+				<direction>up</direction>
+				<number>1</number>
+			</slot>
+		</weapons>
+		<drones power="2" room="11" start="false" img="room_drones_9"/> <!--F-->
+		<clonebay power="1" room="0" start="true">
+			<slot>
+				<number>0</number>
+			</slot>
+		</clonebay>
+		<medbay power="1" room="0" start="false" img="room_medbay_4">   <!--F-->
+			<slot>
+				<number>0</number>
+			</slot>
+		</medbay>
+		<teleporter power="1" room="1" start="false"/>   <!--F-->
+		<cloaking power="1" room="6" start="false" img="room_cloaking_4"/>  <!--F-->
+		<battery power="1" room="10" start="false" img="room_battery_10"/>   <!--F-->
+		<mind power="1" room="13" start="false" img="room_mind_6"/>   <!--F-->
+		<hacking power="1" room="3" start="true" img="room_hacking_5">
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+	</systemList>
+	<weaponSlots>4</weaponSlots>
+	<droneSlots>2</droneSlots>
+	<weaponList count="2" missiles="3">
+		<weapon name="LASER_CHAINGUN"/>
+		<weapon name="ION_STUN"/>
+	</weaponList>
+	<droneList count="0" drones="9"/>
+	<health amount="30"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "1" class="human"/>
+	<crewCount amount = "2" class="anaerobic"/>
+	<aug name="O2_MASKS"/>
+	<cloakImage>anaerobic_cruiser</cloakImage>
+</shipBlueprint>
+
+
+
+
+
+
+<shipBlueprint name="PLAYER_SHIP_ANAEROBIC_2" layout="anaerobic_cruiser_2" img="anaerobic_cruiser_2">
+	<class id="ship_PLAYER_SHIP_ANAEROBIC_2_class"/>
+	<name id="ship_PLAYER_SHIP_ANAEROBIC_2_name"/>
+	<unlock id="ship_PLAYER_SHIP_ANAEROBIC_2_unlock"/>
+	<desc id="ship_PLAYER_SHIP_ANAEROBIC_2_desc"/>
+	<systemList>
+		<pilot power="1" room="9" start="true">
+			<slot>
+				<direction>right</direction>
+				<number>0</number>
+			</slot>
+		</pilot>
+		<doors power="1" room="16" start="true" img="room_doors_2">
+			<slot>
+				<direction>down</direction>
+				<number>0</number>
+			</slot>
+		</doors>
+		<sensors power="1" room="0" start="false" img="room_sensors_2"> <!--F-->
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</sensors>
+		<oxygen power="1" room="5" start="true"/>
+		<engines power="1" room="8" start="true" img="room_engines_2">
+			<slot>
+				<direction>down</direction>
+				<number>2</number>
+			</slot>
+		</engines>
+		<shields power="2" room="4" start="true" img="room_shields_3">
+			<slot>
+				<direction>left</direction>
+				<number>2</number>
+			</slot>
+		</shields>
+		<weapons power="1" room="13" start="true" img="room_weapons_10">
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</weapons>
+		<drones power="2" room="2" start="false" img="room_drones_7"/> <!--F-->
+		<clonebay power="1" room="11" start="true">
+			<slot>
+				<number>2</number>
+			</slot>
+		</clonebay>
+		<medbay power="1" room="11" start="false" img="room_medbay_7"> <!--F-->
+			<slot>
+				<number>2</number>
+			</slot>
+		</medbay>
+		<teleporter power="1" room="12" start="true"/>
+		<cloaking power="1" room="1" start="false" img="room_cloaking_3"/> <!--F-->
+		<mind power="1" room="17" start="true" img="room_mind_3"/>
+		<battery power="1" room="15" start="false" img="room_battery_12"/>  <!--F-->
+		<hacking power="1" room="3" start="false" img="room_hacking_4">  <!--F-->
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+	</systemList>
+	<weaponSlots>4</weaponSlots>
+	<droneSlots>2</droneSlots>
+	<weaponList count="1" missiles="0">
+		<weapon name="SHOTGUN_PLAYER"/>
+	</weaponList>
+	<droneList drones="0"/>
+	<health amount="30"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "1" class="engi"/>
+	<crewCount amount = "2" class="anaerobic"/>
+	<aug name="O2_MASKS"/>
+	<shieldImage>anaerobic_cruiser</shieldImage>
+	<cloakImage>anaerobic_cruiser</cloakImage>
+</shipBlueprint>
+
+
+
+
+<!--
+
+
+
+This is the original 1st version.  I replaced it with the U shaped ship with the inner ring of airlocks.  I'm 
+keeping this in case we need another layout for now 
+<shipBlueprint name="PLAYER_SHIP_ANAEROBIC_3" layout="anaerobic_cruiser_3" img="anaerobic_cruiser_3">
+	<class>Shrike Cruiser</class>
+	<name>wutwutwut</name>
+	<unlock>>???????????</unlock>
+	<desc>???????????????????</desc>
+	<systemList>
+		<pilot power="1" room="7" start="true">
+			<slot>
+				<direction>right</direction>
+				<number>1</number>
+			</slot>
+		</pilot>
+		<doors power="1" room="12" start="true"/>
+		<sensors power="1" room="5" start="true"/>
+		<oxygen power="1" room="6" start="true"/>
+		<engines power="2" room="2" start="true">
+			<slot>
+				<direction>left</direction>
+				<number>2</number>
+			</slot>
+		</engines>
+		<shields power="2" room="4" start="true">
+			<slot>
+				<direction>down</direction>
+				<number>0</number>
+			</slot>
+		</shields>
+		<weapons power="2" room="11" start="true">
+			<slot>
+				<direction>left</direction>
+				<number>0</number>
+			</slot>
+		</weapons>
+		<drones power="2" room="9" start="false"/>
+		<medbay power="1" room="10" start="true">
+			<slot>
+				<number>2</number>
+			</slot>
+		</medbay>
+		<teleporter power="1" room="14" start="true"/>
+		<cloaking power="1" room="3" start="true"/>
+		<battery power="1" room="13" start="false"/>  <!- NEEDS Room image 
+		<mind power="1" room="0" start="false"/>  <!- NEEDS Room image 
+		<hacking power="1" room="1" start="false"/>  <!- NEEDS Room image 
+	</systemList>
+	<weaponSlots>4</weaponSlots>
+	<droneSlots>2</droneSlots>
+	<weaponList count="1" missiles="5">
+		<weapon name="LASER_BURST_3"/>
+	</weaponList>
+	<droneList drones="2"/>
+	<droneList count="0" drones="0"/>
+	<health amount="30"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "4" class="anaerobic"/>
+</shipBlueprint>
+-->
+
+
+
+
+
+<blueprintList name="SHIPS_LANIUS">
+	<name>ANAEROBIC_SCOUT</name>
+	<name>ANAEROBIC_BOMBER</name>
+</blueprintList>
+
+<blueprintList name="WEAPONS_ANAEROBIC">
+	<name>LASER_BURST_1</name>
+	<name>LASER_BURST_2_A</name>
+	<name>LASER_BURST_3</name>
+	<name>LASER_BURST_5</name>
+	<name>LASER_HEAVY_1</name>
+	<name>LASER_HEAVY_2</name>
+	<name>SHOTGUN</name>
+	<name>SHOTGUN_2</name>
+	<name>ION_2</name>
+	<name>MISSILES_1</name>
+	<name>MISSILES_2</name>
+	<name>MISSILES_3</name>
+	<name>MISSILES_BREACH</name>
+	<name>BEAM_1</name>
+	<name>BEAM_2</name>
+	<name>BOMB_1</name>
+</blueprintList>
+
+
+<!--
+********************
+ANAEROBIC ENEMY SHIPS  - AUTOBLUEPRINT
+  *******************
+-->
+
+  <shipBlueprint name="ANAEROBIC_SCOUT" layout="anaerobic_scout" img="anaerobic_scout">
+	<class id="ship_ANAEROBIC_SCOUT_class"/>
+	<maxSector>7</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="1"/>
+		<clonebay power="1" max="3" room="3" start="false"/>
+		<!--<oxygen power="1" max="3" room="9"/> -->
+		<shields power="2" max="8" room="5"/>
+		<engines power="1" max="5" room="6"/>
+		<weapons power="2" max="8" room="4"/>
+		<doors power="1" max="3" room="0" start="false"/>
+		<hacking power="1" max="3" room="2" start="false"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ANAEROBIC"/>
+	<health amount="7"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="3" class="anaerobic"/>
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>anaerobic_scout</cloakImage>
+	<aug name="O2_MASKS"/>
+</shipBlueprint>
+
+
+  <shipBlueprint name="ANAEROBIC_BOMBER" layout="anaerobic_bomber" img="anaerobic_bomber">
+	<class id="ship_ANAEROBIC_BOMBER_class"/>
+	<minSector>3</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="3"/>
+		<doors power="1" max="3" room="10" start="false"/>
+		<clonebay power="1" max="3" room="7" start="false"/>
+		<!--<oxygen power="1" max="3" room="9"/> -->
+		<shields power="2" max="8" room="0"/>
+		<engines power="1" max="5" room="9"/>
+		<weapons power="2" max="8" room="1"/>
+		<mind power="1" max="2" room="4" start="false"/>
+		<teleporter power="1" max="3" room="8"/>
+		<cloaking power="1" max="3" room="2" start="false"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ANAEROBIC"/>
+	<health amount="9"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "3" max="5" class="anaerobic"/>
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>anaerobic_bomber</cloakImage>
+	<aug name="O2_MASKS"/>
+</shipBlueprint>
+</FTL>

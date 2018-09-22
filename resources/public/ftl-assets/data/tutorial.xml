@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- NAMES ARE IMPORTANT
+	 I don't have a fancy script system, so there are code things that line up with these 
+	 specific NAMES for each STEP. -->
+
+<order type="PC">
+    <step>SHIP_INTRO_1</step>
+    <step>SHIP_INTRO_2</step>
+    <step>SHIP_INTRO_3</step>
+    <step>SHIP_INTRO_4</step>
+    <step>SHIP_INTRO_5</step>
+
+    <step>POWER_SYSTEM_1</step>
+    <step>POWER_SYSTEM_2</step>
+
+    <step>DAMAGE_SYSTEM_1</step>
+    <step>DAMAGE_SYSTEM_2</step>
+    <step>DAMAGE_SYSTEM_3</step>
+    <step>DAMAGE_SYSTEM_4</step>
+    <step>DAMAGE_SYSTEM_5</step>
+    <step>DAMAGE_SYSTEM_5_5</step>
+
+    <step>FIRE_PC_1</step>
+    <step>FIRE_END</step>
+
+    <step>DAMAGE_SYSTEM_6</step>
+    <step>DAMAGE_SYSTEM_7</step>
+
+    <step>STAR_MAP_1</step>
+
+    <step>COMBAT_0</step>
+    <step>COMBAT_1</step>
+    <step>COMBAT_2</step>
+    <step>COMBAT_3</step>
+    <step>COMBAT_4</step>
+    <step>COMBAT_4_5</step>
+    <step>COMBAT_4_6</step>
+
+    <step>INVENTORY_1</step>
+    <step>INVENTORY_2</step>
+
+    <step>COMBAT_5</step>
+
+    <step>UPGRADES_1</step>
+    <step>UPGRADES_1_2</step>
+    <step>UPGRADES_2</step>
+    <step>UPGRADES_3</step>
+
+    <step>DONE_1</step>
+</order>
+
+<order type="IPAD">
+    <step>SHIP_INTRO_1</step>
+    <step>SHIP_INTRO_2</step>
+    <step>SHIP_INTRO_3</step>
+    <step>SHIP_INTRO_5</step>
+
+    <step>POWER_SYSTEM_1</step>
+    <step>POWER_SYSTEM_2</step>
+
+    <step>IPAD_TOOLTIPS</step>
+
+    <step>DAMAGE_SYSTEM_1</step>
+    <step>DAMAGE_SYSTEM_2</step>
+    <step>DAMAGE_SYSTEM_3</step>
+    <step>DAMAGE_SYSTEM_4</step>
+    <step>DAMAGE_SYSTEM_5</step>
+    <step>DAMAGE_SYSTEM_5_5</step>
+
+    <step>FIRE_IPAD_1</step>
+    <step>FIRE_IPAD_2</step>
+
+    <step>FIRE_END</step>
+
+    <step>DAMAGE_SYSTEM_6</step>
+    <step>DAMAGE_SYSTEM_7</step>
+
+    <step>STAR_MAP_1</step>
+
+    <step>COMBAT_0</step>
+    <step>COMBAT_IPAD_0</step>
+    <step>COMBAT_1</step>
+    <step>COMBAT_2</step>
+    <step>COMBAT_3</step>
+    <step>COMBAT_4</step>
+    <step>COMBAT_4_5</step>
+    <step>COMBAT_4_6</step>
+
+    <step>INVENTORY_1</step>
+    <step>INVENTORY_2</step>
+
+    <step>COMBAT_5</step>
+
+    <step>UPGRADES_1</step>
+    <step>UPGRADES_1_2</step>
+    <step>UPGRADES_2</step>
+    <step>UPGRADES_3</step>
+
+    <step>DONE_1</step>
+</order>
+
+<!-- TEXT
+	default = used for both PC and iPad
+	IPAD / PC = used for specific
+	NOTE: If something appears in both the iPad list and the PC list, yet there is no text for it specifically, it will default to whatever is available. (Thus "default" isn't necessary. But makes this more readable)
+-->
+
+<step name="SHIP_INTRO_1">
+	<default id="tutorial_SHIP_INTRO_1"/>
+	<continue>true</continue>
+</step>
+
+<step name="SHIP_INTRO_2">
+	<default id="tutorial_SHIP_INTRO_2"/>
+	<continue>true</continue>
+	<arrow type="PC">
+			<x>-55</x>
+			<y>500</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>-52</x>
+			<y>548</y>
+			<angle>90</angle>
+	</arrow>
+</step>
+
+<step name="SHIP_INTRO_3">
+	<default id="tutorial_SHIP_INTRO_3"/>
+	<continue>true</continue>
+	<arrow type="PC">
+			<x>1020</x>
+			<y>525</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>668</x>
+			<y>557</y>
+			<angle>90</angle>
+	</arrow>
+</step>
+
+<!-- PC Only. Cover tooltips when you cover powering-->
+<step name="SHIP_INTRO_4">
+	<PC id="tutorial_SHIP_INTRO_4_PC"/>
+	<continue>true</continue>
+</step>
+
+<step name="SHIP_INTRO_5">
+	<default id="tutorial_SHIP_INTRO_5"/>
+	<continue>true</continue>
+	<arrow type="PC">
+			<x>100</x>
+			<y>170</y>
+			<angle>270</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>100</x>
+			<y>130</y>
+			<angle>270</angle>
+	</arrow>
+</step>
+
+
+<step name="POWER_SYSTEM_1">
+	<default id="tutorial_POWER_SYSTEM_1"/>
+	<continue>true</continue>
+	<arrow type="PC">
+			<x>42</x>
+			<y>540</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>154</x>
+			<y>548</y>
+			<angle>90</angle>
+	</arrow>
+</step>
+
+
+<step name="POWER_SYSTEM_2">
+	<PC id="tutorial_POWER_SYSTEM_2_PC"/>
+	<IPAD id="tutorial_POWER_SYSTEM_2_IPAD"/>
+	<continue>false</continue>
+	<arrow type="PC">
+			<x>42</x>
+			<y>540</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>154</x>
+			<y>548</y>
+			<angle>90</angle>
+	</arrow>
+</step>
+
+<!-- IPAD ONLY - COVER TOOLTIPS-->
+<step name="IPAD_TOOLTIPS">
+	<IPAD id="tutorial_IPAD_TOOLTIPS_IPAD"/>
+	<continue>false</continue>
+</step>
+
+<step name="DAMAGE_SYSTEM_1">
+	<default id="tutorial_DAMAGE_SYSTEM_1"/>
+	<continue>true</continue>
+	<arrow type="PC">
+			<x>42</x>
+			<y>540</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="PC">
+			<x>225</x>
+			<y>325</y>
+			<angle>0</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>154</x>
+			<y>548</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>96</x>
+			<y>343</y>
+			<angle>0</angle>
+	</arrow>
+</step>
+
+<step name="DAMAGE_SYSTEM_2">
+	<PC id="tutorial_DAMAGE_SYSTEM_2_PC"/>
+	<IPAD id="tutorial_DAMAGE_SYSTEM_2_IPAD"/>
+	<continue>false</continue>
+</step>
+
+<step name="DAMAGE_SYSTEM_3">
+	<PC id="tutorial_DAMAGE_SYSTEM_3_PC"/>
+	<IPAD id="tutorial_DAMAGE_SYSTEM_3_IPAD"/>
+	<continue>false</continue>
+		<arrow type="PC">
+			<x>225</x>
+			<y>325</y>
+			<angle>0</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>96</x>
+			<y>343</y>
+			<angle>0</angle>
+	</arrow>
+</step>
+
+<step name="DAMAGE_SYSTEM_4">
+	<default id="tutorial_DAMAGE_SYSTEM_4"/>
+	<continue>false</continue>
+</step>
+
+<step name="DAMAGE_SYSTEM_5">
+	<default id="tutorial_DAMAGE_SYSTEM_5"/>
+	<continue>true</continue>
+	<arrow type="PC">
+			<x>43</x>
+			<y>534</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>154</x>
+			<y>548</y>
+			<angle>90</angle>
+	</arrow>
+</step>
+
+<step name="DAMAGE_SYSTEM_5_5">
+	<default id="tutorial_DAMAGE_SYSTEM_5_5"/>
+	<continue>true</continue>
+	<arrow type="PC">
+			<x>43</x>
+			<y>534</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>154</x>
+			<y>548</y>
+			<angle>90</angle>
+	</arrow>
+</step>
+
+<step name="FIRE_IPAD_1">
+	<IPAD id="tutorial_FIRE_IPAD_1_IPAD"/>
+	<continue>false</continue>
+	<arrow type="IPAD">
+			<x>724</x>
+			<y>557</y>
+			<angle>90</angle>
+	</arrow>
+</step>
+
+<step name="FIRE_IPAD_2">
+	<IPAD id="tutorial_FIRE_IPAD_2_IPAD"/>
+	<continue>false</continue>
+	<arrow type="IPAD">
+			<x>366</x>
+			<y>533</y>
+			<angle>270</angle>
+	</arrow>
+</step>
+
+<step name="FIRE_PC_1">
+	<PC id="tutorial_FIRE_PC_1_PC"/>
+	<continue>false</continue>
+	<arrow type="PC">
+			<x>495</x>
+			<y>515</y>
+			<angle>270</angle>
+	</arrow>
+</step>
+
+<step name="FIRE_END">
+	<default id="tutorial_FIRE_END"/>
+	<continue>false</continue>
+</step>
+
+<step name="DAMAGE_SYSTEM_6">
+	<default id="tutorial_DAMAGE_SYSTEM_6"/>
+	<continue>false</continue>
+</step>
+
+<step name="DAMAGE_SYSTEM_7">
+	<PC id="tutorial_DAMAGE_SYSTEM_7_PC"/>
+	<IPAD id="tutorial_DAMAGE_SYSTEM_7_IPAD"/>
+	<continue>false</continue>
+	<arrow type="PC">
+			<x>488</x>
+			<y>143</y>
+			<angle>270</angle>
+	</arrow>
+	<arrow type="PC">
+			<x>70</x>
+			<y>140</y>
+			<angle>270</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>53</x>
+			<y>120</y>
+			<angle>270</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>476</x>
+			<y>120</y>
+			<angle>270</angle>
+	</arrow>
+</step>
+
+<step name="STAR_MAP_1">
+	<PC id="tutorial_STAR_MAP_1_PC"/>
+	<IPAD id="tutorial_STAR_MAP_1_IPAD"/>
+	<continue>false</continue>
+</step>
+
+<step name="COMBAT_0">
+	<PC id="tutorial_COMBAT_0_PC"/>
+	<IPAD id="tutorial_COMBAT_0_IPAD"/>
+	<continue>false</continue>
+	<arrow type="IPAD">
+			<x>847</x>
+			<y>582</y>
+			<angle>90</angle>
+	</arrow>
+</step>
+
+<step name="COMBAT_IPAD_0">
+	<IPAD id="tutorial_COMBAT_IPAD_0_IPAD"/>
+	<continue>false</continue>
+	<arrow type="IPAD">
+			<x>4</x>
+			<y>550</y>
+			<angle>90</angle>
+	</arrow>
+</step>
+
+<step name="COMBAT_1">
+	<PC id="tutorial_COMBAT_1_PC"/>
+	<IPAD id="tutorial_COMBAT_1_IPAD"/>
+	<continue>false</continue>
+	<arrow type="PC">
+			<x>187</x>
+			<y>550</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>170</x>
+			<y>500</y>
+			<angle>180</angle>
+	</arrow>
+</step>
+
+<step name="COMBAT_2">
+	<PC id="tutorial_COMBAT_2_PC"/>
+	<IPAD id="tutorial_COMBAT_2_IPAD"/>
+	<continue>false</continue>
+</step>
+
+<step name="COMBAT_3">
+	<default id="tutorial_COMBAT_3"/>
+	<continue>true</continue>
+		<arrow type="PC">
+			<x>7</x>
+			<y>537</y>
+			<angle>90</angle>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="PC">
+			<x>120</x>
+			<y>70</y>
+			<angle>180</angle>
+	</arrow>
+	<arrow type="PC">
+			<x>935</x>
+			<y>110</y>
+			<angle>180</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>-30</x>
+			<y>135</y>
+			<angle>270</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>97</x>
+			<y>550</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD" relative="hostilebox">
+			<x>58</x>
+			<y>20</y>
+			<angle>180</angle>
+	</arrow>
+</step>
+
+<step name="COMBAT_4">
+	<default id="tutorial_COMBAT_4"/>
+	<continue>false</continue>
+		<arrow type="PC">
+			<x>320</x>
+			<y>510</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="PC">
+			<x>150</x>
+			<y>145</y>
+			<angle>270</angle>
+	</arrow>
+	<arrow type="PC">
+			<x>1060</x>
+			<y>235</y>
+			<angle>180</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>113</x>
+			<y>129</y>
+			<angle>270</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>170</x>
+			<y>412</y>
+			<angle>180</angle>
+	</arrow>
+	<arrow type="IPAD" relative="enemy">
+			<x>205</x>
+			<y>188</y>
+			<angle>180</angle>
+	</arrow>
+</step>
+
+<step name="COMBAT_4_5">
+	<default id="tutorial_COMBAT_4_5"/>
+	<continue>true</continue>
+</step>
+
+<step name="COMBAT_4_6">
+	<PC id="tutorial_COMBAT_4_6_PC"/>
+	<IPAD id="tutorial_COMBAT_4_6_IPAD"/>
+	<continue>false</continue>
+</step>
+
+<step name="INVENTORY_1">
+	<PC id="tutorial_INVENTORY_1_PC"/>
+	<IPAD id="tutorial_INVENTORY_1_IPAD"/>
+	<continue>false</continue>
+	<arrow type="PC">
+			<x>580</x>
+			<y>136</y>
+			<angle>270</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>565</x>
+			<y>115</y>
+			<angle>270</angle>
+	</arrow>
+</step>
+
+<step name="INVENTORY_2">
+	<PC id="tutorial_INVENTORY_2_PC"/>
+	<IPAD id="tutorial_INVENTORY_2_IPAD"/>
+	<continue>false</continue>
+	<arrow relative="upgrades">
+			<x>410</x>
+			<y>85</y>
+			<angle>180</angle>
+	</arrow>
+	<arrow type="PC" relative="upgrades">
+			<x>-140</x>
+			<y>325</y>
+			<angle>0</angle>
+	</arrow>
+	<arrow type="IPAD" relative="upgrades">
+			<x>140</x>
+			<y>325</y>
+			<angle>180</angle>
+	</arrow>
+</step>
+
+<step name="COMBAT_5">
+	<default id="tutorial_COMBAT_5"/>
+	<continue>false</continue>
+	<arrow type="PC">
+			<x>152</x>
+			<y>548</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="PC">
+			<x>580</x>
+			<y>136</y>
+			<angle>270</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>23</x>
+			<y>300</y>
+			<angle>90</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>565</x>
+			<y>115</y>
+			<angle>270</angle>
+	</arrow>
+</step>
+
+<step name="UPGRADES_1">
+	<default id="tutorial_UPGRADES_1"/>
+	<continue>true</continue>
+	<arrow type="PC">
+			<x>505</x>
+			<y>10</y>
+			<angle>180</angle>
+	</arrow>
+	<arrow type="IPAD">
+			<x>507</x>
+			<y>9</y>
+			<angle>180</angle>
+	</arrow>
+	<arrow relative="upgrades">
+			<x>580</x>
+			<y>365</y>
+			<angle>180</angle>
+	</arrow>
+</step>
+
+<step name="UPGRADES_1_2">
+	<PC id="tutorial_UPGRADES_1_2_PC"/>
+	<IPAD id="tutorial_UPGRADES_1_2_IPAD"/>
+	<continue>false</continue>
+	<arrow relative="upgrades">
+			<x>340</x>
+			<y>125</y>
+			<angle>180</angle>
+	</arrow>
+</step>
+
+<step name="UPGRADES_2">
+	<PC id="tutorial_UPGRADES_2_PC"/>
+	<IPAD id="tutorial_UPGRADES_2_IPAD"/>
+	<continue>false</continue>
+</step>
+
+<step name="UPGRADES_3">
+	<PC id="tutorial_UPGRADES_3_PC"/>
+	<IPAD id="tutorial_UPGRADES_3_IPAD"/>
+	<continue>true</continue>
+</step>
+
+<step name="DONE_1">
+	<PC id="tutorial_DONE_1_PC"/>
+	<IPAD id="tutorial_DONE_1_IPAD"/>
+	<continue>true</continue>
+</step>
+</FTL>

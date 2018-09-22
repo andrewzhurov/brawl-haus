@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<event name="BIG_NAME_TEST">
+	<img back="BG_DARK" planet="NONE"/>
+	<ship load="PIRATE" hostile="false"/>
+	<text>A ship with pirate markings hails you: "Hello, we know you have %crew on board. The bounty on %crew_his head is substantial, hand %crew_him over and we'll share it."</text>
+	<choice hidden="false">
+		<text>That bounty could be vital to our survival, hand %crew over.</text>
+		<event loss1="crew">
+			<text>%loss1 goes without complaint, understanding your mission is more important than %loss1_his life.</text>
+			<crewMember amount="-1"/>
+			<item_modify>
+				<item type="scrap" min="40" max="80"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice>
+		<text>You don't give in to pirate demands. Power your weapons and prepare to fight.</text>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice req="engi" lvl="1">
+		<text>%req says %req_he has detected a flaw in their ship sensors and can exploit it, allowing the Kestrel to escape without a fight.</text>
+		<event>
+			<text>You hear a hail on all channels: "Dammit, where did you go!? This isn't over %crew!"</text>
+		</event>
+	</choice>
+</event>
+
+<event name="NEBULA_NOTHING_TEST">
+	<text>Appears that this is an empty nebula beacon. %crew, uncomfortable with the silence, distracts %crew_himself by playing death metal over the ship speakers.</text>
+</event>
+
+<event name="FREE_AUGMENT">
+	<text>Wow! A ship enhancement is just floating in space. %crew seems especially excited about this one.</text>
+	<augment name="RANDOM"/>
+</event>
+
+<event name="LONE_SHUTTLE" unique="true">
+	<text>A small, one man shuttle craft is headed straight for you. Repeated hails is yielding no response. You've got a strange feeling about this.</text>
+	<choice>
+		<text>Shoot it down. It's probably just an abandoned vessel, but better safe than sorry.</text>
+		<event>
+			<text>The shuttle has no defenses and breaks apart under your heavy weapon fire.</text>
+			<choice>
+				<text id="continue"/>
+				<event load="LONE_SHUTTLE_DESTROY"/>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text>Wait it out for a moment. Maybe someone needs help.</text>
+		<event load="LONE_SHUTTLE_WAIT"/>
+	</choice>
+</event>
+
+<eventList name="LONE_SHUTTLE_WAIT">
+	<event>
+		<text>As it gets closer, you are able to scan it for lifesigns. It seems to be unmanned. You take what little fuel it has and continue on.</text>
+		<item_modify>
+			<item type="fuel" min="1" max="1"/>
+		</item_modify>
+	</event>
+	<event>
+		<text>After waiting several minutes as the shuttle gets closer and closer, you finally receive a hail: "Are you with the Federation? I'm %add1 and it sure is great to find you. I was hired to scout this sector but my ship was destroyed. If I could hitch a ride, I'd appreciate it." You let %add1_him beam aboard.</text>
+		<crewMember amount="1" type="rock"/>
+	</event>
+	<event>
+		<text>Once it gets closer, you detect multiple lifesigns on the ship. By the time you realize it's a rebel vessel, it's too late and they've beamed aboard.</text>
+		<boarders min="3" max="4" class="human"/>
+	</event>
+	<event>
+		<text>You detect a transporter signal! The shuttle transported multiple explosive devices to the Kestrel before self-destructing. The Kestrel is only lightly damaged, but %loss1 is caught in one of the explosions and dies.</text>
+		<crewMember amount="-1"/>
+		<damage amount="1"/>
+		<damage amount="1" system="random"/>  <!--DLC-->
+	</event>
+</eventList>
+
+<eventList name="LONE_SHUTTLE_DESTROY">
+	<event>
+		<text>Scans show no biological remains in the vessel; it was unmanned... very strange.</text>
+	</event>
+	<event>
+		<text>In the wreckage, you detect multiple human remains. But you also discover an encrypted rebel communication system. That's one less enemy ship to worry about.</text>
+	</event>
+	<event>
+		<ship load="REBEL" hostile="false"/>
+		<text>A rebel ship arrives at the beacon. "Ah! It seems you did our dirty work for us. Nothing worse than Engi refugees. Let us give you some spare supplies as thanks, we've been chasing those Federation lapdogs through two sectors." Luckily they're too grateful for your help to notice who you are.</text>
+		<item_modify>
+			<item type="scrap" min="25" max="50"/>
+			<item type="fuel" min="1" max="3"/>
+		</item_modify>
+	</event>
+</eventList>
+
+<event name="DERELICT_TREASURE" unique="true">
+	<text load="DERELICT_TREASURE"/>
+	<choice hidden="true">
+		<text>Attempt to salvage what you can from the debris.</text>
+		<event load="DERELICT_TREASURE_REWARD"/>
+	</choice>
+	<choice hidden="true" req="engi" lvl="1">
+		<text>(Engi) %req isn't convinced that it's safe. %req_He asks you to give %req_him some time to run some more scans.</text>
+		<event load="DERELICT_ENGI"/>
+	</choice>
+	<choice>
+		<text>Who knows what dangers that wreckage could hold? You don't need the supplies anyway. Continue on your way.</text>
+		<event/>
+	</choice>
+</event>
+
+<textList name="DERELICT_TREASURE">
+	<text>You stumble upon the remnents of a recent battle. One ship nearby looks like it could still have some valuable resources.</text>
+	<text>A derelict Selz class freighter is floating near this beacon. It could contain something valuable.</text>
+	<text>A massive space station is orbitting a nearby moon. Initial scans show it to be empty and abandoned.</text>
+</textList>
+
+<eventList name="DERELICT_TREASURE_REWARD">
+	<event>
+		<text>An explosion rocks your ship, it seems the wreckage was rigged to explode. You don't know why anyone would do something so malicious...</text>
+		<damage amount="5"/>
+		<damage amount="1" system="room" effect="breach"/>  <!--DLC-->
+	</event>
+	<event>
+		<text>When you get close enough to start scrapping the wreckage, your systems detect a transmission going out. It seems the Rebels rigged it to warn them of your arrival.</text>
+		<modifyPursuit amount="1"/>
+	</event>
+	<event>
+		<text>You discover the wreckage has tons use-able scrap and even some weaponry!</text>
+		<item_modify>
+			<item type="scrap" min="50" max="60"/>
+		</item_modify>
+		<weapon name="RANDOM"/>
+	</event>
+</eventList>
+
+<eventList name="DERELICT_ENGI">
+	<event>
+		<text>%req discovers that the ship is rigged to explode if you get too near. Better that you avoid the wreckage and continue on your way.</text>
+	</event>
+	<event>
+		<text>%req finds a hidden rebel transmitter on the wreckage! %req_He's able to disable it remotely and leaves you to scrap the ship for valuable supplies.</text>
+		<item_modify>
+			<item type="scrap" min="50" max="60"/>
+		</item_modify>
+		<weapon name="RANDOM"/>
+	</event>
+	<event>
+		<text>%req discovers nothing extraordinary about this specific wreckage. You go about salvaging what you can.</text>
+		<item_modify>
+			<item type="scrap" min="50" max="60"/>
+		</item_modify>
+		<weapon name="RANDOM"/>
+	</event>
+</eventList>
+
+<event name="ENGI_REFUGEES" unique = "true">
+	<text>You come across a freighter of Engi refugees fleeing the Rebels. Their ship is seriously damaged and they clearly need help.</text>
+	<choice>
+		<text>You just don't have the equipment or the time to help them. We wish them luck and let them go on their way.</text>
+		<event/>
+	</choice>
+	<choice>
+		<text>You give them what scrap you can afford to aid them in their repair efforts.</text>
+		<event>
+			<text>They thank you repeatedly and wish you good luck on your mission.</text>
+			<item_modify>
+				<item type="scrap" min="-30" max="-10"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice req="engi" lvl="1">
+		<text>(Engi) Your crewmember wants to go aboard to see if he can provide any help personally. He requests some scrap to help.</text>
+		<event>
+			<text>He returns bearing good news. He was able to improve their engines and convinced one of their crew to join your cause.</text>
+			<item_modify>
+				<item type="scrap" min="-25" max="-5"/>
+			</item_modify>
+			<crewMember amount="1" type="engi"/>
+		</event>
+	</choice>
+</event>
+
+</FTL>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- System tooltips for the player -->
+<text name="tooltip_oxygen">Oxygen: Replenishes the ship's oxygen supply.</text>
+<text name="tooltip_doors">Doors: Allows for remote opening/closing of doors.</text>
+<text name="tooltip_doors_touch">Doors: Allows for remote opening/closing of doors. On your ship, tap individual doors or drag over multiple to open or close them.</text>
+<text name="tooltip_shields">Shields: Sustains projectile-blocking shields. Manning increases shield recharge speed.</text>
+<text name="tooltip_pilot">Piloting: Requires a crewmember to evade in combat or jump.</text>
+<text name="tooltip_engines">Engines: Charges the FTL drive and powers evasion. Manning increases dodge chance.</text>
+<text name="tooltip_sensors">Sensors: Enables view of all rooms and info for enemy ships.</text>
+<text name="tooltip_medbay">Medbay: Heals crewmembers inside the Medbay</text>
+<text name="tooltip_weapons">Weapons: Click on a weapon to charge and fire. Manning reduces charge time.</text>
+<text name="tooltip_weapons_touch">Weapons: Tap on a weapon to charge and fire. Manning reduces charge time.</text>
+<text name="tooltip_drones">Drones: Power automated robots for attack and defense.</text>
+<text name="tooltip_teleporter">Teleporter: Send crewmembers in the teleporter room to board enemy ships.</text>
+<text name="tooltip_cloaking">Cloaking: Partially disappear into another dimension, providing +60 to dodge and temporarily stopping enemy weapon charging and aiming.</text>
+<text name="tooltip_artillery">Artillery: Beam that automatically fires a 1 damage beam that pierces all shields.</text>  <!-- Dummy text; actual tooltip is taken from weapon text -->
+<text name="tooltip_powerTotal">Reactor: Unused reactor energy available to power your systems.</text>
+<text name="tooltip_battery">Battery: Activate to temporarily increase available reactor power.</text>
+<text name="tooltip_clonebay">Clone Bay: Automatically clones any dead crewmember.</text>
+<text name="tooltip_mind">Mind Control: Turn enemies into friendlies temporarily.</text>
+<text name="tooltip_hacking">Hacking: Lockdown a system room while periodically disrupting the system and stunning crew.</text>
+
+<!-- System tooltips for the enemy -->
+<text name="tooltip_oxygen_enemy">Oxygen: Replenishes the enemy ship's oxygen supply.</text>
+<text name="tooltip_doors_enemy">Doors: Powers enemy blast doors, delaying boarder movement.</text>
+<text name="tooltip_shields_enemy">Shields: Powers the enemy's projectile blocking shields.</text>
+<text name="tooltip_pilot_enemy">Piloting: If functional with a crew-member, the enemy can dodge your shots.</text>
+<text name="tooltip_engines_enemy">Engines: Charges the enemy FTL drive and powers evasion.</text>
+<text name="tooltip_sensors_enemy">Sensors: No functionality for the enemy.</text>
+<text name="tooltip_medbay_enemy">Medbay: Heals enemy crewmembers.</text>
+<text name="tooltip_weapons_enemy">Weapons: Powers the enemy's weapons.</text>
+<text name="tooltip_weapons_touch_enemy">Weapons: Powers the enemy's weapons. Destroy it to stop them firing.</text>
+<text name="tooltip_drones_enemy">Drones: Powers the enemy's drones. Destroy it to shut them down.</text>
+<text name="tooltip_teleporter_enemy">Teleporter: The enemy uses this to teleport intruders onto your ship.</text>
+<text name="tooltip_cloaking_enemy">Cloaking: When in use, your weapons cannot charge and the enemy evasion is increased by 60.</text>
+<text name="tooltip_artillery_enemy">Artillery: Powers a single powerful weapon.</text>  <!-- Dummy text; actual tooltip is taken from weapon text -->
+<text name="tooltip_battery_enemy">Battery: Grants temporary power to the enemy.</text>
+<text name="tooltip_clonebay_enemy">Clone Bay: Will automatically clone any crew you kill, reviving them to fight again!</text>
+<text name="tooltip_mind_enemy">Mind Control: Can temporarily gain control of your crew. Destroy it to prevent this.</text>
+<text name="tooltip_hacking_enemy">Hacking: Launches a hacking drone that can temporarily disable a system.</text>
+
+<!-- Ship status tooltips -->
+<text name="tooltip_hull">Current hull integrity. If it drops to zero, the ship is destroyed.</text>
+<text name="tooltip_droneCount">Number of Drone Parts. Using a Drone consumes one Drone Part.</text>
+<text name="tooltip_fuelCount">Amount of fuel. Each jump consumes one fuel.</text>
+<text name="tooltip_missileCount">Number of Missiles. Some weapons consume one Missile when fired.</text>
+<text name="tooltip_scrapCount">Current scrap total</text>
+<text name="tooltip_FTLButton">Opens star map to choose jump location.</text>
+<text name="tooltip_jump_noPiloting">Your Pilot System must be functioning in order to Jump.</text>
+<text name="tooltip_jump_noCrew">You must have a crewmember in the Pilot System to Jump.</text>
+<text name="tooltip_jump_noEngines">Your Engine System must be functioning in order to Jump.</text>
+<text name="tooltip_shieldDisplay">Current shield status.</text>
+<text name="tooltip_evadeDisplay">Evasion: The percentage chance incoming shots will miss your ship. Determined by your Engine Power Level.</text>
+<text name="tooltip_oxygenDisplay">Oxygen: The average oxygen level in your ship. Most crew need oxygen to live. Your Oxygen System will replenish this if powered.</text>
+<text name="tooltip_energyShieldDisplay">Zoltan Energy Shield: Will completely block incoming damage of any weapon type.</text>
+
+<!-- Other -->
+<text name="tooltip_autofire">Toggle to activate/deactivate weapons automatically firing. Hotkey: \1\n\n\2 + AIM can force a weapon to do the opposite of current setting</text> <!-- \1: autofire key, \2: invert autofire key -->
+
+<text name="tooltip_asteroids">You're in an asteroid field. Periodically asteroids will strike your ship.</text>
+<text name="tooltip_sun">You're too close to a star. Solar flares will light the ship on fire. Shields will reduce the effect.</text>
+<text name="tooltip_nebula">You're inside a nebula. Your sensors will not function, but the Rebel fleet will advance more slowly towards you.</text>
+<text name="tooltip_storm">This section of the nebula is experiencing a plasma storm. Your main reactor can only function at half capacity.</text>
+<text name="tooltip_pulsar">You're close to a pulsar. Periodic waves of electromagnetic energy will disrupt your systems.</text>
+<text name="tooltip_PDS_FLEET">The Fleet's Anti-Ship Batteries are targeting you.</text>
+<text name="tooltip_PDS_PLAYER">An Anti-Ship Battery on the planet is targeting you.</text>
+<text name="tooltip_PDS_ENEMY">An Anti-Ship Battery on the planet is targeting your enemies.</text>
+<text name="tooltip_PDS_ALL">An Anti-Ship Battery on the planet is firing on all ships in the area.</text>
+
+<text name="tooltip_map_wait">Wait for help to arrive.</text>
+<text name="tooltip_map_distress">Toggling the distress beacon might increase the chances you'll be found, but no telling who will find you first.</text>
+
+<text name="tooltip_rename">Click to rename</text>
+<text name="tooltip_subsystems">Subsystems are powered for free as long as they are functional.</text>
+</FTL>

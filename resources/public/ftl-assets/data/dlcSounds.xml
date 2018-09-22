@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- System sounds -->
+
+
+<cloneArrive volume="10">dlc/FTLX _Cloning_Bay_New_Clone.ogg</cloneArrive>
+<cloneBroken volume="10" loop="true" count="1">dlc/FTLX _Cloning_Bay_Not_Functioning.ogg</cloneBroken>
+
+<batteryStop volume="10">dlc/FTLX_Battery_Power_Down.ogg</batteryStop>
+<batteryStart volume="10">dlc/FTLX_Battery_Start_Up.ogg</batteryStart>
+
+<mindControl volume="10">dlc/FTLX_Mind_Control_Confusion.ogg</mindControl>
+<mindControlEnd volume="10">dlc/AESFX_Mind_Control_Ending.ogg</mindControlEnd>
+
+<pulsar volume="10">dlc/AESFX_Pulsar_Pulse.ogg</pulsar>
+
+<hackLand volume="4">dlc/FTLX_Hacking_Drone_Land.ogg</hackLand>
+<hackLoop volume="5" loop="true" count="1">dlc/AESFX_Hacking_Loop.ogg</hackLoop>
+<hackStart volume="5">dlc/AESFX_Hacking_Start.ogg</hackStart>
+
+<!-- Metal Aliens -->
+
+
+<shrikeDeath volume="10">dlc/FTLX_Shrike_Death.ogg</shrikeDeath>
+<shrikeRepair volume="10" loop="true" count="5">dlc/FTLX_Shrike_Repair.ogg</shrikeRepair>
+
+<!--- new stuff -->
+
+<flakImpact1 volume="10">dlc/AESFX_FlakImpact1.ogg</flakImpact1>
+<flakImpact2 volume="10">dlc/AESFX_FlakImpact2.ogg</flakImpact2>
+<flakImpact3 volume="10">dlc/AESFX_FlakImpact3.ogg</flakImpact3>
+<flakImpact4 volume="10">dlc/AESFX_FlakImpact4.ogg</flakImpact4>
+
+<crystalExplosion volume="10">dlc/AESFX_Crystal_Explosion_Large.ogg</crystalExplosion>
+<crystalExplosion_small volume="10">dlc/AESFX_CrystalExplosionSmall.ogg</crystalExplosion_small>
+
+<fleetFireHeavy volume="10">dlc/AESFX_FleetHeavyFiring.ogg</fleetFireHeavy>
+<fleetFireLight volume="10">dlc/AESFX_FleetLightFiring.ogg</fleetFireLight>
+
+<ionBoarderCharge volume="10">dlc/AESFX_IonBoarderDroneCharging.ogg</ionBoarderCharge>
+
+<shieldDroneCharge volume="10">dlc/AESFX_ShieldDronePowerUp.ogg</shieldDroneCharge>
+<shieldDroneActivate volume="10">dlc/AESFX_ShieldDroneShieldUp.ogg</shieldDroneActivate>
+
+<weaponReady volume="5">dlc/AESFX_WeaponReady2.ogg</weaponReady>
+
+<hullBreach volume="7">dlc/AESFX_Hull_Crack.ogg</hullBreach>
+
+<eventDamage volume="6">explosions/bp_explosion_large_3.ogg</eventDamage>
+</FTL>

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+			SUMMARY - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+Structure:
+START_BEACON_PIRATE
+	STORE_PIRATE
+	NOTHING_PIRATE
+
+Hostile:
+	PIRATE
+	PIRATE_NO_ESCAPE
+
+Neutral:
+	PIRATE_CIVILIAN (with commly used SAVE_CIVILIAN_LIST)
+	PIRATE_BRIBER
+	PIRATE_CHOICE
+	PIRATE_SLAVER
+	FRIENDLY_SLAVER
+
+Environment:
+	PIRATE_SUN
+	PIRATE_ASTEROID
+
+Boarders:
+	BOARDERS_SUN
+	BOARDERS_ASTEROID
+	FLOATING_CARGO
+-->
+
+
+
+<eventList name="HOSTILE_PIRATE">
+	<event load="PIRATE"/>
+	<event load="REBEL_AUTO"/>
+	<event load="AUTO_ASTEROID"/>
+	<event load="PIRATE_ASTEROID"/>
+	<event load="PIRATE_NO_ESCAPE"/>
+	<event load="PIRATE_SLAVER"/>
+	<event load="PIRATE_SUN"/>
+</eventList>
+
+
+<eventList name="NEUTRAL_PIRATE">
+	<event load="PIRATE_CHOICE"/>
+	<event load="PIRATE_CIVILIAN"/>
+	<event load="MERCENARY"/>
+	<event load="DISTRESS_BEACON"/>
+	<event load="FRIENDLY_SLAVER"/>
+	<event load="PIRATE_BRIBER"/>
+	<event load="ASTEROID_EXPLORE"/>
+
+	<event load="ASTEROID_DERELICT_SHIP"/> <!-- CRYSTAL UNLOCK-->
+
+	<event load="REFUGEE_NO_DISTRESS_PIRATE"/> <!--DLC - In newEvents-->
+</eventList>
+
+
+<eventList name="BOARDERS_PIRATE">
+	<event load="BOARDERS"/>
+	<event load="STATION_SICK"/>
+	<event load="BOARDERS_SUN"/>
+	<event load="BOARDERS_HACKING"/>
+	<event load="FLOATING_CARGO"/>
+</eventList>
+
+
+<eventList name="DISTRESS_BEACON_PIRATE">
+	<event load="STRANDED_BEACON"/>
+	<event load="CIVILIAN_ASTEROIDS_BEACON"/>
+	<event load="ESCORT_BEACON"/>
+	<event load="PIRATE_CIVILIAN_BEACON"/>
+	<event load="FRIENDLY_BEACON"/>
+	<event load="TRAP_BEACON"/>
+	<event load="DISTRESS_TRAPPED_MINER"/>
+	<event load="DISTRESS_STATION_FIRE"/>
+	<event load="DISTRESS_STATION_DISEASE"/>
+
+	<event load="REFUGEE_DISTRESS_PIRATE"/> <!--DLC - In newEvents-->
+</eventList>
+
+<eventList name="NEBULA_PIRATE">
+	<event load="NEBULA_EMPTY"/>
+	<event load="NEBULA_REBEL"/>
+	<event load="NEBULA_PIRATE_SMUGGLE"/>
+	<event load="NEBULA_TRADER"/>
+	<event load="NEBULA_LOST_SHIP"/>
+	<event load="NEBULA_BOARDING"/>
+	<event load="NEBULA_REBEL_UNDETECTED"/>
+	<event load="NEBULA_LOST_SHIP"/>
+	<event load="NEBULA_REBEL_BOARDING"/>
+	<event load="STORM_ITEMS"/>
+	<!--<event load="STORM_BOARDING"/> -->
+	<event load="STORM_ITEMS"/>
+</eventList>
+
+<eventList name="QUESTS_PIRATE">
+	<event load="MERCHANT_REQUEST"/>
+	<event load="MERCENARY_WORK_START"/>
+	<event load="QUEST_ESCORT"/>
+</eventList>
+
+
+
+<!--
+*********
+		STRUCTURE!!!
+	Necessary events
+**********
+-->
+
+<event name="START_BEACON_PIRATE">
+	<text load="START_BEACON_PIRATE"/>
+</event>
+<textList name="START_BEACON_PIRATE">
+	<text id="text_START_BEACON_PIRATE_1"/>
+	<text id="text_START_BEACON_PIRATE_2"/>
+	<text id="text_START_BEACON_PIRATE_3"/>
+	<text id="text_START_BEACON_PIRATE_4"/>
+</textList>
+
+<event name="STORE_PIRATE">
+	<text load="STORE_PIRATE"/>
+	<store/>
+</event>
+<textList name="STORE_PIRATE">
+	<text id="text_STORE_PIRATE_1"/>
+	<text id="text_STORE_PIRATE_2"/>
+	<text id="text_STORE_PIRATE_3"/>
+	<text id="text_STORE_PIRATE_4"/>
+</textList>
+
+
+<event name="NOTHING_PIRATE">
+	<text load="NOTHING_PIRATE"/>
+</event>
+<textList name="NOTHING_PIRATE">
+	<text id="text_NOTHING_PIRATE_1"/>
+	<text id="text_NOTHING_PIRATE_2"/>
+	<text id="text_NOTHING_PIRATE_3"/>
+	<text id="text_NOTHING_PIRATE_4"/>
+</textList>
+
+
+
+
+<!--
+*********
+		HOSTILE!!!
+	Events that call up a fight for sure
+**********
+-->
+
+
+<event name="PIRATE">
+	<text load="PIRATE"/>
+	<ship load="PIRATE" hostile="true"/>
+</event>
+<textList name="PIRATE">
+	<text id="text_PIRATE_1"/>
+	<text id="text_PIRATE_2"/>
+	<text id="text_PIRATE_3"/>
+	<text id="text_PIRATE_4"/>
+	<text id="text_PIRATE_5"/>
+</textList>
+
+
+<event name="PIRATE_NO_ESCAPE" unique="true">
+	<text id="event_PIRATE_NO_ESCAPE_text"/>
+	<ship load="PIRATE_NO_ESCAPE" hostile="true"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event>
+			<status type="limit" target="player" system="engines" amount="1"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="hacking"> <!-- CHANGED - added -->
+		<text id="event_PIRATE_NO_ESCAPE_c2_choice"/>
+		<event>
+			<text id="event_PIRATE_NO_ESCAPE_c2_text"/>
+			<status type="limit" target="player" system="hacking" amount="0"/>
+		</event>
+	</choice>
+</event>
+
+
+
+
+
+<!--
+*********
+		NEUTRAL!!!
+	Events that could have a fight
+**********
+-->
+
+
+
+<event name="PIRATE_CIVILIAN" unique="false">
+	<text load="PIRATE_CIVILIAN"/>
+	<img back="BACKGROUND" planet="PLANET_POPULATED"/>
+	<choice>
+		<text id="event_PIRATE_CIVILIAN_c1_choice"/>
+		<event>
+			<text id="event_PIRATE_CIVILIAN_c1_text"/>
+			<ship load="PIRATE_CIVILIAN" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_PIRATE_CIVILIAN_c2_choice"/>
+		<event>
+			<text id="event_PIRATE_CIVILIAN_c2_text"/>
+		</event>
+	</choice>
+</event>
+<textList name="PIRATE_CIVILIAN">
+	<text id="text_PIRATE_CIVILIAN_1" planet="PLANET_POPULATED_SMALL"/>
+	<text id="text_PIRATE_CIVILIAN_2"/>
+	<text id="text_PIRATE_CIVILIAN_3"/>
+	<text id="text_PIRATE_CIVILIAN_4"/>
+	<text id="text_PIRATE_CIVILIAN_5"/>
+	<text id="text_PIRATE_CIVILIAN_6"/>
+</textList>
+<eventList name="SAVE_CIVILIAN_LIST">
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_1_text"/>
+		<choice>
+			<text id="event_SAVE_CIVILIAN_LIST_1_c1_choice"/>
+			<event>
+				<text id="event_SAVE_CIVILIAN_LIST_1_c1_text"/>
+				<crewMember amount="1"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_SAVE_CIVILIAN_LIST_1_c2_choice"/>
+			<event/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_2_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_3_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_4_text"/>
+		<choice>
+			<text id="event_SAVE_CIVILIAN_LIST_4_c1_choice"/>
+			<event>
+				<autoReward level="LOW">weapon</autoReward>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_5_text"/>
+		<damage amount="-5"/>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_6_text"/>
+	</event>
+</eventList>
+
+
+
+<event name="PIRATE_BRIBER" unique="true">
+	<text load="PIRATE_BRIBER"/>
+	<ship load="PIRATE_BRIBER" hostile="false"/>
+	<choice>
+		<text id="event_PIRATE_BRIBER_c1_choice"/>
+		<event>
+			<text id="event_PIRATE_BRIBER_c1_text"/>
+			<autoReward level="LOW">standard</autoReward>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_PIRATE_BRIBER_c2_choice"/>
+		<event>
+			<text id="event_PIRATE_BRIBER_c2_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+</event>
+<eventList name="PIRATE_BRIBER_WIN">
+	<event>
+		<text id="event_PIRATE_BRIBER_WIN_1_text"/>
+		<choice hidden="true">
+			<text id="event_PIRATE_BRIBER_WIN_1_c1_choice"/>
+			<event>
+				<text id="event_PIRATE_BRIBER_WIN_1_c1_text"/>
+				<autoReward level="LOW">standard</autoReward>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_PIRATE_BRIBER_WIN_1_c2_choice"/>
+			<event>
+				<text id="event_PIRATE_BRIBER_WIN_1_c2_text"/>
+				<modifyPursuit amount="-1"/>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_PIRATE_BRIBER_WIN_2_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_PIRATE_BRIBER_WIN_3_text"/>
+	</event>
+	<event>
+		<text id="event_PIRATE_BRIBER_WIN_4_text"/>
+		<store/>
+	</event>-
+	<event>
+		<text id="event_PIRATE_BRIBER_WIN_5_text"/>
+		<damage amount="-15"/>
+	</event>
+</eventList>
+<textList name="PIRATE_BRIBER">
+	<text id="text_PIRATE_BRIBER_1"/>
+	<text id="text_PIRATE_BRIBER_2"/>
+	<text id="text_PIRATE_BRIBER_3"/>
+</textList>
+
+
+
+
+<event name="PIRATE_CHOICE" unique="false">
+	<img planet="NONE"/>
+	<text id="event_PIRATE_CHOICE_text"/>
+	<ship load="PIRATE" hostile="false"/>
+	<choice>
+		<text id="event_PIRATE_CHOICE_c1_choice"/>
+		<event>
+			<text id="event_PIRATE_CHOICE_c1_text"/>
+			<item_modify>
+				<item type="scrap" min="-25" max="-15"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_PIRATE_CHOICE_c2_choice"/>
+		<event>
+			<text id="event_PIRATE_CHOICE_c2_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+</event>
+
+
+
+
+<event name="PIRATE_SLAVER" unique="false">
+	<text id="event_PIRATE_SLAVER_text"/>
+	<ship load="PIRATE_SLAVER" hostile="false"/>
+	<choice>
+		<text id="event_PIRATE_SLAVER_c1_choice"/>
+		<event>
+			<text id="event_PIRATE_SLAVER_c1_text"/>
+			<removeCrew>
+				<clone>false</clone>
+				<text id="event_PIRATE_SLAVER_c1_c0_clone"/>
+			</removeCrew>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_PIRATE_SLAVER_c2_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice req="engines" lvl="6" hidden="true">
+		<text id="event_PIRATE_SLAVER_c3_choice"/>
+		<event load="PIRATE_SLAVER_RUN"/>
+	</choice>
+</event>
+<eventList name="PIRATE_SLAVER_RUN">
+	<event>
+		<text id="event_PIRATE_SLAVER_RUN_1_text"/>
+		<ship hostile="true"/>
+	</event>
+	<event>
+		<text id="event_PIRATE_SLAVER_RUN_2_text"/>
+	</event>
+	<event>
+		<text id="event_PIRATE_SLAVER_RUN_3_text"/>
+	</event>
+</eventList>
+
+
+
+
+
+<event name="FRIENDLY_SLAVER" unique="true"> <!-- add an event if you kill the crew? -->
+	<ship load="PIRATE_SLAVER" hostile="false"/>
+	<text id="event_FRIENDLY_SLAVER_text"/>
+	<choice>
+		<text id="event_FRIENDLY_SLAVER_c1_choice"/>
+		<event>
+			<item_modify>
+				<item type="scrap" min="-45" max="-25"/>
+			</item_modify>
+			<crewMember amount="1"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_FRIENDLY_SLAVER_c2_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_FRIENDLY_SLAVER_c3_choice"/>
+		<event/>
+	</choice>
+	<choice req="teleporter" lvl="2" hidden="true">
+		<text id="event_FRIENDLY_SLAVER_c4_choice"/>
+		<event load="FRIENDLY_SLAVER_TELEPORTER"/>
+	</choice>
+</event>
+<eventList name="FRIENDLY_SLAVER_TELEPORTER">
+	<event>
+		<text id="event_FRIENDLY_SLAVER_TELEPORTER_1_text"/>
+		<crewMember amount="1"/>
+		<ship hostile="true"/>
+	</event>
+	<event>
+		<text id="event_FRIENDLY_SLAVER_TELEPORTER_2_text"/>
+		<crewMember amount="1"/>
+		<ship hostile="true"/>
+	</event>
+	<event>
+		<text id="event_FRIENDLY_SLAVER_TELEPORTER_3_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+
+
+
+
+<!--
+*********
+		ENVIRONMENT!!!
+	Events with unique environments
+**********
+-->
+
+
+
+<event name="PIRATE_SUN" unique="true">
+	<img back="BG_DARK"/>
+	<text id="event_PIRATE_SUN_text"/>
+	<ship load="PIRATE" hostile="true"/>
+	<environment type="sun"/>
+</event>
+
+
+<event name="PIRATE_ASTEROID">
+	<img planet="NONE" back="BG_DARK"/>
+	<environment type="asteroid"/>
+	<text id="event_PIRATE_ASTEROID_text"/>
+	<ship load="PIRATE" hostile="true"/>
+	<choice>
+		<text id="event_PIRATE_ASTEROID_c1_choice"/>
+		<event/>
+	</choice> <!--
+	<choice req="pilot" lvl="2" hidden="true">
+		<text>(Piloting) Attempt to maneuver out of the asteroid field before engaging the pirate.</text>
+		<event load="PIRATE_ASTEROID_PILOTING"/>
+	</choice> -->
+</event>
+<!-- No longer used
+<eventList name="PIRATE_ASTEROID_PILOTING">
+	<event>
+		<text>Your pilot succeeds in getting your ship out of the asteroid field without damage. You turn to engage with the pirate ship.</text>
+	</event>
+	<event>
+		<text>Despite some fancy flying, the pirate catches up to you before you can leave the asteroid field. You have no choice but to fight.</text>
+		<environment type="asteroid"/>
+	</event>
+</eventList>  -->
+
+
+
+
+
+<!--
+*********
+		BOARDERS!!!
+	Events with boarder calls
+**********
+-->
+
+
+
+<event name="BOARDERS_PIRATE">
+	<text load="BOARDERS_PIRATE"/>
+	<boarders min="2" max="4" class="random"/>
+</event>
+<textList name="BOARDERS_PIRATE" unique="false">
+	<text>SSSSSSSSSSSSSSSSS</text>
+</textList>
+
+
+<event name="BOARDERS_SUN" unique="true">
+	<text id="event_BOARDERS_SUN_text"/>
+	<boarders min="2" max="4" class="human"/>
+	<environment type="sun"/>
+</event>
+
+<event name="BOARDERS_ASTEROID" unique="true">
+	<img back="BG_DARK" planet="NONE"/>
+	<text id="event_BOARDERS_ASTEROID_text"/>
+	<boarders min="2" max="4" class="human"/>
+	<environment type="asteroid"/>
+</event>
+
+<event name="FLOATING_CARGO" unique="true">
+	<text id="event_FLOATING_CARGO_text"/>
+	<choice hidden="true">
+		<text id="event_FLOATING_CARGO_c1_choice"/>
+		<event load="FLOATING_CARGO_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_FLOATING_CARGO_c2_choice"/>
+		<event>
+			<text id="event_FLOATING_CARGO_c2_text"/>
+		</event>
+	</choice>
+	<choice req="sensors" lvl="2" hidden="true">
+		<text id="event_FLOATING_CARGO_c3_choice"/>
+		<event load="FLOATING_CARGO_SCAN_LIST"/>
+	</choice>
+	<choice req="ADV_SCANNERS" hidden="true">
+		<text id="event_FLOATING_CARGO_c4_choice"/>
+		<event load="FLOATING_CARGO_SCAN_LIST"/>
+	</choice>
+</event>
+<eventList name="FLOATING_CARGO_LIST">
+	<event>
+		<text id="event_FLOATING_CARGO_LIST_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_FLOATING_CARGO_LIST_2_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_FLOATING_CARGO_LIST_3_text"/>
+		<boarders min="2" max="4" class="human"/>
+	</event>
+	<event>
+		<text id="event_FLOATING_CARGO_LIST_4_text"/>
+		<boarders min="2" max="4" class="human"/>
+		<ship load="JELLY_PIRATE_WITHBOARDERS" hostile="true"/>
+	</event>
+</eventList>
+<eventList name="FLOATING_CARGO_SCAN_LIST">
+	<event>
+		<text id="event_FLOATING_CARGO_SCAN_LIST_1_text"/>
+		<item_modify>
+			<item type="scrap" min="20" max="35"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_FLOATING_CARGO_SCAN_LIST_2_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_FLOATING_CARGO_SCAN_LIST_3_text"/>
+		<choice hidden="true">
+			<text id="event_FLOATING_CARGO_SCAN_LIST_3_c1_choice"/>
+			<event>
+				<text id="event_FLOATING_CARGO_SCAN_LIST_3_c1_text"/>
+				<ship load="PIRATE" hostile="true"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_FLOATING_CARGO_SCAN_LIST_3_c2_choice"/>
+			<event/>
+		</choice>
+	</event>
+</eventList>
+
+
+
+
+
+
+</FTL>

@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- Common strings -->
+
+<text name="bullet">-\1</text>  <!-- \1: arbitrary text (used in a bulleted list) -->
+<text name="button_close">CLOSE</text>  <!-- Text for button used to close various windows -->
+<text name="continue">Continue...</text>  <!-- Standard choice in events -->
+
+<!-- Main menu -->
+
+<text name="welcome">Welcome to FTL: Faster Than Light!\n\nWe'd highly recommend you take a moment to play the tutorial. We've done our best to make it as short and to the point as possible!\n\nWe hope you enjoy the game.\n\n-- Subset Games</text>  <!-- Shown on first-time startup (full version) -->
+<text name="welcome_demo">Welcome to the FTL Demo!\n\nWe'd highly recommend you take a moment to play the tutorial. We've done our best to make it as short and to the point as possible!\n\nWe hope you enjoy the game.\n\n-- Subset Games</text>  <!-- Shown on first-time startup (demo version) -->
+
+<text name="version">Version \1</text>  <!-- \1: version number -->
+<text name="demo_version">DEMO Version \1</text>  <!-- \1: version number -->
+
+<text name="mainmenu_continue">CONTINUE</text>
+<text name="mainmenu_newgame">NEW GAME</text>
+<text name="mainmenu_tutorial">TUTORIAL</text>
+<text name="mainmenu_stats">STATS</text>
+<text name="mainmenu_options">OPTIONS</text>
+<text name="mainmenu_credits">CREDITS</text>
+<text name="mainmenu_quit">QUIT</text>
+
+<text name="no_load">No previous game exists</text>  <!-- Tooltip on "Continue" when no saved game is present -->
+
+<text name="new_player">A new player has signed into the Game Center. Returning to the title screen.</text>  <!-- Shown on iPad when the Game Center login changes -->
+
+<!-- In-game menu -->
+
+<text name="escape_continue">CONTINUE</text>
+<text name="escape_mainmenu">MAIN MENU</text>
+<text name="escape_hangar">HANGAR</text>
+<text name="escape_reset">RESTART</text>
+<text name="escape_options">OPTIONS</text>
+<text name="escape_controls">CONTROLS</text>
+<text name="escape_save">SAVE+QUIT</text>
+
+<text name="menu_status_difficulty">Difficulty</text>
+<text name="menu_status_ae_content">AE Content</text>
+<text name="menu_status_achievements">Current Ship Achievements</text>
+
+<text name="help_crew_title">CREW CONTROL</text>  <!-- Window titles and text for the help screen -->
+<text name="help_crew_text_top">How to give orders:</text>  <!-- For all "help_X_text_Y" strings, newlines are optional, and text will auto-wrap at the appropriate size (see game for size reference) -->
+<text name="help_crew_text_pc_select">Left click or drag\nto select crew.</text>
+<text name="help_crew_text_pc_move">Right click to move\nselected crew.</text>
+<text name="help_crew_text_pc_bottom">Crew will automatically repair systems or\nfight intruders in their current room.</text>
+<text name="help_crew_text_ipad_select">Tap on someone to select them\nor tap and drag to select\nmultiple crew members.</text>
+<text name="help_crew_text_ipad_move">Tap on a room to tell the selected\ncrew members to move there.</text>
+<text name="help_crew_text_ipad_bottom">Crew will automatically repair or\nfight in their current room.</text>
+<text name="help_pause_title">PAUSING</text>
+<text name="help_pause_text_pc_1">Press the Space Bar to pause.</text>
+<text name="help_pause_text_pc_2">Commands and orders can still\nbe given while paused.</text>
+<text name="help_pause_text_ipad_1">Press the Pause button on the\nlower right to pause the game.</text>
+<text name="help_pause_text_ipad_2">Commands and orders can still\nbe given while paused.</text>
+<text name="help_pause_text_ipad_auto">The game will automatically pause\nin some situations (this can be\ndisabled in the options menu).</text>
+<text name="help_power_title">POWER CONTROLS</text>
+<text name="help_power_text_top">Adding/removing power to systems:</text>
+<text name="help_power_text_pc_add">Left click to\nadd power.</text>
+<text name="help_power_text_pc_remove">Right click to\nremove power.</text>
+<text name="help_power_text_ipad_1">Drag your finger up/down to\nincrease/decrease system power.</text>
+<text name="help_power_text_ipad_2">There must be enough reactor\npower to power the system.</text>
+<text name="help_weapons_title">WEAPONS/DRONES</text>
+<text name="help_weapons_text_top">How to fire:</text>
+<text name="help_weapons_text_pc_power">Left click to\npower a weapon.</text>  <!-- These three strings do not auto-wrap because some lines may need to encroach onto the adjacent image's space. Insert manual line breaks where appropriate. -->
+<text name="help_weapons_text_pc_activate">Left click again\nto activate.</text>
+<text name="help_weapons_text_pc_target">Left click on\nan enemy ship\nto target it.</text>
+<text name="help_weapons_text_pc_bottom1">Left click and drag to reorder weapons/drones.</text>
+<text name="help_weapons_text_pc_bottom2">If the system is damaged, the\nrightmost item will be depowered first.</text>
+<text name="help_weapons_text_ipad_power">Tap on the\nweapon\nsystem.</text>  <!-- These three strings do not auto-wrap because some lines may need to encroach onto the adjacent image's space (as in English). Insert manual line breaks where appropriate. -->
+<text name="help_weapons_text_ipad_activate">Tap on a weapon\nto power and\nagain to activate.</text>
+<text name="help_weapons_text_ipad_target">Tap on the\ntarget room.</text>
+<text name="help_weapons_text_ipad_autofire">Tapping a weapon twice\nwill enable auto-fire\nfor that weapon.</text>
+<text name="help_weapons_text_ipad_bottom1">Tap and drag to reorder\nweapons/drones.</text>
+<text name="help_weapons_text_ipad_bottom2">If the system is damaged,\nthe highest item will be\ndepowered first.</text>
+<text name="help_tap_close">Tap the screen to return to the game.</text>  <!-- Shown on iPad at the bottom of the controls help screen -->
+<text name="help_customize">Note: This is an overview. You can customize many hotkeys in the Options menu.</text>  <!-- Shown on PC at the bottom of the controls help screen -->
+
+<text name="no_save_tutorial">Cannot save and quit during the tutorial</text>  <!-- Tooltip on "Save+Quit" in in-game menu during tutorial -->
+
+<!-- Options screen -->
+
+<text name="options_tab">OPTIONS</text>  <!-- Text for the tab on the options menu -->
+<text name="options_frame_video">VIDEO</text>  <!-- Window frame titles for the options menu -->
+<text name="options_frame_gameplay">GAMEPLAY</text>
+<text name="options_frame_audio">AUDIO</text>
+
+<text name="on">On</text>  <!-- Generic setting values -->
+<text name="off">Off</text>
+<text name="disabled">Disabled</text>
+<text name="enabled">Enabled</text>
+<text name="manual_override">Overridden by manual settings</text>  <!-- Tooltip shown when mousing over fullscreen setting if manual override is in effect -->
+<text name="restart_required">Restart required</text>  <!-- Shown above options window if a change to or from native fullscreen mode is pending -->
+<text name="restart_required_dialog">You will need to restart FTL before the new video settings take effect.</text>  <!-- Shown when options window is closed if a change to or from native fullscreen mode is pending -->
+
+<text name="fullscreen">Fullscreen: \1</text>  <!-- \1: option setting -->
+<text name="fullscreen_0">Off</text>
+<text name="fullscreen_1">On (Stretch)</text>
+<text name="fullscreen_2">On (Borders)</text>
+<text name="fullscreen_3">On (Native)</text>
+
+<text name="v_sync">Vertical Sync: \1</text>  <!-- \1: "on" or "off" -->
+<text name="frame_limit">Frame Limit: \1</text>  <!-- \1: "on" or "off" -->
+<text name="dynamic_back">Dynamic Backgrounds: \1</text>  <!-- \1: "on" or "off" -->
+<text name="colorblind">Colorblind Mode: \1</text>  <!-- \1: "enabled" or "disabled" -->
+
+<text name="event_choice">Event choice selection: \1</text>  <!-- \1: option setting -->
+<text name="event_choice_disable_hotkeys">Disable hotkeys</text>
+<text name="event_choice_no_delay">No delay</text>
+<text name="event_choice_brief_delay">Brief delay</text>
+
+<text name="show_paths">Show beacon paths on hover: \1</text>  <!-- \1: "enabled" or "disabled" -->
+<text name="show_paths_ipad">Show beacon paths on touch: \1</text>  <!-- \1: "enabled" or "disabled" -->
+<text name="achievement_popup">Achievement Popups: \1</text>  <!-- \1: "enabled" or "disabled" -->
+<text name="window_focus">Window Focus Auto-Pause: \1</text>  <!-- \1: "on" or "off" -->
+<text name="touch_autopause">Touch Command Auto-Pause: \1</text>  <!-- \1: "on" or "off" -->
+<text name="configure_controls">Configure Keyboard Hotkeys</text>
+
+<text name="sound_volume">Sound Volume</text>
+<text name="music_volume">Music Volume</text>
+
+<text name="button_delete_profile">DELETE\nPROFILE</text>
+
+<text name="configure_controls_tab">CONFIGURE CONTROLS</text>
+
+<text name="power_note">Note: Shift + Power System will also de-power the system</text>
+
+<text name="press_key">PRESS KEY</text>  <!-- Shown in place of key name on hotkey config screen when waiting for the user to press the new key -->
+
+<text name="button_defaults">DEFAULTS</text>
+
+<!-- Hotkey names -->
+
+<text name="hotkey_crew1">Select Crew 1</text>
+<text name="hotkey_crew2">Select Crew 2</text>
+<text name="hotkey_crew3">Select Crew 3</text>
+<text name="hotkey_crew4">Select Crew 4</text>
+<text name="hotkey_crew5">Select Crew 5</text>
+<text name="hotkey_crew6">Select Crew 6</text>
+<text name="hotkey_crew7">Select Crew 7</text>
+<text name="hotkey_crew8">Select Crew 8</text>
+<text name="hotkey_crew_all">Select All Crew</text>
+<text name="hotkey_loadPositions">Return to Stations</text>
+<text name="hotkey_savePositions">Save Stations</text>
+<text name="hotkey_lockdown">Secret Alien Ability</text>
+
+<text name="hotkey_open">Open All Doors</text>
+<text name="hotkey_close">Close All Doors</text>
+
+<text name="hotkey_activate_cloak">Activate Cloaking</text>
+
+<text name="hotkey_send_tele">Teleport - Send</text>
+<text name="hotkey_ret_tele">Teleport - Return</text>
+<text name="hotkey_start_hacking">Start Hacking</text>
+<text name="hotkey_mindControl">Mind Control</text>
+<text name="hotkey_activate_battery">Activate Battery</text>
+
+<text name="hotkey_drone1">Drone Slot 1</text>
+<text name="hotkey_drone2">Drone Slot 2</text>
+<text name="hotkey_drone3">Drone Slot 3</text>
+
+<text name="hotkey_weapon1">Weapon Slot 1</text>
+<text name="hotkey_weapon2">Weapon Slot 2</text>
+<text name="hotkey_weapon3">Weapon Slot 3</text>
+<text name="hotkey_weapon4">Weapon Slot 4</text>
+<text name="hotkey_autofire">Toggle Autofire</text>
+
+<text name="hotkey_force_autofire">Autofire Modifier (Hold + Aim)</text>
+
+<text name="hotkey_pause">Pause Game</text>
+<text name="hotkey_jump">FTL Jump</text>
+<text name="hotkey_ship_info">Open Upgrades</text>
+<text name="hotkey_ship_inv">Open Inventory</text>
+<text name="hotkey_store">Open Store</text>
+<text name="hotkey_ship_crew">Open Crew Manifest</text>
+<text name="hotkey_options">Open Options</text>
+<text name="hotkey_increase_font">Increase Event Font</text>
+<text name="hotkey_decrease_font">Decrease Event Font</text>
+
+<text name="hotkey_rightclick">Right Click Modifier</text>  <!-- Only used on Mac (clicking the mouse button with this key held down acts like a right click) -->
+
+<text name="hotkey_shields">Power Shields</text>
+<text name="hotkey_engines">Power Engines</text>
+<text name="hotkey_oxygen">Power Oxygen</text>
+<text name="hotkey_medbay">Power Medbay / Clone</text>
+<text name="hotkey_teleporter">Power Teleporter</text>
+<text name="hotkey_cloaking">Power Cloaking</text>
+<text name="hotkey_mind">Power Mind Control</text>
+<text name="hotkey_hacking">Power Hacking</text>
+<text name="hotkey_artillery">Power Artillery</text>
+<text name="hotkey_weapons">Power Weapons</text>
+<text name="hotkey_drones">Power Drones</text>
+
+<text name="hotkey_un_shields">De-Power Shields</text>
+<text name="hotkey_un_engines">De-Power Engines</text>
+<text name="hotkey_un_oxygen">De-Power Oxygen</text>
+<text name="hotkey_un_medbay">De-Power Medbay / Clone</text>
+<text name="hotkey_un_teleporter">De-Power Teleporter</text>
+<text name="hotkey_un_cloaking">De-Power Cloaking</text>
+<text name="hotkey_un_mind">De-Power Mind Control</text>
+<text name="hotkey_un_hacking">De-Power Hacking</text>
+<text name="hotkey_un_artillery">De-Power Artillery</text>
+<text name="hotkey_un_weapons">De-Power Weapons</text>
+<text name="hotkey_un_drones">De-Power Drones</text>
+
+<text name="hotkey_power_1">Power System 1</text>
+<text name="hotkey_power_2">Power System 2</text>
+<text name="hotkey_power_3">Power System 3</text>
+<text name="hotkey_power_4">Power System 4</text>
+<text name="hotkey_power_5">Power System 5</text>
+<text name="hotkey_power_6">Power System 6</text>
+<text name="hotkey_power_7">Power System 7</text>
+<text name="hotkey_power_8">Power System 8</text>
+
+<text name="hotkey_un_power_1">De-Power System 1</text>
+<text name="hotkey_un_power_2">De-Power System 2</text>
+<text name="hotkey_un_power_3">De-Power System 3</text>
+<text name="hotkey_un_power_4">De-Power System 4</text>
+<text name="hotkey_un_power_5">De-Power System 5</text>
+<text name="hotkey_un_power_6">De-Power System 6</text>
+<text name="hotkey_un_power_7">De-Power System 7</text>
+<text name="hotkey_un_power_8">De-Power System 8</text>
+
+<!-- Keycap names -->
+
+<text name="keycap_none">None</text>  <!-- Dummy entry for unrecognized keys (not normally used) -->
+<text name="keycap_altgr">ALT GR</text>
+<text name="keycap_backspace">BACKSPACE</text>
+<text name="keycap_break">BREAK</text>
+<text name="keycap_capslock">CAPS LOCK</text>
+<text name="keycap_clear">CLEAR</text>
+<text name="keycap_compose">COMPOSE</text>
+<text name="keycap_delete">DELETE</text>
+<text name="keycap_down">DOWN</text>
+<text name="keycap_end">END</text>
+<text name="keycap_enter">ENTER</text>
+<text name="keycap_escape">ESCAPE</text>
+<text name="keycap_euro">EURO</text>
+<text name="keycap_f1">F1</text>
+<text name="keycap_f2">F2</text>
+<text name="keycap_f3">F3</text>
+<text name="keycap_f4">F4</text>
+<text name="keycap_f5">F5</text>
+<text name="keycap_f6">F6</text>
+<text name="keycap_f7">F7</text>
+<text name="keycap_f8">F8</text>
+<text name="keycap_f9">F9</text>
+<text name="keycap_f10">F10</text>
+<text name="keycap_f11">F11</text>
+<text name="keycap_f12">F12</text>
+<text name="keycap_f13">F13</text>
+<text name="keycap_f14">F14</text>
+<text name="keycap_f15">F15</text>
+<text name="keycap_help">HELP</text>
+<text name="keycap_home">HOME</text>
+<text name="keycap_insert">INSERT</text>
+<text name="keycap_kp0">KP 0</text>
+<text name="keycap_kp1">KP 1</text>
+<text name="keycap_kp2">KP 2</text>
+<text name="keycap_kp3">KP 3</text>
+<text name="keycap_kp4">KP 4</text>
+<text name="keycap_kp5">KP 5</text>
+<text name="keycap_kp6">KP 6</text>
+<text name="keycap_kp7">KP 7</text>
+<text name="keycap_kp8">KP 8</text>
+<text name="keycap_kp9">KP 9</text>
+<text name="keycap_kp_add">KP +</text>
+<text name="keycap_kp_decimal">KP .</text>
+<text name="keycap_kp_divide">KP /</text>
+<text name="keycap_kp_enter">KP ENTER</text>
+<text name="keycap_kp_equals">KP =</text>
+<text name="keycap_kp_multiply">KP *</text>
+<text name="keycap_kp_subtract">KP -</text>
+<text name="keycap_left">LEFT</text>
+<text name="keycap_leftalt">LEFT ALT</text>
+<text name="keycap_leftcontrol">LEFT CTRL</text>
+<text name="keycap_leftmeta">LEFT META</text>
+<text name="keycap_leftshift">LEFT SHIFT</text>
+<text name="keycap_leftsuper">LEFT SUPER</text>
+<text name="keycap_menu">MENU</text>
+<text name="keycap_numlock">NUM LOCK</text>
+<text name="keycap_pagedown">PAGE DOWN</text>
+<text name="keycap_pageup">PAGE UP</text>
+<text name="keycap_pause">PAUSE</text>
+<text name="keycap_power">POWER</text>
+<text name="keycap_printscreen">PRNT SCRN</text>
+<text name="keycap_right">RIGHT</text>
+<text name="keycap_rightalt">RIGHT ALT</text>
+<text name="keycap_rightcontrol">RIGHT CTRL</text>
+<text name="keycap_rightmeta">RIGHT META</text>
+<text name="keycap_rightshift">RIGHT SHIFT</text>
+<text name="keycap_rightsuper">RIGHT SUPER</text>
+<text name="keycap_scrolllock">SCROLL LOCK</text>
+<text name="keycap_space">SPACE</text>
+<text name="keycap_sysrq">SYS RQ</text>
+<text name="keycap_tab">TAB</text>
+<text name="keycap_undo">UNDO</text>
+<text name="keycap_up">UP</text>
+
+<!-- Stats screen -->
+
+<text name="stats_shipbest">SHIP BEST</text>
+<text name="stats_topscores">TOP SCORES</text>
+<text name="stats_achievements">ACHIEVEMENTS</text>
+<text name="stats_stats">STATS</text>
+
+<text name="stats_ranking">#\1</text>  <!-- Place indicator in high score list. \1: place number (1 for highest score, 2 for second highest, etc.) -->
+
+<text name="defeated_stat">Ships Defeated</text>
+<text name="beacons_stat">Beacons Explored</text>
+<text name="scrap_stat">Scrap Collected</text>
+<text name="crew_stat">Crew Hired</text>
+<text name="most_defeated_stat">Most Ships Defeated</text>
+<text name="most_beacons_stat">Most Beacons Explored</text>
+<text name="most_scrap_stat">Most Scrap Collected</text>
+<text name="most_crew_stat">Most Crew Hired</text>
+<text name="total_defeated_stat">Total Ships Defeated</text>
+<text name="total_beacons_stat">Total Beacons Explored</text>
+<text name="total_scrap_stat">Total Scrap Collected</text>
+<text name="total_crew_stat">Total Crew Hired</text>
+
+<text name="crew_evasions">Piloted Evasions</text>
+<text name="crew_repairs">Repairs</text>
+<text name="crew_kills">Combat Kills</text>
+<text name="crew_jumps">Jumps Survived</text>
+<text name="crew_masteries">Skill Masteries Earned</text>
+<text name="most_crew_evasions">Most Piloted Evasions</text>
+<text name="most_crew_repairs">Most Repairs</text>
+<text name="most_crew_kills">Most Combat Kills</text>
+<text name="most_crew_jumps">Most Jumps Survived</text>
+<text name="most_crew_masteries">Most Skill Masteries Earned</text>
+
+<text name="records_heading">Session Records:</text>
+<text name="crew_heading">Crew Records:</text>
+<text name="stats_heading">Session Stats:</text>
+<text name="total_heading">Totals:</text>
+
+<text name="final_score">Final Score</text>
+<text name="total_games">Total Games Played</text>
+<text name="total_victories">Total Victories</text>
+
+<text name="progression_heading">General Progression:</text>
+<text name="distance_heading">Going the Distance:</text>
+<text name="skill_heading">Skill and Equipment Feats:</text>
+
+<text name="new_crew">New!</text>  <!-- Displayed on new crewmember box when ship has too many crew -->
+<text name="new_achievement">New!</text>  <!-- Displayed on achievement icon for newly earned achievements -->
+<text name="new_score">New!</text>  <!-- Displayed on score list when previous game makes the high score list -->
+
+<text name="type_a">Type A</text>
+<text name="type_b">Type B</text>
+<text name="type_c">Type C</text>
+<text name="shipselect_type_suffix"> \1</text>  <!-- Appended to ship class in ship select screen. \1: type string ("type_a", "type_b", or "type_c") -->
+
+<text name="victory_ach_title">\1 Victory</text>  <!-- \1: ship class -->
+<text name="victory_ach">Defeat the Flagship with any layout of the \1</text>  <!-- \1: ship class -->
+<text name="quest_ach_title">\1 Quest</text>  <!-- \1: ship class -->
+<text name="quest_ach">Complete the unlock quest for the \1</text>  <!-- \1: ship class -->
+
+<text name="achieved_with">Achieved with \1 (\2)</text>  <!-- Shown below unlocked ship victory achievements for each type (A/B/C). \1: type string ("type_a" etc.), \2: "easy"/"normal"/"hard" -->
+
+<text name="ach_unlocked">Achievement Unlocked!</text>  <!-- Title for regular achievement popup -->
+<text name="layout_unlocked">Layout Unlocked!</text>  <!-- Title for new ship layout achievement popup -->
+<text name="ship_unlocked">Ship Unlocked!</text>  <!-- Title for new ship class achievement popup -->
+
+<text name="ach_easy">Unlocked on EASY</text>  <!-- Shown below unlocked achievements -->
+<text name="ach_normal">Unlocked on NORMAL</text>
+<text name="ach_hard">Unlocked on HARD</text>
+
+<text name="victory">Victory</text>
+<text name="advanced">Advanced</text>
+<text name="scorelist_score">SCORE     \1</text>  <!-- \1: score -->
+<text name="scorelist_sector">SECTOR    \1</text>  <!-- \1: sector number -->
+<text name="gameover_score">SCORE: \1</text>  <!-- \1: score -->
+<text name="easy">Easy</text>
+<text name="normal">Normal</text>
+<text name="hard">Hard</text>
+
+<text name="new_high">New High Score!</text>
+
+<!-- Hangar screen -->
+
+<text name="welcome_hangar_pc">Welcome to the Federation Hangar!\n\nHere you'll be able to choose your ship, name it, and name your crew. Right now only the Kestrel is available to you, but as you play you will unlock more.\n\nYou can change the difficulty setting in the top right. If you're new, you might want to give Easy a shot first.</text>  <!-- Shown on PC the first time the hangar is entered -->
+<text name="welcome_hangar_ipad">Welcome to the Federation Hangar!\n\nHere you'll be able to choose your ship, name it, and name your crew. Right now only the Kestrel is available to you, but as you play you will unlock more.\n\nYou can change the difficulty setting on the right side of the screen. If you're new, you might want to give Easy a shot first.</text>  <!-- Shown on iPad the first time the hangar is entered -->
+
+<text name="tutorial_list_open">You've unlocked a new ship!\n\nClick on the LIST button to see your current ships and find out how to unlock more.</text>  <!-- Shown on the hangar screen the first time a new ship has been unlocked -->
+
+<text name="list_tutorial">This is the ship list. Here you can get a summary of all of your achievements and see your progress in unlocking all of the playable ships.</text>  <!-- Shown when opening the ship select screen for the first time, followed by one of the next three lines -->
+<text name="list_tutorial_2">To unlock a new ship, you have two options:\n\nFind and complete a unique quest within the game world. These will often start in the 'homeworld' sectors.\n\nAlternatively, beat the game with the previous ship in the list to unlock the next.\n\nHover over any ship to get more details!</text>
+<text name="list_tutorial_2_demo">As this is only the demo version of FTL, you are not able to unlock additional ships. But the full version has 10 playable ships, each with multiple unique layouts.</text>
+<text name="list_tutorial_2_ipad">To unlock a new ship, you have two options:\n\nFind and complete a unique quest within the game world. These will often start in the 'homeworld' sectors.\n\nAlternatively, beat the game with the previous ship in the list to unlock the next.\n\nTap on any ship to get more details!</text>
+
+<text name="hangar_frame_ship">SHIP</text>  <!-- Window frame titles for the hangar screen (WEAPONS, DRONES, and AUGMENTATIONS are taken from the equipment screen) -->
+<text name="hangar_frame_layout">LAYOUT</text>
+<text name="hangar_frame_crew">CREW</text>
+
+<text name="hangar_achievements_title">Complete 2 for Layout B</text>  <!-- Shown above the ship achievement list -->
+<text name="hangar_advanced_title">Advanced Edition Content</text>  <!-- Shown above the DISABLED/ENABLED buttons -->
+
+<text name="hangar_advanced_warning">ENABLE ADVANCED EDITION\nCONTENT TO ACCESS</text>  <!-- Displayed over ship image for AE-only ships if AE content is disabled -->
+
+<text name="start_button">START</text>  <!-- Text for hangar screen "Start" button -->
+<text name="hangar_exit_button">MAIN MENU</text>  <!-- Text for hangar screen "Main Menu" button (iPad-specific) -->
+
+<text name="easy_button">EASY</text>  <!-- Text for hangar screen "Easy" button; also used in in-game menu -->
+<text name="easy_title">Easy Mode</text>  <!-- Info box for hangar screen "Easy" button -->
+<text name="easy_text">Increased scrap rewards and easier enemy generation.</text>
+
+<text name="normal_button">NORMAL</text>  <!-- Text for hangar screen "Normal" button; also used in in-game menu -->
+<text name="normal_title">Normal Mode</text>  <!-- Info box for hangar screen "Normal" button -->
+<text name="normal_text">Standard scrap rewards and enemies.\n\nYour score gets a 25 percent boost.</text>
+
+<text name="hard_button">HARD</text>  <!-- Text for hangar screen "Hard" button; also used in in-game menu -->
+<text name="hard_title">Hard Mode</text>  <!-- Info box for hangar screen "Hard" button -->
+<text name="hard_text">Low scrap rewards and harder enemies.\n\nYour score gets a 50 percent boost.</text>
+
+<text name="advanced_on_button">ENABLED</text>  <!-- Text for hangar screen "AE Content Enabled" button; also used in in-game menu -->
+<text name="advanced_on_title">Advanced Content</text>  <!-- Info box for hangar screen "AE Content Enabled" button -->
+<text name="advanced_on_text">New systems, weapons, alien race, and more! Recommended for experienced players.</text>
+<text name="advanced_on_demo_text">NOT AVAILABLE IN DEMO</text>  <!-- Shown below "advanced_text" in demo builds -->
+
+<text name="advanced_off_button">DISABLED</text>  <!-- Text for hangar screen "AE Content Enabled" button; also used in in-game menu -->
+<text name="advanced_off_title">Default Content</text>  <!-- Info box for hangar screen "AE Content Disabled" button -->
+<text name="advanced_off_text">The default Faster Than Light experience.</text>
+
+<text name="ship_rename_button">RENAME</text>  <!-- Text for ship rename button on the hangar screen -->
+<text name="ship_list_button">LIST</text>  <!-- Text for ship list button on the hangar screen -->
+<text name="ship_random_button">RANDOM SHIP</text>  <!-- Text for "Random Ship" button on the hangar screen -->
+
+<text name="typebutton_a">A</text>  <!-- Button titles for ship type buttons on the hangar screen; should be 1 character each -->
+<text name="typebutton_b">B</text>
+<text name="typebutton_c">C</text>
+
+<text name="ship_showrooms_button">SHOW ROOMS</text>  <!-- Text for "Show Rooms" button on the hangar screen -->
+<text name="ship_hiderooms_button">HIDE ROOMS</text>  <!-- Text for "Hide Rooms" button on the hangar screen -->
+
+<text name="crewbox_customize">CUSTOMIZE</text>  <!-- Text for "Customize" button in hangar screen crew boxes -->
+<text name="crewbox_rename">RENAME</text>  <!-- Text for "Rename" button when customizing crew (also used on iPad in crew manifest screen) -->
+<text name="crewbox_accept">ACCEPT</text>  <!-- Text for "Accept" button when customizing crew -->
+
+<!-- Ship select screen -->
+
+<text name="shiplist_title">CHOOSE YOUR SHIP</text>
+
+<text name="typebutton_type_a">TYPE A</text>  <!-- Button titles for ship type buttons on the ship list screen -->
+<text name="typebutton_type_b">TYPE B</text>
+<text name="typebutton_type_c">TYPE C</text>
+
+<text name="no_type_c">No Type C</text>  <!-- Shown in ship select screen for Crystal and Lanius ships when type C is selected -->
+
+<text name="shiplist_accept_button">ACCEPT</text>  <!-- Text for "Accept" button on the ship list screen -->
+
+<text name="ship_unlock_victory">Defeat the Flagship with any layout of the \1 to unlock the \2</text>  <!-- \1: required ship class, \2: unlocked ship class -->
+<text name="ship_unlock_sector5">Get to Sector five with any layout of the \1 to unlock the \2</text>  <!-- \1: required ship class, \2: unlocked ship class -->
+
+<text name="alt_unlock">Alt Unlock: \1</text>  <!-- \1: alternate unlock condition -->
+<text name="alt_unlock_victory">Defeat the Flagship with any layout of the \1</text>  <!-- \1: required ship class -->
+<text name="alt_unlock_victory_locked">Defeat the Flagship with any layout of the \1 (locked)</text>  <!-- Used if required ship class is locked. \1: required ship class -->
+<text name="alt_unlock_crystal">Defeat the Flagship with Type A and Type B of every other ship (excluding the Lanius Cruiser)</text>
+
+<text name="unidentified">Unidentified Cruiser</text>  <!-- Replaces "Crystal Cruiser" on ship select screen if Crystal ship is not yet unlocked -->
+
+<!-- HUD UI elements -->
+
+<text name="status_hull">HULL</text>
+<text name="status_shields">SHIELDS</text>  <!-- Used in combat box for enemy shield status -->
+
+<text name="button_jump">JUMP</text>  <!-- Also used in beacon map on iPad -->
+<text name="ftl_drive">FTL Drive</text>  <!-- Displayed above JUMP button -->
+<text name="ftl_charging">CHARGING</text>  <!-- Displayed under JUMP button while FTL drive is charging -->
+<text name="ftl_ready">READY!</text>  <!-- Displayed under JUMP button after FTL drive is charged -->
+<text name="button_store">STORE</text>
+<text name="button_options">OPTIONS</text>  <!-- Only used on iPad -->
+<text name="button_pause">PAUSE</text>  <!-- Only used on iPad -->
+
+<text name="button_autofire">AUTOFIRE</text>
+<text name="button_autofire_ipad">AUTO\nFIRE</text>  <!-- iPad version; 2 lines due to space constraints -->
+
+<text name="button_lockdown">LOCKDOWN</text>  <!-- Crystal crew power button -->
+
+<text name="weapons_label">WEAPONS</text>  <!-- Label under the weapon boxes -->
+<text name="drones_label">DRONES</text>  <!-- Label under the drone boxes -->
+<text name="subsystems_label">SUBSYSTEMS</text>  <!-- Label under the subsystem icons -->
+
+<text name="door_close_all">CLOSE\nALL</text>  <!-- Button labels for the door subsystem on iPad -->
+<text name="door_open_all">OPEN\nALL</text>
+
+<text name="miss">MISS</text>  <!-- Displayed when a shot misses its target -->
+<text name="resist">RESIST</text>  <!-- Displayed when a shot hits its target but the target takes no damage (Rock Plating augmentation) -->
+
+<text name="paused">PAUSED</text>  <!-- Displayed when the game is paused -->
+<text name="paused_text">Press \1 to resume</text>  <!-- Text below "PAUSED" on PC. \1: key name -->
+<text name="auto_paused">AUTO-PAUSED</text>  <!-- Displayed on iPad when the game is auto-paused -->
+<text name="auto_paused_text">The game will resume after the action is complete</text>  <!-- Text below "AUTO-PAUSED" -->
+<text name="paused_crew">CREW SELECTION</text>  <!-- Displayed on iPad when selecting crew -->
+<text name="paused_crew_text">Drag to select multiple crew</text> <!-- Text below "CREW SELECTION" -->
+<text name="paused_door">DOOR CONTROL</text>  <!-- Displayed on iPad when opening/closing doors -->
+<text name="paused_door_text">Tap or drag to open and close doors</text> <!-- Text below "DOOR CONTROL" -->
+<text name="paused_hacking">HACKING</text>  <!-- Displayed on iPad when selecting a hacking target -->
+<text name="paused_hacking_text">Tap on a room to send a hacking drone</text> <!-- Text below "HACKING" -->
+<text name="paused_mind">MIND CONTROL</text>  <!-- Displayed on iPad when selecting a mind control target -->
+<text name="paused_mind_text">Tap on an enemy to temporarily convert them</text> <!-- Text below "MIND CONTROL" -->
+<text name="paused_room">ROOM SELECTION</text>  <!-- Displayed on iPad when choosing a room to send crew to -->
+<text name="paused_room_text">Tap on a room to select a destination</text> <!-- Text below "ROOM SELECTION" -->
+<text name="paused_targeting">TARGETING</text>  <!-- Displayed on iPad when selecting a weapon target -->
+<text name="paused_targeting_text">Tap on a room to select a target</text> <!-- Text below "TARGETING" for non-beam weapons -->
+<text name="paused_targeting_text_beam">Tap and drag to select the target area</text> <!-- Text below "TARGETING" for beam weapons -->
+<text name="paused_teleport">TELEPORTING</text>  <!-- Displayed on iPad when selecting a teleport target -->
+<text name="paused_teleport_text_in">Tap an enemy ship's room to retrieve any crew inside</text>  <!-- Text below "TELEPORTING" when retrieving crew from the enemy ship -->
+<text name="paused_teleport_text_out">Tap an enemy ship's room to send your boarding team</text> <!-- Text below "TELEPORTING" when sending crew to the enemy ship -->
+
+<!-- Warning popups -->
+
+<text name="warning_warning">WARNING!</text>  <!-- Generic line used in multiple warning messages (usually underlined) -->
+
+<text name="warning_in_danger">IN DANGER</text>  <!-- Displayed under the SHIP button if the player tries to click it when in combat or at an environmental danger beacon -->
+
+<text name="warning_environment_danger">DANGER!</text>  <!-- Displayed below environmental danger icons -->
+<text name="warning_pds_allies">ALLIES!</text>  <!-- Displayed in green below the ASB icon when friendly anti-ship batteries are present -->
+
+<text name="warning_solar_flare">SOLAR FLARE\nIMMINENT!</text>  <!-- Displayed in star environments when a solar flare is about to occur -->
+<text name="warning_ion_pulse">ION PULSE\nIMMINENT!</text>  <!-- Displayed in pulsar environments when an ion pulse is about to occur -->
+<text name="warning_pds_locked">ASB TARGET\nLOCKED!</text>  <!-- Displayed in anti-ship battery environments when the ASB is about to fire -->
+<text name="warning_power_surge">POWER SURGE\nDETECTED</text>  <!-- Displayed when the final boss is about to use its special attack -->
+
+<text name="warning_oxygen">O2 LOW!</text>  <!-- Displayed when the player ship's oxygen level falls below 25% -->
+<text name="warning_clone_off_1">CLONEBAY OFF</text>  <!-- Displayed along with the next string when the player ship's clone system is depowered and a dead crewmember is about to be lost forever -->
+<text name="warning_clone_off_2">CREW ARE DYING!</text>
+<text name="warning_engine">ENGINES CRITICAL</text>  <!-- Displayed when the player ship's engine system is destroyed -->
+<text name="warning_hull_75">HULL AT 75%</text>  <!-- Displayed when the player ship's hull strength falls to 75% or below -->
+<text name="warning_hull_50">HULL AT 50%</text>  <!-- Displayed when the player ship's hull strength falls to 50% or below -->
+<text name="warning_hull_25">HULL CRITICAL</text>  <!-- Displayed when the player ship's hull strength falls to 25% or below -->
+<text name="warning_shields">SHIELDS CRITICAL</text>  <!-- Displayed when the player ship's shield system is damaged to 1 point of health or less -->
+<text name="warning_intruders">INTRUDERS\nDETECTED</text>  <!-- Displayed when enemy crew are on the player ship -->
+
+<text name="warning_no_missiles">NO MISSILES</text>  <!-- Displayed when trying to use a missile weapon with no missile ammo -->
+<text name="warning_no_drones">NO DRONES</text>  <!-- Displayed when trying to launch a drone with no drone parts -->
+<text name="warning_no_enemy_ship">NO\nENEMY\nSHIP</text>  <!-- Displayed when trying to launch a drone that targets the enemy ship (e.g. boarding drone) but no enemy ship is present -->
+<text name="warning_no_power">NOT\nENOUGH\nPOWER</text>  <!-- Displayed when trying to add power to a system but no power is available -->
+<text name="warning_no_power_ipad">POWER\nTOO\nLOW</text>  <!-- iPad version of "warning_no_power"; different wording in English because of space limits -->
+<text name="warning_system_broken">SYSTEM\nBROKEN</text>  <!-- Displayed when trying to power a weapon or drone but the system is too damaged to support it -->
+<text name="warning_needs_upgrade">REQUIRES\nSYSTEM\nUPGRADE</text>  <!-- Displayed when trying to power a weapon or drone but the system has not been upgraded enough to support it, or when trying to add the last unit of power to a shield system at an odd-numbered upgrade level -->
+<text name="warning_no_system_power">NOT ENOUGH\nSYSTEM POWER</text>  <!-- Displayed when trying to power a weapon or drone but the system power is already used by other weapons or drones. The difference between this and "warning_needs_upgrade" is that this is displayed if the system could power this weapon/drone on its own, but it currently can't because other items are also powered. -->
+<text name="warning_super_shield_mind">SUPER\nSHIELDS\nBLOCK MIND\nCONTROL</text>  <!-- Displayed when trying to use mind control on an enemy ship with a Zoltan shield -->
+<text name="warning_super_shield_hacking">SUPER\nSHIELDS\nPREVENT\nHACKING</text>  <!-- Displayed when trying to use hacking on an enemy ship with a Zoltan shield -->
+<text name="warning_super_shield_teleporter">SUPER\nSHIELDS\nPREVENT\nTELEPORTING</text>  <!-- Displayed when trying to use the teleporter on an enemy ship with a Zoltan shield -->
+
+<text name="warning_ftl_charging">ENEMY FTL CHARGING</text>  <!-- Displayed when the enemy ship is charging its FTL drive to escape -->
+<text name="warning_ftl_charging_ipad">FTL\nCHARGING</text>  <!-- Same, for the iPad -->
+<text name="warning_ftl_delayed">ENEMY FTL DELAYED</text>  <!-- Displayed when the enemy ship is trying to escape but its FTL drive is not charging -->
+<text name="warning_ftl_delayed_ipad">FTL\nDELAYED</text>  <!-- Same, for the iPad -->
+<text name="warning_ftl_imminent">JUMP IMMINENT</text>  <!-- Displayed when the enemy ship is about to escape -->
+<text name="warning_ftl_imminent_ipad">FTL\nJUMP\nIMMINENT</text>  <!-- Same, for the iPad -->
+
+<text name="warning_boss_jump">FLAGSHIP\nJUMPING</text>  <!-- Displayed on the map screen when the final boss is about to jump to a new beacon -->
+
+<!-- Combat box -->
+
+<text name="target_window">TARGET</text>  <!-- Title of the enemy ship window -->
+
+<text name="combat_class">Class: \1</text>  <!-- \1: ship class -->
+<text name="combat_relationship">Relationship: \1</text>  <!-- \1: "neutral" or "hostile" -->
+<text name="neutral">Neutral</text>
+<text name="hostile">Hostile</text>
+
+<text name="engines_hacked">Engines Hacked</text>
+<text name="pilot_hacked">Pilot Hacked</text>
+<text name="current_evasion">Current Evasion: \1</text>  <!-- \1: current evasion -->
+
+<text name="oxygen_hacked">Oxygen Hacked</text>
+<text name="current_oxygen">Current Oxygen: \1</text>  <!-- \1: current oxygen level -->
+
+<!-- Tooltips when hovering over deployed drones -->
+
+<text name="ion_intruder">Ion Intruder</text>
+<text name="crew_repair_drone">Repair Drone</text>
+<text name="anti_person_drone">Anti-Personnel Drone</text>
+<text name="boarder_drone">Boarder Drone</text>
+
+<text name="hacking_tooltip">Cannot be targeted. Hacking drone.</text>
+<text name="repair_tooltip">Cannot be targeted. Ship repair drone.</text>
+<text name="boarding_tooltip">Cannot be targeted. Boarding drone.</text>
+<text name="shield_tooltip">Cannot be targeted. Shield overcharger.</text>
+
+<text name="combat_friendly">Your Combat Drone:\nRepeatedly attacks enemy ship. Will function until destroyed or until you jump away.</text>
+<text name="combat_enemy">Enemy Combat Drone:\nRepeatedly attacks your ship. Can be shut down by damaging the enemy ship's drone system.</text>
+
+<text name="defense_friendly">Your Defense Drone:\nShoots down missiles and asteroids. Will function until destroyed or until you jump away.</text>
+<text name="defense_enemy">Defense Drone:\nShoots down missiles and asteroids. Can be shut down by damaging the enemy ship's drone system.</text>
+
+<text name="defense_2_friendly">Your Defense Drone Mk II:\nShoots down any projectiles. Will function until destroyed or until you jump away.</text>
+<text name="defense_2_enemy">Defense Drone Mk II:\nShoots down any projectiles. Can be shut down by damaging the enemy ship's drone system.</text>
+
+<text name="anti_combat_friendly">Your Anti-Combat Drone:\nShoots to stun and possibly destroy enemy combat drones. Will function until destroyed or until you jump away.</text>
+<text name="anti_combat_enemy">Enemy Anti-Combat Drone:\nShoots to stun and possibly destroy your combat drones. Can be shut down by damaging the enemy ship's drone system.</text>
+
+<!-- Star map -->
+
+<text name="map_title">BEACON MAP</text>  <!-- Title for the star map -->
+<text name="map_sector">SECTOR</text>  <!-- Sector number label -->
+
+<text name="map_icon_base">BASE</text>  <!-- Map icon labels -->
+<text name="map_icon_distress">DISTRESS</text>
+<text name="map_icon_exit">EXIT</text>
+<text name="map_icon_quest">QUEST</text>
+<text name="map_icon_repair">REPAIR</text>
+<text name="map_icon_store">STORE</text>
+
+<text name="button_nextsector">NEXT SECTOR</text>  <!-- Button shown when at the sector exit -->
+<text name="button_wait">WAIT</text>  <!-- Button shown when out of fuel or in sector 8 -->
+<text name="map_distress_beacon">DISTRESS\nBEACON</text>  <!-- Label for the distress beacon on/off button when out of fuel -->
+<text name="button_distress_off">OFF</text> <!-- Distress beacon toggle button -->
+<text name="button_distress_on">ON</text>
+
+<text name="map_nofuel">NO FUEL</text>  <!-- Shown over the map if the ship cannot jump because it's out of fuel -->
+<text name="map_waiting">Waiting...</text>  <!-- Shown over the map for a short time after pressing the WAIT button -->
+
+<text name="sector_title">SECTOR MAP</text>  <!-- Title for the sector map (shown when jumping to a new sector) -->
+<text name="sector_legend_civilian">Civilian</text>  <!-- Sector type legend labels -->
+<text name="sector_legend_hostile">Hostile</text>
+<text name="sector_legend_nebula">Nebula</text>
+<text name="sector_civilian">Unidentified Civilian Sector</text>  <!-- Names for unidentified sectors -->
+<text name="sector_hostile">Unidentified Hostile Sector</text>
+<text name="sector_nebula">Unidentified Nebula Sector</text>
+<text name="sector_unknown">Unidentified Sector</text>
+
+<text name="boss_jumps">Turns until the base is destroyed</text>  <!-- Shown in sector 8 after the flagship reaches the Federation base to indicate the number of turns until the player loses the game -->
+<text name="pc_boss">The Flagship will destroy the Federation Base if it spends three consecutive turns there.\n\nThe red rotating Flagship icon indicates its position. When the jump line from the ship is solid, it will jump to the indicated beacon on that turn.\n\nRepair stations partially repair for free.</text>
+<text name="ipad_boss">The Flagship will destroy the Federation Base if it spends three consecutive turns there. The red rotating Flagship icon indicates its position. When the jump line from the ship is solid, it will jump to the indicated beacon on that turn. Repair stations partially repair for free.</text>
+
+<text name="final_sector_wait">Wait in your current location.</text>  <!-- Text shown next to the WAIT button (replaces map_current_loc) -->
+
+<text name="map_current_loc">Your current location.</text>  <!-- Descriptive text for various beacon types -->
+<text name="map_boss_loc">Rebel Flagship</text>
+
+<text name="map_base_loc">This is the Federation Base.</text>
+<text name="map_exit_loc">This is the exit beacon. Go here to travel to the next sector.</text>
+<text name="map_rebels_loc">The Rebels are about to gain control of this beacon!</text>
+<text name="map_store_loc">You previously found a store at this location.</text>
+<text name="map_repair_loc">Federation Repair Station. Repairs hull and provides supplies.</text>
+<text name="map_fleet_loc">The Rebels have control of this location. Very dangerous.</text>
+<text name="map_hostile_loc">A hostile enemy was left behind at this location.</text>
+<text name="map_nothing_loc">Explored location. Nothing left of interest.</text>
+<text name="map_distress_loc">Distress beacon. Someone might need help.</text>
+<text name="map_ship_loc">Unvisited. Possible ship detected.</text>
+<text name="map_quest_loc">Unvisited. Quest destination.</text>
+<text name="map_merchant_loc">Unvisited. Reported merchant location.</text>
+<text name="map_unvisited_loc">An unvisited location.</text>
+
+<text name="map_nebula_fleet_loc">The Rebel Fleet was prepared for the nebula in this sector, so it won't be as effective a hiding spot.</text>
+<text name="map_nebula_loc">The nebula here will make fleet pursuit slower but will disrupt your sensors.</text>
+<text name="map_asteroid_loc">Asteroid field detected in this location.</text>
+<text name="map_sun_loc">Beacon coordinates appear to be very close to a nearby sun.</text>
+<text name="map_ion_loc">This section of the nebula is experiencing an ion storm.</text>
+<text name="map_pulsar_loc">A pulsar is flooding this area with dangerous electromagnetic forces.</text>
+
+<text name="map_pds_fleet">The fleet's anti-ship batteries will be firing on you at this location.</text>
+<text name="map_pds_loc">Planet-side anti-ship batteries are detected in this system.</text>
+
+<!-- Upgrade/crew/equipment screen -->
+
+<text name="upgrade_frame_systems">SYSTEMS</text>  <!-- Window frame titles for the upgrade screen -->
+<text name="upgrade_frame_subsystems">SUBSYSTEMS</text>
+<text name="upgrade_frame_reactor">REACTOR</text>
+<text name="button_accept">ACCEPT</text>  <!-- Text for the "accept" button on the upgrade screen -->
+<text name="button_undo">UNDO</text>  <!-- Text for the "undo" button on the upgrade screen -->
+<text name="button_upgrade">UPGRADE</text>  <!-- Text for the iPad-specific confirmation button -->
+<text name="upgrade_max">MAX</text>  <!-- Shown instead of upgrade cost when a system is fully upgraded -->
+<text name="upgrade_reactor_power">\1 POWER BARS</text>  <!-- Shown in the reactor upgrade button. \1: current reactor power level -->
+
+<text name="crewbox_dismiss">DISMISS</text>
+<text name="rename_note">Note: Click on any crew name to change it.</text>  <!-- Displayed on the crew manifest screen -->
+
+<text name="equipment_frame_weapons">WEAPONS</text>  <!-- Window frame titles for the equipment screen -->
+<text name="equipment_frame_drones">DRONES</text>
+<text name="equipment_frame_cargo">CARGO</text>
+<text name="equipment_frame_augments">AUGMENTATIONS</text>
+<text name="equipment_no_system">SYSTEM NOT INSTALLED</text>  <!-- Shown if weapon or drone system is not installed; also used on hangar screen -->
+
+<text name="dismiss_box_title">DISMISSAL</text>  <!-- Only used on iPad -->
+<text name="dismiss_box_text">Drag a crew\nmember into\nthis box to\ndismiss them.</text>  <!-- Only used on iPad; line breaks optional (text will auto-wrap) -->
+<text name="overcapacity_crew_title">OVER\nCAPACITY</text>
+<text name="overcapacity_crew_text">You must dismiss\na crew member\nto continue.</text>  <!-- Line breaks optional (text will auto-wrap) -->
+<text name="overcapacity_item_title">OVER\nCAPACITY</text>
+<text name="overcapacity_item_text1">This item will\nbe left behind\nwhen you jump.</text>  <!-- Line breaks optional (text will auto-wrap) -->
+<text name="overcapacity_item_text2">Drag and drop\nto swap items.</text>  <!-- Line breaks optional (text will auto-wrap) -->
+<text name="overcapacity_aug_title">OVER\nCAPACITY</text>
+<text name="overcapacity_aug_text1">This augment will\nbe left behind\nwhen you jump.</text>  <!-- Line breaks optional (text will auto-wrap) -->
+<text name="overcapacity_aug_text2">Drag and drop\nto swap augments.</text>  <!-- Line breaks optional (text will auto-wrap) -->
+
+<!-- Store screen -->
+
+<text name="store_tab_buy">BUY</text>
+<text name="store_tab_sell">SELL</text>
+<text name="store_tab_page1">PAGE 1</text>  <!-- Also used in key config screen -->
+<text name="store_tab_page2">PAGE 2</text>  <!-- Also used in key config screen -->
+
+<text name="store_title_items">ITEMS</text>  <!-- Title text for store window subframes -->
+<text name="store_title_repair">REPAIR</text>
+<text name="store_title_augments">AUGMENTATIONS</text>
+<text name="store_title_crew">HIRE CREW</text>
+<text name="store_title_drones">DRONES</text>
+<text name="store_title_systems">SYSTEMS</text>
+<text name="store_title_weapons">WEAPONS</text>
+
+<text name="store_current_hull">CURRENT\nHULL</text>  <!-- Shown in lower left corner of store window -->
+
+<text name="button_buy">BUY</text>  <!-- "Confirm buy" button, only used on iPad -->
+<text name="button_sell">SELL</text>  <!-- "Confirm sell" button, only used on iPad -->
+
+<text name="repair_all_button">FIX ALL</text>
+<text name="repair_all_title">Repair Entire Hull</text>
+<text name="repair_all_desc">Purchase a repair job to restore your hull health back to maximum.</text>
+<text name="repair_one_button">FIX 1</text>
+<text name="repair_one_title">Repair Partial Hull</text>
+<text name="repair_one_desc">Purchase a repair job to restore one point of hull health.</text>
+<text name="repair_max">MAX</text>  <!-- Shown in repair buttons to indicate that hull is at full health -->
+
+<text name="sell_box_title">SELL ITEM</text>
+<text name="sell_box_text">Drag equipment\nor augmentations\ninto this box\nto sell them.</text>  <!-- Line breaks optional (text will auto-wrap) -->
+<text name="sell_value">SELL VALUE</text>
+
+<text name="max_augments">Your ship can only hold 3 augmentations.</text>
+<text name="have_augment">You already have this augmentation and its effect cannot be stacked.</text>
+
+<text name="max_crew">Your ship is full and cannot hold any more crewmembers!</text>
+<text name="max_drones">Your ship's cargo is full and cannot hold any more drones!</text>
+<text name="max_weapons">Your ship's cargo is full and cannot hold any more weapons!</text>
+<text name="system_drones">Powers the ship's drones.</text>  <!-- Info text for drone system -->
+
+<text name="free_drone">Purchase comes with free \1</text>  <!-- Additional info text for drone system. \1: drone type -->
+
+<text name="sys_full">You've reached the System Limit</text>  <!-- Tooltip shown on systems when the ship already has the maximum number of systems -->
+
+<!-- System level info -->
+
+<text name="artillery_1">50 Second Cooldown</text>
+<text name="artillery_2">40 Second Cooldown</text>
+<text name="artillery_3">30 Second Cooldown</text>
+<text name="artillery_4">20 Second Cooldown</text>
+
+<text name="door_1">Normal doors</text>
+<text name="door_2">Blast Doors</text>
+<text name="door_3">Improved Blast Doors</text>
+<text name="door_4">Super Blast Doors</text>
+
+<text name="pilot_1">Needs pilot to function</text>
+<text name="pilot_2">Auto: 50 percent evasion</text>
+<text name="pilot_3">Auto: 80 percent evasion</text>
+
+<text name="sensor_1">See ship interior</text>
+<text name="sensor_2">See enemy interior</text>
+<text name="sensor_3">See enemy weapon charge</text>
+<text name="sensor_4">See enemy power use</text>
+
+<text name="cloak">Cloak: \1 seconds</text>  <!-- \1: cloak duration -->
+
+<text name="teleporter_on">\1 sec cooldown</text>  <!-- \1: cooldown duration -->
+
+<text name="engine">Dodge: \1 / FTL: \2x</text>  <!-- \1: evasion rate, \2: FTL charge rate -->
+
+<text name="medbay_healing">Healing Boost: \1x</text>  <!-- \1: healing rate -->
+
+<text name="system_power">More System Power</text>  <!-- Generic info line for weapon/drone systems -->
+
+<text name="oxygen_on">O2 Refill Boost: \1x</text>  <!-- \1: oxygen refill rate -->
+
+<text name="shields_0">One Shield Barrier</text>
+<text name="shields_1">Two Shield Barriers</text>
+<text name="shields_2">Three Shield Barriers</text>
+<text name="shields_3">Four Shield Barriers</text>
+
+<text name="hacking_duration">\1 second disruption</text>  <!-- \1: hacking effect duration -->
+
+<text name="mind_1">Mind control one person</text>
+<text name="mind_2">Boosts health and damage</text>
+<text name="mind_3">Increases boost</text>
+
+<text name="battery_power">Provides \1 bonus power</text>
+
+<text name="clone">\1 sec clone</text>  <!-- \1: clone time -->
+<text name="clone_full">\1 sec clone + \2 hp/jump</text>  <!-- \1: clone time, \2: healing amount -->
+
+<!-- System info boxes -->
+
+<text name="upgrade_reactor">Reactor</text>  <!-- Info box title for reactor upgrades -->
+<text name="reactor_desc">Provides power to all ship systems. Each power bar allows you to send one unit of power to a system. Subsystems do not need power from the reactor.</text>
+
+<text name="reactor_desc_short">Provides power to all ship systems.</text>  <!-- Reactor info box text when "weak system" warning is displayed -->
+
+<text name="weak_warning">Weak System - Extra scrap required for initial upgrades</text>
+
+<text name="nano_warning">Note: Requires powered Medbay to function.</text>  <!-- Additional info text for Engi Med-bot Disperal augmentation -->
+
+<!-- System tooltips -->
+
+<text name="level">Level \1: \2</text>  <!-- \1: power level, \2: description -->
+<text name="manning_bonus">Manned: \1</text>  <!-- \1: bonus description -->
+<text name="status">Status:</text>
+
+<text name="subsystem_manned">+1 System Level</text>
+
+<text name="full_powered">Fully Powered</text>
+<text name="full_functional">Fully Functional</text>
+<text name="partial_powered">Partially Powered</text>
+<text name="partial_functional">Partially Functional</text>
+<text name="unpowered">Unpowered</text>
+
+<text name="unmanned">Unmanned</text>
+<text name="zoltan">Zoltan Bonus Power</text>
+<text name="zoltan_rearrange_weapon">Zoltan Bonus Power: Always powers weapon in first slot, click and drag to rearrange weapons</text>
+<text name="zoltan_rearrange_drone">Zoltan Bonus Power: Always powers drone in first slot, click and drag to rearrange drones</text>
+
+<text name="destroyed">Destroyed</text>
+<text name="damaged">Damaged</text>
+
+<text name="temp_disabled">Temporarily disabled by enemy or location</text>
+
+<text name="ioned">Locked by Ion Effect</text>
+<text name="on_fire">On Fire</text>
+<text name="sabotaged">Being Sabotaged</text>
+
+<text name="add_power">Add Power: \1</text>  <!-- \1: hotkey name -->
+<text name="remove_power">Remove Power: \1</text>  <!-- \1: hotkey name -->
+<text name="remove_power_alt">Remove Power: Shift + \1</text>  <!-- \1: hotkey name -->
+
+<text name="hacked">Hacked: Experiences temporary disruption and doors are locked down</text>
+
+<text name="artillery_off">OFF: Beam not charging</text>
+<text name="doors_off">OFF: Cannot manipulate doors</text>
+<text name="pilot_off">OFF: NO DODGE!</text>
+<text name="sensors_off">OFF: Limited vision</text>
+<text name="engine_off">OFF: NO DODGE!</text>
+<text name="medbay_off">OFF: Cannot heal crew</text>
+<text name="weapons_off">OFF: Weapons not available</text>
+<text name="drones_off">OFF: Drones not functional</text>
+<text name="oxygen_off">OFF: OXYGEN DRAINING!</text>
+<text name="clone_off">OFF: Dead crew will die forever</text>
+<text name="shields_off">OFF: SHIELDS DOWN!</text>
+
+<text name="clonebay_health">Heals all crew \1 hp every jump.</text>  <!-- \1: healing amount -->
+<text name="clonebay_damaged"> (If repaired, it will heal more)</text>
+
+<!-- Crew skill descriptions -->
+
+<text name="pilot_skill">Evasion +\1</text>  <!-- \1: evasion bonus -->
+<text name="engine_skill">Evasion +\1</text>  <!-- \1: evasion bonus -->
+<text name="shield_skill">\1% faster recharge</text>  <!-- \1: speed bonus -->
+<text name="weapon_skill">\1% faster charge</text>  <!-- \1: speed bonus -->
+<text name="combat_0">Increases crew damage</text>
+<text name="combat_skilled">\1% more crew damage</text>  <!-- \1: damage bonus -->
+<text name="repair_0">Increases repair speed</text>
+<text name="repair_skilled">\1% faster repair</text>  <!-- \1: speed bonus -->
+
+<!-- Crew box tooltips -->
+
+<text name="health">Health: \1/\2</text>  <!-- Shown in crew box. \1: current health, \2: max health -->
+
+<text name="cloning">Cloning...</text>  <!-- Shown on crew tooltip when being cloned -->
+
+<text name="power_ready">Ready: Click to lock down room with special power\nHotkey: \1</text>  <!-- Shown on crew tooltip for Crystal crew. \1: key name -->
+<text name="power_not_ready">Not Ready: Lockdown power charging (see charge left of portrait)</text>  <!-- Shown on crew tooltip for Crystal crew -->
+
+<text name="pilot_skill_tooltip">Piloting Skill:\n\1</text>  <!-- \1: skill description -->
+<text name="engines_skill_tooltip">Engines Skill:\n\1</text>  <!-- \1: skill description -->
+<text name="shields_skill_tooltip">Shields Skill:\n\1</text>  <!-- \1: skill description -->
+<text name="weapons_skill_tooltip">Weapons Skill:\n\1</text>  <!-- \1: skill description -->
+<text name="combat_skill_tooltip">Combat Skill:\n\1</text>  <!-- \1: skill description -->
+<text name="repair_skill_tooltip">Repair Skill:\n\1</text>  <!-- \1: skill description -->
+
+<text name="next_level">Next Level: \1/\2</text>  <!-- \1: current experience, \2: target experience -->
+
+<!-- Crew info boxes -->
+
+<text name="crew_skills">Crew Skills</text>
+
+<text name="pilot_skill_infobox">\1 when manning Piloting.</text>  <!-- \1: skill description -->
+<text name="engines_skill_infobox">\1 when manning Engines.</text>  <!-- \1: skill description -->
+<text name="shields_skill_infobox">\1 when manning Shields.</text>  <!-- \1: skill description -->
+<text name="weapons_skill_infobox">\1 when manning Weapons.</text>  <!-- \1: skill description -->
+<text name="combat_skill_infobox">\1</text>  <!-- \1: skill description -->
+<text name="repair_skill_infobox">\1</text>  <!-- \1: skill description -->
+
+<!-- Weapon/drone info boxes -->
+
+<text name="required_power">Required Power: \1</text>  <!-- Also used for drones. \1: required power -->
+<text name="boost_power_speed">Chain Power: Faster Charge</text>
+<text name="boost_power_damage">Chain Power: More Damage</text>
+<text name="damage_cap">Chain Damage Cap: \1</text>  <!-- \1: maximum damage amount -->
+<text name="speed_cap">Chain Charge Cap: \1 seconds</text>  <!-- \1: fastest cooldown speed -->
+
+<text name="charge_time">Charge Time: \1 seconds</text>  <!-- \1: charge time -->
+<text name="requires_missiles">Requires Missile</text>
+<text name="shots">Shots Per Charge: \1</text>  <!-- \1: number of shots per charge -->
+<text name="charge">Max Charge Shots: \1</text>  <!-- \1: maximum number of charges -->
+<text name="damage_shot">Normal Damage: \1</text>  <!-- \1: damage amount -->
+<text name="damage_room">Damage Per Room Hit: \1</text>  <!-- \1: damage amount -->
+<text name="shield_piercing">Shield Piercing: \1</text>  <!-- \1: maximum shield level that can be pierced -->
+<text name="fire_chance">Fire Chance: \1</text>  <!-- \1: chance (chance_* string) -->
+<text name="breach_chance">Breach Chance: \1</text>  <!-- \1: chance (chance_* string) -->
+<text name="stun_chance">Stun Chance: \1</text>  <!-- \1: chance (chance_* string) -->
+<text name="ion_damage">Ion Damage: \1</text>  <!-- \1: damage amount -->
+<text name="stun_damage">Stun: \1 seconds</text>  <!-- \1: stun duration -->
+<text name="personnel_damage">Crew Damage: \1</text>  <!-- \1: damage amount -->
+<text name="system_damage">System Damage: \1</text>  <!-- \1: damage amount -->
+<text name="double_damage">2x Damage on systemless rooms.</text>
+
+<text name="chance_of">Possible Effect: \1</text>  <!-- \1: list of possible effects -->
+<text name="chance_of_separator">, </text>
+<text name="chance_of_fire">Fire</text>
+<text name="chance_of_breach">Breach</text>
+<text name="chance_of_stun">Stun</text>
+
+<text name="chance_low">Low</text>
+<text name="chance_medium">Med</text>
+<text name="chance_high">High</text>
+
+<text name="type_desc">Type: \1\n\2</text>  <!-- \1: type string (1 or 2 lines), \2: effect string (0 or more lines) -->
+
+<text name="type_beam">Beam</text>
+<text name="type_bomb">Teleporting Bomb</text>
+<text name="type_laser">Laser</text>
+<text name="type_laser_chain">Chain Laser</text>
+<text name="type_laser_charge">Charge Laser</text>
+<text name="type_missile">Missile</text>
+<text name="type_crystal">Physical Projectile</text>
+<text name="type_burst">Blast</text>  <!-- Weapons which hit randomly in a circular area, i.e. flak weapons and Swarm Missile -->
+<text name="type_burst_chain">Chain Blast</text>
+<text name="type_burst_charge">Charge Blast</text>
+<text name="type_ion">Ion</text>
+<text name="type_ion_chain">Chain Ion</text>
+<text name="type_ion_charge">Charge Ion</text>
+
+<text name="type_ion_effect">Drains and Locks Systems</text>
+<text name="type_missile_effect">Ignores Shields\nRequires Missile</text>
+<text name="type_bomb_effect">Ignores Shields</text>
+<text name="type_burst_effect">Area Effect Aiming</text>
+<text name="type_charge_effect">Charge Multiple Times</text>
+<text name="type_chain_effect">Improves With Consecutive Shots</text>
+
+<text name="drone_required">Requires drone part to deploy</text>
+
+<!-- Weapon/drone info box tips -->
+
+<text name="tip_drone_generic">Tip: Use requires spending one drone part to activate, and then constant power (similar to weapons).</text>
+<text name="tip_drone_warning">Warning: You do not have a Drone System. You can purchase one from a store.</text>
+<text name="tip_drone_drag">Tip: Currently in cargo. Drag to an available Drone System slot to equip this drone.</text>
+<text name="tip_weapon_drag">Tip: Currently in cargo. Drag to an available Weapon System slot to equip this weapon.</text>
+
+<text name="tip_beams">Tip: For every shield bar on the enemy, a beam's damage is reduced by one. For example, a three damage beam against two shield bars will cause one damage in every room it hits.</text>
+
+<text name="tip_missiles">Tip: Missiles will ignore all enemy shields, but cost one missile to launch. Enemy defense drones will shoot down incoming missiles.</text>
+
+<text name="tip_bombs">Tip: Bombs teleport past shields and defense drones to land directly on the ship. Like missiles, they cost one missile to launch. They never damage hull, but can be effective at disrupting crew and systems. You can even launch them at boarders on your own ship.</text>
+
+<text name="tip_ion">Tip: For every one point of ion damage, one power bar is removed from the target system and it is then locked for 5 seconds, preventing re-powering. If an ion weapon hits shields, the damage is automatically applied to the Shield System.</text>
+
+<text name="tip_laser">Tip: Each laser shot will be blocked by a single shield bubble, regardless of the laser's damage.</text>
+
+<text name="tip_hull">Tip: Hull weapons deal double damage if they hit a room that does not have a system or a subsystem.</text>
+
+<text name="tip_charge">Tip: Charge weapons can be charged multiple times to generate more firepower. You can save time and fire the weapon prematurely but it will have fewer shots ready as a result.</text>
+
+<text name="tip_chain_laser">Tip: Chain lasers decrease their cooldown every time they fire. Check the green lights on the weapon to see how many times it has fired.</text>
+
+<text name="tip_chain_ion">Tip: The Chain Ion increases its damage every time it fires. Check the green lights on the weapon to see how many times it has fired.</text>
+
+<text name="tip_flak">Tip: Flak weapons target an area instead of a single room. This loss of accuracy means more firepower and speed than their laser counterparts.</text>
+
+<text name="tip_crystal">Tip: Crystal weapons pierce a single layer of shields. Only level 2 shields and higher can stop them.</text>
+
+<text name="tip_combat">Tip: Combat Drones require 1 drone part to deploy for each new enemy. They will attack the enemy as long as they are powered.</text>
+
+<text name="tip_defense">Tip: Defense Drones require 1 drone part to deploy at every new location. They will defend your ship as long as they are powered.</text>
+
+<text name="tip_boarding">Tip: Boarding Drones require 1 drone part to deploy for each new enemy. They will board the enemy ship and attack as long as they are powered.</text>
+
+<text name="tip_crew">Tip: Crew Drones require 1 drone to deploy, but will not need to be deployed again until destroyed. They stay on ship and help your crew as long as they are powered.</text>
+
+<text name="tip_repair_bomb">Tip: Bombs never miss when targeting your own ship, so this bomb is a guaranteed full heal for any of your systems.</text>
+<text name="tip_heal_bomb">Tip: Remember, bombs can miss the enemy ship so don't count on this as a guaranteed heal for your boarders!</text>
+<text name="tip_fire_beam">Tip: This Fire Beam does no hull damage, so it cannot pierce any amount of shields.</text>
+<text name="tip_crew_beam">Tip: This Anti-Bio Beam does no hull damage, so it cannot pierce any amount of shields. It also won't hurt drones!</text>
+
+<!-- Hacking tooltips -->
+
+<text name="hack_potential">Grants disruption ability: \1</text>  <!-- Shown when hovering over an enemy ship room when in hacking launch mode. \1: effect description (one of the "hack_*" strings below) -->
+<text name="hack_activate">Begins disruption ability: \1</text>  <!-- Shown on hacking button tooltip when a hacking drone is deployed. \1: effect description -->
+
+<text name="hack_no_system">None, must hack a system.</text>
+<text name="hack_oxygen">Temporarily drain the enemy ship of oxygen.</text>
+<text name="hack_doors">Temporarily turn all enemy doors into player friendly blast doors.</text>
+<text name="hack_shields">Temporarily drain power from the enemy shields.</text>
+<text name="hack_pilot">Temporarily reduce the enemy ship's evasion to 0.</text>
+<text name="hack_engines">Temporarily reduce the enemy ship's evasion to 0.</text>
+<text name="hack_sensors">Temporarily shut down the enemy sensors.</text>
+<text name="hack_medbay">Temporarily cause the medbay to damage instead of heal enemy crew.</text>
+<text name="hack_weapons">Temporarily drain charge from enemy weapons.</text>
+<text name="hack_drones">Temporarily freeze enemy drones with a chance of destroying them.</text>
+<text name="hack_teleporter">Temporarily take control of the enemy teleporter, returning crew to the enemy ship.</text>
+<text name="hack_cloaking">Temporarily shut down the enemy's ability to cloak.</text>
+<text name="hack_artillery">Temporarily reverse the enemy's artillery charge.</text>
+<text name="hack_battery">Temporarily reduce the enemy's reactor power by two.</text>
+<text name="hack_clonebay">Temporarily shut down the clone bay's functionality, killing potential clones.</text>
+<text name="hack_mind">Free any currently controlled people and temporarily mind control an enemy unit.</text>
+<text name="hack_hacking">Temporarily interrupt and shut down the enemy hacking.</text>
+
+<text name="hack_oxygen_player">SYSTEM HACKED: LOSING OXYGEN RAPIDLY.</text>  <!-- Added to system tooltips when the enemy hacks the player ship -->
+<text name="hack_doors_player">SYSTEM HACKED: DOORS DISRUPT CREW MOVEMENT.</text>
+<text name="hack_shields_player">SYSTEM HACKED: SHIELDS LOSING POWER.</text>
+<text name="hack_pilot_player">SYSTEM HACKED: EVASION DROPPED TO 0.</text>
+<text name="hack_engines_player">SYSTEM HACKED: EVASION DROPPED TO 0.</text>
+<text name="hack_sensors_player">SYSTEM HACKED: SENSORS WILL NOT FUNCTION.</text>
+<text name="hack_medbay_player">SYSTEM HACKED: MEDBAY DAMAGES CREW!</text>
+<text name="hack_weapons_player">SYSTEM HACKED: WEAPONS LOSING CHARGE.</text>
+<text name="hack_drones_player">SYSTEM HACKED: DRONES STUNNED AND MAY EXPLODE.</text>
+<text name="hack_teleporter_player">SYSTEM HACKED: FRIENDLY CREW FORCED TO TELEPORT HOME.</text>
+<text name="hack_cloaking_player">SYSTEM HACKED: CLOAKING SYSTEM INTERRUPTED.</text>
+<text name="hack_artillery_player">SYSTEM HACKED: ARTILLERY QUICKLY LOSING CHARGE.</text>
+<text name="hack_battery_player">SYSTEM HACKED: REACTOR POWER REDUCED BY 2.</text>
+<text name="hack_clonebay_player">SYSTEM HACKED: CLONES CANNOT BE MADE, CREW MAY DIE!</text>
+<text name="hack_mind_player">SYSTEM HACKED: FRIENDLY UNIT UNDER CONTROL!</text>
+<text name="hack_hacking_player">SYSTEM HACKED: HACKING TEMPORARILY INTERRUPTED</text>
+
+<!-- Additions to event text -->
+
+<text name="distraction">You deploy your Distraction Buoys, giving you more time to explore this sector before the fleet catches up.</text>
+<text name="added_quest">Added a quest marker to your map!</text>
+<text name="no_time">Upon examining your map, you realize you just won't have time and need to get to the Federation base! You leave the quest for another day.</text>
+<text name="added_quest_sector">Added a quest marker to the next sector!</text>
+
+<text name="circle_ship">Congratulations, by making it to the 5th sector you've unlocked the Engi playable ship for future playthroughs!</text>
+
+<text name="intruder_energy">They must have a Super Shield bypass unit; boarders are on board!</text>
+
+<text name="event_crew_full"> [Warning: You will have to dismiss a crewmember, you are already full.]</text>
+
+<text name="unlock_ship_1">The Engi secret tech has been delivered to the hangar. The stealth ship has been unlocked!</text>
+<text name="unlock_ship_2">A Mantis cruiser has been unlocked and added to the hangar!</text>
+<text name="unlock_ship_4">The Federation Cruiser has been unlocked and added to the hangar!</text>
+<text name="unlock_ship_5">The Slug cruiser has been unlocked and added to the hangar!</text>
+<text name="unlock_ship_6">The Rock deliver a cruiser to the hangar. The Bulwark has been unlocked!</text>
+<text name="unlock_ship_7">A Zoltan cruiser has been unlocked and added to the hangar!</text>
+<text name="unlock_ship_8">The Crystalline ship is sent to the hangar. The Bravais has been unlocked!</text>
+
+<!-- Event result text -->
+
+<text name="augment">Augment:</text>
+
+<text name="upgrade_success">Upgraded \1 by \2</text>  <!-- \1: system name ("the Reactor" etc.), \2: amount -->
+<text name="upgrade_fail_max">Could not upgrade \1, it's maxed</text>  <!-- \1: system name -->
+<text name="upgrade_fail_missing">Could not upgrade \1, it's not present</text>  <!-- \1: system name -->
+
+<text name="oxygen">the Oxygen System</text>  <!-- These are used in running text, e.g. "upgrade_success" -->
+<text name="doors">the Doors</text>
+<text name="shields">the Shields</text>
+<text name="pilot">the Piloting</text>
+<text name="engines">the Engines</text>
+<text name="sensors">the Sensors</text>
+<text name="medbay">the Medbay</text>
+<text name="weapons">the Weapons</text>
+<text name="drones">the Drone System</text>
+<text name="teleporter">the Teleporter</text>
+<text name="cloaking">the Cloaking</text>
+<text name="artillery">the Artillery</text>
+<text name="battery">the Backup Battery</text>
+<text name="clonebay">the Clonebay</text>
+<text name="mind">the Mind Control</text>
+<text name="hacking">the Hacking System</text>
+<text name="reactor">the Reactor</text>
+
+<text name="oxygen_installed">Oxygen System installed</text>  <!-- These "X_installed" strings are not currently used; they would appear in the same style as the "upgrade_success" string, for example -->
+<text name="doors_installed">Door Subsystem installed</text>
+<text name="shields_installed">Shield System installed</text>
+<text name="pilot_installed">Piloting Subsystem installed</text>
+<text name="engines_installed">Engines installed</text>
+<text name="sensors_installed">Sensor Subsystem installed</text>
+<text name="medbay_installed">Medbay installed</text>
+<text name="weapons_installed">Weapons System installed</text>
+<text name="drones_installed">Drone System installed</text>
+<text name="teleporter_installed">Teleporter installed</text>
+<text name="cloaking_installed">Cloaking System installed</text>
+<text name="artillery_installed">Artillery installed</text>
+<text name="battery_installed">Backup Battery installed</text>
+<text name="clonebay_installed">Clonebay installed</text>
+<text name="mind_installed">Mind Control System installed</text>
+<text name="hacking_installed">Hacking System installed</text>
+<text name="reactor_installed">Reactor installed</text>
+
+<text name="new_system_last">Warning: If you add a new system, your ship will be full and unable to hold any more.</text>
+<text name="new_system_penultimate">Warning: If you add a new system, you will have 1 system slot left.</text>
+<text name="new_system_update">Warning: If you add a new system, you will have \1 system slots left.</text>  <!-- \1: number of slots left -->
+<text name="new_system_clonebay">Warning: Accepting a clonebay will replace your medbay.</text>
+<text name="new_system_medbay">Warning: Accepting a medbay will replace your clonebay.</text>
+<text name="new_system_full">Warning: You cannot hold any more systems.</text>
+<text name="new_system_owned">Warning: You already have the offered system.</text>
+
+<text name="dead_crew">\1 is gone</text>  <!-- \1: crew name -->
+<text name="traitor_crew">\1 is now an enemy</text>  <!-- \1: crew name -->
+<text name="intruder_alert">Intruders on board</text>
+<text name="item_removed">Item removed: \1</text>  <!-- \1: item name -->
+
+<text name="damage_alert">\1 damage to your hull</text>  <!-- \1: damage amount -->
+
+<text name="heal_alert">\1 hull points repaired</text>  <!-- \1: repair amount -->
+<text name="heal_1_alert">1 hull point repaired</text>
+
+<text name="fleet_delayed">Fleet delayed by \1 jumps</text>  <!-- \1: number of jumps -->
+<text name="fleet_delayed_1">Fleet delayed by 1 jump</text>
+
+<text name="fleet_speed">Fleet pursuit doubled for \1 jumps</text>  <!-- \1: number of jumps -->
+<text name="fleet_speed_1">Fleet pursuit doubled for 1 jump</text>
+
+<!-- Game-over text -->
+
+<text name="gameover_title_gameover">GAME OVER</text>
+<text name="gameover_title_victory">VICTORY!</text>  <!-- Replaces "GAME OVER" when the player has won -->
+
+<text name="gameover_button_stats">STATS</text>
+<text name="gameover_button_restart">RESTART</text>
+<text name="gameover_button_hangar">HANGAR</text>
+<text name="gameover_button_mainmenu">MAIN MENU</text>
+<text name="gameover_button_quit">QUIT</text>
+
+<text name="gameover_win">Congratulations! You've defeated the Rebel Flagship and ensured the victory of the Federation!</text>
+<text name="gameover_win_demo">Congratulations! You've defeated the 'Impossible Pirate' and completed the Demo!</text>
+
+<text name="gameover_crew">All crewmembers have died. Your ship will continue to drift for eternity. Or until looters destroy it.</text>
+<text name="gameover_blowup">One last explosion marks your fate as your ship is torn apart.</text>
+<text name="gameover_fedbase">The Rebel Flagship has destroyed the Federation Base. All is lost, they've won.</text>
+<text name="gameover_tutorial">Somehow you've died during the introduction training exercise. Feel free to try again but this doesn't bode well for your mission.</text>
+
+<!-- Credits -->
+
+<text name="crewlist_comma">, </text>  <!-- Precedes all but the last crew name in the victory screen -->
+<text name="crewlist_and"> and </text>  <!-- Precedes the last crew name in the victory screen -->
+
+<text name="thank_ship">Thanks to the valiant effort of:</text>
+
+<text name="thank_crew">And her successful crew:</text>
+
+<text name="credit_victory">The Rebel's flagship was destroyed, throwing their fleet into chaos and ensuring a Federation victory</text>
+
+<text name="game_from">A game from:</text>
+<text name="subset_games">subset games</text>
+
+<text name="created_by">Created by:</text>
+<text name="matthew_justin">Matthew Davis and Justin Ma</text>
+
+<text name="addition_code">iOS programming:</text>
+<text name="andrew_church">Andrew Church</text>
+
+<text name="music_by">Music and sound by:</text>
+<text name="ben_prunty">Ben Prunty</text>
+
+<text name="writing_by">With writing from:</text>
+<text name="tom_jubert">Tom Jubert</text>
+
+<text name="guest_writer">Advanced Edition special guest writer:</text>
+<text name="chris_a">Chris Avellone</text>
+
+<text name="additional_art">Additional art and design:</text>
+<text name="bryan_ma">Bryan Ma</text>
+
+<text name="editing">Additional editing and design:</text>
+<text name="alison_w">Alison Waller</text>
+
+<text name="additional_testing">Additional testing, advice, and invaluable support:</text>
+<text name="family_friends">Alison, Maria, Bryan, Matthieu, Collin, Anton, Ethan, Andy, Xia Tai Yi, our parents, and many more</text>
+
+<text name="kickstarter">Thank you to all of our extremely generous Kickstarter backers, with a very special thank you to:</text>
+
+<text name="third_party">FTL uses the following third party libraries</text>
+<text name="folder">(See accompanying license folder or readme for more details)</text>
+<text name="freetype">The FreeType Project (c) 1996-2002, 2006 by David Turner, Robert Wilhelm, and Werner Lemberg</text>
+<text name="bass">BASS audio library (c) 1999-2012 Un4seen Developments Ltd</text>
+<text name="SDL">SDL - Simple DirectMedia Layer (c) 1997-2009 Sam Lantinga</text>
+<text name="rapidxml">RapidXML (c) 2006, 2007 Marcin Kalicinski</text>
+<text name="devil">DevIL: Developer's Image Loader (c) 2000-2009 by Denton Woods</text>
+<text name="font">'Half-Life 1 + 2' fonts used with permission from freakyfonts.de</text>
+
+<text name="touch_skip">Keep finger pressed to skip the credits.</text>
+
+<!-- Miscellaneous tooltips -->
+
+<text name="autofire_tooltip_on">Autofire On. Weapons by default will continue firing at their target.\n\nTap twice when arming a weapon to toggle its individual mode.</text>  <!-- Only used on iPad -->
+<text name="autofire_tooltip_off">Autofire Off. Weapons will only fire once at their target.\n\nTap twice when arming a weapon to toggle its individual mode.</text>  <!-- Only used on iPad -->
+
+<text name="health_tooltip">Health: \1/\2</text>  <!-- Tooltip when hovering over a crewmember. \1: current health, \2: max health -->
+<text name="death_tooltip">Dying</text>  <!-- Tooltip when hovering over a dying crewmember -->
+
+<text name="save_stations_tooltip">Save your current crew positions\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="ret_stations_tooltip">Return crew to saved positions\nHotkey: \1</text>  <!-- \1: key name -->
+
+<text name="ship_info">Open the ship info screens. Unavailable when the ship is in danger.\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="open_store">Reopen the store at your location.\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="open_options">Open the settings menu</text>
+
+<text name="mind_controlled_tooltip">Mind Controlled</text>  <!-- Shown on crew tooltip -->
+
+<text name="rearrange">Click and drag to rearrange</text>  <!-- Shown on weapon/drone tooltip -->
+
+<text name="hotkey">Hotkey: \1</text>  <!-- Shown on various tooltips. \1: key name -->
+
+<text name="jump_button">Opens star map to choose jump location.\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="activate_battery">Activate the Backup Battery, providing additional Reactor power bars\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="mind_button">Turn enemies into allies temporarily.\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="hack_button">Launch hacking drone; costs 1 drone part.\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="pulse_button_broken">Can't disrupt system when it's destroyed</text>  <!-- Hacking button tooltip shown if the hacked system is destroyed -->
+<text name="open_doors">Open all doors on the ship.\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="close_doors">Close all doors on the ship.\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="tele_ret">Retrieve crew from targeted enemy room to player teleporter room.\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="tele_send">Send crew in player teleporter room to targeted enemy room.\nHotkey: \1</text>  <!-- \1: key name -->
+<text name="cloak_button">Temporarily cloak the ship, halting enemy weapon charging and increasing evasion by 60\nHotkey: \1</text>  <!-- \1: key name -->
+
+<text name="powered_deployed">Deployed (Powered): Active and providing its function.</text>  <!-- Tooltips for drone boxes -->
+<text name="unpowered_deployed">Deployed (Unpowered): Not active, but can be repowered without costing a drone part.</text>
+<text name="undeployed">Not Deployed: Will cost one drone part when first powered.</text>
+<text name="rebuilding">Drone rebuilding after unexpected destruction.</text>  <!-- Shown when a deployed drone has been destroyed (by enemy fire, for example) -->
+
+<text name="weapon_autofire_off">Tap once to arm. Tap twice to arm and engage autofire for continuous firing.</text>  <!-- Weapon tooltips on iPad -->
+<text name="weapon_autofire_on">Tap once to arm with autofire. Tap twice to arm for a single shot without autofire engaged.</text>
+
+<!-- Confirmation dialog messages -->
+
+<text name="confirm_yes">YES</text>  <!-- Text for the "yes" button -->
+<text name="confirm_no">NO</text>  <!-- Text for the "no" button -->
+
+<text name="confirm_buy_clonebay">Are you sure?\nThe Clonebay will replace your Medbay.</text>  <!-- Displayed when attempting to buy a clonebay when a medbay is already installed. Note that line breaks in confirmation dialogs are optional (text will auto-wrap) and are used in English for aesthetic reasons. -->
+<text name="confirm_buy_last_system">This is your ship's final system slot.\nAre you sure?</text>  <!-- Displayed when attempting to buy the eighth system on the ship -->
+<text name="confirm_buy_medbay">Are you sure?\nThe Medbay will replace your Clonebay.</text>  <!-- Displayed when attempting to buy a medbay when a clonebay is already installed -->
+<text name="confirm_dismiss">The crew\nwill be gone\nforever.\nAre you sure?</text>  <!-- Displayed after clicking the DISMISS button for a crewmember on the crew manifest -->
+<text name="confirm_end_game">Are you sure?\nAll progress will be lost.</text>  <!-- Displayed after clicking the HANGAR or RESTART button on the in-game menu -->
+<text name="confirm_leave_crew">Are you sure?\nYour crew is\nstill aboard\nthe enemy ship.</text>  <!-- Displayed when attempting to jump away from an enemy ship while player crew are aboard it -->
+<text name="confirm_new_game">WARNING:\nAre you sure you want to start a new game? Your previous progress will be lost.</text>  <!-- Displayed when clicking "NEW GAME" on the title screen when a saved game is present -->
+<text name="confirm_reset_keys">Reset all\nkey bindings?</text>  <!-- Displayed after clicking the "DEFAULTS" button on the key binding screen -->
+<text name="confirm_wipe_profile">Are you sure?\nYou will lose\nall unlocked ships,\nachievements,\nand stats.</text>  <!-- Displayed after clicking the "DELETE PROFILE" button on the options screen -->
+
+<!-- Miscellaneous -->
+
+<text name="button_cancel">CANCEL</text>  <!-- Text for the "cancel" button used with the "start a new game" confirmation dialog and  -->
+<text name="button_confirm">CONFIRM</text>  <!-- Text for the "confirm" button used with the "start a new game" confirmation dialog -->
+
+<text name="tutorial_continue">CONTINUE</text>  <!-- Text for the "continue" button in the tutorial -->
+
+<text name="weapon_off">OFF</text>  <!-- Text for the iPad-specific button to turn off individual weapons and drones -->
+
+<text name="window_title">FTL: Faster Than Light</text>  <!-- Title of the game window -->
+<text name="error_resolution">Note: FTL requires a minimum resolution of 1280x720 or higher, and it appears your computer does not support that. Please contact Subset Games at devteam@ftlgame.com if you believe you received this message in error.</text>
+<text name="error_native_fullscreen">Sorry, FTL was unable to start in Native Fullscreen mode. Your monitor does not support the required resolution (1280 x 720). Video settings have been automatically reverted to Fullscreen Stretched instead.</text>  <!-- Displayed on game start if the "native fullscreen" (1280x720) video mode was selected but the video mode couldn't be changed -->
+
+<text name="screen_changed">You recently changed your screen settings. Are these acceptable?\n\nWill quit and auto-revert in \1</text>  <!-- Displayed at startup after switching to Native Fullscreen mode. \1: either screen_changed_seconds or screen_changed_1_second -->
+<text name="screen_changed_seconds">\1 seconds</text>  <!-- \1: number of seconds remaining before restart -->
+<text name="screen_changed_1_second">1 second</text>
+<text name="keep_screen">Keep Screen Setting</text>
+<text name="revert_screen">Revert Screen Setting and Quit</text>
+
+<text name="mind_blocked_shield">Cannot mind control through Super Shields.</text>
+<text name="mind_blocked_blackout">Cannot mind control in rooms you cannot detect life in.</text>
+
+<text name="rename">Hit ENTER or ESCAPE to confirm name.</text>
+
+<text name="stations_saved">Stations Saved!</text>
+<text name="no_stations">No Stations Saved!</text>  <!-- Displayed on clicking "return to stations" button if no stations have been saved (as after clicking "save stations" while all crew are on the enemy ship) -->
+<text name="return_stations">Return to Stations!</text>
+
+<text name="nameless_one">The Nameless One</text>  <!-- Used as crew name if player enters an empty name -->
+
+<text name="game_center">Waiting for Game Center</text>  <!-- Displayed while waiting for Game Center during startup on the iPad -->
+<text name="game_center_slow">If Game Center is not responding, you can disable it in the FTL page of the Settings app.</text>
+<text name="game_center_disabled">Note: Game Center support is disabled.</text>  <!-- Displayed on the iPad title screen if Game Center support is disabled -->
+
+<text name="default_dead_crew">Your crewmember will be missed.</text>  <!-- Normally unused (error-handling text) -->
+
+<text name="first_run_tip_pc">TIP: Open the in-game menu by pressing ESCAPE. You can restart or change options from there.</text>
+<text name="first_run_tip_ipad">TIP: Open the in-game menu by tapping the OPTIONS button in the upper-right corner of the screen. You can restart or change options from there.</text>
+
+<text name="demo_locked">Unavailable in FTL Demo</text>
+
+<text name="beam_tutorial">Beam weapons can hit multiple rooms. When aiming one, DRAG your finger to draw its initial path.\n\nOnce drawn, if you continue to drag ONE finger the angle will change, or you can use TWO fingers to change the position. Experiment for an optimal aiming path!</text>  <!-- Shown on iPad the first time the player targets a beam weapon -->
+
+<text name="tutorial_extra_crew_1">Tom</text>  <!-- Name of 1st extra crew member in tutorial (initial crewmember's name is random) -->
+<text name="tutorial_extra_crew_2">Mona</text>  <!-- Name of 2nd extra crew member in tutorial (initial crewmember's name is random) -->
+
+<text name="loading">LOADING</text>  <!-- Displayed at program startup while loading data -->
+
+</FTL>

@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+			SUMMARY  - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+Structure:
+
+Hostile:
+
+Neutral:
+
+Environmnt:
+
+-->
+
+
+<eventList name="HOSTILE_ROCK">
+	<event load="ROCK_SHIP"/>
+	<event load="ROCK_PIRATE"/>
+	<event load="ROCK_FIGHT_ASTEROID"/>
+	<event load="ROCK_PIRATE_ASTEROID"/>
+	<event load="ROCK_PIRATE_SUN"/>
+
+</eventList>
+
+<eventList name="NEUTRAL_ROCK">
+	<!--<event load="ROCK_NURSERY"/>-->
+	<event load="ROCK_MANTIS_HUNTER"/>
+	<event load="ROCK_MANTIS_FREIGHTER"/>
+	<!--<event load="ROCK_ZOLTAN_HELP"/>-->
+	<event load="ROCK_ATHIEST"/>
+	<event load="ROCK_LOOTING"/>
+	<event load="ROCK_STARSHIP_MINE"/>
+
+	<event load="PIRATE_CIVILIAN"/>
+	<event load="MERCENARY"/>
+	<event load="FRIENDLY_SLAVER"/>
+
+	<event load="ASTEROID_DERELICT_SHIP"/> <!-- CRYSTAL UNLOCK-->
+
+	<event load="ROCK_SLUG_ARGUMENT"/> <!--DLC - newEvents-->
+</eventList>
+
+
+<eventList name="BOARDERS_ROCK">
+	<event load="ROCK_BOARDERS_SHIP"/>
+	<event load="ROCK_BOARDERS_ASTEROID"/>
+	<event load="ROCK_BOARDERS_SUN"/>
+
+</eventList>
+
+
+<eventList name="DISTRESS_BEACON_ROCK">
+
+
+	<event load="FRIENDLY_BEACON"/>
+	<event load="TRAP_BEACON"/>
+	<event load="STRANDED_BEACON"/>
+	<event load="PIRATE_CIVILIAN_BEACON"/>
+	<event load="CIVILIAN_ASTEROIDS_BEACON"/>
+	<event load="REBEL_VS_FEDERATION"/>
+	<event load="ESCORT_BEACON"/>
+	<event load="DISTRESS_TRAPPED_MINER"/>
+	<event load="DISTRESS_INFESTATION"/>
+	<event load="DISTRESS_SATELLITE_DEFENSE"/>
+	<event load="DISTRESS_STATION_FIRE"/>
+	<event load="DISTRESS_STATION_DISEASE"/>
+</eventList>
+
+
+<eventList name="NEBULA_ROCK">
+
+
+</eventList>
+
+<eventList name="QUESTS_ROCK">
+	<event load="ROCK_QUEST_MARRIAGE_START"/>
+
+	<event load="QUEST_ESCORT"/>
+	<event load="FEDERATION_PLANET_SIGNAL"/>
+	<event load="MERCENARY_WORK_START"/>
+	<event load="QUEST_CREWDEAD_START"/>
+</eventList>
+
+
+
+
+
+<!--
+*********
+		STRUCTURE!!!
+	Required structural 
+**********
+-->
+<event name="START_BEACON_ROCK">
+	<text load="START_BEACON_ROCK"/>
+</event>
+<textList name="START_BEACON_ROCK">
+	<text id="text_START_BEACON_ROCK_1"/>
+	<text id="text_START_BEACON_ROCK_2"/>
+</textList>
+
+<event name="STORE_ROCK">
+	<text load="STORE_ROCK"/>
+	<store/>
+</event>
+<textList name="STORE_ROCK">
+	<text id="text_STORE_ROCK_1"/>
+	<text id="text_STORE_ROCK_2"/>
+	<text id="text_STORE_ROCK_3"/>
+	<text id="text_STORE_ROCK_4"/>
+	<text id="text_STORE_ROCK_5"/>
+</textList>
+
+<event name="NOTHING_ROCK">
+	<text load="NOTHING_ROCK"/>
+</event>
+<textList name="NOTHING_ROCK">
+	<text id="text_NOTHING_ROCK_1"/>
+	<text id="text_NOTHING_ROCK_2"/>
+	<text id="text_NOTHING_ROCK_3"/>
+	<text id="text_NOTHING_ROCK_4"/>
+	<text id="text_NOTHING_ROCK_5"/>
+	<text id="text_NOTHING_ROCK_6"/>
+	<text id="text_NOTHING_ROCK_7"/>
+</textList>
+
+
+
+<!--
+*********
+		HOSTILE!!!
+	Events that call up a fight for sure
+**********
+-->
+
+<event name="ROCK_SHIP">
+	<text load="ROCK_SHIP"/>
+	<ship load="ROCK_SHIP" hostile="true"/>
+</event>
+<textList name="ROCK_SHIP">  <!-- JUSTIN - make surrender possible-->
+	<text id="text_ROCK_SHIP_1"/>
+	<text id="text_ROCK_SHIP_2"/>
+	<text id="text_ROCK_SHIP_3"/>
+	<text id="text_ROCK_SHIP_4"/>
+	<text id="text_ROCK_SHIP_5"/>
+	<text id="text_ROCK_SHIP_6"/>
+	<text id="text_ROCK_SHIP_7"/>
+	<text id="text_ROCK_SHIP_8"/>
+</textList>
+<!-- JUSTIN - TO DO - not used yet
+<textList name="ROCK_FIGHT_DESTROYED">
+	<text>Victory! You narrowly avoid a hull breach as one of the Rock crew is propelled by the explosion straight toward your bridge.</text>
+	<text>The Rock ship disintegrates, a jump drive burn out turning its crew to stardust.</text>
+	<text>The enemy hull is torn apart by a final volley. They're with the sandman now.</text>
+	<text>You blink and they're gone: all that remains of the Rockman ship are the more sturdy pieces of hull infrastructure; might be something you can use.</text>
+	<text>Rockmen rarely go without a fight, but go they do. Their ship in pieces, you're free to take what you can.</text>
+</textList>
+<textList name="ROCK_FIGHT_CREWDEAD">
+	<text>The Rockmen are a hardy species, though, so you take care when boarding their ship. All seems quiet - you take what you need and set off.</text>
+	<text>Sensors report no lifesigns remaining on the enemy ship. Who knew Rockmen were so soft? Time to plunder.</text>
+	<text>The Rockmen hail, but by the time the video feed decrypts all that's shown is the final crewman sitting slumped in his chair. Perhaps they were offering for you to ransack their supplies.</text>
+-->
+<event name="ROCK_SHIP_SURRENDER">
+	<text load="ROCK_SHIP_SURRENDER"/>
+	<choice>
+		<text id="event_ROCK_SHIP_SURRENDER_c1_choice"/>
+		<event>
+			<ship hostile="false"/>
+			<autoReward level="RANDOM">stuff</autoReward>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_ROCK_SHIP_SURRENDER_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+<textList name="ROCK_SHIP_SURRENDER">
+	<text id="text_ROCK_SHIP_SURRENDER_1"/>
+	<text id="text_ROCK_SHIP_SURRENDER_2"/>
+	<text id="text_ROCK_SHIP_SURRENDER_3"/>
+
+	<text id="text_ROCK_SHIP_SURRENDER_1"/>
+	<text id="text_ROCK_SHIP_SURRENDER_2"/>
+	<text id="text_ROCK_SHIP_SURRENDER_3"/>
+
+	<text id="text_ROCK_SHIP_SURRENDER_1"/>
+	<text id="text_ROCK_SHIP_SURRENDER_2"/>
+	<text id="text_ROCK_SHIP_SURRENDER_3"/>
+
+	<text id="text_ROCK_SHIP_SURRENDER_1"/>
+	<text id="text_ROCK_SHIP_SURRENDER_2"/>
+	<text id="text_ROCK_SHIP_SURRENDER_3"/>
+</textList>
+
+
+<event name="ROCK_PIRATE">
+	<text load="ROCK_PIRATE"/>
+	<ship load="ROCK_PIRATE" hostile="true"/>
+</event>
+<textList name="ROCK_PIRATE">
+	<text id="text_ROCK_PIRATE_1"/>
+	<text id="text_ROCK_PIRATE_2"/>
+	<text id="text_ROCK_PIRATE_3"/>
+
+	<text id="text_ROCK_PIRATE_4"/>
+	<text id="text_ROCK_PIRATE_2"/>
+	<text id="text_ROCK_PIRATE_3"/>
+
+	<text id="text_ROCK_PIRATE_1"/>
+	<text id="text_ROCK_PIRATE_2"/>
+	<text id="text_ROCK_PIRATE_3"/>
+</textList>
+
+
+
+
+<!--
+*********
+		NEUTRAL!!!
+	Events that could have a fight
+**********
+-->
+<event name="ROCK_LOOTING" unique="true">
+	<text id="event_ROCK_LOOTING_text"/>
+	<choice hidden="true">
+		<text id="event_ROCK_LOOTING_c1_choice"/>
+		<event load="ROCK_LOOTING_STRIP"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_LOOTING_c2_choice"/>
+		<event load="ROCK_LOOTING_LEAVE"/>
+	</choice>
+	<choice hidden="true" req="slug">
+		<text id="event_ROCK_LOOTING_c3_choice"/>
+		<event load="ROCK_LOOTING_SLUG"/>
+	</choice>
+</event>
+<eventList name="ROCK_LOOTING_STRIP">
+	<event>
+		<text id="event_ROCK_LOOTING_STRIP_1_text"/>
+		<autoReward level="low">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_ROCK_LOOTING_STRIP_2_text"/>
+		<ship load="ROCK_SHIP" hostile="true"/>
+		<autoReward level="low">standard</autoReward>
+	</event>
+</eventList>
+<eventList name="ROCK_LOOTING_LEAVE">
+	<event>
+		<text id="event_ROCK_LOOTING_LEAVE_1_text"/>
+	</event>
+	<event>
+		<text id="event_ROCK_LOOTING_LEAVE_1_text"/>
+	</event>
+	<event>
+		<text id="event_ROCK_LOOTING_LEAVE_3_text"/>
+		<ship load="ROCK_SHIP" hostile="true"/>
+	</event>
+</eventList>
+<eventList name="ROCK_LOOTING_SLUG">
+	<event>
+		<text id="event_ROCK_LOOTING_SLUG_1_text"/>
+		<autoReward level="low">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_ROCK_LOOTING_SLUG_2_text"/>
+		<autoReward level="low">standard</autoReward>
+	</event>
+</eventList>
+<event name="ROCK_NURSERY" unique="true">
+	<text id="event_ROCK_NURSERY_text"/>
+	<choice hidden="true">
+		<text id="event_ROCK_NURSERY_c1_choice"/>
+		<event>
+			<text id="event_ROCK_NURSERY_c1_text"/>
+			<choice hidden="true">
+				<text id="event_ROCK_NURSERY_c1_c1_choice"/>
+				<event>
+					<text id="event_ROCK_NURSERY_c1_c1_text"/>
+					<choice hidden="true">
+						<text id="continue"/>
+						<event load="ROCK_NURSERY_STUDENTS"/>
+					</choice>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_ROCK_NURSERY_c1_c2_choice"/>
+				<event>
+					<text id="event_ROCK_NURSERY_c1_c1_text"/>
+					<choice hidden="true">
+						<text id="continue"/>
+						<event load="ROCK_NURSERY_AUTHORITY"/>
+					</choice>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_NURSERY_c2_choice"/>
+		<event>
+			<text id="event_ROCK_NURSERY_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="weapons" lvl="6">
+		<text id="event_ROCK_NURSERY_c3_choice"/>
+		<event>
+			<text id="event_ROCK_NURSERY_c3_text"/>
+			<ship load="ROCK_SHIP" hostile="true"/>
+		</event>
+	</choice>
+</event>
+<eventList name="ROCK_NURSERY_STUDENTS">
+	<event>
+		<text id="event_ROCK_NURSERY_STUDENTS_1_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ROCK_NURSERY_STUDENTS_1_c1_text"/>
+				<choice hidden="true">
+					<text id="continue"/>
+					<event load="ROCK_NURSERY_LOSE"/>
+				</choice>
+			</event>
+		</choice>
+	</event>
+	<event>  <!-- JUSTIN - TO DO - Test if this works. i dont think it does...-->
+		<text id="event_ROCK_NURSERY_STUDENTS_2_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_ROCK_NURSERY_STUDENTS_2_c0_clone"/>
+		</removeCrew>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ROCK_NURSERY_STUDENTS_1_c1_text"/>
+				<crewMember amount="1" class="rock"/>
+				<choice hidden="true">
+					<text id="continue"/>
+					<event load="ROCK_NURSERY_LOSE"/>
+				</choice>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_ROCK_NURSERY_STUDENTS_3_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ROCK_NURSERY_STUDENTS_3_c1_text"/>
+				<choice hidden="true">
+					<text id="continue"/>
+					<event load="ROCK_NURSERY_WIN"/>
+				</choice>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_ROCK_NURSERY_STUDENTS_4_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_ROCK_NURSERY_STUDENTS_2_c0_clone"/>
+		</removeCrew>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ROCK_NURSERY_STUDENTS_3_c1_text"/>
+				<choice hidden="true">
+					<text id="continue"/>
+					<event load="ROCK_NURSERY_WIN"/>
+				</choice>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_ROCK_NURSERY_STUDENTS_5_text"/>
+		<autoReward level="MED">weapon</autoReward>
+	</event>
+</eventList>
+<eventList name="ROCK_NURSERY_AUTHORITY">
+	<event>
+		<text id="event_ROCK_NURSERY_AUTHORITY_1_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ROCK_NURSERY_AUTHORITY_1_c1_text"/>
+				<choice hidden="true">
+					<text id="continue"/>
+					<event load="ROCK_NURSERY_LOSE"/>
+				</choice>
+			</event>
+		</choice>
+	</event>
+	<event>  <!-- JUSTIN - TO DO - Test if this works. i dont think it does...-->
+		<text id="event_ROCK_NURSERY_AUTHORITY_2_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_ROCK_NURSERY_AUTHORITY_2_c0_clone"/>
+		</removeCrew>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ROCK_NURSERY_AUTHORITY_1_c1_text"/>
+				<crewMember amount="1" class="rock"/>
+				<choice hidden="true">
+					<text id="continue"/>
+					<event load="ROCK_NURSERY_LOSE"/>
+				</choice>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_ROCK_NURSERY_AUTHORITY_3_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ROCK_NURSERY_AUTHORITY_3_c1_text"/>
+				<choice hidden="true">
+					<text id="continue"/>
+					<event load="ROCK_NURSERY_WIN"/>
+				</choice>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_ROCK_NURSERY_AUTHORITY_4_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_ROCK_NURSERY_AUTHORITY_2_c0_clone"/>
+		</removeCrew>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ROCK_NURSERY_AUTHORITY_3_c1_text"/>
+				<choice hidden="true">
+					<text id="continue"/>
+					<event load="ROCK_NURSERY_WIN"/>
+				</choice>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_ROCK_NURSERY_AUTHORITY_5_text"/>
+		<autoReward level="MED">weapon</autoReward>
+	</event>
+</eventList>
+<event name="ROCK_NURSERY_WIN">
+	<text id="event_ROCK_NURSERY_WIN_text"/>
+	<autoReward level="HIGH">standard</autoReward>
+</event>
+<event name="ROCK_NURSERY_LOSE">
+	<text id="event_ROCK_NURSERY_LOSE_text"/>
+	<ship load="ROCK_SHIP" hostile="true"/>
+</event>
+
+
+
+<event name="ROCK_MANTIS_HUNTER" unique="true">  <!-- JUSTIN TO DO - test the ship status effect-->
+	<text id="event_ROCK_MANTIS_HUNTER_text"/>
+	<ship load="MANTIS_FIGHT" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_ROCK_MANTIS_HUNTER_c1_choice"/>
+		<event>
+			<text id="event_ROCK_MANTIS_HUNTER_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_MANTIS_HUNTER_c2_choice"/>
+		<event>
+			<text id="event_ROCK_MANTIS_HUNTER_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="ROCK_ARMOR">
+		<text id="event_ROCK_MANTIS_HUNTER_c3_choice"/>
+		<event>
+			<text id="event_ROCK_MANTIS_HUNTER_c3_text"/>
+			<ship hostile="true"/>
+			<status type="limit" target="enemy" system="engines" amount="0"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="rock">
+		<text id="event_ROCK_MANTIS_HUNTER_c4_choice"/>
+		<event>
+			<text id="event_ROCK_MANTIS_HUNTER_c4_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+</event>
+
+<event name="ROCK_MANTIS_FREIGHTER" unique="true">
+	<text id="event_ROCK_MANTIS_FREIGHTER_text"/>
+	<choice hidden="true">
+		<text id="event_ROCK_MANTIS_FREIGHTER_c1_choice"/>
+		<event load="ROCK_MANTIS_FREIGHTER_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_MANTIS_FREIGHTER_c2_choice"/>
+		<event>
+			<text id="event_ROCK_MANTIS_FREIGHTER_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="REPAIR">
+		<text id="event_ROCK_MANTIS_FREIGHTER_c3_choice"/>
+		<event>
+			<text id="event_ROCK_MANTIS_FREIGHTER_c3_text"/>
+			<autoReward level="HIGH">standard</autoReward>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="true" req="SHIP_REPAIR">
+		<text id="event_ROCK_MANTIS_FREIGHTER_c4_choice"/>
+		<event>
+			<text id="event_ROCK_MANTIS_FREIGHTER_c4_text"/>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+			<ship load="MANTIS_ROCK_MANTIS_FREIGHTER" hostile="true"/>
+		</event>
+	</choice>
+</event>
+<eventList name="ROCK_MANTIS_FREIGHTER_LIST">
+	<event>
+		<text id="event_ROCK_MANTIS_FREIGHTER_LIST_1_text"/>
+		<ship load="MANTIS_ROCK_MANTIS_FREIGHTER" hostile="true"/>
+		<status type="loss" target="enemy" system="weapons" amount="2"/>
+	</event>
+	<event>
+		<text id="event_ROCK_MANTIS_FREIGHTER_LIST_2_text"/>
+		<ship load="MANTIS_ROCK_MANTIS_FREIGHTER" hostile="true"/>
+	</event>
+</eventList>
+<ship name="MANTIS_ROCK_MANTIS_FREIGHTER" auto_blueprint="SHIPS_MANTIS">
+	<destroyed>
+		<text id="ship_MANTIS_ROCK_MANTIS_FREIGHTER_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_MANTIS_ROCK_MANTIS_FREIGHTER_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+	<crew>
+		   <crewMember type="mantis" prop="0.80"/>
+		   <crewMember type="engi" prop="0.20"/>
+	</crew>
+</ship>
+
+
+
+<event name="ROCK_ZOLTAN_HELP" unique="true">  <!-- JUSTIN TO DO - Maybe don't include this since the zoltan super shield isn't balanced yet? -->
+	<text id="event_ROCK_ZOLTAN_HELP_text"/>
+	<choice hidden="true">
+		<text id="event_ROCK_ZOLTAN_HELP_c1_choice"/>
+		<event>
+			<text id="event_ROCK_ZOLTAN_HELP_c1_text"/>
+			<ship load="ROCK_ZOLTAN_HELP_ROCK" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_ZOLTAN_HELP_c2_choice"/>
+		<event>
+			<text id="event_ROCK_ZOLTAN_HELP_c2_text"/>
+			<ship load="ROCK_ZOLTAN_HELP_ZOLTAN" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_ZOLTAN_HELP_c3_choice"/>
+		<event>
+			<text id="event_ROCK_ZOLTAN_HELP_c3_text"/>
+		</event>
+	</choice>
+</event>
+<ship name="ROCK_ZOLTAN_HELP_ROCK" auto_blueprint="SHIPS_ROCK">
+	<destroyed>
+		<text id="ship_ROCK_ZOLTAN_HELP_ROCK_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_ROCK_ZOLTAN_HELP_ROCK_destroyed_c1_text"/>
+				<autoReward level="RANDOM">stuff</autoReward>
+			</event>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ROCK_ZOLTAN_HELP_ROCK_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_ROCK_ZOLTAN_HELP_ROCK_destroyed_c1_text"/>
+				<autoReward level="RANDOM">stuff</autoReward>
+			</event>
+		</choice>
+	</deadCrew>
+</ship>
+<ship name="ROCK_ZOLTAN_HELP_ZOLTAN" auto_blueprint="SHIPS_ZOLTAN">
+	<destroyed>
+		<text id="ship_ROCK_ZOLTAN_HELP_ZOLTAN_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ROCK_ZOLTAN_HELP_ZOLTAN_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+</ship>
+
+<event name="ROCK_ATHIEST" unique="true">
+	<text id="event_ROCK_ATHIEST_text"/>
+	<ship load="ROCK_SHIP" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_ROCK_ATHIEST_c1_choice"/>
+		<event>
+			<text load="ROCK_ATHIEST_BAD"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_ATHIEST_c2_choice"/>
+		<event load="ROCK_ATHIEST_GOOD"/>
+	</choice>
+	<choice hidden="true" req="sensors" lvl="2">
+		<text id="event_ROCK_ATHIEST_c3_choice"/>
+		<event>
+			<text id="event_ROCK_ATHIEST_c3_text"/>
+			<crewMember amount="1" class="rock"/>
+		</event>
+	</choice>
+</event>
+<textList name="ROCK_ATHIEST_BAD">
+	<text id="text_ROCK_ATHIEST_BAD_1"/>
+	<text id="text_ROCK_ATHIEST_BAD_2"/>
+</textList>
+<eventList name="ROCK_ATHIEST_GOOD">
+	<event>
+		<text id="event_ROCK_ATHIEST_GOOD_1_text"/>
+		<crewMember amount="1" class="rock"/>
+	</event>
+	<event>
+		<text id="event_ROCK_ATHIEST_GOOD_2_text"/>
+	</event>
+	<event>
+		<text id="event_ROCK_ATHIEST_GOOD_2_text"/>
+	</event>
+</eventList>
+
+<event name="ROCK_STARSHIP_MINE" unique="true">
+	<text id="event_ROCK_STARSHIP_MINE_text"/>
+	<choice hidden="true">
+		<text id="event_ROCK_STARSHIP_MINE_c1_choice"/>
+		<event>
+			<text id="event_ROCK_STARSHIP_MINE_c1_text"/>
+			<choice hidden="true">
+				<text id="event_ROCK_STARSHIP_MINE_c1_c1_choice"/>
+				<event load="ROCK_STARSHIP_MINE_DEFUSE"/>
+			</choice>
+			<choice hidden="true" req="WEAPONS_MISSILES"> <!--JUSTIN - TO DO - Missile weapons-->
+				<text id="event_ROCK_STARSHIP_MINE_c1_c2_choice"/>
+				<event>
+					<text id="event_ROCK_STARSHIP_MINE_c1_c2_text"/>
+					<damage amount="3"/>
+					<damage amount="1" system="random"/>  <!--DLC-->
+					<item_modify>
+						<item type="missile" min="-1" max="-1"/>
+					</item_modify>
+					<autoReward level="LOW">scrap_only</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true" req="COMBAT_BEAM_DRONE_LIST">
+				<text id="event_ROCK_STARSHIP_MINE_c1_c3_choice"/>
+				<event>
+					<text id="event_ROCK_STARSHIP_MINE_c1_c3_text"/>
+					<item_modify>
+						<item type="drones" min="-1" max="-1"/>
+					</item_modify>
+					<autoReward level="LOW">scrap_only</autoReward>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true" req="engines" lvl="5">
+		<text id="event_ROCK_STARSHIP_MINE_c2_choice"/>
+		<event>
+			<text id="event_ROCK_STARSHIP_MINE_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="ROCK_STARSHIP_MINE_DEFUSE">
+	<event>
+		<text id="event_ROCK_STARSHIP_MINE_DEFUSE_1_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_ROCK_STARSHIP_MINE_DEFUSE_2_text"/>
+		<choice hidden="true">
+			<text id="event_ROCK_STARSHIP_MINE_DEFUSE_2_c1_choice"/>
+			<event load="ROCK_STARSHIP_MINE_DEFUSE2"/>
+		</choice>
+		<choice hidden="true">
+			<text id="event_ROCK_STARSHIP_MINE_DEFUSE_2_c2_choice"/>
+			<event load="ROCK_STARSHIP_MINE_DEFUSE2"/>
+		</choice>
+	</event>
+</eventList>
+<eventList name="ROCK_STARSHIP_MINE_DEFUSE2">
+	<event>
+		<text id="event_ROCK_STARSHIP_MINE_DEFUSE2_1_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_ROCK_STARSHIP_MINE_DEFUSE2_2_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_ROCK_STARSHIP_MINE_DEFUSE2_2_c0_clone"/>
+		</removeCrew>
+		<damage amount="5"/>
+		<damage amount="1" system="room" effect="breach"/>  <!--DLC-->
+	</event>
+</eventList>
+
+
+
+<!--
+*********
+		ENVIRONMENT!!!
+	Events with unique environments
+**********
+-->
+
+<event name="ROCK_FIGHT_ASTEROID" unique="true">
+	<environment type="asteroid"/>
+	<text load="ROCK_FIGHT_ASTEROID"/>
+	<ship load="ROCK_SHIP" hostile="true"/>
+</event>
+<textList name="ROCK_FIGHT_ASTEROID">
+	<text id="text_ROCK_FIGHT_ASTEROID_1"/>
+	<text id="text_ROCK_FIGHT_ASTEROID_2"/>
+	<text id="text_ROCK_FIGHT_ASTEROID_3"/>
+</textList>
+
+<event name="ROCK_PIRATE_ASTEROID" unique="true">
+	<environment type="asteroid"/>
+	<text load="ROCK_PIRATE_ASTEROID"/>
+	<ship load="ROCK_PIRATE" hostile="true"/>
+</event>
+<textList name="ROCK_PIRATE_ASTEROID">
+	<text id="text_ROCK_PIRATE_ASTEROID_1"/>
+	<text id="text_ROCK_PIRATE_ASTEROID_2"/>
+</textList>
+
+
+<event name="ROCK_PIRATE_SUN" unique="true">
+	<environment type="sun"/>
+	<text load="ROCK_PIRATE_SUN"/>
+	<ship load="ROCK_PIRATE" hostile="true"/>
+</event>
+<textList name="ROCK_PIRATE_SUN">
+	<text id="text_ROCK_PIRATE_SUN_1"/>
+	<text id="text_ROCK_PIRATE_SUN_2"/>
+</textList>
+
+
+<!--
+*********
+		QUESTS!!!
+**********
+-->
+
+<event name="ROCK_QUEST_MARRIAGE_START" unique="true">
+	<text id="event_ROCK_QUEST_MARRIAGE_START_text"/>
+	<choice hidden="true">
+		<text id="event_ROCK_QUEST_MARRIAGE_START_c1_choice"/>
+		<event>
+			<text id="event_ROCK_QUEST_MARRIAGE_START_c1_text"/>
+			<quest event="ROCK_QUEST_MARRIAGE"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_QUEST_MARRIAGE_START_c2_choice"/>
+		<event>
+			<text id="event_ROCK_QUEST_MARRIAGE_START_c2_text"/>
+		</event>
+	</choice>
+</event>
+<event name="ROCK_QUEST_MARRIAGE">
+	<text id="event_ROCK_QUEST_MARRIAGE_text"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event>
+			<text id="event_ROCK_QUEST_MARRIAGE_c1_text"/>
+			<choice hidden="true">
+				<text id="event_ROCK_QUEST_MARRIAGE_c1_c1_choice"/>
+				<event>
+					<text id="event_ROCK_QUEST_MARRIAGE_c1_c1_text"/>
+					<augment name="RANDOM"/>
+					<autoReward level="LOW">scrap_only</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_ROCK_QUEST_MARRIAGE_c1_c2_choice"/>
+				<event>
+					<text id="event_ROCK_QUEST_MARRIAGE_c1_c2_text"/>
+					<crewMember amount="1" class="rock" id="name_Ariadne"/>
+					<ship load="ROCK_QUEST_MARRIAGE" hostile="true"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<ship name="ROCK_QUEST_MARRIAGE" auto_blueprint="SHIPS_ROCK">
+	<destroyed>
+		<text id="ship_ROCK_QUEST_MARRIAGE_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ROCK_QUEST_MARRIAGE_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+<!--
+*********
+		DISTRESS!!!
+
+**********
+-->
+
+<!--
+*********
+		BOARDERS!!!
+	Events with boarder calls
+**********
+-->
+
+<event name="ROCK_BOARDERS_SHIP" unique="true">
+	<text load="ROCK_BOARDERS_SHIP"/>
+	<boarders min="1" max="3" class="rock"/>
+	<ship load="ROCK_SHIP" hostile="true"/>
+</event>
+<textList name="ROCK_BOARDERS_SHIP">
+	<text id="text_ROCK_BOARDERS_SHIP_1"/>
+	<text id="text_ROCK_BOARDERS_SHIP_2"/>
+</textList>
+
+
+<event name="ROCK_BOARDERS_ASTEROID" unique="true">
+	<text load="ROCK_BOARDERS_ASTEROID"/>
+	<boarders min="1" max="2" class="rock"/>
+	<environment type="asteroid"/>
+	<ship load="ROCK_SHIP" hostile="true"/>
+</event>
+<textList name="ROCK_BOARDERS_ASTEROID">
+	<text id="text_ROCK_BOARDERS_ASTEROID_1"/>
+	<text id="text_ROCK_BOARDERS_ASTEROID_2"/>
+</textList>
+
+<event name="ROCK_BOARDERS_SUN" unique="true">
+	<text load="ROCK_BOARDERS_SUN"/>
+	<environment type="sun"/>
+	<boarders min="2" max="3" class="rock"/>
+</event>
+<textList name="ROCK_BOARDERS_SUN">
+	<text id="text_ROCK_BOARDERS_SUN_1"/>
+	<text id="text_ROCK_BOARDERS_SUN_2"/>
+</textList>
+
+
+
+<!--
+*********
+		SPECIAL!!!
+	Special events
+
+unlock - Asked to prove the federation is worth of rock fighters - follow him to a sun - fight in an sun - must let them escape.  then a normal fight and you must let them surrender
+**********
+-->
+
+
+<event name="ROCK_UNLOCK1" unique="true">
+	<text id="event_ROCK_UNLOCK1_text"/>
+	<ship load="ROCK_UNLOCK2" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_ROCK_UNLOCK1_c1_choice"/>
+		<event>
+			<text id="event_ROCK_UNLOCK1_c1_text"/>
+			<quest event="ROCK_UNLOCK2"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_UNLOCK1_c2_choice"/>
+		<event>
+			<text id="event_ROCK_UNLOCK1_c2_text"/>
+			<quest event="ROCK_UNLOCK2"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_UNLOCK1_c3_choice"/>
+		<event>
+			<text id="event_ROCK_UNLOCK1_c3_text"/>
+		</event>
+	</choice>
+</event>
+<event name="ROCK_UNLOCK2">
+	<text id="event_ROCK_UNLOCK2_text"/>
+	<ship load="ROCK_UNLOCK2" hostile="true"/>
+	<environment type="sun"/>
+</event>
+<event name="ROCK_UNLOCK3">
+	<text id="event_ROCK_UNLOCK3_text"/>
+	<ship load="ROCK_UNLOCK1" hostile="false"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event>
+			<text id="event_ROCK_UNLOCK3_c1_text"/>
+			<unlockShip id="6"/>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event>
+					<text id="event_ROCK_UNLOCK3_c1_c1_text"/>
+					<augment name="ROCK_ARMOR"/>
+					<damage amount="-29"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+</FTL>

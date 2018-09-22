@@ -1,0 +1,1561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+
+<!--
+
+This doc is for alterate versions of the existing ships - outfitted with the new systems and different layouts 
+
+-->
+
+<blueprintList name="WEAPONS_MISSILES_EVENTS"> <!-- for an event that asks for missiles-->
+	<name>MISSILES_1</name>
+	<name>MISSILES_2</name>
+	<name>MISSILES_2_PLAYER</name>
+	<name>MISSILES_3</name>
+	<name>MISSILES_BURST</name>
+	<name>MISSILES_BREACH</name>
+	<name>MISSILE_CHARGEGUN</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_DRONES_STANDARD">  <!-- Unchanged -->
+	<name>COMBAT_1</name>
+	<name>COMBAT_2</name>
+	<name>COMBAT_BEAM</name>
+	<name>DEFENSE_1</name>
+	<name>DEFENSE_2_ENEMY</name>
+	<name>REPAIR</name>
+	<name>BATTLE</name>
+	<name>BOARDER</name>
+
+	<name>BOARDER_ION</name>
+	<name>DRONE_SHIELD</name>
+	<name>ANTI_DRONE</name>
+	<name>COMBAT_BEAM_2</name>
+	<name>COMBAT_FIRE</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_DRONES_COMBAT">  <!-- Unchanged -->
+	<name>COMBAT_1</name>
+	<name>COMBAT_2</name>
+	<name>COMBAT_BEAM</name>
+
+	<name>COMBAT_BEAM_2</name>
+	<name>COMBAT_FIRE</name>
+</blueprintList>
+
+ <!-- Unchanged
+<blueprintList name="OVERRIDE_DRONES_INTERNAL">
+	<name>REPAIR</name>
+	<name>BATTLE</name>
+</blueprintList>
+-->
+
+<blueprintList name="OVERRIDE_DRONES_DEFENSE">  <!-- Unchanged -->
+	<name>DEFENSE_1</name>
+	<name>DEFENSE_2_ENEMY</name>
+	<name>ANTI_DRONE</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_WEAPONS_REBEL">
+	<name>LASER_BURST_1</name>
+	<name>LASER_BURST_2_A</name>
+	<name>LASER_BURST_3</name>
+	<name>LASER_BURST_5</name>
+	<name>LASER_HEAVY_1</name>
+	<name>LASER_HEAVY_2</name>
+	<name>MISSILES_1</name>
+	<name>MISSILES_2</name>
+	<name>MISSILES_3</name>
+	<name>MISSILES_BREACH</name>
+	<name>BEAM_1</name>
+	<name>BEAM_2</name>
+	<name>BOMB_1</name>
+
+	<name>SHOTGUN</name>
+	<name>LASER_CHAINGUN</name>
+	<name>LASER_CHAINGUN_2</name>
+	<name>LASER_CHARGEGUN_2</name>
+	<name>SHOTGUN_2</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_WEAPONS_AUTO">
+	<name>LASER_BURST_1</name>
+	<name>LASER_BURST_2_A</name>
+	<name>LASER_BURST_3</name>
+	<name>LASER_BURST_5</name>
+	<name>LASER_HEAVY_1</name>
+	<name>LASER_HEAVY_2</name>
+	<name>MISSILES_1</name>
+	<name>MISSILES_2</name>
+	<name>MISSILES_3</name>
+	<name>BEAM_1</name>
+	<name>BEAM_2</name>
+	<name>BOMB_1</name>
+	<name>BOMB_FIRE</name>
+	<name>BOMB_ION</name>
+	<name>ION_1</name>
+	<name>ION_2</name>
+	<name>ION_4</name>
+
+	<name>LASER_CHAINGUN</name>
+	<name>ION_CHARGEGUN</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_WEAPONS_JELLY">
+	<name>LASER_BURST_1</name>
+	<name>LASER_BURST_2_A</name>
+	<name>LASER_BURST_3</name>
+	<name>LASER_HEAVY_1</name>
+	<name>LASER_HEAVY_2</name>
+	<name>MISSILES_2</name>
+	<name>MISSILES_BREACH</name>
+	<name>BEAM_1</name>
+	<name>BEAM_2</name>
+	<name>BEAM_3</name>
+	<name>BEAM_LONG</name>
+	<name>BEAM_FIRE</name>
+	<name>BOMB_FIRE</name>
+	<name>BOMB_BREACH</name>
+	<name>ION_1</name>
+	<name>ION_4</name>
+
+	<name>LASER_CHARGEGUN_2</name>
+	<name>ION_CHARGEGUN</name>
+	<!--<name>MISSILE_CHARGEGUN</name>-->
+</blueprintList>
+
+
+
+<blueprintList name="OVERRIDE_WEAPONS_ROCK">
+	<name>LASER_BURST_1</name>
+	<name>LASER_BURST_2_A</name>
+	<name>LASER_BURST_3</name>
+	<name>LASER_BURST_5</name>
+	<name>LASER_HEAVY_1</name>
+	<name>LASER_HEAVY_2</name>
+	<name>MISSILES_1</name>
+	<name>MISSILES_2</name>
+	<name>MISSILES_3</name>
+	<name>MISSILES_BREACH</name>
+	<name>BEAM_1</name>
+	<name>BEAM_2</name>
+	<name>BOMB_1</name>
+	<name>ION_2</name>
+
+	<!--<name>MISSILE_CHARGEGUN</name>-->
+	<name>SHOTGUN</name>
+	<name>SHOTGUN_2</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_WEAPONS_MANTIS">
+	<name>LASER_BURST_1</name>
+	<name>LASER_BURST_2_A</name>
+	<name>LASER_BURST_3</name>
+	<name>LASER_BURST_5</name>
+	<name>LASER_HEAVY_1</name>
+	<name>LASER_HEAVY_2</name>
+	<name>MISSILES_1</name>
+	<name>MISSILES_2</name>
+	<name>MISSILES_3</name>
+	<name>MISSILES_BREACH</name>
+	<name>BEAM_1</name>
+	<name>BEAM_2</name>
+	<name>BOMB_1</name>
+	<name>BOMB_FIRE</name>
+	<name>BOMB_ION</name>
+
+	<name>ION_CHAINGUN</name>
+	<name>LASER_CHARGEGUN</name>
+	<name>LASER_CHARGEGUN_2</name>
+	<name>ION_STUN</name>
+	<name>BOMB_STUN</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_WEAPONS_FED">
+	<name>LASER_BURST_1</name>
+	<name>LASER_BURST_2_A</name>
+	<name>LASER_BURST_3</name>
+	<name>LASER_BURST_5</name>
+	<name>LASER_HEAVY_1</name>
+	<name>LASER_HEAVY_2</name>
+	<name>MISSILES_1</name>
+	<name>MISSILES_2</name>
+	<name>MISSILES_3</name>
+	<name>MISSILES_BREACH</name>
+	<name>BEAM_1</name>
+	<name>BEAM_2</name>
+	<name>BOMB_1</name>
+
+	<name>SHOTGUN</name>
+	<name>LASER_CHAINGUN_2</name>
+	<name>ION_CHARGEGUN</name>
+	<name>ION_STUN</name>
+</blueprintList>
+
+
+
+<blueprintList name="OVERRIDE_WEAPONS_CIRCLE">
+	<name>LASER_BURST_1</name>
+	<name>LASER_BURST_2_A</name>
+	<name>LASER_BURST_3</name>
+	<name>LASER_HEAVY_1</name>
+	<name>BEAM_1</name>
+	<name>BEAM_2</name>
+	<name>BEAM_3</name>
+	<name>BEAM_LONG</name>
+	<name>BEAM_FIRE</name>
+	<name>ION_1</name>
+	<name>ION_2</name>
+	<name>ION_4</name>
+
+	<name>ION_CHAINGUN</name>
+	<name>ION_CHARGEGUN</name>
+	<name>ION_STUN</name>
+	<name>BOMB_STUN</name>
+</blueprintList>
+<blueprintList name="OVERRIDE_DRONES_CIRCLE">  <!-- Unchanged -->
+	<name>COMBAT_BEAM</name>
+	<name>COMBAT_ION</name>
+	<name>DEFENSE_1</name>
+	<name>DEFENSE_2_ENEMY</name>
+	<!-- <name>SHIP_REPAIR</name> -->
+	<name>REPAIR</name>
+	<name>BATTLE</name>
+
+	<name>BOARDER_ION</name>
+	<name>DRONE_SHIELD</name>
+	<name>ANTI_DRONE</name>
+	<name>COMBAT_BEAM_2</name>
+	<name>COMBAT_FIRE</name>
+</blueprintList>
+
+
+
+<blueprintList name="OVERRIDE_WEAPONS_ZOLTAN">   <!-- Unchanged -->
+	<name>LASER_BURST_1</name>
+	<name>LASER_BURST_2_A</name>
+	<name>LASER_BURST_3</name>
+	<name>LASER_BURST_5</name>
+	<name>LASER_HEAVY_1</name>
+	<name>LASER_HEAVY_2</name>
+	<name>MISSILES_1</name>
+	<name>MISSILES_2</name>
+	<name>MISSILES_3</name>
+	<name>BEAM_1</name>
+	<name>BEAM_2</name>
+	<name>BEAM_3</name>
+	<name>BEAM_LONG</name>
+	<name>BEAM_FIRE</name>
+	<name>ION_1</name>
+	<name>ION_2</name>
+	<name>BOMB_1</name>
+	<name>BOMB_ION</name>
+	<name>BEAM_HULL</name>
+
+	<name>SHOTGUN</name>
+	<name>ION_STUN</name>
+	<name>LASER_CHAINGUN</name>
+</blueprintList>
+
+<!-- Unchanged
+<blueprintList name="OVERRIDE_WEAPONS_CRYSTAL">
+	<name>BOMB_LOCK</name>
+	<name>CRYSTAL_BURST_1</name>
+	<name>CRYSTAL_BURST_2</name>
+	<name>CRYSTAL_HEAVY_1</name>
+	<name>CRYSTAL_HEAVY_2</name>
+</blueprintList>
+-->
+
+
+
+
+<!--********************           Overwriting the previous ship lists to include the new versions            *******************-->
+
+<blueprintList name="OVERRIDE_SHIPS_FED">
+	<name>FED_SCOUT</name>
+	<name>FED_BOMBER</name>
+	<name>FED_SCOUT</name>
+	<name>FED_BOMBER</name>
+	<name>FED_SCOUT_DLC</name>
+	<name>FED_BOMBER_DLC</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_SHPS_REBEL_AND_AUTO">
+	<name>AUTO_BASIC</name>
+	<name>AUTO_ASSAULT</name>
+	<name>REBEL_FAT</name>
+	<name>REBEL_SKINNY</name>
+	<name>AUTO_BASIC</name>
+	<name>AUTO_ASSAULT</name>
+	<name>REBEL_FAT</name>
+	<name>REBEL_SKINNY</name>
+	<name>AUTO_BASIC_DLC</name>
+	<name>AUTO_ASSAULT_DLC</name>
+	<name>REBEL_FAT_DLC</name>
+	<name>REBEL_SKINNY_DLC</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_SHIPS_REBEL">
+	<name>REBEL_FAT</name>
+	<name>REBEL_SKINNY</name>
+	<name>REBEL_FAT</name>
+	<name>REBEL_SKINNY</name>
+	<name>REBEL_FAT_DLC</name>
+	<name>REBEL_SKINNY_DLC</name>
+</blueprintList>
+
+
+<blueprintList name="SHIPS_REBEL_ELITE">
+	<name>REBEL_SKINNY_ELITE</name>
+</blueprintList>
+
+
+<blueprintList name="OVERRIDE_SHIPS_REBEL_ELITE">
+	<name>REBEL_SKINNY_ELITE</name>
+	<name>REBEL_SKINNY_ELITE</name>
+	<name>REBEL_SKINNY_ELITE_DLC</name>
+</blueprintList>
+
+
+<blueprintList name="OVERRIDE_SHIPS_AUTO">
+	<name>AUTO_BASIC</name>
+	<name>AUTO_ASSAULT</name>
+	<name>AUTO_BASIC</name>
+	<name>AUTO_ASSAULT</name>
+	<name>AUTO_BASIC_DLC</name>
+	<name>AUTO_ASSAULT_DLC</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_SHIPS_JELLY">
+	<name>JELLY_BUTTON</name>
+	<name>JELLY_CROISSANT</name>
+	<name>JELLY_TRUFFLE</name>
+	<name>JELLY_BUTTON</name>
+	<name>JELLY_CROISSANT</name>
+	<name>JELLY_TRUFFLE</name>
+	<name>JELLY_BUTTON_DLC</name>
+	<name>JELLY_CROISSANT_DLC</name>
+	<name>JELLY_TRUFFLE_DLC</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_SHIPS_MANTIS">
+	<name>MANTIS_SCOUT</name>
+	<name>MANTIS_FIGHTER</name>
+	<name>MANTIS_BOMBER</name>
+	<name>MANTIS_SCOUT</name>
+	<name>MANTIS_FIGHTER</name>
+	<name>MANTIS_BOMBER</name>
+	<name>MANTIS_SCOUT_DLC</name>
+	<name>MANTIS_FIGHTER_DLC</name>
+	<name>MANTIS_BOMBER_DLC</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_SHIPS_ROCK">
+	<name>ROCK_SCOUT</name>
+	<name>ROCK_FIGHT</name>
+	<name>ROCK_ASSAULT</name>
+	<name>ROCK_SCOUT</name>
+	<name>ROCK_FIGHT</name>
+	<name>ROCK_ASSAULT</name>
+	<name>ROCK_SCOUT_DLC</name>
+	<name>ROCK_FIGHT_DLC</name>
+	<name>ROCK_ASSAULT_DLC</name>
+</blueprintList>
+<blueprintList name="OVERRIDE_SHIPS_ROCK_PIRATE">
+	<name>ROCK_SCOUT_P</name>
+	<name>ROCK_FIGHT_P</name>
+	<name>ROCK_SCOUT_P</name>
+	<name>ROCK_FIGHT_P</name>
+	<name>ROCK_SCOUT_P_DLC</name>
+	<name>ROCK_FIGHT_P_DLC</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_SHIPS_CIRCLE">
+	<name>CIRCLE_SCOUT</name>
+	<name>CIRCLE_BOMBER</name>
+	<name>CIRCLE_SCOUT</name>
+	<name>CIRCLE_BOMBER</name>
+	<name>CIRCLE_SCOUT_DLC</name>
+	<name>CIRCLE_BOMBER_DLC</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_SHIPS_ZOLTAN">
+	<name>ZOLTAN_FIGHTER</name>
+	<name>ZOLTAN_BOMBER</name>
+	<name>ZOLTAN_FIGHTER</name>
+	<name>ZOLTAN_BOMBER</name>
+	<name>ZOLTAN_FIGHTER_DLC</name>
+	<name>ZOLTAN_BOMBER_DLC</name>
+</blueprintList>
+
+<blueprintList name="OVERRIDE_SHIPS_ZOLTAN_PIRATE">
+	<name>ZOLTAN_FIGHTER_P</name>
+	<name>ZOLTAN_BOMBER_P</name>
+	<name>ZOLTAN_FIGHTER_P</name>
+	<name>ZOLTAN_BOMBER_P</name>
+	<name>ZOLTAN_FIGHTER_P_DLC</name>
+	<name>ZOLTAN_BOMBER_P_DLC</name>
+</blueprintList>
+
+
+<blueprintList name="OVERRIDE_SHIPS_CRYSTAL">
+	<name>CRYSTAL_SCOUT</name>
+	<name>CRYSTAL_BOMBER</name>
+	<name>CRYSTAL_SCOUT</name>
+	<name>CRYSTAL_BOMBER</name>
+	<name>CRYSTAL_SCOUT_DLC</name>
+	<name>CRYSTAL_BOMBER_DLC</name>
+</blueprintList>
+
+
+
+<blueprintList name="OVERRIDE_SHIPS_CIVILIAN">
+	<name>JELLY_BUTTON</name>
+<!--	<name>JELLY_CROISSANT</name>
+	<name>JELLY_TRUFFLE</name> -->
+	<name>ROCK_SCOUT</name>
+	<name>ROCK_FIGHT</name>
+	<name>FED_SCOUT</name>
+	<name>FED_BOMBER</name>
+	<name>CIRCLE_SCOUT</name>
+	<name>CIRCLE_BOMBER</name>
+</blueprintList>
+
+
+<blueprintList name="OVERRIDE_SHIPS_PIRATE">
+	<name>JELLY_BUTTON_P</name>
+	<name>JELLY_CROISSANT_P</name>
+	<name>JELLY_TRUFFLE_P</name>
+	<name>REBEL_FAT_P</name>
+	<name>REBEL_SKINNY_P</name>
+	<name>ROCK_SCOUT_P</name>
+	<name>ROCK_FIGHT_P</name>
+	<name>MANTIS_SCOUT_P</name>
+	<name>MANTIS_FIGHTER_P</name>
+	<name>MANTIS_BOMBER_P</name>
+	<name>FED_SCOUT_P</name>
+	<name>FED_BOMBER_P</name>
+	<name>ZOLTAN_FIGHTER_P</name>
+	<name>ZOLTAN_BOMBER_P</name>
+
+	<name>JELLY_BUTTON_P</name>
+	<name>JELLY_CROISSANT_P</name>
+	<name>JELLY_TRUFFLE_P</name>
+	<name>REBEL_FAT_P</name>
+	<name>REBEL_SKINNY_P</name>
+	<name>ROCK_SCOUT_P</name>
+	<name>ROCK_FIGHT_P</name>
+	<name>MANTIS_SCOUT_P</name>
+	<name>MANTIS_FIGHTER_P</name>
+	<name>MANTIS_BOMBER_P</name>
+	<name>FED_SCOUT_P</name>
+	<name>FED_BOMBER_P</name>
+	<name>ZOLTAN_FIGHTER_P</name>
+	<name>ZOLTAN_BOMBER_P</name>
+
+	<name>JELLY_BUTTON_P_DLC</name>
+	<name>JELLY_CROISSANT_P_DLC</name>
+	<name>JELLY_TRUFFLE_P_DLC</name>
+	<name>REBEL_FAT_P_DLC</name>
+	<name>REBEL_SKINNY_P_DLC</name>
+	<name>ROCK_SCOUT_P_DLC</name>
+	<name>ROCK_FIGHT_P_DLC</name>
+	<name>MANTIS_SCOUT_P_DLC</name>
+	<name>MANTIS_FIGHTER_P_DLC</name>
+	<name>MANTIS_BOMBER_P_DLC</name>
+	<name>FED_SCOUT_P_DLC</name>
+	<name>FED_BOMBER_P_DLC</name>
+	<name>ZOLTAN_FIGHTER_P_DLC</name>
+	<name>ZOLTAN_BOMBER_P_DLC</name>
+</blueprintList>
+
+
+
+<!--
+********************
+  REBELS
+  *******************
+-->
+
+<shipBlueprint name="REBEL_FAT_DLC" layout="rebel_squat" img="rebel_squat">
+	<class id="ship_REBEL_FAT_DLC_class"/>
+	<systemList>
+		<pilot power="1" max="2" room="0"/>
+		<oxygen power="1" max="2" room="1"/> <!--2-->
+		<shields power="2" max="8" room="7"/> <!--4-->
+		<engines power="2" max="4" room="6"/> <!--7-->
+		<weapons power="1" max="6" room="2"/> <!--6-->
+		<drones power="2" max="8" room="4"/> <!--1-->
+		<clonebay power="1" max="3" room="3" start="false"/> <!--3-->
+		<hacking power="1" max="1" room="5" start="false"/> <!--5-->
+	</systemList>
+	<droneList drones="4" load="DRONES_STANDARD"/>
+	<weaponList missiles="10" load="WEAPONS_REBEL"/>
+	<health amount="9"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "3" max="5" class="human"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+<shipBlueprint name="REBEL_SKINNY_DLC" layout="rebel_long" img="rebel_long">
+	<class id="ship_REBEL_SKINNY_DLC_class"/>
+	<systemList>
+		<oxygen power="1" max="2" room="3"/> <!--2-->
+		<pilot power="1" max="3" room="0"/> <!--0-->
+		<shields power="2" max="8" room="4"/> <!--6-->
+		<engines power="2" max="5" room="5"/> <!--5-->
+		<weapons power="2" max="8" room="6"/>   <!--4-->
+		<clonebay power="1" max="2" room="2" start="false"/> <!--3-->
+		<teleporter power="1" max="1" room="1" start="false"/> <!--1-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_REBEL"/>
+	<health amount="10"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "3" max="6" class="human"/> <!--CHANGED was 3/6-->
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+<shipBlueprint name="REBEL_SKINNY_ELITE_DLC" layout="rebel_long" img="rebel_long_elite">
+	<class id="ship_REBEL_SKINNY_ELITE_DLC_class"/>
+	<systemList>
+		<oxygen power="1" max="2" room="3"/>
+		<pilot power="1" max="3" room="0"/>
+		<shields power="4" max="8" room="4"/>
+		<engines power="3" max="5" room="5"/>
+		<weapons power="4" max="10" room="6"/>
+		<clonebay power="1" max="3" room="2"/>
+		<teleporter power="1" max="3" room="1" start="false"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_REBEL"/>
+	<health amount="14"/>
+	<maxPower amount ="13"/>
+	<crewCount amount="3" max="8" class="human"/> <!--CHANGED was 3/6-->
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+
+
+
+<!--
+********************
+  AUTOMATED
+  *******************
+-->
+
+
+<shipBlueprint name="AUTO_BASIC_DLC" layout="auto_basic" img="auto_basic">  <!-- NOTE:   This ship starts with no shields.  that ok?-->
+	<class id="ship_AUTO_BASIC_DLC_class"/>
+	<systemList>
+		<pilot power="1" max="2" room="2"/>
+		<shields power="2" max="8" room="1" start="false"/> <!--3-->
+		<engines power="2" max="8" room="0"/> <!--1-->
+		<weapons power="2" max="8" room="3"/> <!--4-->
+		<mind power="1" max="2" room="4" start="false"/> <!--0-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_AUTO"/>
+	<health amount="6"/>
+	<maxPower amount ="6"/>
+	<crewCount amount = "0" max="0" class="human"/>
+</shipBlueprint>
+
+<shipBlueprint name="AUTO_ASSAULT_DLC" layout="auto_assault" img="auto_assault">
+	<class id="ship_AUTO_ASSAULT_DLC_class"/>
+	<systemList>
+		<pilot power="1" max="3" room="2"/><!--2-->
+		<shields power="2" max="8" room="1"/> <!--3-->
+		<engines power="1" max="5" room="0"/><!--4-->
+		<weapons power="2" max="7" room="3"/>   <!--1-->
+		<hacking power="1" max="2" room="4"/> <!--0-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_AUTO"/>
+	<droneList drones="4"/>
+	<health amount="8"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "0" max="0" class="human"/>
+</shipBlueprint>
+
+
+<!--
+********************
+  SLUG SHIPS
+  *******************
+-->
+
+
+<shipBlueprint name="JELLY_BUTTON_DLC" layout="jelly_button" img="jelly_button">
+	<class id="ship_JELLY_BUTTON_DLC_class"/>
+	<maxSector>5</maxSector>
+	<systemList>
+		<oxygen power="1" max="3" room="3"/>
+		<pilot power="1" max="3" room="0"/>
+		<shields power="2" max="8" room="1"/>
+		<engines power="1" max="8"  room="4"/>
+		<weapons power="2" max="8"  room="2"/>
+	</systemList>
+	<weaponList missiles="6" load="WEAPONS_JELLY"/>
+	<health amount="9"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="3" class="slug"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="SLUG_GEL"/>
+</shipBlueprint>
+
+<shipBlueprint name="JELLY_CROISSANT_DLC" layout="jelly_croissant" img="jelly_croissant">
+	<class id="ship_JELLY_CROISSANT_DLC_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/> <!--0-->
+		<!-- <doors power="1" max="3"room="7" start="false"/>  <!-5-->
+		<oxygen power="1" max="3" room="4"/>  <!--4-->
+		<clonebay power="1" max="3" room="7" start="false"/>  <!--6-->
+		<shields power="2" max="10" room="3"/>  <!--3-->
+		<engines power="1" max="6" room="2"/>  <!--7-->
+		<weapons power="2" max="7" room="1"/>  <!--1-->
+		<mind power="1" max="2" room="6" start="false"/>  <!--new-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_JELLY"/>
+	<health amount="10"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "3" max="7" class="slug"/><!--CHANGED was 3/5-->
+	<boardingAI>sabotage</boardingAI>
+	<aug name="SLUG_GEL"/>
+</shipBlueprint>
+
+
+  <shipBlueprint name="JELLY_TRUFFLE_DLC" layout="jelly_truffle" img="jelly_truffle">
+	<class id="ship_JELLY_TRUFFLE_DLC_class"/>
+	<minSector>4</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/>  <!--0-->
+		<mind power="1" max="2" room="4" start="false"/>  <!--doors 1-->
+		<oxygen power="1" max="3" room="6"/>  <!--4-->
+		<clonebay power="1" max="3" room="7" start="false"/>  <!--3-->
+		<shields power="2" max="10" room="5"/>  <!--6-->
+		<engines power="1" max="5" room="3"/>  <!--2-->
+		<weapons power="2" max="9" room="1"/>  <!--5-->
+		<cloaking power="1" max="1" room="2" start="false"/>  <!--7-->
+	</systemList>
+	<weaponList missiles="14" load="WEAPONS_JELLY"/>
+	<health amount="11"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "4" max="8" class="slug"/> <!--CHANGED was 4/6-->
+	<boardingAI>sabotage</boardingAI>
+	<aug name="SLUG_GEL"/>
+</shipBlueprint>
+
+
+
+
+<!--
+********************
+ ROCK SHIPS!
+  *******************
+-->
+
+  <shipBlueprint name="ROCK_SCOUT_DLC" layout="rock_scout" img="rock_scout">
+	<class id="ship_ROCK_SCOUT_DLC_class"/>
+	<maxSector>5</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="3"/>  <!--3-->
+		<teleporter power="1" max="2" room="0" start="false"/> <!-- doors 5-->
+		<oxygen power="1" max="3" room="5"/> <!--0-->
+		<clonebay power="1" max="3" room="6" start="false"/> <!--2-->
+		<shields power="2" max="8" room="2"/> <!--4-->
+		<engines power="1" max="5" room="1"/> <!--6-->
+		<weapons power="2" max="8" room="4"/> <!--1-->
+	</systemList>
+	<weaponList missiles="6" load="WEAPONS_ROCK"/>
+	<health amount="8"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "2" max="4" class="rock"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="ROCK_ARMOR"/>
+</shipBlueprint>
+
+  <shipBlueprint name="ROCK_FIGHT_DLC" layout="rock_fight" img="rock_fight">
+	<class id="ship_ROCK_FIGHT_DLC_class"/>
+	<minSector>2</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="3"/> <!--3-->
+		<teleporter power="1" max="2" room="6" start="false"/> <!--6-->
+		<oxygen power="1" max="3" room="4"/> <!--7-->
+		<clonebay power="1" max="3" room="0" start="false"/> <!--4-->
+		<shields power="2" max="8" room="8"/> <!--5-->
+		<engines power="2" max="5" room="7"/> <!--8-->
+		<weapons power="2" max="8" room="5"/> <!--0-->
+		<cloaking power="1" max="1" room="2" start="false"/> <!--0-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ROCK"/>
+	<health amount="10"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="5" class="rock"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="ROCK_ARMOR"/>
+</shipBlueprint>
+
+
+
+  <shipBlueprint name="ROCK_ASSAULT_DLC" layout="rock_assault" img="rock_assault">
+	<class id="ship_ROCK_ASSAULT_DLC_class"/>
+	<minSector>5</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/> <!--0-->
+		<doors power="1" max="3" room="3" start="false"/> <!--3-->
+		<oxygen power="1" max="3" room="9"/> <!--9-->
+		<clonebay power="1" max="2" room="1" start="false"/> <!--1-->
+		<shields power="2" max="8" room="6"/> <!--6-->
+		<engines power="2" max="5" room="7"/> <!--7-->
+		<weapons power="2" max="8" room="5"/> <!--5-->
+		<cloaking power="1" max="2" room="4" start="false"/> <!--4-->
+		<teleporter power="1" max="2" room="8" start="false"/> <!--8-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ROCK"/>
+	<health amount="12"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="6" class="rock"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="ROCK_ARMOR"/>
+</shipBlueprint>
+
+
+
+<!--
+********************
+ MANTIS SHIPS!
+  *******************
+-->
+
+  <shipBlueprint name="MANTIS_SCOUT_DLC" layout="mantis_scout" img="mantis_scout">
+	<class id="ship_MANTIS_SCOUT_DLC_class"/>
+	<maxSector>5</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="5"/>  <!--1-->
+		<doors power="1" max="2" room="2" start="false"/> <!--2-->
+		<oxygen power="1" max="3" room="1"/> <!--5-->
+		<clonebay power="1" max="2" room="0" start="false"/> <!--6-->
+		<teleporter power="1" max="2" room="7" start="false"/> <!--4-->
+		<shields power="2" max="8" room="3"/> <!--0-->
+		<engines power="1" max="5" room="4"/> <!--7-->
+		<weapons power="2" max="7" room="6"/> <!--3-->
+	</systemList>
+	<weaponList missiles="6" load="WEAPONS_MANTIS"/>
+	<health amount="7"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "2" max="4" class="mantis"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+<shipBlueprint name="MANTIS_FIGHTER_DLC" layout="mantis_fighter" img="mantis_fighter">
+	<class id="ship_MANTIS_FIGHTER_DLC_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="9"/> <!--9-->
+		<doors power="1" max="3" room="5" start="false"/> <!--2-->
+		<oxygen power="1" max="3" room="8"/> <!--5-->
+		<clonebay power="1" max="3" room="0"/> <!--8-->
+		<teleporter power="1" max="2" room="7"/> <!--4-->
+		<shields power="2" max="7" room="3"/> <!--0-->
+		<engines power="1" max="5" room="4"/> <!--7-->
+		<weapons power="1" max="7" room="2"/> <!--3-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_MANTIS"/>
+	<health amount="9"/>
+	<maxPower amount ="11"/>
+	<crewCount amount = "2" max="5" class="mantis"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+<shipBlueprint name="MANTIS_BOMBER_DLC" layout="mantis_bomber" img="mantis_bomber">
+	<class id="ship_MANTIS_BOMBER_DLC_class"/>
+	<minSector>4</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="3"/>				 <!--3-->
+		<doors power="1" max="3" room="11" start="false"/> <!--9-->
+		<oxygen power="1" max="3" room="9"/> 			 <!--11-->
+		<clonebay power="1" max="1" room="0" start="false"/> <!--8-->
+		<teleporter power="1" max="2" room="4"/>			<!--4-->
+		<shields power="2" max="8" room="10"/>			<!--0-->
+		<engines power="1" max="5" room="7"/>		<!--7-->
+		<weapons power="2" max="8" room="8"/>	<!--10-->
+	</systemList>
+	<weaponList missiles="14" load="WEAPONS_MANTIS"/>
+	<health amount="11"/>
+	<maxPower amount ="11"/>
+	<crewCount amount = "3" max="6" class="mantis"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+<!--
+********************
+ FED SHIPS!
+  *******************
+-->
+
+  <shipBlueprint name="FED_SCOUT_DLC" layout="fed_scout" img="fed_scout">
+	<class id="ship_FED_SCOUT_DLC_class"/>
+	<maxSector>6</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/> <!--0-->
+		<hacking power="1" max="1" room="2" start="false"/> <!--2-->
+		<oxygen power="1" max="3" room="5"/> <!--5-->
+		<shields power="2" max="8" room="3"/> <!--1-->
+		<engines power="1" max="5" room="4"/> <!--4-->
+		<weapons power="2" max="8" room="1"/> <!--3-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_FED"/>
+	<droneList drones="4"/>
+	<health amount="7"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "2" max="3" class="human"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+  <shipBlueprint name="FED_BOMBER_DLC" layout="fed_bomber" img="fed_bomber">
+	<class id="ship_FED_BOMBER_DLC_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/> <!--0-->
+		<hacking power="1" max="1" room="2" start="false"/> <!--doors 2-->
+		<clonebay power="1" max="3" room="8" start="false"/> <!--8-->
+		<oxygen power="1" max="3" room="5"/> <!--5-->
+		<shields power="2" max="8" room="9"/> <!--1-->
+		<engines power="1" max="5" room="6"/>  <!--9-->
+		<weapons power="2" max="8" room="1"/> <!--6-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_FED"/>
+	<droneList drones="4"/>
+	<health amount="9"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="6" class="human"/>  <!--CHANGED was 2 4-->
+</shipBlueprint>
+
+
+<!--
+********************
+ CIRCLE SHIPS!
+  *******************
+-->
+
+  <shipBlueprint name="CIRCLE_SCOUT_DLC" layout="circle_scout" img="circle_scout">
+	<class id="ship_ENGI_SCOUT_DLC_class"/>
+	<maxSector>7</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="5"/> <!--5-->
+		<hacking power="1" max="2" room="2" start="false"/> <!--2-->
+		<clonebay power="1" max="3" room="6" start="false"/> <!--6-->
+		<oxygen power="1" max="3" room="7"/>  <!--3-->
+		<shields power="2" max="8" room="3"/> <!--1-->
+		<engines power="1" max="5" room="4"/> <!--7-->
+		<weapons power="2" max="6" room="1"/> <!--4-->
+		<drones power="2" max="8" room="0"/> <!--0-->
+	</systemList>
+	<weaponList missiles="6" load="WEAPONS_CIRCLE"/>
+	<droneList drones="4" load="DRONES_DEFENSE"/>
+	<health amount="7"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "2" max="5" class="engi"/><!--CHANGED was 2 3-->
+	<aug name="NANO_MEDBAY"/>
+</shipBlueprint>
+
+  <shipBlueprint name="CIRCLE_BOMBER_DLC" layout="circle_bomber" img="circle_bomber">
+	<class id="ship_ENGI_BOMBER_DLC_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="1"/>  <!--1-->
+		<doors power="1" max="3" room="2" start="false"/> <!--2-->
+		<clonebay power="1" max="3" room="4" start="false"/>  <!--4-->
+		<oxygen power="1" max="3" room="3"/> <!--3-->
+		<shields power="2" max="10" room="11"/>  <!--7-->
+		<engines power="1" max="5" room="7"/> <!--9-->
+		<weapons power="2" max="8" room="9"/> <!--11-->
+		<drones power="2" max="8" room="6"/> <!--5-->
+		<hacking power="1" max="3" room="8" start="false"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_CIRCLE"/>
+	<droneList drones="4" load="DRONES_DEFENSE"/>
+	<health amount="9"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "3" max="6" class="engi"/><!--CHANGED was 2 3-->
+	<boardingAI>sabotage</boardingAI>
+	<aug name="NANO_MEDBAY"/>
+</shipBlueprint>
+
+
+
+
+
+<!--
+********************
+ ZOLTAN  SHIPS!
+  *******************
+-->
+
+  <shipBlueprint name="ZOLTAN_FIGHTER_DLC" layout="energy_fighter" img="energy_fighter">
+	<class id="ship_ZOLTAN_FIGHTER_DLC_class"/>
+	<systemList>
+		<pilot power="1" max="3" room="0"/> <!--5-->
+		<mind power="1" max="1" room="1" start="false"/> <!--2-->
+		<clonebay power="1" max="3" room="6" start="false"/> <!--6-->
+		<oxygen power="1" max="3" room="4"/>  <!--3-->
+		<shields power="2" max="8" room="2"/> <!--1-->
+		<engines power="1" max="5" room="5"/> <!--0-->
+		<weapons power="2" max="8" room="3"/> <!--4-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ZOLTAN"/>
+	<health amount="7"/>
+	<aug name="ENERGY_SHIELD"/>
+	<maxPower amount ="12"/>
+	<crewCount amount = "2" max="3" class="energy"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+  <shipBlueprint name="ZOLTAN_BOMBER_DLC" layout="energy_bomber" img="energy_bomber">
+	<class id="ship_ZOLTAN_BOMBER_DLC_class"/>
+	<minSector>3</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="1"/>  <!--1-->
+		<doors power="1" max="3" room="2" start="false"/> <!--2-->
+		<clonebay power="1" max="3" room="7" start="false"/> <!--6-->
+		<oxygen power="1" max="3" room="5"/>  <!--5-->
+		<shields power="2" max="8" room="4"/>  <!--3-->
+		<engines power="1" max="5" room="6"/> <!--7-->
+		<weapons power="2" max="8" room="3"/> <!--4-->
+		<hacking power="1" max="2" room="0" start="false"/> <!--0-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ZOLTAN"/>
+	<droneList drones="5" load="DRONES_COMBAT"/>
+	<health amount="7"/>
+	<aug name="ENERGY_SHIELD"/>
+	<maxPower amount ="15"/>
+	<crewCount amount = "3" max="6" class="energy"/> <!--CHANGED was 3 4-->
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+
+<!--
+********************
+ CRYSTAL SHIPS!
+  *******************
+-->
+
+
+  <shipBlueprint name="CRYSTAL_SCOUT_DLC" layout="crystal_scout" img="crystal_scout">
+	<class id="ship_CRYSTAL_SCOUT_DLC_class"/>
+	<systemList>
+		<pilot power="1" max="3" room="3"/>
+		<clonebay power="1" max="3" room="5" start="false"/>
+		<oxygen power="1" max="3" room="0"/>
+		<shields power="2" max="8" room="1"/>
+		<engines power="1" max="5" room="4"/>
+		<weapons power="4" max="8" room="2"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_CRYSTAL"/>
+	<health amount="7"/>
+	<maxPower amount ="9"/>
+	<crewCount amount = "2" max="3" class="crystal"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+<shipBlueprint name="CRYSTAL_BOMBER_DLC" layout="crystal_bomber" img="crystal_bomber">
+	<class id="ship_CRYSTAL_BOMBER_DLC_class"/>
+	<systemList>
+		<pilot power="1" max="3" room="2"/>
+		<doors power="1" max="3" room="8" start="false"/>
+		<clonebay power="1" max="3" room="0" start="false"/>
+		<oxygen power="1" max="3" room="6"/>
+		<shields power="2" max="10" room="4"/>
+		<engines power="1" max="5" room="5"/>
+		<weapons power="2" max="10" room="7"/>
+		<cloaking power="1" max="2" room="1"/>
+		<teleporter power="1" max="2" room="3"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_CRYSTAL"/>
+	<health amount="9"/>
+	<maxPower amount ="9"/>
+	<crewCount amount = "2" max="5" class="crystal"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+
+<!--
+********************
+Overwritten player ships!
+  *******************
+-->
+
+ <!-- ALT Kestrel -->
+<shipBlueprint name="PLAYER_SHIP_HARD_3" layout="kestral_3" img="kestral_3">
+	<class id="ship_PLAYER_SHIP_KESTREL_3_class"/>
+	<name id="ship_PLAYER_SHIP_KESTREL_3_name"/>
+	<desc id="ship_PLAYER_SHIP_KESTREL_3_desc"/>
+	<unlock id="ship_PLAYER_SHIP_KESTREL_3_unlock"/>
+	<systemList>
+		<pilot power="1" room="11" start="true" img="room_pilot">
+			<slot>
+				<direction>right</direction>
+				<number>0</number>
+			</slot>
+		</pilot>
+		<doors power="1" room="10" start="true" img="room_doors">
+			<slot>
+				<direction>up</direction>
+				<number>1</number>
+			</slot>
+		</doors>
+		<sensors power="2" room="13" start="true" img="room_sensors">
+			<slot>
+				<direction>down</direction>
+				<number>1</number>
+			</slot>
+		</sensors>
+		<medbay power="1" room="9" start="false" img="room_medbay_8">  <!--F-->
+			<slot>
+				<number>1</number>
+			</slot>
+		</medbay>
+		<clonebay power="1" room="9" start="true">
+			<slot>
+				<number>1</number>
+			</slot>
+		</clonebay>
+		<oxygen power="1"  room="7" start="true" img="room_oxygen_10"/>
+		<shields power="2" room="12" start="true" img="room_shields_3">
+			<slot>
+				<direction>left</direction>
+				<number>2</number>
+			</slot>
+		</shields>
+		<engines power="2" room="5" start="true" img="room_engines"/>
+		<weapons power="2" room="2" start="true" img="room_weapons_2"/>
+		<drones power="2" room="6" start="false" img="room_drones_13"/>  <!-- F-->
+		<teleporter power="1" room="4"	start="false"/>  <!-- F-->
+		<cloaking power="1" room="1" start="false" img="room_cloaking_3"/>  <!-- F-->
+		<battery power="1" room="8" start="false" img="room_battery_6"/>    <!-- F-->
+		<mind power="1" room="16" start="false" img="room_mind_1"/>  <!-- F-->
+		<hacking power="1" room="14" start="false" img="room_hacking"> <!-- F-->
+			<slot>
+				<direction>down</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+	</systemList>
+	<weaponSlots>4</weaponSlots>
+	<droneSlots>2</droneSlots>
+	<weaponList count="2" missiles="4">
+		<weapon name="LASER_BURST_2"/>
+		<weapon name="ION_STUN"/>
+	</weaponList>
+	<droneList count="0" drones="3">
+	</droneList>
+	<health amount="30"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "1" class="human"/>
+	<crewCount amount = "1" class="anaerobic"/>
+	<crewCount amount = "1" class="human"/>
+	<shieldImage>kestral</shieldImage>
+	<cloakImage>kestral</cloakImage>
+	<floorImage>kestral</floorImage>
+</shipBlueprint>
+
+
+ <!-- ALT ENGI -->
+<shipBlueprint name="PLAYER_SHIP_CIRCLE_3" layout="circle_cruiser_3" img="circle_cruiser_3">
+	<class id="ship_PLAYER_SHIP_ENGI_3_class"/>
+	<name id="ship_PLAYER_SHIP_ENGI_3_name"/>
+	<unlock id="ship_PLAYER_SHIP_ENGI_3_unlock"/>
+	<desc id="ship_PLAYER_SHIP_ENGI_3_desc"/>
+	<systemList>
+		<pilot power="1" room="14" start="true"/>
+		<doors power="1" room="16" start="true" img="room_doors_2">
+			<slot>
+				<direction>down</direction>
+				<number>0</number>
+			</slot>
+		</doors>
+		<sensors power="1" room="13" start="true" img="room_sensors_2">
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</sensors>
+		<oxygen power="1" room="0" start="true" img="room_oxygen_13"/>
+		<engines power="2" room="10" start="true" img="room_engines_2">
+			<slot>
+				<direction>down</direction>
+				<number>1</number>
+			</slot>
+		</engines>
+		<shields power="2" room="8" start="true" img="room_shields_4"/>
+		<weapons power="1" room="6" start="true"/>
+		<drones power="2" room="7" start="true" img="room_drones_9"/>
+		<medbay power="1" room="11" start="false" img="room_medbay_9">  <!-- F-->
+			<slot>
+				<number>-2</number>
+			</slot>
+		</medbay>
+		<clonebay power="1" room="11" start="true"/>
+		<teleporter power="1" room="4" start="false"/><!-- F-->
+		<cloaking power="1" room="1" start="false" img="room_cloaking_4"/> <!-- F-->
+		<battery power="1" room="2" start="false" img="room_battery_17"/> <!-- F-->
+		<mind power="1" room="3" start="false" img="room_mind_12"/> <!-- F-->
+		<hacking power="1" room="5" start="true" img="room_hacking_5">
+			<slot>
+				<direction>down</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+	</systemList>
+	<weaponSlots>3</weaponSlots>
+	<droneSlots>3</droneSlots>
+	<weaponList count="1" missiles="0">
+		<weapon name="LASER_BURST_2"/>
+	</weaponList>
+	<droneList count="1" drones="25">
+		<drone name="COMBAT_BEAM"/>
+	</droneList>
+	<health amount="30"/>
+	<maxPower amount ="9"/>
+	<crewCount amount = "1" class="anaerobic"/>
+	<crewCount amount = "2" class="engi"/>
+	<aug name="DEFENSE_SCRAMBLER"/>
+	<shieldImage>circle_cruiser</shieldImage>
+	<cloakImage>circle_cruiser</cloakImage>
+	<floorImage>circle_cruiser</floorImage>
+</shipBlueprint>
+
+
+
+<shipBlueprint name="PLAYER_SHIP_FED_3" layout="fed_cruiser_3" img="fed_cruiser_3">
+	<class id="ship_PLAYER_SHIP_FED_3_class"/>
+	<name id="ship_PLAYER_SHIP_FED_3_name"/>
+	<unlock id="ship_PLAYER_SHIP_FED_3_unlock"/>
+	<desc id="ship_PLAYER_SHIP_FED_3_desc"/>
+	<systemList>
+		<pilot power="1" room="6" start="true"/>
+		<doors power="1" room="13" start="true" img="room_doors">
+			<slot>
+				<direction>up</direction>
+				<number>1</number>
+			</slot>
+		</doors>
+		<sensors power="1" room="10" start="true">
+			<slot>
+				<direction>down</direction>
+				<number>1</number>
+			</slot>
+		</sensors>
+		<oxygen power="1" room="12" start="true" img="room_oxygen_2"/>
+		<engines power="2" room="5" start="true" img="room_engines_8">
+			<slot>
+				<direction>left</direction>
+				<number>1</number>
+			</slot>
+		</engines>
+		<shields power="2" room="15" start="true"/>
+		<weapons power="1" room="11" start="true" img="room_weapons">
+			<slot>
+				<direction>up</direction>
+				<number>1</number>
+			</slot>
+		</weapons>
+		<drones power="2" room="17" start="false" img="room_drones_3"/> <!-- F-->
+		<medbay power="1" room="1" start="false"/>  <!-- F-->
+		<clonebay power="2" room="1" start="true"/>
+		<teleporter power="1" room="8" start="true"/>
+		<artillery power="1" room="9" weapon="ARTILLERY_FED_C"/>
+		<cloaking power="1" room="4" start="false" img="room_cloaking_3"/>   <!-- F-->
+		<battery power="1" room="7" start="false" img="room_battery_16"/>  <!-- F-->
+		<mind power="1" room="16" start="false" img="room_mind_3"/> <!-- F-->
+		<hacking power="1" room="2" start="false" img="room_hacking_9"> <!--F-->
+			<slot>
+				<direction>left</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+	</systemList>
+	<weaponSlots>4</weaponSlots>
+	<droneSlots>2</droneSlots>
+	<weaponList count="0" missiles="5">
+	</weaponList>
+	<droneList drones="0"/>
+	<health amount="30"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "1" class="human"/>
+	<crewCount amount = "2" class="energy"/>
+	<crewCount amount = "1" class="mantis"/>
+	<aug name="O2_MASKS"/>
+	<shieldImage>fed_cruiser</shieldImage>
+	<cloakImage>fed_cruiser</cloakImage>
+	<floorImage>fed_cruiser</floorImage>
+</shipBlueprint>
+
+
+
+<shipBlueprint name="PLAYER_SHIP_JELLY_3" layout="jelly_cruiser_3" img="jelly_cruiser_3">
+	<class id="ship_PLAYER_SHIP_JELLY_3_class"/>
+	<name id="ship_PLAYER_SHIP_JELLY_3_name"/>
+	<unlock id="ship_PLAYER_SHIP_JELLY_3_unlock"/>
+	<desc id="ship_PLAYER_SHIP_JELLY_3_desc"/>
+	<systemList>
+		<pilot power="1" room="8" start="true"/>
+		<doors power="2" room="10" start="true" img="room_doors_9">
+			<slot>
+				<direction>right</direction>
+				<number>1</number>
+			</slot>
+		</doors>
+		<oxygen power="1" room="3" start="true" img="room_oxygen_2"/>
+		<engines power="2" room="6" start="true" img="room_engines_2"/>
+		<shields power="2" room="7" start="true" img="room_shields_7">
+			<slot>
+				<direction>up</direction>
+				<number>1</number>
+			</slot>
+		</shields>
+		<weapons power="2" room="9" start="true" img="room_weapons_5">
+			<slot>
+				<direction>right</direction>
+				<number>1</number>
+			</slot>
+		</weapons>
+		<medbay power="1" room="15" start="false" img="room_medbay_9">
+			<slot>
+				<number>-2</number>
+			</slot>
+		</medbay><!--F-->
+		<clonebay power="1" room="15" start="true">
+			<slot>
+				<number>1</number>
+			</slot>
+		</clonebay>
+		<sensors power="1" room="5" start="false" img="room_sensors_3"><!--F-->
+			<slot>
+				<direction>right</direction>
+				<number>1</number>
+			</slot>
+		</sensors>
+		<drones power="2" room="13" start="false" img="room_drones_15"/>  <!--F-->
+		<teleporter power="1" room="11" start="false"/>  <!--F-->
+		<cloaking power="1" room="1" start="false" img="room_cloaking_3"/>  <!--F-->
+		<battery power="1" room="4" start="false" img="room_battery_10"/> <!--F-->
+		<mind power="1" room="0" start="true" img="room_mind_5"/>  <!--F-->
+		<hacking power="1" room="12" start="true" img="room_hacking_8"> <!--F-->
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+	</systemList>
+	<weaponSlots>4</weaponSlots>
+	<droneSlots>2</droneSlots>
+	<weaponList count="1" missiles="1">
+		<weapon name="LASER_CHAINGUN"/>
+	</weaponList>
+	<droneList drones="15"/>
+	<aug name="SLUG_GEL"/>
+	<health amount="30"/>
+	<maxPower amount ="9"/>
+	<crewCount amount = "3" class="slug"/>
+	<shieldImage>jelly_cruiser</shieldImage>
+	<cloakImage>jelly_cruiser</cloakImage>
+	<floorImage>jelly_cruiser</floorImage>
+</shipBlueprint>
+
+
+<shipBlueprint name="PLAYER_SHIP_STEALTH_3" layout="stealth_3" img="stealth_3">
+	<class id="ship_PLAYER_SHIP_STEALTH_3_class"/>
+	<name id="ship_PLAYER_SHIP_STEALTH_3_name"/>
+	<unlock id="ship_PLAYER_SHIP_STEALTH_3_unlock"/>
+	<desc id="ship_PLAYER_SHIP_STEALTH_3_desc"/>
+	<systemList>
+		<pilot power="1" room="8" start="true"/>
+		<doors power="1" room="9" start="true" img="room_doors_2">
+			<slot>
+				<direction>down</direction>
+				<number>0</number>
+			</slot>
+		</doors>
+		<sensors power="1" room="4" start="false" img="room_sensors_2"><!--F-->
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</sensors>
+		<oxygen power="1" room="1" start="true" img="room_oxygen_2"/>
+		<engines power="3" room="5" start="true" img="room_engines"/>
+		<shields power="2" room="6" start="false" img="room_shields_7"> <!--F-->
+			<slot>
+				<direction>up</direction>
+				<number>1</number>
+			</slot>
+		</shields>
+		<weapons power="2" room="3" start="true" img="room_weapons_5">
+			<slot>
+				<direction>right</direction>
+				<number>1</number>
+			</slot>
+		</weapons>
+		<drones power="2" room="11" start="true" img="room_drones_4"/><!--F-->
+		<medbay power="1" room="0" start="false" img="room_medbay_4"> <!--F-->
+			<slot>
+				<number>0</number>
+			</slot>
+		</medbay>
+		<clonebay power="1" room="0" start="true">
+			<slot>
+				<number>0</number>
+			</slot>
+		</clonebay>
+		<teleporter power="1" room="10" start="false"/> <!--F-->
+		<cloaking power="1" room="12" start="false" img="room_cloaking_11"/><!-- F-->
+		<hacking power="1" room="13" start="false" img="room_hacking"><!-- F-->
+			<slot>
+				<direction>down</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+		<battery power="1" room="2" start="false" img="room_battery_15"/><!-- F-->
+		<mind power="1" room="7" start="false" img="room_mind_5"/><!-- F-->
+	</systemList>
+	<weaponList count="2" missiles="0">
+		<weapon name="LASER_CHARGEGUN_PLAYER"/>
+		<weapon name="BEAM_1"/>
+	</weaponList>
+	<weaponSlots>3</weaponSlots>
+	<droneSlots>3</droneSlots>
+	<aug name="ADV_SCANNERS"/>
+	<droneList count="2" drones="16">
+		<drone name="DRONE_SHIELD_PLAYER"/>
+		<drone name="ANTI_DRONE"/>
+	</droneList>
+	<health amount="30"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "1" class="human"/>
+	<crewCount amount = "1" class="rock"/>
+	<crewCount amount = "1" class="slug"/>
+	<shieldImage>stealth</shieldImage>
+	<cloakImage>stealth</cloakImage>
+	<floorImage>stealth</floorImage>
+</shipBlueprint>
+
+
+ <!-- ALT ENERGY -->
+<shipBlueprint name="PLAYER_SHIP_ENERGY_3" layout="energy_cruiser_3" img="energy_cruiser_3">
+	<class id="ship_PLAYER_SHIP_ENERGY_3_class"/>
+	<name id="ship_PLAYER_SHIP_ENERGY_3_name"/>
+	<unlock id="ship_PLAYER_SHIP_ENERGY_3_unlock"/>
+	<desc id="ship_PLAYER_SHIP_ENERGY_3_desc"/>
+	<systemList>
+		<pilot power="1" room="8" start="true"/>
+		<doors power="1" room="17" start="true" img="room_doors_2">
+			<slot>
+				<direction>down</direction>
+				<number>0</number>
+			</slot>
+		</doors>
+		<sensors power="1" room="16" start="true">
+			<slot>
+				<direction>down</direction>
+				<number>1</number>
+			</slot>
+		</sensors>
+		<oxygen power="1" room="3" start="true" img="room_oxygen_2"/>
+		<engines power="2" room="0" start="true" img="room_engines_5">
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</engines>
+		<shields power="2" room="1" start="true" img="room_shields_3">
+			<slot>
+				<direction>left</direction>
+				<number>2</number>
+			</slot>
+		</shields>
+		<weapons power="2" room="2" start="true" img="room_weapons"/>
+		<drones power="3" room="14" start="true" img="room_drones_5"/>
+		<medbay power="1" room="11" start="false" img="room_medbay_4"> <!--F-->
+			<slot>
+				<number>0</number>
+			</slot>
+		</medbay>
+		<clonebay power="1" room="11" start="true">
+			<slot>
+				<number>0</number>
+			</slot>
+		</clonebay>
+		<teleporter power="1" room="13" start="false"/>  <!--F-->
+		<cloaking power="1" room="9" start="false" img="room_cloaking_3"/> <!--F-->
+		<battery power="2" room="4" start="true" img="room_battery_9"/>
+		<mind power="1" room="12" start="false" img="room_mind_5"/>  <!--F-->
+		<hacking power="1" room="6" start="false" img="room_hacking_7"> <!--F-->
+			<slot>
+				<direction>left</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+	</systemList>
+	<weaponSlots>4</weaponSlots>
+	<droneSlots>2</droneSlots>
+	<weaponList count="1" missiles="2">
+		<weapon name="ION_CHARGEGUN"/>
+	</weaponList>
+	<droneList count="1" drones="15">
+		<drone name="COMBAT_BEAM"/>
+	</droneList>
+	<health amount="30"/>
+	<maxPower amount ="2"/>
+	<crewCount amount = "4" class="energy"/>
+	<aug name="ENERGY_SHIELD"/>
+	<shieldImage>energy_cruiser</shieldImage>
+	<cloakImage>energy_cruiser</cloakImage>
+	<floorImage>energy_cruiser</floorImage>
+</shipBlueprint>
+
+
+
+<shipBlueprint name="PLAYER_SHIP_ROCK_3" layout="rock_cruiser_3" img="rock_cruiser_3">
+	<class id="ship_PLAYER_SHIP_ROCK_3_class"/>
+	<name id="ship_PLAYER_SHIP_ROCK_3_name"/>
+	<unlock id="ship_PLAYER_SHIP_ROCK_3_unlock"/>
+	<desc id="ship_PLAYER_SHIP_ROCK_3_desc"/>
+	<systemList>
+		<pilot power="1" room="4" start="true"/>
+		<doors power="1" room="6" start="true" img="room_doors_8">
+			<slot>
+				<direction>left</direction>
+				<number>0</number>
+			</slot>
+		</doors>
+		<sensors power="1" room="10" start="true" img="room_sensors_4">
+			<slot>
+				<direction>left</direction>
+				<number>1</number>
+			</slot>
+		</sensors>
+		<oxygen power="1" room="7" start="true" img="room_oxygen_13"/>
+		<engines power="2" room="8" start="true"/>
+		<shields power="2" room="12" start="true" img="room_shields_3">
+			<slot>
+				<direction>left</direction>
+				<number>2</number>
+			</slot>
+		</shields>
+		<weapons power="3" room="0" start="true" img="room_weapons">
+			<slot>
+				<direction>up</direction>
+				<number>1</number>
+			</slot>
+		</weapons>
+		<drones power="2" room="11" start="false" img="room_drones_14"/>     <!--F-->
+		<medbay power="1" room="13" start="false" img="room_medbay_6">  <!--F-->
+			<slot>
+				<number>-2</number>
+			</slot>
+		</medbay>
+		<clonebay power="1" room="13" start="true">
+			<slot>
+				<number>0</number>
+			</slot>
+		</clonebay>
+		<teleporter power="1" room="15" start="false"/>  <!--F-->
+		<cloaking power="1" room="2" start="false" img="room_cloaking_3"/>    <!--F-->
+		<battery power="1" room="16" start="false" img="room_battery_14"/>  <!--F-->
+		<mind power="1" room="5" start="false" img="room_mind_4"/>  <!--F-->
+		<hacking power="1" room="9" start="false" img="room_hacking_7"> <!--F-->
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+	</systemList>
+	<weaponSlots>4</weaponSlots>
+	<droneSlots>2</droneSlots>
+	<weaponList count="2" missiles="15">
+		<weapon name="MISSILE_CHARGEGUN"/>
+		<weapon name="CRYSTAL_HEAVY_1"/>
+	</weaponList>
+	<droneList count="0" drones="0">
+	</droneList>
+	<health amount="30"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "2" class="rock"/>
+	<crewCount amount = "1" class="crystal"/>
+	<aug name="ROCK_ARMOR"/>
+	<shieldImage>rock_cruiser</shieldImage>
+	<cloakImage>rock_cruiser</cloakImage>
+	<floorImage>rock_cruiser</floorImage>
+</shipBlueprint>
+
+
+
+<shipBlueprint name="PLAYER_SHIP_MANTIS_3" layout="mantis_cruiser_3" img="mantis_cruiser_3">
+	<class id="ship_PLAYER_SHIP_MANTIS_3_class"/>
+	<name id="ship_PLAYER_SHIP_MANTIS_3_name"/>
+	<unlock id="ship_PLAYER_SHIP_MANTIS_3_unlock"/>
+	<desc id="ship_PLAYER_SHIP_MANTIS_3_desc"/>
+	<systemList>
+		<pilot power="1" room="7" start="true" img="room_pilot_4"/>
+		<doors power="1" room="9" start="true">
+			<slot>
+				<direction>up</direction>
+				<number>1</number>
+			</slot>
+		</doors>
+		<sensors power="1" room="10" start="true">
+			<slot>
+				<direction>down</direction>
+				<number>1</number>
+			</slot>
+		</sensors>
+		<oxygen power="1" room="5" start="true" img="room_oxygen_12"/>
+		<shields power="2" room="6" start="true" img="room_shields_3">
+			<slot>
+				<direction>left</direction>
+				<number>2</number>
+			</slot>
+		</shields>
+		<engines power="2" room="0" start="true" img="room_engines_2"/>
+		<weapons power="2" room="12" start="true" img="room_weapons_9"/>
+		<drones power="2" room="16" start="false" img="room_drones_11"/><!-- F-->
+		<medbay power="1" room="3" start="false"/>
+		<clonebay power="2" room="3" start="true"/><!-- F-->
+		<teleporter power="1" room="15" start="true"/>
+		<cloaking power="1" room="13" start="false" img="room_cloaking_10"/><!-- F-->
+		<battery power="1" room="11" start="false" img="room_battery_8"/> <!-- F-->
+		<mind power="1" room="8" start="false" img="room_mind_4"/><!-- F-->
+		<hacking power="1" room="2" start="false" img="room_hacking_6"><!-- F-->
+			<slot>
+				<direction>up</direction>
+				<number>0</number>
+			</slot>
+		</hacking>
+	</systemList>
+	<weaponList count="2" missiles="20">
+		<weapon name="BOMB_LOCK"/>
+		<weapon name="BOMB_STUN"/>
+	</weaponList>
+	<weaponSlots>3</weaponSlots>
+	<droneSlots>2</droneSlots>
+	<aug name="CREW_STIMS"/>
+	<health amount="30"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "1" class="engi"/>
+	<crewCount amount = "1" class="mantis"/>
+	<crewCount amount = "1" class="anaerobic"/>
+	<shieldImage>mantis_cruiser</shieldImage>
+	<cloakImage>mantis_cruiser</cloakImage>
+	<floorImage>mantis_cruiser</floorImage>
+</shipBlueprint>
+
+
+
+</FTL>

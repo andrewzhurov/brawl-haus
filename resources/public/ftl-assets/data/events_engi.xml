@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+			SUMMARY  - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+Structure:
+	START_BEACON_ENGI
+	STORE_ENGI
+	NOTHING_ENGI
+
+Items:
+	ENGI_GIFT
+	ENGI_FLEET_DELAY
+	ENGI_MONSTER
+
+Hostile:
+	ENGI_MANTIS_FIGHT		NEW!!!
+	ENGI_REBEL_FIGHT		NEW!!!
+	ENGI_PIRATE_FIGHT		NEW!!!
+
+Neutral:
+	ENGI_STATION_DISTRESS    (could be quest or distress - uses SAVE_ENGI_STATION)
+
+Environment:
+
+Boarders:
+
+Special
+-->
+
+
+<!--
+Idea - make an event where you're fighting to save an engi ship but theres mantis on board. - super bonus if its crewDead.
+
+-->
+
+
+<!--
+******************************
+	ENGI EVENTLIST     ''   " " "
+********************************
+-->
+
+
+
+<eventList name="ITEMS_ENGI">
+	<event load="ENGI_GIFT"/>
+	<event load="ENGI_FLEET_DELAY"/>
+<!--	<event load="ENGI_MONSTER"/> -->
+	<event load="ENGI_SURRENDER"/>
+
+	<event load="FIND_DRONE"/>
+	<event load="FIND_WEAPON"/>
+	<event load="REFUEL_STATION"/>
+</eventList>
+
+<eventList name="HOSTILE_ENGI">
+	<event load="ENGI_MANTIS_FIGHT"/>
+	<event load="ENGI_REBEL_FIGHT"/>
+	<event load="ENGI_PIRATE_FIGHT"/>
+
+	<event load="PIRATE"/>
+	<event load="PIRATE_CHOICE"/>
+	<event load="REBEL"/>
+	<event load="SQUAT_WARNING"/>
+	<event load="PIRATE_ASTEROID"/>
+	<event load="PIRATE_SUN"/>
+	<event load="PIRATE_NO_ESCAPE"/>
+</eventList>
+
+<eventList name="NEUTRAL_ENGI">
+	<!--<event load="ENGI_UNLOCK_1"/> -->
+	<event load="ENGI_STATION_DISTRESS"/>
+	<event load="MANTIS_FIGHT_CHOICE"/>
+	<event load="MANTIS_CIVILIAN"/>
+
+	<event load="PIRATE_BRIBER"/>
+	<event load="ASTEROID_EXPLORE"/>
+	<event load="BROKEN_REBEL_DRONE"/>
+	<event load="AUTO_DEFENSE_ITEM"/>
+
+	<event load="ALISON_MANTIS_CREW"/> <!-- new alison written event -->
+
+	<event load="ZOLTAN_CREW_STUDY"/>
+
+	<event load="ASTEROID_DERELICT_SHIP"/> <!-- CRYSTAL UNLOCK-->
+
+	<event load="REFUGEE_NO_DISTRESS"/> <!--DLC - newEvents-->
+	<event load="WRECKAGE_EVENT"/> <!--DLC - newEvents-->
+	<event load="FUELING_STATION"/> <!--DLC - newEvents-->
+	<event load="CONFUSED_MANTIS"/> <!--DLC - newEvents-->
+	<event load="ENGI_SEX"/><!--DLC - below-->
+	<event load="ENGI_VIRUS"/> <!--DLC - below-->
+</eventList>
+
+<eventList name="DISTRESS_BEACON_ENGI">
+	<event load="ENGI_STATION_DISTRESS"/>
+	<event load="DISTRESS_ENGI_REBEL"/>
+	<event load="DISTRESS_ENGI_REACTOR"/>
+
+	<event load="CIVILIAN_ASTEROIDS_BEACON"/>
+	<event load="FRIENDLY_BEACON"/>
+	<event load="TRAP_BEACON"/>
+	<event load="DISTRESS_TRAPPED_MINER"/>
+	<event load="DISTRESS_INFESTATION"/>
+	<event load="DISTRESS_SATELLITE_DEFENSE"/>
+</eventList>
+
+<eventList name="QUESTS_ENGI">
+	<event load="QUEST_ESCORT"/>
+	<event load="MERCHANT_REQUEST"/>
+	<event load="FEDERATION_PLANET_SIGNAL"/>
+	<event load="MERCENARY_WORK_START"/>
+</eventList>
+
+
+
+
+
+
+<!--
+*********
+		STRUCTURE!!!
+	Others events necessary for strucrtural stuff
+**********
+-->
+
+<event name="START_BEACON_ENGI">
+	<text load="START_BEACON_ENGI"/>
+</event>
+<textList name="START_BEACON_ENGI">
+	<text id="text_START_BEACON_ENGI_1"/>
+	<text id="text_START_BEACON_ENGI_2"/>
+</textList>
+
+<event name="STORE_ENGI">
+	<text load="STORE_ENGI"/>
+	<store/>
+</event>
+<textList name="STORE_ENGI">
+	<text id="text_STORE_ENGI_1"/>
+	<text id="text_STORE_ENGI_2"/>
+	<text id="text_STORE_ENGI_3"/>
+</textList>
+
+<event name="NOTHING_ENGI">
+	<text load="NOTHING_ENGI"/>
+</event>
+<textList name="NOTHING_ENGI">
+	<text id="text_NOTHING_ENGI_1"/>
+	<text id="text_NOTHING_ENGI_2"/>  <!-- JUSTIN TO DO-  MAKE GREEN PLANET-->
+	<text id="text_NOTHING_ENGI_3"/>
+	<text id="text_NOTHING_ENGI_4"/>
+	<text id="text_NOTHING_ENGI_5"/>
+	<text id="text_NOTHING_ENGI_6"/>
+	<text id="text_NOTHING_ENGI_7"/>
+	<text id="text_NOTHING_ENGI_8"/>
+	<text id="text_NOTHING_ENGI_9"/>
+	<text id="text_NOTHING_ENGI_10"/>
+</textList>
+
+
+
+
+
+
+
+
+<!--
+*********
+		ITEMS!!!
+	Events that give items
+**********
+-->
+
+<event name="ENGI_GIFT">
+	<text load="ENGI_GIFT"/>
+	<autoReward level="RANDOM">standard</autoReward>
+</event>
+<textList name="ENGI_GIFT">
+	<text id="text_ENGI_GIFT_1"/>
+	<text id="text_ENGI_GIFT_2"/>
+	<text id="text_ENGI_GIFT_3"/>
+	<text id="text_ENGI_GIFT_4"/>
+</textList>
+
+<event name="ENGI_FLEET_DELAY" unique="true">
+	<text id="event_ENGI_FLEET_DELAY_text"/>
+	<choice>
+		<text id="event_ENGI_FLEET_DELAY_c1_choice"/>
+		<event>
+			<text id="event_ENGI_FLEET_DELAY_c1_text"/>
+			<item_modify>
+				<item type="missiles" min="-2" max="-2"/>
+			</item_modify>
+			<modifyPursuit amount="-2"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ENGI_FLEET_DELAY_c2_choice"/>
+		<event>
+			<text id="event_ENGI_FLEET_DELAY_c2_text"/>
+			<autoReward level="MED">drone</autoReward>
+		</event>
+	</choice>
+</event>
+
+<event name="ENGI_MONSTER" unique="true">  <!-- TO DO - Need black image!!!!!! JUSTIN!!!! -->
+	<img back="BG_DARK" planet="NONE"/>
+	<text id="event_ENGI_MONSTER_text"/>
+	<choice hidden="true">
+		<text id="event_ENGI_MONSTER_c1_choice"/>
+		<event/>
+	</choice>
+	<choice hidden="true" req="sensors" lvl="3">
+		<text id="event_ENGI_MONSTER_c2_choice"/>
+		<event>
+			<text id="event_ENGI_MONSTER_c2_text"/>
+			<autoReward level="LOW">augment</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true" req="ADV_SCANNERS">
+		<text id="event_ENGI_MONSTER_c3_choice"/>
+		<event>
+			<text id="event_ENGI_MONSTER_c2_text"/>
+			<autoReward level="LOW">augment</autoReward>
+		</event>
+	</choice>
+</event>
+
+
+
+
+<event name="ENGI_SURRENDER" unique="true">
+	<text id="event_ENGI_SURRENDER_text"/>
+	<choice hidden="true">
+		<text id="event_ENGI_SURRENDER_c1_choice"/>
+		<event load="ENGI_SURRENDER_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ENGI_SURRENDER_c2_choice"/>
+		<event>
+			<text id="event_ENGI_SURRENDER_c2_text"/>
+			<autoReward level="RANDOM">standard</autoReward>
+		</event>
+	</choice>
+</event>
+<eventList name="ENGI_SURRENDER_LIST">
+	<event>
+		<text id="event_ENGI_SURRENDER_LIST_1_text"/>
+	</event>
+	<event>
+		<text id="event_ENGI_SURRENDER_LIST_2_text"/>
+		<autoReward level="RANDOM">standard</autoReward>
+	</event>
+</eventList>
+
+
+
+
+
+
+<!--
+*********
+		HOSTILE!!!
+	Events that call up a fight for sure
+**********
+-->
+
+<event name="ENGI_MANTIS_FIGHT">
+	<text load="ENGI_MANTIS_FIGHT"/>
+	<ship load="MANTIS_FIGHT" hostile="true"/>
+</event>
+<textList name="ENGI_MANTIS_FIGHT">
+	<text id="text_ENGI_MANTIS_FIGHT_1"/>
+	<text id="text_ENGI_MANTIS_FIGHT_2"/>
+	<text id="text_ENGI_MANTIS_FIGHT_3"/>
+	<text id="text_ENGI_MANTIS_FIGHT_4"/>
+</textList>
+
+<event name="ENGI_REBEL_FIGHT">
+	<text id="event_ENGI_REBEL_FIGHT_text"/>
+	<ship load="REBEL" hostile="true"/>
+</event>
+
+<event name="ENGI_PIRATE_FIGHT">
+	<text id="event_ENGI_PIRATE_FIGHT_text"/>
+	<ship load="PIRATE" hostile="true"/>
+</event>
+
+
+
+
+<!--
+*********
+		NEUTRAL!!!
+	Events that could have a fight
+**********
+-->
+
+<event name="ENGI_STATION_DISTRESS" unique="false">
+	<text id="event_ENGI_STATION_DISTRESS_text"/>
+	<choice>
+		<text id="event_ENGI_STATION_DISTRESS_c1_choice"/>
+		<event load="ENGI_STATION_DISTRESS_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_ENGI_STATION_DISTRESS_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+<eventList name="ENGI_STATION_DISTRESS_LIST">
+	<event>
+		<text id="event_ENGI_STATION_DISTRESS_LIST_1_text"/>
+		<ship load="ENGI_MANTIS_CONTROLLED" hostile="true"/>
+		<boarders min="1" max="2" class="mantis"/>
+	</event>
+	<event>
+		<text id="event_ENGI_STATION_DISTRESS_LIST_2_text"/>
+		<ship load="MANTIS_ENGI_STATION" hostile="true"/>
+	</event>
+</eventList>
+<eventList name="SAVE_ENGI_STATION">
+	<event>
+		<text id="event_SAVE_ENGI_STATION_1_text"/>
+	</event>
+	<event>
+		<text id="event_SAVE_ENGI_STATION_2_text"/>
+		<autoReward level="MED">fuel_only</autoReward>
+	</event>
+	<event>
+		<text id="event_SAVE_ENGI_STATION_3_text"/>
+		<choice hidden="true">
+			<text id="event_SAVE_ENGI_STATION_3_c1_choice"/>
+			<event>
+				<text id="event_SAVE_ENGI_STATION_3_c1_text"/>
+				<autoReward level="HIGH">fuel</autoReward>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_SAVE_ENGI_STATION_3_c2_choice"/>
+			<event>
+				<text id="event_SAVE_ENGI_STATION_3_c2_text"/>
+				<autoReward level="LOW">weapon</autoReward>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_SAVE_ENGI_STATION_3_c3_choice"/>
+			<event>
+				<text id="event_SAVE_ENGI_STATION_3_c3_text"/>
+				<autoReward level="LOW">drone</autoReward>
+			</event>
+		</choice>
+		<choice req="engi" hidden="true">
+			<text id="event_SAVE_ENGI_STATION_3_c4_choice"/>
+			<event>
+				<text id="event_SAVE_ENGI_STATION_3_c4_text"/>
+				<autoReward level="LOW">weapon</autoReward>
+				<quest event="HIDDEN_FEDERATION_BASE_LIST"/>
+				<damage amount="-10"/>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_SAVE_ENGI_STATION_4_text"/>
+		<crewMember amount="1" class="engi"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+</eventList>
+
+
+
+<!--
+*********
+		DISTRESS!!!
+	Events that havea distress beacon  
+**********
+-->
+
+<event name="DISTRESS_ENGI_REBEL" unique="true">
+	<text id="event_DISTRESS_ENGI_REBEL_text"/>
+	<distressBeacon/>
+	<ship load="DISTRESS_ENGI_REBEL" hostile="true"/>
+</event>
+<event name="DISTRESS_ENGI_REBEL_RESULT">
+	<text id="event_DISTRESS_ENGI_REBEL_RESULT_text"/>
+	<choice hidden="true">
+		<text id="event_DISTRESS_ENGI_REBEL_RESULT_c1_choice"/>
+		<event load="DISTRESS_ENGI_REBEL_LIST1"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_ENGI_REBEL_RESULT_c2_choice"/>
+		<event load="DISTRESS_ENGI_REBEL_LIST2"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_ENGI_REBEL_RESULT_c3_choice"/>
+		<event>
+			<text id="event_DISTRESS_ENGI_REBEL_RESULT_c3_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="DISTRESS_ENGI_REBEL_LIST1">
+	<event>
+		<text id="event_DISTRESS_ENGI_REBEL_LIST1_1_text"/>
+		<item_modify>
+			<item type="scrap" min="-25" max="-25"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_DISTRESS_ENGI_REBEL_LIST1_2_text"/>
+		<weapon name="BOMB_HEAL"/>
+		<item_modify>
+			<item type="scrap" min="-25" max="-25"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_DISTRESS_ENGI_REBEL_LIST1_3_text"/>
+		<drone name="RANDOM"/>
+		<item_modify>
+			<item type="scrap" min="-25" max="-25"/>
+		</item_modify>
+	</event>
+</eventList>
+<event name="DISTRESS_ENGI_REBEL_LIST2">
+	<text id="event_DISTRESS_ENGI_REBEL_LIST2_text"/>
+	<item_modify>
+		<item type="scrap" min="-40" max="-40"/>
+		<item type="fuel" min="-2" max="-2"/>
+		<item type="missiles" min="-2" max ="-2"/>
+	</item_modify>
+	<augment name="NANO_MEDBAY"/>
+</event>
+
+
+
+<event name="DISTRESS_ENGI_REACTOR" unique="true">
+	<text id="event_DISTRESS_ENGI_REACTOR_text"/>
+	<distressBeacon/>
+	<choice hidden="true">
+		<text id="event_DISTRESS_ENGI_REACTOR_c1_choice"/>
+		<event load="DISTRESS_ENGI_REACTOR_LIST1"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_ENGI_REACTOR_c2_choice"/>
+		<event>
+			<text id="event_DISTRESS_ENGI_REACTOR_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="sensors" lvl="2">
+		<text id="event_DISTRESS_ENGI_REACTOR_c3_choice"/>
+		<event load="DISTRESS_ENGI_REACTOR_SCAN"/>
+	</choice>
+	<choice hidden="true" req="ADV_SCANNERS">
+		<text id="event_DISTRESS_ENGI_REACTOR_c4_choice"/>
+		<event load="DISTRESS_ENGI_REACTOR_SCAN"/>
+	</choice>
+</event>
+<eventList name="DISTRESS_ENGI_REACTOR_LIST1">
+	<event>
+		<text id="event_DISTRESS_ENGI_REACTOR_LIST1_1_text"/>
+	</event>
+	<event>
+		<text id="event_DISTRESS_ENGI_REACTOR_LIST1_2_text"/>
+		<choice hidden="true">
+			<text id="event_DISTRESS_ENGI_REACTOR_LIST1_2_c1_choice"/>
+			<event load="DISTRESS_ENGI_REACTOR_ENGI"/>
+		</choice>
+		<choice hidden="true">
+			<text id="event_DISTRESS_ENGI_REACTOR_LIST1_2_c2_choice"/>
+			<event load="DISTRESS_ENGI_REACTOR_DRONE"/>
+		</choice>
+		<choice hidden="true">
+			<text id="event_DISTRESS_ENGI_REACTOR_LIST1_2_c3_choice"/>
+			<event>
+				<text id="event_DISTRESS_ENGI_REACTOR_LIST1_2_c3_text"/>
+				<autoReward level="LOW">scrap_only</autoReward>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<eventList name="DISTRESS_ENGI_REACTOR_ENGI">
+	<event>
+		<text id="event_DISTRESS_ENGI_REACTOR_ENGI_1_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_DISTRESS_ENGI_REACTOR_ENGI_1_c0_clone"/>
+		</removeCrew>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_DISTRESS_ENGI_REACTOR_ENGI_1_c1_text"/>
+				<crewMember amount="1" class="engi"/>
+				<autoReward level="LOW">scrap_only</autoReward>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_DISTRESS_ENGI_REACTOR_ENGI_2_text"/>
+		<crewMember amount="1" class="engi"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+</eventList>
+<eventList name="DISTRESS_ENGI_REACTOR_DRONE">
+	<event>
+		<text id="event_DISTRESS_ENGI_REACTOR_DRONE_1_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_DISTRESS_ENGI_REACTOR_DRONE_1_c0_clone"/>
+		</removeCrew>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_DISTRESS_ENGI_REACTOR_DRONE_2_text"/>
+		<autoReward level="LOW">drone</autoReward>
+	</event>
+</eventList>
+<event name="DISTRESS_ENGI_REACTOR_SCAN">
+	<text id="event_DISTRESS_ENGI_REACTOR_SCAN_text"/>
+	<choice hidden="true">
+		<text id="event_DISTRESS_ENGI_REACTOR_SCAN_c1_choice"/>
+		<event>
+			<text id="event_DISTRESS_ENGI_REACTOR_SCAN_c1_text"/>
+			<crewMember amount="1" class="engi"/>
+			<autoReward level="LOW">scrap_only</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_ENGI_REACTOR_SCAN_c2_choice"/>
+		<event>
+			<text id="event_DISTRESS_ENGI_REACTOR_SCAN_c2_text"/>
+			<autoReward level="LOW">drone</autoReward>
+		</event>
+	</choice>
+</event>
+
+
+<!--
+*********
+		SPECIAL!!!
+	Unique events
+**********
+-->
+
+<event name="ENGI_UNLOCK_1" unique="true">
+	<text id="event_ENGI_UNLOCK_1_text"/>
+	<choice>
+		<text id="event_ENGI_UNLOCK_1_c1_choice"/>
+		<event>
+			<text id="event_ENGI_UNLOCK_1_c1_text"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_ENGI_UNLOCK_1_c2_choice"/>
+		<event>
+			<text id="event_ENGI_UNLOCK_1_c2_text"/>
+		</event>
+	</choice>
+	<choice req="engi" hidden="true">
+		<text id="event_ENGI_UNLOCK_1_c3_choice"/>
+		<event>
+			<text id="event_ENGI_UNLOCK_1_c3_text"/>
+			<choice>
+				<text id="event_ENGI_UNLOCK_1_c3_c1_choice"/>
+				<event>
+					<text id="event_ENGI_UNLOCK_1_c3_c1_text"/>
+					<quest event="ENGI_UNLOCK_2REAL"/>
+					<choice>
+						<text id="continue"/>
+						<event>
+							<quest event="ENGI_UNLOCK_2FAKE"/>
+							<text id="event_ENGI_UNLOCK_1_c3_c1_c1_text"/>
+							<choice>
+								<text id="event_ENGI_UNLOCK_1_c3_c1_c1_c1_choice"/>
+								<event/>
+							</choice>
+						</event>
+					</choice>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<event name="ENGI_UNLOCK_2FAKE">
+	<text id="event_ENGI_UNLOCK_2FAKE_text"/>
+	<ship load="REBEL_ENGI_UNLOCK_2FAKE" hostile="true"/>
+</event>
+<event name="ENGI_UNLOCK_2FAKE_SURRENDER">
+	<text id="event_ENGI_UNLOCK_2FAKE_SURRENDER_text"/>
+	<choice>
+		<text id="event_ENGI_UNLOCK_2FAKE_SURRENDER_c1_choice"/>
+		<event>
+			<text id="event_ENGI_UNLOCK_2FAKE_SURRENDER_c1_text"/>
+			<choice>
+				<text id="event_ENGI_UNLOCK_2FAKE_SURRENDER_c1_c1_choice"/>
+				<event>
+					<ship hostile="false"/>
+				</event>
+			</choice>
+			<choice>
+				<text id="event_ENGI_UNLOCK_2FAKE_SURRENDER_c1_c2_choice"/>
+				<event>
+					<text id="event_ENGI_UNLOCK_2FAKE_SURRENDER_c1_c2_text"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<event name="ENGI_UNLOCK_2REAL">
+	<text id="event_ENGI_UNLOCK_2REAL_text"/>
+	<ship load="REBEL_ENGI_UNLOCK_2REAL" hostile="true"/>
+</event>
+<event name="ENGI_UNLOCK_2REAL_SURRENDER">
+	<text id="event_ENGI_UNLOCK_2REAL_SURRENDER_text"/>
+	<choice>
+		<text id="event_ENGI_UNLOCK_2REAL_SURRENDER_c1_choice"/>
+		<event>
+			<text id="event_ENGI_UNLOCK_2REAL_SURRENDER_c1_text"/>
+			<quest event="ENGI_UNLOCK_3"/>
+			<choice>
+				<text id="event_ENGI_UNLOCK_2REAL_SURRENDER_c1_c1_choice"/>
+				<event>
+					<text id="event_ENGI_UNLOCK_2REAL_SURRENDER_c1_c1_text"/>
+					<ship hostile="false"/>
+				</event>
+			</choice><!--   REMOVED THIS TO PREVENT DOUBLE QUESTS
+			<choice>
+				<text>Ignore him and attack.</text>
+				<event>
+					<text>"But we..." You cut the transmission and prepare an FTL message containing the coordinates to send to the Engies. You then focus on the battle.</text>
+				</event>
+			</choice>-->
+		</event>
+	</choice>
+</event>
+<event name="ENGI_UNLOCK_3">
+	<text id="event_ENGI_UNLOCK_3_text"/>
+	<ship load="MANTIS_ENGI_UNLOCK_3" hostile="true"/>
+</event>
+<event name="ENGI_UNLOCK_4">
+	<text id="event_ENGI_UNLOCK_4_text"/>
+	<choice>
+		<text id="event_ENGI_UNLOCK_4_c1_choice"/>
+		<event>
+			<text id="event_ENGI_UNLOCK_4_c1_text"/>
+			<choice hidden="true">
+				<text id="event_ENGI_UNLOCK_4_c1_c1_choice"/>
+				<event>
+					<text id="event_ENGI_UNLOCK_4_c1_c1_text"/>
+					<damage amount="-20"/>
+					<autoReward level="HIGH">standard</autoReward>
+					<augment name="SYSTEM_CASING"/>
+					<unlockShip id="1"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+
+
+
+
+
+
+
+<!--
+
+***************************************
+		DLC!!!
+	Events added with the DLC
+***************************************
+
+-->
+
+
+
+<event name="ENGI_SEX" unique="true">
+	<text id="event_ENGI_SEX_text"/>
+	<choice hidden="true">
+		<text id="event_ENGI_SEX_c1_choice"/>
+		<event>
+			<text id="event_ENGI_SEX_c1_text"/>
+			<ship load="ENGI_SEX_SHIP" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ENGI_SEX_c2_choice"/>
+		<event/>
+	</choice>
+	<choice req="engi">
+		<text id="event_ENGI_SEX_c3_choice"/>
+		<event>
+			<text id="event_ENGI_SEX_c3_text"/>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event>
+					<text id="event_ENGI_SEX_c3_c1_text"/>
+					<autoReward level="MEDIUM">stuff</autoReward>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<ship name="ENGI_SEX_SHIP" auto_blueprint="SHIPS_CIRCLE">
+	<destroyed>
+		<text id="ship_ENGI_SEX_SHIP_destroyed_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ENGI_SEX_SHIP_DONE"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ENGI_SEX_SHIP_deadCrew_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ENGI_SEX_SHIP_DONE"/>
+		</choice>
+	</deadCrew>
+</ship>
+<event name="ENGI_SEX_SHIP_DONE">
+	<text id="event_ENGI_SEX_SHIP_DONE_text"/>
+</event>
+
+
+<!-- Right now you can get this more than once in a game.  Dunno how good that is -->
+<event name="ENGI_VIRUS" unique="true">
+	<text id="event_ENGI_VIRUS_text"/>
+	<choice>
+		<text id="continue"/>
+		<event>
+			<text id="event_ENGI_VIRUS_c1_text"/>
+			<choice hidden="true">
+				<text id="event_ENGI_VIRUS_c1_c1_choice"/>
+				<event>
+					<text id="event_ENGI_VIRUS_c1_c1_text"/>
+					<status type="divide" target="player" system="shields" amount="2"/>
+					<status type="divide" target="player" system="engines" amount="2"/>
+					<ship load="ENGI_VIRUS_SHIP" hostile="true"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_ENGI_VIRUS_c1_c2_choice"/>
+				<event>
+					<text id="event_ENGI_VIRUS_c1_c2_text"/>
+					<ship load="ENGI_VIRUS_SHIP" hostile="true"/>
+				</event>
+			</choice>
+			<choice req="hacking" lvl="1" max_group="0" hidden="true">
+				<text id="event_ENGI_VIRUS_c1_c3_choice"/>
+				<event>
+					<text id="event_ENGI_VIRUS_c1_c3_text"/>
+					<choice hidden="true">
+						<text id="continue"/>
+						<event>
+							<text id="event_ENGI_VIRUS_c1_c3_c1_text"/>
+							<autoReward level="LOW">standard</autoReward>
+							<augment name="DRONE_SPEED"/>
+						</event>
+					</choice>
+				</event>
+			</choice>
+			<choice req="hacking" lvl="2" max_group="0" hidden="true">
+				<text id="event_ENGI_VIRUS_c1_c4_choice"/>
+				<event>
+					<text id="event_ENGI_VIRUS_c1_c4_text"/>
+					<choice hidden="true">
+						<text id="continue"/>
+						<event>
+							<text id="event_ENGI_VIRUS_c1_c4_c1_text"/>
+							<damage amount="-15"/>
+							<upgrade amount="1" system="reactor"/>
+							<choice hidden="true">
+								<text id="continue"/>
+								<event>
+									<text id="event_ENGI_VIRUS_c1_c3_c1_text"/>
+									<augment name="DRONE_SPEED"/>
+								</event>
+							</choice>
+						</event>
+					</choice>
+				</event>
+			</choice>
+			<choice req="hacking" lvl="3" max_group="0" hidden="true">
+				<text id="event_ENGI_VIRUS_c1_c5_choice"/>
+				<event>
+					<text id="event_ENGI_VIRUS_c1_c4_text"/>
+					<choice hidden="true">
+						<text id="continue"/>
+						<event>
+							<text id="event_ENGI_VIRUS_c1_c4_c1_text"/>
+							<damage amount="-30"/>
+							<upgrade amount="1" system="reactor"/>
+							<choice hidden="true">
+								<text id="continue"/>
+								<event>
+									<text id="event_ENGI_VIRUS_c1_c3_c1_text"/>
+									<augment name="DRONE_SPEED"/>
+								</event>
+							</choice>
+						</event>
+					</choice>
+				</event>
+			</choice>
+			<choice req="anaerobic" hidden="true">
+				<text id="event_ENGI_VIRUS_c1_c6_choice"/>
+				<event>
+					<text id="event_ENGI_VIRUS_c1_c6_text"/>
+					<autoReward level="MEDIUM">scrap_only</autoReward>
+					<augment name="DRONE_SPEED"/>
+				</event>
+			</choice>
+			<choice req="engi" hidden="true">
+				<text id="event_ENGI_VIRUS_c1_c7_choice"/>
+				<event>
+					<text id="event_ENGI_VIRUS_c1_c7_text"/>
+					<ship load="ENGI_VIRUS_SHIP_ALT" hostile="true"/>
+					<removeCrew class="engi">
+						<clone>false</clone>
+						<text id="event_ENGI_VIRUS_c1_c7_c0_clone"/>
+					</removeCrew>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<ship name="ENGI_VIRUS_SHIP" auto_blueprint="SHIPS_CIRCLE">
+	<destroyed>
+		<text id="ship_ENGI_VIRUS_SHIP_destroyed_text"/>
+		<autoReward level="MEDIUM">standard</autoReward>
+		<status type="clear" target="player" system="engines" amount="100"/>
+		<status type="clear" target="player" system="shields" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ENGI_VIRUS_SHIP_deadCrew_text"/>
+		<autoReward level="MEDIUM">standard</autoReward>
+		<status type="clear" target="player" system="engines" amount="100"/>
+		<status type="clear" target="player" system="shields" amount="100"/>
+	</deadCrew>
+</ship>
+<ship name="ENGI_VIRUS_SHIP_ALT" auto_blueprint="SHIPS_CIRCLE">
+	<destroyed>
+		<text id="ship_ENGI_VIRUS_SHIP_ALT_destroyed_text"/>
+		<autoReward level="MEDIUM">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ENGI_VIRUS_REBORN"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ENGI_VIRUS_SHIP_ALT_deadCrew_text"/>
+		<autoReward level="MEDIUM">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ENGI_VIRUS_REBORN"/>
+		</choice>
+	</deadCrew>
+</ship>
+<event name="ENGI_VIRUS_REBORN">
+	<text id="event_ENGI_VIRUS_REBORN_text"/>
+	<crewMember amount="1" class="engi" all_skills="2" id="name_Virus"/>
+</event>
+</FTL>

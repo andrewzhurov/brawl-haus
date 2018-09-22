@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+			SUMMARY  - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+
+Structure:
+	NO_FUEL_FLEET
+
+No Beacon:    	NO_FUEL (this is a list)
+	FUEL_FLEET_DELAY
+	FUEL_NOTHING
+	FUEL_TRADER
+	FUEL_EXPLORE
+	FUEL_APPROACH
+
+Beacon:    NO_FUEL_DISTRESS (this is a list)
+	FUEL_FLEET_DISTRESS
+	FUEL_NOTHING_DISTRESS
+	FUEL_SELLER_DISTRESS
+	FUEL_TRADER_DISTRESS
+
+Sector Specific:
+
+-->
+
+
+
+
+
+
+
+
+<!-- NO FUEL stuff -->
+
+<event name="NO_FUEL_FLEET">
+	<text id="event_NO_FUEL_FLEET_text"/>
+	<ship load = "REBEL_FLEET_FUEL" hostile ="true"/>
+	<fleet>rebel</fleet>
+</event>
+
+<event name="NO_FUEL_FLEET_DLC">
+	<text id="event_NO_FUEL_FLEET_DLC_text"/>
+	<ship load = "REBEL_FLEET_FUEL" hostile ="true"/>
+	<fleet>rebel</fleet>
+	<environment type="PDS" target="player"/>
+</event>
+
+
+
+
+
+
+
+
+
+
+<!--
+*****************
+DEFAULT FUEL EVENTS
+Beacon Off.....
+******************
+-->
+<eventList name="NO_FUEL">
+	<event load="FUEL_FLEET_DELAY"/>
+
+	<event load="FUEL_NOTHING"/>
+	<event load="FUEL_NOTHING"/>
+	<event load="FUEL_NOTHING"/>
+	<event load="FUEL_NOTHING"/>
+
+	<event load="FUEL_TRADER"/>
+	<event load="FUEL_EXPLORE"/>
+	<event load="FUEL_APPROACH"/>
+	<event load="FUEL_OFF_ENGI_DUBIOUS"/>
+	<event load="FUEL_OFF_ROCK_WRECK"/>
+
+	<event load="NO_FUEL_REFUGEE_FRIENDLY"/> <!-- DLC - below -->
+</eventList>
+
+<event name="FUEL_FLEET_DELAY">
+	<text load="FUEL_FLEET_DELAY_LIST"/>
+	<modifyPursuit amount="-1"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event load="NO_FUEL"/>
+	</choice>
+</event>
+<textList name="FUEL_FLEET_DELAY_LIST">
+	<text id="text_FUEL_FLEET_DELAY_LIST_1"/>
+	<text id="text_FUEL_FLEET_DELAY_LIST_2"/>
+	<text id="text_FUEL_FLEET_DELAY_LIST_3"/>
+	<text id="text_FUEL_FLEET_DELAY_LIST_4"/>
+	<text id="text_FUEL_FLEET_DELAY_LIST_5"/>
+	<text id="text_FUEL_FLEET_DELAY_LIST_6"/>
+	<text id="text_FUEL_FLEET_DELAY_LIST_7"/>
+</textList>
+
+<event name="FUEL_NOTHING">
+	<text load="FUEL_NOTHING_LIST"/>
+</event>
+<textList name="FUEL_NOTHING_LIST">
+	<text id="text_FUEL_NOTHING_LIST_1"/>
+	<text id="text_FUEL_NOTHING_LIST_2"/>
+	<text id="text_FUEL_NOTHING_LIST_3"/>
+	<text id="text_FUEL_NOTHING_LIST_4"/>
+	<text id="text_FUEL_NOTHING_LIST_5"/>
+	<text id="text_FUEL_NOTHING_LIST_6"/>
+	<text id="text_FUEL_NOTHING_LIST_7"/>
+	<text id="text_FUEL_NOTHING_LIST_8"/>
+	<text id="text_FUEL_NOTHING_LIST_9"/>
+	<text id="text_FUEL_NOTHING_LIST_10"/>
+	<text id="text_FUEL_NOTHING_LIST_11"/>
+</textList>
+
+<event name="FUEL_TRADER">   <!-- this continues in the DISTRESS section -->
+	<text load="FUEL_TRADER_TEXT_LIST"/>
+	<ship load="CIVILIAN_SHIP" hostile="false"/>
+	<choice>
+		<text id="event_FUEL_TRADER_c1_choice"/>
+		<event load="FUEL_TRADER_HIGH_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_FUEL_TRADER_c2_choice"/>
+		<event load="FUEL_TRADER_PT2"/>
+	</choice>
+</event>
+<textList name="FUEL_TRADER_TEXT_LIST">
+	<text id="text_FUEL_TRADER_TEXT_LIST_1"/>
+	<text id="text_FUEL_TRADER_TEXT_LIST_2"/>
+	<text id="text_FUEL_TRADER_TEXT_LIST_3"/>
+	<text id="text_FUEL_TRADER_TEXT_LIST_4"/>
+	<text id="text_FUEL_TRADER_TEXT_LIST_5"/>
+</textList>
+
+<event name="FUEL_EXPLORE">
+	<text id="event_FUEL_EXPLORE_text"/>
+	<choice hidden="true">
+		<text id="event_FUEL_EXPLORE_c1_choice"/>
+		<event load="FUEL_EXPLORE_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_FUEL_EXPLORE_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+<eventList name="FUEL_EXPLORE_LIST">
+	<event>
+		<text id="event_FUEL_EXPLORE_LIST_1_text"/>
+		<choice hidden="true">
+			<text id="event_FUEL_EXPLORE_LIST_1_c1_choice"/>
+			<event load="ASTEROID_EXPLORE_RESULTS"/>
+		</choice>
+		<choice>
+			<text id="event_FUEL_EXPLORE_LIST_1_c2_choice"/>
+			<event/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_FUEL_EXPLORE_LIST_2_text"/>
+		<choice hidden="true">
+			<text id="event_FUEL_EXPLORE_LIST_2_c1_choice"/>
+			<event>
+				<text id="event_FUEL_EXPLORE_LIST_2_c1_text"/>
+				<item_modify>
+					<item type="fuel" min="5" max="5"/>
+					<item type="scrap" min="-20" max="-20"/>
+				</item_modify>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_FUEL_EXPLORE_LIST_2_c2_choice"/>
+			<event>
+				<text id="event_FUEL_EXPLORE_LIST_2_c2_text"/>
+				<item_modify>
+					<item type="fuel" min="2" max="2"/>
+					<item type="scrap" min="-10" max="-10"/>
+				</item_modify>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_FUEL_EXPLORE_LIST_2_c3_choice"/>
+			<event>
+				<text id="event_FUEL_EXPLORE_LIST_2_c3_text"/>
+				<item_modify>
+					<item type="fuel" min="1" max="1"/>
+					<item type="scrap" min="-5" max="-5"/>
+				</item_modify>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_FUEL_EXPLORE_LIST_2_c4_choice"/>
+			<event/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_FUEL_EXPLORE_LIST_3_text"/>
+	</event>
+	<event>
+		<text id="event_FUEL_EXPLORE_LIST_4_text"/>
+		<ship load="REBEL_AUTO_FUEL" hostile="true"/>
+	</event>
+</eventList>
+
+<event name="FUEL_APPROACH">
+	<text id="event_FUEL_APPROACH_text"/>
+	<choice hidden="true">
+		<text id="event_FUEL_APPROACH_c1_choice"/>
+		<event load="FUEL_APPROACH_ACCEPT_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_FUEL_APPROACH_c2_choice"/>
+		<event load="FUEL_APPROACH_DECLINE_LIST"/>
+	</choice>
+	<choice hidden="true" req="sensors" lvl="3">
+		<text id="event_FUEL_APPROACH_c3_choice"/>
+		<event load="FUEL_APPROACH_SCAN_LIST"/>
+	</choice>
+	<choice hidden="true" req="ADV_SCANNERS">
+		<text id="event_FUEL_APPROACH_c4_choice"/>
+		<event load="FUEL_APPROACH_SCAN_LIST"/>
+	</choice>
+</event>
+<eventList name="FUEL_APPROACH_ACCEPT_LIST">
+	<event>
+		<text id="event_FUEL_APPROACH_ACCEPT_LIST_1_text"/>
+		<ship load="CIVILIAN_SHIP" hostile="false"/>
+		<item_modify>
+			<item type="fuel" min="2" max="6"/>
+		</item_modify>
+	</event>
+	<event>   <!-- this continues in the DISTRESS section -->
+		<text id="event_FUEL_APPROACH_ACCEPT_LIST_2_text"/>
+		<ship load="CIVILIAN_SHIP" hostile="false"/>
+		<choice>
+			<text id="event_FUEL_APPROACH_ACCEPT_LIST_2_c1_choice"/>
+			<event load="FUEL_TRADER_HIGH_LIST"/>
+		</choice>
+		<choice>
+			<text id="event_FUEL_APPROACH_ACCEPT_LIST_2_c2_choice"/>
+			<event load="FUEL_TRADER_PT2"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_FUEL_APPROACH_ACCEPT_LIST_3_text"/>
+		<ship load="PIRATE_FUEL" hostile="true"/>
+		<boarders min="2" max="3" class="human"/>
+	</event>
+	<event>
+		<text id="event_FUEL_APPROACH_ACCEPT_LIST_4_text"/>
+		<ship load="PIRATE" hostile="true"/>
+	</event>
+</eventList>
+<eventList name="FUEL_APPROACH_DECLINE_LIST">
+	<event>
+		<text id="event_FUEL_APPROACH_DECLINE_LIST_1_text"/>
+		<ship load="CIVILIAN_SHIP" hostile="false"/>
+		<item_modify>
+			<item type="fuel" min="1" max="4"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_FUEL_APPROACH_DECLINE_LIST_2_text"/>
+	</event>
+	<event>
+		<text id="event_FUEL_APPROACH_DECLINE_LIST_3_text"/>
+		<ship load="PIRATE_FUEL" hostile="true"/>
+	</event>
+</eventList>
+<eventList name="FUEL_APPROACH_SCAN_LIST">
+	<event>
+		<text id="event_FUEL_APPROACH_SCAN_LIST_1_text"/>
+		<item_modify>
+			<item type="fuel" min="3" max="7"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_FUEL_APPROACH_SCAN_LIST_2_text"/>
+		<choice>
+			<text id="event_FUEL_APPROACH_SCAN_LIST_2_c1_choice"/>
+			<event>
+				<ship load="PIRATE_FUEL" hostile="true"/>
+			</event>
+		</choice>
+		<choice req="cloaking" hidden="true">
+			<text id="event_FUEL_APPROACH_SCAN_LIST_2_c2_choice"/>
+			<event>
+				<text id="event_FUEL_APPROACH_SCAN_LIST_2_c2_text"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+
+
+
+
+
+
+
+
+<!--
+*****************
+DEFAULT FUEL EVENTS
+Beacon On!!!!
+******************
+-->
+
+
+<eventList name="NO_FUEL_DISTRESS">
+	<event load="FUEL_NOTHING_DISTRESS"/>
+	<event load="FUEL_NOTHING_DISTRESS"/>
+
+	<event load="FUEL_SELLER_DISTRESS"/>
+	<event load="FUEL_TRADER_DISTRESS"/>
+	<event load="FUEL_EXPLORE"/>
+	<event load="FUEL_APPROACH"/>
+	<event load="FUEL_ON_SLUG_OVERPRICED"/>
+	<event load="FUEL_ON_SLUG_CHUCKLE"/>
+	<event load="FUEL_ON_MANTIS_ATTACK"/>
+	<event load="FUEL_ON_REBEL_WARNING"/>
+	<event load="FUEL_ON_REBEL_ATTACK"/>
+
+	<event load="NO_FUEL_REFUGEE"/> <!-- DLC - below -->
+</eventList>
+
+
+
+
+
+<!-- MATT FIXME - IS THIS A REPEAT -->
+<event name="FUEL_FLEET_DISTRESS">
+	<text load="FUEL_FLEET_DISTRESS_LIST"/>
+	<modifyPursuit amount="1"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event load="NO_FUEL"/>
+	</choice>
+</event>
+<textList name="FUEL_FLEET_DISTRESS_LIST">
+	<text id="text_FUEL_FLEET_DISTRESS_LIST_1"/>
+	<text id="text_FUEL_FLEET_DISTRESS_LIST_2"/>
+	<text id="text_FUEL_FLEET_DISTRESS_LIST_3"/>
+	<text id="text_FUEL_FLEET_DISTRESS_LIST_4"/>
+	<text id="text_FUEL_FLEET_DISTRESS_LIST_5"/>
+	<text id="text_FUEL_FLEET_DISTRESS_LIST_6"/>
+	<text id="text_FUEL_FLEET_DISTRESS_LIST_7"/>
+</textList>
+<!--***-->
+
+
+<event name="FUEL_NOTHING_DISTRESS">
+	<text load="FUEL_NOTHING_DISTRESS_LIST"/>
+</event>
+<textList name="FUEL_NOTHING_DISTRESS_LIST">
+	<text id="text_FUEL_NOTHING_DISTRESS_LIST_1"/>
+	<text id="text_FUEL_NOTHING_DISTRESS_LIST_2"/>
+	<text id="text_FUEL_NOTHING_DISTRESS_LIST_3"/>
+	<text id="text_FUEL_NOTHING_DISTRESS_LIST_4"/>
+	<text id="text_FUEL_NOTHING_DISTRESS_LIST_5"/>
+	<text id="text_FUEL_NOTHING_DISTRESS_LIST_6"/>
+	<text id="text_FUEL_NOTHING_DISTRESS_LIST_7"/>
+</textList>
+
+<event name="FUEL_SELLER_DISTRESS">
+	<ship load="AUTO_FUEL_SELLER" hostile="false"/>
+	<text id="event_FUEL_SELLER_DISTRESS_text"/>
+	<choice hidden="true">
+		<text id="event_FUEL_SELLER_DISTRESS_c1_choice"/>
+		<event>
+			<text id="event_FUEL_SELLER_DISTRESS_c1_text"/>
+			<autoReward level="LOW">fuel_only</autoReward>
+		</event>
+	</choice>
+	<choice hidden="false">
+		<text id="event_FUEL_SELLER_DISTRESS_c2_choice"/>
+		<event>
+			<text id="event_FUEL_SELLER_DISTRESS_c2_text"/>
+			<item_modify>
+				<item type="fuel" min="5" max="5"/>
+				<item type="scrap" min="-20" max="-20"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="false">
+		<text id="event_FUEL_SELLER_DISTRESS_c3_choice"/>
+		<event>
+			<text id="event_FUEL_SELLER_DISTRESS_c2_text"/>
+			<item_modify>
+				<item type="fuel" min="2" max="2"/>
+				<item type="scrap" min="-8" max="-8"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_FUEL_SELLER_DISTRESS_c4_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+</event>
+
+
+
+
+<!-- This number of events offers the players a bad trade, then if they say no, a chance for a better trade, and if no again, a chance for just some charity. -->
+<event name="FUEL_TRADER_DISTRESS">
+	<text load="FUEL_TRADER_DISTRESS_TEXT_LIST"/>
+	<ship load="CIVILIAN_SHIP" hostile="false"/>
+	<choice>
+		<text id="event_FUEL_TRADER_DISTRESS_c1_choice"/>
+		<event load="FUEL_TRADER_HIGH_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_FUEL_TRADER_DISTRESS_c2_choice"/>
+		<event load="FUEL_TRADER_PT2"/>
+	</choice>
+</event>
+<textList name="FUEL_TRADER_DISTRESS_TEXT_LIST">
+	<text id="text_FUEL_TRADER_DISTRESS_TEXT_LIST_1"/>
+	<text id="text_FUEL_TRADER_DISTRESS_TEXT_LIST_2"/>
+	<text id="text_FUEL_TRADER_DISTRESS_TEXT_LIST_3"/>
+	<text id="text_FUEL_TRADER_DISTRESS_TEXT_LIST_4"/>
+</textList>
+<eventList name="FUEL_TRADER_HIGH_LIST">
+	<event>
+		<item_modify>
+			<item type="fuel" min="2" max="4"/>
+			<item type="drones" min="-2" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<item_modify>
+			<item type="fuel" min="2" max="5"/>
+			<item type="missiles" min="-4" max="-2"/>
+		</item_modify>
+	</event>
+	<event>
+		<item_modify>
+			<item type="fuel" min="2" max="5"/>
+			<item type="scrap" min="-25" max="-15"/>
+		</item_modify>
+	</event>
+</eventList>
+<eventList name="FUEL_TRADER_PT2"> <!-- this list is if the player cant afford the initial trade, he'll either give up and leave or give a second cheaper offer.-->
+	<event>
+		<text id="event_FUEL_TRADER_PT2_1_text"/>
+		<choice>
+			<text id="event_FUEL_TRADER_PT2_1_c1_choice"/>
+			<event load="FUEL_TRADER_LOW_LIST"/>
+		</choice>
+		<choice hidden="true">
+			<text id="event_FUEL_TRADER_PT2_1_c2_choice"/>
+			<event load="FUEL_TRADER_PT3"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_FUEL_TRADER_PT2_2_text"/>
+		<choice>
+			<text id="event_FUEL_TRADER_PT2_1_c1_choice"/>
+			<event load="FUEL_TRADER_HIGH_LIST"/>
+		</choice>
+		<choice>
+			<text id="event_FUEL_TRADER_PT2_2_c2_choice"/>
+			<event>
+				<text id="event_FUEL_TRADER_PT2_2_c2_text"/>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_FUEL_TRADER_PT2_3_text"/>
+	</event>
+</eventList>
+<eventList name="FUEL_TRADER_LOW_LIST">
+	<event>
+		<item_modify>
+			<item type="fuel" min="4" max="7"/>
+			<item type="drones" min="-2" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<item_modify>
+			<item type="fuel" min="4" max="7"/>
+			<item type="missiles" min="-2" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<item_modify>
+			<item type="fuel" min="3" max="7"/>
+			<item type="scrap" min="-12" max="-5"/>
+		</item_modify>
+	</event>
+</eventList>
+<eventList name="FUEL_TRADER_PT3">
+	<event>
+		<text id="event_FUEL_TRADER_PT3_1_text"/>
+		<item_modify>
+			<item type="fuel" min="1" max="6"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_FUEL_TRADER_PT3_2_text"/>
+	</event>
+</eventList>
+<!--END NO_FUEL_TRADER STUFF-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+*********
+		Non sector specific new events
+**********
+-->
+
+
+<event name="FUEL_ON_REBEL_ATTACK">
+	<text load="FUEL_ON_REBEL_ATTACK"/>
+	<ship load="REBEL_FUEL" hostile="true"/>
+</event>
+<textList name="FUEL_ON_REBEL_ATTACK">
+	<text id="text_FUEL_ON_REBEL_ATTACK_1"/>
+	<text id="text_FUEL_ON_REBEL_ATTACK_2"/>
+	<text id="text_FUEL_ON_REBEL_ATTACK_3"/>
+	<text id="text_FUEL_ON_REBEL_ATTACK_4"/>
+</textList>
+
+
+<event name="FUEL_ON_REBEL_WARNING">
+	<text id="event_FUEL_ON_REBEL_WARNING_text"/>
+	<ship load="REBEL_AUTO_WARNING" hostile="true"/>
+</event>
+
+
+<!--
+*********
+		ENGI
+		Specific no fuel events that should eventually be tied to the engi sector
+**********
+-->
+
+<event name="FUEL_OFF_ENGI_DUBIOUS">
+	<text id="event_FUEL_OFF_ENGI_DUBIOUS_text"/>
+	<ship load="FUEL_OFF_ENGI_DUBIOUS" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_FUEL_OFF_ENGI_DUBIOUS_c1_choice"/>
+		<event load="FUEL_OFF_ENGI_DUBIOUS_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_FUEL_OFF_ENGI_DUBIOUS_c2_choice"/>
+		<event>
+			<text id="event_FUEL_OFF_ENGI_DUBIOUS_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="SHIP_REPAIR">
+		<text id="event_FUEL_OFF_ENGI_DUBIOUS_c3_choice"/>
+		<event>
+			<text id="event_FUEL_OFF_ENGI_DUBIOUS_c3_text"/>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+				<item type="fuel" min="4" max="6"/>
+			</item_modify>
+		</event>
+	</choice>
+</event>
+<eventList name="FUEL_OFF_ENGI_DUBIOUS_LIST">
+	<event>
+		<text id="event_FUEL_OFF_ENGI_DUBIOUS_LIST_1_text"/>
+	</event>
+	<event>
+		<text id="event_FUEL_OFF_ENGI_DUBIOUS_LIST_2_text"/>
+		<ship hostile="true"/>
+	</event>
+	<event>
+		<text id="event_FUEL_OFF_ENGI_DUBIOUS_LIST_3_text"/>
+		<choice>
+			<text id="event_FUEL_OFF_ENGI_DUBIOUS_LIST_3_c1_choice"/>
+			<event>
+				<text id="event_FUEL_OFF_ENGI_DUBIOUS_LIST_3_c1_text"/>
+				<item_modify>
+					<item type="scrap" min="-20" max="-10"/>
+					<item type="fuel" min="4" max="6"/>
+				</item_modify>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_FUEL_OFF_ENGI_DUBIOUS_LIST_3_c2_choice"/>
+			<event>
+				<text id="event_FUEL_OFF_ENGI_DUBIOUS_LIST_3_c2_text"/>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_FUEL_OFF_ENGI_DUBIOUS_LIST_4_text"/>
+		<item_modify>
+			<item type="fuel" min="2" max="6"/>
+		</item_modify>
+	</event>
+</eventList>
+
+
+
+
+
+<!--
+*********
+		ENGI
+		Specific no fuel events that should eventually be tied to the engi sector
+**********
+-->
+
+<event name="FUEL_ON_MANTIS_ATTACK">
+	<text load="FUEL_ON_MANTIS_ATTACK"/>
+	<ship load="MANTIS_FUEL" hostile="true"/>
+</event>
+<textList name="FUEL_ON_MANTIS_ATTACK">
+	<text id="text_FUEL_ON_MANTIS_ATTACK_1"/>
+	<text id="text_FUEL_ON_MANTIS_ATTACK_2"/>
+	<text id="text_FUEL_ON_MANTIS_ATTACK_3"/>
+	<text id="text_FUEL_ON_MANTIS_ATTACK_4"/>
+
+	<text id="text_FUEL_ON_MANTIS_ATTACK_1"/>
+	<text id="text_FUEL_ON_MANTIS_ATTACK_2"/>
+	<text id="text_FUEL_ON_MANTIS_ATTACK_3"/>
+	<text id="text_FUEL_ON_MANTIS_ATTACK_4"/>
+</textList>
+
+
+<!--
+*********
+		ROCKS
+		Specific no fuel events that should eventually be tied to the rock sector
+**********
+-->
+<event name="FUEL_OFF_ROCK_WRECK">
+	<text id="event_FUEL_OFF_ROCK_WRECK_text"/>
+	<choice hidden="true">
+		<text id="event_FUEL_OFF_ROCK_WRECK_c1_choice"/>
+		<event>
+			<text id="event_FUEL_OFF_ROCK_WRECK_c1_text"/>
+			<choice hidden="true">
+				<text id="event_FUEL_OFF_ROCK_WRECK_c1_c1_choice"/>
+				<event load="FUEL_OFF_ROCK_WRECK_LIST"/>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_FUEL_OFF_ROCK_WRECK_c2_choice"/>
+		<event>
+			<text id="event_FUEL_OFF_ROCK_WRECK_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="LIFE_SCANNER"> <!--DLC-->
+		<text id="event_FUEL_OFF_ROCK_WRECK_c3_choice"/>
+		<event>
+			<text id="event_FUEL_OFF_ROCK_WRECK_c3_text"/>
+			<autoReward level="MED">fuel_only</autoReward>
+		</event>
+	</choice>
+</event>
+<eventList name="FUEL_OFF_ROCK_WRECK_LIST">
+	<event>
+		<text id="event_FUEL_OFF_ROCK_WRECK_LIST_1_text"/>
+		<autoReward level="MED">missiles</autoReward>
+	</event>
+	<event>
+		<text id="event_FUEL_OFF_ROCK_WRECK_LIST_2_text"/>
+		<reveal_map/>
+		<autoReward level="MED">fuel_only</autoReward>
+	</event>
+	<event>
+		<text id="event_FUEL_OFF_ROCK_WRECK_LIST_3_text"/>
+		<autoReward level="MED">fuel_only</autoReward>
+	</event>
+	<event>
+		<text id="event_FUEL_OFF_ROCK_WRECK_LIST_4_text"/>
+		<choice>
+			<text id="event_FUEL_OFF_ROCK_WRECK_LIST_4_c1_choice"/>
+			<event>
+				<text id="event_FUEL_OFF_ROCK_WRECK_LIST_4_c1_text"/>  <!-- JUSTIN - TO DO - I don't like this one since you don't know who's being ransomed -->
+				<item_modify >
+					<item type="scrap" min="-40" max="-25"/>
+				</item_modify>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_FUEL_OFF_ROCK_WRECK_LIST_4_c2_choice"/>
+			<event>
+				<text id="event_FUEL_OFF_ROCK_WRECK_LIST_4_c2_text"/>
+				<removeCrew>
+					<clone>false</clone>
+					<text id="event_FUEL_OFF_ROCK_WRECK_LIST_4_c2_c0_clone"/>
+				</removeCrew>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+<event name="FUEL_OFF_ROCK_CURIOUS">
+	<text id="event_FUEL_OFF_ROCK_CURIOUS_text"/>
+	<choice hidden="true">
+		<text id="event_FUEL_OFF_ROCK_CURIOUS_c1_choice"/>
+		<event>
+			<text id="event_FUEL_OFF_ROCK_CURIOUS_c1_text"/>
+			<ship load="FUEL_OFF_ROCK_CURIOUS" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_FUEL_OFF_ROCK_CURIOUS_c2_choice"/>
+		<event load="FUEL_OFF_ROCK_CURIOUS_LIST"/>
+	</choice>
+</event>
+<eventList name="FUEL_OFF_ROCK_CURIOUS_LIST">
+	<event>
+		<text id="event_FUEL_OFF_ROCK_CURIOUS_LIST_1_text"/>
+		<item_modify>
+			<item type="fuel" min="3" max="8"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_FUEL_OFF_ROCK_CURIOUS_LIST_2_text"/>
+		<ship load="FUEL_OFF_ROCK_CURIOUS" hostile="true"/>
+		<status type="limit" target="player" system="engines" amount="1"/>
+	</event>
+</eventList>
+<ship name="FUEL_OFF_ROCK_CURIOUS" auto_blueprint="SHIPS_ROCK">
+	<escape timer="80" min="30" max="30"/>
+	<gotaway>
+		<text id="ship_FUEL_OFF_ROCK_CURIOUS_gotaway_text"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_FUEL_OFF_ROCK_CURIOUS_destroyed_text"/>
+		<autoReward level="MED">fuel</autoReward>
+		<status type="clear" target="player" system="pilot" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_FUEL_OFF_ROCK_CURIOUS_destroyed_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+		<status type="clear" target="player" system="engines" amount="100"/>
+	</deadCrew>
+</ship>
+
+
+
+
+
+
+<!--
+*********
+		SLUG
+		Specific no fuel events that should eventually be tied to the slug sector
+**********
+-->
+
+<event name="FUEL_ON_SLUG_CHUCKLE">
+	<text id="event_FUEL_ON_SLUG_CHUCKLE_text"/>
+	<ship load="JELLY" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_FUEL_ON_SLUG_CHUCKLE_c1_choice"/>
+		<event load="FUEL_ON_SLUG_CHUCKLE_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_FUEL_ON_SLUG_CHUCKLE_c2_choice"/>
+		<event>
+			<text id="event_FUEL_ON_SLUG_CHUCKLE_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="slug">
+		<text id="event_FUEL_ON_SLUG_CHUCKLE_c3_choice"/>
+		<event>
+			<text id="event_FUEL_ON_SLUG_CHUCKLE_c3_text"/>
+			<item_modify>
+				<item type="scrap" min="-15" max="-15"/>
+				<item type="fuel" min="5" max="5"/>
+			</item_modify>
+		</event>
+	</choice>
+</event>
+<eventList name="FUEL_ON_SLUG_CHUCKLE_LIST">
+	<event>
+		<text id="event_FUEL_ON_SLUG_CHUCKLE_LIST_1_text"/>
+		<item_modify>
+			<item type="scrap" min="-15" max="-15"/>
+			<item type="fuel" min="5" max="5"/>
+		</item_modify>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_FUEL_ON_SLUG_CHUCKLE_LIST_1_c1_text"/>
+				<item_modify steal="true">
+					<item type="scrap" min="-35" max="-20"/>
+					<item type="missiles" min="-4" max="-2"/>
+				</item_modify>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_FUEL_ON_SLUG_CHUCKLE_LIST_1_text"/>
+		<item_modify>
+			<item type="scrap" min="-15" max="-15"/>
+			<item type="fuel" min="5" max="5"/>
+		</item_modify>
+	</event>
+</eventList>
+
+<event name="FUEL_ON_SLUG_OVERPRICED">
+	<text id="event_FUEL_ON_SLUG_OVERPRICED_text"/>
+	<ship load="JELLY_OVERPRICED" hostile="false"/>
+	<choice hidden="false">
+		<text id="event_FUEL_ON_SLUG_OVERPRICED_c1_choice"/>
+		<event>
+			<text id="event_FUEL_ON_SLUG_OVERPRICED_c1_text"/>
+			<item_modify>
+				<item type="scrap" min="-50" max="-50"/>
+				<item type="fuel" min="5" max="5"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="false">
+		<text id="event_FUEL_ON_SLUG_OVERPRICED_c2_choice"/>
+		<event>
+			<text id="event_FUEL_ON_SLUG_OVERPRICED_c1_text"/>
+			<item_modify>
+				<item type="scrap" min="-95" max="-95"/>
+				<item type="fuel" min="10" max="10"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_FUEL_ON_SLUG_OVERPRICED_c3_choice"/>
+		<event>
+			<text id="event_FUEL_ON_SLUG_OVERPRICED_c3_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+</event>
+
+
+
+
+
+
+
+
+
+<!--
+
+***************************************
+		DLC!!!
+	Events added with the DLC
+***************************************
+	NO_FUEL_REFUGEE
+	NO_FUEL_REFUGEE_FRIENDLY
+-->
+
+
+<!-- Distress beacon on -->
+
+<eventList name="NO_FUEL_REFUGEE">  <!-- I made this one compile all 3 so they're less likely than the normal events-->
+	<event>
+		<text id="event_NO_FUEL_REFUGEE_1_text"/>
+		<autoReward level="LOW">fuel_only</autoReward>
+	</event>
+	<event load="NO_FUEL_REFUGEE_DAMAGED"/>
+	<event load="NO_FUEL_REFUGEE_PIRATE"/>
+</eventList>
+
+<event name="NO_FUEL_REFUGEE_DAMAGED">
+	<text id="event_NO_FUEL_REFUGEE_DAMAGED_text"/>
+	<choice>
+		<text id="event_NO_FUEL_REFUGEE_DAMAGED_c1_choice"/>
+		<event>
+			<text id="event_NO_FUEL_REFUGEE_DAMAGED_c1_text"/>
+			<item_modify>
+				<item type="fuel" min="3" max="3"/>
+				<item type="scrap" min="-10" max="-10"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice req="engi" hidden="true">
+		<text id="event_NO_FUEL_REFUGEE_DAMAGED_c2_choice"/>
+		<event>
+			<text id="event_NO_FUEL_REFUGEE_DAMAGED_c2_text"/>
+			<choice>
+				<text id="event_NO_FUEL_REFUGEE_DAMAGED_c2_c1_choice"/>
+				<event>
+					<item_modify>
+						<item type="fuel" min="6" max="6"/>
+						<item type="scrap" min="-10" max="-10"/>
+					</item_modify>
+				</event>
+			</choice>
+			<choice>
+				<text id="event_NO_FUEL_REFUGEE_DAMAGED_c2_c2_choice"/>
+				<event/>
+			</choice>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_NO_FUEL_REFUGEE_DAMAGED_c3_choice"/>
+		<event load="NO_FUEL_REFUGEE_REFUSE"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_NO_FUEL_REFUGEE_DAMAGED_c4_choice"/>
+		<event>
+			<text id="event_NO_FUEL_REFUGEE_DAMAGED_c4_text"/>
+			<autoReward level="MED">fuel</autoReward>
+		</event>
+	</choice>
+</event>
+
+<eventList name="NO_FUEL_REFUGEE_REFUSE">
+	<event>
+		<text id="event_NO_FUEL_REFUGEE_REFUSE_1_text"/>
+	</event>
+	<event>
+		<text id="event_NO_FUEL_REFUGEE_REFUSE_2_text"/>
+		<choice>
+			<text id="event_NO_FUEL_REFUGEE_REFUSE_2_c1_choice"/>
+			<event>
+				<item_modify>
+					<item type="fuel" min="6" max="6"/>
+					<item type="scrap" min="-10" max="-10"/>
+				</item_modify>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_NO_FUEL_REFUGEE_REFUSE_2_c2_choice"/>
+			<event>
+				<text id="event_NO_FUEL_REFUGEE_REFUSE_1_text"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+<event name="NO_FUEL_REFUGEE_PIRATE">
+	<text id="event_NO_FUEL_REFUGEE_PIRATE_text"/>
+	<choice>
+		<text id="event_NO_FUEL_REFUGEE_PIRATE_c1_choice"/>
+		<event load="NO_FUEL_REFUGEE_PIRATE_ACCEPT"/>
+	</choice>
+	<choice>
+		<text id="event_NO_FUEL_REFUGEE_PIRATE_c2_choice"/>
+		<event load="NO_FUEL_REFUGEE_PIRATE_REJECT"/>
+	</choice>
+</event>
+
+<eventList name="NO_FUEL_REFUGEE_PIRATE_ACCEPT">
+	<event>
+		<text id="event_NO_FUEL_REFUGEE_PIRATE_ACCEPT_1_text"/>
+		<item_modify>
+			<item type="fuel" min="5" max="7"/>
+			<item type="missiles" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_NO_FUEL_REFUGEE_PIRATE_ACCEPT_2_text"/>
+		<item_modify>
+			<item type="fuel" min="5" max="7"/>
+			<item type="missiles" min="-1" max="-1"/>
+		</item_modify>
+		<ship load="PIRATE" hostile="true"/>
+	</event>
+</eventList>
+
+<eventList name="NO_FUEL_REFUGEE_PIRATE_REJECT">
+	<event>
+		<text id="event_NO_FUEL_REFUGEE_PIRATE_REJECT_1_text"/>
+	</event>
+	<event>
+		<text id="event_NO_FUEL_REFUGEE_PIRATE_REJECT_2_text"/>
+		<autoReward level="LOW">fuel_only</autoReward>
+	</event>
+	<event>
+		<text id="event_NO_FUEL_REFUGEE_PIRATE_REJECT_3_text"/>
+		<ship load="PIRATE" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_NO_FUEL_REFUGEE_PIRATE_REJECT_3_text"/>
+		<ship load="PIRATE" hostile="true"/>
+	</event>
+</eventList>
+
+<!-- Distress beacon off -->
+
+<event name="NO_FUEL_REFUGEE_FRIENDLY">
+	<text id="event_NO_FUEL_REFUGEE_FRIENDLY_text"/>
+	<autoReward level="MED">fuel_only</autoReward>
+</event>
+
+
+
+</FTL>

@@ -1,0 +1,1617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- NOTE on Naming - I'm going to keep up with naming the files 'anaerobic' but switch over to LANIUS for events just cause it's shorter :/ -->
+
+
+<!--
+This sector will be hostile (i think) but with lots of varied events.  Leading to sometimes being filled with fights and other times being filled with diplomatic stuff 
+- lots of distress signals perhaps.
+-->
+
+<eventList name="HOSTILE_LANIUS">  <!-- more unique ones -->
+	<event load="LANIUS_FIGHT"/>
+	<event load="LANIUS_REBEL_FIGHT"/>
+	<event load="LANIUS_PIRATE_FIGHT"/>
+	<event load="LANIUS_HARVESTER"/> <!-- From Chris-->
+
+	<event load="REBEL"/>
+	<event load="REBEL_AUTO"/>
+</eventList>
+
+
+<eventList name="HOSTILE_ENVIRONMENT_LANIUS">  <!-- Prob enough -->
+	<event load="LANIUS_FIGHT_ASTEROID"/>
+	<event load="LANIUS_FIGHT_PULSAR"/>
+	<event load="LANIUS_NOBOARDERS_PDS"/>
+
+</eventList>
+
+
+
+<eventList name="NEUTRAL_LANIUS">   <!-- more unique ones? -->
+	<event load="LANIUS_CIVILIAN"/>
+	<event load="LANIUS_PIRATE_CIVILIAN"/>
+	<event load="LANIUS_SOLO_SALVAGE"/>
+	<event load="LANIUS_SCARED_CIVILIAN"/>
+	<event load="LANIUS_AUTO_REBEL"/>
+	<event load="LANIUS_GROUP_AUTO"/>
+	<event load="LANIUS_BEACON_EATER"/>
+
+	<event load="LANIUS_DORMANT_EVENT"/> <!--Chris-->
+	<event load="LANIUS_FUELING_STATION"/> <!--Chris-->
+
+	<event load="FRIENDLY_SLAVER"/>
+	<event load="PIRATE_BRIBER"/>
+	<event load="ASTEROID_EXPLORE"/>
+	<event load="BROKEN_REBEL_DRONE"/>
+</eventList>
+
+
+
+
+
+<eventList name="ITEM_LANIUS">  <!-- Prob enough -->
+	<event load="LANIUS_FREE_STUFF"/>
+	<event load="LANIUS_TRADER_TRANSLATOR"/>
+	<event load="LANIUS_TRADER"/>
+	<event load="LANIUS_RESEARCHER_CRAFT"/>
+	<event load="LANIUS_RESEARCHER_CONTACT"/>
+
+</eventList>
+
+
+
+
+<eventList name="BOARDERS_LANIUS"> <!-- Prob enough - unless theres something cool -->
+	<!--<event load="LANIUS_BOARDERS"/> -->
+	<event load="LANIUS_PIRATE_BOARDERS"/>
+
+</eventList>
+
+
+
+<eventList name="DISTRESS_BEACON_LANIUS">  <!-- Need more -->
+	<event load="LANIUS_DISTRESS_FIGHT"/>
+	<event load="LANIUS_DISTRESS_EMPTY"/>
+	<event load="LANIUS_DISTRESS_TOOLATE"/>
+
+	<event load="LANIUS_DISTRESS_TRAP"/> <!-- Chris's  -->
+	<event load="LANIUS_SLUG_DISTRESS"/> <!-- Chris's  -->
+	<event load="LANIUS_MANTIS_DISTRESS"/> <!-- Chris's -->
+	<event load="LANIUS_ROCK_DISTRESS"/> <!-- Chris's -->
+
+
+	<event load="DISTRESS_SATELLITE_DEFENSE"/>
+	<event load="DISTRESS_STATION_FIRE"/>
+	<event load="FRIENDLY_BEACON"/>
+	<event load="TRAP_BEACON"/>
+	<event load="STRANDED_BEACON"/>
+</eventList>
+
+
+
+<eventList name="QUESTS_LANIUS"> <!-- Need more -->
+
+
+	<event load="FEDERATION_PLANET_SIGNAL"/>
+</eventList>
+
+
+
+<!--
+******************************************
+		STRUCTURE!!!
+	Requred structural 
+**********************************************
+-->
+
+
+<event name="START_BEACON_LANIUS">
+	<text load="START_BEACON_LANIUS"/>
+</event>
+<textList name="START_BEACON_LANIUS">
+	<text id="text_START_BEACON_LANIUS_1"/>
+	<text id="text_START_BEACON_LANIUS_2"/>
+	<text id="text_START_BEACON_LANIUS_3"/>
+	<text id="text_START_BEACON_LANIUS_4"/>
+</textList>
+
+
+<event name="STORE_LANIUS">
+	<text load="STORE_LANIUS"/>
+	<store/>
+</event>
+<textList name="STORE_LANIUS">
+	<text id="text_STORE_LANIUS_1"/>
+	<text id="text_STORE_LANIUS_2"/>
+	<text id="text_STORE_LANIUS_3"/>
+	<text id="text_STORE_LANIUS_4"/>
+	<text id="text_STORE_LANIUS_5"/>
+	<text id="text_STORE_LANIUS_6"/>
+</textList>
+
+<event name="NOTHING_LANIUS">
+	<text load="NOTHING_LANIUS"/>
+</event>
+<textList name="NOTHING_LANIUS">
+	<text id="text_NOTHING_LANIUS_1"/>
+	<text id="text_NOTHING_LANIUS_2"/>
+	<text id="text_NOTHING_LANIUS_3"/>
+	<text id="text_NOTHING_LANIUS_4"/>
+	<text id="text_NOTHING_LANIUS_5"/>
+
+
+	<text id="text_NOTHING_LANIUS_6"/><!--DLC2-->
+	<text id="text_NOTHING_LANIUS_1"/>
+	<text id="text_NOTHING_LANIUS_2"/>
+
+</textList>
+
+
+<event name="LANIUS_SURRENDER">
+	<text load="LANIUS_SURRENDER_TEXT"/>
+	<choice>
+		<text id="event_LANIUS_SURRENDER_c1_choice"/>
+		<event>
+			<ship hostile="false"/>
+			<autoReward level="RANDOM">stuff</autoReward>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_SURRENDER_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+
+<textList name="LANIUS_SURRENDER_TEXT">
+	<text id="text_LANIUS_SURRENDER_TEXT_1"/>
+	<text id="text_LANIUS_SURRENDER_TEXT_2"/>
+	<text id="text_LANIUS_SURRENDER_TEXT_3"/>
+	<text id="text_LANIUS_SURRENDER_TEXT_4"/>
+	<text id="text_LANIUS_SURRENDER_TEXT_5"/>
+	<text id="text_LANIUS_SURRENDER_TEXT_6"/>
+	<text id="text_LANIUS_SURRENDER_TEXT_7"/>
+</textList>
+
+<eventList name="LANIUS_ESCAPE">
+	<event>
+		<text id="event_LANIUS_ESCAPE_1_text"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_ESCAPE_2_text"/>
+	</event>
+</eventList>
+
+<eventList name="LANIUS_DESTROYED">
+	<event>
+		<text id="event_LANIUS_DESTROYED_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DESTROYED_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DESTROYED_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DESTROYED_4_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+</eventList>
+
+<eventList name="LANIUS_DEAD_CREW">
+	<event>
+		<text id="event_LANIUS_DEAD_CREW_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DEAD_CREW_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DEAD_CREW_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DEAD_CREW_1_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DEAD_CREW_1_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DEAD_CREW_6_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DEAD_CREW_7_text"/>
+		<crewMember amount="1"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_DEAD_CREW_8_text"/>
+		<autoReward level="LOW">drone</autoReward>
+	</event>
+</eventList>
+
+<eventList name="SAVE_CIVILIAN_LIST_LANIUS">
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_LANIUS_1_text"/>
+		<choice>
+			<text id="event_SAVE_CIVILIAN_LIST_LANIUS_1_c1_choice"/>
+			<event>
+				<text id="event_SAVE_CIVILIAN_LIST_LANIUS_1_c1_text"/>
+				<crewMember amount="1"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_SAVE_CIVILIAN_LIST_LANIUS_1_c2_choice"/>
+			<event/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_LANIUS_2_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_LANIUS_3_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_LANIUS_4_text"/>
+		<choice>
+			<text id="event_SAVE_CIVILIAN_LIST_LANIUS_4_c1_choice"/>
+			<event>
+				<autoReward level="LOW">weapon</autoReward>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_LANIUS_5_text"/>
+		<damage amount="-5"/>
+	</event>
+	<event>
+		<text id="event_SAVE_CIVILIAN_LIST_LANIUS_6_text"/>
+	</event>
+</eventList>
+
+
+
+
+
+<!--
+******************************************
+		DISTRESS!!!
+	Uses distress beacon
+**********************************************
+-->
+
+<event name="LANIUS_DISTRESS_FIGHT" unique="true">
+	<text id="event_LANIUS_DISTRESS_FIGHT_text"/>
+	<distressBeacon/>
+	<ship load="LANIUS_CIVILIAN" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_DISTRESS_FIGHT_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_DISTRESS_FIGHT_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_DISTRESS_FIGHT_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_DISTRESS_FIGHT_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="anaerobic">
+		<text id="event_LANIUS_DISTRESS_FIGHT_c3_choice"/>
+		<event load="LANIUS_DISTRESS_FIGHT_LANIUS"/>
+	</choice>
+</event>
+<eventList name="LANIUS_DISTRESS_FIGHT_LANIUS">
+	<event>
+		<text id="event_LANIUS_DISTRESS_FIGHT_LANIUS_1_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_LANIUS_DISTRESS_FIGHT_LANIUS_2_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+
+
+<event name="LANIUS_DISTRESS_EMPTY" unique="true">
+	<text id="event_LANIUS_DISTRESS_EMPTY_text"/>
+	<distressBeacon/>
+</event>
+
+<event name="LANIUS_DISTRESS_TOOLATE" unique="true">
+	<text id="event_LANIUS_DISTRESS_TOOLATE_text"/>
+	<distressBeacon/>
+</event>
+
+
+
+
+
+<!-- Below are from Chris
+-->
+
+<event name="LANIUS_DISTRESS_TRAP" unique="true">
+	<text id="event_LANIUS_DISTRESS_TRAP_text"/>
+	<ship load="LANIUS_SHIP" hostile="true"/>
+	<distressBeacon/>
+</event>
+
+<!-- Slug distressed -->
+
+<event name="LANIUS_SLUG_DISTRESS" unique="true">
+	<text id="event_LANIUS_SLUG_DISTRESS_text"/>
+	<distressBeacon/>
+	<choice>
+		<text id="event_LANIUS_SLUG_DISTRESS_c1_choice"/>
+		<event>
+			<ship load="LANIUS_SLUG_DISTRESS_SHIP" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_SLUG_DISTRESS_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_SLUG_DISTRESS_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_SLUG_DISTRESS_END">
+	<event>
+		<text id="event_LANIUS_SLUG_DISTRESS_END_1_text"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_SLUG_DISTRESS_END_2_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+</eventList>
+<ship name="LANIUS_SLUG_DISTRESS_SHIP" auto_blueprint="SHIPS_LANIUS">
+	<destroyed>
+		<text id="ship_LANIUS_SLUG_DISTRESS_SHIP_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_SLUG_DISTRESS_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_SLUG_DISTRESS_END"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_LANIUS_SLUG_DISTRESS_SHIP_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_SLUG_DISTRESS_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_SLUG_DISTRESS_END"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+<!-- Mantis distress -->
+
+<event name="LANIUS_MANTIS_DISTRESS" unique="true">
+	<text id="event_LANIUS_MANTIS_DISTRESS_text"/>
+	<distressBeacon/>
+	<choice>
+		<text id="event_LANIUS_MANTIS_DISTRESS_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_MANTIS_DISTRESS_c1_text"/>
+			<ship load="LANIUS_MANTIS_DISTRESS_SHIP" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_MANTIS_DISTRESS_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_MANTIS_DISTRESS_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_MANTIS_DISTRESS_END">
+	<event>
+		<text id="event_LANIUS_MANTIS_DISTRESS_END_1_text"/>
+		<autoReward level="MED">missiles</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_MANTIS_DISTRESS_END_2_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+</eventList>
+<ship name="LANIUS_MANTIS_DISTRESS_SHIP" auto_blueprint="SHIPS_LANIUS">
+	<destroyed>
+		<text id="ship_LANIUS_MANTIS_DISTRESS_SHIP_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_MANTIS_DISTRESS_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_MANTIS_DISTRESS_END"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_LANIUS_MANTIS_DISTRESS_SHIP_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_MANTIS_DISTRESS_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_MANTIS_DISTRESS_END"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+<!-- Rock distress -->
+
+<event name="LANIUS_ROCK_DISTRESS" unique="true">
+	<text id="event_LANIUS_ROCK_DISTRESS_text"/>
+	<distressBeacon/>
+	<choice>
+		<text id="event_LANIUS_ROCK_DISTRESS_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_ROCK_DISTRESS_c1_text"/>
+			<ship load="LANIUS_ROCK_DISTRESS_SHIP" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_ROCK_DISTRESS_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_ROCK_DISTRESS_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_ROCK_DISTRESS_END">
+	<event>
+		<text id="event_LANIUS_ROCK_DISTRESS_END_1_text"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_ROCK_DISTRESS_END_2_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+</eventList>
+<ship name="LANIUS_ROCK_DISTRESS_SHIP" auto_blueprint="SHIPS_LANIUS">
+	<destroyed>
+		<text id="ship_LANIUS_ROCK_DISTRESS_SHIP_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_ROCK_DISTRESS_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_ROCK_DISTRESS_END"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_LANIUS_ROCK_DISTRESS_SHIP_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_ROCK_DISTRESS_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_ROCK_DISTRESS_END"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+<!--
+******************************************
+		QUEST!!!
+	uses quest tag
+
+	- pirate and lanius ship working together - choose who to fight - leads to quest to kill the other?
+**********************************************
+-->
+
+
+
+<!--
+******************************************
+		ITEM!!!
+	Events that can give something ususally no fight	
+************DLC_WEAPONS**********************************
+-->
+
+<event name="LANIUS_FREE_STUFF" unique="true">
+	<text id="event_LANIUS_FREE_STUFF_text"/>
+	<autoReward level="HIGH">standard</autoReward>
+</event>
+
+<event name="LANIUS_RESEARCHER_CONTACT" unique="true">
+	<text id="event_LANIUS_RESEARCHER_CONTACT_text"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_RESEARCHER_CONTACT_c1_choice"/>
+		<event load="LANIUS_RESEARCHER_CONTACT_LIST"/>
+	</choice>
+	<choice hidden="true" req="anaerobic">
+		<text id="event_LANIUS_RESEARCHER_CONTACT_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_RESEARCHER_CONTACT_c2_text"/>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event load="LANIUS_RESEARCHER_CONTACT_LIST2"/>
+			</choice>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_RESEARCHER_CONTACT_c3_choice"/>
+		<event>
+			<text id="event_LANIUS_RESEARCHER_CONTACT_c3_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_RESEARCHER_CONTACT_LIST">
+	<event>
+		<text id="event_LANIUS_RESEARCHER_CONTACT_LIST_1_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_RESEARCHER_CONTACT_LIST_2_text"/>
+		<autoReward level="MED">droneparts</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_RESEARCHER_CONTACT_LIST_3_text"/>
+		<weapon name="RANDOM"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_RESEARCHER_CONTACT_LIST_4_text"/>
+	</event>
+</eventList>
+<eventList name="LANIUS_RESEARCHER_CONTACT_LIST2">
+	<event>
+		<text id="event_LANIUS_RESEARCHER_CONTACT_LIST2_1_text"/>
+		<augment name="RANDOM"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_RESEARCHER_CONTACT_LIST2_1_text"/>
+		<weapon name="RANDOM"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_RESEARCHER_CONTACT_LIST2_1_text"/>
+		<drone name="RANDOM"/>
+	</event>
+</eventList>
+
+
+<event name="LANIUS_RESEARCHER_CRAFT" unique="true">
+	<text id="event_LANIUS_RESEARCHER_CRAFT_text"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_RESEARCHER_CRAFT_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_RESEARCHER_CRAFT_c1_text"/>
+			<choice hidden="true">
+				<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c1_choice"/>
+				<event>
+					<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c1_text"/>
+					<item_modify>
+						<item type="scrap" min="-45" max="-45"/>
+					</item_modify>
+					<augment name="DLC_AUGMENTS"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c2_choice"/>
+				<event>
+					<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c2_text"/>
+					<item_modify>
+						<item type="scrap" min="-50" max="-50"/>
+					</item_modify>
+					<weapon name="DLC_WEAPONS"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c3_choice"/>
+				<event>
+					<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c3_text"/>
+					<item_modify>
+						<item type="scrap" min="-40" max="-40"/>
+					</item_modify>
+					<drone name="DLC_DRONES"/>
+				</event>
+			</choice>
+			<choice>
+				<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c4_choice"/>
+				<event>
+					<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c4_text"/>
+				</event>
+			</choice>
+			<choice hidden="true" req="anaerobic">
+				<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c5_choice"/>
+				<event>
+					<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c5_text"/>
+					<choice hidden="true">
+						<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c5_c1_choice"/>
+						<event>
+							<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c1_text"/>
+							<item_modify>
+								<item type="scrap" min="-35" max="-35"/>
+							</item_modify>
+							<augment name="DLC_AUGMENTS"/>
+						</event>
+					</choice>
+					<choice hidden="true">
+						<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c5_c2_choice"/>
+						<event>
+							<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c2_text"/>
+							<item_modify>
+								<item type="scrap" min="-40" max="-40"/>
+							</item_modify>
+							<weapon name="DLC_WEAPONS"/>
+						</event>
+					</choice>
+					<choice hidden="true">
+						<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c5_c3_choice"/>
+						<event>
+							<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c3_text"/>
+							<item_modify>
+								<item type="scrap" min="-30" max="-30"/>
+							</item_modify>
+							<drone name="DLC_DRONES"/>
+						</event>
+					</choice>
+					<choice>
+						<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c4_choice"/>
+						<event>
+							<text id="event_LANIUS_RESEARCHER_CRAFT_c1_c4_text"/>
+						</event>
+					</choice>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_RESEARCHER_CRAFT_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_RESEARCHER_CRAFT_c2_text"/>
+		</event>
+	</choice>
+</event>
+
+
+<event name="LANIUS_TRADER_TRANSLATOR" unique="true">
+	<text id="event_LANIUS_TRADER_TRANSLATOR_text"/>
+	<choice>
+		<text id="event_LANIUS_TRADER_TRANSLATOR_c1_choice"/>
+		<event load="LANIUS_TRADER_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_TRADER_TRANSLATOR_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_TRADER_TRANSLATOR_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_TRADER_TRANSLATOR_c3_choice"/>
+		<event>
+			<text id="event_LANIUS_TRADER_TRANSLATOR_c3_text"/>
+			<choice hidden="true">
+				<text id="event_LANIUS_TRADER_TRANSLATOR_c3_c1_choice"/>
+				<event>
+					<text id="event_LANIUS_TRADER_TRANSLATOR_c3_c1_text"/>
+					<crewMember amount="1" class="anaerobic" id="name_Translator"/>
+					<item_modify>
+						<item type="scrap" min="-40" max="-40"/>
+					</item_modify>
+				</event>
+			</choice>
+			<choice>
+				<text id="event_LANIUS_TRADER_TRANSLATOR_c3_c2_choice"/>
+				<event>
+					<text id="event_LANIUS_TRADER_TRANSLATOR_c3_c2_text"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+
+<event name="LANIUS_TRADER" unique="true">
+	<text load="LANIUS_TRADER_TEXT"/>
+	<choice>
+		<text id="event_LANIUS_TRADER_c1_choice"/>
+		<event load="LANIUS_TRADER_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_TRADER_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_TRADER_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="anaerobic">
+		<text id="event_LANIUS_TRADER_c3_choice"/>
+		<event>
+			<text id="event_LANIUS_TRADER_c3_text"/>
+			<choice>
+				<text id="event_LANIUS_TRADER_c1_choice"/>
+				<event load="LANIUS_TRADER_LIST2"/>
+			</choice>
+			<choice>
+				<text id="event_LANIUS_TRADER_c2_choice"/>
+				<event>
+					<text id="event_LANIUS_TRADER_c2_text"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<textList name="LANIUS_TRADER_TEXT">
+	<text id="text_LANIUS_TRADER_TEXT_1" planet="PLANET_POPULATED"/>
+	<text id="text_LANIUS_TRADER_TEXT_2"/>
+	<text id="text_LANIUS_TRADER_TEXT_3"/>
+</textList>
+<eventList name="LANIUS_TRADER_LIST">
+	<event>
+		<text id="event_LANIUS_TRADER_LIST_1_text"/>
+		<item_modify>
+			<item type="fuel" min="-7" max="-3"/>
+			<item type="scrap" min="15" max="30"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_LANIUS_TRADER_LIST_1_text"/>
+		<item_modify>
+			<item type="missiles" min="-7" max="-3"/>
+			<item type="scrap" min="20" max="40"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_LANIUS_TRADER_LIST_1_text"/>
+		<item_modify>
+			<item type="drones" min="-7" max="-3"/>
+			<item type="scrap" min="20" max="40"/>
+		</item_modify>
+	</event>
+</eventList>
+<eventList name="LANIUS_TRADER_LIST2">
+	<event>
+		<text id="event_LANIUS_TRADER_LIST2_1_text"/>
+		<item_modify>
+			<item type="fuel" min="-7" max="-3"/>
+			<item type="scrap" min="20" max="35"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_LANIUS_TRADER_LIST2_1_text"/>
+		<item_modify>
+			<item type="missiles" min="-7" max="-3"/>
+			<item type="scrap" min="25" max="50"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_LANIUS_TRADER_LIST2_1_text"/>
+		<item_modify>
+			<item type="drones" min="-7" max="-3"/>
+			<item type="scrap" min="25" max="50"/>
+		</item_modify>
+	</event>
+</eventList>
+
+
+<!--
+******************************************
+		HOSTILE!!!
+	Events that call up a fight for sure
+**********************************************
+-->
+
+
+<event name="LANIUS_FIGHT">
+	<text load="LANIUS_FIGHT_TEXT"/>
+	<ship load="LANIUS_SHIP" hostile="true"/>
+</event>
+
+<textList name="LANIUS_FIGHT_TEXT">
+	<text id="text_LANIUS_FIGHT_TEXT_1"/>
+	<text id="text_LANIUS_FIGHT_TEXT_2"/>
+	<text id="text_LANIUS_FIGHT_TEXT_3"/>
+	<text id="text_LANIUS_FIGHT_TEXT_4"/>
+	<text id="text_LANIUS_FIGHT_TEXT_5"/>
+	<text id="text_LANIUS_FIGHT_TEXT_6"/>
+
+
+	<!-- ** ** ** ** ** ** ** ** ** ** ** ** ** ** CHRIS ADDITIONS** ** ** ** ** ** ** ** ** ** ** ** ** ** -->
+
+	<text id="text_LANIUS_FIGHT_TEXT_7"/>
+	<text id="text_LANIUS_FIGHT_TEXT_8"/>
+	<text id="text_LANIUS_FIGHT_TEXT_9"/>
+	<text id="text_LANIUS_FIGHT_TEXT_10"/>
+	<text id="text_LANIUS_FIGHT_TEXT_8"/>
+
+	<!-- ** ** ** ** ** ** ** ** ** ** ** ** ** ** TODO More** ** ** ** ** ** ** ** ** ** ** ** ** ** -->
+</textList>
+
+<event name="LANIUS_REBEL_FIGHT">
+	<text load="LANIUS_REBEL_FIGHT_TEXT"/>
+	<ship load="REBEL" hostile="true"/>
+</event>
+<textList name="LANIUS_REBEL_FIGHT_TEXT">
+	<text id="text_LANIUS_REBEL_FIGHT_TEXT_1"/>
+	<text id="text_LANIUS_REBEL_FIGHT_TEXT_2"/>
+	<text id="text_LANIUS_REBEL_FIGHT_TEXT_3"/>
+	<text id="text_LANIUS_REBEL_FIGHT_TEXT_4"/>
+	<text id="text_LANIUS_REBEL_FIGHT_TEXT_5"/>
+	<text id="text_LANIUS_REBEL_FIGHT_TEXT_6"/>
+
+	<!-- ** ** ** ** ** ** ** ** ** ** ** ** ** ** TODO More** ** ** ** ** ** ** ** ** ** ** ** ** ** -->
+</textList>
+
+<event name="LANIUS_PIRATE_FIGHT">
+	<text load="LANIUS_PIRATE_FIGHT_TEXT"/>
+	<ship load="PIRATE" hostile="true"/>
+</event>
+<textList name="LANIUS_PIRATE_FIGHT_TEXT">
+	<text id="text_LANIUS_PIRATE_FIGHT_TEXT_1"/>
+	<text id="text_LANIUS_PIRATE_FIGHT_TEXT_2"/>
+	<text id="text_LANIUS_PIRATE_FIGHT_TEXT_3"/>
+	<text id="text_LANIUS_PIRATE_FIGHT_TEXT_4"/>
+	<text id="text_LANIUS_PIRATE_FIGHT_TEXT_5"/>
+
+	<!-- ** ** ** ** ** ** ** ** ** ** ** ** ** ** TODO More** ** ** ** ** ** ** ** ** ** ** ** ** ** -->
+</textList>
+
+
+<event name="LANIUS_FIGHT_ASTEROID" unique="true">
+	<text id="event_LANIUS_FIGHT_ASTEROID_text"/>
+	<ship load="LANIUS_SHIP" hostile="true"/>
+	<environment type="asteroid"/>
+</event>
+
+<event name="LANIUS_FIGHT_PULSAR" unique="true">
+	<text id="event_LANIUS_FIGHT_PULSAR_text"/>
+	<ship load="LANIUS_SHIP" hostile="true"/>
+	<environment type="pulsar"/>
+</event>
+
+<event name="LANIUS_NOBOARDERS_PDS" unique="true">
+	<text id="event_LANIUS_NOBOARDERS_PDS_text" planet="PLANET_POPULATED"/>
+	<!--<boarders min="2" max="2" class="anaerobic"/> -->
+	<environment type="PDS" target="enemy"/>
+	<ship load="LANIUS_BOARDERS_PDS" hostile="true"/>
+</event>
+<eventList name="LANIUS_BOARDERS_PDS_LIST">
+	<event>
+		<text id="event_LANIUS_BOARDERS_PDS_LIST_1_text"/>
+		<damage amount="-8"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_BOARDERS_PDS_LIST_2_text"/>
+	</event>
+</eventList>
+
+
+
+<!-- From Chris-->
+<event name="LANIUS_HARVESTER" unique="true">
+	<text id="event_LANIUS_HARVESTER_text"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_HARVESTER_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_HARVESTER_c1_text"/>
+			<ship load="LANIUS_HARVESTER_SHIP" hostile="true"/>
+		</event>
+	</choice>
+	<choice req="pilot" lvl="2" hidden="true" max_group="0">
+		<text id="event_LANIUS_HARVESTER_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_HARVESTER_c2_text"/>
+			<autoReward level="MED">standard</autoReward>
+		</event>
+	</choice>
+	<choice req="pilot" lvl="3" hidden="true" max_group="0">
+		<text id="event_LANIUS_HARVESTER_c3_choice"/>
+		<event>
+			<text id="event_LANIUS_HARVESTER_c3_text"/>
+			<autoReward level="HIGH">standard</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_HARVESTER_c4_choice"/>
+		<event>
+			<text id="event_LANIUS_HARVESTER_c4_text"/>
+			<ship load="LANIUS_HARVESTER_SHIP" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_HARVESTER_c5_choice"/>
+		<event>
+			<text id="event_LANIUS_HARVESTER_c5_text"/>
+		</event>
+	</choice>
+</event>
+<ship name="LANIUS_HARVESTER_SHIP" auto_blueprint="SHIPS_LANIUS">
+	<destroyed>
+		<text id="ship_LANIUS_HARVESTER_SHIP_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_HARVESTER_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_HARVESTER_SHIP_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_LANIUS_HARVESTER_SHIP_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_HARVESTER_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_HARVESTER_SHIP_LIST"/>
+		</choice>
+	</deadCrew>
+</ship>
+<eventList name="LANIUS_HARVESTER_SHIP_LIST">
+	<event>
+		<text id="event_LANIUS_HARVESTER_SHIP_LIST_1_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_HARVESTER_SHIP_LIST_2_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_HARVESTER_SHIP_LIST_3_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+</eventList>
+
+
+
+<!--
+******************************************
+		NEUTRAL!!!
+	Events that could have a fight
+
+	- Lanius researchers - trying to obtain knowledge of zoltan super shield technology. Can give them info if you have it, zoltan, or lanius.
+	- Lanius floating debris settlement - describe that it's pretty.  Can lead to fight or store if you have lanius
+	- Rebel attacking a group attempting to make contact and form relations with Lanius
+**********************************************
+-->
+
+
+
+
+<event name="LANIUS_CIVILIAN" unique="true">
+	<text load="LANIUS_CIVILIAN_TEXT"/>
+	<ship load="LANIUS_CIVILIAN" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_CIVILIAN_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_CIVILIAN_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_CIVILIAN_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_CIVILIAN_c2_text"/>
+		</event>
+	</choice>
+</event>
+<textList name="LANIUS_CIVILIAN_TEXT">
+	<text id="text_LANIUS_CIVILIAN_TEXT_1"/>
+	<text id="text_LANIUS_CIVILIAN_TEXT_2"/>
+	<text id="text_LANIUS_CIVILIAN_TEXT_3"/>
+</textList>
+
+<event name="LANIUS_PIRATE_CIVILIAN">
+	<text load="LANIUS_PIRATE_CIVILIAN_TEXT"/>
+	<ship load="PIRATE_CIVILIAN_LANIUS" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_PIRATE_CIVILIAN_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_PIRATE_CIVILIAN_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_PIRATE_CIVILIAN_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_PIRATE_CIVILIAN_c2_text"/>
+		</event>
+	</choice>
+</event>
+<textList name="LANIUS_PIRATE_CIVILIAN_TEXT">
+	<text id="text_LANIUS_PIRATE_CIVILIAN_TEXT_1"/>
+	<text id="text_LANIUS_PIRATE_CIVILIAN_TEXT_2"/>
+	<text id="text_LANIUS_PIRATE_CIVILIAN_TEXT_3"/>
+</textList>
+
+<event name="LANIUS_SOLO_SALVAGE">
+	<text load="LANIUS_SOLO_SALVAGE_TEXT"/>
+	<ship load="LANIUS_SHIP" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_SOLO_SALVAGE_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_SOLO_SALVAGE_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_SOLO_SALVAGE_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_SOLO_SALVAGE_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="anaerobic">
+		<text id="event_LANIUS_SOLO_SALVAGE_c3_choice"/>
+		<event load="LANIUS_SOLO_SALVAGE_LIST"/>
+	</choice>
+</event>
+<eventList name="LANIUS_SOLO_SALVAGE_LIST">
+	<event>
+		<text id="event_LANIUS_SOLO_SALVAGE_LIST_1_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_LANIUS_SOLO_SALVAGE_LIST_2_text"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_SOLO_SALVAGE_LIST_3_text"/>
+		<choice hidden="true">
+			<text id="event_LANIUS_SOLO_SALVAGE_LIST_3_c1_choice"/>
+			<event>
+				<text id="event_LANIUS_SOLO_SALVAGE_LIST_3_c1_text"/>
+				<ship hostile="true"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_LANIUS_SOLO_SALVAGE_LIST_3_c2_choice"/>
+			<event>
+				<text id="event_LANIUS_SOLO_SALVAGE_LIST_3_c2_text"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<textList name="LANIUS_SOLO_SALVAGE_TEXT">
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_1"/>
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_2"/>
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_3"/>
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_4"/>
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_5"/>
+
+
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_1"/>
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_2"/>
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_3"/>
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_4"/>
+	<text id="text_LANIUS_SOLO_SALVAGE_TEXT_5"/>
+</textList>
+
+
+<event name="LANIUS_SCARED_CIVILIAN" unique="true">
+	<text id="event_LANIUS_SCARED_CIVILIAN_text"/>
+	<ship load="LANIUS_SHIP" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_SCARED_CIVILIAN_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_SCARED_CIVILIAN_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_SCARED_CIVILIAN_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_SCARED_CIVILIAN_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_SCARED_CIVILIAN_c3_choice"/>
+		<event>
+			<text id="event_LANIUS_SCARED_CIVILIAN_c3_text"/>
+			<choice hidden="true">
+				<text id="event_LANIUS_SCARED_CIVILIAN_c3_c1_choice"/>
+				<event load="LANIUS_SCARED_CIVILIAN_LIST"/>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true" req="anaerobic">
+		<text id="event_LANIUS_SCARED_CIVILIAN_c4_choice"/>
+		<event>
+			<text id="event_LANIUS_SCARED_CIVILIAN_c4_text"/>
+			<store/>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_SCARED_CIVILIAN_LIST">
+	<event>
+		<text id="event_LANIUS_SCARED_CIVILIAN_LIST_1_text"/>
+		<store/>
+	</event>
+	<event>
+		<text id="event_LANIUS_SCARED_CIVILIAN_LIST_2_text"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_SCARED_CIVILIAN_LIST_3_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+
+
+<event name="LANIUS_AUTO_REBEL" unique="true">
+	<text id="event_LANIUS_AUTO_REBEL_text"/>
+	<ship load="LANIUS_AUTO_REBEL" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_AUTO_REBEL_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_AUTO_REBEL_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_AUTO_REBEL_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_AUTO_REBEL_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_AUTO_REBEL_LIST">
+	<event>
+		<text id="event_LANIUS_AUTO_REBEL_LIST_1_text"/>
+		<autoReward level="low">scrap_only</autoReward>
+		<reveal_map/>
+	</event>
+	<event>
+		<text id="event_LANIUS_AUTO_REBEL_LIST_2_text"/>
+		<autoReward level="low">scrap_only</autoReward>
+		<modifyPursuit amount="-1"/>
+	</event>
+</eventList>
+
+<event name="LANIUS_GROUP_AUTO" unique="true">
+	<text id="event_LANIUS_GROUP_AUTO_text"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_GROUP_AUTO_c1_choice"/>
+		<event load="LANIUS_GROUP_AUTO_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_GROUP_AUTO_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_GROUP_AUTO_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="anaerobic">
+		<text id="event_LANIUS_GROUP_AUTO_c3_choice"/>
+		<event>
+			<text id="event_LANIUS_GROUP_AUTO_c3_text"/>
+			<autoReward level="MED">standard</autoReward>
+			<modifyPursuit amount="-1"/>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_GROUP_AUTO_LIST">
+	<event>
+		<text id="event_LANIUS_GROUP_AUTO_LIST_1_text"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_GROUP_AUTO_LIST_2_text"/>
+		<ship load="LANIUS_SHIP" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_GROUP_AUTO_LIST_3_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<modifyPursuit amount="-1"/>
+	</event>
+</eventList>
+
+
+<event name="LANIUS_BEACON_EATER" unique="true">
+	<text id="event_LANIUS_BEACON_EATER_text"/>
+	<ship load="LANIUS_SHIP" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_BEACON_EATER_c1_choice"/>
+		<event load="LANIUS_BEACON_EATER_ASK"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_BEACON_EATER_c2_choice"/>
+		<event load="LANIUS_BEACON_EATER_SCRAP"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_BEACON_EATER_c3_choice"/>
+		<event load="LANIUS_BEACON_EATER_LEAVE"/>
+	</choice>
+	<choice hidden="true" req="anaerobic">
+		<text id="event_LANIUS_BEACON_EATER_c4_choice"/>
+		<event>
+			<text id="event_LANIUS_BEACON_EATER_c4_text"/>
+			<choice hidden="true">
+				<text id="event_LANIUS_BEACON_EATER_c4_c1_choice"/>
+				<event>
+					<text id="event_LANIUS_BEACON_EATER_c4_c1_text"/>
+					<augment name="RANDOM"/>
+					<item_modify>
+						<item type="scrap" min="-30" max="-30"/>
+					</item_modify>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_LANIUS_BEACON_EATER_c4_c2_choice"/>
+				<event>
+					<text id="event_LANIUS_BEACON_EATER_c4_c1_text"/>
+					<item_modify>
+						<item type="missiles" min="-6" max="-6"/>
+					</item_modify>
+					<augment name="RANDOM"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_LANIUS_BEACON_EATER_c4_c3_choice"/>
+				<event>
+					<text id="event_LANIUS_BEACON_EATER_c4_c1_text"/>
+					<item_modify>
+						<item type="drones" min="-6" max="-6"/>
+					</item_modify>
+					<augment name="RANDOM"/>
+				</event>
+			</choice>
+			<choice>
+				<text id="event_LANIUS_BEACON_EATER_c4_c4_choice"/>
+				<event/>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true" req="SHIP_REPAIR">
+		<text id="event_LANIUS_BEACON_EATER_c5_choice"/>
+		<event>
+			<text id="event_LANIUS_BEACON_EATER_c5_text"/>
+			<crewMember amount="1" class="anaerobic"/>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_BEACON_EATER_ASK">
+	<event>
+		<text id="event_LANIUS_BEACON_EATER_ASK_1_text"/>
+		<choice hidden="true">
+			<text id="event_LANIUS_BEACON_EATER_ASK_1_c1_choice"/>
+			<event>
+				<text id="event_LANIUS_BEACON_EATER_ASK_1_c1_text"/>
+				<item_modify>
+					<item type="scrap" min="-30" max="-30"/>
+				</item_modify>
+				<augment name="RANDOM"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_LANIUS_BEACON_EATER_ASK_1_c2_choice"/>
+			<event load="LANIUS_BEACON_EATER_LEAVE"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_LANIUS_BEACON_EATER_ASK_2_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+<eventList name="LANIUS_BEACON_EATER_SCRAP">
+	<event>
+		<text id="event_LANIUS_BEACON_EATER_SCRAP_1_text"/>
+		<item_modify>
+			<item type="scrap" min="-30" max="-30"/>
+		</item_modify>
+		<augment name="RANDOM"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_BEACON_EATER_SCRAP_2_text"/>
+		<item_modify>
+			<item type="scrap" min="-30" max="-30"/>
+		</item_modify>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+<eventList name="LANIUS_BEACON_EATER_LEAVE">
+	<event>
+		<text id="event_LANIUS_BEACON_EATER_LEAVE_1_text"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_BEACON_EATER_LEAVE_1_text"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_BEACON_EATER_LEAVE_1_text"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_BEACON_EATER_LEAVE_4_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+
+
+
+<!-- From Chris-->
+<event name="LANIUS_DORMANT_EVENT" unique="true">
+	<text id="event_LANIUS_DORMANT_EVENT_text"/>
+	<ship load="LANIUS_SHIP" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_LANIUS_DORMANT_EVENT_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_DORMANT_EVENT_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_DORMANT_EVENT_c2_choice"/>
+		<event load="LANIUS_DORMANT_WEAPONS"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_DORMANT_EVENT_c3_choice"/>
+		<event load="LANIUS_DORMANT_INVESTIGATE"/>
+	</choice>
+</event>
+<eventList name="LANIUS_DORMANT_WEAPONS">
+	<event>
+		<text id="event_LANIUS_DORMANT_WEAPONS_1_text"/>
+		<ship hostile="true"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_DORMANT_WEAPONS_2_text"/>
+		<choice hidden="true">
+			<text id="event_LANIUS_DORMANT_WEAPONS_2_c1_choice"/>
+			<event load="LANIUS_DORMANT_INVESTIGATE"/>
+		</choice>
+		<choice hidden="true">
+			<text id="event_LANIUS_DORMANT_WEAPONS_2_c2_choice"/>
+			<event>
+				<text id="event_LANIUS_DORMANT_WEAPONS_2_c2_text"/>
+				<ship hostile="true"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<event name="LANIUS_DORMANT_INVESTIGATE">
+	<text id="event_LANIUS_DORMANT_INVESTIGATE_text"/>
+	<choice>
+		<text id="event_LANIUS_DORMANT_INVESTIGATE_c1_choice"/>
+		<event/>
+	</choice>
+	<choice req="anaerobic" hidden="true">
+		<text id="event_LANIUS_DORMANT_INVESTIGATE_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_DORMANT_INVESTIGATE_c2_text"/>
+			<autoReward level="MED">stuff</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_DORMANT_INVESTIGATE_c3_choice"/>
+		<event load="LANIUS_DORMANT_PILOT"/>
+	</choice>
+	<choice hidden="true" req="pilot" lvl="2">
+		<text id="event_LANIUS_DORMANT_INVESTIGATE_c4_choice"/>
+		<event>
+			<text id="event_LANIUS_DORMANT_INVESTIGATE_c4_text"/>
+			<autoReward level="MED">standard</autoReward>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_DORMANT_PILOT">
+	<event>
+		<text id="event_LANIUS_DORMANT_PILOT_1_text"/>
+		<ship hostile="true"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_DORMANT_PILOT_2_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+</eventList>
+
+
+
+<!-- From Chris-->
+<event name="LANIUS_FUELING_STATION" unique="true">
+	<text id="event_LANIUS_FUELING_STATION_text"/>
+	<choice>
+		<text id="event_LANIUS_FUELING_STATION_c1_choice"/>
+		<event>
+			<text id="event_LANIUS_FUELING_STATION_c1_text"/>
+			<ship load="LANIUS_FUELING_STATION_SHIP" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_LANIUS_FUELING_STATION_c2_choice"/>
+		<event>
+			<text id="event_LANIUS_FUELING_STATION_c2_text"/>
+			<choice hidden="true">
+				<text id="event_LANIUS_FUELING_STATION_c2_c1_choice"/>
+				<event load="LANIUS_FUELING_STATION_LIST"/>
+			</choice>
+			<choice req="doors" lvl="2" hidden="true">
+				<text id="event_LANIUS_FUELING_STATION_c2_c2_choice"/>
+				<event>
+					<text id="event_LANIUS_FUELING_STATION_c2_c2_text"/>
+					<item_modify>
+						<item type="fuel" min="5" max="5"/>
+					</item_modify>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_LANIUS_FUELING_STATION_c3_choice"/>
+		<event>
+			<text id="event_LANIUS_FUELING_STATION_c3_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="LANIUS_FUELING_STATION_LIST">
+	<event>
+		<text id="event_LANIUS_FUELING_STATION_LIST_1_text"/>
+		<ship load="LANIUS_FUELING_STATION_SHIP" hostile="true"/>
+		<boarders breach="true" min="1" max="1" class="anaerobic"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_FUELING_STATION_LIST_2_text"/>
+		<ship load="LANIUS_FUELING_STATION_SHIP" hostile="true"/>
+		<damage amount="3" system="engines"/>
+	</event>
+	<event>
+		<text id="event_LANIUS_FUELING_STATION_LIST_3_text"/>
+		<item_modify>
+			<item type="fuel" min="3" max="5"/>
+		</item_modify>
+		<choice>
+			<text id="continue"/>
+			<event/>
+		</choice>
+		<choice req="sensors" lvl="2" hidden="true" max_group="0">
+			<text id="event_LANIUS_FUELING_STATION_LIST_3_c2_choice"/>
+			<event>
+				<text id="event_LANIUS_FUELING_STATION_LIST_3_c2_text"/>
+				<item_modify>
+					<item type="fuel" min="1" max="3"/>
+				</item_modify>
+			</event>
+		</choice>
+		<choice req="sensors" lvl="3" hidden="true" max_group="0">
+			<text id="event_LANIUS_FUELING_STATION_LIST_3_c3_choice"/>
+			<event>
+				<text id="event_LANIUS_FUELING_STATION_LIST_3_c3_text"/>
+				<item_modify>
+					<item type="fuel" min="2" max="3"/>
+					<item type="drones" min="1" max="3"/>
+				</item_modify>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<event name="LANIUS_FUELING_STATION_END">
+	<text id="event_LANIUS_FUELING_STATION_END_text"/>
+	<item_modify>
+		<item type="fuel" min="3" max="5"/>
+	</item_modify>
+</event>
+<ship name="LANIUS_FUELING_STATION_SHIP" auto_blueprint="SHIPS_LANIUS">
+	<destroyed>
+		<text id="ship_LANIUS_FUELING_STATION_SHIP_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_FUELING_STATION_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_FUELING_STATION_END"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_LANIUS_FUELING_STATION_SHIP_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_FUELING_STATION_SHIP_destroyed_c1_choice"/>
+			<event load="LANIUS_FUELING_STATION_END"/>
+		</choice>
+	</deadCrew>
+</ship>
+<!--
+******************************************
+		BOARDERS!!!
+	Events with boarder calls
+**********************************************
+-->
+<event name="LANIUS_PIRATE_BOARDERS" unique="false"> <!-- MATT CHANGED TO STOP CRASHES-->
+	<text id="event_LANIUS_PIRATE_BOARDERS_text"/>
+	<boarders breach="false" min="3" max="4" class="human"/>
+</event>
+
+<!--
+<event name="LANIUS_BOARDERS" unique="true">
+	<text>You detect a small craft in an otherwise empty area and move in to examine it. It appears to be the husk of a Lanius ship barely holding together. As you are closely scanning it for useful materials, three figures climb out from the wreckage and launch themselves the short distance onto your ship. An explosive vibration rocks the ship and Lanius lifeforms are detected on board!</text>
+	<boarders min="3" max="3" class="anaerobic"/>
+</event>  -->
+
+
+<!--
+******************************************
+		SPECIAL!!!
+	-
+**********************************************
+-->
+
+
+<ship name="LANIUS_SHIP" auto_blueprint="SHIPS_LANIUS">
+	<surrender  chance="0.2" min="3" max="4" load="LANIUS_SURRENDER"/>
+	<escape  chance="0.2" min="2" max="4" load="LANIUS_ESCAPE"/>
+	<destroyed load="LANIUS_DESTROYED"/>
+	<gotaway>
+		<text id="ship_LANIUS_SHIP_gotaway_text"/>
+	</gotaway>
+	<deadCrew load="LANIUS_DEAD_CREW"/>
+</ship>
+
+
+<ship name="LANIUS_CIVILIAN" auto_blueprint="SHIPS_LANIUS">
+	<destroyed>
+		<text id="ship_LANIUS_CIVILIAN_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_CIVILIAN_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_LANIUS_CIVILIAN_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_LANIUS_CIVILIAN_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+<ship name="LANIUS_BOARDERS_PDS" auto_blueprint="SHIPS_LANIUS">
+	<destroyed>
+		<text id="ship_LANIUS_BOARDERS_PDS_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="LANIUS_BOARDERS_PDS_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_LANIUS_BOARDERS_PDS_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="LANIUS_BOARDERS_PDS_LIST"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+<ship name="LANIUS_AUTO_REBEL" auto_blueprint="SHIPS_LANIUS">
+	<escape  chance="0.2" min="2" max="4" load="LANIUS_ESCAPE"/>
+	<destroyed>
+		<text id="ship_LANIUS_AUTO_REBEL_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="LANIUS_AUTO_REBEL_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_LANIUS_AUTO_REBEL_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="LANIUS_AUTO_REBEL_LIST"/>
+		</choice>
+	</deadCrew>
+	<gotaway>
+		<text id="ship_LANIUS_AUTO_REBEL_gotaway_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="LANIUS_AUTO_REBEL_LIST"/>
+		</choice>
+	</gotaway>
+</ship>
+
+
+
+
+<ship name="PIRATE_CIVILIAN_LANIUS" auto_blueprint="SHIPS_PIRATE">
+	<destroyed>
+		<text id="ship_PIRATE_CIVILIAN_LANIUS_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_PIRATE_CIVILIAN_LANIUS_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_PIRATE_CIVILIAN_LANIUS_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_PIRATE_CIVILIAN_LANIUS_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</deadCrew>
+</ship>
+</FTL>

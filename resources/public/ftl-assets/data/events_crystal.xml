@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+			SUMMARY  - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+Structure:
+
+Items:
+
+Hostile:
+
+Neutral:
+
+Environment:
+
+Boarders:
+
+Special
+-->
+
+
+<!--
+
+-->
+
+
+
+<!--
+*****************CRYSTAL EVENTLIST     
+''   " " "
+*******************************
+-->
+
+
+<eventList name="ITEMS_CRYSTAL">
+	<event load="CRYSTAL_CACHE"/>
+	<event load="CRYSTAL_SCRAP_EXCITED"/>
+
+	<event load="FIND_DRONE"/>
+	<event load="FIND_WEAPON"/>
+	<event load="REFUEL_STATION"/>
+	<event load="REPAIR_STATION"/>
+</eventList>
+
+<eventList name="HOSTILE_CRYSTAL">
+	<event load="CRYSTAL_FIGHT"/>
+	<event load="CRYSTAL_FIGHT"/>
+	<event load="CRYSTAL_FIGHT"/>
+	<event load="CRYSTAL_CONVOY"/>
+	<event load="CRYSTAL_REBEL"/>
+	<event load="CRYSTAL_HUNTER"/>
+	<event load="CRYSTAL_AUTO"/>
+
+</eventList>
+
+<eventList name="NEUTRAL_CRYSTAL">
+	<event load="CRYSTAL_REBEL_CRYSTAL"/>
+	<event load="CRYSTAL_REBEL_CRYSTAL2"/>
+	<event load="CRYSTAL_MANTIS_CRYSTAL"/>
+	<event load="CRYSTAL_PIRATE_CRYSTAL"/>
+	<event load="CRYSTAL_FED"/>
+	<event load="CRYSTAL_FED_DESERTER"/>
+	<event load="CRYSTAL_HUMAN_TESTS"/>
+	<event load="CRYSTAL_CHATTY"/>
+	<event load="CRYSTAL_REQUEST"/>
+	<event load="CRYSTAL_HELP_DIG"/>
+
+</eventList>
+
+
+<eventList name="QUESTS_CRYSTAL">
+
+</eventList>
+
+
+
+
+
+
+<!--
+*********STRUCTURE!!!	
+	Others events necessary for strucrtural stuff
+**********
+-->
+
+<event name="START_BEACON_CRYSTAL">
+	<text id="event_START_BEACON_CRYSTAL_text"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event>
+			<text id="event_START_BEACON_CRYSTAL_c1_text"/>
+			<quest event="CRYSTAL_UNLOCK"/>
+		</event>
+	</choice>
+</event>
+<event name="CRYSTAL_UNLOCK">
+	<text id="event_CRYSTAL_UNLOCK_text"/>
+	<autoReward level="MED">fuel</autoReward>
+	<augment name="CRYSTAL_SHARDS"/>
+	<damage amount="-10"/>
+	<unlockShip id="8"/>
+</event>
+
+<event name="STORE_CRYSTAL">
+	<text load="STORE_CRYSTAL"/>
+	<store/>
+</event>
+<textList name="STORE_CRYSTAL">
+	<text id="text_STORE_CRYSTAL_1"/>
+	<text id="text_STORE_CRYSTAL_2"/>
+	<text id="text_STORE_CRYSTAL_3"/>
+	<text id="text_STORE_CRYSTAL_4"/>
+
+	<text id="text_STORE_CRYSTAL_1"/>
+	<text id="text_STORE_CRYSTAL_2"/>
+	<text id="text_STORE_CRYSTAL_5"/>
+	<text id="text_STORE_CRYSTAL_6"/>
+</textList>
+
+<event name="NOTHING_CRYSTAL">
+	<text load="NOTHING_CRYSTAL"/>
+</event>
+<textList name="NOTHING_CRYSTAL">
+	<text id="text_NOTHING_CRYSTAL_1"/>
+	<text id="text_NOTHING_CRYSTAL_2"/>
+	<text id="text_NOTHING_CRYSTAL_3"/>
+	<text id="text_NOTHING_CRYSTAL_4"/>
+	<text id="text_NOTHING_CRYSTAL_5"/>
+	<text id="text_NOTHING_CRYSTAL_6"/>
+
+	<text id="text_NOTHING_CRYSTAL_7"/>
+	<text id="text_NOTHING_CRYSTAL_2"/>
+	<text id="text_NOTHING_CRYSTAL_3"/>
+	<text id="text_NOTHING_CRYSTAL_4"/>
+	<text id="text_NOTHING_CRYSTAL_5"/>
+	<text id="text_NOTHING_CRYSTAL_6"/>
+</textList>
+
+
+
+<!--
+*********ITEMS!!!
+	Events that give items
+************
+-->
+
+<event name="CRYSTAL_CACHE" unique="true">
+	<text id="event_CRYSTAL_CACHE_text"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_CACHE_c1_choice"/>
+		<event load="CRYSTAL_CACHE_BREAK"/>
+	</choice>
+	<choice hidden="true" req="MISSILES_BREACH">
+		<text id="event_CRYSTAL_CACHE_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_CACHE_c2_text"/>
+			<item_modify>
+				<item type="missiles" min="-1" max="-1"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_CACHE_c2_c1_choice"/>
+				<event load="CRYSTAL_CACHE_LIST"/>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true" req="crystal">
+		<text id="event_CRYSTAL_CACHE_c3_choice"/>
+		<event>
+			<text id="event_CRYSTAL_CACHE_c3_text"/>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_CACHE_c2_c1_choice"/>
+				<event load="CRYSTAL_CACHE_LIST"/>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="CRYSTAL_CACHE_BREAK">
+	<event>
+		<text id="event_CRYSTAL_CACHE_BREAK_1_text"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_CACHE_BREAK_1_text"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_CACHE_BREAK_3_text"/>
+		<choice hidden="true">
+			<text id="event_CRYSTAL_CACHE_BREAK_3_c1_choice"/>
+			<event load="CRYSTAL_CACHE_LIST"/>
+		</choice>
+	</event>
+</eventList>
+<eventList name="CRYSTAL_CACHE_LIST">
+	<event>
+		<text id="event_CRYSTAL_CACHE_LIST_1_text"/>
+		<weapon name="WEAPONS_CRYSTAL"/>
+		<autoReward level="LOW">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_CACHE_LIST_2_text"/>
+		<weapon name="WEAPONS_CRYSTAL"/>
+		<autoReward level="LOW">stuff</autoReward>
+		<boarders min="2" max="3" class="crystal"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_CACHE_LIST_3_text"/>
+		<choice hidden="true">
+			<text id="event_CRYSTAL_CACHE_LIST_3_c1_choice"/>
+			<event>
+				<text id="event_CRYSTAL_CACHE_LIST_3_c1_text"/>
+				<removeCrew>
+					<clone>true</clone>
+					<text id="event_CRYSTAL_CACHE_LIST_3_c1_c0_clone"/>
+				</removeCrew>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_CRYSTAL_CACHE_LIST_3_c2_choice"/>
+			<event>
+				<text id="event_CRYSTAL_CACHE_LIST_3_c2_text"/>
+				<item_modify steal="true">
+					<item type="fuel" min="-100" max="-100"/>
+				</item_modify>
+				<weapon name="RANDOM"/>
+				<autoReward level="LOW">stuff</autoReward>
+			</event>
+		</choice>
+		<choice hidden="true" req="teleporter" lvl="2">
+			<text id="event_CRYSTAL_CACHE_LIST_3_c3_choice"/>
+			<event>
+				<text id="event_CRYSTAL_CACHE_LIST_3_c3_text"/>
+			</event>
+		</choice>
+		<choice hidden="true" req="engines" lvl="7">
+			<text id="event_CRYSTAL_CACHE_LIST_3_c4_choice"/>
+			<event>
+				<text id="event_CRYSTAL_CACHE_LIST_3_c4_text"/>
+				<weapon name="RANDOM"/>
+				<autoReward level="LOW">stuff</autoReward>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+
+
+<event name="CRYSTAL_SCRAP_EXCITED" unique="true">
+	<text id="event_CRYSTAL_SCRAP_EXCITED_text"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_SCRAP_EXCITED_c1_choice"/>
+		<event>
+			<text id="event_CRYSTAL_SCRAP_EXCITED_c1_text"/>
+			<item_modify>
+				<item type="scrap" min="-35" max="-35"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_SCRAP_EXCITED_c1_c1_choice"/>
+				<event>
+					<text id="event_CRYSTAL_SCRAP_EXCITED_c1_c1_text"/>
+					<crewMember amount="1" class="crystal"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_SCRAP_EXCITED_c1_c2_choice"/>
+				<event load="CRYSTAL_SCRAP_EXCITED_LIST"/>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_SCRAP_EXCITED_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_SCRAP_EXCITED_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="CRYSTAL_SCRAP_EXCITED_LIST">
+	<event>
+		<text id="event_CRYSTAL_SCRAP_EXCITED_LIST_1_text"/>
+		<weapon name="BOMB_LOCK"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SCRAP_EXCITED_LIST_2_text"/>
+		<weapon name="CRYSTAL_BURST_2"/>
+	</event>
+</eventList>
+
+
+<!--
+*********HOSTILE!!!
+	Events that call up a fight for sure
+**********
+-->
+
+<event name="CRYSTAL_FIGHT" unique="false">
+	<text load="CRYSTAL_FIGHT"/>
+	<ship load="CRYSTAL_SHIP" hostile="true"/>
+</event>
+<textList name="CRYSTAL_FIGHT">
+	<text id="text_CRYSTAL_FIGHT_1"/>
+	<text id="text_CRYSTAL_FIGHT_2"/>
+	<text id="text_CRYSTAL_FIGHT_3"/>
+	<text id="text_CRYSTAL_FIGHT_4"/>
+	<text id="text_CRYSTAL_FIGHT_5"/>
+	<text id="text_CRYSTAL_FIGHT_6"/>
+	<text id="text_CRYSTAL_FIGHT_7"/>
+
+	<text id="text_CRYSTAL_FIGHT_1"/>
+	<text id="text_CRYSTAL_FIGHT_2"/>
+	<text id="text_CRYSTAL_FIGHT_3"/>
+	<text id="text_CRYSTAL_FIGHT_4"/>
+	<text id="text_CRYSTAL_FIGHT_5"/>
+	<text id="text_CRYSTAL_FIGHT_6"/>
+	<text id="text_CRYSTAL_FIGHT_7"/>
+</textList>
+
+<event name="CRYSTAL_CONVOY" unique="true">
+	<text id="event_CRYSTAL_CONVOY_text"/>
+	<ship load="CRYSTAL_CONVOY" hostile="true"/>
+</event>
+
+<event name="CRYSTAL_HUNTER" unique="true">
+	<text id="event_CRYSTAL_HUNTER_text"/>
+	<ship load="CRYSTAL_HUNTER" hostile="true"/>
+</event>
+
+<event name="CRYSTAL_REBEL" unique="false">
+	<text id="event_CRYSTAL_REBEL_text"/>
+	<ship load="REBEL" hostile="true"/>
+</event>
+
+<event name="CRYSTAL_AUTO" unique="true">
+	<text id="event_CRYSTAL_AUTO_text"/>
+	<ship load="REBEL_AUTO" hostile="true"/>
+</event>
+
+
+
+<!--
+*********NEUTRAL!!!
+	Events that could have a fight
+**********
+-->
+
+<event name="CRYSTAL_REBEL_CRYSTAL" unique="false">
+	<text id="event_CRYSTAL_REBEL_CRYSTAL_text"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_REBEL_CRYSTAL_c1_choice"/>
+		<event>
+			<text id="event_CRYSTAL_REBEL_CRYSTAL_c1_text"/>
+			<ship load="REBEL_CRYSTAL_REBEL_CRYSTAL" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_REBEL_CRYSTAL_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_REBEL_CRYSTAL_c2_text"/>
+			<modifyPursuit amount="1"/>
+			<ship load="CRYSTAL_SHIP_NO_SURRENDER" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_REBEL_CRYSTAL_c3_choice"/>
+		<event>
+			<text id="event_CRYSTAL_REBEL_CRYSTAL_c3_text"/>
+		</event>
+	</choice>
+</event>
+<event name="CRYSTAL_MANTIS_CRYSTAL" unique="false">
+	<text id="event_CRYSTAL_MANTIS_CRYSTAL_text"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_MANTIS_CRYSTAL_c1_choice"/>
+		<event>
+			<text id="event_CRYSTAL_MANTIS_CRYSTAL_c1_text"/>
+			<ship load="MANTIS_CRYSTAL" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_MANTIS_CRYSTAL_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_MANTIS_CRYSTAL_c2_text"/>
+		</event>
+	</choice>
+</event>
+<!-- Justin - TO DO - make a separate list? -->
+<event name="CRYSTAL_PIRATE_CRYSTAL" unique="false">
+	<text id="event_CRYSTAL_PIRATE_CRYSTAL_text"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_PIRATE_CRYSTAL_c1_choice"/>
+		<event>
+			<text id="event_CRYSTAL_PIRATE_CRYSTAL_c1_text"/>
+			<ship load="PIRATE_CRYSTAL" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_PIRATE_CRYSTAL_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_PIRATE_CRYSTAL_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="CRYSTAL_SAVED">
+	<event>
+		<text id="event_CRYSTAL_SAVED_1_text"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SAVED_2_text"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SAVED_3_text"/>
+		<autoReward level="RANDOM">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SAVED_4_text"/>
+		<autoReward level="RANDOM">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SAVED_5_text"/>
+		<weapon name="WEAPONS_CRYSTAL"/>
+	</event>
+</eventList>
+
+<event name="CRYSTAL_REBEL_CRYSTAL2" unique="true">
+	<text id="event_CRYSTAL_REBEL_CRYSTAL2_text"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_REBEL_CRYSTAL2_c1_choice"/>
+		<event>
+			<text id="event_CRYSTAL_REBEL_CRYSTAL2_c1_text"/>
+			<ship load="CRYSTAL_SHIP_NO_SURRENDER" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_REBEL_CRYSTAL2_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_REBEL_CRYSTAL2_c2_text"/>
+		</event>
+	</choice>
+</event>
+
+
+
+<event name="CRYSTAL_FED" unique="false">
+	<text id="event_CRYSTAL_FED_text"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_FED_c1_choice"/>
+		<event>
+			<text id="event_CRYSTAL_FED_c1_text"/>
+			<ship load="CRYSTAL_FED" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_FED_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_FED_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="CRYSTAL_FED_LIST">
+	<event>
+		<text id="event_CRYSTAL_FED_LIST_1_text"/>
+		<autoReward level="RANDOM">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_FED_LIST_2_text"/>
+		<crewMember amount="1"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+</eventList>
+
+
+<event name="CRYSTAL_FED_DESERTER" unique="true">
+	<text id="event_CRYSTAL_FED_DESERTER_text"/>
+	<ship load="FED_SHIP" hostile="false"/>
+	<choice hidden="false">
+		<text id="event_CRYSTAL_FED_DESERTER_c1_choice"/>
+		<event>
+			<text id="event_CRYSTAL_FED_DESERTER_c1_text"/>
+			<item_modify>
+				<item type="fuel" min="-3" max="-1"/>
+				<item type="scrap" min="-25" max="-15"/>
+			</item_modify>
+			<reveal_map/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_FED_DESERTER_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_FED_DESERTER_c2_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_FED_DESERTER_c3_choice"/>
+		<event>
+			<text id="event_CRYSTAL_FED_DESERTER_c3_text"/>
+		</event>
+	</choice>
+</event>
+
+
+<event name="CRYSTAL_HUMAN_TESTS" unique="true">
+	<text id="event_CRYSTAL_HUMAN_TESTS_text"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_HUMAN_TESTS_c1_choice"/>
+		<event load="CRYSTAL_HUMAN_TESTS_ACCEPT"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_HUMAN_TESTS_c2_choice"/>
+		<event load="CRYSTAL_HUMAN_TESTS_REFUSE"/>
+	</choice>
+	<choice hidden="true" req="rock">
+		<text id="event_CRYSTAL_HUMAN_TESTS_c3_choice"/>
+		<event>
+			<text id="event_CRYSTAL_HUMAN_TESTS_c3_text"/>
+			<autoReward level="MED">standard</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true" req="BACKUP_DNA"> <!--DLC-->
+		<text id="event_CRYSTAL_HUMAN_TESTS_c4_choice"/>
+		<event>
+			<text id="event_CRYSTAL_HUMAN_TESTS_c4_text"/>
+			<autoReward level="MED">weapon</autoReward>
+		</event>
+	</choice>
+</event>
+<eventList name="CRYSTAL_HUMAN_TESTS_ACCEPT">
+	<event>
+		<text id="event_CRYSTAL_HUMAN_TESTS_ACCEPT_1_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_CRYSTAL_HUMAN_TESTS_ACCEPT_1_c0_clone"/>
+		</removeCrew>
+		<autoReward level="LOW">weapon</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_HUMAN_TESTS_ACCEPT_2_text"/>
+		<autoReward level="MED">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_HUMAN_TESTS_ACCEPT_3_text"/>
+		<autoReward level="LOW">drone</autoReward>
+	</event>
+</eventList>
+<!-- JUSTIN - TO DO - add one where they're just generally hostile and it was a trap? -->
+<eventList name="CRYSTAL_HUMAN_TESTS_REFUSE">
+	<event>
+		<text id="event_CRYSTAL_HUMAN_TESTS_REFUSE_1_text"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_HUMAN_TESTS_REFUSE_1_text"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_HUMAN_TESTS_REFUSE_3_text"/>
+		<ship load="CRYSTAL_SHIP_NO_SURRENDER" hostile="true"/>
+	</event>
+</eventList>
+
+
+<event name="CRYSTAL_CHATTY" unique="true">
+	<text id="event_CRYSTAL_CHATTY_text"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_CHATTY_c1_choice"/>
+		<event>
+			<text id="event_CRYSTAL_CHATTY_c1_text"/>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_CHATTY_c1_c1_choice"/>
+				<event load="CRYSTAL_CHATTY_LIST"/>
+			</choice>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_CHATTY_c1_c2_choice"/>
+				<event>
+					<text id="event_CRYSTAL_CHATTY_c1_c2_text"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_CHATTY_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_CHATTY_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="crystal">
+		<text id="event_CRYSTAL_CHATTY_c3_choice"/>
+		<event>
+			<text id="event_CRYSTAL_CHATTY_c3_text"/>
+			<autoReward level="RANDOM">fuel</autoReward>
+		</event>
+	</choice>
+</event>
+<eventList name="CRYSTAL_CHATTY_LIST">
+	<event>
+		<text id="event_CRYSTAL_CHATTY_LIST_1_text"/>
+		<ship load="REBEL" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_CHATTY_LIST_2_text"/>
+		<autoReward level="RANDOM">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_CHATTY_LIST_3_text"/>
+		<damage amount="-6"/>
+	</event>
+</eventList>
+
+
+<event name="CRYSTAL_REQUEST" unique="true">
+	<text id="event_CRYSTAL_REQUEST_text"/>
+	<ship load="CRYSTAL_SHIP_NO_SURRENDER" hostile="false"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event>
+			<text id="event_CRYSTAL_REQUEST_c1_text"/>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_REQUEST_c1_c1_choice"/>
+				<event>
+					<text id="event_CRYSTAL_REQUEST_c1_c1_text"/>
+					<autoReward level="HIGH">scrap_only</autoReward>
+					<modifyPursuit amount="1"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_REQUEST_c1_c2_choice"/>
+				<event load="CRYSTAL_REQUEST_LIST"/>
+			</choice>
+			<choice hidden="true" req="FLEET_DISTRACTION"> <!--DLC-->
+				<text id="event_CRYSTAL_REQUEST_c1_c3_choice"/>
+				<event>
+					<text id="event_CRYSTAL_REQUEST_c1_c3_text"/>
+					<autoReward level="HIGH">scrap_only</autoReward>
+					<modifyPursuit amount="-1"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_REQUEST_c1_c4_choice"/>
+				<event>
+					<text id="event_CRYSTAL_REQUEST_c1_c4_text"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="CRYSTAL_REQUEST_LIST">
+	<event>
+		<text id="event_CRYSTAL_REQUEST_LIST_1_text"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+		<modifyPursuit amount="-1"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_REQUEST_LIST_2_text"/>
+		<ship hostile="true"/>
+		<boarders min="1" max="2" class="crystal"/>
+	</event>
+</eventList>
+
+
+<event name="CRYSTAL_HELP_DIG" unique="true">
+	<text id="event_CRYSTAL_HELP_DIG_text"/>
+	<ship load="CRYSTAL_SHIP_NO_SURRENDER" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_CRYSTAL_HELP_DIG_c1_choice"/>
+		<event>
+			<text id="event_CRYSTAL_HELP_DIG_c1_text"/>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_HELP_DIG_c1_c1_choice"/>
+				<event>
+					<text id="event_CRYSTAL_HELP_DIG_c1_c1_text"/>
+					<autoReward level="MED">fuel</autoReward>
+					<removeCrew>
+						<clone>false</clone>
+						<text></text>
+					</removeCrew>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_CRYSTAL_HELP_DIG_c1_c2_choice"/>
+				<event>
+					<text id="event_CRYSTAL_HELP_DIG_c1_c2_text"/>
+					<ship hostile="true"/>
+				</event>
+			</choice>
+			<choice>
+				<text id="event_CRYSTAL_HELP_DIG_c1_c3_choice"/>
+				<event>
+					<text id="event_CRYSTAL_HELP_DIG_c1_c3_text"/>
+					<modifyPursuit amount="1"/>
+					<choice hidden="true">
+						<text id="event_CRYSTAL_HELP_DIG_c1_c1_choice"/>
+						<event>
+							<text id="event_CRYSTAL_HELP_DIG_c1_c1_text"/>
+							<autoReward level="HIGH">fuel</autoReward>
+							<removeCrew>
+								<clone>false</clone>
+								<text></text>
+							</removeCrew>
+						</event>
+					</choice>
+					<choice hidden="true">
+						<text id="event_CRYSTAL_HELP_DIG_c1_c2_choice"/>
+						<event>
+							<text id="event_CRYSTAL_HELP_DIG_c1_c2_text"/>
+							<ship hostile="true"/>
+						</event>
+					</choice>
+					<choice hidden="true">
+						<text id="event_CRYSTAL_HELP_DIG_c1_c3_choice"/>
+						<event>
+							<text id="event_CRYSTAL_HELP_DIG_c1_c3_c3_text"/>
+							<modifyPursuit amount="1"/>
+							<autoReward level="HIGH">augment</autoReward>
+							<weapon name="CRYSTAL_HEAVY_2"/>
+						</event>
+					</choice>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_CRYSTAL_HELP_DIG_c2_choice"/>
+		<event>
+			<text id="event_CRYSTAL_HELP_DIG_c2_text"/>
+		</event>
+	</choice>
+</event>
+
+
+
+<!--
+*********DISTRESS!!!	
+	Events that have a distress beacon  
+**********
+-->
+
+
+
+
+
+
+<!--
+*********SPECIAL!!!
+	Unique events
+**********
+-->
+
+
+<event name="BOARDERS_CRYSTAL" unique="false">
+	<text load="BOARDERS_CRYSTAL"/>
+	<boarders min="2" max="3" class="crystal"/>
+</event>
+<textList name="BOARDERS_CRYSTAL">
+	<text id="text_BOARDERS_CRYSTAL_1"/>
+	<text id="text_BOARDERS_CRYSTAL_2"/>
+	<text id="text_BOARDERS_CRYSTAL_3"/>
+</textList>
+
+
+<textList name="CRYSTAL_SHIP_SURRENDER">
+	<text id="text_CRYSTAL_SHIP_SURRENDER_1"/>
+	<text id="text_CRYSTAL_SHIP_SURRENDER_2"/>
+	<text id="text_CRYSTAL_SHIP_SURRENDER_3"/>
+	<text id="text_CRYSTAL_SHIP_SURRENDER_4"/>
+	<text id="text_CRYSTAL_SHIP_SURRENDER_5"/>
+
+	<text id="text_CRYSTAL_SHIP_SURRENDER_1"/>
+	<text id="text_CRYSTAL_SHIP_SURRENDER_6"/>
+	<text id="text_CRYSTAL_SHIP_SURRENDER_3"/>
+	<text id="text_CRYSTAL_SHIP_SURRENDER_7"/>
+	<text id="text_CRYSTAL_SHIP_SURRENDER_5"/>
+</textList>
+<eventList name="CRYSTAL_SHIP_SURRENDER">
+	<event>
+		<text id="event_CRYSTAL_SHIP_SURRENDER_1_text"/>
+		<ship hostile="false"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SHIP_SURRENDER_2_text"/>
+		<ship hostile="false"/>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SHIP_SURRENDER_3_text"/>
+		<ship hostile="false"/>
+		<autoReward level="RANDOM">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SHIP_SURRENDER_4_text"/>
+		<ship hostile="false"/>
+		<autoReward level="RANDOM">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SHIP_SURRENDER_5_text"/>
+		<ship hostile="false"/>
+		<autoReward level="RANDOM">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SHIP_SURRENDER_6_text"/>
+		<ship hostile="false"/>
+		<autoReward level="RANDOM">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_CRYSTAL_SHIP_SURRENDER_7_text"/>
+		<ship hostile="false"/>
+		<choice hidden="true">
+			<text id="event_CRYSTAL_SHIP_SURRENDER_7_c1_choice"/>
+			<event>
+				<text id="event_CRYSTAL_SHIP_SURRENDER_7_c1_text"/>
+				<crewMember amount="1" class="crystal"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_CRYSTAL_SHIP_SURRENDER_7_c2_choice"/>
+			<event>
+				<text id="event_CRYSTAL_SHIP_SURRENDER_7_c2_text"/>
+				<autoReward level="RANDOM">stuff</autoReward>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+
+
+</FTL>

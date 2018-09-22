@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- TO DO - EVENTS TO ADD TO THINGS
+
+
+
+
+
+
+
+
+-->
+
+
+<!--
+****
+Events For Testing
+****
+-->
+<event name="FUEL_ESCAPE_PULSAR">
+	<text>Taking advantage of the last of your fuel reserves, you were able to navigate to a safe distance from the pulsar.</text>
+</event>
+
+<event name="PULSAR">
+	<text>Oh no! A pulsar!</text>
+	<ship load="REBEL_AUTO" hostile="true"/>
+	<environment type="pulsar"/>
+</event>
+
+<event name="PDS_TEST">
+	<text>Oh no! This planet is friendly to the Rebels and is shooting at us!</text>
+	<environment type="PDS" target="all"/>
+	<ship load="REBEL_AUTO" hostile="true"/>
+</event>
+
+<event name="FUEL_ESCAPE_PDS">
+	<text>Using your impulse engines, you were able to pull to a safe distance from the hostile planet.</text>
+</event>
+
+<event name="FUEL_ESCAPE_FLEET">
+	<text>Your pilot deftly avoids the artillery fire from the surrounding fleet while you try to sort out exactly what your plan is....</text>
+</event>
+
+<event name="NEWSHIP1">
+	<text>whatever</text>
+	<ship load="NEWSHIP1" hostile="true"/>
+</event>
+
+<event name="NEWSHIP2">
+	<text>whatever</text>
+	<ship load="NEWSHIP2" hostile="true"/>
+</event>
+
+<ship name="NEWSHIP1" auto_blueprint="ANAEROBIC_SCOUT">
+	<destroyed>
+		<text>Yay</text>
+	</destroyed>
+	<deadCrew>
+		<text>Yay</text>
+	</deadCrew>
+</ship>
+
+<ship name="NEWSHIP2" auto_blueprint="ANAEROBIC_BOMBER">
+	<destroyed>
+		<text>Yay</text>
+	</destroyed>
+	<deadCrew>
+		<text>Yay</text>
+	</deadCrew>
+	<surrender  chance="0.5" min="3" max="4" load="PIRATE_SURRENDER"/>
+</ship>
+
+
+
+
+
+
+<!--
+****
+New Item Events
+****
+-->
+
+
+<event name="STORE_REBELSIDE" unique="true">
+	<text id="event_STORE_REBELSIDE_text"/>
+	<choice hidden="true">
+		<text id="event_STORE_REBELSIDE_c1_choice"/>
+		<event load="STORE_REBELSIDE_SEARCH"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_STORE_REBELSIDE_c2_choice"/>
+		<event>
+			<text id="event_STORE_REBELSIDE_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="mind" lvl="1" max_group="0">
+		<text id="event_STORE_REBELSIDE_c3_choice"/>
+		<event>
+			<text id="event_STORE_REBELSIDE_c3_text"/>
+			<store/>
+		</event>
+	</choice>
+	<choice hidden="true" req="mind" lvl="2" max_group="0">
+		<text id="event_STORE_REBELSIDE_c4_choice"/>
+		<event>
+			<text id="event_STORE_REBELSIDE_c4_text"/>
+			<autoReward level="MED">standard</autoReward>
+			<store/>
+		</event>
+	</choice>
+	<choice hidden="true" req="mind" lvl="3" max_group="0">
+		<text id="event_STORE_REBELSIDE_c5_choice"/>
+		<event>
+			<text id="event_STORE_REBELSIDE_c5_text"/>
+			<autoReward level="HIGH">standard</autoReward>
+			<store/>
+		</event>
+	</choice>
+</event>
+<eventList name="STORE_REBELSIDE_SEARCH">
+	<event>
+		<text id="event_STORE_REBELSIDE_SEARCH_1_text"/>
+		<store/>
+	</event>
+	<event>
+		<text id="event_STORE_REBELSIDE_SEARCH_2_text"/>
+		<autoReward level="RANDOM">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_STORE_REBELSIDE_SEARCH_3_text"/>
+		<ship load="REBEL_AUTO" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_STORE_REBELSIDE_SEARCH_3_text"/>
+		<ship load="REBEL_AUTO" hostile="true"/>
+	</event>
+</eventList>
+
+
+<!--
+****
+HOSTILE ENVIRONMENT! 
+ Environment Events - Added into standard rotations
+****
+-->
+
+
+<event name="REBEL_PULSAR" unique="true">
+	<text load="REBEL_PULSAR_TEXT"/>
+	<ship load="REBEL" hostile="true"/>
+	<environment type="pulsar"/>
+</event>
+<textList name="REBEL_PULSAR_TEXT"> <!--DLC2-->
+	<text id="text_REBEL_PULSAR_TEXT_1"/>
+	<text id="text_REBEL_PULSAR_TEXT_2"/>
+	<text id="text_REBEL_PULSAR_TEXT_3"/>
+
+
+	<!-- NEEDS MORE-->
+	<text id="text_REBEL_PULSAR_TEXT_1"/>
+	<text id="text_REBEL_PULSAR_TEXT_2"/>
+	<text id="text_REBEL_PULSAR_TEXT_3"/>
+</textList>
+
+<event name="PIRATE_PULSAR" unique="true">
+	<text load="PIRATE_PULSAR_TEXT"/>
+	<ship load="PIRATE" hostile="true"/>
+	<environment type="pulsar"/>
+</event>
+<textList name="PIRATE_PULSAR_TEXT">
+	<text id="text_PIRATE_PULSAR_TEXT_1"/>
+	<text id="text_PIRATE_PULSAR_TEXT_2"/>
+	<text id="text_PIRATE_PULSAR_TEXT_3"/>
+
+
+	<!-- NEEDS MORE-->
+	<text id="text_PIRATE_PULSAR_TEXT_1"/>
+	<text id="text_PIRATE_PULSAR_TEXT_2"/>
+	<text id="text_PIRATE_PULSAR_TEXT_3"/>
+</textList>
+
+
+
+<event name="REBEL_PDS" unique="true">
+	<text load="REBEL_PDS_TEXT"/>
+	<environment type="PDS" target="player"/>
+	<ship load="REBEL" hostile="true"/>
+	<choice>
+		<text id="event_REBEL_PDS_c1_choice"/>
+		<event/>
+	</choice>
+	<choice req="hacking" lvl="1">
+		<text id="event_REBEL_PDS_c2_choice"/>
+		<event>
+			<text id="event_REBEL_PDS_c2_text"/>
+			<environment type="PDS" target="all"/>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice req="hacking" lvl="3">
+		<text id="event_REBEL_PDS_c3_choice"/>
+		<event>
+			<text id="event_REBEL_PDS_c3_text"/>
+			<environment type="PDS" target="enemy"/>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+		</event>
+	</choice>
+</event>
+<textList name="REBEL_PDS_TEXT">
+	<text id="text_REBEL_PDS_TEXT_1"/>
+
+	<!-- NEEDS MORE-->
+	<text id="text_REBEL_PDS_TEXT_1"/>
+	<text id="text_REBEL_PDS_TEXT_1"/>
+	<text id="text_REBEL_PDS_TEXT_1"/>
+</textList>
+
+
+<event name="REBEL_AUTO_PDS" unique="true">
+	<text load="REBEL_AUTO_PDS_TEXT"/>
+	<environment type="PDS" target="player"/>
+	<ship load="REBEL_AUTO" hostile="true"/>
+	<choice>
+		<text id="event_REBEL_AUTO_PDS_c1_choice"/>
+		<event/>
+	</choice>
+	<choice req="hacking" lvl="1">
+		<text id="event_REBEL_AUTO_PDS_c2_choice"/>
+		<event>
+			<text id="event_REBEL_AUTO_PDS_c2_text"/>
+			<environment type="PDS" target="all"/>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice req="hacking" lvl="3">
+		<text id="event_REBEL_AUTO_PDS_c3_choice"/>
+		<event>
+			<text id="event_REBEL_AUTO_PDS_c3_text"/>
+			<environment type="PDS" target="enemy"/>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+		</event>
+	</choice>
+</event>
+<textList name="REBEL_AUTO_PDS_TEXT">
+	<text id="text_REBEL_AUTO_PDS_TEXT_1"/>
+
+	<!-- NEEDS MORE-->
+	<text id="text_REBEL_AUTO_PDS_TEXT_1"/>
+	<text id="text_REBEL_AUTO_PDS_TEXT_1"/>
+	<text id="text_REBEL_AUTO_PDS_TEXT_1"/>
+</textList>
+
+<!--
+****
+Standard Ships 
+****
+-->
+
+
+
+
+
+<!--
+****
+New Rebel Fleet events
+****
+-->
+
+
+
+
+<!--
+****
+New Last-Stand Events 
+****
+-->
+
+
+
+
+<!--
+****
+Lanius Sector Events
+****
+-->
+
+</FTL>

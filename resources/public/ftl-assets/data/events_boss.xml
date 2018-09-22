@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+			SUMMARY  - 
+A list of all main events to be called by lists
+	(does not include sub-events)
+
+Structure:
+	START_BEACON_BOSS
+	FEDERATION_BASE
+	BOSS_AUTOMATED
+	BOSS_DESTROYED
+	BOSS_ESCAPED
+	BOSS_TEXT_1
+	BOSS_TEXT_2
+	BOSS_TEXT_3
+
+Hostile:
+	BOSS_SCOUT
+	BOSS_FLEETS_REBEL   (also used for structure of !!! events)
+
+Neutral:
+	BOSS_SCOUT_RESCUE
+
+Boarders:
+
+Empty:
+	BOSS_FLEETS_FED
+	BOSS_FLEETS_BOTH    (sometimes in !!! events)
+
+Items:
+	BOSS_REPAIR_STATION
+
+
+
+<fleet>rebel</fleet>
+<fleet>fed</fleet>
+<fleet>battle</fleet>
+-->
+
+
+
+
+<eventList name="BOSS_HOSTILE">
+	<event load="BOSS_SCOUT"/>
+	<event load="BOSS_SCOUT"/>
+	<event load="BOSS_SCOUT"/>
+</eventList>
+
+<eventList name="BOSS_NEUTRAL">
+	<event load="BOSS_SCOUT_RESCUE"/>
+	<event load="BOSS_FLEETS_BOTH_FIGHT"/>
+	<event load="BOSS_FLEETS_FED"/>
+	<event load="SQUAT_REFUEL_STATION"/>
+	<event load="REBEL"/>
+</eventList>
+
+
+<eventList name="BOSS_WARNING_NODE">
+	<event load="BOSS_FLEETS_REBEL"/>
+	<event load="BOSS_FLEETS_BOTH_FIGHT"/>
+</eventList>
+
+
+<event name="FEDERATION_BASE">
+	<text id="event_FEDERATION_BASE_text"/>
+</event>
+
+<!-- the first time you arrive at the base, before the rebel fleet arrives -->
+<event name="LAST_STAND_START">
+	<text id="event_LAST_STAND_START_text"/>
+	<choice>
+		<text id="event_LAST_STAND_START_c1_choice"/>
+		<event>
+			<text id="event_LAST_STAND_START_c1_text"/>
+			<choice hidden="true">
+				<text id="event_LAST_STAND_START_c1_c1_choice"/>
+				<event>
+					<text id="event_LAST_STAND_START_c1_c1_text"/>
+					<item_modify>
+						<item type="fuel" min="10" max="10"/>
+					</item_modify>
+					<damage amount="-10"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<fleet>fed</fleet>
+</event>
+
+<event name="BOSS_AUTOMATED">
+	<text id="event_BOSS_AUTOMATED_text"/>
+</event>
+
+<event name="BOSS_DESTROYED">
+	<text id="event_BOSS_DESTROYED_text"/>
+	<choice>
+		<text id="continue"/>
+		<event>
+			<text id="event_BOSS_DESTROYED_c1_text"/>
+		</event>
+	</choice>
+	<status type="clear" target="player" system="sensors" amount="100"/>
+</event>
+
+<event name="BOSS_ESCAPED">
+	<text id="event_BOSS_ESCAPED_text"/>
+	<autoReward level="HIGH">standard</autoReward>
+	<status type="clear" target="player" system="sensors" amount="100"/>
+</event>
+
+
+<event name="BOSS_TEXT_1">
+	<text id="event_BOSS_TEXT_1_text"/>
+</event>
+
+<event name="BOSS_TEXT_2">
+	<text id="event_BOSS_TEXT_2_text"/>
+</event>
+
+<event name="BOSS_TEXT_3">
+	<text id="event_BOSS_TEXT_3_text"/>
+</event>
+
+
+
+
+
+<event name="BOSS_REPAIR_STATION">  <!-- the various stations that heal you around the map-->
+	<text load="BOSS_REPAIR_STATION"/>
+	<damage amount="-15"/>
+	<repair/>
+	<item_modify>
+		<item type="missiles" min="4" max="4"/>
+		<item type="fuel" min="5" max="5"/>
+		<item type="drones" min="5" max="5"/>
+		<item type="scrap" min="22" max="44"/>
+	</item_modify>
+</event>
+<textList name="BOSS_REPAIR_STATION">
+	<text id="text_BOSS_REPAIR_STATION_1"/>
+	<text id="text_BOSS_REPAIR_STATION_2"/>
+	<text id="text_BOSS_REPAIR_STATION_3"/>
+	<text id="text_BOSS_REPAIR_STATION_4"/>
+	<text id="text_BOSS_REPAIR_STATION_5"/>
+</textList>
+
+
+
+<!--
+Neutral
+-->
+
+<event name="BOSS_SCOUT" unique="false"> <!-- player discovers scout attacking or scouting. basic fight -->
+	<text load="BOSS_SCOUT"/>
+	<ship load="REBEL_AND_AUTO" hostile="true"/>
+</event>
+<textList name="BOSS_SCOUT">
+	<text id="text_BOSS_SCOUT_1"/>  <!--image- Fleet background-->
+	<text id="text_BOSS_SCOUT_2"/> <!--image-no fleets-->
+	<text id="text_BOSS_SCOUT_3"/> <!-- image- no fleet, empty planet-->
+	<text id="text_BOSS_SCOUT_4"/>
+	<text id="text_BOSS_SCOUT_5"/>
+	<text id="text_BOSS_SCOUT_6"/>
+</textList>
+
+<event name="BOSS_SCOUT_RESCUE">  <!-- player rescues weakened fed/civilian ship from a rebel scout - fight with rescue-->
+	<text load="BOSS_SCOUT_RESCUE"/>
+	<choice>
+		<text id="event_BOSS_SCOUT_RESCUE_c1_choice"/>
+		<event>
+			<text id="event_BOSS_SCOUT_RESCUE_c1_text"/>
+			<ship load="BOSS_SCOUT_RESCUE" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_BOSS_SCOUT_RESCUE_c2_choice"/>
+		<event>
+			<text id="event_BOSS_SCOUT_RESCUE_c2_text"/>
+		</event>
+	</choice>
+</event>
+<textList name="BOSS_SCOUT_RESCUE">
+	<text id="text_BOSS_SCOUT_RESCUE_1"/>
+	<text id="text_BOSS_SCOUT_RESCUE_2"/>
+	<text id="text_BOSS_SCOUT_RESCUE_3"/>
+	<text id="text_BOSS_SCOUT_RESCUE_4"/>
+	<text id="text_BOSS_SCOUT_RESCUE_5"/>
+	<text id="text_BOSS_SCOUT_RESCUE_3"/>
+	<text id="text_BOSS_SCOUT_RESCUE_4"/>
+	<text id="text_BOSS_SCOUT_RESCUE_5"/>
+</textList>
+<eventList name="BOSS_SCOUT_RESCUE_LIST">  <!-- what the player gets for rescuing the ship-->
+	<event>
+		<text id="event_BOSS_SCOUT_RESCUE_LIST_1_text"/>
+	</event>
+	<event>
+		<text id="event_BOSS_SCOUT_RESCUE_LIST_2_text"/>
+		<damage amount="-8"/>
+	</event>
+	<event>
+		<text id="event_BOSS_SCOUT_RESCUE_LIST_3_text"/>
+		<autoReward level="MED">stuff</autoReward>
+	</event>
+</eventList>
+<ship name="BOSS_SCOUT_RESCUE" auto_blueprint="SHIPS_REBEL">
+	<escape  chance="0.5" min="4" max="8" load="PIRATE_ESCAPE"/>
+	<destroyed>
+		<text id="ship_BOSS_SCOUT_RESCUE_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_BOSS_SCOUT_RESCUE_destroyed_c1_choice"/>
+			<event load="BOSS_SCOUT_RESCUE_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_BOSS_SCOUT_RESCUE_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_BOSS_SCOUT_RESCUE_destroyed_c1_choice"/>
+			<event load="BOSS_SCOUT_RESCUE_LIST"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+
+
+
+
+
+<!--
+Fleets - some with minor fights
+-->
+
+
+<event name="BOSS_FLEETS_FED">  <!-- empty nodes that the Rebels have not reached yet.-->
+	<fleet>fed</fleet>
+	<text load="BOSS_FLEETS_FED"/>
+</event>
+<textList name="BOSS_FLEETS_FED">
+	<text id="text_BOSS_FLEETS_FED_1"/> <!-- large fed fleet-->
+	<text id="text_BOSS_FLEETS_FED_2"/> <!-- small fed fleet - debris-->
+	<text id="text_BOSS_FLEETS_FED_3"/> <!-- small fed fleet - populated planet-->
+	<text id="text_BOSS_FLEETS_FED_4"/> <!--large fed fleet-->
+	<text id="text_BOSS_FLEETS_FED_5"/><!-- small fed fleet - planet-->
+
+		<text id="text_BOSS_FLEETS_FED_1"/> <!-- large fed fleet-->
+	<text id="text_BOSS_FLEETS_FED_2"/> <!-- small fed fleet - debris-->
+	<text id="text_BOSS_FLEETS_FED_3"/> <!-- small fed fleet - populated planet-->
+	<text id="text_BOSS_FLEETS_FED_4"/> <!--large fed fleet-->
+	<text id="text_BOSS_FLEETS_FED_5"/><!-- small fed fleet - planet-->
+</textList>
+
+
+
+<event name="BOSS_FLEETS_BOTH">  <!-- nodes that have ships fighting  -  unique background -->
+	<fleet>battle</fleet>
+	<text load="BOSS_FLEETS_BOTH"/>
+</event>
+<textList name="BOSS_FLEETS_BOTH">
+	<text id="text_BOSS_FLEETS_BOTH_1"/>
+	<text id="text_BOSS_FLEETS_BOTH_2"/>
+	<text id="text_BOSS_FLEETS_BOTH_3"/>
+	<text id="text_BOSS_FLEETS_BOTH_4"/>
+	<text id="text_BOSS_FLEETS_BOTH_5"/>
+	<text id="text_BOSS_FLEETS_BOTH_6"/>
+
+	<text id="text_BOSS_FLEETS_BOTH_1"/>
+	<text id="text_BOSS_FLEETS_BOTH_2"/>
+	<text id="text_BOSS_FLEETS_BOTH_3"/>
+	<text id="text_BOSS_FLEETS_BOTH_4"/>
+	<text id="text_BOSS_FLEETS_BOTH_5"/>
+	<text id="text_BOSS_FLEETS_BOTH_6"/>
+</textList>
+
+
+
+
+
+
+<event name="BOSS_FLEETS_BOTH_FIGHT">  <!-- nodes that have ships fighting  -  also inside the /!\ symbol but can be elswhere too. -->
+	<fleet>battle</fleet>
+	<text load="BOSS_FLEETS_BOTH_FIGHT"/>
+	<ship load="BOSS_FLEETS_REBEL" hostile="true"/>
+</event>
+<textList name="BOSS_FLEETS_BOTH_FIGHT">
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_1"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_2"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_3"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_4"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_5"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_6"/>
+
+		<text id="text_BOSS_FLEETS_BOTH_FIGHT_1"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_2"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_3"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_4"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_5"/>
+	<text id="text_BOSS_FLEETS_BOTH_FIGHT_6"/>
+</textList>
+
+
+
+
+
+
+<event name="BOSS_FLEETS_REBEL"> <!-- areas that the fleet took over (or will take over soon) have the /!\ symbol on the map-->
+	<fleet>rebel</fleet>
+	<text load="BOSS_FLEETS_REBEL"/>
+	<ship load="BOSS_FLEETS_REBEL" hostile="true"/>
+</event>
+<textList name="BOSS_FLEETS_REBEL">
+	<text id="text_BOSS_FLEETS_REBEL_1"/>
+	<text id="text_BOSS_FLEETS_REBEL_2"/> <!-- no environment?-->
+	<text id="text_BOSS_FLEETS_REBEL_3" planet="PLANET_POPULATED"/>
+	<text id="text_BOSS_FLEETS_REBEL_4"/>
+	<text id="text_BOSS_FLEETS_REBEL_5"/>
+	<text id="text_BOSS_FLEETS_REBEL_6" planet="PLANET_POPULATED"/>
+	<text id="text_BOSS_FLEETS_REBEL_7"/>
+
+	<text id="text_BOSS_FLEETS_REBEL_1"/>
+	<text id="text_BOSS_FLEETS_REBEL_2"/> <!-- no environment?-->
+	<text id="text_BOSS_FLEETS_REBEL_3" planet="PLANET_POPULATED"/>
+	<text id="text_BOSS_FLEETS_REBEL_4"/>
+	<text id="text_BOSS_FLEETS_REBEL_5"/>
+	<text id="text_BOSS_FLEETS_REBEL_6" planet="PLANET_POPULATED"/>
+	<text id="text_BOSS_FLEETS_REBEL_7"/>
+</textList>
+<ship name="BOSS_FLEETS_REBEL" auto_blueprint="SHIPS_REBEL">
+	<destroyed>
+		<text id="ship_BOSS_FLEETS_REBEL_destroyed_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_BOSS_FLEETS_REBEL_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+</FTL>

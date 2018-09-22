@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- Room image layouts -->
+
+<roomLayout name="artillery">
+	<computerGlow x="40" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="engines">
+	<computerGlow x="5" y="53" dir="DOWN"/>
+</roomLayout>
+
+<roomLayout name="engines_2">
+	<computerGlow x="5" y="53" dir="DOWN"/>
+</roomLayout>
+
+<roomLayout name="engines_3">
+	<computerGlow x="53" y="7" dir="RIGHT"/>
+</roomLayout>
+
+<roomLayout name="engines_4">
+	<computerGlow x="5" y="53" dir="DOWN"/>
+</roomLayout>
+
+<roomLayout name="engines_5">
+	<computerGlow x="5" y="1" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="engines_6">
+	<computerGlow x="43" y="53" dir="DOWN"/>
+</roomLayout>
+
+<roomLayout name="engines_7">
+	<computerGlow x="54" y="44" dir="RIGHT"/>
+</roomLayout>
+
+<roomLayout name="engines_8">
+	<computerGlow x="0" y="44" dir="LEFT"/>
+</roomLayout>
+
+<roomLayout name="engines_9">
+	<computerGlow x="43" y="1" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="hacking">
+	<computerGlow x="9" y="19" dir="DOWN"/>
+</roomLayout>
+
+<roomLayout name="hacking_2">
+	<computerGlow x="9" y="19" dir="DOWN"/>
+</roomLayout>
+
+<roomLayout name="hacking_3">
+	<computerGlow x="0" y="8" dir="LEFT"/>
+</roomLayout>
+
+<roomLayout name="hacking_4">
+	<computerGlow x="9" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="hacking_5">
+	<computerGlow x="5" y="1" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="hacking_6">
+	<computerGlow x="9" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="pilot">
+	<computerGlow name="glow_pilot" x="19" y="9" dir="RIGHT"/>
+</roomLayout>
+
+<roomLayout name="pilot_2">
+	<computerGlow name="glow_pilot" x="54" y="8" dir="RIGHT"/>
+</roomLayout>
+
+<roomLayout name="pilot_3">
+	<computerGlow name="glow_pilot" x="54" y="8" dir="RIGHT"/>
+</roomLayout>
+
+<roomLayout name="pilot_4">
+	<computerGlow name="glow_pilot" x="19" y="9" dir="RIGHT"/>
+</roomLayout>
+
+<roomLayout name="shields">
+	<computerGlow x="1" y="8" dir="LEFT"/>
+</roomLayout>
+
+<roomLayout name="shields_2">
+	<computerGlow x="1" y="8" dir="LEFT"/>
+</roomLayout>
+
+<roomLayout name="shields_3">
+	<computerGlow x="1" y="41" dir="LEFT"/>
+</roomLayout>
+
+<roomLayout name="shields_4">
+	<computerGlow x="1" y="8" dir="LEFT"/>
+</roomLayout>
+
+<roomLayout name="shields_5">
+	<computerGlow x="10" y="1" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="shields_6">
+	<computerGlow x="1" y="8" dir="LEFT"/>
+</roomLayout>
+
+<roomLayout name="shields_7">
+	<computerGlow x="36" y="1" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="shields_8">
+	<computerGlow x="1" y="12" dir="LEFT"/>
+</roomLayout>
+
+<roomLayout name="shields_9">
+	<computerGlow x="38" y="1" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="shields_10">
+	<computerGlow x="35" y="53" dir="DOWN"/>
+</roomLayout>
+
+<roomLayout name="shields_11">
+	<computerGlow x="35" y="18" dir="DOWN"/>
+</roomLayout>
+
+<roomLayout name="weapons">
+	<computerGlow x="40" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="weapons_2">
+	<computerGlow x="40" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="weapons_3">
+	<computerGlow x="40" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="weapons_4">
+	<computerGlow x="8" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="weapons_5">
+	<computerGlow x="54" y="7" dir="RIGHT"/>
+</roomLayout>
+
+<roomLayout name="weapons_6">
+	<computerGlow x="40" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="weapons_7">
+	<computerGlow x="40" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="weapons_8">
+	<computerGlow x="40" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="weapons_9">
+	<computerGlow x="40" y="0" dir="UP"/>
+</roomLayout>
+
+<roomLayout name="weapons_10">
+	<computerGlow x="8" y="0" dir="UP"/>
+</roomLayout>
+</FTL>

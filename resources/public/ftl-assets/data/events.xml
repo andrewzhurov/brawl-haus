@@ -1,0 +1,3498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+
+<!--
+			SUMMARY  - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+Structure:
+	GAMEOVER
+	TUTORIAL_START
+	TUTORIAL_ENEMY
+	TOO_MANY_CREW
+
+
+Fleet Progression:
+	START_BEACON
+	FINISH_BEACON
+	FINISH_BEACON_NEBULA
+	FLEET_EASY_BEACON
+	FLEET_HARD
+
+
+Hostile:
+
+Neutral:
+	ASTEROID_EXPLORE
+	MERCENARY
+
+
+Nothing:	
+	NOTHING
+
+Distress Signals:
+	FRIENDLY_BEACON
+	PIRATE_CIVILIAN_BEACON
+	STRANDED_BEACON
+	TRAP_BEACON
+	CIVILIAN_ASTEROIDS_BEACON
+	ESCORT_BEACON
+	REBEL_VS_FEDERATION   (also quest)
+
+
+Boarders:
+	BOARDERS
+	BOARDERS_HACKING
+	STATION_SICK
+	BOARDERS_ASTEROID_GHOST
+
+
+
+
+Items:
+	STORE
+	FIND_DRONE
+	FIND_WEAPON
+	FREE_ITEMS
+	FUEL_FOR_DRONE
+	REFUEL_STATION
+	REPAIR_STATION
+	SELL_DRONES_STATION
+	SELL_MISSILES_STATION
+	TRADER_CIV
+
+
+
+
+Special:
+	GHOST_SHIP
+	FEDERATION_PLANET_SIGNAL    (contains other quest events)
+			FEDERATION_PLANET_SIGNAL_LIST
+			HIDDEN_FEDERATION_BASE_LIST
+			FEDERATION_BASE_ASSIST
+	QUEST_ESCORT
+	STORE_RESCUE   (contains other quest events)
+			QUEST_STORE
+			QUEST_STORE_RESCUE
+	MERCENARY_WORK_START
+
+-->
+
+
+
+<!--
+		New Ideas:
+
+You're asked to scare someone off but not kill them
+A treasure that if you choose to open it the jump track advances   	
+- add a quest that is just a warning "don't go over here, there are pirates ambushing people"
+engi - asks for a weapon to use - can give you an upgrade?
+
+-->
+
+
+<!--<autoReward level=<LOW/MED/HIGH/RANDOM>> tag </autoreward>
+where tag is
+standard  - which is scrap + 2 resources (possible a weapon)
+stuff     - less scrap, mostly resources (intended for surrenders)
+fuel 
+missiles 
+droneparts  - scrap + that resource
+fuel_only 
+missiles_only 
+droneparts_only - self explanatory
+weapon 
+augment 
+drone 
+item - scrap + that thing  -->
+
+<event name="BOARDER_TEST">
+	<text>Oh no enemies!</text>
+	<boarders min="3" max="5" class="human"/>
+	<ship load="PIRATE"/>
+</event>
+
+<event name="REMOVAL_TEST">
+	<text>Oh no! Your drone is gone.</text>
+	<remove name="COMBAT_1"/>
+</event>
+
+<event name="CREW_DEAD_TEST">
+	<text>Oh no! Your crew is dead.</text>
+	<removeCrew>
+		<clone>false</clone>
+		<text>They're still dead!</text>
+	</removeCrew>
+</event>
+
+<event name="TEST_EVENT">
+	<text>This looks good...</text>
+	<choice>
+		<text id="continue"/>
+		<event>
+			<text>Kaboom ship damage!!</text>
+			<damage amount="5"/>
+			<damage amount="1" system="engines" effect="random"/>
+			<damage amount="1" system="shields" effect="all"/>
+		</event>
+	</choice>
+</event>
+
+<event name="TEST_EVENT2">
+	<text>Limited systems!</text>
+	<status type="limit" target="player" system="sensors" amount="1"/>
+	<status type="limit" target="player" system="doors" amount="1"/>
+	<status type="limit" target="player" system="engine" amount="1"/>
+	<status type="limit" target="player" system="weapons" amount="1"/>
+</event>
+
+<event name="FREE_NANO">
+	<text>FREE NANO!</text>
+	<augment name="NANO_MEDBAY"/>
+</event>
+
+<event name="FREE_AUG">
+	<text>FREE AUG!</text>
+	<augment name="RANDOM"/>
+</event>
+
+<event name="CRYSTAL_TEST">
+	<text>Testing Crystal Teleport</text>
+	<choice>
+		<text>Travel to the Crystal Sector</text>
+		<event>
+			<secretSector/>
+		</event>
+	</choice>
+</event>
+
+<event name="STALEMATE_SURRENDER">
+	<text id="event_STALEMATE_SURRENDER_text"/>
+	<item_modify>
+		<item type="fuel" min="2" max="2"/>
+	</item_modify>
+	<ship hostile="false"/>
+</event>
+
+<event name="BOSS_STALEMATE">
+	<text id="event_BOSS_STALEMATE_text"/>
+</event>
+
+<event name="CREW_STUCK">
+	<text id="event_CREW_STUCK_text"/>
+</event>
+
+<event name="FUEL_ESCAPE_SUN">
+	<text id="event_FUEL_ESCAPE_SUN_text"/>
+</event>
+
+<event name="FUEL_ESCAPE_STORM">
+	<text id="event_FUEL_ESCAPE_STORM_text"/>
+</event>
+
+<event name="FUEL_ESCAPE_ASTEROIDS">
+	<text id="event_FUEL_ESCAPE_ASTEROIDS_text"/>
+</event>
+
+<event name="AUGMENT_FULL">
+	<text id="event_AUGMENT_FULL_text"/>
+</event>
+
+<event name="EQUIP_FULL">
+	<text id="event_EQUIP_FULL_text"/>
+</event>
+
+<event name="START_DEMO">
+	<text id="event_START_DEMO_text"/>
+</event>
+
+<event name="START_GAME">
+	<text id="event_START_GAME_text"/>
+</event>
+
+<!-- demo gameover text-->
+<textList name="GAMEOVER">
+	<text id="text_GAMEOVER_1"/>
+</textList>
+
+<!-- Dummy event, please leave in-->
+<event name="DUMMY">
+	<text id="event_DUMMY_text"/>
+</event>
+
+<event name="TUTORIAL_START">
+	<text id="event_TUTORIAL_START_text"/>
+	<choice>
+		<text id="continue"/>
+		<event>
+			<text id="event_TUTORIAL_START_c1_text"/>
+			<choice>
+				<text id="continue"/>
+				<event>
+					<text id="event_TUTORIAL_START_c1_c1_text"/>
+				</event>
+				<choice>
+					<text id="event_TUTORIAL_START_c1_c2_choice"/>
+					<event/>
+				</choice>
+			</choice>
+		</event>
+	</choice>
+</event>
+
+<event name = "TUTORIAL_MISSILE">
+	<text id="event_TUTORIAL_MISSILE_text"/>
+	<weapon name="MISSILES_2_PLAYER"/>
+</event>
+
+
+<event name = "TUTORIAL_ENEMY">
+	<text id="event_TUTORIAL_ENEMY_text"/>
+	<choice>
+		<text id="continue"/>
+		<event/>
+	</choice>
+	<choice req="sensors" lvl="1" hidden="true">
+		<text id="event_TUTORIAL_ENEMY_c2_choice"/>
+		<event/>
+	</choice>
+	<ship load = "TUTORIAL_PIRATE" hostile="true"/>
+</event>
+
+<ship name="TUTORIAL_PIRATE" blueprint="TUTORIAL_PIRATE">
+	<destroyed>
+		<text id="ship_TUTORIAL_PIRATE_destroyed_text"/>
+		<item_modify>
+			<item type="fuel" min="1" max="1"/>
+			<item type="missiles" min="3" max="3"/>
+			<item type="scrap" min="100" max="100"/>
+		</item_modify>
+		<weapon name="BEAM_2"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_TUTORIAL_PIRATE_deadCrew_text"/>
+		<item_modify>
+			<item type="fuel" min="1" max="1"/>
+			<item type="missiles" min="3" max="3"/>
+			<item type="scrap" min="100" max="100"/>
+		</item_modify>
+		<weapon name="BEAM_2"/>
+	</deadCrew>
+</ship>
+
+
+<event name="TOO_MANY_CREW">
+	<text id="event_TOO_MANY_CREW_text"/>
+	<choice>
+		<text id="continue"/>
+		<event/>
+	</choice>
+</event>
+
+
+
+
+<!--   		***************************************
+					STRUCTURE EVENTS 
+			********************************************   
+-->
+<event name="START_BEACON">
+	<text id="event_START_BEACON_text"/>
+</event>
+
+<event name="FINISH_BEACON">
+	<text id="event_FINISH_BEACON_text"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event load="EXIT_LIST"/>
+	</choice>
+</event>
+
+<event name="FINISH_BEACON_NEBULA">
+	<text id="event_FINISH_BEACON_NEBULA_text"/>
+<!--	<choice hidden="true">
+		<text id="continue"/>   There has been two sightings of odd events at the end of the nebula sectors. Simplifying just as a random precaution.
+		<event load="NEBULA"/>
+	</choice>-->
+</event>
+
+
+<event name = "FLEET_EASY">
+	<fleet>rebel</fleet>
+	<text id="event_FLEET_EASY_text"/>
+	<ship load = "LONG_FLEET" hostile ="true"/>
+	<environment type="PDS" target="player"/>
+</event>
+
+
+<event name = "FLEET_EASY_DLC">
+	<fleet>rebel</fleet>
+	<text id="event_FLEET_EASY_DLC_text"/>
+	<ship load = "LONG_FLEET" hostile ="true"/>
+	<environment type="PDS" target="player"/>
+</event>
+
+<!--
+<event name = "FLEET_EASY_AGAIN">
+	<fleet>rebel</fleet>
+	<text>Another ship approaches, the reinforcements seem endless! You must jump away!</text>
+	<ship load = "LONG_FLEET" hostile ="true"/>
+</event>  -->
+
+<event name = "FLEET_EASY_BEACON">
+	<fleet>rebel</fleet>
+	<text id="event_FLEET_EASY_BEACON_text"/>
+	<ship load="LONG_FLEET" hostile ="true"/>
+</event>
+
+<event name = "FLEET_EASY_BEACON_DLC">
+	<fleet>rebel</fleet>
+	<text id="event_FLEET_EASY_BEACON_DLC_text"/>
+	<ship load="LONG_FLEET" hostile ="true"/>
+	<environment type="PDS" target="player"/>
+</event>
+
+<event name = "FLEET_HARD">
+	<fleet>rebel</fleet>
+	<text id="event_FLEET_HARD_text"/>
+	<ship load = "LONG_FLEET" hostile ="true"/>
+</event>
+
+
+<event name="NOTHING">
+	<text load="NOTHING"/>
+</event>
+<textList name="NOTHING">
+	<text id="text_NOTHING_1" planet="NONE" back="BG_DARK"/>
+	<text id="text_NOTHING_2" planet="NONE"/>
+	<text id="text_NOTHING_3"/>
+	<text id="text_NOTHING_4" planet="PLANET_POPULATED_SMALL"/>
+	<text id="text_NOTHING_5" planet="PLANET_POPULATED_SMALL"/>
+	<text id="text_NOTHING_6"/>
+	<text id="text_NOTHING_7" planet="PLANET_POPULATED_SMALL"/>
+	<text id="text_NOTHING_8" planet="NONE"/>
+	<text id="text_NOTHING_9" planet="NONE"/>
+</textList>
+
+
+
+<!-- 	*********************************************
+					HOSTILE EVENTS
+		*********************************************
+-->
+
+
+
+
+
+
+
+<!--      **********************************************
+						NEUTRAL EVENTS
+		  **********************************************
+	Not guaranteed fights or getting stuff
+-->
+
+<event name="ASTEROID_EXPLORE" unique="true">
+	<text id="event_ASTEROID_EXPLORE_text"/>
+	<choice hidden="true">
+		<text id="event_ASTEROID_EXPLORE_c1_choice"/>
+		<event load="ASTEROID_EXPLORE_RESULTS"/>
+	</choice>
+	<choice>
+		<text id="event_ASTEROID_EXPLORE_c2_choice"/>
+		<event/>
+	</choice>
+	<choice req="SCRAP_COLLECTOR" hidden="true">
+		<text id="event_ASTEROID_EXPLORE_c3_choice"/>
+		<event>
+			<text id="event_ASTEROID_EXPLORE_c3_text"/>
+			<autoReward level="HIGH">scrap_only</autoReward>
+		</event>
+	</choice>
+</event>
+<eventList name="ASTEROID_EXPLORE_RESULTS">
+	<event>
+		<text id="event_ASTEROID_EXPLORE_RESULTS_1_text"/>
+	</event>
+	<event>
+		<text id="event_ASTEROID_EXPLORE_RESULTS_2_text"/>
+		<autoReward level="HIGH">fuel_only</autoReward>
+	</event>
+	<event>
+		<text id="event_ASTEROID_EXPLORE_RESULTS_3_text"/>
+		<autoReward level="MED">missiles</autoReward>
+	</event>
+	<event>
+		<text id="event_ASTEROID_EXPLORE_RESULTS_4_text"/>
+		<autoReward level="MED">droneparts</autoReward>
+	</event>
+	<event>
+		<text id="event_ASTEROID_EXPLORE_RESULTS_5_text"/>
+		<damage amount="3"/>
+		<damage amount="1" system="random"/>  <!--DLC-->
+		<damage amount="1" system="room" effect="fire"/>
+	</event>
+	<event>
+		<text id="event_ASTEROID_EXPLORE_RESULTS_6_text"/>
+		<ship load="PIRATE" hostile="true"/>
+		<environment type="asteroid"/>
+	</event>
+</eventList>
+
+
+<event name="MERCENARY">
+	<text load="MERCENARY"/>
+	<ship load="PIRATE" hostile="false"/>
+	<choice>
+		<text id="event_MERCENARY_c1_choice"/>
+		<event>
+			<text id="event_MERCENARY_c1_text"/>
+			<item_modify>
+				<item type="scrap" min="-25" max="-10"/>
+			</item_modify>
+			<modifyPursuit amount="-2"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_MERCENARY_c2_choice"/>
+		<event>
+			<text id="event_MERCENARY_c2_text"/>
+			<item_modify>
+				<item type="scrap" min="-20" max="-10"/>
+			</item_modify>
+			<reveal_map/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_MERCENARY_c3_choice"/>
+		<event>
+			<text id="event_MERCENARY_c3_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_MERCENARY_c4_choice"/>
+		<event/>
+	</choice>
+</event>
+<textList name="MERCENARY">
+	<text id="text_MERCENARY_1"/>
+	<text id="text_MERCENARY_2"/>
+	<text id="text_MERCENARY_3" planet="PLANET_POPULATED"/>
+	<text id="text_MERCENARY_4"/>
+	<text id="text_MERCENARY_5"/>
+	<text id="text_MERCENARY_6"/>
+</textList>
+
+
+
+<event name="PIRATE_STATION_CROPS" unique="true">
+	<text id="event_PIRATE_STATION_CROPS_text"/>
+	<ship load="PIRATE_STATION_CROPS" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_PIRATE_STATION_CROPS_c1_choice"/>
+		<event>
+			<text id="event_PIRATE_STATION_CROPS_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_PIRATE_STATION_CROPS_c2_choice"/>
+		<event>
+			<text id="event_PIRATE_STATION_CROPS_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="BEAM_FIRE">
+		<text id="event_PIRATE_STATION_CROPS_c3_choice"/>
+		<event>
+			<text id="event_PIRATE_STATION_CROPS_c3_text"/>
+			<autoReward level="HIGH">drone</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true" req="BOMB_FIRE">
+		<text id="event_PIRATE_STATION_CROPS_c4_choice"/>
+		<event>
+			<text id="event_PIRATE_STATION_CROPS_c4_text"/>
+			<item_modify>
+				<item type="missiles" min="-1" max="-1"/>
+			</item_modify>
+			<autoReward level="HIGH">drone</autoReward>
+		</event>
+	</choice>
+</event>
+<event name="PIRATE_STATION_CROPS_RESULT">
+	<text id="event_PIRATE_STATION_CROPS_RESULT_text"/>
+	<autoReward level="LOW">stuff</autoReward>
+</event>
+<ship name="PIRATE_STATION_CROPS" auto_blueprint="SHIPS_PIRATE">
+	<surrender  chance="0.5" min="2" max="4" >
+		<text id="ship_PIRATE_STATION_CROPS_surrender_text"/>
+		<choice>
+			<text id="ship_PIRATE_STATION_CROPS_surrender_c1_choice"/>
+			<event>
+				<ship hostile="false"/>
+				<autoReward level="MED">stuff</autoReward>
+			</event>
+		</choice>
+		<choice>
+			<text id="ship_PIRATE_STATION_CROPS_surrender_c2_choice"/>
+			<event/>
+		</choice>
+	</surrender>
+	<escape chance="0.5" min="3" max="4" >
+		<text id="ship_PIRATE_STATION_CROPS_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<gotaway load="PIRATE_STATION_CROPS_RESULT"/>
+	<destroyed>
+		<text id="ship_PIRATE_STATION_CROPS_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="PIRATE_STATION_CROPS_RESULT"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_PIRATE_STATION_CROPS_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="PIRATE_STATION_CROPS_RESULT"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+
+
+
+
+
+
+<!--
+*********
+		DISTRESS!!!
+	Events with that can be found at a distress beacon
+**********
+-->
+
+<event name="FRIENDLY_BEACON">
+	<text load="FRIENDLY_BEACON"/>
+	<distressBeacon/>
+	<ship load="CIVILIAN_SHIP" hostile="false"/>
+	<choice>
+		<text id="event_FRIENDLY_BEACON_c1_choice"/>
+		<event>
+			<text id="event_FRIENDLY_BEACON_c1_text"/>
+			<item_modify>
+				<item type="fuel" min="-4" max="-2"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event load="RANDOM_GIFT"/>
+			</choice>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_FRIENDLY_BEACON_c2_choice"/>
+		<event>
+			<text id="event_FRIENDLY_BEACON_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="RANDOM_GIFT">  <!-- JUSTIN - ADD STUFF-->
+	<event>
+		<text id="event_RANDOM_GIFT_1_text"/>
+		<reveal_map/>
+	</event>
+	<event>
+		<text id="event_RANDOM_GIFT_2_text"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_RANDOM_GIFT_2_text"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_RANDOM_GIFT_4_text"/>
+		<weapon name="RANDOM"/>
+	</event>
+	<event> <!--DLC!-->
+		<text id="event_RANDOM_GIFT_5_text"/>
+		<upgrade amount="1" system="reactor"/>
+	</event>
+</eventList>
+<textList name="FRIENDLY_BEACON">
+	<text id="text_FRIENDLY_BEACON_1"/>
+	<text id="text_FRIENDLY_BEACON_2"/>
+	<text id="text_FRIENDLY_BEACON_3"/>
+	<text id="text_FRIENDLY_BEACON_4"/>
+	<text id="text_FRIENDLY_BEACON_5"/>
+</textList>
+
+
+
+<event name="PIRATE_CIVILIAN_BEACON">
+	<text id="event_PIRATE_CIVILIAN_BEACON_text"/>
+	<choice>
+		<text id="event_PIRATE_CIVILIAN_BEACON_c1_choice"/>
+		<event>
+			<text id="event_PIRATE_CIVILIAN_BEACON_c1_text"/>
+			<ship load="PIRATE_CIVILIAN" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_PIRATE_CIVILIAN_BEACON_c2_choice"/>
+		<event>
+			<text id="event_PIRATE_CIVILIAN_BEACON_c2_text"/>
+		</event>
+	</choice>
+	<choice req="weapons" lvl="6" hidden="true">
+		<text id="event_PIRATE_CIVILIAN_BEACON_c3_choice"/>
+		<event load="PIRATE_CIVILIAN_BEACON_BEAM"/>
+	</choice>
+</event>
+<eventList name="PIRATE_CIVILIAN_BEACON_BEAM">
+	<event>
+		<text id="event_PIRATE_CIVILIAN_BEACON_BEAM_1_text"/>
+		<ship load="PIRATE_CIVILIAN" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_PIRATE_CIVILIAN_BEACON_BEAM_2_text"/>
+		<choice hiiden="true">
+			<text id="continue"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</event>
+</eventList>
+
+
+<event name="STRANDED_BEACON" unique="true">
+	<text id="event_STRANDED_BEACON_text"/>
+	<distressBeacon/>
+	<choice hidden="true">
+		<text id="event_STRANDED_BEACON_c1_choice"/>
+		<event load="STRANDED"/>
+	</choice>
+	<choice>
+		<text id="event_STRANDED_BEACON_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+<eventList name="STRANDED">
+	<event>
+		<text id="event_STRANDED_1_text"/>
+		<choice hidden="true">
+			<text id="event_STRANDED_1_c1_choice"/>
+			<event load="STRANDED_CHARLIES"/> <!--DLC!-->
+		</choice>
+		<choice hidden="true">
+			<text id="event_STRANDED_1_c2_choice"/>
+			<event load="FAMILY_RETURN"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_STRANDED_2_text"/>
+		<choice hidden="true">
+			<text id="event_STRANDED_2_c1_choice"/>
+			<event load="MADMAN"/>
+		</choice>
+		<choice>
+			<text id="event_STRANDED_2_c2_choice"/>
+			<event/>
+		</choice>
+		<choice req="medbay" lvl="2" hidden="true" max_group="0">
+			<text id="event_STRANDED_2_c3_choice"/>
+			<event>
+				<text id="event_STRANDED_2_c3_text"/>
+				<crewMember amount="1" id="name_Charlie"/>
+			</event>
+		</choice>
+		<choice req="medbay" lvl="3" hidden="true" max_group="0"> <!--DLC!-->
+			<text id="event_STRANDED_2_c4_choice"/>
+			<event>
+				<text id="event_STRANDED_2_c4_text"/>
+				<crewMember amount="1" all_skills="1" id="name_Charlie"/>
+			</event>
+		</choice>
+		<choice req="slug" hidden="true">
+			<text id="event_STRANDED_2_c5_choice"/>
+			<event load="MADMAN_SLUG"/>
+		</choice>
+	</event>
+</eventList>
+<eventList name="FAMILY_RETURN">
+	<event>
+		<text id="event_FAMILY_RETURN_1_text"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_FAMILY_RETURN_2_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_FAMILY_RETURN_3_text"/>
+		<damage amount="-10"/>
+	</event>
+</eventList>
+<eventList name="MADMAN">
+	<event>
+		<text id="event_MADMAN_1_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_MADMAN_1_c0_clone"/>
+		</removeCrew>
+	</event>
+	<event>
+		<text id="event_MADMAN_2_text"/>
+		<crewMember amount="1" id="name_Charlie"/>
+	</event>
+	<event>
+		<text id="event_MADMAN_3_text"/>
+		<damage amount="4"/>
+		<damage amount="1" system="random"/>  <!--DLC-->
+	</event>
+	<event>
+		<text id="event_MADMAN_4_text"/>
+		<choice>
+			<text id="continue"/>
+			<event/>
+		</choice>
+		<choice req="medbay" lvl="2" hidden="true">
+			<text id="event_MADMAN_4_c2_choice"/>
+			<event>
+				<text id="event_MADMAN_4_c2_text"/>
+				<crewMember amount="1" id="name_Charlie"/>
+			</event>
+		</choice>
+		<choice req="clonebay" lvl="2" hidden="true"> <!--DLC!-->
+			<text id="event_MADMAN_4_c3_choice"/>
+			<event>
+				<text id="event_MADMAN_4_c3_text"/>
+				<crewMember amount="1" id="name_Charlie"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<eventList name="MADMAN_SLUG">
+	<event>
+		<text id="event_MADMAN_SLUG_1_text"/>
+	</event>
+	<event>
+		<text id="event_MADMAN_SLUG_2_text"/>
+		<crewMember amount="1" class="human"/>
+	</event>
+</eventList>
+<eventList name="STRANDED_CHARLIES"> <!--DLC!-->
+	<event>
+		<text id="event_STRANDED_CHARLIES_1_text"/>
+		<crewMember weapons="1" amount="1" id="name_Charlie"/>
+	</event>
+	<event>
+		<text id="event_STRANDED_CHARLIES_2_text"/>
+		<crewMember shields="1" amount="1" id="name_Charlie"/>
+	</event>
+	<event>
+		<text id="event_STRANDED_CHARLIES_3_text"/>
+		<crewMember pilot="1" amount="1" id="name_Charlie"/>
+	</event>
+	<event>
+		<text id="event_STRANDED_CHARLIES_4_text"/>
+		<crewMember engines="1" amount="1" id="name_Charlie"/>
+	</event>
+	<event>
+		<text id="event_STRANDED_CHARLIES_5_text"/>
+		<crewMember combat="1" amount="1" id="name_Charlie"/>
+	</event>
+	<event>
+		<text id="event_STRANDED_CHARLIES_6_text"/>
+		<crewMember repair="1" amount="1" id="name_Charlie"/>
+	</event>
+</eventList>
+
+
+
+
+<event name="TRAP_BEACON" unique="true">
+	<text load="TRAP_BEACON_TEXT"/>
+	<distressBeacon/>
+	<ship load="PIRATE" hostile="true"/>
+</event>
+<textList name="TRAP_BEACON_TEXT">  <!-- JUSTIN - ADDED -->
+	<text id="text_TRAP_BEACON_TEXT_1"/>
+	<text id="text_TRAP_BEACON_TEXT_2"/>
+	<text id="text_TRAP_BEACON_TEXT_3"/>
+	<text id="text_TRAP_BEACON_TEXT_4"/>
+</textList>
+
+<event name="CIVILIAN_ASTEROIDS_BEACON" unique="true">
+	<text id="event_CIVILIAN_ASTEROIDS_BEACON_text"/>
+	<distressBeacon/>
+	<choice>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_c1_choice"/>
+		<event load="CIVILIAN_ASTEROIDS_BEACON_2"/>
+	</choice>
+</event>
+
+<event name="CIVILIAN_ASTEROIDS_BEACON_2">
+	<text id="event_CIVILIAN_ASTEROIDS_BEACON_2_text"/>
+	<choice hidden="true">
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_2_c1_choice"/>
+		<event load="CIVILIAN_ASTEROIDS_BEACON_LIST1"/>
+	</choice>
+	<choice>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_2_c2_choice"/>
+		<event load="CIVILIAN_ASTEROIDS_BEACON_LIST4"/>
+	</choice>
+	<choice req="DRONES_DEFENSE_LIST" hidden="true">
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_2_c3_choice"/>
+		<event load="CIVILIAN_ASTEROIDS_BEACON_LIST2"/>
+	</choice>
+	<choice req="REPAIR" hidden="true">
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_2_c4_choice"/>
+		<event load="CIVILIAN_ASTEROIDS_BEACON_LIST2"/>
+	</choice>
+	<choice req="teleporter" hidden="true">
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_2_c5_choice"/>
+		<event load="CIVILIAN_ASTEROIDS_BEACON_LIST3"/>
+	</choice>
+	<choice req="ROCK_ARMOR" hidden="true">
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_2_c6_choice"/>
+		<event>
+			<text id="event_CIVILIAN_ASTEROIDS_BEACON_2_c6_text"/>
+			<autoReward level="MED">fuel</autoReward>
+		</event>
+	</choice>
+</event>
+
+<eventList name="CIVILIAN_ASTEROIDS_BEACON_LIST1">
+	<event>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST1_1_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+		<damage amount="1" system="room" effect="fire"/> <!--DLC-->
+	</event>
+	<event>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST1_2_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST1_3_text"/>
+		<damage amount="4"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+</eventList>
+<eventList name="CIVILIAN_ASTEROIDS_BEACON_LIST2">
+	<event>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST2_1_text"/>
+		<autoReward level="MED">weapon</autoReward>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+		<damage amount="2"/>
+		<damage amount="1" system="random"/>  <!--DLC-->
+		<damage amount="1" system="room" effect="fire"/>
+	</event>
+	<event>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST2_2_text"/>
+		<quest event="HIDDEN_FEDERATION_BASE_LIST"/>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+</eventList>
+<eventList name="CIVILIAN_ASTEROIDS_BEACON_LIST3">
+	<event>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST3_1_text"/>
+		<crewMember amount="1"/>
+	</event>
+	<event>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST3_2_text"/>
+		<choice hidden="true">
+			<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST3_2_c1_choice"/>
+			<event load="FAMILY_RETURN"/>
+		</choice>
+	</event>
+</eventList>
+<eventList name="CIVILIAN_ASTEROIDS_BEACON_LIST4">
+	<event>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST4_1_text"/>
+		<modifyPursuit amount="1"/>
+	</event>
+	<event>
+		<text id="event_CIVILIAN_ASTEROIDS_BEACON_LIST4_2_text"/>
+	</event>
+</eventList>
+
+
+<event name="ESCORT_BEACON" unique="true">
+	<text id="event_ESCORT_BEACON_text"/>
+	<distressBeacon/>
+	<ship load="CIVILIAN_SHIP" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_ESCORT_BEACON_c1_choice"/>
+		<event>
+			<text id="event_ESCORT_BEACON_c1_text"/>
+			<quest event="QUEST_ESCORT_ARRIVE"/>
+			<autoReward level="LOW">scrap_only</autoReward>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_ESCORT_BEACON_c2_choice"/>
+		<event>
+			<text id="event_ESCORT_BEACON_c2_text"/>
+		</event>
+	</choice>
+	<choice req="FTL_JUMPER" hidden="true">
+		<text id="event_ESCORT_BEACON_c3_choice"/>
+		<event>
+			<text id="event_ESCORT_BEACON_c3_text"/>
+			<autoReward level="HIGH">standard</autoReward>
+		</event>
+	</choice>
+</event>
+
+
+<event name="REBEL_VS_FEDERATION" unique="true">  <!-- Fight a rebel ship who's attacking a Federation ship. -->
+	<text load="REBEL_VS_FEDERATION"/>
+	<img back="BACKGROUND" planet="PLANET_POPULATED"/>
+	<choice>
+		<text id="event_REBEL_VS_FEDERATION_c1_choice"/>
+		<event>
+			<text id="event_REBEL_VS_FEDERATION_c1_text"/>
+			<ship load="REBEL_VS_FEDERATION" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_REBEL_VS_FEDERATION_c2_choice"/>
+		<event>
+			<text id="event_REBEL_VS_FEDERATION_c2_text"/>
+		</event>
+	</choice>
+</event>
+<textList name="REBEL_VS_FEDERATION">
+	<text id="text_REBEL_VS_FEDERATION_1"/>
+	<text id="text_REBEL_VS_FEDERATION_2"/>
+	<text id="text_REBEL_VS_FEDERATION_3"/>
+</textList>
+<eventList name="REBEL_VS_FEDERATION_SAVED_LIST">  <!-- What happens once you save the Federation ship from the rebel -->
+	<event>
+		<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_1_text"/>
+		<quest event="HIDDEN_FEDERATION_BASE_LIST"/>
+	</event>
+	<event>
+		<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_text"/>
+		<choice hidden="true">
+			<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_c1_choice"/>
+			<event>
+				<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_c1_text"/>
+				<crewMember amount="1"/>
+				<autoReward level="LOW">standard</autoReward>
+			</event>
+		</choice>
+		<choice req="NANO_MEDBAY" hidden="true">
+			<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_c2_choice"/>
+			<event>
+				<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_c2_text"/>
+				<crewMember shields="1" amount="1"/> <!--DLC!-->
+				<autoReward level="HIGH">fuel</autoReward>
+			</event>
+		</choice>
+		<choice req="teleporter" hidden="true">
+			<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_c3_choice"/>
+			<event>
+				<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_c3_text"/>
+				<crewMember combat="1" amount="1"/> <!--DLC!-->
+				<quest event="HIDDEN_FEDERATION_BASE_LIST"/>
+				<autoReward level="MED">scrap_only</autoReward>
+			</event>
+		</choice>
+		<choice req="BOMB_HEAL"> <!--DLC!-->
+			<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_c4_choice"/>
+			<event>
+				<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_c4_text"/>
+				<item_modify>
+					<item type="missiles" min="-1" max="-1"/>
+				</item_modify>
+				<choice hidden="true">
+					<text id="continue"/>
+						<event>
+							<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_2_c4_c1_text"/>
+							<crewMember engines="1" amount="1"/> <!--DLC!-->
+							<quest event="HIDDEN_FEDERATION_BASE_LIST"/>
+							<autoReward level="MED">scrap_only</autoReward>
+						</event>
+				</choice>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_REBEL_VS_FEDERATION_SAVED_LIST_3_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+</eventList>
+
+
+<event name="DISTRESS_TRAPPED_MINER" unique="true">
+	<text id="event_DISTRESS_TRAPPED_MINER_text"/>
+	<distressBeacon/>
+	<choice hidden="true">
+		<text id="event_DISTRESS_TRAPPED_MINER_c1_choice"/>
+		<event load="DISTRESS_TRAPPED_MINER_SHOOT"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_TRAPPED_MINER_c2_choice"/>
+		<event load="DISTRESS_TRAPPED_MINER_LOOT"/>
+	</choice>
+	<choice hidden="true" req="WEAPONS_BEAM_DAMAGE"> <!-- JUSTIN - TO DO - List of beam weapons-->
+		<text id="event_DISTRESS_TRAPPED_MINER_c3_choice"/>
+		<event>
+			<text id="event_DISTRESS_TRAPPED_MINER_c3_text"/>
+			<autoReward level="MED">standard</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true" req="COMBAT_BEAM_DRONE_LIST">
+		<text id="event_DISTRESS_TRAPPED_MINER_c4_choice"/>
+		<event>
+			<text id="event_DISTRESS_TRAPPED_MINER_c4_text"/>
+			<autoReward level="MED">standard</autoReward>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+		</event>
+	</choice>
+</event>
+<eventList name="DISTRESS_TRAPPED_MINER_SHOOT">
+	<event>
+		<text id="event_DISTRESS_TRAPPED_MINER_SHOOT_1_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+		<damage amount="2" system="random"/> <!--DLC-->
+	</event>
+	<event>
+		<text id="event_DISTRESS_TRAPPED_MINER_SHOOT_2_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+</eventList>
+<eventList name="DISTRESS_TRAPPED_MINER_LOOT">
+	<event>
+		<text id="event_DISTRESS_TRAPPED_MINER_LOOT_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_DISTRESS_TRAPPED_MINER_LOOT_2_text"/>
+		<ship load="PIRATE" hostile="true"/>
+	</event>
+</eventList>
+
+<event name="DISTRESS_INFESTATION" unique="true">
+	<text id="event_DISTRESS_INFESTATION_text"/>
+	<distressBeacon/>
+	<choice hidden="true">
+		<text id="event_DISTRESS_INFESTATION_c1_choice"/>
+		<event load="DISTRESS_INFESTATION_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_INFESTATION_c2_choice"/>
+		<event>
+			<text id="event_DISTRESS_INFESTATION_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="BATTLE">
+		<text id="event_DISTRESS_INFESTATION_c3_choice"/>
+		<event>
+			<text id="event_DISTRESS_INFESTATION_c3_text"/>
+			<autoReward level="MED">stuff</autoReward>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="true" req="BOARDER">
+		<text id="event_DISTRESS_INFESTATION_c4_choice"/>
+		<event>
+			<text id="event_DISTRESS_INFESTATION_c4_text"/>
+			<autoReward level="LOW">standard</autoReward>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="true" req="BEAM_BIO">
+		<text id="event_DISTRESS_INFESTATION_c5_choice"/>
+		<event>
+			<text id="event_DISTRESS_INFESTATION_c5_text"/>
+			<autoReward level="HIGH">stuff</autoReward>
+		</event>
+	</choice>
+</event>
+<eventList name="DISTRESS_INFESTATION_LIST">
+	<event>
+		<text id="event_DISTRESS_INFESTATION_LIST_1_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_DISTRESS_INFESTATION_LIST_1_c0_clone"/>
+		</removeCrew>
+	</event>
+	<event>
+		<text id="event_DISTRESS_INFESTATION_LIST_2_text"/>
+		<choice hidden="true">
+			<text id="event_DISTRESS_INFESTATION_LIST_2_c1_choice"/>
+			<event>
+				<text id="event_DISTRESS_INFESTATION_LIST_2_c1_text"/>
+				<autoReward level="HIGH">stuff</autoReward>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+<event name="DISTRESS_SATELLITE_DEFENSE" unique="true">
+	<text id="event_DISTRESS_SATELLITE_DEFENSE_text"/>
+	<distressBeacon/>
+	<choice hidden="true">
+		<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_choice"/>
+		<event>
+			<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_text"/>
+			<choice hidden="true">
+				<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c1_choice"/>
+				<event load="SATELLITE_DEFENSE_BORING"/>
+			</choice>
+			<choice hidden="true" req="WEAPONS_ION">
+				<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c2_choice"/>
+				<event>
+					<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c2_text"/>
+					<autoReward level="HIGH">standard</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true" req="cloaking" lvl="1" max_group="0">
+				<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c3_choice"/>
+				<event>
+					<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c3_text"/>
+					<autoReward level="LOW">standard</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true" req="cloaking" lvl="2" max_group="0"> <!--DLC!-->
+				<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c4_choice"/>
+				<event>
+					<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c4_text"/>
+					<autoReward level="MED">standard</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true" req="cloaking" lvl="3" max_group="0">  <!--DLC!-->
+				<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c5_choice"/>
+				<event>
+					<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c5_text"/>
+					<autoReward level="HIGH">standard</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true" req="engi">
+				<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c6_choice"/>
+				<event>
+					<text id="event_DISTRESS_SATELLITE_DEFENSE_c1_c6_text"/>
+					<autoReward level="HIGH">standard</autoReward>
+				</event>
+			</choice><!--
+			<choice hidden="true" req="anaerobic"> <!-DLC!-
+				<text>(Lanius Crew) Your crew offers to help.</text>
+				<event>
+					<text>Your Lanius crewman appears to have a solution. The Lanius simply jumps out of the airlock towards the satellite. Apparently its lack of heat signatures renders it hidden from the satellite's targeting sensors. Once there he simply melts it down into scrap. You quickly pick him up and prepare to jump before the station can question your methods.</text>
+					<autoReward level="HIGH">scrap_only</autoReward>
+				</event>
+			</choice> -->
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_SATELLITE_DEFENSE_c2_choice"/>
+		<event>
+			<text id="event_DISTRESS_SATELLITE_DEFENSE_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="SATELLITE_DEFENSE_BORING">
+	<event>
+		<text id="event_SATELLITE_DEFENSE_BORING_1_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_SATELLITE_DEFENSE_BORING_2_text"/>
+		<damage amount="3"/>
+		<damage amount="1" system="random"/>  <!--DLC-->
+		<damage amount="1" system="room" effect="breach"/>
+	</event>
+</eventList>
+
+<event name="DISTRESS_STATION_FIRE" unique="true">
+	<text id="event_DISTRESS_STATION_FIRE_text"/>
+	<distressBeacon/>
+	<choice hidden="true">
+		<text id="event_DISTRESS_STATION_FIRE_c1_choice"/>
+		<event load="DISTRESS_STATION_FIRE_CREW"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_STATION_FIRE_c2_choice"/>
+		<event load="DISTRESS_STATION_FIRE_RESCUE"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_STATION_FIRE_c3_choice"/>
+		<event>
+			<text id="event_DISTRESS_STATION_FIRE_c3_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="rock">
+		<text id="event_DISTRESS_STATION_FIRE_c4_choice"/>
+		<event>
+			<text id="event_DISTRESS_STATION_FIRE_c4_text"/>
+			<choice hidden="true">
+				<text id="event_DISTRESS_STATION_FIRE_c4_c1_choice"/>
+				<event>
+					<text id="event_DISTRESS_STATION_FIRE_c4_c1_text"/>
+					<autoReward level="HIGH">augment</autoReward>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true" req="REPAIR">
+		<text id="event_DISTRESS_STATION_FIRE_c5_choice"/>
+		<event>
+			<text id="event_DISTRESS_STATION_FIRE_c5_text"/>
+			<choice hidden="true">
+				<text id="event_DISTRESS_STATION_FIRE_c4_c1_choice"/>
+				<event>
+					<text id="event_DISTRESS_STATION_FIRE_c5_c1_text"/>
+					<autoReward level="HIGH">drone</autoReward>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="DISTRESS_STATION_FIRE_CREW">
+	<event>
+		<text id="event_DISTRESS_STATION_FIRE_CREW_1_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_DISTRESS_STATION_FIRE_CREW_1_c0_clone"/>
+		</removeCrew>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_DISTRESS_STATION_FIRE_CREW_2_text"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+	</event>
+</eventList>
+<eventList name="DISTRESS_STATION_FIRE_RESCUE">
+	<event>
+		<text id="event_DISTRESS_STATION_FIRE_RESCUE_1_text"/>
+		<damage amount="3"/>
+		<damage amount="1" system="random"/>  <!--DLC-->
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_DISTRESS_STATION_FIRE_RESCUE_2_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+		<crewMember amount="1" id="name_DrJones"/>
+	</event>
+</eventList>
+
+<event name="DISTRESS_STATION_DISEASE" unique="true">
+	<distressBeacon/>
+	<text id="event_DISTRESS_STATION_DISEASE_text"/>
+	<choice hidden="true">
+		<text id="event_DISTRESS_STATION_DISEASE_c1_choice"/>
+		<event load="DISTRESS_STATION_DISEASE_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DISTRESS_STATION_DISEASE_c2_choice"/>
+		<event>
+			<text id="event_DISTRESS_STATION_DISEASE_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="rock">
+		<text id="event_DISTRESS_STATION_DISEASE_c3_choice"/>
+		<event>
+			<text id="event_DISTRESS_STATION_DISEASE_c3_text"/>
+			<autoReward level="MED">stuff</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true" req="engi">
+		<text id="event_DISTRESS_STATION_DISEASE_c4_choice"/>
+		<event>
+			<text id="event_DISTRESS_STATION_DISEASE_c4_text"/>
+			<autoReward level="MED">stuff</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true" req="medbay" lvl="2">
+		<text id="event_DISTRESS_STATION_DISEASE_c5_choice"/>
+		<event>
+			<text id="event_DISTRESS_STATION_DISEASE_c5_text"/>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event>
+					<text id="event_DISTRESS_STATION_DISEASE_c5_c1_text"/>
+					<autoReward level="MED">stuff</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true" req="NANO_MEDBAY">
+				<text id="event_DISTRESS_STATION_DISEASE_c5_c2_choice"/>
+				<event>
+					<text id="event_DISTRESS_STATION_DISEASE_c5_c2_text"/>
+					<autoReward level="HIGH">weapon</autoReward>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="DISTRESS_STATION_DISEASE_LIST">
+	<event>
+		<text id="event_DISTRESS_STATION_DISEASE_LIST_1_text"/>
+	</event>
+	<event>
+		<text id="event_DISTRESS_STATION_DISEASE_LIST_2_text"/>
+		<removeCrew>
+			<clone>false</clone>
+			<text id="event_DISTRESS_STATION_DISEASE_LIST_2_c0_clone"/>
+		</removeCrew>
+		<autoReward level="MED">stuff</autoReward>
+	</event>
+</eventList>
+
+
+
+<!--
+*********
+		BOARDERS!!!
+	Events with boarders
+**********
+-->
+
+<event name="BOARDERS" unique="true">
+	<text load="BOARDERS_TEXT"/>
+	<boarders min="3" max="5" class="human"/>
+</event>
+<textList name="BOARDERS_TEXT" unique="false">
+	<text id="text_BOARDERS_TEXT_1"/>
+	<text id="text_BOARDERS_TEXT_2"/>
+	<text id="text_BOARDERS_TEXT_3"/>
+	<text id="text_BOARDERS_TEXT_4"/>
+	<text id="text_BOARDERS_TEXT_5"/>
+</textList>
+
+<event name="BOARDERS_HACKING" unique="true">
+	<text id="event_BOARDERS_HACKING_text"/>
+	<boarders min="3" max="5" class="human"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event>
+			<text id="event_BOARDERS_HACKING_c1_text"/>
+			<status type="limit" target="player" system="sensors" amount="0"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="hacking"> <!--DLC - added -->
+		<text id="event_BOARDERS_HACKING_c2_choice"/>
+		<event>
+			<text id="event_BOARDERS_HACKING_c2_text"/>
+		</event>
+	</choice>
+</event>
+
+<event name="BOARDERS_HACKING_2">
+
+</event>
+
+
+<event name="STATION_SICK" unique="true">
+	<text id="event_STATION_SICK_text"/>
+	<choice hidden="true">
+		<text id="event_STATION_SICK_c1_choice"/>
+		<event load="STATION_SICK_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_STATION_SICK_c2_choice"/>
+		<event/>
+	</choice>
+	<choice hidden="true" req="BATTLE">
+		<text id="event_STATION_SICK_c3_choice"/>
+		<event load="STATION_SICK_DRONE_LIST"/>
+	</choice>
+	<choice hidden="true" req="LIFE_SCANNER"> <!--DLC-->
+		<text id="event_STATION_SICK_c4_choice"/>
+		<event load="STATION_SICK_SCANNER"/>
+	</choice>
+</event>
+<eventList name="STATION_SICK_SCANNER"> <!--DLC-->
+	<event>
+		<text id="event_STATION_SICK_SCANNER_1_text"/>
+	</event>
+	<event>
+		<text id="event_STATION_SICK_SCANNER_2_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+</eventList>
+<eventList name="STATION_SICK_LIST">
+	<event>
+		<text id="event_STATION_SICK_LIST_1_text"/>
+		<autoReward level="MED">droneparts</autoReward>
+	</event>
+	<event>
+		<text id="event_STATION_SICK_LIST_2_text"/>
+		<crewMember amount="1"/>
+		<choice>
+			<text id="event_STATION_SICK_LIST_2_c1_choice"/>
+			<event>
+				<boarders min="3" max="4" class="human"/>
+			</event>
+		</choice>
+		<choice hidden="true" req="medbay" lvl="3" max_group="0">
+			<text id="event_STATION_SICK_LIST_2_c2_choice"/>
+			<event>
+				<text id="event_STATION_SICK_LIST_2_c2_text"/>
+				<crewMember repair="1" amount="1"/>
+				<autoReward level="MED">scrap_only</autoReward>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_STATION_SICK_LIST_3_text"/>
+		<choice>
+			<text id="event_STATION_SICK_LIST_3_c1_choice"/>
+			<event>
+				<text id="event_STATION_SICK_LIST_3_c1_text"/>
+				<boarders min="3" max="4" class="human"/>
+				<crewMember amount="-1" class="traitor"/>
+			</event>
+		</choice>
+		<choice hidden="true" req="teleporter">
+			<text id="event_STATION_SICK_LIST_3_c2_choice"/>
+			<event>
+				<text id="event_STATION_SICK_LIST_3_c2_text"/>
+				<crewMember amount="-1" class="traitor"/>
+			</event>
+		</choice>
+		<choice hidden="true" req="medbay" lvl="2" max_group="0">
+			<text id="event_STATION_SICK_LIST_3_c3_choice"/>
+			<event>
+				<text id="event_STATION_SICK_LIST_3_c3_text"/>
+				<boarders min="3" max="4" class="human"/>
+			</event>
+		</choice>
+		<choice hidden="true" req="medbay" lvl="3" max_group="0">
+			<text id="event_STATION_SICK_LIST_3_c4_choice"/>
+			<event>
+				<text id="event_STATION_SICK_LIST_3_c4_text"/>
+				<crewMember amount="1"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<eventList name="STATION_SICK_DRONE_LIST">
+	<event>
+		<text id="event_STATION_SICK_DRONE_LIST_1_text"/>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_STATION_SICK_DRONE_LIST_2_text"/>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_STATION_SICK_DRONE_LIST_3_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+</eventList>
+
+<event name="BOARDERS_ASTEROID_GHOST" unique="true">   <!-- JUSTIN - maybe add some sort of ship graveyard background? -->
+	<img back="BG_DARK" planet="NONE"/>
+	<text id="event_BOARDERS_ASTEROID_GHOST_text"/>
+	<choice>
+		<text id="event_BOARDERS_ASTEROID_GHOST_c1_choice"/>
+			<event>
+			<boarders min="3" max="6" class="ghost"/>
+			<environment type="asteroid"/>
+		</event>
+	</choice>
+	<choice req="engines" lvl="5" hidden="true">
+		<text id="event_BOARDERS_ASTEROID_GHOST_c2_choice"/>
+		<event>
+			<text id="event_BOARDERS_ASTEROID_GHOST_c2_text"/>
+			<damage amount="3"/>
+			<damage amount="1" system="random"/>  <!--DLC-->
+		</event>
+	</choice>
+	<choice req="pilot" lvl="2" hidden="true">
+		<text id="event_BOARDERS_ASTEROID_GHOST_c3_choice"/>
+		<event>
+			<text id="event_BOARDERS_ASTEROID_GHOST_c3_text"/>
+			<boarders min="2" max="4" class="ghost"/>
+		</event>
+	</choice>
+</event>
+
+
+
+
+
+<!--
+*********
+		ENVIRONMENT!!!
+	Events with unique environments
+**********
+-->
+
+<event name="AUTO_ASTEROID">
+	<img back="BG_DARK" planet="NONE"/>
+	<text id="event_AUTO_ASTEROID_text"/>
+	<ship load="REBEL_AUTO" hostile="true"/>
+	<environment type="asteroid"/>
+</event>
+
+<event name="AUTO_SUN" unique = "true">
+	<text id="event_AUTO_SUN_text"/>
+	<ship load="REBEL_AUTO" hostile="true"/>
+	<environment type="sun"/>
+</event>
+
+
+
+
+<!--
+*********
+		ITEMS!!!
+	Events that give items
+**********
+-->
+
+<event name="STORE">
+	<text load="STORE_TEXT"/>
+	<store/>
+</event>
+<textList name="STORE_TEXT">
+	<text id="text_STORE_TEXT_1"/>
+	<text id="text_STORE_TEXT_2" planet="NONE"/>
+	<text id="text_STORE_TEXT_3" planet="PLANET_POPULATED"/>
+	<text id="text_STORE_TEXT_4" planet="PLANET_POPULATED"/>
+	<text id="text_STORE_TEXT_5" planet="NONE"/>
+</textList>
+
+<event name="FIND_DRONE">
+	<text load="FIND_DRONE"/>
+	<autoReward level="LOW">drone</autoReward>
+</event>
+<textList name="FIND_DRONE">
+	<text id="text_FIND_DRONE_1"/>
+	<text id="text_FIND_DRONE_2"/>
+	<text id="text_FIND_DRONE_3"/>
+	<text id="text_FIND_DRONE_4"/>
+	<text id="text_FIND_DRONE_5"/>
+
+	<!--DLC! Added text-->
+	<text id="text_FIND_DRONE_6"/>
+</textList>
+
+<event name="FIND_WEAPON">
+	<text load="FIND_WEAPON"/>
+	<autoReward level="LOW">weapon</autoReward>
+</event>
+<textList name="FIND_WEAPON">
+	<text id="text_FIND_WEAPON_1" planet="NONE"/>
+	<text id="text_FIND_WEAPON_2" planet="PLANET_UNPOPULATED" back="BG_NEBULA"/>
+	<text id="text_FIND_WEAPON_3" planet="PLANET_POPULATED" back="BG_NEBULA"/>
+	<text id="text_FIND_WEAPON_4"/>
+	<text id="text_FIND_WEAPON_5"/>
+	<text id="text_FIND_WEAPON_6"/>
+</textList>
+
+<event name="FREE_ITEMS">
+	<text load="FREE_ITEMS"/>
+	<autoReward level="MED">standard</autoReward>
+</event>
+<textList name="FREE_ITEMS">
+	<text id="text_FREE_ITEMS_1"/>
+	<text id="text_FREE_ITEMS_2"/>
+	<text id="text_FREE_ITEMS_3" planet="PLANET_POPULATED"/>
+	<text id="text_FREE_ITEMS_4" planet="PLANET_GAS"/>
+
+	<!--DLC! added texts-->
+	<text id="text_FREE_ITEMS_5"/>
+	<text id="text_FREE_ITEMS_6"/>
+</textList>
+
+<event name ="FUEL_FOR_DRONE">
+	<text load="FUEL_FOR_DRONE"/>
+	<choice>
+		<text id="event_FUEL_FOR_DRONE_c1_choice"/>
+		<event>
+			<item_modify>
+				<item type="fuel" min="-4" max="-2"/>
+				<item type="drones" min="1" max ="3"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_FUEL_FOR_DRONE_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+<textList name="FUEL_FOR_DRONE">
+	<text id="text_FUEL_FOR_DRONE_1" planet="PLANET_POPULATED"/>
+	<text id="text_FUEL_FOR_DRONE_2"/>
+	<text id="text_FUEL_FOR_DRONE_3"/>
+</textList>
+
+<event name="REFUEL_STATION" unique="true">   <!-- NEED - checks to see if you have enough scrap!-->
+	<text id="event_REFUEL_STATION_text"/>
+	<choice hidden="false">
+		<text id="event_REFUEL_STATION_c1_choice"/>
+		<event>
+			<text id="event_REFUEL_STATION_c1_text"/>
+			<item_modify>
+				<item type="fuel" min="6" max="6"/>
+				<item type="scrap" min="-12" max="-12"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="false">
+		<text id="event_REFUEL_STATION_c2_choice"/>
+		<event>
+			<text id="event_REFUEL_STATION_c1_text"/>
+			<item_modify>
+				<item type="fuel" min="3" max="3"/>
+				<item type="scrap" min="-6" max="-6"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="false">
+		<text id="event_REFUEL_STATION_c3_choice"/>
+		<event>
+			<text id="event_REFUEL_STATION_c1_text"/>
+			<item_modify>
+				<item type="fuel" min="1" max="1"/>
+				<item type="scrap" min="-2" max="-2"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_REFUEL_STATION_c4_choice"/>
+		<event/>
+	</choice>
+</event>
+
+<event name="REPAIR_STATION" unique="true">   <!-- NEED - checks to see if you have enough scrap!-->
+	<text id="event_REPAIR_STATION_text"/>
+	<choice>
+		<text id="event_REPAIR_STATION_c1_choice"/>
+		<event>
+			<text id="event_REPAIR_STATION_c1_text"/>
+			<item_modify>
+				<item type="scrap" min="-40" max="-40"/>
+			</item_modify>
+			<damage amount="-20"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_REPAIR_STATION_c2_choice"/>
+		<event>
+			<text id="event_REPAIR_STATION_c1_text"/>
+			<item_modify>
+				<item type="scrap" min="-20" max="-20"/>
+			</item_modify>
+			<damage amount="-10"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_REPAIR_STATION_c3_choice"/>
+		<event>
+			<text id="event_REPAIR_STATION_c1_text"/>
+			<item_modify>
+				<item type="scrap" min="-10" max="-10"/>
+			</item_modify>
+			<damage amount="-5"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_REPAIR_STATION_c4_choice"/>
+		<event/>
+	</choice>
+</event>
+
+<event name="SELL_MISSILES_STATION" unique="true">
+	<text id="event_SELL_MISSILES_STATION_text"/>
+	<choice hidden="true">
+		<text id="event_SELL_MISSILES_STATION_c1_choice"/>
+		<event>
+			<text id="event_SELL_MISSILES_STATION_c1_text"/>
+			<item_modify>
+				<item type="missiles" min="-5" max="-5"/>
+				<item type="scrap" min="15" max="15"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_SELL_MISSILES_STATION_c2_choice"/>
+		<event>
+			<text id="event_SELL_MISSILES_STATION_c1_text"/>
+			<item_modify>
+				<item type="missiles" min="-10" max="-10"/>
+				<item type="scrap" min="30" max="30"/>
+			</item_modify>
+		</event>
+	</choice>
+		<choice hidden="true">
+		<text id="event_SELL_MISSILES_STATION_c3_choice"/>
+		<event>
+			<text id="event_SELL_MISSILES_STATION_c1_text"/>
+			<item_modify>
+				<item type="missiles" min="-15" max="-15"/>
+				<item type="scrap" min="45" max="45"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_SELL_MISSILES_STATION_c4_choice"/>
+		<event/>
+	</choice>
+</event>
+
+<event name="SELL_DRONES_STATION" unique="true">
+	<text id="event_SELL_DRONES_STATION_text"/>
+	<choice hidden="true">
+		<text id="event_SELL_DRONES_STATION_c1_choice"/>
+		<event>
+			<text id="event_SELL_DRONES_STATION_c1_text"/>
+			<item_modify>
+				<item type="drones" min="-3" max="-3"/>
+				<item type="scrap" min="12" max="12"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_SELL_DRONES_STATION_c2_choice"/>
+		<event>
+			<text id="event_SELL_DRONES_STATION_c1_text"/>
+			<item_modify>
+				<item type="drones" min="-6" max="-6"/>
+				<item type="scrap" min="24" max="24"/>
+			</item_modify>
+		</event>
+	</choice>
+		<choice hidden="true">
+		<text id="event_SELL_DRONES_STATION_c3_choice"/>
+		<event>
+			<text id="event_SELL_DRONES_STATION_c1_text"/>
+			<item_modify>
+				<item type="drones" min="-12" max="-12"/>
+				<item type="scrap" min="48" max="48"/>
+			</item_modify>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_SELL_DRONES_STATION_c4_choice"/>
+		<event/>
+	</choice>
+</event>
+
+<!--needs civilized background-->
+<event name="TRADER_CIV">
+	<text load="TRADER_CIV"/>
+	<choice>
+		<text id="event_TRADER_CIV_c1_choice"/>
+		<event load="TRADER_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_TRADER_CIV_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+<textList name="TRADER_CIV">
+	<text id="text_TRADER_CIV_1" planet="PLANET_POPULATED"/>
+	<text id="text_TRADER_CIV_2" planet="PLANET_POPULATED"/>
+	<text id="text_TRADER_CIV_3" planet="PLANET_POPULATED"/>
+	<text id="text_TRADER_CIV_4" planet="NONE"/>
+	<text id="text_TRADER_CIV_5"/>
+	<text id="text_TRADER_CIV_6" planet="NONE"/>
+</textList>
+<eventList name="TRADER_LIST">
+	<event>
+		<item_modify>
+			<item type="fuel" min="5" max="10"/>
+			<item type="drones" min="-2" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<item_modify>
+			<item type="missiles" min="4" max="5"/>
+			<item type="fuel" min="-2" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<item_modify>
+			<item type="drones" min="2" max="3"/>
+			<item type="missiles" min="-3" max="-2"/>
+		</item_modify>
+	</event>
+	<event>
+		<item_modify>
+			<item type="fuel" min="4" max="10"/>
+			<item type="missiles" min="-4" max="-2"/>
+		</item_modify>
+	</event>
+</eventList>
+
+
+
+
+
+
+
+
+
+<!--
+*********
+		SPECIAL!!!
+	Special Events
+**********
+-->
+
+
+<event name="GHOST_SHIP" unique="true">
+	<img planet="NONE"/>
+	<text load="GHOST_SHIP_TEXT"/>
+	<ship load="GHOST_SHIP" hostile="FALSE"/>
+	<choice hidden="true">
+		<text id="event_GHOST_SHIP_c1_choice"/>
+		<event load="GHOST_DOCK"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_GHOST_SHIP_c2_choice"/>
+		<event load="GHOST_SCRAP"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_GHOST_SHIP_c3_choice"/>
+		<event/>
+	</choice>
+</event>
+<textList name="GHOST_SHIP_TEXT">
+	<text id="text_GHOST_SHIP_TEXT_1"/>
+	<text id="text_GHOST_SHIP_TEXT_2"/>
+	<text id="text_GHOST_SHIP_TEXT_3"/>
+	<text id="text_GHOST_SHIP_TEXT_4"/>
+</textList>
+<eventList name="GHOST_DOCK">
+	<event>
+		<text id="event_GHOST_DOCK_1_text"/>
+		<choice hidden="true">
+			<text id="event_GHOST_DOCK_1_c1_choice"/>
+			<event load="GHOST_BOARDING"/>
+		</choice>
+		<choice hidden="true">
+			<text id="event_GHOST_DOCK_1_c2_choice"/>
+			<event load="GHOST_SCRAP"/>
+		</choice>
+		<choice req="sensors" lvl="3" hidden="true">
+			<text id="event_GHOST_DOCK_1_c3_choice"/>
+			<event>
+				<text id="event_GHOST_DOCK_1_c3_text"/>
+				<event load="GHOST_SPACE"/>
+				<autoReward level="MED">scrap_only</autoReward>
+			</event>
+		</choice>
+	</event>
+	<event load="GHOST_BOARDING"/>
+</eventList>
+<event name="GHOST_SCRAP">
+	<text id="event_GHOST_SCRAP_text"/>
+	<autoReward level="LOW">scrap_only</autoReward>
+	<choice>
+		<text id="continue"/>
+		<event load="GHOST_SPACE"/>
+	</choice>
+</event>
+<eventList name="GHOST_SPACE">
+	<event>
+		<text id="event_GHOST_SPACE_1_text"/>
+		<ship hostile="true"/>
+	</event>
+	<event>
+		<text id="event_GHOST_SPACE_2_text"/>
+		<choice hidden="true">
+			<text id="event_GHOST_SPACE_2_c1_choice"/>
+			<event/>
+		</choice>
+		<choice hidden="true">
+			<text id="event_GHOST_SPACE_2_c2_choice"/>
+			<event>
+				<ship hostile="true"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<eventList name="GHOST_BOARDING">
+	<event>
+		<text id="event_GHOST_BOARDING_1_text"/>
+		<autoReward level="HIGH">weapon</autoReward>
+	</event>
+	<event>
+		<text id="event_GHOST_BOARDING_2_text"/>
+		<choice hidden="true">
+			<text id="event_GHOST_BOARDING_2_c1_choice"/>
+			<autoReward level="MED">scrap_only</autoReward>
+			<event load="GHOST_SPACE"/>
+		</choice>
+		<choice hidden="true">
+			<text id="event_GHOST_BOARDING_2_c2_choice"/>
+			<event load="GHOST_STAND"/>
+		</choice>
+	</event>
+</eventList>
+<eventList name="GHOST_STAND">
+	<event>
+		<text id="event_GHOST_STAND_1_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="GHOST_BOARDED"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_GHOST_STAND_2_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice>
+			<text id="continue"/>
+			<event load="GHOST_SPACE"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_GHOST_STAND_3_text"/>
+		<choice>
+			<text id="event_GHOST_STAND_3_c1_choice"/>
+			<event load="GHOST_BOARDED"/>
+		</choice>
+		<choice>
+			<text id="event_GHOST_STAND_3_c2_choice"/>
+			<event>
+				<text id="event_GHOST_STAND_3_c2_text"/>
+				<removeCrew>
+					<clone>true</clone>
+					<text id="event_GHOST_STAND_3_c2_c0_clone"/>
+				</removeCrew>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<event name="GHOST_BOARDED">
+	<text id="event_GHOST_BOARDED_text"/>
+	<boarders min="2" max="4" class="ghost"/>
+</event>
+
+
+
+<event name="MERCHANT_REQUEST" unique="true">
+	<img planet="PLANET_POPULATED_SMALL"/>
+	<text id="event_MERCHANT_REQUEST_text"/>
+	<choice hidden="true">
+		<text id="event_MERCHANT_REQUEST_c1_choice"/>
+		<event load="MERCHANT_REQUEST_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_MERCHANT_REQUEST_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+
+<eventList name="MERCHANT_REQUEST_LIST">
+	<event>
+		<text id="event_MERCHANT_REQUEST_LIST_1_text"/>
+		<choice hidden="true">
+			<text id="event_MERCHANT_REQUEST_LIST_1_c1_choice"/>
+			<event>
+				<text id="event_MERCHANT_REQUEST_LIST_1_c1_text"/>
+				<item_modify>
+					<item type="drones" min="5" max="5"/>
+				</item_modify>
+				<quest event="MERCHANT_DELIVER"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_MERCHANT_REQUEST_LIST_1_c2_choice"/>
+			<event>
+				<text id="event_MERCHANT_REQUEST_LIST_1_c2_text"/>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_MERCHANT_REQUEST_LIST_2_text"/>
+		<choice hidden="true">
+			<text id="event_MERCHANT_REQUEST_LIST_1_c1_choice"/>
+			<event>
+				<text id="event_MERCHANT_REQUEST_LIST_2_c1_text"/>
+				<quest event="MERCHANT_INVESTIGATE"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_MERCHANT_REQUEST_LIST_1_c2_choice"/>
+			<event>
+				<text id="event_MERCHANT_REQUEST_LIST_2_c2_text"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<event name="MERCHANT_DELIVER">
+	<text id="event_MERCHANT_DELIVER_text"/>
+	<choice>
+		<text id="continue"/>
+		<event load="MERCHANT_DELIVER_LIST"/>
+	</choice>
+</event>
+<eventList name="MERCHANT_DELIVER_LIST">
+	<event>
+		<text id="event_MERCHANT_DELIVER_LIST_1_text"/>
+		<choice hidden="true">
+			<text id="event_MERCHANT_DELIVER_LIST_1_c1_choice"/>
+			<event load="STATION_SICK_LIST"/>
+		</choice>
+		<choice>
+			<text id="event_MERCHANT_DELIVER_LIST_1_c2_choice"/>
+			<event/>
+		</choice>
+		<choice hidden="true" req="BATTLE">
+			<text id="event_MERCHANT_DELIVER_LIST_1_c3_choice"/>
+			<event load="STATION_SICK_DRONE_LIST"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_MERCHANT_DELIVER_LIST_2_text"/>
+		<choice>
+			<text id="event_MERCHANT_DELIVER_LIST_2_c1_choice"/>
+			<event>
+				<text id="event_MERCHANT_DELIVER_LIST_2_c1_text"/>
+				<item_modify>
+					<item type="scrap" min="20" max="30"/>
+					<item type="drones" min="-5" max="-5"/>
+				</item_modify>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_MERCHANT_DELIVER_LIST_2_c2_choice"/>
+			<event load="MERCHANT_DELIVER_BLUFF_LIST"/>
+		</choice>
+		<choice hidden="true" req="mind">
+			<text id="event_MERCHANT_DELIVER_LIST_2_c3_choice"/>
+			<event>
+				<text id="event_MERCHANT_DELIVER_LIST_2_c3_text"/>
+				<choice>
+					<text id="event_MERCHANT_DELIVER_LIST_2_c3_c1_choice"/>
+					<event>
+						<item_modify>
+							<item type="scrap" min="40" max="55"/>
+							<item type="drones" min="-5" max="-5"/>
+						</item_modify>
+					</event>
+				</choice>
+				<choice>
+					<text id="event_MERCHANT_DELIVER_LIST_2_c3_c2_choice"/>
+					<event/>
+				</choice>
+			</event>
+		</choice>
+		<choice hidden="true" req="weapons" lvl="6">
+			<text id="event_MERCHANT_DELIVER_LIST_2_c4_choice"/>
+			<event>
+				<text id="event_MERCHANT_DELIVER_LIST_2_c4_text"/>
+				<item_modify>
+					<item type="scrap" min="55" max="70"/>
+					<item type="drones" min="-5" max="-5"/>
+					<item type="fuel" min="2" max="5"/>
+				</item_modify>
+			</event>
+		</choice>
+	</event>
+	<!--JUSTIN - TO DO    add another?  -->
+</eventList>
+<eventList name="MERCHANT_DELIVER_BLUFF_LIST"> <!--DLC!-->
+	<event>
+		<text id="event_MERCHANT_DELIVER_BLUFF_LIST_1_text"/>
+		<choice>
+			<text id="event_MERCHANT_DELIVER_BLUFF_LIST_1_c1_choice"/>
+			<event>
+				<item_modify>
+					<item type="scrap" min="40" max="55"/>
+					<item type="drones" min="-5" max="-5"/>
+				</item_modify>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_MERCHANT_DELIVER_BLUFF_LIST_1_c2_choice"/>
+			<event/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_MERCHANT_DELIVER_BLUFF_LIST_2_text"/>
+	</event>
+</eventList>
+<event name="MERCHANT_INVESTIGATE">
+	<text id="event_MERCHANT_INVESTIGATE_text"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event load="MERCHANT_INVESTIGATE_LIST"/>
+	</choice>
+</event>
+<eventList name="MERCHANT_INVESTIGATE_LIST">
+	<event>
+		<text id="event_MERCHANT_INVESTIGATE_LIST_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice>
+			<text id="event_MERCHANT_INVESTIGATE_LIST_1_c1_choice"/>
+			<event>
+				<quest event="MERCHANT_INVESTIGATE_DELIVER"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_MERCHANT_INVESTIGATE_LIST_1_c2_choice"/>
+			<event load="MERCHANT_INVESTIGATE_CARGO_LIST"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_MERCHANT_INVESTIGATE_LIST_2_text"/>
+		<choice hidden="true">
+			<text id="event_MERCHANT_INVESTIGATE_LIST_2_c1_choice"/>
+			<event>
+				<text id="event_MERCHANT_INVESTIGATE_LIST_2_c1_text"/>
+				<crewMember amount="1"/>
+				<quest event="MERCHANT_INVESTIGATE_DELIVER"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_MERCHANT_INVESTIGATE_LIST_2_c2_choice"/>
+			<event load="MERCHANT_INVESTIGATE_CARGO_LIST"/>
+		</choice>
+		<choice req="teleporter" hidden="true">
+			<text id="event_MERCHANT_INVESTIGATE_LIST_2_c3_choice"/>
+			<event load="MERCHANT_INVESTIGATE_CARGO_LIST"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_MERCHANT_INVESTIGATE_LIST_3_text"/>
+		<ship load="JELLY_PIRATE_MERCHANT" hostile="true"/>
+	</event>
+</eventList>
+<eventList name="MERCHANT_INVESTIGATE_CARGO_LIST">
+	<event>
+		<text id="event_MERCHANT_INVESTIGATE_CARGO_LIST_1_text"/>
+		<quest event="MERCHANT_INVESTIGATE_DELIVER"/>
+	</event>
+	<event>
+		<text id="event_MERCHANT_INVESTIGATE_CARGO_LIST_2_text"/>
+		<weapon name="RANDOM"/>
+	</event>
+	<event>
+		<text id="event_MERCHANT_INVESTIGATE_CARGO_LIST_3_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+</eventList>
+<event name="MERCHANT_INVESTIGATE_DELIVER">
+	<text id="event_MERCHANT_INVESTIGATE_DELIVER_text"/>
+		<autoReward level="MED">drone</autoReward>
+</event>
+
+
+
+
+<event name="FEDERATION_PLANET_SIGNAL" unique ="true">
+	<text id="event_FEDERATION_PLANET_SIGNAL_text"/>
+	<choice hidden="true">
+		<text id="event_FEDERATION_PLANET_SIGNAL_c1_choice"/>
+		<event load="FEDERATION_PLANET_SIGNAL_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_FEDERATION_PLANET_SIGNAL_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+<eventList name="FEDERATION_PLANET_SIGNAL_LIST">
+	<event>
+		<text id="event_FEDERATION_PLANET_SIGNAL_LIST_1_text"/>
+		<quest event="HIDDEN_FEDERATION_BASE_LIST"/>
+	</event>
+	<event>
+		<text id="event_FEDERATION_PLANET_SIGNAL_LIST_2_text"/>
+		<autoReward level="MED">stuff</autoReward>
+		<quest event="FEDERATION_BASE_ASSIST"/>
+	</event>
+	<event>
+		<text id="event_FEDERATION_PLANET_SIGNAL_LIST_3_text"/>
+	</event>
+	<event>
+		<text id="event_FEDERATION_PLANET_SIGNAL_LIST_4_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_FEDERATION_PLANET_SIGNAL_LIST_5_text"/>
+		<ship load="REBEL" hostile="true"/>
+		<boarders min="2" max="3" class="human"/>
+	</event>
+</eventList>
+<eventList name="HIDDEN_FEDERATION_BASE_LIST">   <!-- JUSTIN - USE THIS ELSEWHERE -->
+	<event>
+		<text id="event_HIDDEN_FEDERATION_BASE_LIST_1_text"/>
+		<autoReward level="HIGH">drone</autoReward>
+	</event>
+	<event>
+		<text id="event_HIDDEN_FEDERATION_BASE_LIST_2_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<crewMember amount="1"/> <!---->
+	</event>
+	<event>
+		<text id="event_HIDDEN_FEDERATION_BASE_LIST_3_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<damage amount="-35"/>
+	</event>
+	<event>
+		<text id="event_HIDDEN_FEDERATION_BASE_LIST_4_text"/>
+		<choice>
+			<text id="event_HIDDEN_FEDERATION_BASE_LIST_4_c1_choice"/>
+			<event/>
+		</choice>
+		<choice req="sensors" lvl="2" hidden="true" max_group="0"> <!--DLC!-->
+			<text id="event_HIDDEN_FEDERATION_BASE_LIST_4_c2_choice"/>
+			<event>
+				<text id="event_HIDDEN_FEDERATION_BASE_LIST_4_c2_text"/>
+				<autoReward level="MED">standard</autoReward>
+			</event>
+		</choice>
+		<choice req="sensors" lvl="3" hidden="true" max_group="0">
+			<text id="event_HIDDEN_FEDERATION_BASE_LIST_4_c3_choice"/>
+			<event>
+				<text id="event_HIDDEN_FEDERATION_BASE_LIST_4_c3_text"/>
+				<autoReward level="MED">weapon</autoReward>
+			</event>
+		</choice>
+		<choice req="ADV_SCANNERS" hidden="true">
+			<text id="event_HIDDEN_FEDERATION_BASE_LIST_4_c4_choice"/>
+			<event>
+				<text id="event_HIDDEN_FEDERATION_BASE_LIST_4_c4_text"/>
+				<autoReward level="MED">weapon</autoReward>
+			</event>
+		</choice>
+	</event>
+	<event load="FEDERATION_BASE_ASSIST"/>
+</eventList>
+<eventList name="FEDERATION_BASE_ASSIST">
+	<event>
+		<text id="event_FEDERATION_BASE_ASSIST_1_text"/>
+		<ship load="AUTO_FEDERATION_BASE" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_FEDERATION_BASE_ASSIST_1_text"/>
+		<ship load="AUTO_FEDERATION_BASE2" hostile="true"/>
+	</event>
+</eventList>
+
+
+
+<event name="QUEST_ESCORT" unique="false">
+	<text load="QUEST_ESCORT_TEXT"/>
+	<ship load="CIVILIAN_SHIP" hostile="false"/>
+	<choice>
+		<text id="event_QUEST_ESCORT_c1_choice"/>
+		<event>
+			<text id="event_QUEST_ESCORT_c1_text"/>
+			<quest event="QUEST_ESCORT_ARRIVE"/>
+			<autoReward level="LOW">fuel_only</autoReward>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_QUEST_ESCORT_c2_choice"/>
+		<event>
+			<text id="event_QUEST_ESCORT_c2_text"/>
+		</event>
+	</choice>
+</event>
+<textList name="QUEST_ESCORT_TEXT">
+	<text id="text_QUEST_ESCORT_TEXT_1"/>
+	<text id="text_QUEST_ESCORT_TEXT_2"/>
+	<text id="text_QUEST_ESCORT_TEXT_3"/>
+</textList>
+<eventList name="QUEST_ESCORT_ARRIVE">
+	<event>
+		<text id="event_QUEST_ESCORT_ARRIVE_1_text"/>
+		<ship load="REBEL" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_QUEST_ESCORT_ARRIVE_2_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_QUEST_ESCORT_ARRIVE_3_text"/>
+		<damage amount="-5"/>
+		<store/>
+	</event>
+	<event><!--DLC!-->
+		<text id="event_QUEST_ESCORT_ARRIVE_4_text"/>
+		<upgrade amount="1" system="reactor"/>
+	</event>
+</eventList>
+
+
+<event name="STORE_RESCUE" unique="true">
+	<img planet="PLANET_POPULATED"/>
+	<text id="event_STORE_RESCUE_text"/>
+	<choice>
+		<text id="event_STORE_RESCUE_c1_choice"/>
+		<event>
+			<text id="event_STORE_RESCUE_c1_text"/>
+			<quest event="QUEST_STORE_RESCUE"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_STORE_RESCUE_c2_choice"/>
+		<event>
+			<text id="event_STORE_RESCUE_c2_text"/>
+		</event>
+	</choice>
+</event>
+<event name="QUEST_STORE">  <!-- JUSTIN - Can be used elsewhere-->
+	<text id="event_QUEST_STORE_text"/>
+	<store/>
+</event>
+<event name="QUEST_STORE_RESCUE">
+	<text id="event_QUEST_STORE_RESCUE_text"/>
+	<choice>
+		<text id="event_QUEST_STORE_RESCUE_c1_choice"/>
+		<event>
+			<ship load="SQUAT_STORE_RESCUE" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_QUEST_STORE_RESCUE_c2_choice"/>
+		<event>
+			<text id="event_QUEST_STORE_RESCUE_c2_text"/>
+		</event>
+	</choice>
+</event>
+
+
+
+
+<event name="MERCENARY_WORK_START" unique="true">
+	<text id="event_MERCENARY_WORK_START_text"/>
+	<choice>
+		<text id="event_MERCENARY_WORK_START_c1_choice"/>
+		<event load="MERCENARY_WORK_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_MERCENARY_WORK_START_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+<eventList name="MERCENARY_WORK_LIST">
+	<event>
+		<text id="event_MERCENARY_WORK_LIST_1_text"/>
+		<choice>
+			<text id="event_MERCENARY_WORK_LIST_1_c1_choice"/>
+			<event>
+				<text id="event_MERCENARY_WORK_LIST_1_c1_text"/>
+				<quest event="QUEST_STORE_RESCUE"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_MERCENARY_WORK_LIST_1_c2_choice"/>
+			<event>
+				<text id="event_MERCENARY_WORK_LIST_1_c2_text"/>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_MERCENARY_WORK_LIST_2_text"/>
+		<choice>
+			<text id="event_MERCENARY_WORK_LIST_2_c1_choice"/>
+			<event>
+				<text id="event_MERCENARY_WORK_LIST_2_c1_text"/>
+				<ship load="SQUAT_PIRATE_MERCENARY" hostile="true"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_MERCENARY_WORK_LIST_1_c2_choice"/>
+			<event>
+				<text id="event_MERCENARY_WORK_LIST_2_c2_text"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+
+
+
+
+
+<!--
+*********
+		QUEESTTTS!!!
+	Quest Events
+**********
+-->
+
+
+<event name="QUEST_MANTIS_INVASION_START" unique="true">
+	<text id="event_QUEST_MANTIS_INVASION_START_text"/>
+	<choice hidden="true">
+		<text id="event_QUEST_MANTIS_INVASION_START_c1_choice"/>
+		<event>
+			<text id="event_QUEST_MANTIS_INVASION_START_c1_text"/>
+			<quest event="QUEST_MANTIS_INVASION"/>
+			<autoReward level="MED">scrap_only</autoReward>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_QUEST_MANTIS_INVASION_START_c2_choice"/>
+		<event>
+			<text id="event_QUEST_MANTIS_INVASION_START_c2_text"/>
+		</event>
+	</choice>
+</event>
+<event name="QUEST_MANTIS_INVASION" unique="true"> <!-- ADD PDS ENVIRONMENT -->
+	<text id="event_QUEST_MANTIS_INVASION_text"/>
+	<choice>
+		<text id="event_QUEST_MANTIS_INVASION_c1_choice"/>
+		<event load="MANTIS_LANDING_PARTY_LEAVE"/>
+	</choice>
+	<choice req="WEAPONS_MISSILES">
+		<text id="event_QUEST_MANTIS_INVASION_c2_choice"/>
+		<event>
+			<text id="event_QUEST_MANTIS_INVASION_c2_text"/>
+			<item_modify>
+				<item type="missiles" min="-1" max="-1"/>
+			</item_modify>
+			<ship load="MANTIS_LANDING_PARTY" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="BOMB_FIRE">
+		<text id="event_QUEST_MANTIS_INVASION_c3_choice"/>
+		<event>
+			<text id="event_QUEST_MANTIS_INVASION_c3_text"/>
+			<item_modify>
+				<item type="missiles" min="-2" max="-2"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event>
+					<text id="event_QUEST_MANTIS_INVASION_c3_c1_text"/>
+					<autoReward level="HIGH">stuff</autoReward>
+					<crewMember amount="1" class="engi"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="MANTIS_LANDING_PARTY_LEAVE">
+	<event>
+		<text id="event_MANTIS_LANDING_PARTY_LEAVE_1_text"/>
+		<ship load="MANTIS_LANDING_PARTY" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_MANTIS_LANDING_PARTY_LEAVE_2_text"/>
+	</event>
+</eventList>
+<ship name="MANTIS_LANDING_PARTY" auto_blueprint="SHIPS_MANTIS">
+	<destroyed>
+		<text id="ship_MANTIS_LANDING_PARTY_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_MANTIS_LANDING_PARTY_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+	<crew>
+		   <crewMember type="mantis" prop="0.80"/>
+		   <crewMember type="engi" prop="0.20"/>
+	</crew>
+</ship>
+
+<event name="QUEST_CREWDEAD_START" unique="true">
+	<text id="event_QUEST_CREWDEAD_START_text"/>
+	<choice>
+		<text id="continue"/>
+		<event load="QUEST_CREWDEAD_START_2"/>
+	</choice>
+</event>
+
+
+<event name="QUEST_CREWDEAD_START_2">
+	<text id="event_QUEST_CREWDEAD_START_2_text"/>
+	<choice hidden="true">
+		<text id="event_QUEST_CREWDEAD_START_2_c1_choice"/>
+		<event>
+			<text id="event_QUEST_CREWDEAD_START_2_c1_text"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_QUEST_CREWDEAD_START_2_c2_choice"/>
+		<event>
+			<text id="event_QUEST_CREWDEAD_START_2_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="teleporter" lvl="1">
+		<text id="event_QUEST_CREWDEAD_START_2_c3_choice"/>
+		<event load="QUEST_CREWDEAD_CONTINUE"/>
+	</choice>
+	<choice hidden="true" req="BEAM_BIO">
+		<text id="event_QUEST_CREWDEAD_START_2_c4_choice"/>
+		<event load="QUEST_CREWDEAD_CONTINUE"/>
+	</choice>
+	<choice hidden="true" req="BOMB_FIRE">
+		<text id="event_QUEST_CREWDEAD_START_2_c5_choice"/>
+		<event load="QUEST_CREWDEAD_CONTINUE"/>
+	</choice>
+</event>
+<event name="QUEST_CREWDEAD_CONTINUE">
+	<text id="event_QUEST_CREWDEAD_CONTINUE_text"/>
+	<choice hidden="true">
+		<text id="event_QUEST_CREWDEAD_CONTINUE_c1_choice"/>
+		<event>
+			<text id="event_QUEST_CREWDEAD_CONTINUE_c1_text"/>
+			<quest event="QUEST_CREWDEAD"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_QUEST_CREWDEAD_CONTINUE_c2_choice"/>
+		<event>
+			<text id="event_QUEST_CREWDEAD_CONTINUE_c2_text"/>
+		</event>
+	</choice>
+</event>
+<event name="QUEST_CREWDEAD" unique="true">
+	<text id="event_QUEST_CREWDEAD_text"/>
+	<ship load="PIRATE_QUEST_CREWDEAD" hostile="true"/>
+</event>
+<ship name="PIRATE_QUEST_CREWDEAD" auto_blueprint="SHIPS_PIRATE">  <!-- JUSTIN - TO DO - Start fires on the player ship -->
+	<destroyed>
+		<text id="ship_PIRATE_QUEST_CREWDEAD_destroyed_text"/>
+		<damage amount="13"/>
+		<damage amount="1" system="random"/>  <!--DLC-->
+		<damage amount="1" system="room" effect="all"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_PIRATE_QUEST_CREWDEAD_deadCrew_text"/>
+		<autoReward level="HIGH">weapon</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+
+
+<!--      ****************************
+			SURRENDER/ESCAPE EVENTS
+		  ********************************
+-->
+
+<event name="PIRATE_SURRENDER">
+	<text load="PIRATE_SURRENDER_TEXT"/>
+	<choice>
+		<text id="event_PIRATE_SURRENDER_c1_choice"/>
+		<event>
+			<ship hostile="false"/>
+			<autoReward level="RANDOM">stuff</autoReward>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_PIRATE_SURRENDER_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+<textList name="PIRATE_SURRENDER_TEXT">
+	<text id="text_PIRATE_SURRENDER_TEXT_1"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_2"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_3"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_4"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_5"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_6"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_7"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_8"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_9"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_10"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_11"/>
+	<!-- Duplicates below, just to make sure-->
+	<text id="text_PIRATE_SURRENDER_TEXT_1"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_2"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_3"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_12"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_13"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_14"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_6"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_7"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_8"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_9"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_10"/>
+	<text id="text_PIRATE_SURRENDER_TEXT_11"/>
+</textList>
+
+<!-- CONTINUE SAVED GAME
+ START NEW GAME
+ -->
+
+
+<event name="PIRATE_SURRENDER_CIVILAN">
+	<text id="event_PIRATE_SURRENDER_CIVILAN_text"/>
+	<ship hostile="false"/>
+	<choice hidden="true">
+		<text id="event_PIRATE_SURRENDER_CIVILAN_c1_choice"/>
+		<event load="SAVE_CIVILIAN_LIST"/>
+	</choice>
+</event>
+
+<event name="PIRATE_ESCAPE">
+	<text id="event_PIRATE_ESCAPE_text"/>
+	<ship hostile="true"/>
+</event>
+
+<eventList name="DEAD_CREW_DEFAULT">
+	<event>
+		<text id="event_DEAD_CREW_DEFAULT_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_DEAD_CREW_DEFAULT_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_DEAD_CREW_DEFAULT_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_DEAD_CREW_DEFAULT_1_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_DEAD_CREW_DEFAULT_1_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_DEAD_CREW_DEFAULT_6_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+	</event>
+	<event>
+		<text id="event_DEAD_CREW_DEFAULT_6_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+	</event>
+	<event>
+		<text id="event_DEAD_CREW_DEFAULT_8_text"/>
+		<crewMember amount="1"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_DEAD_CREW_DEFAULT_9_text"/>
+		<autoReward level="LOW">weapon</autoReward>
+	</event>
+</eventList>
+
+<eventList name="DEAD_CREW_SLAVER">
+	<event>
+		<text id="event_DEAD_CREW_SLAVER_1_text"/>
+		<choice hidden="true">
+			<text id="event_DEAD_CREW_SLAVER_1_c1_choice"/>
+			<event>
+				<text id="event_DEAD_CREW_SLAVER_1_c1_text"/>
+				<crewMember amount="1" class="mantis"/>
+				<autoReward level="MED">standard</autoReward>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_DEAD_CREW_SLAVER_1_c2_choice"/>
+			<event>
+				<text id="event_DEAD_CREW_SLAVER_1_c2_text"/>
+				<crewMember amount="1" class="rock"/>
+				<autoReward level="MED">standard</autoReward>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_DEAD_CREW_SLAVER_1_c3_choice"/>
+			<event>
+				<text id="event_DEAD_CREW_SLAVER_1_c3_text"/>
+				<crewMember amount="1" class="engi"/>
+				<autoReward level="MED">standard</autoReward>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_DEAD_CREW_SLAVER_2_text"/>
+		<crewMember amount="1"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+	<!--  TO DO - This causes a crash if you hit ACCEPT when there are too many crewmembers.
+	<event>
+		<text>You find two Federation soldiers locked in the cargo hold. The first soldier comes on board asking, "Thanks for the timely rescue. How did command know we were here?"</text>
+		<crewMember amount="1"/>
+		<choice hidden="true">
+			<text>Well... The thing is...</text>
+			<event>
+				<text>Before you can get a word in, the second ex-slave burst through the portal asking where they should be stationed. You give them a rundown of your mission and prepare to jump.</text>
+				<crewMember amount="1"/>
+				<autoReward level="HIGH">standard</autoReward>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text>Command did not know you were here...</text>
+			<event>
+				<text>Before you can get a word in, the second ex-slave burst through the portal asking where they should be stationed. You give them a rundown of your mission and prepare to jump.</text>
+				<crewMember amount="1"/>
+				<autoReward level="HIGH">standard</autoReward>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text>Unfortunately it seems the slaves did not survive the fighting. You strip the ship and prepare to jump.</text>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+	-->
+	<event>
+		<text id="event_DEAD_CREW_SLAVER_3_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+</eventList>
+
+<eventList name="DESTROYED_DEFAULT">
+	<event>
+		<text id="event_DESTROYED_DEFAULT_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_DESTROYED_DEFAULT_1_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</event>
+</eventList>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--      ****************************
+			NEEDS EDITING - New Events
+		  ********************************
+
+		  maybe something about a mysterious unexplained ship
+you can try to communicate or beam aboard
+maybe your people disappear, maybe they're given a gift
+maybe the ship just disappears
+maybe something really rare and unusual
+maybe with scanner tech or other stuff you can wait out a turn and see if you can make contact
+or maybe it just steals one of your people
+or maybe nothing happens and its just a weird thing that leaves people like... well what was that about?
+maybe somebody beams aboard that just bothers you, like Q from next generation
+
+
+		  maybe something that requires approaching a star to retrieve something or someone
+		  malfunction in sensors...sensor trick showing multiple enemy ships when only one weak one...
+they demand whatever and disappear or you fire at them or call their bluff in some way
+civilian ship held hostage, requiring you to take on a mission...
+rebel wanting to defect
+colonists needing supplies
+two ships docked together mysteriously, no life signs
+a crash landing on a large asteroid
+undetectable presence on the ship, helps or hurts or nothing if you probe it or try to communicate
+i mean not undetectable but unidentifiable
+star going supernova
+gravitational phenomena, dark matter
+ debris detected on a small moon
+colonists needing rescue
+save someone who turns out to be a spy
+
+-->
+
+
+<!-- QUESTS
+
+if you have improved doors you can deliver  a prisoner somewhere.  If you dont.... (??)
+
+-->
+
+
+<!-- Neutral
+
+Someone asks you to help them on a land-based combat mission, borrow the crewmember? - potentially killing them0 (?) - can give mantis or rock for increased success
+
+-->
+
+
+<!-- QUESTS -->
+
+
+<!-- Neutral -->
+
+
+<!-- Distress -->
+
+
+
+<!-- ITEM -->
+<event name="ASTEROID_DERELICT_SHIP" unique="true">
+	<text id="event_ASTEROID_DERELICT_SHIP_text"/>
+	<distressBeacon/>
+	<choice hidden="true">
+		<text id="event_ASTEROID_DERELICT_SHIP_c1_choice"/>
+		<event load="ASTEROID_DERELICT_SHIP_SEARCH"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ASTEROID_DERELICT_SHIP_c2_choice"/>
+		<event>
+			<text id="event_ASTEROID_DERELICT_SHIP_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="ROCK_ARMOR">
+		<text id="event_ASTEROID_DERELICT_SHIP_c3_choice"/>
+		<event load="ASTEROID_DERELICT_SHIP_ROCK"/>
+	</choice>
+</event>
+<eventList name="ASTEROID_DERELICT_SHIP_SEARCH">
+	<event>
+		<text id="event_ASTEROID_DERELICT_SHIP_SEARCH_1_text"/>
+		<damage amount="4"/>
+		<damage amount="1" system="engines"/>  <!--DLC-->
+	</event>
+	<event>
+		<text id="event_ASTEROID_DERELICT_SHIP_SEARCH_2_text"/>
+		<autoReward level="RANDOM">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_ASTEROID_DERELICT_SHIP_SEARCH_3_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ASTEROID_DERELICT_SHIP_SEARCH_3_c1_text"/>
+				<choice hidden="true">
+					<text id="event_ASTEROID_DERELICT_SHIP_SEARCH_3_c1_c1_choice"/>
+					<event>
+						<text id="event_ASTEROID_DERELICT_SHIP_SEARCH_3_c1_c1_text"/>
+						<autoReward level="LOW">weapon</autoReward>
+					</event>
+				</choice>
+				<choice hidden="true">
+					<text id="event_ASTEROID_DERELICT_SHIP_SEARCH_3_c1_c2_choice"/>
+					<event>
+						<text id="event_ASTEROID_DERELICT_SHIP_SEARCH_3_c1_c2_text"/>
+						<choice hidden="true">
+							<text id="continue"/>
+							<event>
+								<text id="event_ASTEROID_DERELICT_SHIP_SEARCH_3_c1_c2_c1_text"/>
+								<augment name="STASIS_POD"/>
+								<autoReward level="LOW">scrap_only</autoReward>
+							</event>
+						</choice>
+					</event>
+				</choice>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<eventList name="ASTEROID_DERELICT_SHIP_ROCK">
+	<event>
+		<text id="event_ASTEROID_DERELICT_SHIP_ROCK_1_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ASTEROID_DERELICT_SHIP_ROCK_1_c1_text"/>
+				<choice hidden="true">
+					<text id="event_ASTEROID_DERELICT_SHIP_ROCK_1_c1_c1_choice"/>
+					<event>
+						<text id="event_ASTEROID_DERELICT_SHIP_ROCK_1_c1_c1_text"/>
+						<autoReward level="LOW">weapon</autoReward>
+					</event>
+				</choice>
+				<choice hidden="true">
+					<text id="event_ASTEROID_DERELICT_SHIP_ROCK_1_c1_c2_choice"/>
+					<event>
+						<text id="event_ASTEROID_DERELICT_SHIP_ROCK_1_c1_c2_text"/>
+						<choice hidden="true">
+							<text id="continue"/>
+							<event>
+								<text id="event_ASTEROID_DERELICT_SHIP_ROCK_1_c1_c2_c1_text"/>
+								<augment name="STASIS_POD"/>
+								<autoReward level="LOW">scrap_only</autoReward>
+							</event>
+						</choice>
+					</event>
+				</choice>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+<event name="ZOLTAN_CREW_STUDY">
+	<text id="event_ZOLTAN_CREW_STUDY_text"/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_CREW_STUDY_c1_choice"/>
+		<event load="ZOLTAN_CREW_STUDY_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_CREW_STUDY_c2_choice"/>
+		<event>
+			<text id="event_ZOLTAN_CREW_STUDY_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="medbay" lvl="3">
+		<text id="event_ZOLTAN_CREW_STUDY_c3_choice"/>
+		<event>
+			<text id="event_ZOLTAN_CREW_STUDY_c3_text"/>
+			<drone name="RANDOM"/>
+			<autoReward level="LOW">stuff</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true" req="STASIS_POD">
+		<text id="event_ZOLTAN_CREW_STUDY_c4_choice"/>
+		<event>
+			<remove name="STASIS_POD"/>
+			<text id="event_ZOLTAN_CREW_STUDY_c4_text"/>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event>
+					<text id="event_ZOLTAN_CREW_STUDY_c4_c1_text"/>
+					<choice hidden="true">
+						<text id="continue"/>
+						<event>
+							<text id="event_ZOLTAN_CREW_STUDY_c4_c1_c1_text"/>
+							<crewMember amount="1" class="crystal" id="name_Ruwen"/>
+						</event>
+					</choice>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="ZOLTAN_CREW_STUDY_LIST">
+	<event>
+		<text id="event_ZOLTAN_CREW_STUDY_LIST_1_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_CREW_STUDY_LIST_1_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_CREW_STUDY_LIST_3_text"/>
+		<ship load="PIRATE_ZOLTAN_CREW_STUDY" hostile="true"/>
+		<boarders min="2" max="2" class="random"/>
+	</event>
+</eventList>
+
+<event name="ROCK_CRYSTAL_BEACON">
+	<text id="event_ROCK_CRYSTAL_BEACON_text"/>
+	<choice hidden="true">
+		<text id="event_ROCK_CRYSTAL_BEACON_c1_choice"/>
+		<event load="ROCK_CRYSTAL_BEACON_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ROCK_CRYSTAL_BEACON_c2_choice"/>
+		<event>
+			<text id="event_ROCK_CRYSTAL_BEACON_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="crystal">
+		<text id="event_ROCK_CRYSTAL_BEACON_c3_choice"/>
+		<event>
+			<text id="event_ROCK_CRYSTAL_BEACON_c3_text"/>
+			<item_modify>
+				<item type="fuel" min="1" max="1"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="event_ROCK_CRYSTAL_BEACON_c3_c1_choice"/>
+				<event>
+					<text id="event_ROCK_CRYSTAL_BEACON_c3_c1_text"/>
+					<secretSector/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+
+<eventList name="ROCK_CRYSTAL_BEACON_LIST">
+	<event>
+		<text id="event_ROCK_CRYSTAL_BEACON_LIST_1_text"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_ROCK_CRYSTAL_BEACON_LIST_2_text"/>
+		<ship load="ROCK_SHIP" hostile="true"/>
+	</event>
+</eventList>
+
+
+
+
+
+		<!-- Donor event!!!! -->
+
+
+<event name="DONOR_PLAGUE" unique="true">
+	<text id="event_DONOR_PLAGUE_text"/>
+	<choice hidden="true">
+		<text id="event_DONOR_PLAGUE_c1_choice"/>
+		<event load="DONOR_PLAGUE_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DONOR_PLAGUE_c2_choice"/>
+		<event>
+			<text id="event_DONOR_PLAGUE_c2_text"/>
+			<autoReward level="RANDOM">scrap_only</autoReward>
+		</event>
+	</choice>
+</event>
+<eventList name="DONOR_PLAGUE_LIST">
+	<event>
+		<text id="event_DONOR_PLAGUE_LIST_1_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_DONOR_PLAGUE_LIST_2_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+		<crewMember amount="1" class="human"/>
+	</event>
+	<event>
+		<text id="event_DONOR_PLAGUE_LIST_3_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_DONOR_PLAGUE_LIST_3_c1_text"/>
+				<removeCrew>
+					<clone>false</clone>
+					<text id="event_DONOR_PLAGUE_LIST_3_c1_c0_clone"/>
+				</removeCrew>
+			</event>
+		</choice>
+		<choice hidden="true" req="medbay" lvl="2">
+			<text id="event_DONOR_PLAGUE_LIST_3_c2_choice"/>
+			<event>
+				<text id="event_DONOR_PLAGUE_LIST_3_c2_text"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+
+<event name="DONOR_PONY" unique="true">
+	<text id="event_DONOR_PONY_text"/>
+	<choice hidden="true">
+		<text id="event_DONOR_PONY_c1_choice"/>
+		<event>
+			<text id="event_DONOR_PONY_c1_text"/>
+			<choice hidden="true">
+				<text id="event_DONOR_PONY_c1_c1_choice"/>
+				<event load="DONOR_PONY_PEACE"/>
+			</choice>
+			<choice hidden="true">
+				<text id="event_DONOR_PONY_c1_c2_choice"/>
+				<event load="DONOR_PONY_SELL"/>
+			</choice>
+			<choice hidden="true">
+				<text id="event_DONOR_PONY_c1_c3_choice"/>
+				<event>
+					<text id="event_DONOR_PONY_c1_c3_text"/>
+				</event>
+			</choice>
+			<choice hidden="true" req="slug">
+				<text id="event_DONOR_PONY_c1_c4_choice"/>
+				<event>
+					<text id="event_DONOR_PONY_c1_c4_text"/>
+					<choice hidden="true">
+						<text id="continue"/>
+						<event>
+							<text id="event_DONOR_PONY_c1_c4_c1_text"/>
+							<crewMember amount="1" class="engi"/>
+						</event>
+					</choice>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_DONOR_PONY_c2_choice"/>
+		<event>
+			<text id="event_DONOR_PONY_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="DONOR_PONY_PEACE">
+	<event>
+		<text id="event_DONOR_PONY_PEACE_1_text"/>
+		<crewMember amount="1" class="engi"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_DONOR_PONY_PEACE_2_text"/>
+	</event>
+</eventList>
+<eventList name="DONOR_PONY_SELL">
+	<event>
+		<text id="event_DONOR_PONY_SELL_1_text"/>
+	</event>
+	<event>
+		<text id="event_DONOR_PONY_SELL_2_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_DONOR_PONY_SELL_2_c0_clone"/>
+		</removeCrew>
+	</event>
+</eventList>
+
+
+
+
+
+<event name="DONOR_BLACK_RAVEN" unique="true">
+	<text id="event_DONOR_BLACK_RAVEN_text"/>
+	<ship load="DONOR_BLACK_RAVEN" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_DONOR_BLACK_RAVEN_c1_choice"/>
+		<event>
+			<text id="event_DONOR_BLACK_RAVEN_c1_text"/>
+			<choice hidden="true">
+				<text id="event_DONOR_BLACK_RAVEN_c1_c1_choice"/>
+				<event>
+					<ship hostile="true"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_DONOR_BLACK_RAVEN_c1_c2_choice"/>
+				<event>
+					<text id="event_DONOR_BLACK_RAVEN_c1_c2_text"/>
+					<ship hostile="true"/>
+				</event>
+			</choice>
+			<choice hidden="true" req="slug">
+				<text id="event_DONOR_BLACK_RAVEN_c1_c3_choice"/>
+				<event load="DONOR_BLACK_RAVEN_SLUG"/>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="DONOR_BLACK_RAVEN_SLUG">
+	<event>
+		<text id="event_DONOR_BLACK_RAVEN_SLUG_1_text"/>
+		<ship hostile="true"/>
+		<boarders min="1" max="2" class="slug"/>
+	</event>
+	<event>
+		<text id="event_DONOR_BLACK_RAVEN_SLUG_2_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_DONOR_BLACK_RAVEN_SLUG_2_c1_text"/>
+				<autoReward level="HIGH">weapon</autoReward>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<ship name="DONOR_BLACK_RAVEN" auto_blueprint="JELLY_TRUFFLE">
+	<surrender  chance="0" min="3" max="4">
+		<text id="ship_DONOR_BLACK_RAVEN_surrender_text"/>
+		<choice>
+			<text id="ship_DONOR_BLACK_RAVEN_surrender_c1_choice"/>
+			<event>
+				<text id="ship_DONOR_BLACK_RAVEN_surrender_c1_text"/>
+				<ship hostile="false"/>
+				<autoReward level="HIGH">weapon</autoReward>
+			</event>
+		</choice>
+		<choice>
+			<text id="ship_DONOR_BLACK_RAVEN_surrender_c2_choice"/>
+			<event>
+				<text id="ship_DONOR_BLACK_RAVEN_surrender_c2_text"/>
+			</event>
+		</choice>
+	</surrender>
+	<destroyed>
+		<text id="ship_DONOR_BLACK_RAVEN_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_DONOR_BLACK_RAVEN_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<event name="DONOR_MANTIS_CHASE" unique="true">
+	<text id="event_DONOR_MANTIS_CHASE_text"/>
+	<ship load="DONOR_MANTIS_CHASE1" hostile="true"/>
+</event>
+<ship name="DONOR_MANTIS_CHASE1" auto_blueprint="MANTIS_FIGHTER">
+	<escape timer="5" min="5" max="5">
+		<text id="ship_DONOR_MANTIS_CHASE1_escape_text"/>
+	</escape>
+	<gotaway>
+		<text id="ship_DONOR_MANTIS_CHASE1_gotaway_text"/>
+		<choice hidden="true">
+			<text id="ship_DONOR_MANTIS_CHASE1_gotaway_c1_choice"/>
+			<event>
+				<text id="ship_DONOR_MANTIS_CHASE1_gotaway_c1_text"/>
+				<quest event="DONOR_MANTIS_CHASE2"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="ship_DONOR_MANTIS_CHASE1_gotaway_c2_choice"/>
+			<event>
+				<text id="ship_DONOR_MANTIS_CHASE1_gotaway_c2_text"/>
+			</event>
+		</choice>
+	</gotaway>
+	<destroyed>
+		<text id="ship_DONOR_MANTIS_CHASE1_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_DONOR_MANTIS_CHASE1_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+</ship>
+<event name="DONOR_MANTIS_CHASE2">
+	<text id="event_DONOR_MANTIS_CHASE2_text"/>
+	<ship load="DONOR_MANTIS_CHASE2" hostile="true"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event>
+			<text id="event_DONOR_MANTIS_CHASE2_c1_text"/>
+		</event>
+	</choice>
+</event>
+<ship name="DONOR_MANTIS_CHASE2" auto_blueprint="MANTIS_BOMBER">
+	<escape timer="12" min="6" max="6">
+		<text id="ship_DONOR_MANTIS_CHASE2_escape_text"/>
+	</escape>
+	<gotaway>
+		<text id="ship_DONOR_MANTIS_CHASE2_gotaway_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</gotaway>
+	<surrender  min="2" max="2">
+		<text id="ship_DONOR_MANTIS_CHASE2_surrender_text"/>
+		<choice>
+			<text id="ship_DONOR_MANTIS_CHASE2_surrender_c1_choice"/>
+			<event>
+				<text id="ship_DONOR_MANTIS_CHASE2_surrender_c1_text"/>
+				<autoReward level="HIGH">weapon</autoReward>
+				<ship hostile="false"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="ship_DONOR_MANTIS_CHASE2_surrender_c2_choice"/>
+			<event>
+				<text id="ship_DONOR_MANTIS_CHASE2_surrender_c2_text"/>
+			</event>
+		</choice>
+	</surrender>
+	<destroyed>
+		<text id="ship_DONOR_MANTIS_CHASE2_destroyed_text"/>
+		<weapon name="RANDOM"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_DONOR_MANTIS_CHASE2_deadCrew_text"/>
+		<weapon name="RANDOM"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+<event name="ALISON_MANTIS_CREW" unique="true">
+	<text id="event_ALISON_MANTIS_CREW_text"/>
+	<choice>
+		<text id="continue"/>
+		<event>
+			<text id="event_ALISON_MANTIS_CREW_c1_text"/>
+			<choice hidden="true">
+				<text id="event_ALISON_MANTIS_CREW_c1_c1_choice"/>
+				<event load="ALISON_MANTIS_CREW_HELP"/>
+			</choice>
+			<choice hidden="true">
+				<text id="event_ALISON_MANTIS_CREW_c1_c2_choice"/>
+				<event load="ALISON_MANTIS_CREW_REJECT"/>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="ALISON_MANTIS_CREW_HELP">
+	<event>
+		<text id="event_ALISON_MANTIS_CREW_HELP_1_text"/>
+		<damage amount="3"/>
+		<damage amount="1" system="random"/>  <!--DLC-->
+		<damage amount="1" system="room"/>
+		<ship load="ENGI_MANTIS_CONTROLLED" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_ALISON_MANTIS_CREW_HELP_2_text"/>
+		<ship load="ENGI_SHIP" hostile="true"/>
+		<crewMember amount="1" class="mantis"/>
+	</event>
+</eventList>
+<eventList name="ALISON_MANTIS_CREW_REJECT">
+	<event>
+		<text id="event_ALISON_MANTIS_CREW_REJECT_1_text"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_ALISON_MANTIS_CREW_REJECT_2_text"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+		<damage amount="4"/> <!--DLC-->
+		<damage amount="1" system="room" effect="fire"/>
+	</event>
+	<event>
+		<text id="event_ALISON_MANTIS_CREW_REJECT_3_text"/>
+		<boarders min="1" max="1" class="mantis"/>
+		<ship load="ENGI_MANTIS_CONTROLLED" hostile="true"/>
+	</event>
+</eventList>
+
+
+<event name="ALISON_DEFECTOR" unique="true">
+	<text id="event_ALISON_DEFECTOR_text"/>
+	<ship load="REBEL" hostile="true"/>
+	<choice>
+		<text id="continue"/>
+		<event>
+			<text id="event_ALISON_DEFECTOR_c1_text"/>
+			<choice hidden="true">
+				<text id="event_ALISON_DEFECTOR_c1_c1_choice"/>
+				<event load="ALISON_DEFECTOR_HELP"/>
+			</choice>
+			<choice>
+				<text id="event_ALISON_DEFECTOR_c1_c2_choice"/>
+				<event load="ALISON_DEFECTOR_REJECT"/>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="ALISON_DEFECTOR_REJECT">
+	<event>
+		<text id="event_ALISON_DEFECTOR_REJECT_1_text"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_REJECT_2_text"/>
+		<boarders min="1" max="1" class="human"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_REJECT_3_text"/>
+		<choice>
+			<text id="event_ALISON_DEFECTOR_REJECT_3_c1_choice"/>
+			<event load="ALISON_DEFECTOR_HELP_2"/>
+		</choice>
+		<choice>
+			<text id="event_ALISON_DEFECTOR_REJECT_3_c2_choice"/>
+			<event/>
+		</choice>
+		<choice>
+			<text id="event_ALISON_DEFECTOR_REJECT_3_c3_choice"/>
+			<event>
+				<boarders min="1" max="1" class="human"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<eventList name="ALISON_DEFECTOR_HELP">
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_1_text"/> <!--DLC2-->
+		<damage amount="2"/>
+		<damage amount="1" system="engines"/>  <!--DLC-->
+		<modifyPursuit amount="1"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_2_text"/>
+		<boarders min="2" max="2" class="human"/>
+		<damage amount="3"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_3_text"/>
+		<crewMember amount="1" class="human"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_3_text"/>
+		<crewMember amount="1" class="human"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_3_text"/>
+		<crewMember amount="1" class="human"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_6_text"/>
+		<boarders min="1" max="1" class="human"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_ALISON_DEFECTOR_HELP_6_c0_clone"/>
+		</removeCrew>
+	</event>
+</eventList>
+
+<eventList name="ALISON_DEFECTOR_HELP_2">
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_2_1_text"/> <!--DLC2-->
+		<damage amount="2"/>
+		<damage amount="1" system="engines"/>  <!--DLC-->
+		<modifyPursuit amount="1"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_2_2_text"/>
+		<boarders min="2" max="2" class="human"/>
+		<damage amount="2"/>
+		<damage amount="1" system="pilot"/>  <!--DLC-->
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_2_3_text"/>
+		<crewMember amount="1" class="human"/>
+		<quest event="ALISON_DEFECTOR_QUEST"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_2_3_text"/>
+		<crewMember amount="1" class="human"/>
+		<quest event="ALISON_DEFECTOR_QUEST"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_2_3_text"/>
+		<crewMember amount="1" class="human"/>
+		<quest event="ALISON_DEFECTOR_QUEST"/>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_HELP_2_6_text"/>
+		<boarders min="1" max="1" class="human"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_ALISON_DEFECTOR_HELP_2_6_c0_clone"/>
+		</removeCrew>
+	</event>
+</eventList>
+
+<eventList name="ALISON_DEFECTOR_QUEST">
+	<event>
+		<text id="event_ALISON_DEFECTOR_QUEST_1_text"/>
+		<autoReward level="HIGH">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_ALISON_DEFECTOR_QUEST_2_text"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</event>
+</eventList>
+
+
+<event name="CHARACTER_TEST">
+	<text>`abcdefghijklmno °±²³´µ¶·¸¹º»¼½ ¾¿ÀÁÂÃÄÅÆÇ ÈÉÊËÌÍÎÏ ÐÑÒÓÔÕ Ö×ØÙÚÛ ÜÝÞßàá âãäåæç èéêëìí îïðñòóô õö÷øùúûüýþ ÿŒœŠšŸƒ</text>
+</event>
+
+
+
+
+</FTL>

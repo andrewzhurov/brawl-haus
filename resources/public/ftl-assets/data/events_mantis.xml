@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--     ' ,  " " "
+			SUMMARY  - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+Structure:
+	START_BEACON_MANTIS
+	STORE_MANTIS
+	NOTHING_MANTIS
+
+Items:
+	MANTIS_CAPTURE_COMMANDO			NEW!!
+	MANTIS_GAMBLE					NEW!!
+
+Hostile:
+	MANTIS_FIGHT
+
+Neutral:
+	MANTIS_FIGHT_CHOICE
+	MANTIS_CIVILIAN
+	MANTIS_CREW
+
+Environment:
+						???	MANTIS_NEBULA_FIGHT
+	MANTIS_SUN_FIGHT
+
+Boarders:
+	MANTIS_BOARDERS
+
+Special
+	MANTIS_NAMED_THIEF
+-->
+
+
+
+
+
+
+
+
+<!--
+******************************
+	MANTIS EVENTLISTS
+********************************
+-->
+
+
+<eventList name="HOSTILE_MANTIS">
+	<event load="MANTIS_FIGHT"/>
+	<event load="MANTIS_FIGHT"/>
+	<event load="MANTIS_SUN_FIGHT"/>
+	<event load="DONOR_MANTIS_CHASE"/>
+
+	<event load="REBEL"/>
+	<event load="AUTO_ASTEROID"/>
+	<event load="AUTO_WARNING"/>
+</eventList>
+
+
+<eventList name="NEUTRAL_MANTIS">
+	<event load="MANTIS_FIGHT_CHOICE"/>
+	<event load="MANTIS_CIVILIAN"/>
+	<event load="MANTIS_CREW"/>
+
+	<event load="REBEL_TRANSPORT"/>
+	<event load="BROKEN_REBEL_DRONE"/>
+
+	<event load="ALISON_MANTIS_CREW"/> <!-- new alison written event -->
+</eventList>
+
+
+<eventList name="DISTRESS_BEACON_MANTIS">
+	<event load="ESCORT_BEACON"/>
+	<event load="FRIENDLY_BEACON"/>
+	<event load="TRAP_BEACON"/>
+	<event load="DISTRESS_TRAPPED_MINER"/>
+	<event load="DISTRESS_INFESTATION"/>
+	<event load="DISTRESS_SATELLITE_DEFENSE"/>
+	<event load="DISTRESS_STATION_FIRE"/>
+	<event load="DISTRESS_STATION_DISEASE"/>
+</eventList>
+
+<eventList name="BOARDERS_MANTIS">
+	<event load="MANTIS_BOARDERS"/>
+	<event load="MANTIS_BOARDERS"/>
+	<event load="BOARDERS_SUN"/>
+</eventList>
+
+
+
+<!--
+*********
+		STRUCTURE!!!
+	Others events necessary for strucrtural stuff
+**********
+-->
+
+<event name="START_BEACON_MANTIS">
+	<text id="event_START_BEACON_MANTIS_text"/>
+</event>
+
+<event name="STORE_MANTIS">
+	<text load="STORE_MANTIS"/>
+	<store/>
+</event>
+<textList name="STORE_MANTIS">
+	<text id="text_STORE_MANTIS_1"/>
+	<text id="text_STORE_MANTIS_2"/>
+	<text id="text_STORE_MANTIS_3"/>
+	<text id="text_STORE_MANTIS_4"/>
+	<text id="text_STORE_MANTIS_5"/>
+	<text id="text_STORE_MANTIS_6"/>
+</textList>
+
+<event name="NOTHING_MANTIS">
+	<text load="NOTHING_MANTIS"/>
+</event>
+<textList name="NOTHING_MANTIS">
+	<text id="text_NOTHING_MANTIS_1"/>
+	<text id="text_NOTHING_MANTIS_2"/>
+	<text id="text_NOTHING_MANTIS_3"/>
+	<text id="text_NOTHING_MANTIS_4"/>
+	<text id="text_NOTHING_MANTIS_5"/>
+	<text id="text_NOTHING_MANTIS_6"/>
+</textList>
+
+
+
+<!--
+*********
+		ITEMS!!!
+	Events that give items
+**********
+-->
+
+<event name="MANTIS_CAPTURE_COMMANDO" unique="true">
+	<text id="event_MANTIS_CAPTURE_COMMANDO_text"/>
+	<ship load="ENGI_SHIP" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_MANTIS_CAPTURE_COMMANDO_c1_choice"/>
+		<event load="MANTIS_CAPTURE_COMMANDO_RELEASE"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_MANTIS_CAPTURE_COMMANDO_c2_choice"/>
+		<event load="MANTIS_CAPTURE_COMMANDO_KILL"/>
+	</choice>
+	<choice req="mantis" hidden="true">
+		<text id="event_MANTIS_CAPTURE_COMMANDO_c3_choice"/>
+		<event load="MANTIS_CAPTURE_COMMANDO_TALK"/>
+	</choice>
+	<choice req="mind" hidden="true"> <!--DLC-->
+		<text id="event_MANTIS_CAPTURE_COMMANDO_c4_choice"/>
+		<event>
+			<text id="event_MANTIS_CAPTURE_COMMANDO_c4_text"/>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event>
+					<text id="event_MANTIS_CAPTURE_COMMANDO_c4_c1_text"/>
+					<autoReward level="LOW">weapon</autoReward>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="MANTIS_CAPTURE_COMMANDO_RELEASE">
+	<event>
+		<text id="event_MANTIS_CAPTURE_COMMANDO_RELEASE_1_text"/>
+		<autoReward level="MED">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_MANTIS_CAPTURE_COMMANDO_RELEASE_2_text"/>
+		<damage amount="2"/>
+		<damage amount="1" system="random" effect="fire"/>  <!--DLC-->
+	</event>
+</eventList>
+<eventList name="MANTIS_CAPTURE_COMMANDO_KILL">
+	<event>
+		<text id="event_MANTIS_CAPTURE_COMMANDO_KILL_1_text"/>
+		<autoReward level="MED">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_MANTIS_CAPTURE_COMMANDO_KILL_2_text"/>
+		<autoReward level="MED">stuff</autoReward>
+		<boarders min="1" max="1" class="mantis"/>
+	</event>
+</eventList>
+<eventList name="MANTIS_CAPTURE_COMMANDO_TALK">
+	<event>
+		<text id="event_MANTIS_CAPTURE_COMMANDO_TALK_1_text"/>
+		<reveal_map/>
+	</event>
+	<event>
+		<text id="event_MANTIS_CAPTURE_COMMANDO_TALK_2_text"/>
+		<crewMember amount="1" class="mantis"/>
+		<autoReward level="MED">stuff</autoReward>
+	</event>
+</eventList>
+
+
+<event name="MANTIS_GAMBLE" unique="true">
+	<text id="event_MANTIS_GAMBLE_text"/>
+	<choice hidden="true">
+		<text id="event_MANTIS_GAMBLE_c1_choice"/>
+		<event/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_MANTIS_GAMBLE_c2_choice"/>
+		<event>
+			<text id="event_MANTIS_GAMBLE_c2_text"/>
+			<item_modify>
+				<item type="scrap" min="-50" max="-50"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event load="MANTIS_GAMBLE_BLUE"/>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_MANTIS_GAMBLE_c3_choice"/>
+		<event>
+			<text id="event_MANTIS_GAMBLE_c2_text"/>
+			<item_modify>
+				<item type="scrap" min="-50" max="-50"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event load="MANTIS_GAMBLE_RED"/>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="MANTIS_GAMBLE_BLUE">
+	<event>
+		<text id="event_MANTIS_GAMBLE_BLUE_1_text"/>
+		<item_modify>
+			<item type="scrap" min="100" max="100"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_MANTIS_GAMBLE_BLUE_2_text"/>
+		<choice hidden="true">
+			<text id="event_MANTIS_GAMBLE_BLUE_2_c1_choice"/>
+			<event>
+				<text id="event_MANTIS_GAMBLE_BLUE_2_c1_text"/>
+			</event>
+		</choice>
+		<choice req="engines" lvl="4" hidden="true">
+			<text id="event_MANTIS_GAMBLE_BLUE_2_c2_choice"/>
+			<event>
+				<text id="event_MANTIS_GAMBLE_BLUE_2_c2_text"/>
+				<ship load="MANTIS_FIGHT" hostile="true"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+<eventList name="MANTIS_GAMBLE_RED">
+	<event>
+		<text id="event_MANTIS_GAMBLE_RED_1_text"/>
+		<item_modify>
+			<item type="scrap" min="100" max="100"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_MANTIS_GAMBLE_RED_2_text"/>
+		<choice hidden="true">
+			<text id="event_MANTIS_GAMBLE_RED_2_c1_choice"/>
+			<event>
+				<text id="event_MANTIS_GAMBLE_RED_2_c1_text"/>
+			</event>
+		</choice>
+		<choice req="engines" lvl="4" hidden="true">
+			<text id="event_MANTIS_GAMBLE_RED_2_c2_choice"/>
+			<event>
+				<text id="event_MANTIS_GAMBLE_RED_2_c2_text"/>
+				<ship load="MANTIS_FIGHT" hostile="true"/>
+				<item_modify>
+					<item type="scrap" min="50" max="50"/>
+				</item_modify>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+
+
+<!--
+*********
+		HOSTILE!!!
+	Events that call up a fight for sure
+**********
+-->
+
+<event name="MANTIS_FIGHT" unique="false">
+	<text load="MANTIS_FIGHT"/>
+	<ship load="MANTIS_FIGHT" hostile="true"/>
+</event>
+<textList name="MANTIS_FIGHT">
+	<!-- These are the ones that I had written-->
+	<text id="text_MANTIS_FIGHT_1"/>
+	<text id="text_MANTIS_FIGHT_2"/>
+	<text id="text_MANTIS_FIGHT_3"/>
+	<text id="text_MANTIS_FIGHT_4"/>
+	<text id="text_MANTIS_FIGHT_5"/>
+	<text id="text_MANTIS_FIGHT_6"/>
+	<text id="text_MANTIS_FIGHT_7"/>
+	<!-- These are the ones by tom-->
+	<text id="text_MANTIS_FIGHT_8"/>
+	<text id="text_MANTIS_FIGHT_9"/>
+	<text id="text_MANTIS_FIGHT_10"/>
+	<text id="text_MANTIS_FIGHT_11"/>
+	<text id="text_MANTIS_FIGHT_12"/>
+	<text id="text_MANTIS_FIGHT_13"/>
+	<text id="text_MANTIS_FIGHT_14"/>
+	<text id="text_MANTIS_FIGHT_15"/>
+	<text id="text_MANTIS_FIGHT_16"/>
+	<text id="text_MANTIS_FIGHT_17"/>
+	<text id="text_MANTIS_FIGHT_18"/>
+	<text id="text_MANTIS_FIGHT_19"/>
+	<text id="text_MANTIS_FIGHT_20"/>
+</textList>
+
+
+
+
+<!--
+*********
+		NEUTRAL!!!
+	Events that could have a fight
+**********
+-->
+
+<event name="MANTIS_FIGHT_CHOICE" unique="false">
+	<text load="MANTIS_FIGHT_CHOICE"/>
+	<ship load="MANTIS_FIGHT" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_MANTIS_FIGHT_CHOICE_c1_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_MANTIS_FIGHT_CHOICE_c2_choice"/>
+		<event load="MANTIS_FIGHT_CHOICE_AVOID"/>
+	</choice>
+	<choice hidden="true" req="cloaking" lvl="1">
+		<text id="event_MANTIS_FIGHT_CHOICE_c3_choice"/>
+		<event load="MANTIS_FIGHT_CHOICE_CLOAK"/>
+	</choice>
+</event>
+<textList name="MANTIS_FIGHT_CHOICE">
+	<text id="text_MANTIS_FIGHT_CHOICE_1"/>
+	<text id="text_MANTIS_FIGHT_CHOICE_2"/>
+	<text id="text_MANTIS_FIGHT_CHOICE_3"/>
+	<text id="text_MANTIS_FIGHT_CHOICE_4"/>
+	<text id="text_MANTIS_FIGHT_CHOICE_5"/>
+	<text id="text_MANTIS_FIGHT_CHOICE_6"/>
+</textList>
+<eventList name="MANTIS_FIGHT_CHOICE_AVOID">
+	<event>
+		<text id="event_MANTIS_FIGHT_CHOICE_AVOID_1_text"/>
+	</event>
+	<event>
+		<text id="event_MANTIS_FIGHT_CHOICE_AVOID_2_text"/>
+		<ship hostile="true"/>
+	</event>
+	<event>
+		<text id="event_MANTIS_FIGHT_CHOICE_AVOID_3_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+<eventList name="MANTIS_FIGHT_CHOICE_CLOAK">
+	<event>
+		<text id="event_MANTIS_FIGHT_CHOICE_CLOAK_1_text"/>
+	</event>
+	<event>
+		<text id="event_MANTIS_FIGHT_CHOICE_CLOAK_2_text"/>
+	</event>
+	<event>
+		<text id="event_MANTIS_FIGHT_CHOICE_CLOAK_3_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+
+<event name="MANTIS_CIVILIAN" unique="false">
+	<text load="MANTIS_CIVILIAN"/>
+	<ship load="MANTIS_CIVILIAN" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_MANTIS_CIVILIAN_c1_choice"/>
+		<event>
+			<text id="event_MANTIS_CIVILIAN_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_MANTIS_CIVILIAN_c2_choice"/>
+		<event>
+			<text load="MANTIS_CIVILIAN_AVOID"/>
+		</event>
+	</choice>
+</event>
+<textList name="MANTIS_CIVILIAN">
+	<text id="text_MANTIS_CIVILIAN_1"/>
+	<text id="text_MANTIS_CIVILIAN_2"/>
+	<text id="text_MANTIS_CIVILIAN_3"/>
+	<text id="text_MANTIS_CIVILIAN_4"/>
+	<text id="text_MANTIS_CIVILIAN_5"/>
+
+	<text id="text_MANTIS_CIVILIAN_1"/>
+	<text id="text_MANTIS_CIVILIAN_2"/>
+	<text id="text_MANTIS_CIVILIAN_3"/>
+	<text id="text_MANTIS_CIVILIAN_4"/>
+	<text id="text_MANTIS_CIVILIAN_5"/>
+</textList>
+<textList name="MANTIS_CIVILIAN_AVOID">
+	<text id="text_MANTIS_CIVILIAN_AVOID_1"/>
+	<text id="text_MANTIS_CIVILIAN_AVOID_2"/>
+	<text id="text_MANTIS_CIVILIAN_AVOID_3"/>
+
+	<text id="text_MANTIS_CIVILIAN_AVOID_1"/>
+	<text id="text_MANTIS_CIVILIAN_AVOID_2"/>
+	<text id="text_MANTIS_CIVILIAN_AVOID_3"/>
+</textList>
+
+<event name="MANTIS_CREW" unique="true">
+	<text id="event_MANTIS_CREW_text"/>
+	<choice>
+		<text id="event_MANTIS_CREW_c1_choice"/>
+		<event>
+			<text id="event_MANTIS_CREW_c1_text"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_MANTIS_CREW_c2_choice"/>
+		<event load="MANTIS_CREW_LIST"/>
+	</choice>
+</event>
+<eventList name="MANTIS_CREW_LIST">
+	<event>
+		<text id="event_MANTIS_CREW_LIST_1_text"/>
+		<boarders min="1" max="1" class="mantis"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_MANTIS_CREW_LIST_1_c0_clone"/>
+		</removeCrew>
+	</event>
+	<event>
+		<text id="event_MANTIS_CREW_LIST_2_text"/>
+		<crewMember amount="1" class="mantis"/>   <!-- NOTE - Doesnt work yet -gives human-->
+	</event>
+	<event>
+		<text id="event_MANTIS_CREW_LIST_3_text"/>
+		<crewMember amount="1" class="human"/>
+	</event>
+</eventList>
+
+<!--
+*********
+		ENVIRONMENT!!!
+	Events with unique environments
+**********
+-->
+
+
+<event name="MANTIS_SUN_FIGHT" unique="false">
+	<text id="event_MANTIS_SUN_FIGHT_text"/>
+	<ship load="MANTIS_FIGHT" hostile="true"/>
+	<environment type="sun"/>
+</event>
+
+
+
+
+
+<!--
+*********
+		BOARDERS!!!
+	Events with boarders
+**********
+-->
+
+<event name="MANTIS_BOARDERS" unique="true">
+	<text load="MANTIS_BOARDERS"/>
+	<boarders min="2" max="4" class="mantis"/>
+</event>
+<textList name="MANTIS_BOARDERS">
+	<text id="text_MANTIS_BOARDERS_1"/>
+	<text id="text_MANTIS_BOARDERS_2"/>
+	<text id="text_MANTIS_BOARDERS_3"/>
+</textList>
+
+
+
+
+
+<!--
+*********
+		SPECIAL!!!
+	Unique events
+**********
+-->
+
+<event name="MANTIS_NAMED_THIEF" unique="true"> <!-- NOTE - make globally unique  -->
+	<ship load="MANTIS_NAMED_THIEF" hostile="false"/>
+	<text id="event_MANTIS_NAMED_THIEF_text"/>
+	<choice hidden="true" req="mantis">
+		<text id="event_MANTIS_NAMED_THIEF_c1_choice"/>
+		<event>
+			<text id="event_MANTIS_NAMED_THIEF_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_MANTIS_NAMED_THIEF_c2_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+</event>
+<event name="MANTIS_NAMED_THIEF_DEFEAT">
+	<text id="event_MANTIS_NAMED_THIEF_DEFEAT_text"/>
+	<choice hidden="true">
+		<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c1_choice"/>
+		<event>
+			<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c1_text"/>
+			<autoReward level="HIGH">standard</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true" req="teleporter">
+		<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_choice"/>
+		<event>
+			<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_text"/>
+			<choice hidden="true">
+				<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c1_choice"/>
+				<event>
+					<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c1_text"/>
+					<autoReward level="HIGH">standard</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c2_choice"/>
+				<event>
+					<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c2_text"/>
+					<quest event="MANTIS_NAMED_THIEF_STASH"/>
+					<autoReward level="HIGH">standard</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true" req="medbay" lvl="2">
+				<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_choice"/>
+				<event>
+					<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_text"/>
+					<choice hidden="true">  <!-- NOTE - Add other options?-->
+						<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_c1_choice"/>
+						<event>
+							<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_c1_text"/>
+							<augment name="CREW_STIMS"/>
+							<autoReward level="HIGH">scrap_only</autoReward>
+							<crewMember amount="1" class="mantis" all_skills="2" id="name_Kazaaak"/>  <!-- NOTE - Make him a special unique character/color?  At least give him the right name? -->
+							<quest event="MANTIS_NAMED_THIEF_STASH"/>
+							<unlockShip id="2"/>
+						</event>
+					</choice>
+				</event>
+			</choice>
+			<choice hidden="true" req="clonebay" lvl="2">
+				<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c4_choice"/>
+				<event>
+					<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c4_text"/>
+					<choice hidden="true">  <!-- NOTE - Add other options?-->
+						<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_c1_choice"/>
+						<event>
+							<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_c1_text"/>
+							<augment name="CREW_STIMS"/>
+							<autoReward level="HIGH">scrap_only</autoReward>
+							<crewMember amount="1" class="mantis" all_skills="2" id="name_Kazaaak"/>  <!-- NOTE - Make him a special unique character/color?  At least give him the right name? -->
+							<quest event="MANTIS_NAMED_THIEF_STASH"/>
+							<unlockShip id="2"/>
+						</event>
+					</choice>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true" req="sensors" lvl="3">
+		<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c3_choice"/>
+		<event>
+			<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c3_text"/>
+			<choice hidden="true">
+				<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c3_c1_choice"/>
+				<event>
+					<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c1_text"/>
+					<autoReward level="HIGH">standard</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c3_c2_choice"/>
+				<event>
+					<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c2_text"/>
+					<quest event="MANTIS_NAMED_THIEF_STASH"/>
+					<autoReward level="HIGH">standard</autoReward>
+				</event>
+			</choice>
+			<choice hidden="true" req="medbay" lvl="2">
+				<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c3_c3_choice"/>
+				<event>
+					<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_text"/>
+					<choice hidden="true">  <!-- NOTE - Add other options?-->
+						<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_c1_choice"/>
+						<event>
+							<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_c1_text"/>
+							<augment name="CREW_STIMS"/>
+							<autoReward level="HIGH">scrap_only</autoReward>
+							<crewMember amount="1" class="mantis" all_skills="2" id="name_Kazaaak"/>  <!-- NOTE - Make him a special unique character/color?  At least give him the right name? -->
+							<quest event="MANTIS_NAMED_THIEF_STASH"/>
+							<unlockShip id="2"/>
+						</event>
+					</choice>
+				</event>
+			</choice>
+			<choice hidden="true" req="clonebay" lvl="2">
+				<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c4_choice"/>
+				<event>
+					<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c4_text"/>
+					<choice hidden="true">  <!-- NOTE - Add other options?-->
+						<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_c1_choice"/>
+						<event>
+							<text id="event_MANTIS_NAMED_THIEF_DEFEAT_c2_c3_c1_text"/>
+							<augment name="CREW_STIMS"/>
+							<autoReward level="HIGH">scrap_only</autoReward>
+							<crewMember amount="1" class="mantis" all_skills="2" id="name_Kazaaak"/>  <!-- NOTE - Make him a special unique character/color?  At least give him the right name? -->
+							<quest event="MANTIS_NAMED_THIEF_STASH"/>
+							<unlockShip id="2"/>
+						</event>
+					</choice>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+
+
+
+
+<event name="MANTIS_NAMED_THIEF_STASH">
+	<text id="event_MANTIS_NAMED_THIEF_STASH_text"/>
+	<autoReward level="HIGH">weapon</autoReward>
+</event>
+
+
+
+
+
+
+
+
+
+
+
+
+</FTL>

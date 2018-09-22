@@ -1,0 +1,1756 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+			SUMMARY  - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+Pirates
+	PIRATE
+		PIRATE_CIVILIAN
+		PIRATE_SLAVER
+		PIRATE_BRIBER
+		PIRATE_NO_ESCAPE
+		PIRATE_SMUGGLE
+		SQUAT_PIRATE_MERCENARY
+		JELLY_PIRATE_WITHBOARDERS
+		JELLY_PIRATE_MERCHANT
+
+Rebels:
+	REBEL
+		REBEL_AUTO
+		REBEL_AUTO_CIVILIAN
+		REBEL_AUTO_REFUEL
+		REBEL_AUTO_MAP
+		REBEL_AUTO_ITEM
+		REBEL_AUTO_RADAR
+		REBEL_AUTO_WARNING
+		REBEL_AUTO_BAIT
+		SQUAT_REFUEL_STATION
+		SQUAT_WARNING
+		SQUAT_TRANSPORT
+		SQUAT_STORE_RESCUE
+		AUTO_FEDERATION_BASE
+		AUTO_FEDERATION_BASE2
+		REBEL_VS_FEDERATION
+		LONG_ELITE
+		LONG_FLEET
+		REBEL_FLEET_FUEL
+
+Engi:
+	ENGI_SHIP
+		ENGI_MANTIS_CONTROLLED
+		MANTIS_ENGI_STATION
+
+Mantis:
+	MANTIS_FIGHT
+		MANTIS_CIVILIAN
+		MANTIS_NAMED_THIEF
+
+Civilian:
+	JELLY
+		CIVILIAN_SHIP
+		AUTO_FUEL_SELLER
+
+Special:
+	GHOST_SHIP
+-->
+
+
+
+
+<!--
+******************************
+
+	PIRATE SHIPS
+
+********************************
+-->
+
+<ship name="PIRATE" auto_blueprint="SHIPS_PIRATE">
+	<surrender  chance="0.5" min="3" max="4" load="PIRATE_SURRENDER"/>
+	<escape  chance="0.5" min="2" max="4" load="PIRATE_ESCAPE"/>
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<gotaway>
+		<text id="ship_PIRATE_gotaway_text"/>
+	</gotaway>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+
+
+<ship name="PIRATE_FUEL" auto_blueprint="SHIPS_PIRATE">
+	<escape timer="80" min="30" max="30"/>
+	<gotaway>
+		<text id="ship_PIRATE_FUEL_gotaway_text"/>
+	</gotaway>
+	<surrender  chance="0.5" min="3" max="4" load="PIRATE_SURRENDER"/>
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+
+
+<ship name="PIRATE_CIVILIAN" auto_blueprint="SHIPS_PIRATE">
+	<destroyed>
+		<text id="ship_PIRATE_CIVILIAN_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_PIRATE_CIVILIAN_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_PIRATE_CIVILIAN_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_PIRATE_CIVILIAN_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+<ship name="PIRATE_SLAVER" auto_blueprint="SHIPS_PIRATE">  <!-- NEEDS ELITE TAG -->
+	<surrender  chance="0.2" min="2" max="4">
+		<text id="ship_PIRATE_SLAVER_surrender_text"/>
+		<choice>
+			<text id="ship_PIRATE_SLAVER_surrender_c1_choice"/>
+			<event>
+				<crewMember amount="1"/>
+				<ship hostile="false"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="ship_PIRATE_SLAVER_surrender_c2_choice"/>
+			<event/>
+		</choice>
+	</surrender>
+	<escape  chance="0.5" min="2" max="4" load="PIRATE_ESCAPE"/>
+	<destroyed>
+		<text id="ship_PIRATE_SLAVER_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</destroyed>
+	<deadCrew load="DEAD_CREW_SLAVER"/>
+</ship>
+
+<ship name="PIRATE_BRIBER" auto_blueprint="SHIPS_PIRATE"> <!-- NEEDS ELITE TAG -->
+	<surrender  chance="0.3" min="3" max="4">
+		<text id="ship_PIRATE_BRIBER_surrender_text"/>
+		<choice>
+			<text id="ship_PIRATE_BRIBER_surrender_c1_choice"/>
+			<event>
+				<ship hostile="false"/>
+				<autoReward level="HIGH">stuff</autoReward>
+			</event>
+		</choice>
+		<choice>
+			<text id="ship_PIRATE_BRIBER_surrender_c2_choice"/>
+			<event/>
+		</choice>
+	</surrender>
+	<escape  chance="0.4" min="3" max="4">
+		<text id="ship_PIRATE_BRIBER_escape_text"/>
+	</escape>
+	<gotaway>
+		<text id="ship_PIRATE_BRIBER_gotaway_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="PIRATE_BRIBER_WIN"/>
+		</choice>
+	</gotaway>
+	<destroyed>
+		<text id="ship_PIRATE_BRIBER_destroyed_text"/>
+		<autoReward level="RANDOM">scrap_only</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="PIRATE_BRIBER_WIN"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_PIRATE_BRIBER_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="PIRATE_BRIBER_WIN"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+<ship name="PIRATE_NO_ESCAPE" auto_blueprint="SHIPS_PIRATE">
+	<destroyed>
+		<text id="ship_PIRATE_NO_ESCAPE_destroyed_text"/>
+		<autoReward level="RANDOM">fuel</autoReward>
+		<status type="clear" target="player" system="engines" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_PIRATE_NO_ESCAPE_deadCrew_text"/>
+		<autoReward level="MED">fuel</autoReward>
+		<status type="clear" target="player" system="engines" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+	</deadCrew>
+</ship>
+
+<ship name="PIRATE_SMUGGLE" auto_blueprint="SHIPS_PIRATE"> <!-- NEEDS ELITE TAG -->
+	<surrender  chance="0.5" min="2" max="4" >
+		<text id="ship_PIRATE_SMUGGLE_surrender_text"/>
+		<choice>
+			<text id="ship_PIRATE_SMUGGLE_surrender_c1_choice"/>
+			<event>
+				<ship hostile="false"/>
+				<autoReward level="RANDOM">stuff</autoReward>
+			</event>
+		</choice>
+		<choice>
+			<text id="ship_PIRATE_SMUGGLE_surrender_c2_choice"/>
+			<event/>
+		</choice>
+	</surrender>
+	<escape timer="35" min="3" max="4" >
+		<text id="ship_PIRATE_SMUGGLE_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<destroyed load="REBEL_TRANSPORT_DESTROYED"/>
+	<deadCrew load="REBEL_TRANSPORT_CAPTURED"/>
+</ship>
+
+<ship name="SQUAT_PIRATE_MERCENARY" auto_blueprint="SHIPS_PIRATE">
+	<surrender min="3" max="4">
+		<text id="ship_SQUAT_PIRATE_MERCENARY_surrender_text"/>
+		<choice hidden="true">
+			<text id="ship_SQUAT_PIRATE_MERCENARY_surrender_c1_choice"/>
+			<event>
+				<ship hostile="false"/>
+				<text id="ship_SQUAT_PIRATE_MERCENARY_surrender_c1_text"/>
+				<autoReward level="MED">weapon</autoReward>
+			</event>
+		</choice>
+		<choice>
+			<text id="ship_SQUAT_PIRATE_MERCENARY_surrender_c2_choice"/>
+			<event/>
+		</choice>
+	</surrender>
+	<destroyed>
+		<text id="ship_SQUAT_PIRATE_MERCENARY_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_SQUAT_PIRATE_MERCENARY_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</deadCrew>
+</ship>
+
+<ship name="JELLY_PIRATE_WITHBOARDERS" auto_blueprint="SHIPS_PIRATE">
+	<surrender min="0" max="5" load="PIRATE_SURRENDER"/>
+	<escape chance="0.3" min="2" max="4" timer="15" load="PIRATE_ESCAPE"/>
+	<gotaway>
+		<text id="ship_JELLY_PIRATE_WITHBOARDERS_gotaway_text"/>
+	</gotaway>
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+<ship name="JELLY_PIRATE_MERCHANT" auto_blueprint="SHIPS_PIRATE">
+	<destroyed>
+		<text id="ship_JELLY_PIRATE_MERCHANT_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_PIRATE_MERCHANT_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<ship name="STORM_PIRATE_SUPPLY_FUEL" auto_blueprint="SHIPS_PIRATE">
+	<escape  chance="0.5" min="2" max="4" load="PIRATE_ESCAPE"/>
+	<destroyed>
+		<text id="ship_STORM_PIRATE_SUPPLY_FUEL_destroyed_text"/>
+		<autoReward level="LOW">fuel</autoReward>
+	</destroyed>
+	<gotaway>
+		<text id="ship_STORM_PIRATE_SUPPLY_FUEL_gotaway_text"/>
+	</gotaway>
+	<deadCrew>
+		<text id="ship_STORM_PIRATE_SUPPLY_FUEL_deadCrew_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+	</deadCrew>
+</ship>
+<ship name="STORM_PIRATE_SUPPLY_AMMO" auto_blueprint="SHIPS_PIRATE">
+	<escape  chance="0.5" min="2" max="4" load="PIRATE_ESCAPE"/>
+	<destroyed>
+		<text id="ship_STORM_PIRATE_SUPPLY_AMMO_destroyed_text"/>
+		<autoReward level="LOW">missiles</autoReward>
+	</destroyed>
+	<gotaway>
+		<text id="ship_STORM_PIRATE_SUPPLY_AMMO_gotaway_text"/>
+	</gotaway>
+	<deadCrew>
+		<text id="ship_STORM_PIRATE_SUPPLY_AMMO_deadCrew_text"/>
+		<autoReward level="HIGH">missiles</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+
+<ship name="QUEST_SLUG_PIRATE_TRAP1" auto_blueprint="SHIPS_PIRATE">
+	<surrender  chance="0" min="3" max="4">
+		<text id="ship_QUEST_SLUG_PIRATE_TRAP1_surrender_text"/>
+		<choice hidden="true">
+			<text id="ship_QUEST_SLUG_PIRATE_TRAP1_surrender_c1_choice"/>
+			<event>
+				<text id="ship_QUEST_SLUG_PIRATE_TRAP1_surrender_c1_text"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="ship_QUEST_SLUG_PIRATE_TRAP1_surrender_c2_choice"/>
+			<event>
+				<text id="ship_QUEST_SLUG_PIRATE_TRAP1_surrender_c2_text"/>
+				<autoReward level="HIGH">scrap_only</autoReward>
+				<ship hostile="false"/>
+			</event>
+		</choice>
+	</surrender>
+	<destroyed>
+		<text id="ship_QUEST_SLUG_PIRATE_TRAP1_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_QUEST_SLUG_PIRATE_TRAP1_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+</ship>
+<ship name="QUEST_SLUG_PIRATE_TRAP2" auto_blueprint="SHIPS_PIRATE">
+	<destroyed>
+		<text id="ship_QUEST_SLUG_PIRATE_TRAP2_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_QUEST_SLUG_PIRATE_TRAP2_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<!--
+******************************
+
+	REBEL SHIPS
+
+********************************
+-->
+
+<ship name="REBEL" auto_blueprint="SHIPS_REBEL">
+	<surrender  chance="0.5" min="2" max="3" load="PIRATE_SURRENDER"/>
+	<escape  chance="0.5" min="3" max="4" load="PIRATE_ESCAPE"/>
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+<ship name="REBEL_AUTO" auto_blueprint="SHIPS_AUTO">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+
+<ship name="REBEL_AUTO_FUEL" auto_blueprint="SHIPS_AUTO">
+	<escape timer="80" min="30" max="30"/>
+	<gotaway>
+		<text id="ship_REBEL_AUTO_FUEL_gotaway_text"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_REBEL_AUTO_FUEL_destroyed_text"/>
+		<autoReward level="MED">fuel</autoReward>
+	</destroyed>
+</ship>
+
+<ship name="REBEL_FUEL" auto_blueprint="SHIPS_REBEL">
+	<escape timer="80" min="30" max="30"/>
+	<gotaway>
+		<text id="ship_REBEL_FUEL_gotaway_text"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_REBEL_FUEL_destroyed_text"/>
+		<autoReward level="MED">fuel</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_REBEL_FUEL_deadCrew_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+	</deadCrew>
+</ship>
+
+
+<ship name="MANTIS_FUEL" auto_blueprint="SHIPS_MANTIS">
+	<escape timer="80" min="30" max="30"/>
+	<gotaway>
+		<text id="ship_MANTIS_FUEL_gotaway_text"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_MANTIS_FUEL_destroyed_text"/>
+		<autoReward level="MED">fuel</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_MANTIS_FUEL_deadCrew_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+	</deadCrew>
+</ship>
+
+<ship name="REBEL_AUTO_HACKSHIELDS" auto_blueprint="SHIPS_AUTO">
+	<destroyed>
+		<text id="ship_REBEL_AUTO_HACKSHIELDS_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="shields" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_REBEL_AUTO_HACKSHIELDS_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="shields" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+	</deadCrew>
+</ship>
+
+<ship name="REBEL_AND_AUTO" auto_blueprint="SHPS_REBEL_AND_AUTO">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+
+<ship name="REBEL_AUTO_CIVILIAN" auto_blueprint="SHIPS_AUTO">
+	<destroyed>
+		<text id="ship_REBEL_AUTO_CIVILIAN_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_REBEL_AUTO_CIVILIAN_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_REBEL_AUTO_CIVILIAN_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_REBEL_AUTO_CIVILIAN_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+<ship name="REBEL_AUTO_REFUEL" auto_blueprint="SHIPS_AUTO">
+	<destroyed>
+		<text id="ship_REBEL_AUTO_REFUEL_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_REBEL_AUTO_REFUEL_destroyed_c1_text"/>
+				<autoReward level="MED">standard</autoReward>
+			</event>
+		</choice>
+	</destroyed>
+</ship>
+
+<ship name="REBEL_AUTO_MAP" auto_blueprint="SHIPS_AUTO">
+	<destroyed>
+		<text id="ship_REBEL_AUTO_MAP_destroyed_text"/>
+		<reveal_map/>
+		<autoReward level="LOW">scrap_only</autoReward>
+	</destroyed>
+</ship>
+
+<ship name="REBEL_AUTO_ITEM" auto_blueprint="SHIPS_AUTO">
+	<destroyed>
+		<text id="ship_REBEL_AUTO_ITEM_destroyed_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+		<choice hidden="true">
+			<text id="ship_REBEL_AUTO_ITEM_destroyed_c1_choice"/>
+			<event load="DEFENSE_ITEM_LIST"/>
+		</choice>
+	</destroyed>
+</ship>
+
+<ship name="REBEL_AUTO_RADAR" auto_blueprint="SHIPS_AUTO">
+	<destroyed>
+		<text id="ship_REBEL_AUTO_RADAR_destroyed_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+		<choice>
+			<text id="ship_REBEL_AUTO_RADAR_destroyed_c1_choice"/>
+			<event load="DEFENSE_RADAR_LIST"/>
+		</choice>
+		<choice>
+			<text id="ship_REBEL_AUTO_RADAR_destroyed_c2_choice"/>
+			<event/>
+		</choice>
+		<choice hidden="true" req="hacking">
+			<text id="ship_REBEL_AUTO_RADAR_destroyed_c3_choice"/>
+			<event>
+				<text id="ship_REBEL_AUTO_RADAR_destroyed_c3_text"/>
+				<reveal_map/>
+				<modifyPursuit amount="-1"/>
+				<item_modify>
+					<item type="drones" min="-1" max="-1"/>
+				</item_modify>
+			</event>
+		</choice>
+	</destroyed>
+</ship>
+
+<ship name="REBEL_AUTO_WARNING" auto_blueprint="SHIPS_AUTO">
+	<escape timer="40" min="22" max="22" >
+		<text id="ship_REBEL_AUTO_WARNING_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<gotaway>
+		<text id="ship_REBEL_AUTO_WARNING_gotaway_text"/>
+		<modifyPursuit amount="1"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_REBEL_AUTO_WARNING_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+</ship>
+
+<ship name="REBEL_AUTO_BAIT" auto_blueprint="SHIPS_AUTO">
+	<escape timer="2000" min="3" max="4" >
+		<text id="ship_REBEL_AUTO_BAIT_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<gotaway>
+		<text id="ship_REBEL_AUTO_BAIT_gotaway_text"/>
+		<modifyPursuit amount="1"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_REBEL_AUTO_BAIT_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<modifyPursuit amount="1"/>
+	</destroyed>
+</ship>
+
+<ship name="SQUAT_REFUEL_STATION" auto_blueprint="SHIPS_REBEL">
+	<destroyed>
+		<text id="ship_SQUAT_REFUEL_STATION_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_SQUAT_REFUEL_STATION_destroyed_c1_text"/>
+				<autoReward level="MED">fuel</autoReward>
+			</event>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_SQUAT_REFUEL_STATION_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_SQUAT_REFUEL_STATION_destroyed_c1_text"/>
+				<autoReward level="MED">fuel</autoReward>
+			</event>
+		</choice>
+	</deadCrew>
+</ship>
+
+<ship name="SQUAT_WARNING" auto_blueprint="SHIPS_REBEL">
+	<escape timer="40" min="22" max="22" >
+		<text id="ship_SQUAT_WARNING_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<gotaway>
+		<text id="ship_SQUAT_WARNING_gotaway_text"/>
+		<modifyPursuit amount="1"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_SQUAT_WARNING_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_SQUAT_WARNING_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+
+<ship name="SQUAT_TRANSPORT" auto_blueprint="SHIPS_REBEL">
+	<escape timer="40" min="14" max="14" >
+		<text id="ship_SQUAT_TRANSPORT_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<destroyed load="REBEL_TRANSPORT_DESTROYED"/>
+	<deadCrew load="REBEL_TRANSPORT_CAPTURED"/>
+</ship>
+
+<ship name="SQUAT_STORE_RESCUE" auto_blueprint="SHIPS_REBEL">
+	<destroyed>
+		<text id="ship_SQUAT_STORE_RESCUE_destroyed_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+		<damage amount="-5"/>
+		<store/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_SQUAT_STORE_RESCUE_deadCrew_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+		<damage amount="-5"/>
+		<store/>
+	</deadCrew>
+</ship>
+
+<ship name="AUTO_FEDERATION_BASE" auto_blueprint="SHIPS_AUTO">
+	<destroyed>
+		<text id="ship_AUTO_FEDERATION_BASE_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_AUTO_FEDERATION_BASE_destroyed_c1_text"/>
+				<crewMember amount="1"/>
+				<autoReward level="LOW">weapon</autoReward>
+			</event>
+		</choice>
+	</destroyed>
+</ship>
+<ship name="AUTO_FEDERATION_BASE2" auto_blueprint="SHIPS_AUTO">
+	<destroyed>
+		<text id="ship_AUTO_FEDERATION_BASE2_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_AUTO_FEDERATION_BASE2_destroyed_c1_text"/>
+				<crewMember amount="1"/>
+				<autoReward level="HIGH">standard</autoReward>
+				<damage amount="-7"/>
+			</event>
+		</choice>
+	</destroyed>
+</ship>
+
+<ship name="REBEL_VS_FEDERATION" auto_blueprint="SHIPS_REBEL">  <!-- fed base? -->
+	<destroyed>
+		<text id="ship_REBEL_VS_FEDERATION_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_REBEL_VS_FEDERATION_destroyed_c1_choice"/>
+			<event load="REBEL_VS_FEDERATION_SAVED_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_REBEL_VS_FEDERATION_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_REBEL_VS_FEDERATION_destroyed_c1_choice"/>
+			<event load="REBEL_VS_FEDERATION_SAVED_LIST"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+<ship name="LONG_ELITE" auto_blueprint="SHIPS_REBEL_ELITE"> <!-- NEEDS ELITE BLUEPRINT -->
+	<destroyed>
+		<text id="ship_LONG_ELITE_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</destroyed>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+<ship name="LONG_FLEET" auto_blueprint="SHIPS_REBEL_ELITE"> <!-- NEEDS ELITE BLUEPRINT -->
+	<destroyed>
+		<text id="ship_LONG_FLEET_destroyed_text"/>
+		<item_modify>
+			<item type="fuel" min="1" max="1"/>
+		</item_modify>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_LONG_FLEET_destroyed_text"/>
+		<item_modify>
+			<item type="fuel" min="1" max="1"/>
+		</item_modify>
+	</deadCrew>
+</ship>
+
+
+<ship name="REBEL_FLEET_FUEL" auto_blueprint="SHIPS_REBEL_ELITE"> <!-- NEEDS ELITE BLUEPRINT -->
+	<escape timer="80" min="30" max="30"/>
+	<gotaway>
+		<text id="ship_REBEL_FLEET_FUEL_gotaway_text"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_REBEL_FLEET_FUEL_destroyed_text"/>
+		<item_modify>
+			<item type="fuel" min="2" max="4"/>
+		</item_modify>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_REBEL_FLEET_FUEL_destroyed_text"/>
+		<item_modify>
+			<item type="fuel" min="2" max="4"/>
+		</item_modify>
+	</deadCrew>
+</ship>
+
+
+<ship name="REBEL_ENGI_UNLOCK_2FAKE" auto_blueprint="SHIPS_REBEL">
+	<escape timer="40" min="18" max="18" >
+		<text id="ship_REBEL_ENGI_UNLOCK_2FAKE_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<gotaway>
+		<text id="ship_REBEL_ENGI_UNLOCK_2FAKE_gotaway_text"/>
+	</gotaway>
+	<surrender  min="4" max="4" load="ENGI_UNLOCK_2FAKE_SURRENDER"/>
+	<destroyed>
+		<text id="ship_REBEL_ENGI_UNLOCK_2FAKE_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_REBEL_ENGI_UNLOCK_2FAKE_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+<ship name="REBEL_ENGI_UNLOCK_2REAL" auto_blueprint="SHIPS_REBEL">
+	<escape timer="40" min="18" max="18" >
+		<text id="ship_REBEL_ENGI_UNLOCK_2REAL_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<gotaway>
+		<text id="ship_REBEL_ENGI_UNLOCK_2REAL_gotaway_text"/>
+	</gotaway>
+	<surrender  min="5" max="5" load="ENGI_UNLOCK_2REAL_SURRENDER"/>
+	<destroyed>
+		<text id="ship_REBEL_ENGI_UNLOCK_2REAL_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_REBEL_ENGI_UNLOCK_2REAL_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<quest event="ENGI_UNLOCK_3"/>
+	</deadCrew>
+</ship>
+
+
+
+<ship name="DISTRESS_ENGI_REBEL" auto_blueprint="SHIPS_REBEL">
+	<destroyed>
+		<text id="ship_DISTRESS_ENGI_REBEL_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="DISTRESS_ENGI_REBEL_RESULT"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_DISTRESS_ENGI_REBEL_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="DISTRESS_ENGI_REBEL_RESULT"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+<!--
+******************************
+
+	ENGI SHIPS
+
+********************************
+-->
+
+<ship name="ENGI_SHIP" auto_blueprint="SHIPS_CIRCLE">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+
+
+<ship name="ENGI_MANTIS_CONTROLLED" auto_blueprint="SHIPS_CIRCLE">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+	<crew>
+		   <crewMember type="mantis" prop="1"/>
+	</crew>
+</ship>
+
+<ship name="MANTIS_ENGI_STATION" auto_blueprint="SHIPS_MANTIS">
+	<destroyed>
+		<text id="ship_MANTIS_ENGI_STATION_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_MANTIS_ENGI_STATION_destroyed_c1_choice"/>
+			<event load="SAVE_ENGI_STATION"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_MANTIS_ENGI_STATION_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_MANTIS_ENGI_STATION_destroyed_c1_choice"/>
+			<event load="SAVE_ENGI_STATION"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+<ship name="FUEL_OFF_ENGI_DUBIOUS" auto_blueprint="SHIPS_CIRCLE">
+	<escape timer="80" min="30" max="30"/>
+	<gotaway>
+		<text id="ship_FUEL_OFF_ENGI_DUBIOUS_gotaway_text"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_FUEL_OFF_ENGI_DUBIOUS_destroyed_text"/>
+		<autoReward level="MED">fuel</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_FUEL_OFF_ENGI_DUBIOUS_deadCrew_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<!--
+******************************
+
+	ROCK SHIPS
+
+********************************
+-->
+
+<ship name="ROCK_SHIP" auto_blueprint="SHIPS_ROCK">   <!-- JUSTIN - MAKE A SURRENDER!!-->
+	<surrender  chance="0.7" min="3" max="4" load="ROCK_SHIP_SURRENDER"/>
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+<ship name="ROCK_PIRATE" auto_blueprint="SHIPS_ROCK_PIRATE">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+	<crew>
+		   <crewMember type="rock" prop="1"/>
+	</crew>
+</ship>
+
+
+<ship name="ROCK_UNLOCK1" auto_blueprint="ROCK_ASSAULT_ELITE">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+<ship name="ROCK_UNLOCK2" auto_blueprint="ROCK_ASSAULT_ELITE">
+	<escape timer="32" min="28" max="28" > <!-- was 24-->
+		<text id="ship_ROCK_UNLOCK2_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<gotaway>
+		<text id="ship_ROCK_UNLOCK2_gotaway_text"/>
+		<quest event="ROCK_UNLOCK3"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_ROCK_UNLOCK2_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ROCK_UNLOCK2_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<!--
+******************************
+
+	MANTIS SHIPS
+
+********************************
+-->
+
+
+<ship name="MANTIS_FIGHT" auto_blueprint="SHIPS_MANTIS">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+	<crew>
+		   <crewMember type="mantis" prop="0.80"/>
+		   <crewMember type="engi" prop="0.20"/>
+	</crew>
+</ship>
+
+
+
+<ship name="MANTIS_CIVILIAN" auto_blueprint="SHIPS_MANTIS">
+	<destroyed>
+		<text id="ship_MANTIS_CIVILIAN_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_MANTIS_CIVILIAN_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_MANTIS_CIVILIAN_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_MANTIS_CIVILIAN_destroyed_c1_choice"/>
+			<event load="SAVE_CIVILIAN_LIST"/>
+		</choice>
+	</deadCrew>
+	<crew>
+		   <crewMember type="mantis" prop="0.75"/>
+		   <crewMember type="engi" prop="0.25"/>
+	</crew>
+</ship>
+
+<ship name="MANTIS_NAMED_THIEF" auto_blueprint="SHIPS_MANTIS">  <!--NEEDS ELITE TAG  - need an escape/surrender -->
+	<destroyed>
+		<text id="ship_MANTIS_NAMED_THIEF_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew load="MANTIS_NAMED_THIEF_DEFEAT"/>
+</ship>
+
+
+
+<ship name="MANTIS_ENGI_UNLOCK_3" auto_blueprint="SHIPS_MANTIS">
+	<destroyed load="ENGI_UNLOCK_4"/>
+	<deadCrew>
+		<text id="ship_MANTIS_ENGI_UNLOCK_3_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice>
+			<text id="continue"/>
+			<event load="ENGI_UNLOCK_4"/>
+		</choice>
+	</deadCrew>
+	<crew>
+		   <crewMember type="human" prop="1"/>
+	</crew>
+</ship>
+
+
+<ship name="SLUG_DISTRESS_MANTIS" auto_blueprint="SHIPS_MANTIS">
+	<destroyed>
+		<text id="ship_SLUG_DISTRESS_MANTIS_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_SLUG_DISTRESS_MANTIS_destroyed_c1_choice"/>
+			<event>
+				<text id="ship_SLUG_DISTRESS_MANTIS_destroyed_c1_text"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="ship_SLUG_DISTRESS_MANTIS_destroyed_c2_choice"/>
+			<event load="SLUG_DISTRESS_MANTIS_SURRENDER"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_SLUG_DISTRESS_MANTIS_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="ship_SLUG_DISTRESS_MANTIS_destroyed_c1_choice"/>
+			<event>
+				<text id="ship_SLUG_DISTRESS_MANTIS_destroyed_c1_text"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="ship_SLUG_DISTRESS_MANTIS_destroyed_c2_choice"/>
+			<event load="SLUG_DISTRESS_MANTIS_SURRENDER"/>
+		</choice>
+	</deadCrew>
+	<crew>
+		   <crewMember type="mantis" prop="0.75"/>
+		   <crewMember type="engi" prop="0.25"/>
+	</crew>
+</ship>
+
+
+
+<ship name="ZOLTAN_SHIP_SAVE_MANTIS2" auto_blueprint="SHIPS_MANTIS">
+	<destroyed>
+		<text id="ship_ZOLTAN_SHIP_SAVE_MANTIS2_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_SHIP_SAVE_MANTIS2_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+<!--
+******************************
+
+	SLUG SHIPS
+
+********************************
+-->
+
+<ship name="JELLY" auto_blueprint="SHIPS_JELLY">
+	<surrender  chance="0.5" min="3" max="4" load="SLUG_SURRENDER"/>
+	<escape  chance="0.5" min="3" max="4" load="PIRATE_ESCAPE"/>
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+<ship name="JELLY_UNLOCK1" auto_blueprint="SHIPS_JELLY">
+	<surrender  chance="0" min="3" max="4" load="SLUG_UNLOCK_SURRENDER"/>
+	<escape  chance="0.5" min="3" max="4" load="PIRATE_ESCAPE"/>
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+<ship name="JELLY_UNLOCK2" auto_blueprint="JELLY_TRUFFLE">  <!-- this is the hard ship defending the platform-->
+	<destroyed>
+		<text id="ship_JELLY_UNLOCK2_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_UNLOCK2_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+</ship>
+<ship name="JELLY_UNLOCK3" auto_blueprint="JELLY_BUTTON">  <!-- this is the weak ship that gives you the unlock -->
+	<escape timer="35" min="22" max="22" >
+		<text id="ship_JELLY_UNLOCK3_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+	<gotaway>
+		<text id="ship_JELLY_UNLOCK3_gotaway_text"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_JELLY_UNLOCK3_destroyed_text"/>
+		<unlockShip id="5"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<augment name="SLUG_GEL"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_UNLOCK3_destroyed_text"/>
+		<unlockShip id="5"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<augment name="SLUG_GEL"/>
+	</deadCrew>
+</ship>
+
+
+<ship name="JELLY_DISTRESS_ROCK" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_DISTRESS_ROCK_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="SLUG_DISTRESS_ROCK_RESULT"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_DISTRESS_ROCK_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="SLUG_DISTRESS_ROCK_RESULT"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+<ship name="SLUG_DISTRESS_MANTIS_SLUG" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_SLUG_DISTRESS_MANTIS_SLUG_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_SLUG_DISTRESS_MANTIS_SLUG_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<ship name="JELLY_OVERPRICED" auto_blueprint="SHIPS_JELLY">
+	<escape timer="80" min="30" max="30"/>
+	<gotaway>
+		<text id="ship_JELLY_OVERPRICED_gotaway_text"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_JELLY_OVERPRICED_destroyed_text"/>
+		<autoReward level="MED">fuel</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_OVERPRICED_deadCrew_text"/>
+		<autoReward level="HIGH">fuel</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<ship name="JELLY_STATUS_OXYGEN" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_OXYGEN_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="oxygen" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_OXYGEN_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="oxygen" amount="100"/>
+	</deadCrew>
+</ship>
+<ship name="JELLY_STATUS_OXYGEN_FIRE" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_OXYGEN_FIRE_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="oxygen" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_OXYGEN_FIRE_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="oxygen" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+	</deadCrew>
+	<weaponOverride count="1">
+		<name>BEAM_FIRE</name>
+		<name>BOMB_FIRE</name>
+	</weaponOverride>
+</ship>
+
+<ship name="JELLY_STATUS_DOORS" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_DOORS_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="oxygen" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+		<status type="clear" target="player" system="doors" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_DOORS_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="oxygen" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+		<status type="clear" target="player" system="doors" amount="100"/>
+	</deadCrew>
+	<weaponOverride count="1">
+		<name>BEAM_FIRE</name>
+		<name>BOMB_FIRE</name>
+	</weaponOverride>
+</ship>
+<ship name="JELLY_STATUS_ENGINES" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_ENGINES_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="engines" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_ENGINES_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="engines" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+	</deadCrew>
+</ship>
+<ship name="JELLY_STATUS_SHIELDS" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_SHIELDS_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="shields" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_SHIELDS_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="shields" amount="100"/>
+	</deadCrew>
+</ship>
+
+<ship name="JELLY_STATUS_PILOT" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_PILOT_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="pilot" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_PILOT_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="pilot" amount="100"/>
+	</deadCrew>
+</ship>
+
+<ship name="JELLY_STATUS_WEAPONS" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_WEAPONS_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="weapons"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_WEAPONS_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="weapons"/>
+	</deadCrew>
+</ship>
+
+<ship name="JELLY_STATUS_HACKING_FIRE" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_HACKING_FIRE_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="hacking"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_HACKING_FIRE_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="hacking"/>
+	</deadCrew>
+	<weaponOverride count="1">
+		<name>BEAM_FIRE</name>
+		<name>BOMB_FIRE</name>
+	</weaponOverride>
+</ship>
+
+<ship name="JELLY_STATUS_HACKING" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_HACKING_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="hacking"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_HACKING_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="hacking"/>
+	</deadCrew>
+</ship>
+
+<ship name="JELLY_STATUS_MEDBAY" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_JELLY_STATUS_MEDBAY_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="medbay" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+		<status type="clear" target="player" system="clonebay" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_JELLY_STATUS_MEDBAY_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<status type="clear" target="player" system="medbay" amount="100"/>
+		<status type="clear" target="player" system="clonebay" amount="100"/>
+		<status type="clear" target="player" system="hacking" amount="100"/>
+	</deadCrew>
+</ship>
+
+
+
+
+
+
+<!--
+******************************
+
+	ZOLTAN SHIPS
+
+********************************
+-->
+
+<ship name="ZOLTAN_SHIP" auto_blueprint="SHIPS_ZOLTAN">   <!-- JUSTIN - MAKE A SURRENDER!!-->
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+
+<ship name="ZOLTAN_PIRATE" auto_blueprint="SHIPS_ZOLTAN_PIRATE">
+	<surrender  chance="0.5" min="3" max="4" load="PIRATE_SURRENDER"/>
+	<escape  chance="0.5" min="2" max="4" load="PIRATE_ESCAPE"/>
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<gotaway>
+		<text id="ship_ZOLTAN_PIRATE_gotaway_text"/>
+	</gotaway>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+
+<ship name="ZOLTAN_SCIENCE_DOCK" auto_blueprint="SHIPS_ZOLTAN">   <!-- JUSTIN - MAKE A SURRENDER!!-->
+	<surrender  chance="0.5" min="3" max="4">
+		<text id="ship_ZOLTAN_SCIENCE_DOCK_surrender_text"/>
+		<ship hostile="false"/>
+		<crewMember amount="1" class="energy"/>
+		<autoReward level="LOW">standard</autoReward>
+	</surrender>
+	<destroyed>
+		<text id="ship_ZOLTAN_SCIENCE_DOCK_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_SCIENCE_DOCK_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<ship name="ZOLTAN_PEACE_QUEST_ATTACK1" auto_blueprint="ZOLTAN_PEACE">   <!-- JUSTIN - MAKE A SURRENDER!!-->
+	<surrender  chance="0.2" min="3" max="4">
+		<text id="ship_ZOLTAN_PEACE_QUEST_ATTACK1_surrender_text"/>
+		<choice hidden="true">
+			<text id="ship_ZOLTAN_PEACE_QUEST_ATTACK1_surrender_c1_choice"/>
+			<event>
+				<text id="ship_ZOLTAN_PEACE_QUEST_ATTACK1_surrender_c1_text"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="ship_ZOLTAN_PEACE_QUEST_ATTACK1_surrender_c2_choice"/>
+			<event>
+				<text id="ship_ZOLTAN_PEACE_QUEST_ATTACK1_surrender_c2_text"/>
+				<ship hostile="false"/>
+			</event>
+		</choice>
+	</surrender>
+	<destroyed>
+		<text id="ship_ZOLTAN_PEACE_QUEST_ATTACK1_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_PEACE_QUEST_ATTACK1_deadCrew_text"/>
+		<autoReward level="RANDOM">standard</autoReward>
+	</deadCrew>
+</ship>
+<ship name="ZOLTAN_PEACE_QUEST_ATTACK2" auto_blueprint="SHIPS_ZOLTAN">   <!-- JUSTIN - MAKE A SURRENDER!!-->
+	<destroyed>
+		<text id="ship_ZOLTAN_PEACE_QUEST_ATTACK2_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_PEACE_QUEST_ATTACK2_destroyed_text"/>
+		<autoReward level="RANDOM">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<ship name="ZOLTAN_SHIP_SAVE_MANTIS1" auto_blueprint="SHIPS_ZOLTAN">
+	<destroyed>
+		<text id="ship_ZOLTAN_SHIP_SAVE_MANTIS1_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_SHIP_SAVE_MANTIS1_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+<ship name="ZOLTAN_PRIMITIVES_ZOLTAN" auto_blueprint="SHIPS_ZOLTAN">
+	<destroyed>
+		<text id="ship_ZOLTAN_PRIMITIVES_ZOLTAN_destroyed_text"/>
+		<modifyPursuit amount="1"/>
+		<autoReward level="LOW">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_PRIMITIVES_ZOLTAN_destroyed_text"/>
+		<modifyPursuit amount="1"/>
+		<autoReward level="RANDOM">standard</autoReward>
+	</deadCrew>
+</ship>
+
+<ship name="ZOLTAN_PRIMITIVES_REBEL" auto_blueprint="SHIPS_REBEL">
+	<destroyed>
+		<text id="ship_ZOLTAN_PRIMITIVES_REBEL_destroyed_text"/>
+		<autoReward level="LOW">weapon</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_PRIMITIVES_REBEL_destroyed_text"/>
+		<autoReward level="MED">weapon</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<ship name="ZOLTAN_LIFERAFT" auto_blueprint="SHIPS_ZOLTAN_PIRATE">
+	<destroyed>
+		<text id="ship_ZOLTAN_LIFERAFT_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_ZOLTAN_LIFERAFT_destroyed_c1_text"/>
+				<choice>
+					<text id="ship_ZOLTAN_LIFERAFT_destroyed_c1_c1_choice"/>
+					<event/>
+				</choice>
+				<choice hidden="true">
+					<text id="ship_ZOLTAN_LIFERAFT_destroyed_c1_c2_choice"/>
+					<event load="ZOLTAN_LIFERAFT_HIRE"/>
+				</choice>
+			</event>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_LIFERAFT_deadCrew_text"/>
+		<autoReward level="HIGH">augment</autoReward>
+	</deadCrew>
+	<crew>
+	   <crewMember type="random" prop="1"/>
+	</crew>
+</ship>
+
+
+<ship name="ZOLTAN_RIFT_MANTIS" auto_blueprint="SHIPS_MANTIS">
+	<destroyed>
+		<text id="ship_ZOLTAN_RIFT_MANTIS_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ZOLTAN_RIFT_SUCCESS"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_RIFT_MANTIS_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ZOLTAN_RIFT_SUCCESS"/>
+		</choice>
+	</deadCrew>
+</ship>
+<ship name="ZOLTAN_RIFT_SLUG" auto_blueprint="SHIPS_JELLY">
+	<destroyed>
+		<text id="ship_ZOLTAN_RIFT_SLUG_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ZOLTAN_RIFT_SUCCESS"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_RIFT_SLUG_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ZOLTAN_RIFT_SUCCESS"/>
+		</choice>
+	</deadCrew>
+</ship>
+<ship name="ZOLTAN_RIFT_ROCK" auto_blueprint="SHIPS_ROCK">
+	<destroyed>
+		<text id="ship_ZOLTAN_RIFT_ROCK_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ZOLTAN_RIFT_SUCCESS"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_RIFT_ROCK_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ZOLTAN_RIFT_SUCCESS"/>
+		</choice>
+	</deadCrew>
+</ship>
+<!-- JUSTIN - to do - Crystal -->
+
+
+
+
+<ship name="ZOLTAN_CREW_SCAN" auto_blueprint="SHIPS_ZOLTAN">   <!-- JUSTIN - MAKE A SURRENDER!!-->
+	<destroyed>
+		<text id="ship_ZOLTAN_CREW_SCAN_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<status type="clear" target="player" system="weapons" amount="100"/>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_ZOLTAN_CREW_SCAN_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<status type="clear" target="player" system="weapons" amount="100"/>
+	</deadCrew>
+</ship>
+
+
+
+
+<!--
+******************************
+
+	ZOLTAN SECTOR SHIPS SHIPS
+
+********************************
+-->
+
+
+
+<ship name="PIRATE_ZOLTAN_CREW_STUDY" auto_blueprint="SHIPS_PIRATE">
+	<destroyed>
+		<text id="ship_PIRATE_ZOLTAN_CREW_STUDY_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_PIRATE_ZOLTAN_CREW_STUDY_destroyed_c1_text"/>
+				<autoReward level="LOW">stuff</autoReward>
+				<drone name="RANDOM"/>
+			</event>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_PIRATE_ZOLTAN_CREW_STUDY_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_PIRATE_ZOLTAN_CREW_STUDY_destroyed_c1_text"/>
+				<autoReward level="LOW">stuff</autoReward>
+				<drone name="RANDOM"/>
+			</event>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+
+<!--
+******************************
+
+	FEDERATION SHIPS SHIPS
+
+********************************
+-->
+
+<ship name="FED_SHIP" auto_blueprint="SHIPS_FED">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+
+<!--
+******************************
+
+	CIVILIAN SHIPS
+
+********************************
+-->
+
+<ship name="CIVILIAN_SHIP" auto_blueprint="SHIPS_CIVILIAN">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+
+
+<ship name="AUTO_FUEL_SELLER" auto_blueprint="SHIPS_AUTO">  <!-- needs "WEAK" tag-->
+	<escape timer="80" min="30" max="30"/>
+	<gotaway>
+		<text id="ship_AUTO_FUEL_SELLER_gotaway_text"/>
+	</gotaway>
+	<destroyed>
+		<text id="ship_AUTO_FUEL_SELLER_destroyed_text"/>
+		<autoReward level="MED">fuel</autoReward>
+	</destroyed>
+	<escape chance="0.5" min="2" max="5" >
+		<text id="ship_AUTO_FUEL_SELLER_escape_text"/>
+		<ship hostile="true"/>
+	</escape>
+</ship>
+
+
+
+
+
+
+
+<!--
+******************************
+
+	CRYSTAL SHIPS
+
+	and ships used in the crystal sector
+
+********************************
+-->
+
+<ship name="CRYSTAL_SHIP" auto_blueprint="SHIPS_CRYSTAL">
+	<surrender  chance="0.6" min="3" max="4">
+		<text load="CRYSTAL_SHIP_SURRENDER"/>
+		<choice hidden="true">
+			<text id="ship_CRYSTAL_SHIP_surrender_c1_choice"/>
+			<event load="CRYSTAL_SHIP_SURRENDER"/>
+		</choice>
+		<choice hidden="true">
+			<text id="ship_CRYSTAL_SHIP_surrender_c2_choice"/>
+			<event>
+				<text id="ship_CRYSTAL_SHIP_surrender_c2_text"/>
+			</event>
+		</choice>
+	</surrender>
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+<ship name="CRYSTAL_SHIP_NO_SURRENDER" auto_blueprint="SHIPS_CRYSTAL">
+	<destroyed load="DESTROYED_DEFAULT"/>
+	<deadCrew load="DEAD_CREW_DEFAULT"/>
+</ship>
+
+<ship name="CRYSTAL_FED" auto_blueprint="SHIPS_CRYSTAL">
+	<destroyed>
+		<text id="ship_CRYSTAL_FED_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="CRYSTAL_FED_LIST"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_CRYSTAL_FED_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="CRYSTAL_FED_LIST"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+<ship name="CRYSTAL_CONVOY" auto_blueprint="SHIPS_CRYSTAL">
+	<surrender  chance="0" min="3" max="4">
+		<text id="ship_CRYSTAL_CONVOY_surrender_text"/>
+		<choice hidden="true">
+			<text id="ship_CRYSTAL_CONVOY_surrender_c1_choice"/>
+			<event>
+				<text id="ship_CRYSTAL_CONVOY_surrender_c1_text"/>
+				<ship hostile="false"/>
+				<choice hidden="true">
+					<text id="continue"/>
+					<event>
+						<text id="ship_CRYSTAL_CONVOY_surrender_c1_c1_text"/>
+						<autoReward level="LOW">fuel</autoReward>
+						<damage amount="-8"/>
+					</event>
+				</choice>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="ship_CRYSTAL_CONVOY_surrender_c2_choice"/>
+			<event>
+				<text id="ship_CRYSTAL_CONVOY_surrender_c2_text"/>
+			</event>
+		</choice>
+	</surrender>
+	<destroyed>
+		<text id="ship_CRYSTAL_CONVOY_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_CRYSTAL_CONVOY_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+
+
+
+<ship name="CRYSTAL_HUNTER" auto_blueprint="SHIPS_CRYSTAL">
+	<surrender  chance="0.5" min="3" max="4">
+		<text id="ship_CRYSTAL_HUNTER_surrender_text"/>
+		<choice hidden="true">
+			<text id="ship_CRYSTAL_HUNTER_surrender_c1_choice"/>
+			<event>
+				<text id="ship_CRYSTAL_HUNTER_surrender_c1_text"/>
+				<crewMember amount="1" class="human"/>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="ship_CRYSTAL_HUNTER_surrender_c2_choice"/>
+			<event>
+				<text id="ship_CRYSTAL_HUNTER_surrender_c2_text"/>
+			</event>
+		</choice>
+	</surrender>
+	<destroyed>
+		<text id="ship_CRYSTAL_HUNTER_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_CRYSTAL_HUNTER_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+	</deadCrew>
+</ship>
+
+<ship name="REBEL_CRYSTAL_REBEL_CRYSTAL" auto_blueprint="SHIPS_REBEL">
+	<destroyed>
+		<text id="ship_REBEL_CRYSTAL_REBEL_CRYSTAL_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="CRYSTAL_SAVED"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_REBEL_CRYSTAL_REBEL_CRYSTAL_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="CRYSTAL_SAVED"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+
+<ship name="MANTIS_CRYSTAL" auto_blueprint="SHIPS_MANTIS">
+	<destroyed>
+		<text id="ship_MANTIS_CRYSTAL_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="CRYSTAL_SAVED"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_MANTIS_CRYSTAL_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="CRYSTAL_SAVED"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+<ship name="PIRATE_CRYSTAL" auto_blueprint="SHIPS_PIRATE">
+	<destroyed>
+		<text id="ship_PIRATE_CRYSTAL_destroyed_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="CRYSTAL_SAVED"/>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_PIRATE_CRYSTAL_deadCrew_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="CRYSTAL_SAVED"/>
+		</choice>
+	</deadCrew>
+</ship>
+
+
+
+<!--
+******************************
+
+	SPECIAL SHIPS
+
+********************************
+-->
+
+
+
+<ship name="GHOST_SHIP" auto_blueprint="JELLY_TRUFFLE">
+	<destroyed>
+		<text id="ship_GHOST_SHIP_destroyed_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</destroyed>
+	<crew>
+		   <crewMember class="ghost" prop="2"/>
+	</crew>
+	<deadCrew>
+		<text>Should not be seen</text>
+	</deadCrew>
+</ship>
+
+
+
+</FTL>

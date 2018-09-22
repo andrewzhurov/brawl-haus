@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+
+<!--
+		**************************************
+		**********	IMAGE LISTS	******				
+	    **************************************
+-->
+<!-- NOTE: width/height are the size you WANT not necessarily the size of the file.
+	Though in most cases we want that to match of course. I'm just sayin it's possible 
+	to scale the image if you want. -->
+
+<!-- The following lists are your DEFAULT lists, if the event or text isn't tagged
+		with anything, then it will randomly choose from here. -->
+<imageList name="PLANET">
+	<img w="460" h="460">stars/planet_bigblue.png</img>
+	<img w="460" h="460">stars/planet_brown.png</img>
+	<img w="264" h="264">stars/planet_peach.png</img>
+	<img w="200" h="200">stars/planet_red.png</img>
+	<img w="380" h="380">stars/planet_gas_blue.png</img>
+	<img w="380" h="380">stars/planet_gas_yellow.png</img>
+
+	<img w="230" h="230">stars/planet_bigblue.png</img>
+	<img w="230" h="230">stars/planet_brown.png</img>
+	<img w="132" h="132">stars/planet_peach.png</img>
+	<img w="100" h="100">stars/planet_red.png</img>
+	<img w="190" h="190">stars/planet_gas_blue.png</img>
+	<img w="190" h="190">stars/planet_gas_yellow.png</img>
+<!--	<img w="480" h="460">stars/planet_populated_brown.png</img>
+	<img w="480" h="460">stars/planet_populated_dark.png</img>
+	<img w="480" h="460">stars/planet_populated_orange.png</img> -->
+</imageList>
+
+<imageList name="BACKGROUND">
+	<img w="1280" h="720">stars/bg_darknebula.png</img>
+   <!-- <img w="1280" h="720">stars/bg_blueStarcluster.png</img> -->
+	<img w="1280" h="720">stars/bg_dullstars2.png</img>
+	<img w="1280" h="720">stars/bg_lonelyRedStar.png</img>
+	<img w="1280" h="720">stars/bg_lonelystar.png</img>
+</imageList>
+
+<!-- ui="ipad" means use these instead of the default ones in the iPad UI.
+     Must come AFTER the default definition (the one without the ui=
+     attribute). -->
+<imageList name="BACKGROUND" ui="ipad">
+	<img w="1024" h="768">ipad/stars/bg_darknebula.png</img>
+   <!-- <img w="1024" h="768">ipad/stars/bg_blueStarcluster.png</img> -->
+	<img w="1024" h="768">ipad/stars/bg_dullstars2.png</img>
+	<img w="1024" h="768">ipad/stars/bg_lonelyRedStar.png</img>
+	<img w="1024" h="768">ipad/stars/bg_lonelystar.png</img>
+</imageList>
+
+<!-- SPECIFIC LISTS -->
+<!--background lists-->
+<imageList name="BG_NEBULA">
+	<img w="1280" h="720">stars/bg_darknebula.png</img>
+	<img w="1280" h="720">stars/bg_blueStarcluster.png</img>
+</imageList>
+
+<imageList name="BG_NEBULA" ui="ipad">
+	<img w="1024" h="768">ipad/stars/bg_darknebula.png</img>
+	<img w="1024" h="768">ipad/stars/bg_blueStarcluster.png</img>
+</imageList>
+
+<imageList name="BG_DARK">
+	<img w="1280" h="720">stars/bg_dullstars.png</img>
+	<img w="1280" h="720">stars/bg_dullstars2.png</img>
+	<!--<img w="1280" h="720">stars/bg_darknebula.png</img>-->
+</imageList>
+
+<imageList name="BG_DARK" ui="ipad">
+	<img w="1024" h="768">ipad/stars/bg_dullstars.png</img>
+	<img w="1024" h="768">ipad/stars/bg_dullstars2.png</img>
+	<!--<img w="1024" h="768">ipad/stars/bg_darknebula.png</img>-->
+</imageList>
+
+<!--Used for background behind nebula in higher end machines? Something really basic. -->
+<imageList name="BG_BORING">
+	<img w="1280" h="720">stars/bg_dullstars.png</img>
+	<img w="1280" h="720">stars/bg_dullstars2.png</img>
+</imageList>
+
+<imageList name="BG_BORING" ui="ipad">
+	<img w="1024" h="768">ipad/stars/bg_dullstars.png</img>
+	<img w="1024" h="768">ipad/stars/bg_dullstars2.png</img>
+</imageList>
+
+
+<!-- Planet Lists-->
+<imageList name="PLANET_POPULATED">
+	<img w="480" h="460">stars/planet_populated_brown.png</img>
+	<img w="480" h="460">stars/planet_populated_dark.png</img>
+	<img w="480" h="460">stars/planet_populated_orange.png</img>
+</imageList>
+
+<imageList name="PLANET_POPULATED_SMALL">
+	<img w="240" h="230">stars/planet_populated_brown.png</img>
+	<img w="240" h="230">stars/planet_populated_dark.png</img>
+	<img w="240" h="230">stars/planet_populated_orange.png</img>
+</imageList>
+
+
+<imageList name="PLANET_UNPOPULATED">
+	<img w="460" h="460">stars/planet_bigblue.png</img>
+	<img w="460" h="460">stars/planet_brown.png</img>
+	<img w="264" h="264">stars/planet_peach.png</img>
+	<img w="200" h="200">stars/planet_red.png</img>
+</imageList>
+<imageList name="PLANET_UNPOPULATED_SMALL">
+	<img w="230" h="230">stars/planet_bigblue.png</img>
+	<img w="230" h="230">stars/planet_brown.png</img>
+	<img w="132" h="132">stars/planet_peach.png</img>
+	<img w="100" h="100">stars/planet_red.png</img>
+</imageList>
+
+
+<imageList name="PLANET_GAS">
+	<img w="760" h="760">stars/planet_gas_blue.png</img>
+	<img w="760" h="760">stars/planet_gas_yellow.png</img>
+</imageList>
+
+</FTL>

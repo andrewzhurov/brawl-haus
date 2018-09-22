@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<text name="sectorname_STANDARD_SPACE">Federation Space</text>
+<text name="sectorname_FINAL">The Last Stand</text>
+<text name="sectorname_CIVILIAN_SECTOR">Civilian Sector</text>
+<text name="sectorname_ENGI_SECTOR">Engi Controlled Sector</text>
+<text name="sectorname_ENGI_HOME">Engi Homeworlds</text>
+<text name="sectorname_PIRATE_SECTOR">Pirate Controlled Sector</text>
+<text name="sectorname_REBEL_SECTOR">Rebel Controlled Sector</text>
+<text name="sectorname_REBEL_SECTOR_MINIBOSS">Rebel Stronghold</text>
+<text name="sectorname_MANTIS_SECTOR">Mantis Controlled Sector</text>
+<text name="sectorname_MANTIS_HOME">Mantis Homeworlds</text>
+<text name="sectorname_NEBULA_SECTOR">Uncharted Nebula</text>
+<text name="sectorname_SLUG_SECTOR">Slug Controlled Nebula</text>
+<text name="sectorname_SLUG_HOME">Slug Home Nebula</text>
+<text name="sectorname_ZOLTAN_SECTOR">Zoltan Controlled Sector</text>
+<text name="sectorname_ZOLTAN_HOME">Zoltan Homeworlds</text>
+<text name="sectorname_ROCK_SECTOR">Rock Controlled Sector</text>
+<text name="sectorname_ROCK_HOME">Rock Homeworlds</text>
+<text name="sectorname_CRYSTAL_HOME">Hidden Crystal Worlds</text>
+<text name="sectorname_LANIUS_SECTOR">Abandoned Sector</text>
+
+<text name="sectorname_short_STANDARD_SPACE">Federation Space</text>
+<text name="sectorname_short_FINAL">The Last Stand</text>
+<text name="sectorname_short_CIVILIAN_SECTOR">Civilian Sector</text>
+<text name="sectorname_short_ENGI_SECTOR">Engi Controlled</text>
+<text name="sectorname_short_ENGI_HOME">Engi Homeworlds</text>
+<text name="sectorname_short_PIRATE_SECTOR">Pirate Controlled</text>
+<text name="sectorname_short_REBEL_SECTOR">Rebel Controlled</text>
+<text name="sectorname_short_REBEL_SECTOR_MINIBOSS">Rebel Stronghold</text>
+<text name="sectorname_short_MANTIS_SECTOR">Mantis Controlled</text>
+<text name="sectorname_short_MANTIS_HOME">Mantis Homeworlds</text>
+<text name="sectorname_short_NEBULA_SECTOR">Uncharted Nebula</text>
+<text name="sectorname_short_SLUG_SECTOR">Slug Controlled Nebula</text>
+<text name="sectorname_short_SLUG_HOME">Slug Home Nebula</text>
+<text name="sectorname_short_ZOLTAN_SECTOR">Zoltan Controlled</text>
+<text name="sectorname_short_ZOLTAN_HOME">Zoltan Homeworlds</text>
+<text name="sectorname_short_ROCK_SECTOR">Rock Controlled</text>
+<text name="sectorname_short_ROCK_HOME">Rock Homeworlds</text>
+<text name="sectorname_short_CRYSTAL_HOME">Hidden Crystal Worlds</text>
+<text name="sectorname_short_LANIUS_SECTOR">Abandoned Sector</text>
+</FTL>

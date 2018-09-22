@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+**
+**
+NO DLC 
+**
+**
+-->
+
+<shipBlueprint name="BOSS_1_EASY" layout="boss_1_easy" img="boss_1">
+	<class id="ship_BOSS_1_EASY_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="6" room="1"/>
+		<doors power="3" room="17"/>
+		<!--<teleporter power="2" room="3"/> -->
+		<cloaking power="2" room="15"/>
+		<!--<weapons power="1" room="6"/> -->
+		<!--<sensors power="2" room="13"/>-->
+		<medbay power="3" room="5"/>
+		<engines power="2" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<drones power="1" room="12"/>-->
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+		<artillery power="3" room="18" weapon="ARTILLERY_BOSS_4"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="0" missiles="2"/>
+	<health amount="20"/>
+	<maxPower amount ="40"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_2_EASY" layout="boss_2_easy" img="boss_2">
+	<class id="ship_BOSS_2_EASY_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="6" room="1"/>
+		<!--<teleporter power="2" room="3"/>  -->
+		<!--<weapons power="1" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="3" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<sensors power="2" room="13"/>-->
+		<drones power="8" room="12"/>
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2"/>
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="4" drones="10">
+		<drone name="DEFENSE_1"/>
+		<drone name="COMBAT_1"/>
+		<drone name="COMBAT_BEAM"/>
+		<drone name="BOARDER_BOSS"/>
+	</droneList>
+	<health amount="22"/>
+	<maxPower amount ="42"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_3_EASY" layout="boss_3_easy" img="boss_3">
+	<class id="ship_BOSS_3_EASY_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="6" room="1"/>
+		<teleporter power="2" room="3"/>
+		<!--<weapons power="4" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="6" room="8"/>
+		<oxygen power="2" room="7"/>
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+		<!--<weapon name="ION_2"/>
+		<weapon name="BEAM_FIRE"/>
+	</weaponList>-->
+	<health amount="20"/>
+	<maxPower amount ="29"/>
+	<boardingAI>invasion</boardingAI>
+</shipBlueprint>
+
+
+<shipBlueprint name="BOSS_1_NORMAL" layout="boss_1_easy" img="boss_1">
+	<class id="ship_BOSS_1_NORMAL_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<doors power="3" room="17"/>
+		<!--<teleporter power="2" room="3"/> -->
+		<cloaking power="2" room="15"/>
+		<!--<weapons power="1" room="6"/> -->
+		<!--<sensors power="2" room="13"/>-->
+		<medbay power="3" room="5"/>
+		<engines power="2" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<drones power="1" room="12"/>-->
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+		<artillery power="3" room="18" weapon="ARTILLERY_BOSS_4"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="0" missiles="2"/>
+	<health amount="20"/>
+	<maxPower amount ="42"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_2_NORMAL" layout="boss_2_easy" img="boss_2">
+	<class id="ship_BOSS_2_NORMAL_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<!--<teleporter power="2" room="3"/>  -->
+		<!--<weapons power="1" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="3" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<sensors power="2" room="13"/>-->
+		<drones power="8" room="12"/>
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2"/>
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="4" drones="10">
+		<drone name="DEFENSE_1"/>
+		<drone name="COMBAT_1"/>
+		<drone name="COMBAT_BEAM"/>
+		<drone name="BOARDER_BOSS"/>
+	</droneList>
+	<health amount="22"/>
+	<maxPower amount ="44"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_3_NORMAL" layout="boss_3_easy" img="boss_3">
+	<class id="ship_BOSS_3_NORMAL_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<teleporter power="2" room="3"/>
+		<!--<weapons power="4" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="6" room="8"/>
+		<oxygen power="2" room="7"/>
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+		<!--<weapon name="ION_2"/>
+		<weapon name="BEAM_FIRE"/>
+	</weaponList>-->
+	<health amount="20"/>
+	<maxPower amount ="31"/>
+	<boardingAI>invasion</boardingAI>
+</shipBlueprint>
+
+
+<shipBlueprint name="BOSS_1_HARD" layout="boss_1" img="boss_1">
+	<class id="ship_BOSS_1_HARD_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<doors power="3" room="17"/>
+		<!--<teleporter power="2" room="3"/> -->
+		<cloaking power="2" room="15"/>
+		<!--<weapons power="1" room="6"/> -->
+		<!--<sensors power="2" room="13"/> -->
+		<medbay power="3" room="5"/>
+		<engines power="2" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<drones power="1" room="12"/>-->
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+		<artillery power="3" room="18" weapon="ARTILLERY_BOSS_4"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="0" missiles="2"/>
+	<health amount="20"/>
+	<maxPower amount ="42"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_2_HARD" layout="boss_2" img="boss_2">
+	<class id="ship_BOSS_2_HARD_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<!--<teleporter power="2" room="3"/>  -->
+		<!--<weapons power="1" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="3" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<sensors power="2" room="13"/>-->
+		<drones power="8" room="12"/>
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2"/>
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="4" drones="10">
+		<drone name="DEFENSE_1"/>
+		<drone name="COMBAT_1"/>
+		<drone name="COMBAT_BEAM"/>
+		<drone name="BOARDER_BOSS"/>
+	</droneList>
+	<health amount="22"/>
+	<maxPower amount ="44"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_3_HARD" layout="boss_3" img="boss_3">
+	<class id="ship_BOSS_3_HARD_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<teleporter power="2" room="3"/>
+		<!--<weapons power="4" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="6" room="8"/>
+		<oxygen power="2" room="7"/>
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+		<!--<weapon name="ION_2"/>
+		<weapon name="BEAM_FIRE"/>
+	</weaponList>-->
+	<health amount="20"/>
+	<maxPower amount ="31"/>
+	<boardingAI>invasion</boardingAI>
+</shipBlueprint>
+
+
+
+
+
+
+
+<!--
+**
+**
+DLC!!!
+**
+**
+-->
+
+<shipBlueprint name="BOSS_1_EASY_DLC" layout="boss_1_easy" img="boss_1">
+	<class id="ship_BOSS_1_EASY_DLC_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<doors power="3" room="17"/>
+		<!--<teleporter power="2" room="3"/> -->
+		<cloaking power="2" room="15"/>
+		<!--<weapons power="1" room="6"/> -->
+		<!--<sensors power="2" room="13"/>-->
+		<medbay power="3" room="5"/>
+		<engines power="2" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<drones power="1" room="12"/>-->
+		<hacking power="3" room="2"/>
+		<!--<mind power="1" room="4"/>-->
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+		<artillery power="3" room="18" weapon="ARTILLERY_BOSS_4"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="0" missiles="2"/>
+	<health amount="20"/>
+	<maxPower amount ="42"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_2_EASY_DLC" layout="boss_2_easy" img="boss_2">
+	<class id="ship_BOSS_2_EASY_DLC_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<!--<teleporter power="2" room="3"/>  -->
+		<!--<weapons power="1" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="3" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<sensors power="2" room="13"/>-->
+		<drones power="8" room="12"/>
+		<!--<hacking power="1" room="2"/>-->
+		<!--<mind power="1" room="4"/>-->
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="4" drones="10">
+		<drone name="DEFENSE_1"/>
+		<drone name="COMBAT_1"/>
+		<drone name="COMBAT_BEAM"/>
+		<drone name="BOARDER_BOSS"/>
+	</droneList>
+	<health amount="22"/>
+	<maxPower amount ="44"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_3_EASY_DLC" layout="boss_3_easy" img="boss_3">
+	<class id="ship_BOSS_3_EASY_DLC_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<teleporter power="2" room="3"/>
+		<!--<weapons power="4" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="6" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<hacking power="1" room="2"/>-->
+		<mind power="3" room="4"/>
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+		<!--<weapon name="ION_2"/>
+		<weapon name="BEAM_FIRE"/>
+	</weaponList>-->
+	<health amount="20"/>
+	<maxPower amount ="32"/>
+	<boardingAI>invasion</boardingAI>
+</shipBlueprint>
+
+
+<shipBlueprint name="BOSS_1_NORMAL_DLC" layout="boss_1_easy" img="boss_1">
+	<class id="ship_BOSS_1_NORMAL_DLC_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<doors power="3" room="17"/>
+		<!--<teleporter power="2" room="3"/> -->
+		<cloaking power="2" room="15"/>
+		<!--<weapons power="1" room="6"/> -->
+		<!--<sensors power="2" room="13"/>-->
+		<medbay power="3" room="5"/>
+		<engines power="2" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<drones power="1" room="12"/>-->
+		<hacking power="3" room="2"/>
+		<!--<mind power="1" room="4"/>-->
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+		<artillery power="3" room="18" weapon="ARTILLERY_BOSS_4"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="0" missiles="2"/>
+	<health amount="20"/>
+	<maxPower amount ="42"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_2_NORMAL_DLC" layout="boss_2_easy" img="boss_2">
+	<class id="ship_BOSS_2_NORMAL_DLC_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<!--<teleporter power="2" room="3"/>  -->
+		<!--<weapons power="1" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="3" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<sensors power="2" room="13"/>-->
+		<drones power="8" room="12"/>
+		<!--<hacking power="1" room="2"/>-->
+		<!--<mind power="1" room="4"/>-->
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="4" drones="10">
+		<drone name="DEFENSE_1"/>
+		<drone name="COMBAT_1"/>
+		<drone name="COMBAT_BEAM"/>
+		<drone name="BOARDER_BOSS"/>
+	</droneList>
+	<health amount="22"/>
+	<maxPower amount ="44"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_3_NORMAL_DLC" layout="boss_3_easy" img="boss_3">
+	<class id="ship_BOSS_3_NORMAL_DLC_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<teleporter power="2" room="3"/>
+		<!--<weapons power="4" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="6" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<hacking power="1" room="2"/>-->
+		<mind power="3" room="4"/>
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+		<!--<weapon name="ION_2"/>
+		<weapon name="BEAM_FIRE"/>
+	</weaponList>-->
+	<health amount="20"/>
+	<maxPower amount ="32"/>
+	<boardingAI>invasion</boardingAI>
+</shipBlueprint>
+
+
+<shipBlueprint name="BOSS_1_HARD_DLC" layout="boss_1" img="boss_1">
+	<class id="ship_BOSS_1_HARD_DLC_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<doors power="3" room="17"/>
+		<!--<teleporter power="2" room="3"/> -->
+		<cloaking power="2" room="15"/>
+		<!--<weapons power="1" room="6"/> -->
+		<!--<sensors power="2" room="13"/>-->
+		<medbay power="3" room="5"/>
+		<engines power="2" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<drones power="1" room="12"/>-->
+		<hacking power="3" room="2"/>
+		<!--<mind power="1" room="4"/>-->
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+		<artillery power="3" room="18" weapon="ARTILLERY_BOSS_4"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="0" missiles="2"/>
+	<health amount="20"/>
+	<maxPower amount ="42"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_2_HARD_DLC" layout="boss_2" img="boss_2">
+	<class id="ship_BOSS_2_HARD_DLC_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<!--<teleporter power="2" room="3"/>  -->
+		<!--<weapons power="1" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="3" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<sensors power="2" room="13"/>-->
+		<drones power="8" room="12"/>
+		<!--<hacking power="1" room="2"/>-->
+		<!--<mind power="1" room="4"/>-->
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+		<artillery power="3" room="14" weapon="ARTILLERY_BOSS_3"/>
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+	<droneList count="4" drones="10">
+		<drone name="DEFENSE_1"/>
+		<drone name="COMBAT_1"/>
+		<drone name="COMBAT_BEAM"/>
+		<drone name="BOARDER_BOSS"/>
+	</droneList>
+	<health amount="22"/>
+	<maxPower amount ="44"/>
+</shipBlueprint>
+<shipBlueprint name="BOSS_3_HARD_DLC" layout="boss_3" img="boss_3">
+	<class id="ship_BOSS_3_HARD_DLC_class"/>
+	<systemList>
+		<pilot power="3" room="0"/>
+		<shields power="8" room="1"/>
+		<teleporter power="2" room="3"/>
+		<!--<weapons power="4" room="6"/>  -->
+		<medbay power="3" room="5"/>
+		<engines power="6" room="8"/>
+		<oxygen power="2" room="7"/>
+		<!--<hacking power="1" room="2"/>-->
+		<mind power="3" room="4"/>
+		<artillery power="4" room="9" weapon="ARTILLERY_BOSS_1"/>
+		<artillery power="4" room="10" weapon="ARTILLERY_BOSS_2" />
+	</systemList>
+	<weaponList count="0" missiles="10"/>
+		<!--<weapon name="ION_2"/>
+		<weapon name="BEAM_FIRE"/>
+	</weaponList>-->
+	<health amount="20"/>
+	<maxPower amount ="32"/>
+	<boardingAI>invasion</boardingAI>
+</shipBlueprint>
+</FTL>

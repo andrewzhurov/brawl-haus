@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<img x="-51" y="-60" w="383" h="471"/>
+
+<!-- Only used for iPad -->
+<glowOffset x="40" y="40"/>
+
+<offsets>
+	<cloak x="32" y="32"/>
+</offsets>
+
+<weaponMounts>
+	<mount x="46" y="161" rotate="false" mirror="true" gib="4" slide="left"/>
+	<mount x="336" y="161" rotate="false" mirror="false" gib="3" slide="right"/>
+	<mount x="87" y="84" rotate="false" mirror="true" gib="4" slide="left"/>
+	<mount x="296" y="84" rotate="false" mirror="false" gib="3" slide="right"/>
+</weaponMounts>
+
+
+<!--  Bad combos: 2+3;  2+3+4  -->
+<explosion>
+	<gib1>
+		<velocity min="0.1" max="0.4"/>
+		<direction min="120" max="240"/>
+		<angular min="0" max="0.5"/>
+		<glowOffset x="44" y="44"/> <!-- individual setting - only for ipad - not needed -->
+		<x>85</x>
+		<y>100</y>
+	</gib1>
+	<gib2>
+		<velocity min="0.4" max="1"/>
+		<direction min="120" max="240"/>
+		<angular min="-0.2" max="0.2"/>
+		<glowOffset x="45" y="32"/> <!-- individual setting - only for ipad - not needed -->
+		<x>114</x>
+		<y>166</y>
+	</gib2>
+	<gib3>
+		<velocity min="0.1" max="0.9"/>
+		<direction min="200" max="270"/>
+		<angular min="0" max="1"/>
+		<glowOffset x="32" y="35"/> <!-- individual setting - only for ipad - not needed -->
+		<x>211</x>
+		<y>38</y>
+	</gib3>
+	<gib4>
+		<velocity min="0.3" max="0.8"/>
+		<direction min="15" max="80"/>
+		<angular min= "-1" max="-0.1"/>
+		<glowOffset x="40" y="40"/> <!-- individual setting - only for ipad - not needed -->
+		<x>0</x>
+		<y>0</y>
+	</gib4>
+</explosion>
+</FTL>

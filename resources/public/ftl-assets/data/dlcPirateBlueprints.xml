@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+
+<!--
+*****************************
+*****************************
+REBEL PIRATE SHIPS
+*****************************
+*****************************
+-->
+
+<shipBlueprint name="REBEL_FAT_P" layout="rebel_squat_pirate" img="rebel_squat_pirate">
+	<class id="ship_REBEL_FAT_PIRATE_class"/>
+	<systemList>
+		<pilot power="1" max="2" room="0"/>
+		<oxygen power="1" max="2" room="1"/>
+		<shields power="2" max="8" room="2"/>
+		<engines power="2" max="4" room="7"/>
+		<weapons power="1" max="6" room="4"/>
+		<drones power="2" max="8" room="5"/>
+		<medbay power="1" max="3" room="6" start="false"/>
+		<doors power="1" max="3" room="3" start="false"/>
+	</systemList>
+	<droneList drones="4" load="DRONES_STANDARD"/>
+	<weaponList missiles="10" load="WEAPONS_REBEL"/>
+	<health amount="9"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "3" max="5" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>rebel_squat</cloakImage>
+</shipBlueprint>
+
+<shipBlueprint name="REBEL_FAT_P_DLC" layout="rebel_squat_pirate" img="rebel_squat_pirate">
+	<class id="ship_REBEL_FAT_PIRATE_DLC_class"/>
+	<systemList>
+		<pilot power="1" max="2" room="0"/>
+		<oxygen power="1" max="2" room="3"/>
+		<shields power="2" max="8" room="7"/>
+		<engines power="2" max="4" room="6"/>
+		<weapons power="1" max="6" room="2"/>
+		<drones power="2" max="8" room="4"/>
+		<clonebay power="1" max="3" room="1" start="false"/>
+		<hacking power="1" max="2" room="5" start="false"/>
+	</systemList>
+	<droneList drones="4" load="DRONES_STANDARD"/>
+	<weaponList missiles="10" load="WEAPONS_REBEL"/>
+	<health amount="9"/>
+	<maxPower amount ="8"/>
+	<crewCount amount = "3" max="5" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+
+
+<shipBlueprint name="REBEL_SKINNY_P" layout="rebel_long_pirate" img="rebel_long_pirate">
+	<class id="ship_REBEL_SKINNY_PIRATE_class"/>
+	<systemList>
+		<oxygen power="1" max="2" room="9"/>
+		<pilot power="1" max="3" room="0"/>
+		<shields power="2" max="8" room="4"/>
+		<engines power="2" max="5" room="6"/>
+		<weapons power="2" max="8" room="3"/>
+		<medbay power="1" max="2" room="8" start="false"/> <!-- CHANGED was false-->
+		<teleporter power="1" max="1" room="7" start="false"/>
+		<doors power="1" max="2" room="5" start="false"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_REBEL"/>
+	<health amount="10"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "3" max="6" class="random"/> <!--CHANGED was 3/6-->
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>rebel_long</cloakImage>
+</shipBlueprint>
+
+<shipBlueprint name="REBEL_SKINNY_P_DLC" layout="rebel_long_pirate" img="rebel_long_pirate">
+	<class id="ship_REBEL_SKINNY_PIRATE_DLC_class"/>
+	<systemList>
+		<oxygen power="1" max="2" room="2"/> <!--2-->
+		<pilot power="1" max="3" room="0"/> <!--0-->
+		<shields power="2" max="8" room="5"/> <!--6-->
+		<engines power="2" max="5" room="7"/> <!--5-->
+		<weapons power="2" max="8" room="1"/>   <!--4-->
+		<clonebay power="1" max="2" room="3" start="false"/> <!--3-->
+		<teleporter power="1" max="1" room="4" start="false"/> <!--1-->
+		<doors power="1" max="2" room="6" start="false"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_REBEL"/>
+	<health amount="10"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "3" max="6" class="random"/> <!--CHANGED was 3/6-->
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+<!--
+*****************************
+*****************************
+JELLY PIRATE SHIPS
+*****************************
+*****************************
+-->
+
+
+<shipBlueprint name="JELLY_BUTTON_P" layout="jelly_button_pirate" img="jelly_button_pirate">
+	<class id="ship_JELLY_BUTTON_PIRATE_class"/>
+	<maxSector>4</maxSector>
+	<systemList>
+		<oxygen power="1" max="3" room="1"/>
+		<pilot power="1" max="3" room="0"/>
+		<shields power="2" max="8" room="3"/>
+		<engines power="1" max="8"  room="4"/>
+		<weapons power="2" max="8"  room="5"/>
+		<doors power="1" max="3" room="2" start="false"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_JELLY"/>
+	<health amount="9"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="3" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="SLUG_GEL"/>
+	<cloakImage>jelly_button</cloakImage>
+</shipBlueprint>
+
+<shipBlueprint name="JELLY_BUTTON_P_DLC" layout="jelly_button_pirate" img="jelly_button_pirate">
+	<class id="ship_JELLY_BUTTON_PIRATE_DLC_class"/>
+	<maxSector>5</maxSector>
+	<systemList>
+		<oxygen power="1" max="3" room="1"/>
+		<pilot power="1" max="3" room="4"/>
+		<shields power="2" max="8" room="5"/>
+		<engines power="1" max="8"  room="3"/>
+		<weapons power="2" max="8"  room="0"/>
+		<mind power="1" max="2"  room="2" start="false"/>
+	</systemList>
+	<weaponList missiles="6" load="WEAPONS_JELLY"/>
+	<health amount="9"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="3" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="SLUG_GEL"/>
+</shipBlueprint>
+
+
+
+<shipBlueprint name="JELLY_CROISSANT_P" layout="jelly_croissant_pirate" img="jelly_croissant_pirate">
+	<class id="ship_JELLY_CROISSANT_PIRATE_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="1"/>
+		<doors power="1" max="3" room="5" start="false"/>
+		<oxygen power="1" max="3" room="6"/>
+		<medbay power="1" max="3" room="4" start="false"/>
+		<cloaking power="1" max="2" room="7" start="false"/>
+		<shields power="2" max="10" room="2"/>
+		<engines power="1" max="6" room="8"/>
+		<weapons power="2" max="8" room="3"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_JELLY"/>
+	<health amount="10"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "3" max="6" class="random"/><!--CHANGED was 3/5-->
+	<boardingAI>sabotage</boardingAI>
+	<aug name="SLUG_GEL"/>
+	<cloakImage>jelly_croissant</cloakImage>
+</shipBlueprint>
+
+<shipBlueprint name="JELLY_CROISSANT_P_DLC" layout="jelly_croissant_pirate" img="jelly_croissant_pirate">
+	<class id="ship_JELLY_CROISSANT_PIRATE_DLC_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/> <!--0-->
+		<!-- <doors power="1" max="3" room="7" start="false"/>  <!-5-->
+		<oxygen power="1" max="3" room="3"/>  <!--4-->
+		<clonebay power="1" max="3" room="1" start="false"/>  <!--6-->
+		<shields power="2" max="10" room="4"/>  <!--3-->
+		<engines power="1" max="6" room="8"/>  <!--7-->
+		<weapons power="2" max="7" room="5"/>  <!--1-->
+		<mind power="1" max="2" room="2" start="false"/>  <!--new-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_JELLY"/>
+	<health amount="10"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "3" max="7" class="random"/><!--CHANGED was 3/5-->
+	<boardingAI>sabotage</boardingAI>
+	<aug name="SLUG_GEL"/>
+</shipBlueprint>
+
+
+
+
+  <shipBlueprint name="JELLY_TRUFFLE_P" layout="jelly_truffle_pirate" img="jelly_truffle_pirate">
+	<class id="ship_JELLY_TRUFFLE_PIRATE_class"/>
+	<minSector>4</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/>
+		<doors power="1" max="3" room="4" start="false"/>
+		<oxygen power="1" max="3" room="7"/>
+		<medbay power="1" max="3" room="8" start="false"/>
+		<shields power="2" max="10" room="6"/>
+		<engines power="1" max="5" room="5"/>
+		<weapons power="2" max="10" room="1"/>
+		<cloaking power="1" max="1" room="2" start="false"/>
+	</systemList>
+	<weaponList missiles="14" load="WEAPONS_JELLY"/>
+	<health amount="11"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "4" max="7" class="random"/> <!--CHANGED was 4/6-->
+	<boardingAI>sabotage</boardingAI>
+	<aug name="SLUG_GEL"/>
+	<cloakImage>jelly_truffle</cloakImage>
+</shipBlueprint>
+
+ <shipBlueprint name="JELLY_TRUFFLE_P_DLC" layout="jelly_truffle_pirate" img="jelly_truffle_pirate">
+	<class id="ship_JELLY_TRUFFLE_PIRATE_DLC_class"/>
+	<minSector>4</minSector>
+	<systemList>
+		<pilot power="1" max="0" room="0"/>
+		<mind power="1" max="2" room="5" start="false"/>
+		<oxygen power="1" max="3" room="1"/>
+		<clonebay power="1" max="3" room="3" start="false"/>
+		<shields power="2" max="10" room="7"/>
+		<engines power="1" max="5" room="8"/>
+		<weapons power="2" max="9" room="4"/>
+		<!--<cloaking power="1" max="1" room="6" start="false"/>  <!-7-->
+		<doors power="1" max="2" room="2" start="false"/>
+	</systemList>
+	<weaponList missiles="14" load="WEAPONS_JELLY"/>
+	<health amount="11"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "4" max="8" class="random"/> <!--CHANGED was 4/6-->
+	<boardingAI>sabotage</boardingAI>
+	<aug name="SLUG_GEL"/>
+	<cloakImage>jelly_truffle</cloakImage>
+</shipBlueprint>
+
+
+
+
+<!--
+*****************************
+*****************************
+ROCK PIRATE SHIPS
+*****************************
+*****************************
+-->
+
+
+
+  <shipBlueprint name="ROCK_SCOUT_P" layout="rock_scout_pirate" img="rock_scout_pirate">
+	<class id="ship_ROCK_SCOUT_PIRATE_class"/>
+	<maxSector>5</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="3"/>
+		<teleporter power="1" max="2" room="2" start="false"/>
+		<oxygen power="1" max="3" room="1"/>
+		<!--<medbay power="1" max="3" room="5" start="false"/>--> <!--JUSTIN-->
+		<shields power="2" max="8" room="4"/>
+		<engines power="1" max="5" room="5"/>
+		<weapons power="2" max="8" room="0"/>
+	</systemList>
+	<weaponList missiles="6" load="WEAPONS_ROCK"/>
+	<health amount="8"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "2" max="5" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="ROCK_ARMOR"/>
+	<cloakImage>rock_scout</cloakImage>
+</shipBlueprint>
+
+  <shipBlueprint name="ROCK_SCOUT_P_DLC" layout="rock_scout_pirate" img="rock_scout_pirate">
+	<class id="ship_ROCK_SCOUT_PIRATE_DLC_class"/>
+	<maxSector>5</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/>  <!--3-->
+		<!--<teleporter power="1" max="2" room="0" start="false"/> -->
+		<oxygen power="1" max="3" room="3"/> <!--0-->
+		<clonebay power="1" max="3" room="4" start="false"/> <!--2-->
+		<shields power="2" max="8" room="2"/> <!--4-->
+		<engines power="1" max="5" room="5"/> <!--6-->
+		<weapons power="2" max="8" room="1"/> <!--1-->
+	</systemList>
+	<weaponList missiles="6" load="WEAPONS_ROCK"/>
+	<health amount="8"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "2" max="4" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="ROCK_ARMOR"/>
+</shipBlueprint>
+
+
+
+
+  <shipBlueprint name="ROCK_FIGHT_P" layout="rock_fight_pirate" img="rock_fight_pirate">
+	<class id="ship_ROCK_FIGHT_PIRATE_class"/>
+	<minSector>2</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="2"/>
+		<doors power="1" max="3" room="1" start="false"/>
+		<oxygen power="1" max="3" room="0"/>
+		<medbay power="1" max="3" room="7" start="false"/>
+		<cloaking power="1" max="3" room="5" start="false"/>
+		<shields power="2" max="8" room="4"/>
+		<engines power="2" max="5" room="6"/>
+		<weapons power="2" max="8" room="3"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ROCK"/>
+	<health amount="10"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "3" max="5" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="ROCK_ARMOR"/>
+	<cloakImage>rock_fight</cloakImage>
+</shipBlueprint>
+
+  <shipBlueprint name="ROCK_FIGHT_P_DLC" layout="rock_fight_pirate" img="rock_fight_pirate">
+	<class id="ship_ROCK_FIGHT_PIRATE_DLC_class"/>
+	<minSector>2</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="6"/> <!--3-->
+		<teleporter power="1" max="2" room="5" start="false"/> <!--6-->
+		<oxygen power="1" max="3" room="7"/> <!--7-->
+		<clonebay power="1" max="3" room="2" start="false"/> <!--4-->
+		<shields power="2" max="8" room="0"/> <!--5-->
+		<engines power="2" max="5" room="4"/> <!--8-->
+		<weapons power="2" max="8" room="1"/> <!--0-->
+		<cloaking power="1" max="1" room="3" start="false"/> <!--0-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ROCK"/>
+	<health amount="10"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="5" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<aug name="ROCK_ARMOR"/>
+	<cloakImage>rock_fight</cloakImage>
+</shipBlueprint>
+
+
+
+
+
+
+
+
+
+<!--
+*****************************
+*****************************
+MANTIS PIRATE SHIPS
+*****************************
+*****************************
+-->
+
+ <shipBlueprint name="MANTIS_SCOUT_P" layout="mantis_scout_pirate" img="mantis_scout_pirate">
+	<class id="ship_MANTIS_SCOUT_PIRATE_class"/>
+	<maxSector>5</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="5"/>
+		<oxygen power="1" max="3" room="6"/>
+		<medbay power="1" max="3" room="3" start="false"/>
+		<teleporter power="1" max="3" room="4" start="false"/>
+		<shields power="2" max="8" room="0"/>
+		<engines power="1" max="5" room="2"/>
+		<weapons power="2" max="7" room="1"/> <!-- CHANGED - was 2-8-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_MANTIS"/>
+	<health amount="7"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "3" max="5" class="random"/> <!-- CHANGED - was 2-4-->
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>mantis_scout</cloakImage>
+</shipBlueprint>
+
+  <shipBlueprint name="MANTIS_SCOUT_P_DLC" layout="mantis_scout_pirate" img="mantis_scout_pirate">
+	<class id="ship_MANTIS_SCOUT_PIRATE_DLC_class"/>
+	<maxSector>4</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="5"/>  <!--1-->
+		<oxygen power="1" max="3" room="4"/> <!--5-->
+		<clonebay power="1" max="2" room="1" start="false"/> <!--6-->
+		<teleporter power="1" max="2" room="6" start="false"/> <!--4-->
+		<shields power="2" max="8" room="3"/> <!--0-->
+		<engines power="1" max="5" room="0"/> <!--7-->
+		<weapons power="2" max="7" room="2"/> <!--3-->
+	</systemList>
+	<weaponList missiles="6" load="WEAPONS_MANTIS"/>
+	<health amount="7"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "2" max="4" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+
+<shipBlueprint name="MANTIS_FIGHTER_P" layout="mantis_fighter_pirate" img="mantis_fighter_pirate">
+	<class id="ship_MANTIS_FIGHTER_PIRATE_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="3"/>
+		<doors power="1" max="3" room="1" start="false"/>
+		<oxygen power="1" max="3" room="0"/>
+		<medbay power="1" max="3" room="2"/> <!-- CHANGED - was false-->
+		<teleporter power="1" max="3" room="4"/>
+		<shields power="2" max="8" room="6"/>
+		<engines power="1" max="5" room="7"/>
+		<weapons power="1" max="8" room="5"/> <!-- CHANGED - was 2-8-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_MANTIS"/>
+	<health amount="9"/>
+	<maxPower amount ="11"/>
+	<crewCount amount = "3" max="5" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>mantis_fighter</cloakImage>
+</shipBlueprint>
+
+<shipBlueprint name="MANTIS_FIGHTER_P_DLC" layout="mantis_fighter_pirate" img="mantis_fighter_pirate">
+	<class id="ship_MANTIS_FIGHTER_PIRATE_DLC_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="3"/> <!--9-->
+		<doors power="1" max="3" room="6" start="false"/> <!--2-->
+		<oxygen power="1" max="3" room="1"/> <!--5-->
+		<clonebay power="1" max="3" room="5"/> <!--8-->
+		<teleporter power="1" max="2" room="0"/> <!--4-->
+		<shields power="2" max="7" room="2"/> <!--0-->
+		<engines power="1" max="5" room="7"/> <!--7-->
+		<weapons power="1" max="7" room="4"/> <!--3-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_MANTIS"/>
+	<health amount="9"/>
+	<maxPower amount ="11"/>
+	<crewCount amount = "2" max="5" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+
+
+<shipBlueprint name="MANTIS_BOMBER_P" layout="mantis_bomber_pirate" img="mantis_bomber_pirate">
+	<class id="ship_MANTIS_BOMBER_PIRATE_class"/>
+	<minSector>4</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="5"/>
+		<doors power="1" max="3" room="8" start="false"/>
+		<oxygen power="1" max="3" room="0"/>
+		<medbay power="1" max="3" room="11" start="false"/>
+		<teleporter power="1" max="3" room="9"/>
+		<shields power="2" max="10" room="7"/>
+		<engines power="1" max="5" room="10"/>
+		<weapons power="2" max="10" room="6"/>
+	</systemList>
+	<weaponList missiles="14" load="WEAPONS_MANTIS"/>
+	<health amount="11"/>
+	<maxPower amount ="11"/>
+	<crewCount amount = "4" max="6" class="random"/><!--CHANGED was 4/7-->
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>mantis_bomber</cloakImage>
+</shipBlueprint>
+
+<shipBlueprint name="MANTIS_BOMBER_P_DLC" layout="mantis_bomber_pirate" img="mantis_bomber_pirate">
+	<class id="ship_MANTIS_BOMBER_PIRATE_DLC_class"/>
+	<minSector>4</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/>				 <!--3-->
+		<doors power="1" max="3" room="10" start="false"/> <!--9-->
+		<oxygen power="1" max="3" room="5"/> 			 <!--11-->
+		<clonebay power="1" max="1" room="4" start="false"/> <!--8-->
+		<teleporter power="1" max="2" room="3"/>			<!--4-->
+		<shields power="2" max="8" room="7"/>			<!--0-->
+		<engines power="1" max="5" room="11"/>		<!--7-->
+		<weapons power="2" max="8" room="6"/>	<!--10-->
+	</systemList>
+	<weaponList missiles="14" load="WEAPONS_MANTIS"/>
+	<health amount="11"/>
+	<maxPower amount ="11"/>
+	<crewCount amount = "3" max="6" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+
+
+
+
+<!--
+*****************************
+*****************************
+MANTIS PIRATE SHIPS
+*****************************
+*****************************
+-->
+
+
+  <shipBlueprint name="ZOLTAN_FIGHTER_P" layout="energy_fighter_pirate" img="energy_fighter_pirate">
+	<class id="ship_ZOLTAN_FIGHTER_PIRATE_class"/>
+	<systemList>
+		<pilot power="1" max="3" room="1"/>
+		<doors power="1" max="3" room="4" start="false"/>
+		<medbay power="1" max="3" room="0" start="false"/>
+		<oxygen power="1" max="3" room="3"/>
+		<shields power="2" max="8" room="2"/>
+		<engines power="1" max="5" room="6"/>
+		<weapons power="2" max="8" room="5"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ZOLTAN"/>
+	<health amount="7"/>
+	<aug name="ENERGY_SHIELD"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="3" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>energy_fighter</cloakImage>
+</shipBlueprint>
+
+  <shipBlueprint name="ZOLTAN_FIGHTER_P_DLC" layout="energy_fighter_pirate" img="energy_fighter_pirate">
+	<class id="ship_ZOLTAN_FIGHTER_PIRATE_DLC_class"/>
+	<systemList>
+		<pilot power="1" max="3" room="0"/> <!--5-->
+		<mind power="1" max="1" room="4" start="false"/> <!--2-->
+		<clonebay power="1" max="3" room="3" start="false"/> <!--6-->
+		<oxygen power="1" max="3" room="1"/>  <!--3-->
+		<shields power="2" max="8" room="2"/> <!--1-->
+		<engines power="1" max="5" room="5"/> <!--0-->
+		<weapons power="2" max="8" room="6"/> <!--4-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ZOLTAN"/>
+	<health amount="7"/>
+	<aug name="ENERGY_SHIELD"/>
+	<maxPower amount ="12"/>
+	<crewCount amount = "2" max="3" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+
+
+
+  <shipBlueprint name="ZOLTAN_BOMBER_P" layout="energy_bomber_pirate" img="energy_bomber_pirate">
+	<class id="ship_ZOLTAN_BOMBER_PIRATE_class"/>
+	<minSector>3</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/>
+		<doors power="1" max="3" room="6" start="false"/>
+		<medbay power="1" max="3" room="2" start="false"/>
+		<oxygen power="1" max="3" room="5"/>
+		<shields power="2" max="8" room="3"/>
+		<engines power="1" max="5" room="7"/>
+		<weapons power="2" max="8" room="4"/>
+		<drones power="2" max="4" room="1" start="false"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ZOLTAN"/>
+	<droneList drones="2" load="DRONES_COMBAT"/>
+	<health amount="7"/>
+	<aug name="ENERGY_SHIELD"/>
+	<maxPower amount ="9"/>
+	<crewCount amount = "3" max="6" class="random"/> <!--CHANGED was 3 4-->
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>energy_bomber</cloakImage>
+</shipBlueprint>
+
+  <shipBlueprint name="ZOLTAN_BOMBER_P_DLC" layout="energy_bomber_pirate" img="energy_bomber_pirate">
+	<class id="ship_ZOLTAN_BOMBER_PIRATE_DLC_class"/>
+	<minSector>3</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="2"/>  <!--1-->
+		<doors power="1" max="3" room="1" start="false"/> <!--2-->
+		<clonebay power="1" max="3" room="7" start="false"/> <!--6-->
+		<oxygen power="1" max="3" room="4"/>  <!--5-->
+		<shields power="2" max="8" room="3"/>  <!--3-->
+		<engines power="1" max="5" room="6"/> <!--7-->
+		<weapons power="2" max="8" room="5"/> <!--4-->
+		<hacking power="1" max="2" room="0" start="false"/> <!--0-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_ZOLTAN"/>
+	<droneList drones="5" load="DRONES_COMBAT"/>
+	<health amount="7"/>
+	<aug name="ENERGY_SHIELD"/>
+	<maxPower amount ="15"/>
+	<crewCount amount = "3" max="6" class="random"/> <!--CHANGED was 3 4-->
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+
+
+
+<!--
+*****************************
+*****************************
+FED PIRATE SHIPS
+- these room layouts are not changed since you never fight normal Fed ships
+*****************************
+*****************************
+-->
+
+
+  <shipBlueprint name="FED_SCOUT_P" layout="fed_scout" img="fed_scout_pirate">
+	<class id="ship_FED_SCOUT_PIRATE_class"/>
+	<maxSector>6</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/>
+		<doors power="1" max="3" room="2" start="false"/>
+		<oxygen power="1" max="3" room="5"/>
+		<shields power="2" max="8" room="1"/>
+		<engines power="1" max="5" room="4"/>
+		<weapons power="2" max="8" room="3"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_FED"/>
+	<health amount="7"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "2" max="3" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+	<cloakImage>fed_scout</cloakImage>
+</shipBlueprint>
+
+  <shipBlueprint name="FED_SCOUT_P_DLC" layout="fed_scout" img="fed_scout_pirate">
+	<class id="ship_FED_SCOUT_PIRATE_DLC_class"/>
+	<maxSector>6</maxSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/> <!--0-->
+		<hacking power="1" max="1" room="2" start="false"/> <!--2-->
+		<oxygen power="1" max="3" room="5"/> <!--5-->
+		<shields power="2" max="8" room="3"/> <!--1-->
+		<engines power="1" max="5" room="4"/> <!--4-->
+		<weapons power="2" max="8" room="1"/> <!--3-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_FED"/>
+	<droneList drones="4"/>
+	<health amount="7"/>
+	<maxPower amount ="10"/>
+	<crewCount amount = "2" max="3" class="random"/>
+	<boardingAI>sabotage</boardingAI>
+</shipBlueprint>
+
+
+  <shipBlueprint name="FED_BOMBER_P" layout="fed_bomber" img="fed_bomber_pirate">
+	<class id="ship_FED_BOMBER_PIRATE_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/>
+		<doors power="1" max="3" room="2" start="false"/>
+		<medbay power="1" max="3" room="8" start="false"/>
+		<oxygen power="1" max="3" room="5"/>
+		<shields power="2" max="8" room="1"/>
+		<engines power="1" max="5" room="9"/>
+		<weapons power="2" max="8" room="6"/>
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_FED"/>
+	<health amount="9"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="6" class="random"/>  <!--CHANGED was 2 4-->
+	<cloakImage>fed_bomber</cloakImage>
+</shipBlueprint>
+
+  <shipBlueprint name="FED_BOMBER_P_DLC" layout="fed_bomber" img="fed_bomber_pirate">
+	<class id="ship_FED_BOMBER_PIRATE_DLC_class"/>
+	<minSector>1</minSector>
+	<systemList>
+		<pilot power="1" max="3" room="0"/> <!--0-->
+		<hacking power="1" max="1" room="2" start="false"/> <!--doors 2-->
+		<clonebay power="1" max="3" room="8" start="false"/> <!--8-->
+		<oxygen power="1" max="3" room="5"/> <!--5-->
+		<shields power="2" max="8" room="9"/> <!--1-->
+		<engines power="1" max="5" room="6"/>  <!--9-->
+		<weapons power="2" max="8" room="1"/> <!--6-->
+	</systemList>
+	<weaponList missiles="10" load="WEAPONS_FED"/>
+	<droneList drones="4"/>
+	<health amount="9"/>
+	<maxPower amount ="7"/>
+	<crewCount amount = "2" max="6" class="random"/>  <!--CHANGED was 2 4-->
+</shipBlueprint>
+</FTL>

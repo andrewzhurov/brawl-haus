@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- Events and Event lists that will be overwritten if the DLC is turned on -->
+
+<!--
+***
+Adding pulsar to normal hostile lists.  - Not all of the hostile lists are here, only some have pulsars added.
+	<event load="PIRATE_PULSAR"/>
+	<event load="REBEL_PULSAR"/>
+***
+-->
+
+<eventList name="OVERRIDE_HOSTILE_ENGI">
+	<event load="ENGI_MANTIS_FIGHT"/>
+	<event load="ENGI_REBEL_FIGHT"/>
+	<event load="ENGI_PIRATE_FIGHT"/>
+
+	<event load="PIRATE"/>
+	<event load="PIRATE_CHOICE"/>
+	<event load="REBEL"/>
+	<event load="SQUAT_WARNING"/>
+	<event load="PIRATE_ASTEROID"/>
+	<event load="PIRATE_SUN"/>
+	<event load="PIRATE_NO_ESCAPE"/>
+	<event load="PIRATE_PULSAR"/>
+</eventList>
+
+<eventList name="OVERRIDE_HOSTILE_MANTIS">
+	<event load="MANTIS_FIGHT"/>
+	<event load="MANTIS_FIGHT"/>
+	<event load="MANTIS_SUN_FIGHT"/>
+	<event load="DONOR_MANTIS_CHASE"/>
+
+	<event load="REBEL"/>
+	<event load="AUTO_ASTEROID"/>
+	<event load="AUTO_WARNING"/>
+	<event load="REBEL_PULSAR"/>
+</eventList>
+
+<eventList name="OVERRIDE_HOSTILE_PIRATE">
+	<event load="PIRATE"/>
+	<event load="REBEL_AUTO"/>
+	<event load="AUTO_ASTEROID"/>
+	<event load="PIRATE_ASTEROID"/>
+	<event load="PIRATE_NO_ESCAPE"/>
+	<event load="PIRATE_SLAVER"/>
+	<event load="PIRATE_SUN"/>
+	<event load="PIRATE_PULSAR"/>
+</eventList>
+
+
+<eventList name="OVERRIDE_HOSTILE_REBEL">
+	<event load="REBEL"/>
+	<event load="REBEL_AUTO"/>
+	<event load="AUTO_ASTEROID"/>
+	<event load="AUTO_WARNING"/>
+	<event load="SQUAT_WARNING"/>
+	<event load="REBEL_PULSAR"/>
+</eventList>
+
+
+
+<eventList name="OVERRIDE_HOSTILE_ZOLTAN">
+	<event load="ZOLTAN_FIGHT"/>
+	<event load="ZOLTAN_PIRATE"/>
+	<event load="ZOLTAN_MANTIS"/>
+	<event load="ZOLTAN_ENGI"/>
+	<event load="ZOLTAN_ASTEROID"/>
+
+
+	<event load="REBEL"/>
+	<event load="REBEL_AUTO"/>
+	<event load="REBEL_PULSAR"/>
+</eventList>
+
+
+<!--
+***
+Sector Event Lists
+STORE_REBELSIDE
+***
+-->
+
+<eventList name="OVERRIDE_HOSTILE1">
+	<event load="REBEL_PULSAR"/>
+	<event load="PIRATE_PULSAR"/>
+	<event load="SQUAT_WARNING"/>
+	<event load="AUTO_WARNING"/>
+	<event load="AUTO_ASTEROID"/>
+	<event load="AUTO_HACKER"/>
+	<event load="REBEL_AUTO"/>
+	<event load="AUTO_CIVILIAN"/>
+	<event load="PIRATE_CHOICE"/>
+	<event load="AUTO_REFUEL_STATION"/>
+	<event load="REBEL"/>
+	<event load="MANTIS_HOSTILE"/>
+</eventList>
+
+<eventList name="OVERRIDE_HOSTILE2">
+	<event load="REBEL_PDS"/>
+	<event load="REBEL_AUTO"/>
+	<event load="REBEL_PULSAR"/>
+	<event load="PIRATE_PULSAR"/>
+	<event load="PIRATE"/>
+	<event load="PIRATE_CHOICE"/>
+	<event load="REBEL"/>
+	<event load="SQUAT_WARNING"/>
+	<event load="SQUAT_REFUEL_STATION"/>
+	<event load="PIRATE_ASTEROID"/>
+	<event load="AUTO_REFUEL_STATION"/>
+	<event load="PIRATE_SLAVER"/>
+	<event load="PIRATE_SUN"/>
+	<event load="AUTO_SUN"/>
+	<event load="PIRATE_NO_ESCAPE"/>
+</eventList>
+
+<eventList name="OVERRIDE_ITEMS">
+	<event load="FIND_DRONE"/>
+	<event load="FIND_WEAPON"/>
+	<event load="FREE_ITEMS"/>
+	<event load="FUEL_FOR_DRONE"/>
+	<event load="REFUEL_STATION"/>
+	<event load="REPAIR_STATION"/>
+	<event load="SELL_DRONES_STATION"/>
+	<event load="SELL_MISSILES_STATION"/>
+	<event load="TRADER_CIV"/>
+	<event load="TAVERN_HIRE"/>
+	<event load="STORE_REBELSIDE"/> <!-- dlcEvents-->
+	<event load="TRADER_UPGRADES"/> <!-- dlcEvents-->
+	<event load="TRADER_UPGRADES_EXCHANGE"/><!-- dlcEvents-->
+	<event load="HELP_MINERS"/><!-- dlcEvents-->
+</eventList>
+
+
+
+
+<eventList name="OVERRIDE_NEUTRAL">  <!-- This event list is hardcoded to fill out a sector if it ran out of all other calls for that sector -->
+	<event load="PIRATE_CIVILIAN"/>
+	<event load="REBEL_TRANSPORT"/>
+	<event load="AUTO_REFUEL_STATION"/>
+	<event load="ASTEROID_EXPLORE"/>
+	<event load="BROKEN_REBEL_DRONE"/>
+	<event load="MERCENARY"/>
+	<event load="FRIENDLY_SLAVER"/>
+	<event load="PIRATE_BRIBER"/>
+	<event load="AUTO_DEFENSE_ITEM"/>
+	<event load="DONOR_PONY"/>
+	<event load="DONOR_PLAGUE"/>
+
+	<event load="EMPTY_STATION2"/> <!--DLC - newEvents-->
+	<event load="REFUGEE_NO_DISTRESS"/> <!--DLC - newEvents-->
+	<event load="WRECKAGE_EVENT"/> <!--DLC - newEvents-->
+	<event load="FUELING_STATION"/> <!--DLC - newEvents-->
+	<event load="PIRATE_SALESMAN"/>  <!--DLC matt - newEvents-->
+	<event load="TERRAFORMING_SCAN"/>  <!--DLC matt - newEvents-->
+	<event load="REBEL_CHECKPOINT"/>  <!--DLC matt - newEvents-->
+	<event load="REBEL_HELPERS"/>  <!--DLC matt - newEvents-->
+	<event load="ROGUE_REBEL"/><!--DLC matt - newEvents-->
+</eventList>
+
+<eventList name="OVERRIDE_NEUTRAL_EXIT">  <!-- This event list is hardcoded to fill out a sector if it ran out of all other calls for that sector -->
+	<event load="PIRATE_CIVILIAN"/>
+	<event load="REBEL_TRANSPORT"/>
+	<event load="AUTO_REFUEL_STATION"/>
+	<event load="ASTEROID_EXPLORE"/>
+	<event load="FRIENDLY_SLAVER"/>
+	<event load="PIRATE_BRIBER"/>
+	<event load="AUTO_DEFENSE_ITEM"/>
+	<event load="DONOR_PONY"/>
+	<event load="DONOR_PLAGUE"/>
+
+	<event load="EMPTY_STATION2"/> <!--DLC - newEvents-->
+	<event load="TRADER_UPGRADES"/> <!--DLC - down below-->
+	<event load="REFUGEE_NO_DISTRESS"/> <!--DLC - newEvents-->
+	<event load="WRECKAGE_EVENT"/> <!--DLC - newEvents-->
+	<event load="FUELING_STATION"/> <!--DLC - newEvents-->
+	<event load="PIRATE_SALESMAN"/> <!--DLC - newEvents-->
+	<event load="REBEL_CHECKPOINT"/>  <!--DLC matt - newEvents-->
+	<event load="REBEL_HELPERS"/>  <!--DLC matt - newEvents-->
+	<event load="ROGUE_REBEL"/><!--DLC matt - newEvents-->
+</eventList>
+
+
+<eventList name="OVERRIDE_QUESTS">
+	<event load="QUEST_ESCORT"/>
+	<event load="MERCHANT_REQUEST"/>
+	<event load="FEDERATION_PLANET_SIGNAL"/>
+	<event load="MERCENARY_WORK_START"/>
+	<event load="QUEST_MANTIS_INVASION_START"/>
+	<event load="QUEST_CREWDEAD_START"/>
+
+	<event load="QUEST_CONSTRUCTIONYARD"/> <!--newEvents-->
+</eventList>
+
+
+
+<!--
+***
+Smaller Event Lists
+***
+-->
+<eventList name="OVERRIDE_FEDERATION_BASE_ASSIST">
+	<event>
+		<text id="event_OVERRIDE_FEDERATION_BASE_ASSIST_1_text"/>
+		<ship load="AUTO_FEDERATION_BASE" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_OVERRIDE_FEDERATION_BASE_ASSIST_1_text"/>
+		<ship load="AUTO_FEDERATION_BASE2" hostile="true"/>
+	</event>
+	<!-- the new ones-->
+	<event>
+		<text id="event_OVERRIDE_FEDERATION_BASE_ASSIST_3_text"/>
+		<ship load="REBEL_FEDERATION_PDS" hostile="true"/>
+		<environment type="PDS" target="enemy"/>
+	</event>
+	<event>
+		<text id="event_OVERRIDE_FEDERATION_BASE_ASSIST_4_text"/>
+		<ship load="AUTO_FEDERATION_BASE2" hostile="true"/>
+		<environment type="PDS" target="enemy"/>
+	</event>
+</eventList>
+
+<ship name="REBEL_FEDERATION_PDS" auto_blueprint="SHIPS_REBEL_ELITE">
+	<escape  chance="0.8" min="4" max="6">
+		<text id="ship_REBEL_FEDERATION_PDS_escape_text"/>
+	</escape>
+	<gotaway>
+		<text id="ship_REBEL_FEDERATION_PDS_gotaway_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_REBEL_FEDERATION_PDS_gotaway_c1_text"/>
+				<crewMember amount="1"/>
+				<autoReward level="MED">scrap</autoReward>
+			</event>
+		</choice>
+	</gotaway>
+	<destroyed>
+		<text id="ship_REBEL_FEDERATION_PDS_destroyed_text"/>
+		<autoReward level="LOW">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_REBEL_FEDERATION_PDS_gotaway_c1_text"/>
+				<crewMember amount="1"/>
+				<autoReward level="MED">scrap</autoReward>
+			</event>
+		</choice>
+	</destroyed>
+	<deadCrew>
+		<text id="ship_REBEL_FEDERATION_PDS_deadCrew_text"/>
+		<autoReward level="MED">standard</autoReward>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="ship_REBEL_FEDERATION_PDS_gotaway_c1_text"/>
+				<crewMember amount="1"/>
+				<autoReward level="MED">scrap</autoReward>
+			</event>
+		</choice>
+	</deadCrew>
+</ship>
+</FTL>

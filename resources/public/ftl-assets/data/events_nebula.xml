@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--     ' " "
+			SUMMARY  - 
+A list of all main events to be called by lists
+	(does not include sub-events)
+
+
+
+	NOTE: we need to make all lists with "NEBULA_" in it trigger the creation of a nebula
+
+
+Structure:
+	FLEET_EASY_NEBULA
+	NEBULA_EMPTY
+
+Hostile:
+	NEBULA_REBEL
+	NEBULA_AUTO
+	NEBULA_AUTO_WARNING
+	NEBULA_PIRATE    				NEW
+	NEBULA_MANTIS_FIGHT				NEW
+
+Neutral:
+	NEBULA_REBEL_UNDETECTED
+	NEBULA_PIRATE_SMUGGLE
+	NEBULA_AUTO_DEFENSE_ITEM
+	NEBULA_LOST_SHIP
+	NEBULA_WEAPONS_TRADER			NEW
+	NEBULA_ROCK_RACIST				NEW
+	NEBULA_MANTIS_CHOICE			NEW
+	NEBULA_REBEL_CHASE				NEW
+
+Boarders:
+	NEBULA_BOARDING
+
+Items:
+	NEBULA_TRADER
+
+Storm Environment:
+	STORM_AUTO
+	STORM_REBEL
+	STORM_BOARDING
+	STORM_ITEMS
+
+-->
+
+
+<eventList name="NEBULA_HOSTILE">
+	<event load="NEBULA_REBEL"/>
+	<event load="NEBULA_AUTO"/>
+	<event load="NEBULA_AUTO_WARNING"/>
+	<event load="NEBULA_PIRATE"/>
+	<event load="NEBULA_MANTIS_FIGHT"/>
+	<event load="STORM_AUTO"/>
+	<event load="STORM_REBEL"/>
+	<event load="NEBULA_BOARDING"/>
+	<!--<event load="STORM_BOARDING"/>-->
+</eventList>
+
+<eventList name="NEBULA_NEUTRAL">
+	<event load="NEBULA_REBEL_UNDETECTED"/>
+	<event load="NEBULA_PIRATE_SMUGGLE"/>
+	<event load="NEBULA_AUTO_DEFENSE_ITEM"/>
+	<event load="NEBULA_LOST_SHIP"/>
+	<event load="NEBULA_WEAPONS_TRADER"/>
+	<event load="NEBULA_ROCK_RACIST"/>
+	<event load="NEBULA_MANTIS_CHOICE"/>
+	<event load="NEBULA_REBEL_CHASE"/>
+</eventList>
+
+
+
+
+<!--
+*********
+		STRUCTURE!!!
+	Others events necessary for strucrtural stuff
+**********
+-->
+
+<event name="START_BEACON_NEBULA">
+	<text load="START_BEACON_NEBULA"/>
+</event>
+<textList name="START_BEACON_NEBULA">
+	<text id="text_START_BEACON_NEBULA_1"/>
+	<text id="text_START_BEACON_NEBULA_2"/>
+	<text id="text_START_BEACON_NEBULA_3"/>
+	<text id="text_START_BEACON_NEBULA_4"/>
+	<text id="text_START_BEACON_NEBULA_5"/>
+	<text id="text_START_BEACON_NEBULA_6"/>
+</textList>
+
+<!-- for when the fleet takes over a nebula beacon -->
+<event name = "FLEET_EASY_NEBULA">
+	<text id="event_FLEET_EASY_NEBULA_text"/>
+	<ship load = "LONG_FLEET" hostile ="true"/>
+	<environment type="storm"/>
+</event>
+
+<event name="NEBULA_STORE">
+	<text load="NEBULA_STORE"/>
+	<environment type="nebula"/>
+	<store/>
+</event>
+<textList name="NEBULA_STORE">
+	<text id="text_NEBULA_STORE_1"/>
+	<text id="text_NEBULA_STORE_2"/>
+	<text id="text_NEBULA_STORE_3"/>
+	<text id="text_NEBULA_STORE_4"/>
+	<text id="text_NEBULA_STORE_5"/>
+</textList>
+
+<event name="NEBULA_EMPTY">
+	<text load = "NEBULA_EMPTY_LIST"/>
+	<environment type="nebula"/>
+</event>
+<textList name ="NEBULA_EMPTY_LIST">
+	<text id="text_NEBULA_EMPTY_LIST_1"/>
+	<text id="text_NEBULA_EMPTY_LIST_2"/>
+	<text id="text_NEBULA_EMPTY_LIST_3"/>
+	<text id="text_NEBULA_EMPTY_LIST_4"/>
+	<text id="text_NEBULA_EMPTY_LIST_5"/>
+	<text id="text_NEBULA_EMPTY_LIST_6"/>
+	<text id="text_NEBULA_EMPTY_LIST_7"/>
+	<text id="text_NEBULA_EMPTY_LIST_8"/>
+	<text id="text_NEBULA_EMPTY_LIST_9"/>
+</textList>
+
+
+
+<!--
+*********
+		HOSTILE!!!
+	Events that call up a fight for sure
+**********
+-->
+
+<event name="NEBULA_REBEL">
+	<text load="NEBULA_REBEL_LIST"/>
+	<ship load="REBEL" hostile="true"/>
+	<environment type="nebula"/>
+</event>
+<textList name="NEBULA_REBEL_LIST">
+	<text id="text_NEBULA_REBEL_LIST_1"/>
+	<text id="text_NEBULA_REBEL_LIST_2"/>
+	<text id="text_NEBULA_REBEL_LIST_3"/>
+	<text id="text_NEBULA_REBEL_LIST_4"/>
+	<text id="text_NEBULA_REBEL_LIST_5"/>
+	<text id="text_NEBULA_REBEL_LIST_6"/>
+	<text id="text_NEBULA_REBEL_LIST_7"/>
+</textList>
+
+
+<event name="NEBULA_AUTO">
+	<text load="NEBULA_AUTO_LIST"/>
+	<ship load="REBEL_AUTO" hostile="true"/>
+	<environment type="nebula"/>
+</event>
+<textList name="NEBULA_AUTO_LIST">
+	<text id="text_NEBULA_AUTO_LIST_1"/>
+	<text id="text_NEBULA_AUTO_LIST_2"/>
+	<text id="text_NEBULA_AUTO_LIST_3"/>
+	<text id="text_NEBULA_AUTO_LIST_4"/>
+	<text id="text_NEBULA_AUTO_LIST_5"/>
+</textList>
+
+
+<event name="NEBULA_AUTO_WARNING" unique = "true">
+	<text id="event_NEBULA_AUTO_WARNING_text"/>
+	<ship load="REBEL_AUTO_WARNING" hostile="true"/>
+	<environment type="nebula"/>
+</event>
+
+<event name="NEBULA_PIRATE">
+	<text load="NEBULA_PIRATE"/>
+	<ship load="PIRATE" hostile="true"/>
+</event>
+<textList name="NEBULA_PIRATE">	<!-- JUSTIN - ADD MORE -->
+	<text id="text_NEBULA_PIRATE_1"/>
+	<text id="text_NEBULA_PIRATE_2"/>
+	<text id="text_NEBULA_PIRATE_3"/>
+	<text id="text_NEBULA_PIRATE_4"/>
+	<text id="text_NEBULA_PIRATE_5"/>
+</textList>
+
+<event name="NEBULA_MANTIS_FIGHT" unique="false">
+	<text load="NEBULA_MANTIS_FIGHT"/>
+	<ship load="MANTIS_FIGHT" hostile="true"/>
+	<environment type="nebula"/>
+</event>
+<textList name="NEBULA_MANTIS_FIGHT">
+	<text id="text_NEBULA_MANTIS_FIGHT_1"/>
+	<text id="text_NEBULA_MANTIS_FIGHT_2"/>
+	<text id="text_NEBULA_MANTIS_FIGHT_3"/>
+	<text id="text_NEBULA_MANTIS_FIGHT_4"/>
+	<text id="text_NEBULA_MANTIS_FIGHT_5"/>
+
+</textList>
+
+
+
+
+
+
+
+
+
+
+<!--
+*********
+		NEUTRAL!!!
+	Events that could have a fight
+**********
+-->
+
+<event name="NEBULA_REBEL_UNDETECTED" unique="true">  <!-- give player option to hide, -->
+	<text id="event_NEBULA_REBEL_UNDETECTED_text"/>
+	<ship load="REBEL" hostile="false"/>
+	<environment type="nebula"/>
+	<choice>
+		<text id="event_NEBULA_REBEL_UNDETECTED_c1_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_REBEL_UNDETECTED_c2_choice"/>
+		<event load="NEBULA_REBEL_UNDETECTED_LIST"/>
+	</choice>
+	<choice req="cloaking" hidden="true">
+		<text id="event_NEBULA_REBEL_UNDETECTED_c3_choice"/>
+		<event>
+			<text id="event_NEBULA_REBEL_UNDETECTED_c3_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="NEBULA_REBEL_UNDETECTED_LIST">
+	<event>
+		<text id="event_NEBULA_REBEL_UNDETECTED_LIST_1_text"/>
+		<choice>
+			<text id="event_NEBULA_REBEL_UNDETECTED_LIST_1_c1_choice"/>
+			<event>
+				<ship hostile="true"/>
+			</event>
+		</choice>
+		<choice req="engines" lvl="4" hidden="true">
+			<text id="event_NEBULA_REBEL_UNDETECTED_LIST_1_c2_choice"/>
+			<event>
+				<text id="event_NEBULA_REBEL_UNDETECTED_LIST_1_c2_text"/>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_NEBULA_REBEL_UNDETECTED_LIST_2_text"/>
+	</event>
+	<event>
+		<text id="event_NEBULA_REBEL_UNDETECTED_LIST_3_text"/>
+		<modifyPursuit amount="1"/>
+	</event>
+</eventList>
+
+
+<event name="NEBULA_PIRATE_SMUGGLE">   <!-- TO DO - NEED TO MAKE A NEW PIRATE SHIP THAT ATTEMPTS TO BRIBE YOU WHEN SURRENDERING-->
+	<text id="event_NEBULA_PIRATE_SMUGGLE_text"/>
+	<environment type="nebula"/>
+	<choice>
+		<text id="event_NEBULA_PIRATE_SMUGGLE_c1_choice"/>
+		<event>
+			<text id="event_NEBULA_PIRATE_SMUGGLE_c1_text"/>
+			<ship load="PIRATE_SMUGGLE" hostile ="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_PIRATE_SMUGGLE_c2_choice"/>
+		<event>
+			<text id="event_NEBULA_PIRATE_SMUGGLE_c2_text"/>
+		</event>
+	</choice>
+	<choice req="weapons" lvl="6" hidden="true">
+		<text id="event_NEBULA_PIRATE_SMUGGLE_c3_choice"/>
+		<event>
+			<text id="event_NEBULA_PIRATE_SMUGGLE_c3_text"/>
+			<choice>
+				<text id="event_NEBULA_PIRATE_SMUGGLE_c3_c1_choice"/>
+				<event>
+					<autoReward level="MED">fuel</autoReward>
+				</event>
+			</choice>
+			<choice>
+				<text id="event_NEBULA_PIRATE_SMUGGLE_c3_c2_choice"/>
+				<event>
+					<ship load="PIRATE_SMUGGLE" hostile ="true"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+
+
+<event name="NEBULA_AUTO_DEFENSE_ITEM" unique="true">
+	<text id="event_NEBULA_AUTO_DEFENSE_ITEM_text"/>
+	<ship load="REBEL_AUTO_ITEM" hostile="false"/>  <!-- ship is in other xmls -->
+	<choice>
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_c1_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_c2_choice"/>
+		<event/>
+	</choice>
+	<choice req="cloaking" lvl="1" max_group="0" hidden="true">
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_c3_choice"/>
+		<event load="NEBULA_AUTO_DEFENSE_ITEM_CLOAK"/>
+	</choice>
+	<choice req="cloaking" lvl="2" max_group="0" hidden="true">
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_c4_choice"/>
+			<event>
+			<text id="event_NEBULA_AUTO_DEFENSE_ITEM_c4_text"/>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event load="DEFENSE_ITEM_LIST"/>
+			</choice>
+		</event>
+	</choice>
+	<choice req="hacking" lvl="1" max_group="1" hidden="false"><!--DLC-->
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_c5_choice"/>
+		<event load="NEBULA_AUTO_DEFENSE_ITEM_HACK"/>
+	</choice>
+	<choice req="hacking" lvl="2" max_group="1" hidden="false"><!--DLC-->
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_c6_choice"/>
+		<event>
+			<text id="event_NEBULA_AUTO_DEFENSE_ITEM_c6_text"/>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event load="DEFENSE_ITEM_LIST"/>
+			</choice>
+		</event>
+	</choice>
+	<environment type="nebula"/>
+</event>
+<eventList name="NEBULA_AUTO_DEFENSE_ITEM_CLOAK"> <!--DLC EVENTLIST-->
+	<event>
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_CLOAK_1_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="DEFENSE_ITEM_LIST"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_CLOAK_2_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+<eventList name="NEBULA_AUTO_DEFENSE_ITEM_HACK"> <!--DLC EVENTLIST-->
+	<event>
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_HACK_1_text"/>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="DEFENSE_ITEM_LIST"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_NEBULA_AUTO_DEFENSE_ITEM_HACK_2_text"/>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+
+
+
+<event name="NEBULA_LOST_SHIP" unique="true">
+	<text id="event_NEBULA_LOST_SHIP_text"/>
+	<environment type="nebula"/>
+	<choice hidden="true">
+		<text id="event_NEBULA_LOST_SHIP_c1_choice"/>
+		<event load="NEBULA_LOST_SHIP_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_LOST_SHIP_c2_choice"/>
+		<event/>
+	</choice>
+	<choice req="teleporter" hidden="true">
+		<text id="event_NEBULA_LOST_SHIP_c3_choice"/>
+		<event>
+			<text id="event_NEBULA_LOST_SHIP_c3_text"/>
+			<crewMember amount="1"/>
+			<autoReward level="MED">scrap_only</autoReward>
+		</event>
+	</choice>
+	<choice req="ADV_SCANNERS" hidden="true">
+		<text id="event_NEBULA_LOST_SHIP_c4_choice"/>
+		<event load="NEBULA_LOST_SHIP_LIST2"/>
+	</choice>
+</event>
+<eventList name="NEBULA_LOST_SHIP_LIST">
+	<event>
+		<text id="event_NEBULA_LOST_SHIP_LIST_1_text"/>
+	</event>
+	<event>
+		<text id="event_NEBULA_LOST_SHIP_LIST_2_text"/>
+		<ship load="REBEL" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_NEBULA_LOST_SHIP_LIST_3_text"/>
+		<crewMember amount="1"/>
+	</event>
+</eventList>
+<eventList name="NEBULA_LOST_SHIP_LIST2">
+	<event>
+		<text id="event_NEBULA_LOST_SHIP_LIST2_1_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_NEBULA_LOST_SHIP_LIST2_2_text"/>
+		<crewMember amount="1"/>
+	</event>
+</eventList>
+
+<event name="NEBULA_WEAPONS_TRADER" unique="true">
+	<text id="event_NEBULA_WEAPONS_TRADER_text"/>
+	<environment type="nebula"/>
+	<ship load="PIRATE" hostile="false"/>
+	<choice>
+		<text id="event_NEBULA_WEAPONS_TRADER_c1_choice"/>
+		<event/>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_WEAPONS_TRADER_c2_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_NEBULA_WEAPONS_TRADER_c3_choice"/>
+		<event load="NEBULA_WEAPONS_TRADER_LIST"/>
+	</choice>
+	<choice req="mind" hidden="true"> <!--DLC-->
+		<text id="event_NEBULA_WEAPONS_TRADER_c4_choice"/>
+		<event load="NEBULA_WEAPONS_TRADER_LIST2"/>
+	</choice>
+</event>
+<eventList name="NEBULA_WEAPONS_TRADER_LIST">
+	<event>
+		<text id="event_NEBULA_WEAPONS_TRADER_LIST_1_text"/>
+		<item_modify>
+			<item type="scrap" min="-45" max="-45"/>
+		</item_modify>
+		<weapon name="RANDOM"/>
+	</event>
+	<event>
+		<text id="event_NEBULA_WEAPONS_TRADER_LIST_2_text"/>
+		<item_modify>
+			<item type="scrap" min="-45" max="-45"/>
+		</item_modify>
+		<choice>
+			<text id="event_NEBULA_WEAPONS_TRADER_LIST_2_c1_choice"/>
+			<event>
+				<ship hostile="true"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_NEBULA_WEAPONS_TRADER_LIST_2_c2_choice"/>
+			<event/>
+		</choice>
+	</event>
+</eventList>
+<eventList name="NEBULA_WEAPONS_TRADER_LIST2"> <!--DLC-->
+	<event>
+		<text id="event_NEBULA_WEAPONS_TRADER_LIST2_1_text"/>
+		<choice>
+			<text id="event_NEBULA_WEAPONS_TRADER_LIST2_1_c1_choice"/>
+			<event>
+				<text id="event_NEBULA_WEAPONS_TRADER_LIST2_1_c1_text"/>
+				<item_modify>
+					<item type="scrap" min="-45" max="-45"/>
+				</item_modify>
+				<weapon name="RANDOM"/>
+			</event>
+		</choice>
+		<choice>
+			<text id="event_NEBULA_WEAPONS_TRADER_LIST2_1_c2_choice"/>
+			<event>
+				<text id="event_NEBULA_WEAPONS_TRADER_LIST2_1_c2_text"/>
+			</event>
+		</choice>
+	</event>
+	<event>
+		<text id="event_NEBULA_WEAPONS_TRADER_LIST2_2_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+
+
+<event name="NEBULA_ROCK_RACIST" unique="true">
+	<text id="event_NEBULA_ROCK_RACIST_text"/>
+	<ship load="ROCK_SHIP" hostile="false"/>
+	<environment type="storm"/>
+	<choice>
+		<text id="event_NEBULA_ROCK_RACIST_c1_choice"/>
+		<event/>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_ROCK_RACIST_c2_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="rock">
+		<text id="event_NEBULA_ROCK_RACIST_c3_choice"/>
+		<event>
+			<text id="event_NEBULA_ROCK_RACIST_c3_text"/>
+			<autoReward level="HIGH">standard</autoReward>
+		</event>
+	</choice>
+</event>
+
+<event name="NEBULA_MANTIS_CHOICE" unique="true">
+	<text id="event_NEBULA_MANTIS_CHOICE_text"/>
+	<ship load="MANTIS_FIGHT" hostile="false"/>
+	<environment type="nebula"/>
+	<choice>
+		<text id="event_NEBULA_MANTIS_CHOICE_c1_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_MANTIS_CHOICE_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+
+<event name="NEBULA_REBEL_CHASE" unique="true">
+	<text id="event_NEBULA_REBEL_CHASE_text"/>
+	<ship load="REBEL" hostile="false"/>
+	<environment type="nebula"/>
+	<choice>
+		<text id="event_NEBULA_REBEL_CHASE_c1_choice"/>
+		<event>
+			<text id="event_NEBULA_REBEL_CHASE_c1_text"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_REBEL_CHASE_c2_choice"/>
+		<event load="NEBULA_REBEL_CHASE_LIST"/>
+	</choice>
+	<choice req="sensors" lvl="3">
+		<text id="event_NEBULA_REBEL_CHASE_c3_choice"/>
+		<event>
+			<text id="event_NEBULA_REBEL_CHASE_c3_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice req="ADV_SCANNERS" hidden="true">
+		<text id="event_NEBULA_REBEL_CHASE_c4_choice"/>
+		<event>
+			<text id="event_NEBULA_REBEL_CHASE_c3_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice req="LIFE_SCANNER" hidden="true"><!--DLC-->
+		<text id="event_NEBULA_REBEL_CHASE_c5_choice"/>
+		<event>
+			<text id="event_NEBULA_REBEL_CHASE_c5_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+</event>
+<eventList name="NEBULA_REBEL_CHASE_LIST">
+	<event>
+		<text id="event_NEBULA_REBEL_CHASE_LIST_1_text"/>
+		<ship hostile="true"/>
+	</event>
+	<event>
+		<text id="event_NEBULA_REBEL_CHASE_LIST_2_text"/>
+	</event>
+	<event>
+		<text id="event_NEBULA_REBEL_CHASE_LIST_3_text"/>
+		<modifyPursuit amount="1"/>
+	</event>
+</eventList>
+
+
+
+<!--
+*********
+		ITEMS!!!
+	Events that give items
+**********
+-->
+
+<event name="NEBULA_TRADER" unique="true">
+	<text id="event_NEBULA_TRADER_text"/>
+	<environment type="nebula"/>
+	<choice>
+		<text id="event_NEBULA_TRADER_c1_choice"/>
+		<event load="TRADER_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_TRADER_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+
+
+
+
+
+
+
+<!--
+*********
+		BOARDERS!!!
+	Events with boarder calls
+**********
+-->
+
+<event name="NEBULA_BOARDING" unique="true">
+	<text load="NEBULA_BOARDING_TEXT"/>
+	<environment type="nebula"/>
+	<boarders min="2" max="4" class="human"/>
+</event>
+<textList name="NEBULA_BOARDING_TEXT">
+	<text id="text_NEBULA_BOARDING_TEXT_1"/>
+	<text id="text_NEBULA_BOARDING_TEXT_2"/>
+	<text id="text_NEBULA_BOARDING_TEXT_3"/>
+</textList>
+
+
+
+
+
+
+<!--
+*********
+		STORM!!!
+	Events with storm
+**********
+-->
+
+
+<event name="STORM_AUTO" unique = "true">
+	<text id="event_STORM_AUTO_text"/>
+	<environment type="storm"/>
+	<choice>
+		<text id="event_STORM_AUTO_c1_choice"/>
+		<event>
+			<ship load = "REBEL_AUTO" hostile="true"/>
+		</event>
+	</choice>
+	<choice req="engines" lvl="3" max_group="0" hidden="true">
+		<text id="event_STORM_AUTO_c2_choice"/>
+		<event load="STORM_AUTO_ESCAPE"/>
+	</choice>
+	<choice req="engines" lvl="6" max_group="0" hidden="true">
+		<text id="event_STORM_AUTO_c3_choice"/>
+		<event>
+			<text id="event_STORM_AUTO_c3_text"/>
+		</event>
+	</choice>
+	<choice req="cloaking" hidden="true">
+		<text id="event_STORM_AUTO_c4_choice"/>
+		<event>
+			<text id="event_STORM_AUTO_c4_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="STORM_AUTO_ESCAPE">
+	<event>
+		<text id="event_STORM_AUTO_ESCAPE_1_text"/>
+	</event>
+	<event>
+		<text id="event_STORM_AUTO_ESCAPE_2_text"/>
+		<ship load = "REBEL_AUTO" hostile="true"/>
+	</event>
+</eventList>
+
+<event name="STORM_REBEL" unique = "true">
+	<text id="event_STORM_REBEL_text"/>
+	<ship load = "REBEL" hostile = "true"/>
+	<environment type="storm"/>
+</event>
+
+
+<event name="STORM_BOARDING" unique="true"> <!--DLC - Kinda-->
+	<text id="event_STORM_BOARDING_text"/>
+	<environment type="storm"/>
+	<boarders min="3" max="4" class="human"/>
+	<autoReward level="MED">standard</autoReward>
+</event>
+
+<event name="STORM_ITEMS" unique = "true">
+	<text id="event_STORM_ITEMS_text"/>
+	<choice hidden="true">
+		<text id="event_STORM_ITEMS_c1_choice"/>
+		<event load="STORM_ITEMS_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_STORM_ITEMS_c2_choice"/>
+		<event/>
+	</choice>
+	<choice req="pilot" lvl="2" hidden="true">
+		<text id="event_STORM_ITEMS_c3_choice"/>
+		<event load="STORM_ITEMS_PILOTING"/>
+	</choice>
+	<environment type="storm"/>
+</event>
+<eventList name="STORM_ITEMS_LIST">
+	<event>
+		<text id="event_STORM_ITEMS_LIST_1_text"/>
+		<damage amount="4"/>
+		<damage amount="0" system="random" effect="breach"/>  <!--DLC-->
+		<autoReward level="HIGH">stuff</autoReward>
+	</event>
+	<event>
+		<text id="event_STORM_ITEMS_LIST_2_text"/>
+		<crewMember amount="1"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_STORM_ITEMS_LIST_3_text"/>
+		<removeCrew>
+			<clone>true</clone>
+			<text id="event_STORM_ITEMS_LIST_3_c0_clone"/>
+		</removeCrew>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_STORM_ITEMS_LIST_4_text"/>
+		<autoReward level="MED">drone</autoReward>
+	</event>
+	<event>
+		<text id="event_STORM_ITEMS_LIST_5_text"/>
+		<autoReward level="MED">weapon</autoReward>
+	</event>
+</eventList>
+<eventList name="STORM_ITEMS_PILOTING">
+	<event>
+		<text id="event_STORM_ITEMS_PILOTING_1_text"/>
+		<crewMember amount="1"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_STORM_ITEMS_PILOTING_2_text"/>
+		<autoReward level="MED">drone</autoReward>
+	</event>
+	<event>
+		<text id="event_STORM_ITEMS_PILOTING_3_text"/>
+		<autoReward level="LOW">weapon</autoReward>
+	</event>
+	<event>
+		<text id="event_STORM_ITEMS_PILOTING_4_text"/>
+	</event>
+</eventList>
+
+
+
+
+</FTL>

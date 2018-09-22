@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+			SUMMARY  - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+Structure:
+	START_BEACON_ZOLTAN
+	STORE_ZOLTAN
+	NOTHING_ZOLTAN
+
+Item:	
+	ZOLTAN_FREE_AUGMENT
+	ZOLTAN_FREE_MAP
+	ZOLTAN_ODD_MOON   (ZOLTAN_ODD_MOON_CHECK)
+
+Hostile:
+	ZOLTAN_FIGHT
+	ZOLTAN_PIRATE
+	ZOLTAN_MANTIS
+	ZOLTAN_ENGI
+
+
+Neutral:
+	ZOLTAN_LIFERAFT  (ZOLTAN_LIFERAFT_HIRE)
+
+Environmnt:
+-->
+
+<!-- Event ideas -
+Condescending scientist who asks to join your ship for a fee because he wants to study your barbarian culture.
+
+shield research center - jams shields
+
+-asteroids, sun
+
+-->
+
+
+
+<eventList name="HOSTILE_ZOLTAN">
+	<event load="ZOLTAN_FIGHT"/>
+	<event load="ZOLTAN_PIRATE"/>
+	<event load="ZOLTAN_MANTIS"/>
+	<event load="ZOLTAN_ENGI"/>
+	<event load="ZOLTAN_ASTEROID"/>
+
+
+	<event load="REBEL"/>
+	<event load="REBEL_AUTO"/>
+</eventList>
+
+
+
+
+
+
+<eventList name="NEUTRAL_ZOLTAN">
+	<event load="ZOLTAN_LIFERAFT"/>
+	<event load="ZOLTAN_SCIENCE_DOCK"/>
+	<event load="ZOLTAN_RIFT_FIGHT"/>
+	<event load="ZOLTAN_CREW_SCAN"/>
+
+	<event load="REFUGEE_NO_DISTRESS_ZOLTAN"/> <!--DLC - In newEvents-->
+
+	<event load="FRIENDLY_SLAVER"/>
+	<event load="PIRATE_BRIBER"/>
+	<event load="ASTEROID_EXPLORE"/>
+
+	<!--
+	<event load="BROKEN_REBEL_DRONE"/>
+	<event load="AUTO_DEFENSE_ITEM"/> -->
+</eventList>
+
+
+
+
+
+
+<eventList name="ITEM_ZOLTAN">
+	<event load="ZOLTAN_FREE_AUGMENT"/>
+	<event load="ZOLTAN_FREE_MAP"/>
+	<event load="ZOLTAN_ODD_MOON"/>
+
+	<event load="FIND_DRONE"/>
+	<event load="FREE_ITEMS"/>
+	<event load="FUEL_FOR_DRONE"/>
+	<event load="REFUEL_STATION"/>
+	<event load="REPAIR_STATION"/>
+	<event load="TRADER_CIV"/>
+</eventList>
+
+
+
+
+<eventList name="BOARDERS_ZOLTAN">
+	<event load="ZOLTAN_BOARDERS"/>
+	<event load="ZOLTAN_BOARDERS_MANTIS"/>
+
+
+	<event load="BOARDERS_HACKING"/>
+
+</eventList>
+
+
+<eventList name="DISTRESS_BEACON_ZOLTAN">
+	<event load="ZOLTAN_DISTRESS_MANTIS"/>
+	<event load="ZOLTAN_DISTRESS_SHELL"/>
+
+	<event load="REFUGEE_DISTRESS_ZOLTAN"/> <!--DLC - In newEvents-->
+
+
+	<event load="DISTRESS_SATELLITE_DEFENSE"/>
+	<event load="DISTRESS_STATION_FIRE"/>
+	<event load="FRIENDLY_BEACON"/>
+	<event load="TRAP_BEACON"/>
+	<event load="STRANDED_BEACON"/>
+</eventList>
+
+
+
+<eventList name="QUESTS_ZOLTAN">
+	<event load="ZOLTAN_TRADE_HUB"/>
+	<event load="ZOLTAN_QUEST_PRIMITIVES"/>
+
+
+	<event load="FEDERATION_PLANET_SIGNAL"/>
+	<event load="QUEST_MANTIS_INVASION_START"/>
+	<event load="QUEST_CREWDEAD_START"/>
+</eventList>
+
+
+<eventList name="NEBULA_ZOLTAN">
+	<event load="NEBULA_ZOLTAN_ROCK"/>
+	<event load="NEBULA_ZOLTAN_EYE"/>
+	<event load="STORM_ZOLTAN_SUPPLY_CHOICE"/>
+
+
+	<event load="NEBULA_EMPTY"/>
+	<event load="NEBULA_EMPTY"/>
+	<event load="NEBULA_REBEL"/>
+	<event load="NEBULA_AUTO"/>
+</eventList>
+
+
+
+
+
+
+<!--
+*********
+		STRUCTURE!!!
+	Required structural 
+**********
+-->
+
+<event name="START_BEACON_ZOLTAN">
+	<text load="START_BEACON_ZOLTAN"/>
+</event>
+<textList name="START_BEACON_ZOLTAN">
+	<text id="text_START_BEACON_ZOLTAN_1"/>
+	<text id="text_START_BEACON_ZOLTAN_2"/>
+	<text id="text_START_BEACON_ZOLTAN_3"/>
+	<text id="text_START_BEACON_ZOLTAN_4"/>
+</textList>
+
+<event name="STORE_ZOLTAN">
+	<text load="STORE_ZOLTAN"/>
+	<store/>
+</event>
+<textList name="STORE_ZOLTAN">
+	<text id="text_STORE_ZOLTAN_1"/>
+	<text id="text_STORE_ZOLTAN_2"/>
+	<text id="text_STORE_ZOLTAN_3"/>
+
+
+</textList>
+
+<event name="NOTHING_ZOLTAN">
+	<text load="NOTHING_ZOLTAN"/>
+</event>
+<textList name="NOTHING_ZOLTAN">
+	<text id="text_NOTHING_ZOLTAN_1"/>
+	<text id="text_NOTHING_ZOLTAN_2"/>
+	<text id="text_NOTHING_ZOLTAN_3"/>
+	<!-- TO DO - need more -->
+	<text id="text_NOTHING_ZOLTAN_4"/>
+	<text id="text_NOTHING_ZOLTAN_5"/>
+	<text id="text_NOTHING_ZOLTAN_6"/>
+	<text id="text_NOTHING_ZOLTAN_7"/>
+</textList>
+
+
+
+
+
+<!--
+*********
+		DISTRESS!!!
+	Beacons
+**********
+-->
+
+<event name="ZOLTAN_DISTRESS_MANTIS" unique="true">
+	<text id="event_ZOLTAN_DISTRESS_MANTIS_text"/>
+	<environment type="asteroid"/>
+	<distressBeacon/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_DISTRESS_MANTIS_c1_choice"/>
+		<event>
+			<text id="event_ZOLTAN_DISTRESS_MANTIS_c1_text"/>
+			<environment type="asteroid"/>
+			<ship load="ZOLTAN_SHIP_SAVE_MANTIS1" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_DISTRESS_MANTIS_c2_choice"/>
+		<event>
+			<text id="event_ZOLTAN_DISTRESS_MANTIS_c2_text"/>
+			<environment type="asteroid"/>
+			<ship load="ZOLTAN_SHIP_SAVE_MANTIS2" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_DISTRESS_MANTIS_c3_choice"/>
+		<event>
+			<text id="event_ZOLTAN_DISTRESS_MANTIS_c3_text"/>
+		</event>
+	</choice>
+</event>
+
+
+<event name="ZOLTAN_DISTRESS_SHELL" unique="true">
+	<text id="event_ZOLTAN_DISTRESS_SHELL_text"/>
+	<distressBeacon/>
+	<autoReward level="RANDOM">standard</autoReward>
+
+</event>
+
+
+
+
+<!--
+*********
+		QUEST!!!
+	Beacons
+**********
+-->
+
+
+<event name="ZOLTAN_TRADE_HUB" unique="true">   <!-- This is a 50/50 chance of quest start-->
+	<text id="event_ZOLTAN_TRADE_HUB_text"/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_TRADE_HUB_c1_choice"/>
+		<event load="ZOLTAN_TRADE_HUB_TALK"/>
+	</choice>
+	<choice hidden="true" req="teleporter" lvl="1">
+		<text id="event_ZOLTAN_TRADE_HUB_c2_choice"/>
+		<event>
+			<text id="event_ZOLTAN_TRADE_HUB_c2_text"/>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event load="ZOLTAN_TRADE_HUB_SUCCESS"/>
+			</choice>
+		</event>
+	</choice>
+	<choice req="energy">
+		<text id="event_ZOLTAN_TRADE_HUB_c3_choice"/>
+		<event>
+			<text id="event_ZOLTAN_TRADE_HUB_c3_text"/>
+			<item_modify>
+				<item type="scrap" min="-10" max="-10"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event load="ZOLTAN_TRADE_HUB_SUCCESS"/>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_TRADE_HUB_c4_choice"/>
+		<event>
+			<text id="event_ZOLTAN_TRADE_HUB_c4_text"/>
+		</event>
+	</choice>
+</event>
+
+
+<eventList name="ZOLTAN_TRADE_HUB_TALK">
+	<event>
+		<text id="event_ZOLTAN_TRADE_HUB_TALK_1_text"/>
+		<ship load="ZOLTAN_SHIP" hostile="true"/>
+		<boarders min="2" max="4" class="energy"/>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_TRADE_HUB_TALK_2_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="ZOLTAN_TRADE_HUB_SUCCESS"/>
+		</choice>
+	</event>
+</eventList>
+<eventList name="ZOLTAN_TRADE_HUB_SUCCESS">
+	<event>
+		<text id="event_ZOLTAN_TRADE_HUB_SUCCESS_1_text"/>
+		<store/>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_TRADE_HUB_SUCCESS_2_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event>
+				<text id="event_ZOLTAN_TRADE_HUB_SUCCESS_2_c1_text"/>
+				<quest event="ZOLTAN_QUEST_PRIMITIVES"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+<event name="ZOLTAN_QUEST_PRIMITIVES" unique="true">
+	<text id="event_ZOLTAN_QUEST_PRIMITIVES_text"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event>
+			<text id="event_ZOLTAN_QUEST_PRIMITIVES_c1_text"/>
+			<choice hidden="true">
+				<text id="event_ZOLTAN_QUEST_PRIMITIVES_c1_c1_choice"/>
+				<event>
+					<text id="event_ZOLTAN_QUEST_PRIMITIVES_c1_c1_text"/>
+					<ship load="ZOLTAN_PRIMITIVES_ZOLTAN" hostile="true"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_ZOLTAN_QUEST_PRIMITIVES_c1_c2_choice"/>
+				<event>
+					<text id="event_ZOLTAN_QUEST_PRIMITIVES_c1_c2_text"/>
+					<ship load="ZOLTAN_PRIMITIVES_REBEL" hostile="true"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_ZOLTAN_QUEST_PRIMITIVES_c1_c3_choice"/>
+				<event>
+					<text id="event_ZOLTAN_QUEST_PRIMITIVES_c1_c3_text"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+
+
+
+
+
+
+<!--
+*********
+		ITEM!!!
+	Events that can give something ususally no fight
+**********
+-->
+<event name="ZOLTAN_FREE_AUGMENT" unique="true">  <!-- this is pretty sweet :/  -->
+	<text id="event_ZOLTAN_FREE_AUGMENT_text"/>
+	<autoReward level="LOW">augment</autoReward>
+</event>
+
+<event name="ZOLTAN_FREE_MAP" unique="true">
+	<text id="event_ZOLTAN_FREE_MAP_text"/>
+	<reveal_map/>
+	<ship load="ZOLTAN_SHIP" hostile="false"/>
+</event>
+
+<event name="ZOLTAN_ODD_MOON" unique="true">
+	<text id="event_ZOLTAN_ODD_MOON_text"/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_ODD_MOON_c1_choice"/>
+		<event load="ZOLTAN_ODD_MOON_CHECK"/>
+	</choice>
+	<choice>
+		<text id="event_ZOLTAN_ODD_MOON_c2_choice"/>
+		<event>
+			<text id="event_ZOLTAN_ODD_MOON_c2_text"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="BOARDER">  <!-- TODO make sure this works!!! -->
+		<text id="event_ZOLTAN_ODD_MOON_c3_choice"/>
+		<event>
+			<text id="event_ZOLTAN_ODD_MOON_c3_text"/>
+			<item_modify>
+				<item type="drones" min="-1" max="-1"/>
+			</item_modify>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event>
+					<text id="event_ZOLTAN_ODD_MOON_c3_c1_text"/>
+					<crewMember amount="1" class="energy"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+
+<eventList name="ZOLTAN_ODD_MOON_CHECK">
+	<event>
+		<text id="event_ZOLTAN_ODD_MOON_CHECK_1_text"/>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_ODD_MOON_CHECK_2_text"/>
+		<autoReward level="LOW">weapon</autoReward>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_ODD_MOON_CHECK_3_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_ODD_MOON_CHECK_4_text"/>
+		<choice hidden="true">
+			<text id="event_ZOLTAN_ODD_MOON_CHECK_4_c1_choice"/>.
+			<event load="ZOLTAN_ODD_MOON_EXPLOSION"/>
+		</choice>
+		<choice>
+			<text id="event_ZOLTAN_ODD_MOON_CHECK_4_c2_choice"/>
+			<event/>
+		</choice>
+	</event>
+</eventList>
+
+<eventList name="ZOLTAN_ODD_MOON_EXPLOSION">
+	<event>
+		<text id="event_ZOLTAN_ODD_MOON_EXPLOSION_1_text"/>
+		<item_modify>
+			<item type="missiles" min="-1" max="-1"/>
+		</item_modify>
+		<autoReward level="RANDOM">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_ODD_MOON_EXPLOSION_2_text"/>
+		<item_modify>
+			<item type="missiles" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_ODD_MOON_EXPLOSION_3_text"/>
+		<autoReward level="RANDOM">weapon</autoReward>
+		<item_modify>
+			<item type="missiles" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+</eventList>
+
+
+<!--
+*********
+		HOSTILE!!!
+	Events that call up a fight for sure
+**********
+-->
+<event name="ZOLTAN_FIGHT">
+	<text load="ZOLTAN_FIGHT"/>
+	<ship load="ZOLTAN_SHIP" hostile="true"/>
+</event>
+<textList name="ZOLTAN_FIGHT">
+	<text id="text_ZOLTAN_FIGHT_1"/>
+	<text id="text_ZOLTAN_FIGHT_2"/>
+	<text id="text_ZOLTAN_FIGHT_3"/>
+	<text id="text_ZOLTAN_FIGHT_4"/>
+	<text id="text_ZOLTAN_FIGHT_5"/>
+	<text id="text_ZOLTAN_FIGHT_6"/>
+	<text id="text_ZOLTAN_FIGHT_7"/>
+	<!-- Add more! -->
+
+</textList>
+
+<event name="ZOLTAN_PIRATE">
+	<text load="ZOLTAN_PIRATE"/>
+	<ship load="PIRATE" hostile="true"/>
+</event>
+<textList name="ZOLTAN_PIRATE">
+	<text id="text_ZOLTAN_PIRATE_1"/>
+	<text id="text_ZOLTAN_PIRATE_2"/>
+	<text id="text_ZOLTAN_PIRATE_3"/>
+	<text id="text_ZOLTAN_PIRATE_4"/>
+	<text id="text_ZOLTAN_PIRATE_5"/>
+	<!-- Add more instead of repeating ! -->
+
+	<text id="text_ZOLTAN_PIRATE_1"/>
+	<text id="text_ZOLTAN_PIRATE_6"/>
+	<text id="text_ZOLTAN_PIRATE_3"/>
+	<text id="text_ZOLTAN_PIRATE_7"/>
+	<text id="text_ZOLTAN_PIRATE_5"/>
+</textList>
+
+<event name="ZOLTAN_MANTIS" unique="true">
+	<text id="event_ZOLTAN_MANTIS_text"/>
+	<ship load="MANTIS_FIGHT" hostile="true"/>
+</event>
+
+<event name="ZOLTAN_ENGI" unique="true">
+	<text id="event_ZOLTAN_ENGI_text"/>
+	<ship load="ENGI_SHIP" hostile="true"/>
+</event>
+
+
+<event name="ZOLTAN_ASTEROID" unique="true">
+	<text id="event_ZOLTAN_ASTEROID_text"/>
+	<environment type="asteroid"/>
+	<ship load="ZOLTAN_SHIP" hostile="true"/>
+</event>
+
+
+<!--
+*********
+		NEUTRAL!!!
+	Events that could have a fight
+**********
+-->
+
+<event name="ZOLTAN_LIFERAFT" unique="true">  <!-- ALSO A QUEST!!-->
+	<text id="event_ZOLTAN_LIFERAFT_text"/>
+	<ship load="ZOLTAN_LIFERAFT" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_LIFERAFT_c1_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_ZOLTAN_LIFERAFT_c2_choice"/>
+		<event>
+			<text id="event_ZOLTAN_LIFERAFT_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="ZOLTAN_LIFERAFT_HIRE">
+	<event>
+		<text id="event_ZOLTAN_LIFERAFT_HIRE_1_text"/>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_LIFERAFT_HIRE_2_text"/>
+		<item_modify>
+			<item type="scrap" min="-40" max="-40"/>
+		</item_modify>
+		<crewMember amount="1" class="energy"/>
+	</event>
+</eventList>
+
+
+<event name="ZOLTAN_SCIENCE_DOCK" unique="true">
+	<text id="event_ZOLTAN_SCIENCE_DOCK_text"/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_SCIENCE_DOCK_c1_choice"/>
+		<event load="ZOLTAN_SCIENCE_DOCK_LIST"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_SCIENCE_DOCK_c2_choice"/>
+		<event>
+			<text id="event_ZOLTAN_SCIENCE_DOCK_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="ZOLTAN_SCIENCE_DOCK_LIST">
+	<event>
+		<text id="event_ZOLTAN_SCIENCE_DOCK_LIST_1_text"/>
+		<ship load="ZOLTAN_SCIENCE_DOCK" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_SCIENCE_DOCK_LIST_2_text"/>
+		<autoReward level="MED">stuff</autoReward>
+	</event>
+</eventList>
+
+
+<event name="ZOLTAN_RIFT_FIGHT" unique="true">
+	<text id="event_ZOLTAN_RIFT_FIGHT_text"/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_RIFT_FIGHT_c1_choice"/>
+		<event>
+			<text id="event_ZOLTAN_RIFT_FIGHT_c1_text"/>
+			<ship load="ZOLTAN_RIFT_MANTIS" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_RIFT_FIGHT_c2_choice"/>
+		<event>
+			<text id="event_ZOLTAN_RIFT_FIGHT_c2_text"/>
+			<ship load="ZOLTAN_RIFT_SLUG" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_RIFT_FIGHT_c3_choice"/>
+		<event>
+			<text id="event_ZOLTAN_RIFT_FIGHT_c3_text"/>
+			<ship load="ZOLTAN_RIFT_ROCK" hostile="true"/>
+		</event>
+	</choice>
+	<!--
+	<choice hidden="true">
+		<text>Crystalline Beings.</text>
+		<event>
+			<text>The Zoltan is quiet for a moment, and then whispers, "Are you sure? Well, so be it then." A huge wormhole opens, and from within it looms a Crystalline ship, prepared for war.</text>
+			<ship load= ?!?!
+					JUSTIN DO THIS STILL!!!!!!! JUSTIN - TO DO
+		</event>
+	</choice> -->
+</event>
+<event name="ZOLTAN_RIFT_SUCCESS">
+	<text id="event_ZOLTAN_RIFT_SUCCESS_text"/>
+	<autoReward level="HIGH">standard</autoReward>
+</event>
+
+
+<event name="ZOLTAN_CREW_SCAN" unique="true">
+	<text id="event_ZOLTAN_CREW_SCAN_text"/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_CREW_SCAN_c1_choice"/>
+		<event>
+			<text id="event_ZOLTAN_CREW_SCAN_c1_text"/>
+			<ship load="ZOLTAN_SHIP" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_CREW_SCAN_c2_choice"/>
+		<event load="ZOLTAN_CREW_SCAN_LIST"/>
+	</choice>
+	<choice hidden="true" req="slug">
+		<text id="event_ZOLTAN_CREW_SCAN_c3_choice"/>
+		<event>
+			<text id="event_ZOLTAN_CREW_SCAN_c3_text"/>
+			<autoReward level="MED">fuel_only</autoReward>
+		</event>
+	</choice>
+	<choice hidden="true" req="mind">
+		<text id="event_ZOLTAN_CREW_SCAN_c4_choice"/>
+		<event>
+			<text id="event_ZOLTAN_CREW_SCAN_c4_text"/>
+			<autoReward level="MED">fuel_only</autoReward>
+		</event>
+	</choice>
+</event>
+<eventList name="ZOLTAN_CREW_SCAN_LIST">
+	<event>
+		<text id="event_ZOLTAN_CREW_SCAN_LIST_1_text"/>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_CREW_SCAN_LIST_2_text"/>
+		<choice hidden="true">
+			<text id="event_ZOLTAN_CREW_SCAN_LIST_2_c1_choice"/>
+			<event>
+				<text id="event_ZOLTAN_CREW_SCAN_LIST_2_c1_text"/>
+				<removeCrew>
+					<clone>false</clone>
+					<text id="event_ZOLTAN_CREW_SCAN_LIST_2_c1_c0_clone"/>
+				</removeCrew>
+			</event>
+		</choice>
+		<choice hidden="true">
+			<text id="event_ZOLTAN_CREW_SCAN_LIST_2_c2_choice"/>
+			<event>
+				<text id="event_ZOLTAN_CREW_SCAN_LIST_2_c2_text"/>
+				<ship load="ZOLTAN_CREW_SCAN" hostile="true"/>
+				<boarders min="2" max="4" class="energy"/>
+				<status type="divide" target="player" system="weapons" amount="2"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+
+
+<!--
+*********
+		NEBULA!!!
+	Events with unique environments
+**********
+-->
+<event name="NEBULA_ZOLTAN_ROCK" unique="true">
+	<text id="event_NEBULA_ZOLTAN_ROCK_text"/>
+	<environment type="nebula"/>
+	<ship load="ROCK_SHIP" hostile="true"/>
+</event>
+
+<event name="NEBULA_ZOLTAN_EYE" unique="true">
+	<text id="event_NEBULA_ZOLTAN_EYE_text"/>
+	<environment type="nebula"/>
+	<choice hidden="true">
+		<text id="event_NEBULA_ZOLTAN_EYE_c1_choice"/>
+		<event load="NEBULA_ZOLTAN_EYE_LIST"/>
+	</choice>
+	<choice>
+		<text id="event_NEBULA_ZOLTAN_EYE_c2_choice"/>
+		<event>
+			<text id="event_NEBULA_ZOLTAN_EYE_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="NEBULA_ZOLTAN_EYE_LIST">
+	<event>
+		<text id="event_NEBULA_ZOLTAN_EYE_LIST_1_text"/>
+		<weapon name="BOMB_HEAL"/>
+	</event>
+	<event>
+		<text id="event_NEBULA_ZOLTAN_EYE_LIST_2_text"/>
+		<ship load="ZOLTAN_SHIP" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_NEBULA_ZOLTAN_EYE_LIST_3_text"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_NEBULA_ZOLTAN_EYE_LIST_4_text"/>
+		<removeCrew>
+			<clone>false</clone>
+			<text id="event_NEBULA_ZOLTAN_EYE_LIST_4_c0_clone"/>
+		</removeCrew>
+	</event>
+</eventList>
+
+<event name="STORM_ZOLTAN_SUPPLY_CHOICE" unique="true">  <!-- can also use this with other sectors?-->
+	<text id="event_STORM_ZOLTAN_SUPPLY_CHOICE_text"/>
+	<environment type="storm"/>
+	<choice hidden="true">
+		<text id="event_STORM_ZOLTAN_SUPPLY_CHOICE_c1_choice"/>
+		<event>
+			<text id="event_STORM_ZOLTAN_SUPPLY_CHOICE_c1_text"/>
+			<ship load="STORM_PIRATE_SUPPLY_FUEL" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_STORM_ZOLTAN_SUPPLY_CHOICE_c2_choice"/>
+		<event>
+			<text id="event_STORM_ZOLTAN_SUPPLY_CHOICE_c2_text"/>
+			<ship load="STORM_PIRATE_SUPPLY_AMMO" hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_STORM_ZOLTAN_SUPPLY_CHOICE_c3_choice"/>
+		<event>
+			<text id="event_STORM_ZOLTAN_SUPPLY_CHOICE_c3_text"/>
+		</event>
+	</choice>
+</event>
+
+
+
+
+
+
+
+
+
+<!--
+*********
+		BOARDERS!!!
+	Events with boarder calls
+**********
+-->
+
+<event name="ZOLTAN_BOARDERS" unique="true">
+	<text id="event_ZOLTAN_BOARDERS_text"/>
+	<ship load="ZOLTAN_SHIP" hostile="true"/>
+	<boarders min="3" max="4" class="energy"/>
+</event>
+
+<event name="ZOLTAN_BOARDERS_MANTIS" unique="true">
+	<text id="event_ZOLTAN_BOARDERS_MANTIS_text"/>
+	<ship load="MANTIS_FIGHT" hostile="true"/>
+	<boarders min="2" max="3" class="mantis"/>
+</event>
+
+
+
+
+
+<!--
+*********
+		SPECIAL!!!
+	-
+**********
+-->
+
+<event name="ZOLTAN_PEACE_QUEST" unique="true">
+	<text id="event_ZOLTAN_PEACE_QUEST_text"/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_PEACE_QUEST_c1_choice"/>
+		<event load="ZOLTAN_PEACE_QUEST_ATTACK"/>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_PEACE_QUEST_c2_choice"/>
+		<event>
+			<text id="event_ZOLTAN_PEACE_QUEST_c2_text"/>
+			<choice hidden="true">
+				<text id="continue"/>
+				<event>
+					<text id="event_ZOLTAN_PEACE_QUEST_c2_c1_text"/>
+					<quest event="ZOLTAN_PEACE_QUEST2"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_PEACE_QUEST_c3_choice"/>
+		<event>
+			<text id="event_ZOLTAN_PEACE_QUEST_c3_text"/>
+		</event>
+	</choice>
+</event>
+
+
+<eventList name="ZOLTAN_PEACE_QUEST_ATTACK">
+	<event>
+		<text id="event_ZOLTAN_PEACE_QUEST_ATTACK_1_text"/>
+		<ship load="ZOLTAN_PEACE_QUEST_ATTACK1" hostile="true"/>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_PEACE_QUEST_ATTACK_2_text"/>
+		<ship load="ZOLTAN_PEACE_QUEST_ATTACK2" hostile="true"/>
+	</event>
+</eventList>
+
+<event name="ZOLTAN_PEACE_QUEST2">
+	<text id="event_ZOLTAN_PEACE_QUEST2_text"/>
+	<ship load="REBEL" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_PEACE_QUEST2_c1_choice"/>
+		<event>
+			<text id="event_ZOLTAN_PEACE_QUEST2_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice hidden="true">
+		<text id="event_ZOLTAN_PEACE_QUEST2_c2_choice"/>
+		<event>
+			<text id="event_ZOLTAN_PEACE_QUEST2_c2_text"/>
+			<choice hidden="true">
+				<text id="event_ZOLTAN_PEACE_QUEST2_c2_c1_choice"/>
+				<event>
+					<text id="event_ZOLTAN_PEACE_QUEST2_c2_c1_text"/>
+					<choice hidden="true">
+						<text id="event_ZOLTAN_PEACE_QUEST2_c2_c1_c1_choice"/>
+						<event>
+							<text id="event_ZOLTAN_PEACE_QUEST2_c2_c1_c1_text"/>
+							<ship hostile="true"/>
+						</event>
+					</choice>
+					<choice hidden="true">
+						<text id="event_ZOLTAN_PEACE_QUEST2_c2_c1_c2_choice"/>
+						<event>
+							<text id="event_ZOLTAN_PEACE_QUEST2_c2_c1_c2_text"/>
+							<choice hidden="true">
+								<text id="continue"/>
+								<event load="ZOLTAN_PEACE_QUEST_REWARD"/>
+							</choice>
+						</event>
+					</choice>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_ZOLTAN_PEACE_QUEST2_c2_c2_choice"/>
+				<event>
+					<text id="event_ZOLTAN_PEACE_QUEST2_c2_c2_text"/>
+					<ship hostile="true"/>
+				</event>
+			</choice>
+			<choice hidden="true">
+				<text id="event_ZOLTAN_PEACE_QUEST2_c2_c3_choice"/>
+				<event>
+					<text id="event_ZOLTAN_PEACE_QUEST2_c2_c3_text"/>
+					<ship hostile="true"/>
+				</event>
+			</choice>
+		</event>
+	</choice>
+</event>
+<eventList name="ZOLTAN_PEACE_QUEST_REWARD"><!--DLC2 DLC3-->
+	<event>
+		<text id="event_ZOLTAN_PEACE_QUEST_REWARD_1_text"/>
+		<unlockShip id="7"/>
+		<autoReward level="LOW">scrap_only</autoReward>
+		<augment name="ENERGY_SHIELD"/>
+	</event>
+	<event>
+		<text id="event_ZOLTAN_PEACE_QUEST_REWARD_2_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+		<unlockShip id="7"/>
+		<crewMember amount="1" class="energy" all_skills="2" id="name_Envoy"/>
+	</event>
+</eventList>
+
+
+<event name="ZOLTAN_SURRENDER">
+	<text load="ZOLTAN_SURRENDER"/>
+	<choice>
+		<text id="event_ZOLTAN_SURRENDER_c1_choice"/>
+		<event>
+			<ship hostile="false"/>
+			<autoReward level="RANDOM">stuff</autoReward>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_ZOLTAN_SURRENDER_c2_choice"/>
+		<event/>
+	</choice>
+</event>
+
+<textList name="ZOLTAN_SURRENDER">
+	<text id="text_ZOLTAN_SURRENDER_1"/>
+	<text id="text_ZOLTAN_SURRENDER_2"/>
+	<text id="text_ZOLTAN_SURRENDER_3"/>
+	<text id="text_ZOLTAN_SURRENDER_4"/>
+	<text id="text_ZOLTAN_SURRENDER_5"/>
+	<text id="text_ZOLTAN_SURRENDER_6"/>
+
+	<!-- duplicate for now - add more?-->
+
+
+	<text id="text_ZOLTAN_SURRENDER_1"/>
+	<text id="text_ZOLTAN_SURRENDER_2"/>
+	<text id="text_ZOLTAN_SURRENDER_3"/>
+	<text id="text_ZOLTAN_SURRENDER_4"/>
+	<text id="text_ZOLTAN_SURRENDER_5"/>
+	<text id="text_ZOLTAN_SURRENDER_6"/>
+</textList>
+
+
+
+
+</FTL>

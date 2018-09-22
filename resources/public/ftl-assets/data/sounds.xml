@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!-- music tracks -->
+<music>
+	<track>
+		<name>civilian</name>
+		<explore>bp_MUS_CivilEXPLORE.ogg</explore>
+		<combat>bp_MUS_CivilBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>milkyway</name>
+		<explore>bp_MUS_MilkyWayEXPLORE.ogg</explore>
+		<combat>bp_MUS_MilkyWayBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>wasteland</name>
+		<explore>bp_MUS_WastelandEXPLORE.ogg</explore>
+		<combat>bp_MUS_WastelandBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>rock</name>
+		<explore>bp_MUS_RockmenEXPLORE.ogg</explore>
+		<combat>bp_MUS_RockmenBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>engi</name>
+		<explore>bp_MUS_EngiEXPLORE.ogg</explore>
+		<combat>bp_MUS_EngiBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>debris</name>
+		<explore>bp_MUS_DebrisEXPLORE.ogg</explore>
+		<combat>bp_MUS_DebrisBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>mantis</name>
+		<explore>bp_MUS_MantisEXPLORE.ogg</explore>
+		<combat>bp_MUS_MantisBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>deepspace</name>
+		<explore>bp_MUS_DeepspaceEXPLORE.ogg</explore>
+		<combat>bp_MUS_DeepspaceBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>colonial</name>
+		<explore>bp_MUS_ColonialEXPLORE.ogg</explore>
+		<combat>bp_MUS_ColonialBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>void</name>
+		<explore>bp_MUS_VoidEXPLORE.ogg</explore>
+		<combat>bp_MUS_VoidBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>zoltan</name>
+		<explore>bp_MUS_ZoltanEXPLORE.ogg</explore>
+		<combat>bp_MUS_ZoltanBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>cosmos</name>
+		<explore>bp_MUS_CosmosEXPLORE.ogg</explore>
+		<combat>bp_MUS_CosmosBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>title</name>
+		<explore>bp_MUS_TitleScreen.ogg</explore>
+	</track>
+	<track>
+		<name>laststand</name>
+		<explore>bp_MUS_LastStand.ogg</explore>
+	</track>
+	<track>
+		<name>shrike</name>
+		<explore>bp_MUS_ShrikeEXPLORE.ogg</explore>
+		<combat>bp_MUS_ShrikeBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>slug</name>
+		<explore>bp_MUS_SlugEXPLORE.ogg</explore>
+		<combat>bp_MUS_SlugBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>lostship</name>
+		<explore>bp_MUS_LostShipEXPLORE.ogg</explore>
+		<combat>bp_MUS_LostShipBATTLE.ogg</combat>
+	</track>
+	<track>
+		<name>hacking</name>
+		<explore>bp_MUS_HackEXPLORE.ogg</explore>
+		<combat>bp_MUS_HackBATTLE.ogg</combat>
+	</track>
+</music>
+
+<!-- Victory Sound -->
+<victory volume="9">ui/bp_MUS_Victory.ogg</victory>
+
+<!-- System UI sounds -->
+<powerUpFail volume="9">ui/select_b_fail1.wav</powerUpFail>
+<powerUpSystem volume="9">ui/select_up1.wav</powerUpSystem>
+<powerDownSystem volume="9">ui/select_down2.wav</powerDownSystem>
+<upgradeSystem volume="5">ui/bp_upgrade_1.ogg</upgradeSystem>
+<downgradeSystem volume="7">ui/select_down2.wav</downgradeSystem>
+<undoUpgrades volume="10">ui/select_down2.wav</undoUpgrades>
+<acceptUpgrades volume="10">ui/select_up1.wav</acceptUpgrades>
+<autofireOn volume="10">ui/select_up1.wav</autofireOn>
+<autofireOff volume="10">ui/select_down2.wav</autofireOff>
+<jumpReady volume="5">ui/bell.ogg</jumpReady>
+
+<!-- Sound Loops -->
+<fire volume="5" loop="true" count="4">ship/bp_fire_1.ogg</fire>
+<airLeak volume="2" loop="true" count="1">ship/bp_air_escaping_1.ogg</airLeak>
+<repair volume="5" loop="true" count="5">ship/bp_fix_1.ogg</repair>
+<extinguish volume="3" loop="true" count="5">ship/bp_fire_extinguisher_1.ogg</extinguish>
+<nebula volume="7" loop="true" count="1">environment/bp_amb_nebula_minimal_01.ogg</nebula>
+<healing volume="5" loop="true" count="4">ship/bp_sfx_healing_01.ogg</healing>
+<brawling volume="2" loop="true" count="4">ship/bp_sfx_punching_01.ogg</brawling>
+<distress volume="7" loop="true" count="1">ui/bp_sfx_distress_beacon_01.ogg</distress>
+
+
+<!-- Store Sounds -->
+<repairShip volume="8">ui/bp_repair_1.ogg</repairShip>
+<buy volume="7">ui/bp_purchase_1.ogg</buy>
+<sell volume="7">ui/bp_purchase_1.ogg</sell>
+
+<!-- Generic UI sound -->
+<hoverBeep volume="7">ui/select_light1.wav</hoverBeep>
+<warning volume="2">ui/warning3.ogg</warning>
+<environWarning volume="3">ui/warning3b.ogg</environWarning >
+<surgeWarning volume="5">ui/bp_SFX_FlagshipPowerSurgeWarning.ogg</surgeWarning>
+
+<!-- success sounds -->
+<achievement volume="7">ui/bp_SFX_AchievementUnlocked.ogg</achievement>
+<unlock volume="7">ui/bp_SFX_NewShipUnlocked.ogg</unlock>
+<levelup volume="10">ui/bp_SFX_LevelUp.ogg</levelup>
+
+<!-- Crew Sounds -->
+<death1 volume="5">ship/bp_crew_death_1.ogg</death1>
+<death2 volume="5">ship/bp_crew_death_2.ogg</death2>
+
+<femaleDeath1 volume="7">ship/bp_SFX_FemaleDeath1.ogg</femaleDeath1>
+<femaleDeath2 volume="7">ship/bp_SFX_FemaleDeath2.ogg</femaleDeath2>
+<femaleDeath3 volume="7">ship/bp_SFX_FemaleDeath3.ogg</femaleDeath3>
+
+<lowCrewHealth volume="5">ship/bp_SFX_HealthWarning.ogg</lowCrewHealth>
+
+<!-- Alien Sounds -->
+<!-- RockMan Sounds -->
+<rockDeath volume="5">aliens/bp_sfx_RockMan_Death_01.ogg</rockDeath>
+
+<rockHit1 volume="8">aliens/bp_sfx_RockMan_RockHit1_01.ogg</rockHit1>
+<rockHit2 volume="8">aliens/bp_sfx_RockMan_RockHit2_01.ogg</rockHit2>
+<rockHit3 volume="8">aliens/bp_sfx_RockMan_RockHit3_01.ogg</rockHit3>
+
+<rockThrow1 volume="4">aliens/bp_sfx_RockMan_Throw1_01.ogg</rockThrow1>
+<rockThrow2 volume="4">aliens/bp_sfx_RockMan_Throw2_01.ogg</rockThrow2>
+<rockThrow3 volume="4">aliens/bp_sfx_RockMan_Throw3_01.ogg</rockThrow3>
+
+<rockStomp1 volume="9">aliens/bp_sfx_RockMan_Stomp1_01.ogg</rockStomp1>
+<rockStomp2 volume="9">aliens/bp_sfx_RockMan_Stomp2_01.ogg</rockStomp2>
+
+<rockThud1 volume="4">aliens/bp_sfx_RockMan_Thud1_01.ogg</rockThud1>
+<rockThud2 volume="4">aliens/bp_sfx_RockMan_Thud2_01.ogg</rockThud2>
+<rockThud3 volume="4">aliens/bp_sfx_RockMan_Thud3_01.ogg</rockThud3>
+
+<!-- Mantis Sounds -->
+<mantisDeath volume="4">aliens/bp_sfx_Mantis_Death_01.ogg</mantisDeath>
+
+<mantisSplat1 volume="8">aliens/bp_sfx_Mantis_Splat1_01.ogg</mantisSplat1>
+<mantisSplat2 volume="8">aliens/bp_sfx_Mantis_Splat2_01.ogg</mantisSplat2>
+<mantisSplat3 volume="8">aliens/bp_sfx_Mantis_Splat3_01.ogg</mantisSplat3>
+
+<mantisSpit1 volume="6">aliens/bp_SFX_MantisSpit1.ogg</mantisSpit1>
+<mantisSpit2 volume="6">aliens/bp_SFX_MantisSpit2.ogg</mantisSpit2>
+<mantisSpit3 volume="6">aliens/bp_SFX_MantisSpit3.ogg</mantisSpit3>
+
+<!-- Crystal Sounds -->
+
+<crystalDeath volume="5">aliens/bp_SFX_CrystalDeath.ogg</crystalDeath>
+
+<lockdown1 volume="7">aliens/bp_SFX_CrystalLockdown1.ogg</lockdown1>
+<lockdown2 volume="7">aliens/bp_SFX_CrystalLockdown2.ogg</lockdown2>
+
+<!-- Engi Sounds -->
+
+<engiDeath volume="4">aliens/bp_SFX_EngiDeath.ogg</engiDeath>
+
+<!-- Zoltan Sounds -->
+
+<energyDeath volume="4">aliens/bp_SFX_ZoltanDeath.ogg</energyDeath>
+
+<!-- Environment sounds -->
+<solarFlare volume="10">environment/bp_flare_1.ogg</solarFlare>
+<lightning1 volume="10">environment/bp_lightning1_01.ogg</lightning1>
+<lightning2 volume="10">environment/bp_lightning2_01.ogg</lightning2>
+<lightning3 volume="10">environment/bp_lightning3_01.ogg</lightning3>
+<lightning4 volume="10">environment/bp_lightning4_01.ogg</lightning4>
+<nebula volume="7">environment/bp_amb_nebula_minimal_01.ogg</nebula>
+
+
+<!-- ship sounds -->
+<!-- doorOpen and doorClose are WAVs to reduce CPU load when opening/closing
+     all doors at once -->
+<doorOpen volume="6">ui/bp_door_open.wav</doorOpen>
+<doorClose volume="6">ui/bp_door_open.wav</doorClose>
+<shieldsUp volume="6">ship/shield_up1.ogg</shieldsUp>
+<shieldsDown volume="8">ship/shield_down1.ogg</shieldsDown>
+<enginesOn volume="10">ship/engines_power_on.ogg</enginesOn>
+<enginesOff volume="10">ship/engines_power_down.ogg</enginesOff>
+<jumpLeave volume="6">ship/bp_jump_1.ogg</jumpLeave>
+<jumpArrive volume="2">ship/jump.ogg</jumpArrive>
+<droneLaunch volume="7">ship/bp_drone_launch_2.ogg</droneLaunch>
+<airLoss volume="3">ship/bp_air_woosh_1.ogg</airLoss>
+<breach volume="3">ship/bp_air_woosh_1.ogg</breach>
+<cloak volume="5">ship/bp_sfx_cloak_01.ogg</cloak>
+<decloak volume="5">ship/bp_sfx_cloak-decloak_01.ogg</decloak>
+<teleport volume="9">ship/bp_sfx_teleport_01.ogg</teleport>
+
+
+<!-- explosions .. using for ship explosion-->
+<explosion1 volume="6">explosions/bp_explosion_large_1.ogg</explosion1>
+<explosion2 volume="6">explosions/bp_explosion_large_1.ogg</explosion2>
+<explosion3 volume="6">explosions/bp_explosion_large_3.ogg</explosion3>
+<explosion4 volume="6">explosions/bp_explosion_large_3.ogg</explosion4>
+
+<sysExplosion volume="2">explosions/bp_explosion_small_1.ogg</sysExplosion>
+
+<!-- weapon sounds -->
+<lightLaser1 volume="2">weapons/bp_laser_3.ogg</lightLaser1>
+<lightLaser2 volume="2">weapons/bp_laser_3b.ogg</lightLaser2>
+<lightLaser3 volume="2">weapons/bp_laser_3c.ogg</lightLaser3>
+
+<heavyLaser1 volume="2">weapons/bp_laser_heavy_1.ogg</heavyLaser1>
+<heavyLaser2 volume="2">weapons/bp_laser_heavy_1b.ogg</heavyLaser2>
+<heavyLaser3 volume="2">weapons/bp_laser_heavy_1c.ogg</heavyLaser3>
+
+<!-- bomb teleport -->
+<bombTeleport volume="8">weapons/bp_SFX_BombTeleport.ogg</bombTeleport>
+
+<!-- heal bomb explosion -->
+<healBomb volume="6">explosions/bp_SFX_BombHeal.ogg</healBomb>
+
+<!-- fire bomb explosion -->
+<fireBomb volume="6">explosions/bp_SFX_BombFire.ogg</fireBomb>
+
+<!-- ion weapon sounds -->
+<ionShoot1 volume="2">weapons/ions/bp_SFX_IonWeapon1.ogg</ionShoot1>
+<ionShoot2 volume="2">weapons/ions/bp_SFX_IonWeapon2.ogg</ionShoot2>
+<ionShoot3 volume="2">weapons/ions/bp_SFX_IonWeapon3.ogg</ionShoot3>
+
+<ionShields1 volume="10">weapons/ions/bp_SFX_IonShieldHit1.ogg</ionShields1>
+<ionShields2 volume="10">weapons/ions/bp_SFX_IonShieldHit2.ogg</ionShields2>
+<ionShields3 volume="10">weapons/ions/bp_SFX_IonShieldHit3.ogg</ionShields3>
+
+<ionHit1 volume="2">weapons/ions/bp_SFX_IonHitShip1.ogg</ionHit1>
+<ionHit2 volume="2">weapons/ions/bp_SFX_IonHitShip2.ogg</ionHit2>
+<ionHit3 volume="2">weapons/ions/bp_SFX_IonHitShip3.ogg</ionHit3>
+
+<!-- crew sounds -->
+<brawling volume="2">ship/bp_sfx_punching_01.ogg</brawling>
+
+<!-- crew weapon sounds -->
+<crewLaser1 volume="2">ship/bp_sfx_smallarms1_01.ogg</crewLaser1>
+<crewLaser2 volume="2">ship/bp_sfx_smallarms2_01.ogg</crewLaser2>
+<crewLaser3 volume="2">ship/bp_sfx_smallarms3_01.ogg</crewLaser3>
+
+<!-- currently used by all missiles? -->
+<smallMissile1 volume="10">weapons/bp_missile_small.ogg</smallMissile1>
+<smallMissile2 volume="10">weapons/bp_missile_small.ogg</smallMissile2>
+
+<!-- Flak weapon sound -->
+<flak volume="10">weapons/bp_missile_large.ogg</flak>
+
+
+<beam1 volume="3">weapons/bp_beam_1.ogg</beam1>
+<beam1_2 volume="3">weapons/AESFX _Beam_2.ogg</beam1_2>
+<beam2 volume="3">weapons/bp_beam_2.ogg</beam2>
+<beam3 volume="8">weapons/AESFX _Beam_X.ogg</beam3>
+
+<!-- currently used by all missiels? -->
+<smallExplosion volume="10">explosions/bp_explosion_large_3.ogg</smallExplosion>
+
+<!-- i think every projectile uses these! -->
+<hitHull1 volume="10">explosions/bp_hit_hull_1.ogg</hitHull1>
+<hitHull2 volume="10">explosions/bp_hit_hull_2.ogg</hitHull2>
+<hitHull3 volume="10">explosions/bp_hit_hull_2.ogg</hitHull3>
+
+<hitShield1 volume="10">explosions/bp_hit_shield_1.ogg</hitShield1>
+<hitShield2 volume="10">explosions/bp_hit_shield_2.ogg</hitShield2>
+<hitShield3 volume="10">explosions/bp_hit_shield_3.ogg</hitShield3>
+
+<miss volume="10">weapons/miss3.ogg</miss>
+</FTL>

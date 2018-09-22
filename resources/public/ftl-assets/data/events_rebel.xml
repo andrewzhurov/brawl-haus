@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2012 by Subset Games. All rights reserved -->
+<FTL>
+
+<!--
+			SUMMARY  - 
+A list of all main events to be called by lists
+	does not include sub-events)
+
+Structure:
+	START_BEACON_REBEL
+	STORE_REBEL
+	NOTHING_REBEL
+
+Hostile:
+	AUTO_BAIT
+	AUTO_ASTEROID
+	AUTO_WARNING
+	REBEL_AUTO
+	AUTO_HACKER
+	REBEL
+	SQUAT_WARNING
+
+Neutral:
+	AUTO_CIVILIAN
+	SQUAT_REFUEL_STATION
+	AUTO_REFUEL_STATION
+	AUTO_DEFENSE_MAP
+	AUTO_DEFENSE_ITEM
+	AUTO_DEFENSE_RADAR
+	REBEL_TRANSPORT
+	BROKEN_REBEL_DRONE
+
+
+Environmnt:
+	NEBULA_REBEL_BOARDING
+
+-->
+
+
+<eventList name="HOSTILE_REBEL">
+	<event load="REBEL"/>
+	<event load="REBEL_AUTO"/>
+	<event load="AUTO_ASTEROID"/>
+	<event load="AUTO_WARNING"/>
+	<event load="SQUAT_WARNING"/>
+</eventList>
+
+
+<eventList name="NEUTRAL_REBEL">
+	<event load="AUTO_CIVILIAN"/>
+	<event load="SQUAT_REFUEL_STATION"/>
+	<event load="AUTO_DEFENSE_MAP"/>
+	<event load="AUTO_DEFENSE_ITEM"/>
+	<event load="AUTO_DEFENSE_RADAR"/>
+	<event load="REBEL_TRANSPORT"/>
+	<event load="BROKEN_REBEL_DRONE"/>
+	<event load="ALISON_DEFECTOR"/>
+</eventList>
+
+
+<eventList name="BOARDERS_REBEL">
+	<event load="BOARDERS_SUN"/>
+	<event load="BOARDERS_REBEL_SHIP"/>
+</eventList>
+
+
+<eventList name="DISTRESS_BEACON_REBEL">
+	<event load="CIVILIAN_ASTEROIDS_BEACON"/>
+	<event load="REBEL_VS_FEDERATION"/>
+	<event load="ESCORT_BEACON"/>
+	<event load="FRIENDLY_BEACON"/>
+	<event load="TRAP_BEACON"/>
+	<event load="DISTRESS_STATION_FIRE"/>
+</eventList>
+
+
+<eventList name="NEBULA_REBEL">
+	<event load="NEBULA_EMPTY"/>
+	<event load="NEBULA_REBEL"/>
+	<event load="NEBULA_AUTO"/>
+	<event load="NEBULA_AUTO_WARNING"/>
+	<event load="NEBULA_AUTO_DEFENSE_ITEM"/>
+	<event load="NEBULA_TRADER"/>
+	<event load="STORM_REBEL"/>
+	<event load="STORM_AUTO"/>
+	<event load="STORM_ITEMS"/>
+	<event load="NEBULA_REBEL_UNDETECTED"/>
+	<event load="NEBULA_LOST_SHIP"/>
+	<event load="NEBULA_REBEL_BOARDING"/>
+</eventList>
+
+<eventList name="QUESTS_REBEL">
+	<event load="MERCHANT_REQUEST"/>
+	<event load="FEDERATION_PLANET_SIGNAL"/>
+</eventList>
+
+
+
+
+
+<!--
+*********
+		STRUCTURE!!!
+	Required structural 
+**********
+-->
+
+<event name="START_BEACON_REBEL">
+	<text load="START_BEACON_REBEL"/>
+</event>
+<textList name="START_BEACON_REBEL">
+	<text id="text_START_BEACON_REBEL_1"/>
+	<text id="text_START_BEACON_REBEL_2"/>
+	<text id="text_START_BEACON_REBEL_3"/>
+	<text id="text_START_BEACON_REBEL_4"/>
+	<text id="text_START_BEACON_REBEL_5"/>
+</textList>
+
+<event name="STORE_REBEL">
+	<text load="STORE_REBEL"/>
+	<store/>
+</event>
+<textList name="STORE_REBEL">
+	<text id="text_STORE_REBEL_1"/>
+	<text id="text_STORE_REBEL_2"/>
+	<text id="text_STORE_REBEL_3"/>
+</textList>
+
+<event name="NOTHING_REBEL">
+	<text load="NOTHING_REBEL"/>
+</event>
+<textList name="NOTHING_REBEL">
+	<text id="text_NOTHING_REBEL_1"/>
+	<text id="text_NOTHING_REBEL_2"/>
+	<text id="text_NOTHING_REBEL_3"/>
+	<text id="text_NOTHING_REBEL_4" planet="NONE"/>
+	<text id="text_NOTHING_REBEL_5" planet="PLANET_POPULATED_SMALL"/>
+</textList>
+
+
+<!--
+*********
+		HOSTILE!!!
+	Events that call up a fight for sure
+**********
+-->
+
+
+<event name="AUTO_BAIT" unique="true">
+	<text load="REBEL_AUTO"/>
+	<ship load="REBEL_AUTO_BAIT" hostile="true"/>
+</event>
+
+<event name="REBEL_AUTO">
+	<text load="REBEL_AUTO"/>
+	<ship load="REBEL_AUTO" hostile="true"/>
+</event>
+
+<event name="AUTO_WARNING" unique = "true">
+	<text load="REBEL_AUTO"/>
+	<ship load="REBEL_AUTO_WARNING" hostile="true"/>
+</event>
+<textList name="REBEL_AUTO">
+	<text id="text_REBEL_AUTO_1"/>
+	<text id="text_REBEL_AUTO_2"/>
+	<text id="text_REBEL_AUTO_3"/>
+	<text id="text_REBEL_AUTO_4"/>
+	<text id="text_REBEL_AUTO_5"/>
+	<text id="text_REBEL_AUTO_6"/>
+	<text id="text_REBEL_AUTO_7"/>
+	<text id="text_REBEL_AUTO_8"/>
+	<text id="text_REBEL_AUTO_9"/>
+</textList>
+
+<event name="AUTO_HACKER" unique="true">
+	<text id="event_AUTO_HACKER_text"/>
+	<ship load="REBEL_AUTO_HACKSHIELDS" hostile="true"/>
+	<choice>
+		<text id="continue"/>
+		<event>
+			<status type="divide" target="player" system="shields" amount="2"/>
+		</event>
+	</choice>
+	<choice hidden="true" req="hacking"> <!-- CHANGED - added -->
+		<text id="event_AUTO_HACKER_c2_choice"/>
+		<event>
+			<text id="event_AUTO_HACKER_c2_text"/>
+			<ship load="JELLY" hostile="true"/>
+			<status type="limit" target="player" system="hacking" amount="0"/>
+		</event>
+	</choice>
+</event>
+
+<event name="REBEL">
+	<text load="REBEL"/>
+	<ship load="REBEL" hostile="true"/>
+</event>
+<textList name="REBEL">
+	<text id="text_REBEL_1"/>
+	<text id="text_REBEL_2"/>
+	<text id="text_REBEL_3"/>
+	<text id="text_REBEL_4"/>
+	<text id="text_REBEL_5"/>
+	<text id="text_REBEL_6"/>
+	<text id="text_REBEL_7"/>
+	<text id="text_REBEL_8"/>
+	<text id="text_REBEL_9"/>
+	<text id="text_REBEL_10"/>
+</textList>
+
+<event name="SQUAT_WARNING" unique="true">
+	<text id="event_SQUAT_WARNING_text"/>
+	<ship load="SQUAT_WARNING" hostile="true"/>
+</event>
+
+
+
+
+
+
+
+<!--
+*********
+		NEUTRAL!!!
+	Events that could have a fight
+**********
+-->
+
+
+
+<event name="AUTO_CIVILIAN" unique="false">
+	<text id="event_AUTO_CIVILIAN_text"/>
+	<choice>
+		<text id="event_AUTO_CIVILIAN_c1_choice"/>
+		<event>
+			<text id="event_AUTO_CIVILIAN_c1_text"/>
+			<ship load="REBEL_AUTO_CIVILIAN" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_AUTO_CIVILIAN_c2_choice"/>
+		<event>
+			<text id="event_AUTO_CIVILIAN_c2_text"/>
+		</event>
+	</choice>
+</event>
+
+<event name="SQUAT_REFUEL_STATION" unique="true">
+	<img planet="PLANET_POPULATED_SMALL"/>
+	<text id="event_SQUAT_REFUEL_STATION_text"/>
+	<ship load="SQUAT_REFUEL_STATION" hostile="false"/>
+	<choice>
+		<text id="event_SQUAT_REFUEL_STATION_c1_choice"/>
+		<event>
+			<text id="event_SQUAT_REFUEL_STATION_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_SQUAT_REFUEL_STATION_c2_choice"/>
+		<event>
+			<text id="event_SQUAT_REFUEL_STATION_c2_text"/>
+		</event>
+	</choice>
+</event>
+
+<event name="AUTO_REFUEL_STATION" unique="true">
+	<img planet="PLANET_POPULATED_SMALL"/>
+	<text id="event_AUTO_REFUEL_STATION_text"/>
+	<ship load="REBEL_AUTO_REFUEL" hostile="false"/>
+	<choice>
+		<text id="event_AUTO_REFUEL_STATION_c1_choice"/>
+		<event>
+			<text id="event_AUTO_REFUEL_STATION_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_AUTO_REFUEL_STATION_c2_choice"/>
+		<event>
+			<text id="event_AUTO_REFUEL_STATION_c2_text"/>
+		</event>
+	</choice>
+</event>
+
+<event name="AUTO_DEFENSE_MAP" unique="true">
+	<img planet="PLANET_POPULATED"/>
+	<text id="event_AUTO_DEFENSE_MAP_text"/>
+	<ship load="REBEL_AUTO_MAP" hostile="false"/>
+	<choice>
+		<text id="event_AUTO_DEFENSE_MAP_c1_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_AUTO_DEFENSE_MAP_c2_choice"/>
+		<event/>
+	</choice>
+	<choice req="sensors" lvl="3" hidden="true">
+		<text id="event_AUTO_DEFENSE_MAP_c3_choice"/>
+		<event load="AUTO_DEFENSE_MAP_SENSORS"/>
+	</choice>
+	<choice req="teleporter" hidden="true">
+		<text id="event_AUTO_DEFENSE_MAP_c4_choice"/>
+		<event>
+			<text id="event_AUTO_DEFENSE_MAP_c4_text"/>
+			<reveal_map/>
+		</event>
+	</choice>
+</event>
+<eventList name="AUTO_DEFENSE_MAP_SENSORS">
+	<event>
+		<text id="event_AUTO_DEFENSE_MAP_SENSORS_1_text"/>
+		<reveal_map/>
+	</event>
+	<event>
+		<text id="event_AUTO_DEFENSE_MAP_SENSORS_2_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+
+<event name="AUTO_DEFENSE_ITEM" unique="true">
+	<text id="event_AUTO_DEFENSE_ITEM_text"/>
+	<ship load="REBEL_AUTO_ITEM" hostile="false"/>
+	<choice>
+		<text id="event_AUTO_DEFENSE_ITEM_c1_choice"/>
+		<event>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_AUTO_DEFENSE_ITEM_c2_choice"/>
+		<event/>
+	</choice>
+	<choice req="cloaking" hidden="true">
+		<text id="event_AUTO_DEFENSE_ITEM_c3_choice"/>
+		<event load="AUTO_DEFENSE_ITEM_CLOAK"/>
+	</choice>
+</event>
+<eventList name="AUTO_DEFENSE_ITEM_CLOAK">
+	<event>
+		<text id="event_AUTO_DEFENSE_ITEM_CLOAK_1_text"/>
+		<choice hidden="true">
+			<text id="continue"/>
+			<event load="DEFENSE_ITEM_LIST"/>
+		</choice>
+	</event>
+	<event>
+		<text id="event_AUTO_DEFENSE_ITEM_CLOAK_2_text"/>
+		<ship hostile="true"/>
+	</event>
+</eventList>
+<eventList name="DEFENSE_ITEM_LIST">
+	<event>
+		<text id="event_DEFENSE_ITEM_LIST_1_text"/>
+	</event>
+	<event>
+		<text id="event_DEFENSE_ITEM_LIST_2_text"/>
+		<autoReward level="LOW">drone</autoReward>
+	</event>
+	<event>
+		<text id="event_DEFENSE_ITEM_LIST_3_text"/>
+		<autoReward level="LOW">weapon</autoReward>
+	</event>
+	<event>
+		<text id="event_DEFENSE_ITEM_LIST_4_text"/>
+		<autoReward level="MED">stuff</autoReward>
+	</event>
+</eventList>
+
+<event name="AUTO_DEFENSE_RADAR" unique="true">
+	<text id="event_AUTO_DEFENSE_RADAR_text"/>
+	<ship load="REBEL_AUTO_RADAR" hostile="false"/>
+	<choice>
+		<text id="event_AUTO_DEFENSE_RADAR_c1_choice"/>
+		<event>
+			<text id="event_AUTO_DEFENSE_RADAR_c1_text"/>
+			<ship hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_AUTO_DEFENSE_RADAR_c2_choice"/>
+		<event/>
+	</choice>
+	<choice req="COMBAT_DRONE_LIST" hidden="true">
+		<text id="event_AUTO_DEFENSE_RADAR_c3_choice"/>
+		<event load="AUTO_DEFENSE_RADAR_COMBAT"/>
+	</choice>
+</event>
+<eventList name="AUTO_DEFENSE_RADAR_COMBAT">
+	<event>
+		<text id="event_AUTO_DEFENSE_RADAR_COMBAT_1_text"/>
+		<choice>
+			<text id="continue"/>
+			<event load="DEFENSE_RADAR_LIST"/>
+		</choice>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_AUTO_DEFENSE_RADAR_COMBAT_2_text"/>
+		<choice>
+			<text id="continue"/>
+			<event load="DEFENSE_RADAR_LIST"/>
+		</choice>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+	<event>
+		<text id="event_AUTO_DEFENSE_RADAR_COMBAT_3_text"/>
+		<ship hostile="true"/>
+		<item_modify>
+			<item type="drones" min="-1" max="-1"/>
+		</item_modify>
+	</event>
+</eventList>
+<eventList name="DEFENSE_RADAR_LIST">
+	<event>
+		<text id="event_DEFENSE_RADAR_LIST_1_text"/>
+		<modifyPursuit amount="-1"/>
+	</event>
+	<event>
+		<text id="event_DEFENSE_RADAR_LIST_2_text"/>
+		<reveal_map/>
+	</event>
+	<event>
+		<text id="event_DEFENSE_RADAR_LIST_3_text"/>
+	</event>
+	<event>
+		<text id="event_DEFENSE_RADAR_LIST_4_text"/>
+		<modifyPursuit amount="1"/>
+	</event>
+</eventList>
+
+<event name="REBEL_TRANSPORT" unique = "true">
+	<img planet="NONE"/>
+	<text id="event_REBEL_TRANSPORT_text"/>
+	<choice>
+		<text id="event_REBEL_TRANSPORT_c1_choice"/>
+		<event>
+			<text id="event_REBEL_TRANSPORT_c1_text"/>
+			<ship load="SQUAT_TRANSPORT" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_REBEL_TRANSPORT_c2_choice"/>
+		<event>
+			<text id="event_REBEL_TRANSPORT_c2_text"/>
+		</event>
+	</choice>
+</event>
+<eventList name="REBEL_TRANSPORT_DESTROYED">
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_1_text"/>
+		<autoReward level="MED">weapon</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_2_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_3_text"/>
+		<autoReward level="low">weapon</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_4_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_5_text"/>
+		<autoReward level="MED">drone</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_6_text"/>
+		<autoReward level="MED">droneparts</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_7_text"/>
+		<reveal_map/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_8_text"/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_9_text"/>
+		<crewMember amount="1"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_10_text"/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_DESTROYED_11_text"/>
+		<autoReward level="HIGH">standard</autoReward>
+	</event>
+</eventList>
+<eventList name="REBEL_TRANSPORT_CAPTURED">
+	<event>
+		<text id="event_REBEL_TRANSPORT_CAPTURED_1_text"/>
+		<autoReward level="MED">weapon</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_CAPTURED_2_text"/>
+		<crewMember amount="1"/>
+		<autoReward level="HIGH">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_CAPTURED_3_text"/>
+		<reveal_map/>
+		<autoReward level="MED">scrap_only</autoReward>
+	</event>
+	<event>
+		<text id="event_REBEL_TRANSPORT_CAPTURED_4_text"/>
+		<autoReward level="MED">drone</autoReward>
+	</event>
+</eventList>
+
+
+
+<event name="BROKEN_REBEL_DRONE" unique="true">
+	<text id="event_BROKEN_REBEL_DRONE_text"/>
+	<ship load="REBEL_AUTO" hostile="false"/>
+	<choice hidden="true">
+		<text id="event_BROKEN_REBEL_DRONE_c1_choice"/>
+		<event load="DOWNLOAD_DRONE_DATA"/>
+	</choice>
+	<choice>
+		<text id="event_BROKEN_REBEL_DRONE_c2_choice"/>
+		<event>
+			<autoReward level="LOW">scrap_only</autoReward>
+		</event>
+	</choice>
+	<choice req="sensors" lvl="3" hidden="true">
+		<text id="event_BROKEN_REBEL_DRONE_c3_choice"/>
+		<event load="BROKEN_REBEL_DRONE_SENSORS"/>
+	</choice>
+</event>
+<eventList name="DOWNLOAD_DRONE_DATA">
+	<event>
+		<text id="event_DOWNLOAD_DRONE_DATA_1_text"/>
+		<reveal_map/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_DOWNLOAD_DRONE_DATA_2_text"/>
+		<ship load="REBEL_AUTO" hostile="true"/>
+	</event>
+</eventList>
+<eventList name="BROKEN_REBEL_DRONE_SENSORS">
+	<event>
+		<text id="event_BROKEN_REBEL_DRONE_SENSORS_1_text"/>
+		<reveal_map/>
+		<autoReward level="LOW">standard</autoReward>
+	</event>
+	<event>
+		<text id="event_BROKEN_REBEL_DRONE_SENSORS_2_text"/>
+		<choice hidden="true">
+			<text id="event_BROKEN_REBEL_DRONE_SENSORS_2_c1_choice"/>
+			<event load="DOWNLOAD_DRONE_DATA"/>
+		</choice>
+		<choice>
+			<text id="event_BROKEN_REBEL_DRONE_SENSORS_2_c2_choice"/>
+			<event>
+				<text id="event_BROKEN_REBEL_DRONE_SENSORS_2_c2_text"/>
+			</event>
+		</choice>
+	</event>
+</eventList>
+
+
+
+<!--
+*********
+		ENVIRONMENT!!!
+	Events with unique environments
+**********
+-->
+
+
+<event name="NEBULA_REBEL_BOARDING" unique="true">
+	<environment type="nebula"/>
+	<text id="event_NEBULA_REBEL_BOARDING_text"/>
+	<boarders min="3" max="4" class="human"/>
+</event>
+
+
+
+
+
+<!--
+*********
+		BOARDERS!!!
+	Events with boarder calls
+**********
+-->
+
+
+
+
+<event name="BOARDERS_REBEL_SHIP">
+	<text load="BOARDERS_REBEL_SHIP"/>
+	<boarders min="2" max="3" class="human"/>
+	<ship load="REBEL" hostile="true"/>
+</event>
+<textList name="BOARDERS_REBEL_SHIP" unique="false">
+	<text id="text_BOARDERS_REBEL_SHIP_1"/>
+	<text id="text_BOARDERS_REBEL_SHIP_2"/>
+	<text id="text_BOARDERS_REBEL_SHIP_3"/>
+	<text id="text_BOARDERS_REBEL_SHIP_4"/>
+</textList>
+
+
+
+
+
+
+
+
+<!--
+
+***************************************
+		DLC!!!
+	Events added with the DLC
+***************************************
+
+-->
+
+	<!--
+	<<<===== SPECIAL =====>>>
+	-->
+
+<event name="FLAGSHIP_CONSTRUCTION" unique="true">
+	<text id="event_FLAGSHIP_CONSTRUCTION_text"/>
+	<choice>
+		<text id="event_FLAGSHIP_CONSTRUCTION_c1_choice"/>
+		<event>
+			<text id="event_FLAGSHIP_CONSTRUCTION_c1_text"/>
+			<ship load="FLASHSHIP_CONSTRUCTION_SHIP" hostile="true"/>
+		</event>
+	</choice>
+	<choice>
+		<text id="event_FLAGSHIP_CONSTRUCTION_c2_choice"/>
+		<event>
+			<text id="event_FLAGSHIP_CONSTRUCTION_c2_text"/>
+		</event>
+	</choice>
+</event>
+<event name="FLAGSHIP_CONSTRUCTION_DONE">
+	<text id="event_FLAGSHIP_CONSTRUCTION_DONE_text"/>
+	<autoReward level="HIGH">weapon</autoReward>
+	<item_modify>
+		<item type="fuel" min="5" max="5"/>
+		<item type="missiles" min="5" max="5"/>
+		<item type="drones" min="5" max="5"/>
+	</item_modify>
+	<modifyPursuit amount="-2"/>
+	<choice hidden="true">
+		<text id="continue"/>
+		<event>
+			<text id="event_FLAGSHIP_CONSTRUCTION_DONE_c1_text"/>
+			<unlockShip id="4"/>
+		</event>
+	</choice>
+</event>
+<ship name="FLASHSHIP_CONSTRUCTION_SHIP" auto_blueprint="BOSS_SPECIAL">
+	<destroyed load="FLAGSHIP_CONSTRUCTION_DONE"/>
+	<deadCrew>
+		<text id="ship_FLASHSHIP_CONSTRUCTION_SHIP_deadCrew_text"/>
+		<choice hidden="true">
+			<text id="ship_FLASHSHIP_CONSTRUCTION_SHIP_deadCrew_c1_choice"/>
+			<event load="FLAGSHIP_CONSTRUCTION_DONE"/>
+		</choice>
+	</deadCrew>
+</ship>
+</FTL>
