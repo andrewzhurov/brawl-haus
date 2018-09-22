@@ -24,7 +24,7 @@
                       :on-click (if (= :idle status)
                                   #(=>evt [:sv.weapon/power-up stuff-id])
                                   #(=>evt [:sv.weapon/select stuff-id]))
-                      :on-context-menu (if (:selected status)
+                      :on-context-menu (if (= :selected status)
                                          #(do (.preventDefault %)
                                               (=>evt [:sv.weapon/unselect stuff-id]))
                                          #(do (.preventDefault %)
@@ -46,6 +46,11 @@
         ^{:key location-id}
         [:a.collection-item {:on-click #(=>evt [:sv/jump location-id])}
          (str location-name) "  S:" (count ships)])))])
+
+(defn top-hud []
+  [:div.top-hud
+   [:div.scrap-icon]
+   [:div.scrap-amount (<=sub [:sv.cargo/scrap])]])
 
 (defn bottom-hud []
   [:div.bottom-hud
@@ -106,6 +111,7 @@
   ^{:key ship-id}
   [:div.ship {:class (when (<=sub [:sv.ship/wrecked? ship-id]) "wrecked")}
    [:div.name (<=sub [:sv.ship/name ship-id])]
+   [:div.btn.loot {:on-click #(=>evt [:sv.ship/loot ship-id])} "Loot!"]
    (let [{:keys [status percentage]} (<=sub [:sv.shield/readiness ship-id])]
      [:div.shield {:class status
                    :style {:opacity (/ percentage  100)}}])
@@ -144,5 +150,6 @@
    [locations]
    [current-location]
 
+   [top-hud]
    [bottom-hud]
    ])

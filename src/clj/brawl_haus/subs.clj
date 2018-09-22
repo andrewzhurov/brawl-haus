@@ -73,12 +73,12 @@
                          (* 100)
                          (double)))]
     (cond
-      is-selected {:status :selected
-                   :percentage 100}
       (not charging-since) {:status :idle
                             :percentage 0}
       is-firing {:status :firing
                  :percentage 0}
+      is-selected {:status :selected
+                   :percentage 100}
       (< percentage 100) {:status :charging
                           :percentage percentage}
       :ready {:status :ready
@@ -198,11 +198,11 @@
 
    :sv.ship/systems
    (fn [db [_ ship-id] _]
-     (keys (get-in (l "SHIP:" (ship db ship-id)) [:systems])))
+     (keys (get-in (ship db ship-id) [:systems])))
 
    :sv.ship/weapons
    (fn [db [_ ship-id] _]
-     (keys (get-in (l "SHIP:" (ship db ship-id)) [:systems :weapons :stuff])))
+     (keys (get-in (ship db ship-id) [:systems :weapons :stuff])))
 
    :sv.weapon/view
    (fn [db [_ ship-id weapon-id] _]

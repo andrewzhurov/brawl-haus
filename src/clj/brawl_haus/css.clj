@@ -30,6 +30,19 @@
   [single-fire
    flash
    charge-out
+   [:div.top-hud {:background-color "gray"
+                  :border "2px solid lightgray"
+                  :display "flex"
+                  :align-items "center"
+                  :padding "5px"}]
+   [:.scrap-icon
+    {:width "32px"
+     :height "30px"
+     :background-image "url(/ftl-assets/img/ui_icons/icon_scrap.png)"}]
+   [:.scrap-amount
+    {:font-size "20px"
+     :color "white"
+     :font-weight "600"}]
    [:.main-layout {:display "grid"
                    :height "100vh"
                    :grid-template
@@ -273,13 +286,17 @@
                     :grid-template
                     (grid "ship locations environment 1fr"
                           "3fr 2fr 4fr")
-                    :height "100%"}
+                    :height "100%"
+                    :background-color "dimgray"}
     [:.me {:background "darkgray"
             :margin "5px"
             :width "65%"}]
     [:.outside {:background "darkgray"
                  :margin "5px"
                  :width "35%"}]
+    [:.top-hud {:position "absolute"
+                :top "10px"
+                :left "10px"}]
     [:.bottom-hud {:position "absolute"
                    :bottom "10px" :left "10px"
                    :display "flex"
@@ -375,8 +392,14 @@
              :width "min-content"
              :padding "10px"
              :margin "5px"}
+     [:.btn.loot {:visibility "hidden"
+                  :position "absolute"
+                  :top "95px"
+                  :left "70px"
+                  :z-index 4}]
      [:&.wrecked
-      {:animation [[flash "0.6s"]]}]
+      {:animation [[flash "0.6s"]]}
+      [:.btn.loot {:visibility "visible"}]]
      [:.name {:position "absolute"
               :top "148px"
               :left "106px"

@@ -146,7 +146,7 @@
 
 (def weapon-basic-laser
   {:id :basic-laser
-   :slot 2
+   :slot 1
    :name "Basic Laser"
    :required-power 1
    :damage 1
@@ -166,7 +166,7 @@
    ship-basic-engines
    ship-basic-weapons
    ship-basic-laser
-   ))
+   {:cargo {:scrap 20}}))
 
 
 
@@ -340,15 +340,16 @@
       (let [amount (get-in db [:games :sv :ship ship-id :cargo :scrap])]
         (-> db
             (assoc-in [:games :sv :ship ship-id :cargo :scrap] 0)
-            (assoc-in [:games :sv :ship conn-id :cargo :scrap] amount))))
+            (update-in [:games :sv :ship conn-id :cargo :scrap] (fn [old] (+ (or old 0) amount))))))
 
     :sv.store/purchase
     (fn [db _ conn-id]
-      (if (>= 30 (subs/derive db [:sv.cargo/scrap] conn-id))
+      (if (>= (subs/derive db [:sv.cargo/scrap] conn-id) 40)
         (-> db
             (assoc-in [:games :sv :ship conn-id :systems :weapons :stuff :basic-laser2] (merge weapon-basic-laser
-                                                                                               {:id :basic-laser2}))
-            (update-in [:games :sv :ship conn-id :cargo :scrap] - 30))
+                                                                                               {:id :basic-laser2
+                                                                                                :slot 2}))
+            (update-in [:games :sv :ship conn-id :cargo :scrap] - 40))
         db))}))
 
 (defn drive [db [evt-id :as evt] & params]

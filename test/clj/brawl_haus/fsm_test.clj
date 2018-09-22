@@ -391,7 +391,7 @@
     "Station with Store"
     "There may be 'store' service in a station
      It presents a ship with ability to purchase second 'basic-laser'
-     Price is 30 'scrap', fixed
+     Price is 40 'scrap', fixed
      One purchase per ship
      Weapon appears at ship slot after purchase"
     (testing "Store weapon purchase"
@@ -400,7 +400,7 @@
                                            ship-basic-power-hub
                                            ship-basic-weapons
                                            ship-fast-burst-laser-2
-                                           {:cargo {:scrap 30}})}])
+                                           {:cargo {:scrap 40}})}])
           (=>evt1 [:sv/jump :station-location])
           (=>evt1 [:sv.store/purchase :basic-laser])
           (expect 0
