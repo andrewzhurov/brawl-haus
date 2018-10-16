@@ -96,7 +96,7 @@
 (defn -main [& args]
   (reload))
 
-(events/add-evt
+#_(events/add-evt
  :reset
  (fn [_ _ conn-id]
    (println "RESET BACKEND")
