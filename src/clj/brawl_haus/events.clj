@@ -28,12 +28,11 @@
 
 (def db (atom init-db))
 
-(defn calc-speed [text start finish]
-  (let [minutes (/ (t/in-seconds (t/interval (c/from-date start)
-                                             (c/from-date finish)))
-                   60)
-        chars (count text)]
-    (int (/ chars minutes))))
+(defn calc-speed [typed-amount start finish]
+  (let [minutes-passed (/ (t/in-seconds (t/interval (c/from-date start)
+                                                    (c/from-date finish)))
+                          60)]
+    (int (/ typed-amount minutes-passed))))
 
 (defn race-to-be [db]
   (let [[[_ race]] (filter (fn [[_ {:keys [status]}]] (= :to-be status))
@@ -178,7 +177,7 @@
         (assoc-in db
                   [:open-races race-id :participants conn-id]
                   {:left-chars (count left-text)
-                   :speed (calc-speed race-text starts-at (now))})))
+                   :speed (calc-speed (- (count race-text) (count left-text)) starts-at (now))})))
 
     :hiccup-touch/attend
     (fn [db _ conn-id]

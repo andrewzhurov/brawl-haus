@@ -2,7 +2,7 @@
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
             [brawl-haus.panels :as panels]
-            [brawl-haus.utils :refer [l <sub >evt defview view]]
+            [brawl-haus.utils :refer [l <sub >evt <=sub defview view]]
             [cljs-time.core :as t]
             [cljs-time.coerce :as c]
             [cljs-time.format :as f]
@@ -10,19 +10,18 @@
             [brawl-haus.components :as comps]
             ))
 
-(defview :countdown
-  (fn [{:keys [starts-at]}]
-    (r/with-let [now (r/atom (t/now))
-                 looper (js/setInterval #(reset! now (t/now)) 20)]
-      (let [starts (c/from-date starts-at)
-            remains (t/in-millis
-                     (cond
-                       (nil? starts) (t/seconds 10)
-                       (t/after? @now starts) (do (js/clearInterval looper)
-                                                  (t/seconds 0))
-                       :counting (t/interval @now starts)))]
-        [:div.countdown
-         (str (int (/ remains 1000)) ":" (rem remains 1000))]))))
+(defn countdown []
+  (r/with-let [now (r/atom (t/now))
+               looper (js/setInterval #(reset! now (t/now)) 20)]
+    (let [starts (c/from-date (l 1111111111 (:starts-at (<=sub [:countdown]))))
+          remains (t/in-millis
+                   (cond
+                     (nil? starts) (t/seconds 10)
+                     (t/after? @now starts) (t/seconds 0)
+                     :counting (t/interval @now starts)))]
+      [:div.countdown
+       (str (int (/ remains 1000)) ":" (rem remains 1000))])
+    (finally (js/clearInterval looper))))
 
 (def breaks #{\, \space \.})
 (defn bite [text chunk]
@@ -132,7 +131,7 @@
   [_]
   [:div.app
    [:div.content.race-panel
-    [view :countdown]
+    [countdown]
     [view :text-race]
     [to-next]
     [view :race-progress]]])
