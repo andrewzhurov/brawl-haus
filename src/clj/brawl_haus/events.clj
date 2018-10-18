@@ -10,6 +10,7 @@
             [brawl-haus.subs :as subs]
             ))
 
+(declare drive)
 (defn l [desc expr] (println desc expr) expr)
 
 (defn location [state conn-id]
@@ -47,11 +48,14 @@
 
 (defn ensure-race [db conn-id]
   (if-not (race-to-be db)
-    (let [new-race {:id (gen-uuid)
+    (let [race-id (gen-uuid)
+          new-race {:id race-id
                     :participants {}
                     :status :to-be
                     :starts-at (-> (t/now) (t/plus (t/seconds 10)) (c/to-date))}]
-      (assoc-in db [:open-races (:id new-race)] new-race))
+      (future (Thread/sleep 7000)
+              (swap! brawl-haus.events/db drive [:race/ready-set-go race-id] nil))
+      (assoc-in db [:open-races race-id] new-race))
     db))
 
 
@@ -159,7 +163,7 @@
 (defn ensure [struct path val]
   (update-in struct path #(if (nil? %) val %)))
 
-(declare drive)
+
 (def events
   (atom
    {:drop-my-subs
@@ -193,10 +197,6 @@
     :race/attend
     (fn [current-db _ conn-id]
       (let [db-with-race (ensure-race current-db conn-id)]
-        (l "DB:" db-with-race)
-        (future (Thread/sleep 7000)
-                (l 11 2222)
-                (swap! db drive [:race/ready-set-go (:id (race-to-be db-with-race))] nil))
         (enter-race db-with-race (:id (race-to-be db-with-race)) conn-id)))
 
     :chat/add-message
