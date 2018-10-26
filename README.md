@@ -12,7 +12,7 @@ Touch: http://dev.brawl.haus
 ## Mindset
 
 ### State is what we care
-Over years we've been struggling with accidential complexity of inter-connected mutable objects, populating front-end of our application, brought by tools thought to be fancy in those times.
+Over years we've been struggling with accidental complexity of inter-connected mutable objects, populating front-end of our application, brought by tools thought to be fancy in those times.
 
 We've had the same problem just before that - having mutable objects of data+operations in run-time at our back-end. We've been smart enough to find a solution - decouple state out of operations and store it in non-volatile memory.
 
@@ -21,14 +21,14 @@ Recently we've been smart enough to apply the same principle to front-ends as we
 Just the same, and it serves us well.
 
 
-Hovewer there is one more complexity to be purged out of our current systems.
+However there is one more complexity to be purged out of our current systems.
 
 
 ### The real state is out there.
 
 State of the server is the source of truth.
 
-Our clients used to requset a snapshot of this state in order to allow user to operate on it. And here comes the problem - this snashot of the world gets old, and does it fast.
+Our clients used to request a snapshot of this state in order to allow user to operate on it. And here comes the problem - this snapshot of the world gets old, and does it fast.
 
 So our user spends some time poking around in this state: inspecting some of it, thinking, maybe filling some form; and then tries to act and - whoopsie, you can't do that! The world had changed since you've taken a look at it last time, this operation is no more valid... form has been filled by someone else by now, sorry!
 
@@ -40,7 +40,7 @@ So, what do we need? You guessed it! Keep clients in sync with the world.
 Welcome websockets! Those little channels allow bidirectional/async client-server communication. Just the tool we need to tell our clients "now the world is such and such, please inform the user"
 
 ### How it's done, in a shortie
-We have an ol' good SPA as our client, state in one place, propagating down, however the idea of "putting state to the top" was put to extreme - we keep __all the state__ our client may care at the __truly top__ of our application - **server**!
+We have an old good SPA as our client, state in one place, propagating down, however the idea of "putting state to the top" was put to extreme - we keep __all the state__ our client may care at the __truly top__ of our application - **server**!
 It propagates down to clients and then down to end-nodes, all in sync, clients driven!
 
 Just the simplicity of web2.0(view being simple data representation), but with a reactive data flow and all the goodies we can do with thick and tasty SPAs at client side.
@@ -86,9 +86,9 @@ It's being handled at server-side by `event receiver`.
    })
 ```
 
-`event` is the event we emited from client-side
+`event` is the event we emitted from client-side
 
-`tube` is a slight abstraction over websocket, being used to emmit back events and serve as id of a connection
+`tube` is a slight abstraction over websocket, being used to emit back events and serve as id of a connection
 
 We emit back only one event - "now current state of the world is <VALUE>"
 
@@ -104,9 +104,9 @@ And now so you.;)
 
 ## Developer mode
 
-You'll need local clojure environment (see later for it) and do steps:
+You'll need local Clojure environment (see later for it) and do steps:
 
-### Compile css:
+### Compile CSS:
 
 Compile css file once.
 
@@ -152,7 +152,7 @@ $ docker run andrewzhurov/brawl-haus
 Browse http://localhost:9090
 
 
-## Local clojure environment
+## Local Clojure environment
 
 Requires:
 - `clojure` itself https://clojure.org/guides/getting_started#_installation_on_linux
@@ -164,8 +164,8 @@ For wider, deeper understanding of concepts those talks I find amazing:
   * [Flux architecture](https://facebook.github.io/flux/)
   * ['Make frontend backend again'](https://youtu.be/XBfi3Q74BnE)
 
-      History of war against accidential complexity of applications, where we are now and what the next step could be
-      Thanks to @niqola for the avesome talk, it served me as source of knowledge and inspiration. Crucial.
+      History of war against accidental complexity of applications, where we are now and what the next step could be
+      Thanks to @niqola for the awesome talk, it served me as source of knowledge and inspiration. Crucial.
   * More on on Clojure ecosystem and complexity it purges:
     * https://youtu.be/b-Eq4YV4uwc
     * and all you're able find in youtube for 'Rich Hicky' and 'Николай Рыжиков clojure', exceptional goodies.
