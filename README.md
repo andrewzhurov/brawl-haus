@@ -8,6 +8,7 @@ Brawl Haus is a cooperative competition service, planned to have blind-typing or
 
 Touch: http://dev.brawl.haus
 
+[![CircleCI](https://circleci.com/gh/andrewzhurov/brawl-haus/tree/master.svg?style=svg)](https://circleci.com/gh/andrewzhurov/brawl-haus/tree/master)
 
 ## Mindset
 
