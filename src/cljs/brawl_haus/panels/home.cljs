@@ -35,12 +35,12 @@
 [:li "Race game"]
 
 (def shelf-items
-  [{:name "Clojure Crash Course"
+  [#_{:name "Clojure Crash Course"
     :img-src "./image/clojure-men-s-premium-t-shirt.jpg"
     :desc "Dash to get you grasp the language. Heavily practice powered."
     :action "Go for it."
     :action-fn #(rf/dispatch [:conn/send [:ccc/attend]])}
-   {:name "Sandbox (View)"
+   #_{:name "Sandbox (View)"
     :img-src "./image/little-sand-castle.jpg"
     :desc "Sand castles. This is the place you play around Hiccup and Garden - things powering your View"
     :action "Make a castle of my own"
