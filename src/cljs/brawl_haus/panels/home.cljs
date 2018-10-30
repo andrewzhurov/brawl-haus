@@ -9,15 +9,7 @@
             [re-com.misc :as rcmisc]
             [brawl-haus.components :as comps]))
 
-(defn shelf-item [{:keys [name desc action-fn action]}]
-  [:li.card.blue-grey.darken-1
-   [:div.card-content.white-text
-    [:span.card-title name]
-    [:p desc]]
-   [:div.card-action
-    [:a {:on-click action-fn} action]]])
-
-(defn shelf-item2 [{:keys [img-src name desc action-fn action]}]
+(defn shelf-item [{:keys [img-src name desc action-fn action]}]
   ^{:key name}
   [:li.col.s12.m7
    [:div.card
@@ -29,10 +21,6 @@
       desc]]
     [:div.card-action {:on-click action-fn}
      [:a action]]]])
-
-[:li "Clojure crash course"]
-[:li "View sandbox"]
-[:li "Race game"]
 
 (def shelf-items
   [#_{:name "Clojure Crash Course"
@@ -61,6 +49,6 @@
   [:div.home-panel
    [:div.content-section
     [:ul.shelf
-     (map shelf-item2 shelf-items)
+     (map shelf-item shelf-items)
      ]]])
 
