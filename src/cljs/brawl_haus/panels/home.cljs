@@ -2,7 +2,7 @@
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
             [brawl-haus.panels :as panels]
-            [brawl-haus.utils :refer [l <sub defview view]]
+            [brawl-haus.utils :refer [l <sub <=sub defview view]]
             [cljs-time.core :as t]
             [cljs-time.coerce :as c]
             [cljs-time.format :as f]
@@ -33,6 +33,11 @@
     :desc "Sand castles. This is the place you play around Hiccup and Garden - things powering your View"
     :action "Make a castle of my own"
     :action-fn #(rf/dispatch [:conn/send [:hiccup-touch/attend]])}
+   {:name "At last"
+    :img-src "./brawl/poster.jpg"
+    :desc "And here you meet after all, any left to say?"
+    :action "Words can hurt too."
+    :action-fn #(rf/dispatch [:conn/send [:reunion/attend]])}
    {:name "Race game"
     :img-src "./image/graffiti-racer.jpg"
     :desc "Techdemo on what the architecture can facilitate. Multiplayer race-chunk-of-text game"
@@ -49,6 +54,4 @@
   [:div.home-panel
    [:div.content-section
     [:ul.shelf
-     (map shelf-item shelf-items)
-     ]]])
-
+     (map shelf-item shelf-items)]]])

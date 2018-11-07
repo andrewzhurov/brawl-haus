@@ -19,12 +19,23 @@
 
                  [paren-soup "2.13.2"]
                  [hiccups "0.3.0"]
-                 [garden "1.3.5"]]
+                 [garden "1.3.5"]
+
+                 [org.clojure/test.check "0.9.0" :scope "test"]
+
+                 [thi.ng/geom "0.0.908"]
+                 #_[thi.ng/geom-svg "0.0.908"]
+                 [thi.ng/ndarray "0.3.0"]
+                 [thi.ng/strf "0.2.1"]
+                 [thi.ng/xerror "0.1.0"]
+                 [thi.ng/color "1.0.0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-garden "0.3.0"]
             [lein-cljfmt "0.6.0"]
-            [lein-ancient "0.6.15"]]
+            [lein-ancient "0.6.15"]
+            ;; left clojurescript.test out
+            ]
 
   :min-lein-version "2.5.3"
 
@@ -67,7 +78,9 @@
                    [day8.re-frame/tracing "0.5.1"]
                    [figwheel-sidecar "0.5.16"]
                    [cider/piggieback "0.3.5"]
-                   ]
+
+                   [criterium "0.4.3"]
+                   [tentacles "0.3.0"]]
 
     :plugins       [[com.jakemccrary/lein-test-refresh "0.23.0"]
                     [lein-figwheel "0.5.16"]

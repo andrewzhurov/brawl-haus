@@ -198,6 +198,10 @@
       (let [db-with-race (ensure-race current-db conn-id)]
         (enter-race db-with-race (:id (race-to-be db-with-race)) conn-id)))
 
+    :reunion/attend
+    (fn [db _ conn-id]
+      (navigate db conn-id {:location-id :reunion-panel}))
+
     :chat/add-message
     (fn [db [_ text] conn-id]
       (update db :messages conj {:text text

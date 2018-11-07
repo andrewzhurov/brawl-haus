@@ -15,10 +15,14 @@
    [brawl-haus.panels.home]
    [brawl-haus.panels.ccc]
    [brawl-haus.panels.space-versus]
+   [brawl-haus.panels.reunion]
 
    [brawl-haus.components :as comps]
    [brawl-haus.focus :as focus]
-   [brawl-haus.shortcuts :as shortcuts]))
+   [brawl-haus.shortcuts :as shortcuts]
+
+   [brawl-haus.sandbox]))
+
 
 (defn dev-setup []
   (when (:debug? config/env)
@@ -43,7 +47,8 @@
    [shortcuts/help]])
 
 (defn mount-root []
-  (reagent/render [entry-point]
+  (reagent/render #_[brawl-haus.sandbox/content]
+                  [entry-point]
                   (.getElementById js/document "app")))
 
 (rf/reg-event-db
