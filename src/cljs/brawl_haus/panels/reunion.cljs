@@ -27,9 +27,11 @@
 
 (defn px [num] (str num "px"))
 (def style
-  [[:#content {:height "100vh"
-               :width "100vw"}]
-   [:.enemies
+  [[:#content {:margin-top "5px"
+               :display "flex"
+               :flex-direction "column"
+               :align-items "center"}]
+   [:.enemies {:width "400px"}
     [:.beaten {:background-color "lightgray"}]]
    [:.face-group {:cursor "pointer"
                   :margin "auto"}
