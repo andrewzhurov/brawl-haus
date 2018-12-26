@@ -527,8 +527,8 @@
                            (let [{:keys [to on-press?]} (first (filter (fn [{:keys [which]}]
                                                                          (= which (.-which e)))
                                                                        controls))]
-                             (.preventDefault e)
-                             (.stopPropagation e)
+                             #_(.preventDefault e)
+                             #_(.stopPropagation e)
                              (when to
                                (if on-press?
                                  (onpress :down [:controls to])
@@ -547,8 +547,8 @@
                            (let [{:keys [to on-press?]} (first (filter (fn [{:keys [which]}]
                                                                          (= which (.-which e)))
                                                                        controls))]
-                             (.preventDefault e)
-                             (.stopPropagation e)
+                             #_(.preventDefault e)
+                             #_(.stopPropagation e)
                              (when to
                                (if on-press?
                                  (onpress :up [:controls to])
@@ -652,8 +652,8 @@
    [:svg {:width "100vw"
           :height "100vh"
           :on-mouse-move #(when (normal-time?) (>evt [:mouse (coords %)]))
-          :on-click #(do (.preventDefault %)
-                         (.stopPropagation %)
+          :on-click #(do #_(.preventDefault %)
+                         #_(.stopPropagation %)
                          (>evt [:fire]))
           }
     [:text {:x 10 :y 15}
