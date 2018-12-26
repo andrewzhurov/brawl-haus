@@ -532,8 +532,8 @@
                                                                          (= which (.-which e)))
                                                                        controls))]
                              (when to
-                               (.preventDefault e)
-                               (.stopPropagation e)
+                               #_(.preventDefault e)
+                               #_(.stopPropagation e)
                                (if on-press?
                                  (onpress :down [:controls to])
                                  (deduple [:set-controls to 1])))))))))
@@ -552,8 +552,8 @@
                                                                          (= which (.-which e)))
                                                                        controls))]
                              (when to
-                               (.preventDefault e)
-                               (.stopPropagation e)
+                               #_(.preventDefault e)
+                               #_(.stopPropagation e)
                                (if on-press?
                                  (onpress :up [:controls to])
                                  (deduple [:set-controls to 0])))))))))
