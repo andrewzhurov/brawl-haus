@@ -12,5 +12,5 @@
                  #_"Isolation. Transactions are often executed concurrently (eg. reading and writing to multiple tables at the same time). Isolation ensures that concurrent execution of transactions leaves the database in the same state that would've been obtained if the transactions were executed sequentially. Isolation is the main goal of concurrency control; depending on the method used, the effects of an incomplete transaction might not even be visible to other transactions."
                  "Durability. Durability guarantees that once a transaction has been committed, it will remain committed even in the case of a system failure (eg. power outage or crash). This usually means that completed transactions (or their effects) are recorded in non-volatile memory."])
 
-(def names ["blah"] #_(-> (slurp "resources/public/names.txt")
+(def names (-> (slurp "resources/public/names.txt")
                (clojure.string/split #"\n")))
