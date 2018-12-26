@@ -47,7 +47,13 @@
     :img-src "https://i.kinja-img.com/gawker-media/image/upload/t_original/tm7dh3qlzvvnfefftvks.jpg"
     :desc "It's a versus... in the space! Machete kills."
     :action "Embark on a spaceship"
-    :action-fn #(rf/dispatch [:conn/send [:sv/attend]])}])
+    :action-fn #(rf/dispatch [:conn/send [:sv/attend]])}
+   {:name "Frozen in Time"
+    :img-src "https://i.kinja-img.com/gawker-media/image/upload/t_original/tm7dh3qlzvvnfefftvks.jpg"
+    :desc "Game mechanic concepts for the yet to be built game"
+    :action "Check it out"
+    :action-fn #(rf/dispatch [:conn/send [:frozen-in-time/attend]])}]
+  )
 
 (defmethod panels/panel :home-panel
   [_]

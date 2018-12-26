@@ -351,7 +351,11 @@
                                                                                                {:id :basic-laser2
                                                                                                 :slot 2}))
             (update-in [:games :sv :ship conn-id :cargo :scrap] - 40))
-        db))}))
+        db))
+
+    :frozen-in-time/attend
+    (fn [db _ conn-id]
+      (navigate db conn-id {:location-id :frozen-in-time}))}))
 
 (defn drive [db [evt-id :as evt] & params]
   (if-let [evt-fn (get @events evt-id)]

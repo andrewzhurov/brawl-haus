@@ -2,7 +2,14 @@
   (:require [reagent.ratom]
             [re-frame.core :as rf]))
 
-(defn l [desc expr] (js/console.log desc expr) expr)
+(defn l
+  ([desc expr] (js/console.log desc expr) expr)
+  ([expr] (js/console.log "LOG:" expr) expr))
+
+(defn deep-merge [& colls]
+  (if (not (every? map? colls))
+    (last colls)
+    (apply merge-with deep-merge colls)))
 
 (rf/reg-event-fx
  :dirt

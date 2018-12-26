@@ -1,0 +1,41 @@
+(defn gamepad-inspect []
+  (if-let [gp (<sub [:gamepad])]
+    [:g
+     [:text {:x 10 :y 120} (pr-str (int (:angle gp))) (pr-str (:axes gp)) ]
+     (map-indexed
+      (fn [idx val]
+        ^{:key idx}
+        [:text {:x 10 :y (+ 140 (* 20 idx))} (pr-str val)])
+      (:buttons gp))]
+    [:text {:x 10 :y 120} "No gamepad to inspect"]))
+
+;; Render system
+(defmulti render :type)
+(defmethod render :coin-spawner
+  [{:keys [id]
+    {[width height] :zone-size} :coin-spawner
+    [x y] :position :as ent}]
+  ^{:key id}
+  [:rect.coin-spawner {:x x
+                       :y y
+                       :width width
+                       :height height}])
+
+(defmethod render :default
+  [{:keys [id angle]
+    {:keys [texture size]} :render
+    [x y] :position :as ent}]
+  (let [r (/ size 2)]
+    ^{:key id}
+    [:image (cond-> {:x (- x r)
+                     :y (- y r)
+                     :width (* r 2)
+                     :height (* r 2)}
+              angle (assoc :transform (str "rotate(" (-> angle  (* -1) (+ 90)) "," x "," y ")"))
+              texture (assoc :xlinkHref texture))]))
+
+(defn renderer []
+  [:g
+   (for [ent @entities]
+     (render ent)
+     )])

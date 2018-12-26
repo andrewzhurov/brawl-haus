@@ -21,7 +21,8 @@
    [brawl-haus.focus :as focus]
    [brawl-haus.shortcuts :as shortcuts]
 
-   [brawl-haus.sandbox]))
+   [brawl-haus.sandbox]
+   [brawl-haus.sandbox2]))
 
 
 (defn dev-setup []
@@ -47,7 +48,7 @@
    [shortcuts/help]])
 
 (defn mount-root []
-  (reagent/render #_[brawl-haus.sandbox/content]
+  (reagent/render #_[brawl-haus.sandbox2/content]
                   [entry-point]
                   (.getElementById js/document "app")))
 
