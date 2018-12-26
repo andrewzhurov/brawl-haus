@@ -656,6 +656,12 @@
                          (.stopPropagation %)
                          (>evt [:fire]))
           }
+    [:text {:x 10 :y 15}
+     "WASD to move"]
+    [:text {:x 10 :y 27}
+     "Left mouse button to shoot"]
+    [:text {:x 10 :y 40}
+     "SPACE to rewind"]
     [:defs
      [:linearGradient#grad1
       {:y2 "0%", :x2 "100%", :y1 "0%", :x1 "0%"}

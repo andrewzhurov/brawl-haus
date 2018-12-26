@@ -49,7 +49,7 @@
     :action "Embark on a spaceship"
     :action-fn #(rf/dispatch [:conn/send [:sv/attend]])}
    {:name "Frozen in Time"
-    :img-src "https://i.kinja-img.com/gawker-media/image/upload/t_original/tm7dh3qlzvvnfefftvks.jpg"
+    :img-src "https://cdn.pixabay.com/photo/2018/01/18/00/11/winter-3089313_1280.jpg"
     :desc "Game mechanic concepts for the yet to be built game"
     :action "Check it out"
     :action-fn #(rf/dispatch [:conn/send [:frozen-in-time/attend]])}]
