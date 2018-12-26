@@ -34,12 +34,13 @@
                     :crouch 0
                     :crawl 0})
 
-(def db (r/atom {:evt-history {}
-                 :current-tick 0
-                 ;:now (Date.now)
-                 :mouse [0 0]
-                 :controls init-controls
-                 :entities #{}}))
+(def init-db {:evt-history {}
+              :current-tick 0
+              ;:now (Date.now)
+              :mouse [0 0]
+              :controls init-controls
+              :entities #{}})
+(def db (r/atom init-db))
 
 (defn update-set [coll match update-fn]
   (into #{} (map (fn [el]
@@ -456,11 +457,14 @@
 
 
 (defonce sys-running (atom nil))
-(defn clear-sys-running []
-  (when-let [sr (l 111 @sys-running)]
+(defn stop-engine! []
+  (when-let [sr @sys-running]
     (js/clearInterval sr)))
-(clear-sys-running)
-(reset! sys-running (js/setInterval tick! 16))
+(defn start-engine! []
+  (do (stop-engine!)
+      (reset! sys-running (js/setInterval tick! 16))))
+
+
 
 (def controls
   [{:which 65
@@ -476,10 +480,10 @@
    {:which 79
     :to :down
     :on-press? true}
-   {:which 17
+   #_{:which 17
     :to :crouch
     :on-press? true}
-   {:which 74
+   #_{:which 74
     :to :crawl
     :on-press? true}])
 
@@ -527,9 +531,9 @@
                            (let [{:keys [to on-press?]} (first (filter (fn [{:keys [which]}]
                                                                          (= which (.-which e)))
                                                                        controls))]
-                             #_(.preventDefault e)
-                             #_(.stopPropagation e)
                              (when to
+                               (.preventDefault e)
+                               (.stopPropagation e)
                                (if on-press?
                                  (onpress :down [:controls to])
                                  (deduple [:set-controls to 1])))))))))
@@ -547,9 +551,9 @@
                            (let [{:keys [to on-press?]} (first (filter (fn [{:keys [which]}]
                                                                          (= which (.-which e)))
                                                                        controls))]
-                             #_(.preventDefault e)
-                             #_(.stopPropagation e)
                              (when to
+                               (.preventDefault e)
+                               (.stopPropagation e)
                                (if on-press?
                                  (onpress :up [:controls to])
                                  (deduple [:set-controls to 0])))))))))
@@ -638,45 +642,55 @@
 
 (defn coords [e] [(.-clientX e) (.-clientY e)])
 
-(>evt [:add-ent ent-floor])
-(doseq [stair ent-stairs]
-  (>evt [:add-ent stair]))
-(>evt [:add-ent ent-player])
-(>evt [:add-ent ent-enemy])
-(l "DB:" @db)
+(defn content []
+  (r/create-class
+   {:component-will-mount
+    #(do (reset! db init-db)
+         (start-engine!)
+         (>evt [:add-ent ent-floor])
+         (doseq [stair ent-stairs]
+           (>evt [:add-ent stair]))
+         (>evt [:add-ent ent-player])
+         (>evt [:add-ent ent-enemy]))
+    :component-will-unmount
+    #(stop-engine!)
+    :reagent-render
+    (fn [_]
+      [:div
+       [:style (garden.core/css styles)]
+       [:svg {:width "100vw"
+              :height "100vh"
+              :on-mouse-move #(when (normal-time?) (>evt [:mouse (coords %)]))
+              :on-click #(do #_(.preventDefault %)
+                             #_(.stopPropagation %)
+                             (>evt [:fire]))
+              }
+        [:text {:x 10 :y 15}
+         "WASD to move"]
+        [:text {:x 10 :y 27}
+         "Left mouse button to shoot"]
+        [:text {:x 10 :y 40}
+         "SPACE to rewind"]
+        [:defs
+         [:linearGradient#grad1
+          {:y2 "0%", :x2 "100%", :y1 "0%", :x1 "0%"}
+          [:stop
+           {:style {:stop-color "rgb(255,100,0)"
+                    :stop-opacity "0"},
+            :offset "0%"}]
+          [:stop
+           {:style {:stop-color "rgb(255,100,0)"
+                    :stop-opacity "0.4"},
+            :offset "100%"}]]]
+        [timeline]
+        #_[:text {:x 200 :y 200} (str (:mouse @db))]
+        (for [{:keys [id] :as ent} (sort-by :id (:entities @db))]
+          ^{:key id}
+          [render ent])
+        #_[inspect (:controls @db) 10 30]
+        ]])}))
 
 (defmethod panels/panel :frozen-in-time
   [_]
-  [:div
-   [:style (garden.core/css styles)]
-   [:svg {:width "100vw"
-          :height "100vh"
-          :on-mouse-move #(when (normal-time?) (>evt [:mouse (coords %)]))
-          :on-click #(do #_(.preventDefault %)
-                         #_(.stopPropagation %)
-                         (>evt [:fire]))
-          }
-    [:text {:x 10 :y 15}
-     "WASD to move"]
-    [:text {:x 10 :y 27}
-     "Left mouse button to shoot"]
-    [:text {:x 10 :y 40}
-     "SPACE to rewind"]
-    [:defs
-     [:linearGradient#grad1
-      {:y2 "0%", :x2 "100%", :y1 "0%", :x1 "0%"}
-      [:stop
-       {:style {:stop-color "rgb(255,100,0)"
-                :stop-opacity "0"},
-        :offset "0%"}]
-      [:stop
-       {:style {:stop-color "rgb(255,100,0)"
-                :stop-opacity "0.4"},
-        :offset "100%"}]]]
-    [timeline]
-    #_[:text {:x 200 :y 200} (str (:mouse @db))]
-    (for [{:keys [id] :as ent} (sort-by :id (:entities @db))]
-      ^{:key id}
-      [render ent])
-    #_[inspect (:controls @db) 10 30]
-    ]])
+  [content]
+  )
