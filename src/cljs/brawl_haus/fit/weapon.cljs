@@ -1,5 +1,6 @@
 (ns brawl-haus.fit.weapon
-  (:require [brawl-haus.fit.state :as state]))
+  (:require [brawl-haus.fit.state :as state]
+            [brawl-haus.fit.collision :as collision]))
 
 (def ak-47
   {:weight 3.47
@@ -13,3 +14,12 @@
   {:weapon (merge spec
                   {:temp {:last-fired-at 0
                           :left-rounds 30}})})
+
+(defmethod collision/collide [:bullet :floor]
+  [[b-id b] [f-id f]]
+  {b-id nil})
+
+(defmethod collision/collide [:bullet :enemy]
+  [[b-id b] [e-id e]]
+  {b-id nil
+   e-id nil})

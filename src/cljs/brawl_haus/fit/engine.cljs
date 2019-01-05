@@ -8,8 +8,6 @@
             [brawl-haus.fit.gravity :as gravity]
             [brawl-haus.fit.collision :as collision]))
 
-(l "BLAH" "BLEH")
-
 (def systems
   [player/system
    phys/system
@@ -38,10 +36,10 @@
        ))])
 
 (defn run-systems [db]
-  (reduce (fn [db sys-fn]
-            (deep-merge db (sys-fn db)))
-          db
-          systems))
+   (reduce (fn [db sys-fn]
+                      (deep-merge db (sys-fn db)))
+                    db
+                    systems))
 
 
 (defn tick! []
@@ -71,6 +69,7 @@
   (when-let [sr @sys-running]
     (js/clearInterval sr)))
 
+
 (defn start-engine! []
   (do (stop-engine!)
-      (reset! sys-running (js/setInterval tick! 20))))
+      (reset! sys-running (js/setInterval tick! 16))))

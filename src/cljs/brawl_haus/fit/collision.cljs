@@ -1,6 +1,6 @@
 (ns brawl-haus.fit.collision
   (:require [brawl-haus.utils :refer [deep-merge l]]
-            [brawl-haus.fit.player :as player]))
+            ))
 
 (defn component [actor?]
   {:collision {:actor? actor?
@@ -20,43 +20,41 @@
              (or (> pass-y act-y2)
                  (< pass-y2 act-y))))))
 
-(defmulti collide (fn [act pass] [(:type act) (:type pass)]))
-(defmethod collide [:player :floor]
-  [player floor]
-  [(player/player-ground player floor)
-   floor])
+(defmulti collide (fn [[_ act] [_ pass]] (do (js/console.log "COLLIDED:" act pass)
+                                             [(:type act) (:type pass)])))
 
-(defmethod collide [:player :stair]
-  [{[w h] :size
-    [player-x _] :position :as player}
-   {[_ stair-y] :position :as stair}]
-  [(player/player-ground player stair) stair])
+
 (defmethod collide [:player :enemy]
-  [p e]
-  (println "HIT") [p e])
+  [[p-id p] [e-id e]]
+  (println "HIT")
+  {p-id p
+   e-id e}
+   )
 
-(defmethod collide :default [a b] [a b])
+(defmethod collide :default [[a-id a] [b-id b]] {a-id a b-id b})
 
 
+
+(defn calc-collides [ents & worked-ents]
+  (let [worked-ents (or worked-ents #{})
+        subjs (into {} (remove (comp worked-ents key) ents))
+        actor (first (filter (comp :actor? :collision val) subjs))
+        coll-subj (some #(when (and actor (collided? (second actor) (second %))) %)
+                        (disj (set subjs) actor))
+        ]
+    (cond (and actor coll-subj)
+          (recur
+           (deep-merge ents (collide actor coll-subj))
+           (conj worked-ents (key actor)))
+
+          (and actor (nil? coll-subj))
+          (recur ents (conj worked-ents (key actor)))
+
+          :else
+          ents)))
 
 (def system
-  (fn [db & without-subjs]
-    (let [without-subjs (or without-subjs #{})
-          subjs (->> (:entities db)
-                     (remove (fn [[id _]] (contains? without-subjs id)))
-                     (filter (comp :collision val)))
-          actor (first (filter (comp :actor? :collision val) subjs))
-          coll-subj (some #(when (and actor (collided? (second actor) (second %))) %)
-                          (disj (set subjs) actor))
-          actor (second actor)
-          coll-subj (second coll-subj)]
-      (if coll-subj
-        (recur
-         (deep-merge db
-                     {:entities (if coll-subj
-                                  (reduce (fn [acc {:keys [id] :as ent}] (assoc acc id ent))
-                                          {}
-                                          (collide actor coll-subj))
-                                  {})})
-         (conj without-subjs (:id coll-subj) (:id actor)))
-        db))))
+  (fn [{:keys [entities]}]
+    (let [subjs (into {} (filter (comp :collision val) entities))]
+
+      {:entities (calc-collides subjs)})))

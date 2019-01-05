@@ -44,34 +44,7 @@
          (collision/component true)
          (chase/component true)))
 
-(defn bullet [{[pos-x pos-y] :position
-                   }]
-  (let [{[disp-x disp-y] :vec-angle
-         :keys [angle]} @state/angle ;; COFX
-        id (keyword (str (random-uuid)))
-        dt 16] ;; LIE
-    {id (merge {:id id
-                :type :bullet}
-               {:render {:color "steel"
-                         :angle angle}}
-               (comp-position [(-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                                   (* disp-x)
-                                   (+ pos-x))
-                               (-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                                   (* disp-y)
-                                   (+ pos-y 6))])
-               (misc/comp-size 4 2)
-               (collision/component true)
-               (phys/component 0.1
-                               [(-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                                    (* disp-x)
-                                    (* (/ dt 1000)))
-                                (-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                                    (* disp-y)
-                                    (* (/ dt 1000)))]
-                               [0 0])
-               {:self-destruct {:after 20000
-                                :spawn-time (Date.now)}})}))
+
 
 
 (def floor

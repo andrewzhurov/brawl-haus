@@ -3,14 +3,13 @@
             [brawl-haus.fit.sound :as sound]
             [brawl-haus.fit.time :as time]
             [brawl-haus.fit.state :as state]
+            [brawl-haus.fit.collision :as collision]
             [brawl-haus.fit.phys :as phys]
             [brawl-haus.fit.weapon :as weapon]
-            [brawl-haus.fit.collision :as collision]
             [brawl-haus.fit.chase :as chase]
-            [brawl-haus.fit.misc :refer [comp-position]]
-            [brawl-haus.fit.events :refer [>evt]]
+            [brawl-haus.fit.misc :refer [comp-position comp-size]]
             [brawl-haus.fit.mnemo :as mnemo]
-            [brawl-haus.fit.entities :as entities]))
+            ))
 
 (defn comp-person [spec]
   {:person (merge spec
@@ -73,6 +72,36 @@
     new-subj
     ))
 
+
+(defn bullet [{[pos-x pos-y] :position
+                   }]
+  (let [{[disp-x disp-y] :vec-angle
+         :keys [angle]} @state/angle ;; COFX
+        id (keyword (str (random-uuid)))
+        dt 16] ;; LIE
+    {id (merge {:id id
+                :type :bullet}
+               {:render {:color "steel"
+                         :angle angle}}
+               (comp-position [(-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
+                                   (* disp-x)
+                                   (+ pos-x))
+                               (-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
+                                   (* disp-y)
+                                   (+ pos-y 6))])
+               (comp-size 4 2)
+               (collision/component true)
+               (phys/component 0.1
+                               [(-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
+                                    (* disp-x)
+                                    (* (/ dt 1000)))
+                                (-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
+                                    (* disp-y)
+                                    (* (/ dt 1000)))]
+                               [0 0])
+               {:self-destruct {:after 20000
+                                :spawn-time (Date.now)}})}))
+
 (def system
   (fn [{:keys [current-tick time-passed  controls] :as db
         {{{:keys [desired-pose]} :person :as subj} :player} :entities}]
@@ -100,98 +129,18 @@
 
                                     (and (<= left 0.1) (<= right 0.1))
                                     (phys/throttle rt))}
-                   firing? (merge (entities/bullet subj)))
+                   firing? (merge (bullet subj)))
        })))
 
 
-;; Controls
-(def controls
-  [{:which 65
-    :to :left
-    :on-press? false}
-   {:which 69
-    :to :right
-    :on-press? false}
 
-   {:which 188
-    :to :up
-    :on-press? true}
-   {:which 79
-    :to :down
-    :on-press? true}
-   #_{:which 17
-      :to :crouch
-      :on-press? true}
-   #_{:which 74
-      :to :crawl
-      :on-press? true}])
 
-(def dedupler (atom {}))
-(defn deduple [[evt-id & params :as evt]]
-  (swap! dedupler
-         (fn [x]
-           (if (= (get @dedupler evt-id) params)
-             x
-             (do (>evt evt)
-                 (assoc x evt-id params))))))
+(defmethod collision/collide [:player :floor]
+  [[p-id player] [f-id floor]]
+  {p-id (player-ground player floor)})
 
-(def debouncer (atom {:last-evt nil
-                      :last-at nil}))
-(defn debounce [evt]
-  (let [now (Date.now)]
-    (swap! debouncer (fn [{:keys [last-evt last-at]}] (when-not (and (< (- now last-at) 50)
-                                                                     (= last-evt evt))
-                                                        (>evt evt))
-                       {:last-evt evt
-                        :last-at now}
-                       ))))
-
-(def onpresser (atom {:example-event-id :down}))
-(defn onpress [direction [evt-id :as evt]]
-  (swap! onpresser update evt-id (fn [prev-direction]
-                                   (case [prev-direction direction]
-                                     [nil :down] (do (>evt evt)
-                                                     :down)
-                                     [:down :down] :down
-                                     [:down :up]   :up
-                                     [:up :up]     :up
-                                     [:up :down] (do (>evt evt)
-                                                     :down)
-                                     ))))
-
-(defonce bla
-  (.addEventListener js/window "keydown"
-                     (fn [e]
-                       (if (= 32 (.-which e))
-                         (swap! mnemo/mnemo update :current-reverse (fn [curr] (or curr (Date.now))))
-
-                         (when (mnemo/normal-time?)
-                           (let [{:keys [to on-press?]} (first (filter (fn [{:keys [which]}]
-                                                                         (= which (.-which e)))
-                                                                       controls))]
-                             (when to
-                               #_(.preventDefault e)
-                               #_(.stopPropagation e)
-                               (if on-press?
-                                 (onpress :down [:controls to])
-                                 (deduple [:set-controls to 1])))))))))
-
-(defonce bla
-  (.addEventListener js/window "keyup"
-                     (fn [e]
-                       (if (= 32 (.-which e))
-                         (do (swap! mnemo/mnemo (fn [{:keys [current-reverse
-                                                             reverse-history]}]
-                                                  (l "Finished reverse:"
-                                                     {:current-reverse nil
-                                                      :reverse-history (conj reverse-history [current-reverse (Date.now)])}))))
-                         (when (mnemo/normal-time?)
-                           (let [{:keys [to on-press?]} (first (filter (fn [{:keys [which]}]
-                                                                         (= which (.-which e)))
-                                                                       controls))]
-                             (when to
-                               #_(.preventDefault e)
-                               #_(.stopPropagation e)
-                               (if on-press?
-                                 (onpress :up [:controls to])
-                                 (deduple [:set-controls to 0])))))))))
+(defmethod collision/collide [:player :stair]
+  [[p-id {[w h] :size
+          [player-x _] :position :as player}]
+   {[_ stair-y] :position :as stair}]
+  {p-id (player-ground player stair)})
