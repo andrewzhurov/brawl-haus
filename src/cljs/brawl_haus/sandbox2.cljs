@@ -3,19 +3,35 @@
             [reagent.core :as r]
             [reagent.ratom :as ra]
             [re-frame.core :refer [reg-event-db reg-sub reg-sub-raw]]
-            [brawl-haus.utils :refer [l deep-merge ]]
+            [brawl-haus.utils :refer [l deep-merge]]
             [clojure.data :refer [diff]]
             [brawl-haus.panels :as panels]
-            ))
+            [goog.string :as gstr]))
+
+(def fire-assets
+  {1 (js/Audio. "/sandbox/ak-47-1.wav")
+   2 (js/Audio. "/sandbox/ak-47-2.wav")
+   3 (js/Audio. "/sandbox/ak-47-3.wav")
+   4 (js/Audio. "/sandbox/ak-47-4.wav")
+   5 (js/Audio. "/sandbox/ak-47-5.wav")
+   6 (js/Audio. "/sandbox/ak-47-6.wav")
+   7 (js/Audio. "/sandbox/ak-47-7.wav")})
+
+(defn play-fire [idx]
+  (let [sound (get fire-assets idx)]
+    (.pause sound)
+    (set! (.-current-time sound) 0)
+    (.play sound)))
 
 (defn conjv [v? val] (if v? (conj v? val) [val]))
-(def fps 60)
+(def fps 30)
 (def dt (/ 1000 fps))
 (def rewind-speed 2)
 
 (def styles
   [[:body {:overflow "hidden"}]
-   [:svg {:cursor "crosshair"}]
+   [:svg {:cursor "crosshair"
+          }]
    [:.data-reactroot {:overflow "hidden"}]
 
    [:.timeline {:position "absolute"
@@ -32,14 +48,34 @@
                     :left 0
                     :right 0
                     :crouch 0
-                    :crawl 0})
+                    :crawl 0
+                    :trigger false})
+
+(def default-time-flow 0)
+(defn relative-time [ent dt]
+  (cond
+    (= :player (:id ent)) (* dt 2)
+    (= :bullet (:type ent)) dt
+    :else (/ dt 4)))
+
+(defn time-passed [{:keys [current-tick angle-diff-at angle-diff]
+                    {{{[vx vy] :v} :phys} :player} :entities :as db}]
+  (let [disp-x (Math.abs vx)
+        disp-y (Math.abs vy)
+        curr-angle-diff (if (= angle-diff-at current-tick) (Math.abs angle-diff) 0)]
+    (merge db
+           {:time-passed (+ default-time-flow
+                            (* 3 disp-x)
+                            disp-y
+                            (/ curr-angle-diff 4))})))
 
 (def init-db {:evt-history {}
               :current-tick 0
               ;:now (Date.now)
+              :prev-mouse [0 0]
               :mouse [0 0]
               :controls init-controls
-              :entities #{}})
+              :entities {}})
 (def db (r/atom init-db))
 
 (defn update-set [coll match update-fn]
@@ -59,28 +95,34 @@
 (declare ent-bullet)
 (declare calc-angle)
 (declare displacement)
-(def events
-  {:mouse (fn [db [_ coords]]
-            (-> (assoc db :mouse coords)
-                (update :entities update-set {:id "player"} (fn [{[pos-x pos-y] :position :as player}]
-                                                             (let [angle (calc-angle [pos-x (+ pos-y 7)] coords)
-                                                                    facing (if (and (<= angle 90)
-                                                                                    (>= angle -90))
-                                                                             :left :right)
-                                                                    angle (if (= :right facing)
-                                                                            (- (- angle 180))
-                                                                            angle)]
-                                                                (merge player {:vec-angle (displacement [(+ pos-x 7) pos-y] coords)
-                                                                               :angle angle
-                                                                               :facing facing}))))))
-   :fire (fn [db _]
-           (let [player (look-up (:entities db) {:id "player"})]
-             (update db :entities conj (ent-bullet player))))
 
-   :add-ent (fn [db [_ ent]] (update db :entities conj ent))
+(def mouse (r/cursor db [:mouse]))
+(def ppos (r/cursor db [:entities :player :position]))
+(def angle (ra/reaction
+            (let [[pos-x pos-y] @ppos
+                  angle (calc-angle [pos-x (+ pos-y 7)] @mouse)
+                  facing (if (and (<= angle 90)
+                                  (>= angle -90))
+                           :left :right)
+                  angle (if (= :right facing)
+                          (- (- angle 180))
+                          angle)]
+              {:vec-angle (displacement [(+ pos-x 7) pos-y] @mouse)
+               :angle angle
+               :facing facing})))
+
+
+(def events
+  {:mouse (fn [{:keys [mouse current-tick] :as db} [_ coords]]
+            (merge db {:prev-mouse mouse
+                       :angle-diff-at current-tick
+                       :angle-diff (calc-angle mouse coords)
+                       :mouse coords}))
+
+   :add-ent (fn [db [_ ent]] (assoc-in db [:entities (:id ent)] ent))
    :set-controls (fn [db [_ id val]] (assoc-in db [:controls id] val))
    :controls (fn [db [_ action]]
-               (let [subj (first (filter :person (:entities db)))
+               (let [subj (get-in db [:entities :player])
                      desired-pose (get-in subj [:person :desired-pose])
                      new-subj
                      (cond-> subj
@@ -104,15 +146,12 @@
                        (->
                         (deep-merge {:collision {:grounded? false}})
                         (phys-v [0 -3])))]
-                 (update db :entities (fn [ents]
-                                        (-> ents
-                                            (disj subj)
-                                            (conj new-subj))))))
+                 (assoc-in db [:entities :player] new-subj)))
    })
 
 (defn >evt [evt]
   (swap! db (fn [{:keys [current-tick] :as db}]
-              (update-in db [:evt-history current-tick] conjv evt))))
+              (update-in db [:evt-history (inc current-tick)] conjv evt))))
 
 (defn displacement [[x1 y1] [x2 y2]]
   [(- x2 x1) (- y2 y1)])
@@ -129,18 +168,20 @@
 (defn phys-v [ent [v-x v-y] & [max-x dt]]
   (update-in ent [:phys :v] (fn [[now-v-x now-v-y]]
                               (if (and max-x dt)
-                                [((if (neg? max-x) max min) (+ now-v-x (* v-x (/ dt 1000))) max-x)
-                                 (+ now-v-y (* v-y (/ dt 1000)))]
+                                [((if (neg? max-x) max min) (+ now-v-x v-x) max-x)
+                                 (+ now-v-y v-y)]
                                 [(+ now-v-x v-x) (+ now-v-y v-y)])
                               )))
 
 (defn per-s [val dt]
-  (* val (/ dt 1000)))
+  (* (/ val 1000) dt))
 
 (defn phys-throttle [ent dt]
   (update-in ent [:phys :v] (fn [[v-x v-y]]
-                              [(* v-x (- 1 (per-s 3 dt)))
-                               (* v-y (- 1 (per-s 3 dt)))])))
+                              [(if (< (Math.abs v-x) 0.1) 0
+                                   (* v-x (- 1 (per-s 1 dt))))
+                               v-y
+                               #_(* v-y (- 1 (per-s 3 dt)))])))
 
 (defn comp-collision [actor?]
   {:collision {:actor? actor?
@@ -151,13 +192,14 @@
 
 (defn comp-weapon [spec]
   {:weapon (merge spec
-                  {:temp {:last-fired nil
+                  {:temp {:last-fired-at 0
                           :left-rounds 30}})})
 (def ak-47
   {:weight 3.47
    :muzzle-velocity 715 ;m/s
    :rounds 30
-   :rpm 600
+   :rpm 60
+   :cooldown-ticks 30
    :texture "/sandbox/ak-47.svg"})
 
 (defn comp-person [spec]
@@ -179,7 +221,7 @@
   {:chase {:active? active?}})
 
 (def ent-player
-  (merge {:id "player"
+  (merge {:id :player
           :type :player
           :controlled true}
          {:render {:color "orange"
@@ -211,19 +253,21 @@
          (comp-chase true)))
 
 
-(defn move [{:keys [angle facing] :as ent} move-direction dt]
-  (let [backward? (not= move-direction facing)
+(defn move [ent move-direction dt]
+  (let [{:keys [angle facing]} @angle ;; SIDECOFX
+        backward? (not= move-direction facing)
         pose (person-pose ent)
         [speed max] (case [move-direction backward?]
                       [:left false] [[(- (get pose :front-speed)) 0] (- (get pose :front-max))]
                       [:left true]  [[(- (get pose :back-speed)) 0] (- (get pose :back-max))]
                       [:right false] [[(get pose :front-speed) 0] (get pose :front-max)]
                       [:right true] [[(get pose :back-speed) 0] (get pose :back-max)])]
-    (phys-v ent speed max dt)))
+    (l "MOVING:" speed)
+    (phys-v ent [(* 6 (first speed)) (* 3 (second speed))] (* max 3) dt)))
 
 
 (def ent-floor
-  (merge {:id "floor"
+  (merge {:id :floor
           :type :floor}
          {:render {:color "gray"}}
          (comp-position [100 300])
@@ -235,7 +279,7 @@
   (map (fn [stair-num]
          (let [w 15
                h 5]
-           (merge {:id (str "stair-" stair-num)
+           (merge {:id (keyword (str "stair-" stair-num))
                    :type :stair}
                   {:render {:color "darkgray"}}
                   (comp-position [(+ 600 (* stair-num w)) (- 300 (* stair-num h))])
@@ -246,33 +290,37 @@
 
 ;; weapon in
 (defn ent-bullet [{[pos-x pos-y] :position
-                   [disp-x disp-y] :vec-angle}]
-  (merge {:id (str (random-uuid))
-          :type :bullet}
-         {:render {:color "steel"}}
-         (comp-position [(-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                             (* disp-x)
-                             (+ pos-x))
-                         (-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                             (* disp-y)
-                             (+ pos-y 6))])
-         (comp-size 4 2)
-         (comp-collision true)
-         (comp-phys 0.1
-                    [(-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                         (* disp-x)
-                         (* (/ dt 1000)))
-                     (-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                         (* disp-y)
-                         (* (/ dt 1000)))]
-                    [0 0])
-         {:self-destruct {:after 600
-                          :spawn-time (Date.now)}}))
+                   }]
+  (let [{[disp-x disp-y] :vec-angle
+         :keys [angle]} @angle
+        id (keyword (str (random-uuid)))]
+    {id (merge {:id id
+                :type :bullet}
+               {:render {:color "steel"
+                         :angle angle}}
+               (comp-position [(-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
+                                   (* disp-x)
+                                   (+ pos-x))
+                               (-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
+                                   (* disp-y)
+                                   (+ pos-y 6))])
+               (comp-size 4 2)
+               (comp-collision true)
+               (comp-phys 0.1
+                          [(-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
+                               (* disp-x)
+                               (* (/ dt 1000)))
+                           (-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
+                               (* disp-y)
+                               (* (/ dt 1000)))]
+                          [0 0])
+               {:self-destruct {:after 20000
+                                :spawn-time (Date.now)}})}))
 
 
 
 (def ent-enemy
-  (merge {:id "enemy"
+  (merge {:id :enemy
           :type :enemy}
          (comp-position [100 100])
          (comp-size 7 15)
@@ -284,14 +332,15 @@
                   [act-w act-h] :size}
                  {[pass-x pass-y] :position
                   [pass-w pass-h] :size}]
-  (and (or (and (>= act-x pass-x)
-                (<= act-x (+ pass-x pass-w)))
-           (and (<= (+ act-x act-w) pass-x
-                    (+ act-x act-w) (+ pass-x pass-w))))
-       (or (and (>= act-y pass-y)
-                (<= act-y (+ pass-y pass-h)))
-           (and (>= (+ act-y act-h) pass-y)
-                (<= (+ act-y act-h) (+ pass-y pass-h))))))
+  (let [act-x2 (+ act-x act-w)
+        act-y2 (+ act-y act-h)
+        pass-x2 (+ pass-x pass-w)
+        pass-y2 (+ pass-y pass-h)
+        ]
+    (not (or (or (> pass-x act-x2)
+                 (< pass-x2 act-x))
+             (or (> pass-y act-y2)
+                 (< pass-y2 act-y))))))
 
 (defn player-ground [{[player-x _] :position
                       [_ player-h] :size :as player}
@@ -299,7 +348,7 @@
   (deep-merge
    player
    {:phys {:v [(get-in player [:phys :v 0]) 0]}
-    :position [player-x (- floor-y player-h)]
+    :position [player-x (- floor-y player-h 1)]
     :collision {:grounded? true}}))
 
 (defmulti collide (fn [act pass] [(:type act) (:type pass)]))
@@ -322,65 +371,89 @@
 (def gravity-strength 9.8) ;; m/s^2
 ;; dt - ms
 (def systems
-  [
-   [;controls
-    [:controlled]
-    (fn [dt [{{:keys [desired-pose]} :person :as subj}]]
-      (let [{:keys [left right]} (:controls @db)]
-        [(if (get-in subj [:collision :grounded?])
-           (cond-> subj
-             (> left 0.1)
-             (move :left dt)
+  [;Controls
+   (fn [{:keys [current-tick time-passed  controls] :as db
+         {{{:keys [desired-pose]} :person :as subj} :player} :entities}]
+     (let [{:keys [left right trigger]} controls
+           firing? (and trigger
+                        (> (get-in subj [:weapon :temp :left-rounds]) 0)
+                        (< (get-in subj [:weapon :cooldown-ticks]) (- current-tick
+                                                                      (get-in subj [:weapon :temp :last-fired-at]))))
+           rt (relative-time subj time-passed)]
+       {:entities (cond-> {:player (cond-> subj
+                                     (and (> left 0.1) (get-in subj [:collision :grounded?]))
+                                     (move :left rt)
 
-             (> right 0.1)
-             (move :right dt)
+                                     (and (> right 0.1) (get-in subj [:collision :grounded?]))
+                                     (move :right rt)
 
-             (and (<= left 0.1) (<= right 0.1))
-             (phys-throttle dt))
-           subj)]))]
+                                     firing?
+                                     ((fn [player]
+                                        (let [next-sound-idx (rand-nth (into [] (clojure.set/difference #{1 2 3 4 5 6 7} (take 5 (get-in subj [:weapon :temp :played-shot-sounds])))))]
+                                          (play-fire next-sound-idx)
+                                          (-> player
+                                              (update-in [:weapon :temp :played-shot-sounds] conj next-sound-idx)
+                                              (update-in [:weapon :temp :left-rounds] dec)
+                                              (assoc-in [:weapon :temp :last-fired-at] current-tick)))))
 
-   [;:displace
-    [:position :phys]
-    (fn [dt subjs]
-      (map (fn [{[x y] :position
-                 {[vx vy] :v} :phys :as subj}]
-             (merge subj
-                    {:position [(+ x vx) (+ y vy)]}))
-           subjs))]
+                                     (and (<= left 0.1) (<= right 0.1))
+                                     (phys-throttle rt))}
+                    firing? (merge (ent-bullet subj)))
+        }))
 
-   [;:gravity
-    [:position :phys]
-    (fn [dt subjs]
-      (map (fn [{{[a-x-old a-y-old] :a :keys [m]} :phys
-                 {:keys [grounded?]} :collision :as subj}]
-             (if grounded?
-               subj
-               (update-in subj [:phys :v] (fn [[old-x old-y]] [(+ old-x
-                                                                  (* a-x-old (/ dt 1000)))
-                                                               (+ old-y
-                                                                  (* a-y-old (/ dt 1000))
-                                                                  (* (* (/ gravity-strength 10) m) (/ dt 1000)))]))))
-           subjs))]
+   ;Displace
+   (fn [{:keys [time-passed entities]}]
+     {:entities (->> entities
+                     (filter (comp :phys val))
+                     (map (fn [[id {[x y] :position
+                                    {[vx vy] :v} :phys :as subj}]]
+                            (let [rt (relative-time subj time-passed)]
+                              {id {:position [(+ x (* (/ (* vx 3) 1000) rt)) (+ y (* (/ (* vy 3) 1000) rt))]}}))
+                          )
+                     (apply merge))})
 
-   [;collision
-    [:position :size :collision]
-    (fn [dt subjs & without-subjs]
-      (let [actor (first (filter (comp :actor? :collision) subjs))
-            coll-subj (first (filter #(and (collided? actor %)
-                                           (or (empty? without-subjs)
-                                               (not (contains? (set without-subjs) %))))
-                                     (disj (set subjs) actor)))]
-        (if coll-subj
-          (let [new-subjs (-> (set subjs)
-                              (disj actor)
-                              (disj coll-subj)
-                              (into (collide actor coll-subj)))]
-            (recur dt new-subjs (conj without-subjs coll-subj)))
-          subjs)))]
+   ;Gravity
+   (fn [{:keys [entities time-passed]}]
+     (l "TIME PASSED:" time-passed)
+     {:entities
+      (->> entities
+           (filter (comp :phys val))
+           (map (fn [[id {{[a-x-old a-y-old] :a :keys [m]} :phys
+                          {:keys [grounded?]} :collision :as subj}]]
+                  (let [rt (relative-time subj time-passed)]
+                    (if grounded?
+                      {id subj}
+                      {id (update-in subj [:phys :v] (fn [[old-x old-y]] [(+ old-x
+                                                                             (* a-x-old (/ rt 1000)))
+                                                                          (+ old-y
+                                                                             (* a-y-old (/ rt 1000))
+                                                                             (* (* (/ gravity-strength 10) m) (/ rt 1000)))]))}))))
+           (apply merge))})
 
-   [;chase
-    [:chase]
-    (fn [dt subjs]
+   ;Collision
+   (fn [db & without-subjs]
+     (let [without-subjs (or without-subjs #{})
+           subjs (->> (:entities db)
+                      (remove (fn [[id _]] (contains? without-subjs id)))
+                      (filter (comp :collision val)))
+           actor (first (filter (comp :actor? :collision val) subjs))
+           coll-subj (some #(when (and actor (collided? (second actor) (second %))) %)
+                           (disj (set subjs) actor))
+           actor (second actor)
+           coll-subj (second coll-subj)]
+       (if coll-subj
+         (recur
+          (deep-merge db
+                      {:entities (if coll-subj
+                                   (reduce (fn [acc {:keys [id] :as ent}] (assoc acc id ent))
+                                           {}
+                                           (collide actor coll-subj))
+                                   {})})
+          (conj without-subjs (:id coll-subj) (:id actor)))
+         db)))
+
+   #_[[:chase]
+    (fn [dt subjs db]
       (let [player (first (filter #(= :player (:type %)) subjs))
             enemy (first (filter #(= :enemy (:type %)) subjs))
             [disp-x _] (displacement (:position player) (:position enemy))]
@@ -388,30 +461,33 @@
           [player (phys-v enemy [-1 0] -3 dt)]
           [player (phys-v enemy [ 1 0]  3 dt)])))]
 
-   [[:self-destruct]
-    (fn [dt subjs]
-      (let [now (Date.now)]
-        (remove (fn [{{:keys [after spawn-time]} :self-destruct}]
-                  (< (+ spawn-time after) now))
-             subjs)))]])
+   (fn [db]
+     (let [now (Date.now)
+           subjs (filter (fn [[_ {{:keys [after spawn-time]} :self-destruct}]]
+                           (and spawn-time
+                                (< (+ spawn-time after) now)))
+                         (:entities db))
+           ]
+       {:entities (reduce (fn [acc [id _]] (assoc acc id nil))
+                          {}
+                          subjs)}
+       ))])
 
 
 
 
 (defn process-evts [{:keys [evt-history] :as db} at-tick]
   (reduce (fn [acc-db [evt-id :as evt]]
-            #_(l "EVT:" evt)
             ((get events evt-id) acc-db evt))
           db
           (get evt-history at-tick)))
 
-(defn run-systems [db dt]
-  (update db :entities (fn [ents] (reduce (fn [ents-acc [reqs sys-fn]]
-                                            (let [subjs (filter (fn [ent] (every? #(get ent %) reqs)) ents-acc)
-                                                  new-subjs (sys-fn dt subjs)]
-                                              (-> (clojure.set/difference ents-acc subjs)
-                                                  (into new-subjs))))
-                                          ents systems))))
+
+(defn run-systems [db]
+  (reduce (fn [db sys-fn]
+            (deep-merge db (sys-fn db)))
+          db
+          systems))
 
 (defn mnemo-tick [db-now db-prev]
   (assoc db-now :prev-tick db-prev))
@@ -438,21 +514,22 @@
 
 (defn tick! []
   (swap! db (fn [db]
-              (let [time-skewed (* 2 (reduce + (map (fn [[from till]] (- till from)) (:reverse-history @mnemo))))
+              (let [;time-skewed (* 2 (reduce + (map (fn [[from till]] (- till from)) (:reverse-history @mnemo))))
                     prev-tick (:current-tick db)
                     current-tick (inc prev-tick)
                     ;now (- (js/Date.now) time-skewed)
                     ;prev-tick (or (:current-tick db) (- (js/Date.now) 1000))
                     dt dt ;(- now prev-tick)
                     ]
-                (if (:current-reverse @mnemo)
-                  (-> db
-                      (back-tick)
-                      (drop-controls))
-                  (-> (assoc db :current-tick current-tick)
-                      (process-evts prev-tick)
-                      (run-systems dt)
-                      (mnemo-tick db))))))
+                #_(if (:current-reverse @mnemo)
+                    (-> db
+                        (back-tick)
+                        (drop-controls)))
+                (-> (assoc db :current-tick current-tick)
+                    (process-evts prev-tick)
+                    (time-passed)
+                    (run-systems)
+                    #_(mnemo-tick db)))))
   )
 
 
@@ -564,37 +641,39 @@
   [{[x y] :position
     [w h] :size
     {:keys [color]} :render
-    :keys [facing angle weapon id]}]
-  [:g {:transform (str "translate(" x "," y ")"
-                       (when (= :right facing) "scale(-1, 1)"))}
-   [:rect {:x 0 :y 0 :width w :height h
-           :fill color}]
-   [:circle {:x 4 :y 0 :r 5 :color "yellow"}]
-   [:g {:x x
-        :y y
-        :transform (str "translate(" -40 ",0)"
-                        "rotate(" angle "," 40 "," 7 ")"
-                        )}
+    :keys [weapon id]}]
+  (let [{:keys [facing angle]} @angle]
+    [:g {:transform (str "translate(" x "," y ")"
+                         (when (= :right facing) "scale(-1, 1)"))}
+     [:rect {:x 0 :y 0 :width w :height h
+             :fill color}]
+     [:circle {:x 4 :y 0 :r 5 :color "yellow"}]
+     [:g {:x x
+          :y y
+          :transform (str "translate(" -40 ",0)"
+                          "rotate(" angle "," 40 "," 7 ")"
+                          )}
 
-    [:image {:xlinkHref (:texture weapon)
-             :width 40
-             :height 20
-             }]
+      [:image {:xlinkHref (:texture weapon)
+               :width 40
+               :height 20
+               }]
 
-    [:line {:stroke-width "1px"
-            :stroke "url(#grad1)"
-            :x1 2 :y1 7
-            :x2 -500 :y 7
-            }]]
-   ])
+      [:line {:stroke-width "1px"
+              :stroke "url(#grad1)"
+              :x1 2 :y1 7
+              :x2 -500 :y 7
+              }]]
+     ]))
 
-#_(defmethod render :bullet
+(defmethod render :bullet
   [{[x y] :position
     [w h] :size
     {:keys [color]} :render}]
-  [:image {:x x :y y :width w :height h
+  #_[:image {:x x :y y :width w :height h
+           ;:transform (gstr/format "rotate(%s, %s, %s)" angle)
            :xlinkHref "/sandbox/bullet.png"}]
-  #_[:rect {:x x :y y :width w :height h
+  [:rect {:x x :y y :width w :height h
           :fill color}])
 
 (defmethod render :default
@@ -642,6 +721,15 @@
 
 (defn coords [e] [(.-clientX e) (.-clientY e)])
 
+(defn tutorial []
+  [:g
+   [:text {:x 10 :y 15}
+    "WASD to move"]
+   [:text {:x 10 :y 27}
+    "Left mouse button to shoot"]
+   [:text {:x 10 :y 40}
+    "SPACE to rewind"]])
+
 (defn content []
   (r/create-class
    {:component-will-mount
@@ -658,19 +746,12 @@
     (fn [_]
       [:div
        [:style (garden.core/css styles)]
-       [:svg {:width "100vw"
-              :height "100vh"
+       [:svg {:style {:width "100vw"
+                      :height "100vh"}
               :on-mouse-move #(when (normal-time?) (>evt [:mouse (coords %)]))
-              :on-click #(do #_(.preventDefault %)
-                             #_(.stopPropagation %)
-                             (>evt [:fire]))
+              :on-mouse-down #(>evt [:set-controls :trigger true])
+              :on-mouse-up #(>evt [:set-controls :trigger false])
               }
-        [:text {:x 10 :y 15}
-         "WASD to move"]
-        [:text {:x 10 :y 27}
-         "Left mouse button to shoot"]
-        [:text {:x 10 :y 40}
-         "SPACE to rewind"]
         [:defs
          [:linearGradient#grad1
           {:y2 "0%", :x2 "100%", :y1 "0%", :x1 "0%"}
@@ -683,11 +764,13 @@
                     :stop-opacity "0.4"},
             :offset "100%"}]]]
         [timeline]
-        #_[:text {:x 200 :y 200} (str (:mouse @db))]
-        (for [{:keys [id] :as ent} (sort-by :id (:entities @db))]
+        #_[tutorial]
+        (for [[id ent] (sort-by key (:entities @db))]
           ^{:key id}
           [render ent])
+        [inspect (get-in @db [:entities :player :phys]) 10 50]
         #_[inspect (:controls @db) 10 30]
+        [:text {:x 100 :y 100} @angle]
         ]])}))
 
 (defmethod panels/panel :frozen-in-time

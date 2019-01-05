@@ -48,8 +48,8 @@
    [shortcuts/help]])
 
 (defn mount-root []
-  (reagent/render #_[brawl-haus.sandbox2/content]
-                  [entry-point]
+  (reagent/render [brawl-haus.sandbox2/content]
+                  #_[entry-point]
                   (.getElementById js/document "app")))
 
 (rf/reg-event-db
