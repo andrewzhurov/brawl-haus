@@ -11,6 +11,7 @@
   (doseq [stair entities/stairs]
     (>evt [:add-ent stair]))
   (>evt [:add-ent entities/the-player])
-  (>evt [:add-ent entities/enemy]))
+  (doseq [e entities/enemies]
+    (>evt [:add-ent e])))
 
 (defn destroy [] (engine/stop-engine!))

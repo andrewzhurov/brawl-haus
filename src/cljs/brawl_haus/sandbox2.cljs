@@ -53,7 +53,7 @@
           ^{:key id}
           [render/render ent])
         [u/inspect (get-in @state/db [:entities :player :phys]) 10 50]
-        [:text {:x 100 :y 100} @state/angle]
+        #_[:text {:x 100 :y 100} @state/angle]
         ]])}))
 
 

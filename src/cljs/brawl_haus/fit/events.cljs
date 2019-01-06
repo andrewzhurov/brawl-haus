@@ -18,7 +18,6 @@
    })
 
 (defn >evt [evt]
-  (l ">evt" evt)
   (swap! state/db (fn [{:keys [current-tick] :as db}]
                     (update-in db [:evt-history (inc current-tick)] u/conjv evt))))
 

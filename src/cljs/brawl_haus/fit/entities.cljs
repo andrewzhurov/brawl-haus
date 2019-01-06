@@ -20,17 +20,17 @@
                    :facing :left}}
          (player/comp-person {:poses {:stand {:height 40
                                               :width 10
-                                              :front-speed 4
-                                              :front-max 2
-                                              :back-speed 3
-                                              :back-max 1
+                                              :front-speed 6
+                                              :front-max 4
+                                              :back-speed 5
+                                              :back-max 3
                                               }
                                       :crouch {:height 20
                                                :width 13
-                                               :front-speed 4
-                                               :front-max 1.25
-                                               :back-speed 1.5
-                                               :back-max 0.75}
+                                               :front-speed 5
+                                               :front-max 3
+                                               :back-speed 4
+                                               :back-max 2.5}
                                       :crawl {:height 10
                                               :width 40
                                               :front-speed 3
@@ -70,11 +70,14 @@
        (range 1 11)))
 
 
-(def enemy
-  (merge {:id :enemy
+(defn enemy [pos]
+  (merge {:id (keyword (str (random-uuid)))
           :type :enemy}
-         (comp-position [100 100])
-         (comp-size 7 15)
-         (collision/component false)
+         (comp-position pos)
+         (comp-size 12 30)
+         (collision/component true)
          (phys/component 5 [0 0] [0 0])
          (chase/component true)))
+
+(def enemies (repeatedly 3 #(enemy [(+ 100 (rand-int 200))  (+ 100 (rand-int 100))])))
+

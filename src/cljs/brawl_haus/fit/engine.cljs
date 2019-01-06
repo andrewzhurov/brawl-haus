@@ -6,23 +6,17 @@
             [brawl-haus.fit.player :as player]
             [brawl-haus.fit.phys :as phys]
             [brawl-haus.fit.gravity :as gravity]
-            [brawl-haus.fit.collision :as collision]))
+            [brawl-haus.fit.collision :as collision]
+            [brawl-haus.fit.chase :as chase]))
 
 (def systems
   [player/system
    phys/system
    gravity/system
    collision/system
-   #_[[:chase]
-      (fn [dt subjs db]
-        (let [player (first (filter #(= :player (:type %)) subjs))
-              enemy (first (filter #(= :enemy (:type %)) subjs))
-              [disp-x _] (displacement (:position player) (:position enemy))]
-          (if (neg? disp-x)
-            [player (phys-v enemy [-1 0] -3 dt)]
-            [player (phys-v enemy [ 1 0]  3 dt)])))]
+   chase/system
 
-                                        ;self-destruct
+   ;self-destruct
    (fn [db]
      (let [now (Date.now)
            subjs (filter (fn [[_ {{:keys [after spawn-time]} :self-destruct}]]
@@ -57,10 +51,10 @@
                      (back-tick)
                      (drop-controls)))
              (-> (assoc db :current-tick current-tick)
-                 (events/process-evts prev-tick)
-                 (time/time-passed)
-                 (run-systems)
-                 #_(mnemo-tick db)))))
+                       (events/process-evts prev-tick)
+                       (time/time-passed)
+                       (run-systems)
+                       #_(mnemo-tick db)))))
   )
 
 

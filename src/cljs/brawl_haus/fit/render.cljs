@@ -21,7 +21,7 @@
                          (when (= :right facing) "scale(-1, 1)"))}
      [:rect {:x 0 :y 0 :width w :height h
              :fill color}]
-     [:circle {:x 4 :y 0 :r 5 :color "yellow"}]
+     [:circle {:r 5 :color "yellow"}]
      [:g {:x x
           :y y
           :transform (str "translate(" -40 ",0)"

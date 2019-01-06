@@ -34,7 +34,7 @@
                       [:left true]  [[(- (get pose :back-speed)) 0] (- (get pose :back-max))]
                       [:right false] [[(get pose :front-speed) 0] (get pose :front-max)]
                       [:right true] [[(get pose :back-speed) 0] (get pose :back-max)])]
-    (phys/push-v ent [(* 6 (first speed)) (* 3 (second speed))] (* max 3) dt)))
+    (phys/push-v ent speed max dt)))
 
 (defn player-ground [{[player-x _] :position
                       [_ player-h] :size :as player}
@@ -68,39 +68,10 @@
                (get-in subj [:collision :grounded?]))
           (->
            (deep-merge {:collision {:grounded? false}})
-           (phys/push-v [0 -3])))]
+           (phys/push-v [0 -5])))]
     new-subj
     ))
 
-
-(defn bullet [{[pos-x pos-y] :position
-                   }]
-  (let [{[disp-x disp-y] :vec-angle
-         :keys [angle]} @state/angle ;; COFX
-        id (keyword (str (random-uuid)))
-        dt 16] ;; LIE
-    {id (merge {:id id
-                :type :bullet}
-               {:render {:color "steel"
-                         :angle angle}}
-               (comp-position [(-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                                   (* disp-x)
-                                   (+ pos-x))
-                               (-> (/ 40 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                                   (* disp-y)
-                                   (+ pos-y 6))])
-               (comp-size 4 2)
-               (collision/component true)
-               (phys/component 0.1
-                               [(-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                                    (* disp-x)
-                                    (* (/ dt 1000)))
-                                (-> (/ 1000 (+ (Math.abs disp-x) (Math.abs disp-y)))
-                                    (* disp-y)
-                                    (* (/ dt 1000)))]
-                               [0 0])
-               {:self-destruct {:after 20000
-                                :spawn-time (Date.now)}})}))
 
 (def system
   (fn [{:keys [current-tick time-passed  controls] :as db
@@ -119,28 +90,22 @@
                                     (move :right rt)
 
                                     firing?
-                                    ((fn [player]
-                                       (let [next-sound-idx (rand-nth (into [] (clojure.set/difference #{1 2 3 4 5 6 7} (take 5 (get-in subj [:weapon :temp :played-shot-sounds])))))]
-                                         (sound/play-fire next-sound-idx)
-                                         (-> player
-                                             (update-in [:weapon :temp :played-shot-sounds] conj next-sound-idx)
-                                             (update-in [:weapon :temp :left-rounds] dec)
-                                             (assoc-in [:weapon :temp :last-fired-at] current-tick)))))
+                                    (weapon/fire db)
 
                                     (and (<= left 0.1) (<= right 0.1))
                                     (phys/throttle rt))}
-                   firing? (merge (bullet subj)))
+                   firing? (merge (weapon/bullet subj)))
        })))
 
 
+(defn climb [[a-id a] [obst-id obst]]
+  {a-id (player-ground a obst)})
 
+(defmethod collision/collide [:player :floor] [a b] (climb a b))
+(defmethod collision/collide [:player :stair] [a b] (climb a b))
 
-(defmethod collision/collide [:player :floor]
-  [[p-id player] [f-id floor]]
-  {p-id (player-ground player floor)})
+(defmethod collision/collide [:enemy :floor] [a b] (climb a b))
+(defmethod collision/collide [:enemy :stair] [a b] (climb a b))
+(defmethod collision/collide [:enemy :player] [a b] (phys/repel a b))
+#_(defmethod collision/collide [:enemy :enemy] [a b]  (phys/repel a b))
 
-(defmethod collision/collide [:player :stair]
-  [[p-id {[w h] :size
-          [player-x _] :position :as player}]
-   {[_ stair-y] :position :as stair}]
-  {p-id (player-ground player stair)})

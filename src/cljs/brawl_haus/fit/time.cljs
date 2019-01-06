@@ -5,12 +5,12 @@
 (def dt (/ 1000 fps))
 
 
-(def default-time-flow 0)
+(def default-time-flow 25)
 (defn relative-time [ent dt]
   (cond
-    (= :player (:id ent)) (* dt 2)
+    (= :player (:id ent)) dt
     (= :bullet (:type ent)) dt
-    :else (/ dt 4)))
+    :else dt #_(/ dt 4)))
 
 (defn time-passed [{:keys [current-tick angle-diff-at angle-diff]
                     {{{[vx vy] :v} :phys} :player} :entities :as db}]
@@ -18,9 +18,9 @@
         disp-y (Math.abs vy)
         curr-angle-diff (if (= angle-diff-at current-tick) (Math.abs angle-diff) 0)]
     (merge db
-           {:time-passed (+ default-time-flow
-                            (* 3 disp-x)
-                            disp-y
+           {:time-passed 40 #_(+ #_default-time-flow
+                            (if (not= 0 disp-x) 10 0)
+                            (if (not= 0 disp-y) 10 0)
                             (/ curr-angle-diff 4))})))
 
 

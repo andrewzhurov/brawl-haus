@@ -6,10 +6,10 @@
   {:collision {:actor? actor?
                :grounded? false}})
 
-(defn collided? [{[act-x act-y] :position
-                  [act-w act-h] :size}
-                 {[pass-x pass-y] :position
-                  [pass-w pass-h] :size}]
+(defn collided? [[_ {[act-x act-y] :position
+                     [act-w act-h] :size}]
+                 [_ {[pass-x pass-y] :position
+                     [pass-w pass-h] :size}]]
   (let [act-x2 (+ act-x act-w)
         act-y2 (+ act-y act-h)
         pass-x2 (+ pass-x pass-w)
@@ -24,14 +24,7 @@
                                              [(:type act) (:type pass)])))
 
 
-(defmethod collide [:player :enemy]
-  [[p-id p] [e-id e]]
-  (println "HIT")
-  {p-id p
-   e-id e}
-   )
-
-(defmethod collide :default [[a-id a] [b-id b]] {a-id a b-id b})
+(defmethod collide :default [_ _] nil)
 
 
 
@@ -39,15 +32,17 @@
   (let [worked-ents (or worked-ents #{})
         subjs (into {} (remove (comp worked-ents key) ents))
         actor (first (filter (comp :actor? :collision val) subjs))
-        coll-subj (some #(when (and actor (collided? (second actor) (second %))) %)
-                        (disj (set subjs) actor))
+        coll (some #(and actor
+                         (collided? actor %)
+                         (collide actor %))
+                   (disj (set subjs) actor))
         ]
-    (cond (and actor coll-subj)
+    (cond coll
           (recur
-           (deep-merge ents (collide actor coll-subj))
+           (deep-merge ents coll)
            (conj worked-ents (key actor)))
 
-          (and actor (nil? coll-subj))
+          (and actor (nil? coll))
           (recur ents (conj worked-ents (key actor)))
 
           :else
