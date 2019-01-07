@@ -27,7 +27,32 @@
        {:entities (reduce (fn [acc [id _]] (assoc acc id nil))
                           {}
                           subjs)}
-       ))])
+       ))
+
+   (fn [{:keys [time-passed entities]}]
+     {:entities (reduce (fn [acc [ent-id {:keys [phys] :as ent}]]
+                          (let [rt (time/relative-time ent time-passed)]
+                            (assoc acc ent-id (if (and phys (not= :bullet (:type ent)))
+                                                (phys/throttle ent rt)
+                                                ent))))
+                        {}
+                        entities)}
+     )
+
+   ; calm recoil
+   (fn [{:keys [time-passed]
+         {{{:keys [stabilisation]} :weapon} :player} :entities}]
+     (swap! state/recoil (fn [{:keys [angle pressure]}]
+                           {:angle (/ angle (+ (/ angle 300) ;; inc long speed
+                                               1.05 ;; inc grasp speed
+                                               ))
+                            :pressure (max 1 (/ pressure (+ (/ pressure 350) 1.03)))}))
+     {})
+
+   ; clean
+   (fn [{:keys [entities]}]
+     {:entities (into {} (remove (comp nil? val) entities))})
+   ])
 
 (defn run-systems [db]
    (reduce (fn [db sys-fn]

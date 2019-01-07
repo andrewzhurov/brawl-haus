@@ -14,3 +14,8 @@
     (.pause sound)
     (set! (.-current-time sound) 0)
     (.play sound)))
+
+(def bullet-hit-sound (js/Audio. "/sandbox/hit_01.wav"))
+(defn bullet-hit []
+  (set! (.-current-time bullet-hit-sound) 0)
+  (.play bullet-hit-sound))

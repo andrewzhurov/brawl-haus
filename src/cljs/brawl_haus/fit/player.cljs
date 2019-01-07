@@ -82,19 +82,19 @@
                        (< (get-in subj [:weapon :cooldown-ticks]) (- current-tick
                                                                      (get-in subj [:weapon :temp :last-fired-at]))))
           rt (time/relative-time subj time-passed)]
-      {:entities (cond-> {:player (cond-> subj
-                                    (and (> left 0.1) (get-in subj [:collision :grounded?]))
-                                    (move :left rt)
+      {:entities (merge (if firing? (weapon/bullet subj) {})
+                        {:player (cond-> subj
+                                   (and (> left 0.1) (get-in subj [:collision :grounded?]))
+                                   ((fn [subj]
+                                      (weapon/sway-back 7 10)
+                                      (move subj :left rt)))
 
-                                    (and (> right 0.1) (get-in subj [:collision :grounded?]))
-                                    (move :right rt)
+                                   (and (> right 0.1) (get-in subj [:collision :grounded?]))
+                                   (move :right rt)
 
-                                    firing?
-                                    (weapon/fire db)
-
-                                    (and (<= left 0.1) (<= right 0.1))
-                                    (phys/throttle rt))}
-                   firing? (merge (weapon/bullet subj)))
+                                   firing?
+                                   (weapon/fire db)
+                                   )})
        })))
 
 

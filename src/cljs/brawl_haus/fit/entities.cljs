@@ -16,6 +16,11 @@
   (merge {:id :player
           :type :player
           :controlled true}
+         {:body {:health 200
+                 ;:state :normal
+                 ;:frame 0
+                 }}
+
          {:render {:color "orange"
                    :facing :left}}
          (player/comp-person {:poses {:stand {:height 40
@@ -73,11 +78,17 @@
 (defn enemy [pos]
   (merge {:id (keyword (str (random-uuid)))
           :type :enemy}
+         {:body {:health 200
+                 :state :normal
+                 :frame 0
+                 :stagger-time 1000
+                 :stun-time 2500}}
+
          (comp-position pos)
-         (comp-size 12 30)
+         (comp-size 12 50)
          (collision/component true)
          (phys/component 5 [0 0] [0 0])
          (chase/component true)))
 
-(def enemies (repeatedly 3 #(enemy [(+ 100 (rand-int 200))  (+ 100 (rand-int 100))])))
+(def enemies [] #_(repeatedly 3 #(enemy [(+ 100 (rand-int 200))  (+ 100 (rand-int 100))])))
 

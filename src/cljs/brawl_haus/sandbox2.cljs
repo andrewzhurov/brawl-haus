@@ -52,7 +52,10 @@
         (for [[id ent] (sort-by key (:entities @state/db))]
           ^{:key id}
           [render/render ent])
-        [u/inspect (get-in @state/db [:entities :player :phys]) 10 50]
+        [u/inspect @state/angle 10 30]
+        [u/inspect @state/recoil 10 80 ]
+
+        #_[u/inspect (get-in @state/db [:entities :player :phys]) 10 50]
         #_[:text {:x 100 :y 100} @state/angle]
         ]])}))
 

@@ -24,9 +24,12 @@
     {a-id (push-v a [(- (* 2 v-x)) 0] 10)
      b-id (push-v b [(/ v-x 1.2) 0] 10)}))
 
+#_(defn stagger [ent dir]
+  (update-in ent [:phys :v 0] (fn [v-x] (if (neg? v-x) amount (- amount)))))
+
 (defn throttle [ent dt]
   (update-in ent [:phys :v] (fn [[v-x v-y]]
-                              [(if (< (Math.abs v-x) 0.3) 0
+                              [(if (< (Math.abs v-x) 0.2) 0
                                    (* v-x (- 1 (per-s 1 dt))))
                                v-y
                                #_(* v-y (- 1 (per-s 3 dt)))])))

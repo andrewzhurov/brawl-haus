@@ -23,17 +23,23 @@
 (defn init! [] (reset! db init-db))
 
 
+
+(defn rad [deg] (* (/ Math.PI 180) deg))
 (def mouse (r/cursor db [:mouse]))
 (def ppos (r/cursor db [:entities :player :position]))
+(def recoil (r/atom {:pressure 0.1
+                     :angle 0.1})) ;deg
 (def angle (ra/reaction
             (let [[pos-x pos-y] @ppos
                   angle (u/calc-angle [pos-x (+ pos-y 7)] @mouse)
                   facing (if (and (<= angle 90)
                                   (>= angle -90))
                            :left :right)
-                  angle (if (= :right facing)
-                          (- (- angle 180))
-                          angle)]
-              {:vec-angle (u/displacement [(+ pos-x 7) pos-y] @mouse)
+                  angle (+ (:angle @recoil) (if (= :right facing)
+                                     (- (- angle 180))
+                                     angle))
+                  tang (Math.tan (* angle (/ Math.PI 180)))]
+              {:vec-angle (u/displacement [(+ pos-x 2) (+ pos-y 10)] @mouse)
+
                :angle angle
                :facing facing})))

@@ -20,7 +20,7 @@
              (or (> pass-y act-y2)
                  (< pass-y2 act-y))))))
 
-(defmulti collide (fn [[_ act] [_ pass]] (do (js/console.log "COLLIDED:" act pass)
+(defmulti collide (fn [[_ act] [_ pass]] (do #_(js/console.log "COLLIDED:" act pass)
                                              [(:type act) (:type pass)])))
 
 

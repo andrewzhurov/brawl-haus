@@ -24,8 +24,8 @@
      [:circle {:r 5 :color "yellow"}]
      [:g {:x x
           :y y
-          :transform (str "translate(" -40 ",0)"
-                          "rotate(" angle "," 40 "," 7 ")"
+          :transform (str "translate(" -30 "," -0 ")"
+                          "rotate(" angle "," 32 "," 10 ")"
                           )}
 
       [:image {:xlinkHref (:texture weapon)
@@ -36,7 +36,7 @@
       [:line {:stroke-width "1px"
               :stroke "url(#grad1)"
               :x1 2 :y1 7
-              :x2 -500 :y 7
+              :x2 -500 :y2 6
               }]]
      ]))
 
@@ -49,6 +49,17 @@
            :xlinkHref "/sandbox/bullet.png"}]
   [:rect {:x x :y y :width w :height h
           :fill color}])
+
+(defmethod render :enemy
+  [{[x y] :position
+    [w h] :size
+    {:keys [state]} :body
+    {:keys [color]} :render}]
+  [:rect {:x x :y y :width w :height h
+          :fill (case state
+                  :normal "gray"
+                  :stagger "orange"
+                  :stun "blue")}])
 
 (defmethod render :default
   [{[x y] :position
