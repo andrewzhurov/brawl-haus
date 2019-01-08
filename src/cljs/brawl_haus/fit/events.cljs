@@ -58,14 +58,14 @@
   [{:which 65
     :to :left
     :on-press? false}
-   {:which 69
+   {:which 68
     :to :right
     :on-press? false}
 
-   {:which 188
+   {:which 87
     :to :up
     :on-press? true}
-   {:which 79
+   {:which 83
     :to :down
     :on-press? true}
    #_{:which 17

@@ -136,7 +136,7 @@
 (defn init []
   (state/init!)
   (start-engine!)
-  (.play background-theme)
+  (js/setTimeout #(.play background-theme) 500)
   )
 
 
