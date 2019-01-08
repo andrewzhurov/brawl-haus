@@ -130,10 +130,16 @@
       (reset! sys-running (js/setInterval tick! 16))))
 
 
+(def background-theme (js/Audio. "/sandbox/01_phase1.wav"))
+(set! (.-loop background-theme) true)
+
 (defn init []
   (state/init!)
   (start-engine!)
+  (.play background-theme)
   )
 
 
-(defn destroy [] (stop-engine!))
+(defn destroy []
+  (stop-engine!)
+  (.pause background-theme))

@@ -30,6 +30,7 @@
     (fn [_]
       [:div
        [:style (garden.core/css css/styles)]
+       
        [:svg {:style {:width "800px"
                       :height "450px"}
               :on-mouse-move #(when (mnemo/normal-time?) (>evt [:mouse (u/coords %)]))

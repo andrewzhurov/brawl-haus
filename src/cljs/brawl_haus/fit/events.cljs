@@ -7,7 +7,6 @@
             [brawl-haus.fit.entities :as entities]))
 
 (defn add-evt [{:keys [current-tick] :as db} evt]
-  (l (str "EVT to " (inc current-tick)) evt)
   (update-in db [:evt-history (inc current-tick)] u/conjv evt))
 
 
@@ -27,10 +26,10 @@
                                :evt-history evt-history
                                :current-tick current-tick}
                        ents (entities/the-zone le)]
-                   (l 0 (reduce (fn [acc ent]
-                                  ((get events :add-ent) acc [:add-ent ent]))
-                                new-db
-                                ents))
+                   (reduce (fn [acc ent]
+                                   ((get events :add-ent) acc [:add-ent ent]))
+                                 new-db
+                                 ents)
                    #_(-> new-db
                        (add-ents evts))
                        )))
@@ -41,7 +40,7 @@
                        :angle-diff (u/calc-angle mouse coords)
                        :mouse coords}))
 
-   :add-ent (fn [db [_ ent]] (l "ADD ENT:" (assoc-in db [:entities (:id ent)] ent)))
+   :add-ent (fn [db [_ ent]] (assoc-in db [:entities (:id ent)] ent))
    :set-controls (fn [db [_ id val]] (assoc-in db [:controls id] val))
    :controls (fn [db [_ action]] (update-in db [:entities :player] player/control action))
    })

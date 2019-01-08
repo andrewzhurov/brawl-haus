@@ -6,7 +6,7 @@
             [brawl-haus.fit.sound :as sound]
             [brawl-haus.fit.misc :refer [comp-position comp-size]]
             [brawl-haus.fit.state :as state]
-            [brawl-haus.fit.events :as events]))
+            #_[brawl-haus.fit.events :as events]))
 
 (def ak-47
   {:weight 3.47
@@ -169,7 +169,7 @@
   [db  [b-id b] [p-id p]]
   (let [new-p (health-damage p 25)]
     (if (> 0 (get-in new-p [:body :health]))
-      (events/add-evt db [:to-level 1])
+      #_(events/add-evt db [:to-level 1])
       {:entities {b-id nil
                   p-id new-p}})))
 
@@ -177,6 +177,7 @@
   [db [p-id p] [b-id b]]
   (let [new-p (bullet-hit p b 25)]
     (if (> 0 (get-in new-p [:body :health]))
-      (events/add-evt db [:to-level 1])
+      (.play (js/Audio "/sandbox/07_loss.wav"))
+      #_(events/add-evt db [:to-level 1])
       {:entities {b-id nil
                   p-id new-p}})))

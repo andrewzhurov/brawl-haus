@@ -14,7 +14,6 @@
             [brawl-haus.utils :refer [l]]))
 
 (defn add-evt [{:keys [current-tick] :as db} evt]
-  (l "EVT:" evt)
   (update-in db [:evt-history (inc current-tick)] u/conjv evt))
 
 
