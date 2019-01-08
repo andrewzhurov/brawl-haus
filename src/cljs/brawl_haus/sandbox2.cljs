@@ -24,14 +24,14 @@
 
 (defn content []
   (r/create-class
-   {:component-will-mount lifecycle/init
-    :component-will-unmount lifecycle/destroy
+   {:component-will-mount engine/init
+    :component-will-unmount engine/destroy
     :reagent-render
     (fn [_]
       [:div
        [:style (garden.core/css css/styles)]
-       [:svg {:style {:width "100vw"
-                      :height "100vh"}
+       [:svg {:style {:width "800px"
+                      :height "450px"}
               :on-mouse-move #(when (mnemo/normal-time?) (>evt [:mouse (u/coords %)]))
               :on-mouse-down #(>evt [:set-controls :trigger true])
               :on-mouse-up #(>evt [:set-controls :trigger false])
@@ -46,19 +46,38 @@
           [:stop
            {:style {:stop-color "rgb(255,100,0)"
                     :stop-opacity "0.4"},
+            :offset "100%"}]]
+         [:linearGradient#grad2
+          {:y2 "0%", :x2 "100%", :y1 "0%", :x1 "0%"}
+          [:stop
+           {:style {:stop-color "rgb(200,100,0)"
+                    :stop-opacity "0"},
+            :offset "40%"}]
+          [:stop
+           {:style {:stop-color "rgb(200,100,0)"
+                    :stop-opacity "0.4"},
             :offset "100%"}]]]
         #_[timeline]
         #_[tutorial]
+        [:image {:width 800
+                 :height 450
+                 :xlinkHref "/sandbox/grad.png"}]
+        [:image {:width 800
+                 :height 450
+                 :xlinkHref "/sandbox/collision3.png"}]
+        
         (for [[id ent] (sort-by key (:entities @state/db))]
           ^{:key id}
           [render/render ent])
-        [u/inspect @state/angle 10 30]
-        [u/inspect @state/recoil 10 80 ]
+        [:text {:x 30 :y 30 :font-size 30 :fill "green"} (get-in @state/db [:entities :player :body :health])]
+        [:text {:x 400 :y 50 :font-size 45 :fill "brown"} (:level @state/db)]
+        #_[u/inspect (:mouse @state/db) 10 30]
+        #_[u/inspect @state/recoil 10 80]
 
-        #_[u/inspect (get-in @state/db [:entities :player :phys]) 10 50]
+        [u/inspect  400 50]
+        #_[u/inspect (get-in @state/db [:entities :player :phys]) 50 150]
         #_[:text {:x 100 :y 100} @state/angle]
         ]])}))
-
 
 (defmethod panels/panel :frozen-in-time
   [_]

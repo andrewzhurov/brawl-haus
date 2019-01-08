@@ -20,36 +20,37 @@
              (or (> pass-y act-y2)
                  (< pass-y2 act-y))))))
 
-(defmulti collide (fn [[_ act] [_ pass]] (do #_(js/console.log "COLLIDED:" act pass)
-                                             [(:type act) (:type pass)])))
+(defmulti collide (fn [db [_ act] [_ pass]] (do #_(js/console.log "COLLIDED:" act pass)
+                                                [(:type act) (:type pass)])))
 
 
-(defmethod collide :default [_ _] nil)
+(defmethod collide :default [_ _ _] nil)
 
 
-
-(defn calc-collides [ents & worked-ents]
-  (let [worked-ents (or worked-ents #{})
-        subjs (into {} (remove (comp worked-ents key) ents))
-        actor (first (filter (comp :actor? :collision val) subjs))
-        coll (some #(and actor
-                         (collided? actor %)
-                         (collide actor %))
-                   (disj (set subjs) actor))
-        ]
-    (cond coll
-          (recur
-           (deep-merge ents coll)
-           (conj worked-ents (key actor)))
-
-          (and actor (nil? coll))
-          (recur ents (conj worked-ents (key actor)))
-
-          :else
-          ents)))
-
+;; FUCKED ON LOAD
+;; Up to 22 ms
 (def system
-  (fn [{:keys [entities]}]
-    (let [subjs (into {} (filter (comp :collision val) entities))]
+  (fn [{:keys [entities] :as db} & without]
+    (let [without (or without #{})
+          actor (some (fn [[ent-id ent]]
+                        (when (and (get-in ent [:collision :actor?])
+                                   (not (without ent-id)))
+                          [ent-id ent]))
+                      (:entities db))
+          coll (when actor
+                 (some (fn [[ent-id ent]]
+                         (and (not ((conj without actor) ent-id))
+                              (collided? actor [ent-id ent])
+                              (collide db actor [ent-id ent])))
+                       (:entities db)))
+          ]
+      (cond (not-empty coll)
+            (recur
+             (deep-merge db coll)
+             (conj without (first actor)))
 
-      {:entities (calc-collides subjs)})))
+            (and actor (empty? coll))
+            (recur db (conj without (first actor)))
+
+            :else
+             db))))

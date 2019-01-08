@@ -36,6 +36,12 @@
 
 
 (def domain-mapping 5)
+; peak 6
+; average 0.2
+
+; on load
+; peak 4
+; average 0.5
 (def system
   (fn [{:keys [time-passed entities]}]
     {:entities (->> entities

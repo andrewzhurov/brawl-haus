@@ -54,16 +54,26 @@
   [{[x y] :position
     [w h] :size
     {:keys [state]} :body
-    {:keys [color]} :render}]
-  [:rect {:x x :y y :width w :height h
-          :fill (case state
-                  :normal "gray"
-                  :stagger "orange"
-                  :stun "blue")}])
+    {:keys [color]} :render
+    {[px py] :at} :watcher
+    }]
+  [:g
+   [:rect {:x x :y y :width w :height h
+           :fill (case state
+                   :normal "gray"
+                   :stagger "orange"
+                   :stun "blue")}]
+   (when px
+     [:line {:x1 (- x 10) :y1 (+ y 10)
+             :x2 px :y2 (+ py 5)
+             :stroke "url(#grad2)"
+             :stroke-width "1px"}])])
+
+
 
 (defmethod render :default
   [{[x y] :position
     [w h] :size
     {:keys [color]} :render}]
   [:rect {:x x :y y :width w :height h
-          :fill color}])
+          :fill "transparent" #_color}])

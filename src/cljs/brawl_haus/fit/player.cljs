@@ -68,11 +68,13 @@
                (get-in subj [:collision :grounded?]))
           (->
            (deep-merge {:collision {:grounded? false}})
-           (phys/push-v [0 -5])))]
+           (phys/push-v [0 -7])))]
     new-subj
     ))
 
 
+; peak 2ms
+; average 0.3ms
 (def system
   (fn [{:keys [current-tick time-passed  controls] :as db
         {{{:keys [desired-pose]} :person :as subj} :player} :entities}]
@@ -101,11 +103,11 @@
 (defn climb [[a-id a] [obst-id obst]]
   {a-id (player-ground a obst)})
 
-(defmethod collision/collide [:player :floor] [a b] (climb a b))
-(defmethod collision/collide [:player :stair] [a b] (climb a b))
+(defmethod collision/collide [:player :floor] [_ a b] {:entities (climb a b)})
+(defmethod collision/collide [:player :stair] [_ a b] {:entities (climb a b)})
 
-(defmethod collision/collide [:enemy :floor] [a b] (climb a b))
-(defmethod collision/collide [:enemy :stair] [a b] (climb a b))
-(defmethod collision/collide [:enemy :player] [a b] (phys/repel a b))
-#_(defmethod collision/collide [:enemy :enemy] [a b]  (phys/repel a b))
+(defmethod collision/collide [:enemy :floor] [_ a b] {:entities (climb a b)})
+(defmethod collision/collide [:enemy :stair] [_ a b] {:entities (climb a b)})
+(defmethod collision/collide [:enemy :player] [_ a b] {:entities (phys/repel a b)})
+#_(defmethod collision/collide [:enemy :enemy] [_ a b]  (phys/repel a b))
 

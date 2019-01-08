@@ -3,30 +3,53 @@
             [brawl-haus.fit.state :as state]
             [brawl-haus.fit.utils :as u]
             [brawl-haus.fit.player :as player]
-            [brawl-haus.fit.mnemo :as mnemo]))
+            [brawl-haus.fit.mnemo :as mnemo]
+            [brawl-haus.fit.entities :as entities]))
+
+(defn add-evt [{:keys [current-tick] :as db} evt]
+  (l (str "EVT to " (inc current-tick)) evt)
+  (update-in db [:evt-history (inc current-tick)] u/conjv evt))
+
+
+(defn add-ents [db ents]
+  (reduce (fn [acc-db ?ent]
+            #_(if (sequential? (l -1 ?ent))
+                (recur acc-db ?ent))
+            (add-evt acc-db [:add-ent ?ent]))
+          db
+          ents))
 
 (def events
-  {:mouse (fn [{:keys [mouse current-tick] :as db} [_ coords]]
+  {:to-level (fn [{:keys [evt-history current-tick level] :as db} [_ le]]
+               (if (= le level)
+                 db
+                 (let [new-db {:level le
+                               :evt-history evt-history
+                               :current-tick current-tick}
+                       ents (entities/the-zone le)]
+                   (l 0 (reduce (fn [acc ent]
+                                  ((get events :add-ent) acc [:add-ent ent]))
+                                new-db
+                                ents))
+                   #_(-> new-db
+                       (add-ents evts))
+                       )))
+
+   :mouse (fn [{:keys [mouse current-tick] :as db} [_ coords]]
             (merge db {:prev-mouse mouse
                        :angle-diff-at current-tick
                        :angle-diff (u/calc-angle mouse coords)
                        :mouse coords}))
 
-   :add-ent (fn [db [_ ent]] (assoc-in db [:entities (:id ent)] ent))
+   :add-ent (fn [db [_ ent]] (l "ADD ENT:" (assoc-in db [:entities (:id ent)] ent)))
    :set-controls (fn [db [_ id val]] (assoc-in db [:controls id] val))
    :controls (fn [db [_ action]] (update-in db [:entities :player] player/control action))
    })
 
+
+
 (defn >evt [evt]
-  (swap! state/db (fn [{:keys [current-tick] :as db}]
-                    (update-in db [:evt-history (inc current-tick)] u/conjv evt))))
-
-(defn process-evts [{:keys [evt-history] :as db} at-tick]
-  (reduce (fn [acc-db [evt-id :as evt]]
-            ((get events evt-id) acc-db evt))
-          db
-          (get evt-history at-tick)))
-
+  (swap! state/db add-evt evt))
 
 
 
