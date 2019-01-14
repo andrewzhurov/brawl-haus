@@ -59,7 +59,7 @@
   {:games {:sv {:locations {:station-location {:station {}}}}}})
 
 
-(deftest fsm-test
+#_(deftest fsm-test
   (let [conn-id1 "test-conn-id1"
         conn-id2 "test-conn-id2"
         =>evt1 (init-=>evt conn-id1)
@@ -411,3 +411,24 @@
 
     ))
 
+
+(deftest shooter-game
+  (let [conn-id1 "test-conn-id1"
+        conn-id2 "test-conn-id2"
+        =>evt1 (init-=>evt conn-id1)
+        =>evt2 (init-=>evt conn-id2)
+        <=sub1 (init-<=sub conn-id1)
+        <=sub2 (init-<=sub conn-id2)]
+    "In this game you're in control of a character
+     Character has a pistol
+     Pistol has:
+     - rounds left
+     Pistol can be fired"
+    (-> {}
+        (=>evt1 [:shooter-game/attend])
+        (expect {:rounds-left 8}
+                (<=sub1 [:shooter-game/weapon-status]))
+        (=>evt1 [:shooter-game/fire])
+        (expect {:rounds-left 7}
+                (<=sub1 [:shooter-game/weapon-status]))
+        )))
