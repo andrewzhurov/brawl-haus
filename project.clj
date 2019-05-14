@@ -74,6 +74,8 @@
   {:dev
    {:source-paths ["dev"]
     :dependencies [[binaryage/devtools "0.9.10"]
+                   
+                   
                    [day8.re-frame/re-frame-10x "0.3.3"]
                    [day8.re-frame/tracing "0.5.1"]
                    [figwheel-sidecar "0.5.16"]
@@ -83,6 +85,7 @@
                    [tentacles "0.3.0"]]
 
     :plugins       [[com.jakemccrary/lein-test-refresh "0.23.0"]
+                    [cider/cider-nrepl "0.21.1"]
                     [lein-figwheel "0.5.16"]
                     [lein-pdo "0.1.1"]]}
    :stage ;; dev.brawl.haus
