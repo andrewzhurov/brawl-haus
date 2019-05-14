@@ -21,7 +21,6 @@
             [brawl-haus.fit.lifecycle :as lifecycle]
             [brawl-haus.fit.render :as render]))
 
-
 (defn content []
   (r/create-class
    {:component-will-mount engine/init
@@ -30,13 +29,13 @@
     (fn [_]
       [:div
        [:style (garden.core/css css/styles)]
-       
-       [:svg {:style {:width "800px"
-                      :height "450px"}
-              :on-mouse-move #(when (mnemo/normal-time?) (>evt [:mouse (u/coords %)]))
-              :on-mouse-down #(>evt [:set-controls :trigger true])
-              :on-mouse-up #(>evt [:set-controls :trigger false])
-              }
+       [:svg#fit-canvas
+        {:style {:width "800px"
+                 :height "450px"}
+         :on-mouse-move #(when (mnemo/normal-time?) (>evt [:mouse (u/coords %)]))
+         :on-mouse-down #(>evt [:set-controls :trigger true])
+         :on-mouse-up #(>evt [:set-controls :trigger false])
+         }
         [:defs
          [:linearGradient#grad1
           {:y2 "0%", :x2 "100%", :y1 "0%", :x1 "0%"}

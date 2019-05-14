@@ -31,7 +31,11 @@
                   data)
      :default [:text {:x x :y y :color :orange} (pr-str data)])])
 
-(defn coords [e] [(.-clientX e) (.-clientY e)])
+(defn fit-canvas [] (js/document.getElementById "fit-canvas"))
+(defn coords [e]
+  (let [relative-rect (.getBoundingClientRect (fit-canvas))]
+    [(- (.-clientX e) (.-left relative-rect))
+     (- (.-clientY e) (.-top  relative-rect))]))
 
 (defn displacement [[x1 y1] [x2 y2]]
   [(- x2 x1) (- y2 y1)])
