@@ -31,17 +31,17 @@
                    :facing :left}}
          (player/comp-person {:poses {:stand {:height 40
                                               :width 10
-                                              :front-speed 6
-                                              :front-max 4
-                                              :back-speed 5
-                                              :back-max 3
+                                              :front-speed 8
+                                              :front-max 6
+                                              :back-speed 7
+                                              :back-max 4
                                               }
                                       :crouch {:height 20
                                                :width 13
-                                               :front-speed 5
-                                               :front-max 3
+                                               :front-speed 6
+                                               :front-max 4
                                                :back-speed 4
-                                               :back-max 2.5}
+                                               :back-max 3}
                                       :crawl {:height 10
                                               :width 40
                                               :front-speed 3

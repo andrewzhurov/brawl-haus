@@ -16,12 +16,13 @@
                     {{{[vx vy] :v} :phys} :player} :entities :as db}]
   (let [disp-x (Math.abs vx)
         disp-y (Math.abs vy)
-        curr-angle-diff (if (= angle-diff-at current-tick) (Math.abs angle-diff) 0)]
+        curr-angle-diff (if (= angle-diff-at current-tick) (Math.abs angle-diff) 0)
+        tp (+ #_default-time-flow
+              (if (not= 0 disp-x) 10 0)
+              (if (not= 0 disp-y) 10 0)
+              (/ curr-angle-diff 4))]
     (-> db
-        (assoc :time-passed 40 #_(+ #_default-time-flow
-                                (if (not= 0 disp-x) 10 0)
-                                (if (not= 0 disp-y) 10 0)
-                                (/ curr-angle-diff 4)))
-        (update :time-passed-all + 40))))
+        (assoc :time-passed tp)
+        (update :time-passed-all + tp))))
 
 

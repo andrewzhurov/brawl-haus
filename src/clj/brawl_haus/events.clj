@@ -355,7 +355,12 @@
 
     :frozen-in-time/attend
     (fn [db _ conn-id]
-      (navigate db conn-id {:location-id :frozen-in-time}))}))
+      (navigate db conn-id {:location-id :frozen-in-time}))
+
+
+    :inc-counter
+    (fn [db _ _]
+      (update db :counter inc))}))
 
 (defn drive [db [evt-id :as evt] & params]
   (if-let [evt-fn (get @events evt-id)]
